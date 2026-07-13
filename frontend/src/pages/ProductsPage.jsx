@@ -1,20 +1,77 @@
-const products = [
-  { name: 'Business Cards', description: 'Premium business cards with fast turnaround.' },
-  { name: 'Posters', description: 'High-quality posters for promotions and events.' },
-  { name: 'Banners', description: 'Durable banners for retail and exhibitions.' },
-  { name: 'Stickers', description: 'Custom labels and stickers for branding.' }
-];
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getProducts, getCategories } from '../services/api';
+import CategorySidebar from '../components/CategorySidebar';
+import ProductCard from '../components/ProductCard';
 
 export default function ProductsPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCategory = searchParams.get('category') || 'all';
+
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let alive = true;
+    Promise.all([getProducts(), getCategories()])
+      .then(([prods, data]) => {
+        if (!alive) return;
+        setProducts(prods);
+        setCategories(data.categories || []);
+      })
+      .catch(() => {})
+      .finally(() => alive && setLoading(false));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const setCategory = (id) => {
+    setSearchParams(id === 'all' ? {} : { category: id });
+  };
+
+  const visible =
+    activeCategory === 'all' ? products : products.filter((p) => p.category === activeCategory);
+
   return (
-    <main>
-      <h2>Popular Products</h2>
-      {products.map((product) => (
-        <div className="card" key={product.name}>
-          <h3>{product.name}</h3>
-          <p>{product.description}</p>
+    <div className="catalog-shell">
+      <CategorySidebar />
+
+      <main className="catalog-main">
+        <div className="catalog-heading">
+          <h1>Shop Products &amp; Get Instant Pricing</h1>
+          <p>Pick a product, enter size and quantity, and see live wholesale pricing — no waiting on a rep.</p>
         </div>
-      ))}
-    </main>
+
+        <div className="filter-bar">
+          <button
+            className={`chip ${activeCategory === 'all' ? 'chip-active' : ''}`}
+            onClick={() => setCategory('all')}
+          >
+            All Products
+          </button>
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              className={`chip ${activeCategory === cat.id ? 'chip-active' : ''}`}
+              onClick={() => setCategory(cat.id)}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+
+        {loading ? (
+          <p className="muted">Loading products…</p>
+        ) : (
+          <div className="pcard-grid">
+            {visible.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        )}
+      </main>
+    </div>
   );
 }

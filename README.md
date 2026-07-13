@@ -2,13 +2,17 @@
 
 A modern React + Node.js web application for an online printing business similar to B2Sign.
 
+A wholesale large-format print storefront (banners, signs, flags, displays) with
+**instant online pricing**, modeled after trade printers like B2Sign.
+
 ## Features
 
-- Responsive storefront
-- Product catalog
-- Quote request form
-- File upload support for artwork
-- Admin-friendly order handling
+- Responsive storefront with wholesale/trade messaging
+- Large-format product catalog with category filtering
+- **Instant price calculator** — live pricing by size, material, finishing & quantity
+- Volume discount tiers and free-shipping thresholds
+- Quote / order request flow with artwork upload (prefilled from the configurator)
+- Product & pricing REST API (`/api/products`, `/api/price`, `/api/quote`)
 
 ## Project structure
 
