@@ -59,6 +59,10 @@ drop policy if exists "orders_update_own" on public.orders;
 create policy "orders_update_own" on public.orders
   for update using (auth.uid() = user_id);
 
+drop policy if exists "orders_delete_own" on public.orders;
+create policy "orders_delete_own" on public.orders
+  for delete using (auth.uid() = user_id);
+
 -- 3) Storage bucket for submitted / drawn artwork ------------------------------
 insert into storage.buckets (id, name, public)
 values ('designs', 'designs', false)
@@ -75,6 +79,13 @@ create policy "designs_insert_own" on storage.objects
 drop policy if exists "designs_select_own" on storage.objects;
 create policy "designs_select_own" on storage.objects
   for select using (
+    bucket_id = 'designs'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+drop policy if exists "designs_delete_own" on storage.objects;
+create policy "designs_delete_own" on storage.objects
+  for delete using (
     bucket_id = 'designs'
     and (storage.foldername(name))[1] = auth.uid()::text
   );

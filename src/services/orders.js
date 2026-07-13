@@ -97,6 +97,17 @@ export async function getMyOrders() {
   return data || [];
 }
 
+// Delete an order (and its uploaded design). RLS ensures a user can only
+// delete their own orders.
+export async function deleteOrder(order) {
+  if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
+  if (order.design_path) {
+    await supabase.storage.from(DESIGN_BUCKET).remove([order.design_path]).catch(() => {});
+  }
+  const { error } = await supabase.from('orders').delete().eq('id', order.id);
+  if (error) throw error;
+}
+
 // Signed URL so a user can view their submitted artwork.
 export async function getDesignUrl(path) {
   if (!isSupabaseReady || !path) return null;

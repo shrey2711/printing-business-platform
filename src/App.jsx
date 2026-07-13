@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from 'react';
-import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
@@ -86,14 +86,32 @@ function Header() {
         <div className="header-spacer" />
         <HeaderAuth />
       </div>
-      <nav className="header-nav">
-        {topNav.map((item) => (
-          <NavLink key={item.label} to={item.to} end={item.to === '/products'}>
-            {item.label}
-          </NavLink>
-        ))}
-      </nav>
+      <HeaderNav />
     </header>
+  );
+}
+
+// Custom active state that also compares the ?category query — otherwise every
+// "/products?category=..." link lights up at once on the /products page.
+function HeaderNav() {
+  const location = useLocation();
+  const currentCategory = new URLSearchParams(location.search).get('category');
+
+  const isActive = (to) => {
+    const [path, query = ''] = to.split('?');
+    if (path !== location.pathname) return false;
+    const itemCategory = new URLSearchParams(query).get('category');
+    return (itemCategory || null) === (currentCategory || null);
+  };
+
+  return (
+    <nav className="header-nav">
+      {topNav.map((item) => (
+        <Link key={item.label} to={item.to} className={isActive(item.to) ? 'active' : ''}>
+          {item.label}
+        </Link>
+      ))}
+    </nav>
   );
 }
 

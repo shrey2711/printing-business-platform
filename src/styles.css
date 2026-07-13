@@ -40,6 +40,8 @@ h1, h2, h3, h4 { color: var(--navy); }
 .btn-blue:hover { background: var(--blue-dark); }
 .btn-outline { background: #fff; color: var(--navy); border: 1px solid var(--line); }
 .btn-outline:hover { border-color: var(--muted); }
+.btn-ghost-danger { background: #fff; color: var(--red); border: 1px solid var(--line); }
+.btn-ghost-danger:hover { border-color: var(--red); background: #fdeef0; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* ---------- Header ---------- */

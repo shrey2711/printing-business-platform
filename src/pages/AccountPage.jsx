@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getMyOrders, getDesignUrl } from '../services/orders';
+import { getMyOrders, getDesignUrl, deleteOrder } from '../services/orders';
 import { startCheckout, confirmCheckout } from '../services/checkout';
 import StatusTimeline from '../components/StatusTimeline';
 
@@ -12,6 +12,9 @@ const statusColor = {
   shipped: 'st-green',
   cancelled: 'st-red'
 };
+
+// An order counts as paid once it's paid or moved further along.
+const isPaid = (o) => ['paid', 'in_production', 'shipped'].includes(o.status);
 
 export default function AccountPage() {
   const { displayName, isAuthenticated, isSupabaseReady, loading } = useAuth();
@@ -71,6 +74,19 @@ export default function AccountPage() {
         config: o.config
       }
     });
+  };
+
+  const remove = async (o) => {
+    const label = isPaid(o)
+      ? 'This order is already paid. Delete it from your history anyway?'
+      : 'Delete this order? This cannot be undone.';
+    if (!window.confirm(label)) return;
+    try {
+      await deleteOrder(o);
+      setOrders((prev) => prev.filter((x) => x.id !== o.id));
+    } catch (e) {
+      setPayMsg(e.message || 'Could not delete the order.');
+    }
   };
 
   if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
@@ -138,8 +154,12 @@ export default function AccountPage() {
               <div className="order-card-meta">
                 <span>Qty <strong>{o.quantity}</strong></span>
                 <span>
-                  {o.amount_total ? 'Paid ' : 'Est. '}
-                  <strong>{o.amount_total ? `$${Number(o.amount_total).toFixed(2)}` : o.estimated_price || '—'}</strong>
+                  {isPaid(o) ? 'Paid ' : 'Est. '}
+                  <strong>
+                    {isPaid(o) && o.amount_total
+                      ? `$${Number(o.amount_total).toFixed(2)}`
+                      : o.estimated_price || (o.amount_total ? `$${Number(o.amount_total).toFixed(2)}` : '—')}
+                  </strong>
                 </span>
                 {o.tracking_number && (
                   <span>Tracking <strong>{o.carrier ? `${o.carrier} ` : ''}{o.tracking_number}</strong></span>
@@ -156,6 +176,7 @@ export default function AccountPage() {
                 {o.config?.slug && (
                   <button className="btn btn-outline btn-sm" onClick={() => reorder(o)}>Reorder</button>
                 )}
+                <button className="btn btn-ghost-danger btn-sm" onClick={() => remove(o)}>Delete</button>
               </div>
             </div>
           ))}
