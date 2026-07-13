@@ -265,6 +265,20 @@ export default function ProductConfigurator() {
           <p className="panel-foot">Upload a print-ready file or draw your own on the next step.</p>
         </aside>
       </div>
+
+      {product.faqs?.length > 0 && (
+        <section className="faq-section">
+          <h2>{product.name} — Frequently Asked Questions</h2>
+          <div className="faq-list">
+            {product.faqs.map((f, i) => (
+              <details className="faq-item" key={i} open={i === 0}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

@@ -5,6 +5,7 @@ import multer from 'multer';
 
 import { listProducts, getProduct, categories, navGroups } from './data/products.js';
 import { computePrice } from './data/pricing.js';
+import { getProductFaqs } from './data/faqs.js';
 import { stripe, supabaseAdmin, getUserFromToken, isAdmin, adminEmails, baseUrl } from './lib/clients.js';
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } from './lib/mailer.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
@@ -38,7 +39,7 @@ app.get('/api/products', (req, res) => {
 app.get('/api/products/:slug', (req, res) => {
   const product = getProduct(req.params.slug);
   if (!product) return res.status(404).json({ error: 'Product not found' });
-  res.json({ product });
+  res.json({ product: { ...product, faqs: getProductFaqs(product) } });
 });
 
 // Instant pricing ----------------------------------------------------------

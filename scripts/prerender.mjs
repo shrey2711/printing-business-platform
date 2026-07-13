@@ -7,6 +7,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 import { listProducts, getProduct } from '../backend/data/products.js';
+import { getProductFaqs } from '../backend/data/faqs.js';
 import { states, slugify } from '../src/data/states.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -118,6 +119,7 @@ for (const summary of productList) {
     }
     const finishing = (p.finishing || []).map((f) => f.name).join(', ');
     const related = productList.filter((x) => x.slug !== product.slug).slice(0, 5);
+    const faqs = getProductFaqs(product);
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>
       <h1>${esc(product.name)} — Custom Printing &amp; Instant Pricing</h1>
@@ -129,6 +131,8 @@ for (const summary of productList) {
       <p>Sizes: ${esc(sizes)}</p>
       ${finishing ? `<p>Finishing: ${esc(finishing)}.</p>` : ''}
       <p><a href="/products/${product.slug}">Configure your ${esc(product.name)} and get an instant price →</a></p>
+      <h2>Frequently asked questions</h2>
+      ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
       <h2>More products</h2>
       <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>`;
     return render({
@@ -159,6 +163,15 @@ for (const summary of productList) {
             { '@type': 'ListItem', position: 2, name: 'Products', item: `${ORIGIN}/products` },
             { '@type': 'ListItem', position: 3, name: product.name, item: `${ORIGIN}/products/${product.slug}` }
           ]
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a }
+          }))
         }
       ]
     });
