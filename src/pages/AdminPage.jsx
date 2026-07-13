@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getAllOrders, updateOrder } from '../services/admin';
+import { getAllOrders, updateOrder, deleteOrder } from '../services/admin';
 
 const STATUSES = ['submitted', 'paid', 'in_production', 'shipped', 'cancelled'];
 const statusColor = {
@@ -36,6 +36,17 @@ export default function AdminPage() {
       const { order, email } = await updateOrder(o.id, { status });
       setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, status: order.status } : x)));
       flash(email?.sent ? `✓ Status updated — email sent to ${o.customer_email}` : '✓ Status updated (email not sent — check Resend key)');
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
+  const removeOrder = async (o) => {
+    if (!window.confirm(`Delete order #${String(o.id).slice(0, 8)} from ${o.customer_email || 'customer'}? This cannot be undone.`)) return;
+    try {
+      await deleteOrder(o.id);
+      setOrders((prev) => prev.filter((x) => x.id !== o.id));
+      flash('✓ Order deleted');
     } catch (e) {
       setError(e.message);
     }
@@ -87,7 +98,7 @@ export default function AdminPage() {
         <div className="orders-table admin-table card">
           <div className="orders-row admin-row orders-head">
             <span>Order</span><span>Customer</span><span>Product / specs</span>
-            <span>Amount</span><span>Status</span><span>Tracking #</span><span>Art</span>
+            <span>Amount</span><span>Status</span><span>Tracking #</span><span>Art</span><span></span>
           </div>
           {orders.map((o) => (
             <div className="orders-row admin-row" key={o.id}>
@@ -116,6 +127,9 @@ export default function AdminPage() {
               </span>
               <span>
                 {o.designUrl ? <a href={o.designUrl} target="_blank" rel="noreferrer">View</a> : <span className="muted">—</span>}
+              </span>
+              <span>
+                <button className="btn btn-ghost-danger btn-sm" onClick={() => removeOrder(o)} title="Delete order">✕</button>
               </span>
             </div>
           ))}

@@ -20,3 +20,12 @@ export async function updateOrder(id, patch) {
   if (!res.ok) throw new Error('Could not update the order.');
   return res.json();
 }
+
+export async function deleteOrder(id) {
+  const res = await fetch(`/api/admin/orders/${id}`, {
+    method: 'DELETE',
+    headers: { ...(await authHeader()) }
+  });
+  if (!res.ok) throw new Error('Could not delete the order.');
+  return res.json();
+}

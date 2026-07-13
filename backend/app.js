@@ -272,6 +272,22 @@ app.get('/api/admin/orders', async (req, res) => {
   res.json({ orders });
 });
 
+app.delete('/api/admin/orders/:id', async (req, res) => {
+  const admin = await requireAdmin(req, res);
+  if (!admin) return;
+  const { data: order } = await supabaseAdmin
+    .from('orders')
+    .select('design_path')
+    .eq('id', req.params.id)
+    .single();
+  if (order?.design_path) {
+    await supabaseAdmin.storage.from('designs').remove([order.design_path]).catch(() => {});
+  }
+  const { error } = await supabaseAdmin.from('orders').delete().eq('id', req.params.id);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
+});
+
 app.patch('/api/admin/orders/:id', async (req, res) => {
   const admin = await requireAdmin(req, res);
   if (!admin) return;

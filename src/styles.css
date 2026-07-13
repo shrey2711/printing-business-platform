@@ -426,7 +426,7 @@ h1, h2, h3, h4 { color: var(--navy); }
 .loc-chip:hover .loc-abbr { background: var(--red); }
 
 /* Admin table */
-.admin-row { grid-template-columns: 0.8fr 1.4fr 2fr 0.9fr 1.1fr 1.1fr 0.6fr; }
+.admin-row { grid-template-columns: 0.8fr 1.4fr 1.8fr 0.8fr 1.1fr 1fr 0.5fr 0.4fr; }
 .admin-table .wrap { word-break: break-word; }
 .status-select { border: 1px solid var(--line); border-radius: 5px; padding: 0.35rem 0.5rem; font-weight: 600; font-size: 0.82rem; background: #fff; cursor: pointer; }
 .status-select.st-green { color: #1f7a3d; }
