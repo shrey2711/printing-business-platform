@@ -1,6 +1,7 @@
 {
   "name": "printing-business-platform",
   "private": true,
+  "type": "module",
   "workspaces": [
     "frontend"
   ],

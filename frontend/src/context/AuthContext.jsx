@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase, isSupabaseReady } from '../lib/supabase';
+import { supabase, isSupabaseReady, adminEmails } from '../lib/supabase';
 
 const AuthContext = createContext(null);
 
@@ -52,6 +52,7 @@ export function AuthProvider({ children }) {
     loading,
     isSupabaseReady,
     isAuthenticated: Boolean(user),
+    isAdmin: Boolean(user && adminEmails.includes((user.email || '').toLowerCase())),
     displayName: user?.user_metadata?.full_name || user?.email || '',
     register,
     login,

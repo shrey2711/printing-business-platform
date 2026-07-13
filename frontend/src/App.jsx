@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage';
 import AccountPage from './pages/AccountPage';
 import DesignStudio from './pages/DesignStudio';
 import PlaceOrderPage from './pages/PlaceOrderPage';
+import AdminPage from './pages/AdminPage';
 
 const topNav = [
   { label: 'All Products', to: '/products' },
@@ -23,7 +24,7 @@ const topNav = [
 ];
 
 function HeaderAuth() {
-  const { isAuthenticated, displayName, login, logout, isSupabaseReady } = useAuth();
+  const { isAuthenticated, isAdmin, displayName, login, logout, isSupabaseReady } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
   const [err, setErr] = useState(false);
@@ -32,6 +33,7 @@ function HeaderAuth() {
     return (
       <div className="header-account">
         <Link to="/account" className="acct-link">👤 {displayName?.split(' ')[0] || 'Account'}</Link>
+        {isAdmin && <Link to="/admin" className="btn btn-outline btn-sm">Admin</Link>}
         <Link to="/account" className="btn btn-blue btn-sm">My Orders</Link>
         <button className="btn btn-outline btn-sm" onClick={async () => { await logout(); navigate('/'); }}>
           Sign out
@@ -149,6 +151,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/account" element={<AccountPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
       <Footer />

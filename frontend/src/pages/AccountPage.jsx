@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getMyOrders, getDesignUrl } from '../services/orders';
+import { startCheckout, confirmCheckout } from '../services/checkout';
 
 const statusColor = {
   submitted: 'st-blue',
+  paid: 'st-green',
   in_production: 'st-amber',
   shipped: 'st-green',
   cancelled: 'st-red'
@@ -13,26 +15,50 @@ const statusColor = {
 export default function AccountPage() {
   const { displayName, isAuthenticated, isSupabaseReady, loading } = useAuth();
   const location = useLocation();
+  const [params, setParams] = useSearchParams();
   const justPlaced = location.state?.placed;
 
   const [orders, setOrders] = useState([]);
   const [designUrls, setDesignUrls] = useState({});
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [payMsg, setPayMsg] = useState('');
+
+  const loadOrders = async () => {
+    const rows = await getMyOrders();
+    setOrders(rows);
+    const urls = {};
+    for (const o of rows) {
+      if (o.design_path) urls[o.id] = await getDesignUrl(o.design_path);
+    }
+    setDesignUrls(urls);
+  };
 
   useEffect(() => {
     if (!isAuthenticated) return;
-    getMyOrders()
-      .then(async (rows) => {
-        setOrders(rows);
-        const urls = {};
-        for (const o of rows) {
-          if (o.design_path) urls[o.id] = await getDesignUrl(o.design_path);
-        }
-        setDesignUrls(urls);
-      })
-      .catch(() => {})
-      .finally(() => setLoadingOrders(false));
+    (async () => {
+      // If we just returned from Stripe, confirm payment first.
+      if (params.get('checkout') === 'success' && params.get('order')) {
+        const { paid } = await confirmCheckout(params.get('order')).catch(() => ({ paid: false }));
+        setPayMsg(paid ? 'Payment received — thank you! Your order is now paid.' : '');
+      } else if (params.get('checkout') === 'cancelled') {
+        setPayMsg('Checkout cancelled. Your order was saved — you can pay any time below.');
+      }
+      if (params.get('checkout')) setParams({}, { replace: true });
+      await loadOrders().catch(() => {});
+      setLoadingOrders(false);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
+
+  const payNow = async (orderId) => {
+    try {
+      const { url, unavailable } = await startCheckout(orderId);
+      if (unavailable) return setPayMsg('Online payment isn\'t enabled yet — we\'ll invoice you directly.');
+      if (url) window.location.href = url;
+    } catch (e) {
+      setPayMsg(e.message);
+    }
+  };
 
   if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
 
@@ -66,6 +92,7 @@ export default function AccountPage() {
           Order placed! Reference: <strong>{justPlaced}</strong>. We'll review your artwork and follow up.
         </div>
       )}
+      {payMsg && <div className="status-message status-success">{payMsg}</div>}
 
       <h2 className="section-title">Your orders</h2>
 
@@ -93,6 +120,9 @@ export default function AccountPage() {
                 <em className={`status-pill ${statusColor[o.status] || 'st-blue'}`}>
                   {String(o.status || 'submitted').replace('_', ' ')}
                 </em>
+                {o.status === 'submitted' && o.config?.slug && (
+                  <button className="btn btn-blue btn-sm pay-btn" onClick={() => payNow(o.id)}>Pay now</button>
+                )}
               </span>
               <span>
                 {designUrls[o.id] ? (

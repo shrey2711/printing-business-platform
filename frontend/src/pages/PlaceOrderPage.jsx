@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { placeOrder } from '../services/orders';
+import { startCheckout } from '../services/checkout';
 
 export default function PlaceOrderPage() {
   const { user, isAuthenticated, isSupabaseReady, loading } = useAuth();
@@ -46,8 +47,22 @@ export default function PlaceOrderPage() {
         quantity: incoming.quantity || 1,
         estimatedPrice: incoming.estimatedPrice || '',
         notes,
-        design: file || drawnDesign
+        design: file || drawnDesign,
+        config: incoming.config || null
       });
+
+      // If the order has a priced config, try to send them straight to payment.
+      if (incoming.config?.slug) {
+        try {
+          const checkout = await startCheckout(order.id);
+          if (checkout?.url) {
+            window.location.href = checkout.url;
+            return;
+          }
+        } catch {
+          /* fall through to account — they can pay from there */
+        }
+      }
       navigate('/account', { state: { placed: order?.id } });
     } catch (err) {
       setError(err.message || 'Could not place the order.');
@@ -104,8 +119,16 @@ export default function PlaceOrderPage() {
           {error && <div className="status-message status-error">{error}</div>}
 
           <button className="btn btn-red" type="submit" disabled={busy || !isSupabaseReady}>
-            {busy ? 'Submitting…' : 'Submit order'}
+            {busy
+              ? 'Submitting…'
+              : incoming.config?.slug && incoming.estimatedPrice
+                ? `Submit & pay ${incoming.estimatedPrice}`
+                : 'Submit order'}
           </button>
+          {incoming.config?.slug && (
+            <p className="panel-foot">You'll be taken to secure Stripe checkout. If payment isn't set up yet,
+              your order is still saved and we'll follow up.</p>
+          )}
         </form>
       </div>
     </main>

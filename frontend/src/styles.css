@@ -358,6 +358,16 @@ h1, h2, h3, h4 { color: var(--navy); }
 .st-green { background: #e6f6ec; color: #1f7a3d; }
 .st-red { background: #fbe7ea; color: var(--red-dark); }
 .orders-row a { color: var(--blue-dark); font-weight: 600; }
+.pay-btn { margin-left: 0.5rem; padding: 0.25rem 0.6rem; font-size: 0.78rem; }
+
+/* Admin table */
+.admin-row { grid-template-columns: 0.8fr 1.4fr 2fr 0.5fr 0.9fr 1.3fr 0.6fr; }
+.admin-table .wrap { word-break: break-word; }
+.status-select { border: 1px solid var(--line); border-radius: 5px; padding: 0.35rem 0.5rem; font-weight: 600; font-size: 0.82rem; background: #fff; cursor: pointer; }
+.status-select.st-green { color: #1f7a3d; }
+.status-select.st-amber { color: #b7791f; }
+.status-select.st-red { color: var(--red-dark); }
+.status-select.st-blue { color: #1878b6; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px) {
@@ -374,9 +384,8 @@ h1, h2, h3, h4 { color: var(--navy); }
   .login-inline { display: none; }
   .studio-layout { grid-template-columns: 1fr; }
   .studio-toolbar { position: static; }
-  .orders-row { grid-template-columns: 1fr 1fr; }
+  .orders-row, .admin-row { grid-template-columns: 1fr 1fr; }
   .orders-head { display: none; }
-  .orders-row span::before { content: attr(data-label); }
 }
 @media (max-width: 560px) {
   .pcard-grid, .two-col, .contact-grid { grid-template-columns: 1fr; }

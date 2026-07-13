@@ -26,7 +26,7 @@ async function uploadDesign(userId, source) {
 }
 
 // Place an order: optionally upload a design, then insert the order row.
-export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design }) {
+export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config }) {
   if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
   const designPath = design ? await uploadDesign(user.id, design) : null;
 
@@ -40,6 +40,7 @@ export async function placeOrder({ user, product, specs, quantity, estimatedPric
       estimated_price: estimatedPrice || null,
       notes: notes || null,
       design_path: designPath,
+      config: config || null,
       status: 'submitted'
     })
     .select()

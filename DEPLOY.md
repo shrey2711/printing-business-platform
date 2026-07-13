@@ -56,12 +56,35 @@ show a "connect Supabase" message.
    - Output: `frontend/dist`
    - `/api/*` → the serverless function in [`api/`](api/index.js)
    - all other routes → `index.html` (SPA routing)
-4. In **Project → Settings → Environment Variables**, add:
-   | Name | Value |
-   |------|-------|
-   | `VITE_SUPABASE_URL` | your Supabase project URL |
-   | `VITE_SUPABASE_ANON_KEY` | your Supabase anon public key |
+4. In **Project → Settings → Environment Variables**, add the variables below.
 5. Click **Deploy**.
+
+> **If the import screen shows "multiple services" / a "Services" preset:** it's
+> using a cached scan. Remove the half-created project and **re-import the repo
+> fresh**, and set **Root Directory = repo root** (not `frontend`) and
+> **Framework Preset = Other**. The repo is a single project (only the frontend
+> is a workspace; `backend/` is just source imported by the `/api` function).
+
+### Environment variables
+
+**Frontend (browser-safe):**
+| Name | Value |
+|------|-------|
+| `VITE_SUPABASE_URL` | your Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon public key |
+| `VITE_ADMIN_EMAILS` | comma-separated staff emails (shows the Admin link) |
+
+**Server (API — keep secret):**
+| Name | Value |
+|------|-------|
+| `SUPABASE_URL` | same Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase **service_role** key (Settings → API) |
+| `SUPABASE_ANON_KEY` | Supabase anon key |
+| `STRIPE_SECRET_KEY` | Stripe secret key (`sk_...`) — enables payments |
+| `ADMIN_EMAILS` | comma-separated staff emails (enforced by the API) |
+
+Payments and admin activate only once their keys are set — without them the store
+still runs and shows "not enabled yet" messages. See `.env.example` files for a template.
 6. After the first deploy, add your Vercel URL to Supabase under
    **Authentication → URL Configuration → Site URL / Redirect URLs**
    (e.g. `https://your-app.vercel.app`).

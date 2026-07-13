@@ -13,3 +13,19 @@ export const supabase = isSupabaseReady ? createClient(url, anonKey) : null;
 
 // Storage bucket that holds submitted / drawn artwork.
 export const DESIGN_BUCKET = 'designs';
+
+// Client-side list used ONLY to show/hide the Admin link. The API independently
+// enforces admin access against its own ADMIN_EMAILS server env var.
+export const adminEmails = (import.meta.env.VITE_ADMIN_EMAILS || '')
+  .split(',')
+  .map((e) => e.trim().toLowerCase())
+  .filter(Boolean);
+
+// Authorization header carrying the signed-in user's access token, for calls
+// to our own /api/* endpoints (checkout, admin).
+export async function authHeader() {
+  if (!isSupabaseReady) return {};
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}

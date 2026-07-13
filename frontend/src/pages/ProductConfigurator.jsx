@@ -64,7 +64,9 @@ export default function ProductConfigurator() {
     product: product.name,
     quantity: config.quantity,
     specs: describeConfig(product, config, price),
-    estimatedPrice: price ? `$${price.total.toFixed(2)}` : ''
+    estimatedPrice: price ? `$${price.total.toFixed(2)}` : '',
+    // Raw pricing config so the server can re-price authoritatively at checkout.
+    config: { slug, ...config }
   });
 
   const requestOrder = () => navigate('/order', { state: orderState() });

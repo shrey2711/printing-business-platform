@@ -173,7 +173,8 @@ app.get('/api/admin/orders', async (req, res) => {
     .order('created_at', { ascending: false });
   if (error) return res.status(500).json({ error: error.message });
 
-  // Attach signed URLs for artwork so staff can view designs.
+  // Attach signed artwork URLs + customer email so staff can act on orders.
+  const emailCache = new Map();
   const orders = await Promise.all(
     (data || []).map(async (o) => {
       let designUrl = null;
@@ -183,7 +184,13 @@ app.get('/api/admin/orders', async (req, res) => {
           .createSignedUrl(o.design_path, 3600);
         designUrl = signed?.signedUrl || null;
       }
-      return { ...o, designUrl };
+      let email = emailCache.get(o.user_id);
+      if (email === undefined) {
+        const { data: u } = await supabaseAdmin.auth.admin.getUserById(o.user_id);
+        email = u?.user?.email || null;
+        emailCache.set(o.user_id, email);
+      }
+      return { ...o, designUrl, customer_email: email };
     })
   );
   res.json({ orders });
