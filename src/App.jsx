@@ -14,6 +14,7 @@ import PlaceOrderPage from './pages/PlaceOrderPage';
 import AdminPage from './pages/AdminPage';
 import LocationsPage from './pages/LocationsPage';
 import LocationPage from './pages/LocationPage';
+import CityPage from './pages/CityPage';
 
 const topNav = [
   { label: 'All Products', to: '/products' },
@@ -157,6 +158,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/locations" element={<LocationsPage />} />
         <Route path="/locations/:stateSlug" element={<LocationPage />} />
+        <Route path="/locations/:stateSlug/:citySlug" element={<CityPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
       <Footer />

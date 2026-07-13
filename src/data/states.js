@@ -59,3 +59,25 @@ export const regions = ['Northeast', 'South', 'Midwest', 'West'];
 export function getState(slug) {
   return states.find((s) => s.slug === slug) || null;
 }
+
+// Turn a city name into a URL slug, e.g. "St. Louis" -> "st-louis".
+export function slugify(name) {
+  return name
+    .toLowerCase()
+    .replace(/[.,']/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+// Find a city (by slug) within a state (by slug). Returns { state, city } or null.
+export function getCity(stateSlug, citySlug) {
+  const state = getState(stateSlug);
+  if (!state) return null;
+  const city = state.cities.find((c) => slugify(c) === citySlug);
+  return city ? { state, city } : null;
+}
+
+// Every [state, city] pair, for sitemap/link generation.
+export function allCities() {
+  return states.flatMap((s) => s.cities.map((c) => ({ state: s, city: c, citySlug: slugify(c) })));
+}

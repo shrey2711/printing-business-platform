@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
-import { getState } from '../data/states';
+import { getState, slugify } from '../data/states';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
@@ -78,6 +78,17 @@ export default function LocationPage() {
           Whether you need a single banner for a {state.cities[0]} grand opening or a bulk order of yard
           signs for a statewide campaign, our online tools make it easy to design, price, and order in minutes.
         </p>
+      </section>
+
+      <section className="section-block-bare">
+        <h2 className="section-title">Cities we serve in {state.name}</h2>
+        <div className="loc-grid">
+          {state.cities.map((c) => (
+            <Link className="loc-chip" to={`/locations/${state.slug}/${slugify(c)}`} key={c}>
+              <span className="loc-abbr">{state.abbr}</span><span>{c}</span>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="cta-banner">
