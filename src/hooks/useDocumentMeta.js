@@ -24,7 +24,7 @@ function upsertLink(rel, href) {
 // Per-page SEO: sets a unique <title>, description, canonical URL, Open Graph /
 // Twitter tags, and optional JSON-LD structured data. Canonical/OG URLs use the
 // live origin so they stay correct on any custom domain.
-export default function useDocumentMeta(title, description, jsonLd) {
+export default function useDocumentMeta(title, description, jsonLd, robots) {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -36,6 +36,11 @@ export default function useDocumentMeta(title, description, jsonLd) {
     upsertMeta('property', 'og:title', fullTitle);
     upsertMeta('property', 'og:url', url);
     upsertMeta('name', 'twitter:title', fullTitle);
+
+    // Robots: set noindex on templated pages; clear it when moving to an indexable one.
+    const robotsEl = document.head.querySelector('meta[name="robots"]');
+    if (robots) upsertMeta('name', 'robots', robots);
+    else if (robotsEl) robotsEl.remove();
 
     if (description) {
       upsertMeta('name', 'description', description);

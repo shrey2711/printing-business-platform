@@ -13,8 +13,10 @@ export default function CityPage() {
   useDocumentMeta(
     match ? `Custom Banners & Signs in ${match.city}, ${match.state.abbr}` : 'Location',
     match
-      ? `Order custom banners, yard signs, feather flags and displays in ${match.city}, ${match.state.name} with instant online pricing and fast local shipping.`
-      : ''
+      ? `Order custom banners, yard signs, feather flags and displays in ${match.city}, ${match.state.name} with instant online pricing and fast shipping.`
+      : '',
+    undefined,
+    'noindex, follow' // templated page — noindex until it has unique local content
   );
 
   useEffect(() => {
@@ -70,12 +72,11 @@ export default function CityPage() {
       </section>
 
       <section className="section-block card">
-        <h2>Local printing for {city} businesses</h2>
+        <h2>Custom printing shipped to {city}</h2>
         <p className="muted">
-          From storefront signage and event banners to trade-show displays, {city} businesses order
-          professional large-format printing from PrintUSA online — no need to visit a print shop.
-          Design your artwork in our Design Studio or upload your own, get an instant quote, and we'll
-          print and ship it to {city}, {state.name}.
+          PrintUSA is a fully online nationwide print shop — we don't have a storefront in {city}, and you
+          don't need one. From storefront signage and event banners to trade-show displays, {city} businesses
+          design or upload artwork, get an instant quote online, and we print and ship it to {city}, {state.name}.
         </p>
       </section>
 

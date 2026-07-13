@@ -37,7 +37,7 @@ const NAV = `<nav aria-label="Primary">
   <a href="/contact">Contact</a>
 </nav>`;
 
-function render({ path, title, description, body, jsonLd }) {
+function render({ path, title, description, body, jsonLd, robots }) {
   const url = ORIGIN + path;
   let html = template;
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`);
@@ -46,6 +46,9 @@ function render({ path, title, description, body, jsonLd }) {
   html = html.replace(/(<meta property="og:title" content=")[\s\S]*?(")/, `$1${esc(title)}$2`);
   html = html.replace(/(<meta property="og:url" content=")[\s\S]*?(")/, `$1${url}$2`);
   html = html.replace(/(<meta property="og:description" content=")[\s\S]*?(")/, `$1${esc(description)}$2`);
+  if (robots) {
+    html = html.replace('</head>', `<meta name="robots" content="${robots}">\n</head>`);
+  }
   if (jsonLd) {
     const script = `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
     html = html.replace('</head>', `${script}\n</head>`);
@@ -235,7 +238,10 @@ for (const s of states) {
       return render({
         path: `/locations/${s.slug}/${citySlug}`,
         title: `Custom Banners & Signs in ${c}, ${s.abbr} | PrintUSA`,
-        description: `Order custom banners, signs, flags and displays in ${c}, ${s.name} with instant online pricing and fast local shipping.`,
+        description: `Order custom banners, signs, flags and displays in ${c}, ${s.name} with instant online pricing and fast shipping.`,
+        // City pages are templated — keep them accessible but noindex until each
+        // has genuinely unique content (avoids doorway-page risk).
+        robots: 'noindex, follow',
         body,
         jsonLd: {
           '@context': 'https://schema.org',
@@ -288,3 +294,20 @@ for (const build of routes) {
 }
 
 console.log(`Prerendered ${count} pages.`);
+
+// ---- Sitemap: INDEXABLE pages only (city pages are noindex, so excluded) ----
+const smUrl = (loc, priority, changefreq) =>
+  `  <url><loc>${ORIGIN}${loc}</loc>${changefreq ? `<changefreq>${changefreq}</changefreq>` : ''}<priority>${priority}</priority></url>`;
+const sm = [];
+sm.push(smUrl('/', '1.0', 'weekly'));
+sm.push(smUrl('/products', '0.9', 'weekly'));
+productList.forEach((p) => sm.push(smUrl(`/products/${p.slug}`, '0.8')));
+sm.push(smUrl('/locations', '0.6', 'monthly'));
+states.forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
+sm.push(smUrl('/quote', '0.4'));
+sm.push(smUrl('/contact', '0.4'));
+writeFileSync(
+  join(DIST, 'sitemap.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sm.join('\n')}\n</urlset>\n`
+);
+console.log(`Sitemap: ${sm.length} indexable URLs (city pages excluded).`);
