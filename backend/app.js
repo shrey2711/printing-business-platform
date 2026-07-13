@@ -5,7 +5,9 @@ import multer from 'multer';
 
 import { listProducts, getProduct, categories, navGroups } from './data/products.js';
 import { computePrice } from './data/pricing.js';
-import { stripe, supabaseAdmin, getUserFromToken, isAdmin, baseUrl } from './lib/clients.js';
+import { stripe, supabaseAdmin, getUserFromToken, isAdmin, adminEmails, baseUrl } from './lib/clients.js';
+import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } from './lib/mailer.js';
+import { findCoupon, applyCoupon } from './data/coupons.js';
 
 dotenv.config();
 
@@ -74,7 +76,7 @@ app.post('/api/checkout', async (req, res) => {
   const user = await getUserFromToken(req.headers.authorization);
   if (!user) return res.status(401).json({ error: 'Not signed in.' });
 
-  const { orderId } = req.body || {};
+  const { orderId, coupon } = req.body || {};
   const { data: order, error } = await supabaseAdmin
     .from('orders')
     .select('*')
@@ -84,14 +86,17 @@ app.post('/api/checkout', async (req, res) => {
   if (order.user_id !== user.id) return res.status(403).json({ error: 'Not your order.' });
 
   // Re-price server-side from the stored config (never trust the browser).
-  let amount = 0;
+  let subtotal = 0;
   if (order.config && order.config.slug) {
     const priced = computePrice(order.config);
-    if (priced.ok) amount = priced.total;
+    if (priced.ok) subtotal = priced.total;
   }
-  if (!amount || amount <= 0) {
+  if (!subtotal || subtotal <= 0) {
     return res.status(400).json({ error: 'This order needs a manual quote before payment.' });
   }
+
+  // Apply coupon server-side.
+  const { discount, total, coupon: applied } = applyCoupon(subtotal, coupon);
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
@@ -100,10 +105,12 @@ app.post('/api/checkout', async (req, res) => {
         quantity: 1,
         price_data: {
           currency: 'usd',
-          unit_amount: Math.round(amount * 100),
+          unit_amount: Math.round(total * 100),
           product_data: {
             name: order.product,
-            description: order.specs || undefined
+            description: [order.specs, applied ? `Coupon ${applied.code} (-$${discount})` : null]
+              .filter(Boolean)
+              .join(' — ') || undefined
           }
         }
       }
@@ -116,10 +123,36 @@ app.post('/api/checkout', async (req, res) => {
 
   await supabaseAdmin
     .from('orders')
-    .update({ stripe_session_id: session.id, amount_total: amount })
+    .update({
+      stripe_session_id: session.id,
+      amount_total: total,
+      coupon_code: applied?.code || null,
+      discount: discount || null
+    })
     .eq('id', order.id);
 
   res.json({ url: session.url });
+});
+
+// Validate a coupon code (for showing the discount before paying).
+app.post('/api/coupon', (req, res) => {
+  const coupon = findCoupon((req.body || {}).code);
+  if (!coupon) return res.status(404).json({ valid: false, error: 'Invalid or expired code.' });
+  res.json({ valid: true, code: coupon.code, type: coupon.type, value: coupon.value, label: coupon.label });
+});
+
+// Send confirmation to the customer + alert to staff after an order is placed.
+app.post('/api/orders/:id/notify', async (req, res) => {
+  if (!supabaseAdmin) return res.status(503).json({ error: 'Not configured.' });
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Not signed in.' });
+
+  const { data: order } = await supabaseAdmin.from('orders').select('*').eq('id', req.params.id).single();
+  if (!order || order.user_id !== user.id) return res.status(404).json({ error: 'Order not found.' });
+
+  const confirmation = await sendOrderConfirmationEmail({ to: user.email, order });
+  const alert = await sendNewOrderAlert({ to: adminEmails, order, customerEmail: user.email });
+  res.json({ confirmation, alert });
 });
 
 // Confirm payment on return from Stripe and mark the order paid.
@@ -200,16 +233,37 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   const admin = await requireAdmin(req, res);
   if (!admin) return;
   const allowed = ['submitted', 'paid', 'in_production', 'shipped', 'cancelled'];
-  const { status } = req.body || {};
-  if (!allowed.includes(status)) return res.status(400).json({ error: 'Invalid status.' });
+  const { status, tracking_number, carrier } = req.body || {};
+
+  const patch = {};
+  if (status !== undefined) {
+    if (!allowed.includes(status)) return res.status(400).json({ error: 'Invalid status.' });
+    patch.status = status;
+  }
+  if (tracking_number !== undefined) patch.tracking_number = tracking_number || null;
+  if (carrier !== undefined) patch.carrier = carrier || null;
+  if (!Object.keys(patch).length) return res.status(400).json({ error: 'Nothing to update.' });
+
   const { data, error } = await supabaseAdmin
     .from('orders')
-    .update({ status })
+    .update(patch)
     .eq('id', req.params.id)
     .select()
     .single();
   if (error) return res.status(500).json({ error: error.message });
-  res.json({ order: data });
+
+  // Email the customer when the STATUS changes (not for silent tracking edits).
+  let email = { sent: false, reason: 'no-status-change' };
+  if (status !== undefined) {
+    try {
+      const { data: u } = await supabaseAdmin.auth.admin.getUserById(data.user_id);
+      email = await sendOrderStatusEmail({ to: u?.user?.email, order: data, status });
+    } catch (e) {
+      email = { sent: false, reason: e.message };
+    }
+  }
+
+  res.json({ order: data, email });
 });
 
 export default app;

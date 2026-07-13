@@ -1,4 +1,4 @@
-import { supabase, isSupabaseReady, DESIGN_BUCKET } from '../lib/supabase';
+import { supabase, isSupabaseReady, DESIGN_BUCKET, authHeader } from '../lib/supabase';
 
 // Convert a canvas dataURL (from the Design Studio) into a File for upload.
 function dataUrlToFile(dataUrl, filename) {
@@ -47,6 +47,19 @@ export async function placeOrder({ user, product, specs, quantity, estimatedPric
     .single();
   if (error) throw error;
   return data;
+}
+
+// Fire confirmation (to customer) + alert (to staff) after an order is placed.
+// Best-effort: failures here never block the order.
+export async function notifyOrderPlaced(orderId) {
+  try {
+    await fetch(`/api/orders/${orderId}/notify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) }
+    });
+  } catch {
+    /* ignore */
+  }
 }
 
 export async function getMyOrders() {

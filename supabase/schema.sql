@@ -16,6 +16,10 @@ create table if not exists public.orders (
   config            jsonb,             -- raw pricing config (for authoritative re-pricing)
   amount_total      numeric,           -- charged amount in dollars (set at checkout)
   stripe_session_id text,
+  coupon_code       text,
+  discount          numeric,
+  tracking_number   text,
+  carrier           text,
   status            text not null default 'submitted'
                       check (status in ('submitted','paid','in_production','shipped','cancelled')),
   created_at        timestamptz not null default now()
@@ -23,10 +27,15 @@ create table if not exists public.orders (
 
 create index if not exists orders_user_id_idx on public.orders (user_id);
 
--- If you created the table before payments were added, run these once:
+-- If you created the table before these features were added, run these once
+-- (safe to run repeatedly):
 alter table public.orders add column if not exists config jsonb;
 alter table public.orders add column if not exists amount_total numeric;
 alter table public.orders add column if not exists stripe_session_id text;
+alter table public.orders add column if not exists coupon_code text;
+alter table public.orders add column if not exists discount numeric;
+alter table public.orders add column if not exists tracking_number text;
+alter table public.orders add column if not exists carrier text;
 alter table public.orders drop constraint if exists orders_status_check;
 alter table public.orders add constraint orders_status_check
   check (status in ('submitted','paid','in_production','shipped','cancelled'));

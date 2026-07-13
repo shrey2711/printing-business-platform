@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /account
+Disallow: /admin
+Disallow: /order
+
+Sitemap: https://printing-business-platform-frontend.vercel.app/sitemap.xml

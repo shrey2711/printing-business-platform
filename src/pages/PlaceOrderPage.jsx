@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { placeOrder } from '../services/orders';
-import { startCheckout } from '../services/checkout';
+import { placeOrder, notifyOrderPlaced } from '../services/orders';
+import { startCheckout, validateCoupon } from '../services/checkout';
 
 export default function PlaceOrderPage() {
   const { user, isAuthenticated, isSupabaseReady, loading } = useAuth();
@@ -14,6 +14,22 @@ export default function PlaceOrderPage() {
   const [file, setFile] = useState(null);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [couponInput, setCouponInput] = useState('');
+  const [coupon, setCoupon] = useState(null); // { code, label }
+  const [couponMsg, setCouponMsg] = useState('');
+
+  const applyCouponCode = async () => {
+    setCouponMsg('');
+    if (!couponInput.trim()) return;
+    const res = await validateCoupon(couponInput.trim());
+    if (res.valid) {
+      setCoupon({ code: res.code, label: res.label });
+      setCouponMsg(`✓ ${res.label} applied`);
+    } else {
+      setCoupon(null);
+      setCouponMsg('Invalid or expired code.');
+    }
+  };
 
   // Design can arrive as a dataURL (from Design Studio) or an uploaded file.
   const drawnDesign = incoming.design || null;
@@ -51,10 +67,13 @@ export default function PlaceOrderPage() {
         config: incoming.config || null
       });
 
+      // Fire confirmation + staff alert emails (best-effort).
+      notifyOrderPlaced(order.id);
+
       // If the order has a priced config, try to send them straight to payment.
       if (incoming.config?.slug) {
         try {
-          const checkout = await startCheckout(order.id);
+          const checkout = await startCheckout(order.id, coupon?.code);
           if (checkout?.url) {
             window.location.href = checkout.url;
             return;
@@ -110,6 +129,21 @@ export default function PlaceOrderPage() {
             <textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)}
               placeholder="Deadline, color notes, finishing details…" />
           </div>
+
+          {incoming.config?.slug && (
+            <div className="field">
+              <label htmlFor="coupon">Coupon code</label>
+              <div className="coupon-row">
+                <input id="coupon" value={couponInput}
+                  onChange={(e) => setCouponInput(e.target.value)}
+                  placeholder="e.g. WELCOME10" />
+                <button type="button" className="btn btn-outline" onClick={applyCouponCode}>Apply</button>
+              </div>
+              {couponMsg && (
+                <small className={coupon ? 'coupon-ok' : 'coupon-bad'}>{couponMsg}</small>
+              )}
+            </div>
+          )}
 
           {!isSupabaseReady && (
             <div className="status-message status-error">

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 const valueProps = [
   { stat: '24/7', label: 'Online ordering & instant pricing' },
@@ -12,6 +13,10 @@ const valueProps = [
 ];
 
 export default function HomePage() {
+  useDocumentMeta(
+    'Wholesale Banners, Signs & Displays with Instant Pricing',
+    'Order custom vinyl banners, yard signs, feather flags and trade-show displays online with instant wholesale pricing and nationwide shipping.'
+  );
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

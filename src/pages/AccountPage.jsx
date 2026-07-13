@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getMyOrders, getDesignUrl } from '../services/orders';
 import { startCheckout, confirmCheckout } from '../services/checkout';
+import StatusTimeline from '../components/StatusTimeline';
 
 const statusColor = {
   submitted: 'st-blue',
@@ -15,6 +16,7 @@ const statusColor = {
 export default function AccountPage() {
   const { displayName, isAuthenticated, isSupabaseReady, loading } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const justPlaced = location.state?.placed;
 
@@ -36,7 +38,6 @@ export default function AccountPage() {
   useEffect(() => {
     if (!isAuthenticated) return;
     (async () => {
-      // If we just returned from Stripe, confirm payment first.
       if (params.get('checkout') === 'success' && params.get('order')) {
         const { paid } = await confirmCheckout(params.get('order')).catch(() => ({ paid: false }));
         setPayMsg(paid ? 'Payment received — thank you! Your order is now paid.' : '');
@@ -53,11 +54,23 @@ export default function AccountPage() {
   const payNow = async (orderId) => {
     try {
       const { url, unavailable } = await startCheckout(orderId);
-      if (unavailable) return setPayMsg('Online payment isn\'t enabled yet — we\'ll invoice you directly.');
+      if (unavailable) return setPayMsg("Online payment isn't enabled yet — we'll invoice you directly.");
       if (url) window.location.href = url;
     } catch (e) {
       setPayMsg(e.message);
     }
+  };
+
+  const reorder = (o) => {
+    navigate('/order', {
+      state: {
+        product: o.product,
+        specs: o.specs,
+        quantity: o.quantity,
+        estimatedPrice: o.estimated_price,
+        config: o.config
+      }
+    });
   };
 
   if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
@@ -89,7 +102,7 @@ export default function AccountPage() {
 
       {justPlaced && (
         <div className="status-message status-success">
-          Order placed! Reference: <strong>{justPlaced}</strong>. We'll review your artwork and follow up.
+          Order placed! Reference: <strong>{justPlaced}</strong>. We emailed your confirmation and will review your artwork.
         </div>
       )}
       {payMsg && <div className="status-message status-success">{payMsg}</div>}
@@ -106,31 +119,44 @@ export default function AccountPage() {
           <Link className="btn btn-red" to="/products">Browse products</Link>
         </div>
       ) : (
-        <div className="orders-table card">
-          <div className="orders-row orders-head">
-            <span>Order</span><span>Product</span><span>Qty</span><span>Est. price</span><span>Status</span><span>Artwork</span>
-          </div>
+        <div className="order-cards">
           {orders.map((o) => (
-            <div className="orders-row" key={o.id}>
-              <span className="mono">#{String(o.id).slice(0, 8)}</span>
-              <span>{o.product}<br /><small className="muted">{o.specs}</small></span>
-              <span>{o.quantity}</span>
-              <span>{o.estimated_price || '—'}</span>
-              <span>
+            <div className="order-card card" key={o.id}>
+              <div className="order-card-top">
+                <div>
+                  <span className="mono order-ref">#{String(o.id).slice(0, 8)}</span>
+                  <h3>{o.product}</h3>
+                  <p className="muted order-specs">{o.specs}</p>
+                </div>
                 <em className={`status-pill ${statusColor[o.status] || 'st-blue'}`}>
                   {String(o.status || 'submitted').replace('_', ' ')}
                 </em>
+              </div>
+
+              <StatusTimeline status={o.status} />
+
+              <div className="order-card-meta">
+                <span>Qty <strong>{o.quantity}</strong></span>
+                <span>
+                  {o.amount_total ? 'Paid ' : 'Est. '}
+                  <strong>{o.amount_total ? `$${Number(o.amount_total).toFixed(2)}` : o.estimated_price || '—'}</strong>
+                </span>
+                {o.tracking_number && (
+                  <span>Tracking <strong>{o.carrier ? `${o.carrier} ` : ''}{o.tracking_number}</strong></span>
+                )}
+                {designUrls[o.id] && (
+                  <a href={designUrls[o.id]} target="_blank" rel="noreferrer">View artwork</a>
+                )}
+              </div>
+
+              <div className="order-card-actions">
                 {o.status === 'submitted' && o.config?.slug && (
-                  <button className="btn btn-blue btn-sm pay-btn" onClick={() => payNow(o.id)}>Pay now</button>
+                  <button className="btn btn-blue btn-sm" onClick={() => payNow(o.id)}>Pay now</button>
                 )}
-              </span>
-              <span>
-                {designUrls[o.id] ? (
-                  <a href={designUrls[o.id]} target="_blank" rel="noreferrer">View</a>
-                ) : (
-                  <span className="muted">—</span>
+                {o.config?.slug && (
+                  <button className="btn btn-outline btn-sm" onClick={() => reorder(o)}>Reorder</button>
                 )}
-              </span>
+              </div>
             </div>
           ))}
         </div>

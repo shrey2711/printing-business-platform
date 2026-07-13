@@ -3,8 +3,10 @@ import { useSearchParams } from 'react-router-dom';
 import { getProducts, getCategories } from '../services/api';
 import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function ProductsPage() {
+  useDocumentMeta('Shop All Products & Get Instant Pricing', 'Browse banners, signs, flags, displays and decals. Configure size and quantity for live wholesale pricing.');
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'all';
 

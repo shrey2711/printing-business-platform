@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProduct, getPrice } from '../services/api';
 import ProductArt from '../components/ProductArt';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function ProductConfigurator() {
   const { slug } = useParams();
@@ -14,6 +15,11 @@ export default function ProductConfigurator() {
   const [price, setPrice] = useState(null);
   const [pricing, setPricing] = useState(false);
   const debounceRef = useRef(null);
+
+  useDocumentMeta(
+    product ? `${product.name} — Custom Printing & Instant Pricing` : 'Product',
+    product?.tagline
+  );
 
   // Load the product and seed default configuration.
   useEffect(() => {

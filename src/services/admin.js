@@ -9,12 +9,14 @@ export async function getAllOrders() {
   return (await res.json()).orders;
 }
 
-export async function updateOrderStatus(id, status) {
+// Patch an order: { status } and/or { tracking_number, carrier }.
+// Returns { order, email } (email.sent is true when a status email went out).
+export async function updateOrder(id, patch) {
   const res = await fetch(`/api/admin/orders/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
-    body: JSON.stringify({ status })
+    body: JSON.stringify(patch)
   });
-  if (!res.ok) throw new Error('Could not update status.');
-  return (await res.json()).order;
+  if (!res.ok) throw new Error('Could not update the order.');
+  return res.json();
 }
