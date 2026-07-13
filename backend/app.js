@@ -193,8 +193,9 @@ app.post('/api/orders/:id/notify', writeLimiter, async (req, res) => {
   const { data: order } = await supabaseAdmin.from('orders').select('*').eq('id', req.params.id).single();
   if (!order || order.user_id !== user.id) return res.status(404).json({ error: 'Order not found.' });
 
-  const confirmation = await sendOrderConfirmationEmail({ to: user.email, order });
-  const alert = await sendNewOrderAlert({ to: adminEmails, order, customerEmail: user.email });
+  const appUrl = baseUrl(req);
+  const confirmation = await sendOrderConfirmationEmail({ to: user.email, order, appUrl });
+  const alert = await sendNewOrderAlert({ to: adminEmails, order, customerEmail: user.email, appUrl });
   res.json({ confirmation, alert });
 });
 
@@ -316,7 +317,7 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   if (status !== undefined) {
     try {
       const { data: u } = await supabaseAdmin.auth.admin.getUserById(data.user_id);
-      email = await sendOrderStatusEmail({ to: u?.user?.email, order: data, status });
+      email = await sendOrderStatusEmail({ to: u?.user?.email, order: data, status, appUrl: baseUrl(req) });
     } catch (e) {
       email = { sent: false, reason: e.message };
     }
