@@ -35,7 +35,11 @@ export default function AdminPage() {
     try {
       const { order, email } = await updateOrder(o.id, { status });
       setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, status: order.status } : x)));
-      flash(email?.sent ? `✓ Status updated — email sent to ${o.customer_email}` : '✓ Status updated (email not sent — check Resend key)');
+      flash(
+        email?.sent
+          ? `✓ Status updated — email sent to ${o.customer_email}`
+          : `✓ Status updated — email NOT sent (reason: ${email?.reason || 'unknown'})`
+      );
     } catch (e) {
       setError(e.message);
     }
