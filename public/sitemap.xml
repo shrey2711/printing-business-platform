@@ -3,15 +3,67 @@
   <url><loc>https://printing-business-platform-frontend.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://printing-business-platform-frontend.vercel.app/products</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://printing-business-platform-frontend.vercel.app/products/vinyl-banners</loc><priority>0.8</priority></url>
-  <url><loc>https://printing-business-platform-frontend.vercel.app/products/mesh-banners</loc><priority>0.7</priority></url>
-  <url><loc>https://printing-business-platform-frontend.vercel.app/products/fabric-banners</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/products/mesh-banners</loc><priority>0.8</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/products/fabric-banners</loc><priority>0.8</priority></url>
   <url><loc>https://printing-business-platform-frontend.vercel.app/products/yard-signs</loc><priority>0.8</priority></url>
-  <url><loc>https://printing-business-platform-frontend.vercel.app/products/rigid-signs</loc><priority>0.7</priority></url>
-  <url><loc>https://printing-business-platform-frontend.vercel.app/products/decals-stickers</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/products/rigid-signs</loc><priority>0.8</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/products/decals-stickers</loc><priority>0.8</priority></url>
   <url><loc>https://printing-business-platform-frontend.vercel.app/products/feather-flags</loc><priority>0.8</priority></url>
-  <url><loc>https://printing-business-platform-frontend.vercel.app/products/retractable-banner-stands</loc><priority>0.7</priority></url>
-  <url><loc>https://printing-business-platform-frontend.vercel.app/products/table-covers</loc><priority>0.7</priority></url>
-  <url><loc>https://printing-business-platform-frontend.vercel.app/products/canopy-tents</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/products/retractable-banner-stands</loc><priority>0.8</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/products/table-covers</loc><priority>0.8</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/products/canopy-tents</loc><priority>0.8</priority></url>
   <url><loc>https://printing-business-platform-frontend.vercel.app/design</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/alabama</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/alaska</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/arizona</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/arkansas</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/california</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/colorado</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/connecticut</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/delaware</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/florida</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/georgia</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/hawaii</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/idaho</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/illinois</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/indiana</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/iowa</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/kansas</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/kentucky</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/louisiana</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/maine</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/maryland</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/massachusetts</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/michigan</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/minnesota</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/mississippi</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/missouri</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/montana</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/nebraska</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/nevada</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/new-hampshire</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/new-jersey</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/new-mexico</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/new-york</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/north-carolina</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/north-dakota</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/ohio</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/oklahoma</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/oregon</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/pennsylvania</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/rhode-island</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/south-carolina</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/south-dakota</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/tennessee</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/texas</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/utah</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/vermont</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/virginia</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/washington</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/west-virginia</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/wisconsin</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/wyoming</loc><priority>0.7</priority></url>
+  <url><loc>https://printing-business-platform-frontend.vercel.app/locations/washington-dc</loc><priority>0.7</priority></url>
   <url><loc>https://printing-business-platform-frontend.vercel.app/contact</loc><priority>0.5</priority></url>
 </urlset>

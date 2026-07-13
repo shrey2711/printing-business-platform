@@ -12,6 +12,8 @@ import AccountPage from './pages/AccountPage';
 import DesignStudio from './pages/DesignStudio';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import AdminPage from './pages/AdminPage';
+import LocationsPage from './pages/LocationsPage';
+import LocationPage from './pages/LocationPage';
 
 const topNav = [
   { label: 'All Products', to: '/products' },
@@ -109,6 +111,7 @@ function Footer() {
             <Link to="/products/vinyl-banners">Vinyl Banners</Link>
             <Link to="/products/yard-signs">Yard Signs</Link>
             <Link to="/design">Design Studio</Link>
+            <Link to="/locations">Locations (All 50 States)</Link>
           </div>
         </div>
         <div>
@@ -152,6 +155,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/locations" element={<LocationsPage />} />
+        <Route path="/locations/:stateSlug" element={<LocationPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
       <Footer />

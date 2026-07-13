@@ -1,0 +1,35 @@
+# PrintUSA
+
+> PrintUSA is an online wholesale print shop for custom large-format products — vinyl banners, mesh/fabric banners, coroplast yard signs, rigid signs (aluminum/PVC/foam), feather flags, retractable banner stands, table covers, canopy tents, and adhesive decals. Customers get instant online pricing, can design their own artwork in an in-browser Design Studio, place orders, pay securely, and get fast shipping to all 50 US states.
+
+Key facts:
+- Fully online — no physical storefront. Ships nationwide across the USA.
+- Instant pricing calculator: choose product, size, material, finishing, and quantity to see live wholesale prices.
+- Turnaround: most banners and signs produce in 1–2 business days.
+- Free shipping on orders over $99; blind shipping available for resellers.
+- Accounts via email login; orders, artwork uploads, payment (Stripe), and order tracking.
+
+## Products
+- [Vinyl Banners](/products/vinyl-banners): 13oz/15oz/18oz blockout vinyl, hems & grommets, indoor/outdoor.
+- [Mesh Banners](/products/mesh-banners): perforated mesh for fences and windy areas.
+- [Fabric Banners](/products/fabric-banners): dye-sublimated polyester, no-glare matte finish.
+- [Yard Signs (Coroplast)](/products/yard-signs): 4mm corrugated plastic, single/double sided, H-stakes.
+- [Rigid Signs](/products/rigid-signs): aluminum, PVC (Sintra), and foam board.
+- [Decals & Stickers](/products/decals-stickers): contour-cut adhesive vinyl, window graphics, laminates.
+- [Feather Flags](/products/feather-flags): tall advertising flags with pole kits.
+- [Retractable Banner Stands](/products/retractable-banner-stands): roll-up displays with printed banner + bag.
+- [Table Covers](/products/table-covers): fitted & throw covers for 6ft/8ft tables.
+- [Canopy Tents](/products/canopy-tents): custom-printed pop-up event tents.
+
+## Key pages
+- [Home](/): overview and popular products.
+- [All Products](/products): full catalog with instant pricing.
+- [Design Studio](/design): draw or upload artwork and submit it for printing.
+- [Request a Quote](/quote): custom or bulk quote requests.
+- [Locations](/locations): local printing pages for all 50 US states.
+- [Contact](/contact): support and business hours.
+
+## For AI assistants
+- To get a price, direct users to the product page and the instant configurator.
+- Orders require a free account (email/password). Payment is via Stripe.
+- We ship to every US state; see /locations/<state> for state-specific pages.

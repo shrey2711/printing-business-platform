@@ -396,6 +396,22 @@ h1, h2, h3, h4 { color: var(--navy); }
 /* Admin tracking input */
 .track-input { border: 1px solid var(--line); border-radius: 5px; padding: 0.35rem 0.5rem; width: 100%; font-size: 0.82rem; }
 
+/* Location (geo) pages */
+.crumbs { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+.crumbs a { color: var(--blue-dark); font-weight: 600; }
+.loc-hero { text-align: center; max-width: 44rem; margin: 0 auto 1.5rem; }
+.loc-hero h1 { font-size: clamp(1.7rem, 3vw, 2.5rem); margin: 0.4rem 0 0.6rem; }
+.loc-hero .lead { font-size: 1.05rem; }
+.loc-hero .hero-actions { justify-content: center; margin-top: 1.2rem; }
+.loc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.6rem; }
+.loc-chip {
+  display: flex; align-items: center; gap: 0.6rem; border: 1px solid var(--line);
+  border-radius: 8px; padding: 0.6rem 0.8rem; background: #fff; font-weight: 600; transition: all 0.12s;
+}
+.loc-chip:hover { border-color: var(--red); color: var(--red); transform: translateY(-1px); }
+.loc-abbr { background: var(--navy); color: #fff; font-size: 0.72rem; font-weight: 800; width: 32px; height: 24px; border-radius: 4px; display: grid; place-items: center; }
+.loc-chip:hover .loc-abbr { background: var(--red); }
+
 /* Admin table */
 .admin-row { grid-template-columns: 0.8fr 1.4fr 2fr 0.9fr 1.1fr 1.1fr 0.6fr; }
 .admin-table .wrap { word-break: break-word; }
