@@ -20,6 +20,7 @@ create table if not exists public.orders (
   discount          numeric,
   tracking_number   text,
   carrier           text,
+  idempotency_key   text,              -- prevents duplicate orders on retry/double-submit
   status            text not null default 'submitted'
                       check (status in ('submitted','paid','in_production','shipped','cancelled')),
   created_at        timestamptz not null default now()
@@ -36,6 +37,9 @@ alter table public.orders add column if not exists coupon_code text;
 alter table public.orders add column if not exists discount numeric;
 alter table public.orders add column if not exists tracking_number text;
 alter table public.orders add column if not exists carrier text;
+alter table public.orders add column if not exists idempotency_key text;
+create unique index if not exists orders_idempotency_key_uidx
+  on public.orders (idempotency_key) where idempotency_key is not null;
 alter table public.orders drop constraint if exists orders_status_check;
 alter table public.orders add constraint orders_status_check
   check (status in ('submitted','paid','in_production','shipped','cancelled'));

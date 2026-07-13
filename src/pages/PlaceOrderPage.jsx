@@ -17,6 +17,10 @@ export default function PlaceOrderPage() {
   const [couponInput, setCouponInput] = useState('');
   const [coupon, setCoupon] = useState(null); // { code, label }
   const [couponMsg, setCouponMsg] = useState('');
+  // Stable per-attempt key so retries/double-clicks don't create duplicate orders.
+  const [idempotencyKey] = useState(() =>
+    (crypto?.randomUUID?.() || `k-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  );
 
   const applyCouponCode = async () => {
     setCouponMsg('');
@@ -64,7 +68,8 @@ export default function PlaceOrderPage() {
         estimatedPrice: incoming.estimatedPrice || '',
         notes,
         design: file || drawnDesign,
-        config: incoming.config || null
+        config: incoming.config || null,
+        idempotencyKey
       });
 
       // Fire confirmation + staff alert emails (best-effort).

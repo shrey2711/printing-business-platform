@@ -26,8 +26,20 @@ async function uploadDesign(userId, source) {
 }
 
 // Place an order: optionally upload a design, then insert the order row.
-export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config }) {
+export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey }) {
   if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
+
+  // Idempotency: if this exact attempt already created an order (retry / double
+  // submit), return the existing one instead of creating a duplicate.
+  if (idempotencyKey) {
+    const { data: existing } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('idempotency_key', idempotencyKey)
+      .maybeSingle();
+    if (existing) return existing;
+  }
+
   const designPath = design ? await uploadDesign(user.id, design) : null;
 
   const { data, error } = await supabase
@@ -41,11 +53,24 @@ export async function placeOrder({ user, product, specs, quantity, estimatedPric
       notes: notes || null,
       design_path: designPath,
       config: config || null,
+      idempotency_key: idempotencyKey || null,
       status: 'submitted'
     })
     .select()
     .single();
-  if (error) throw error;
+
+  // 23505 = unique violation → another concurrent submit won the race; fetch it.
+  if (error) {
+    if (error.code === '23505' && idempotencyKey) {
+      const { data: existing } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('idempotency_key', idempotencyKey)
+        .maybeSingle();
+      if (existing) return existing;
+    }
+    throw error;
+  }
   return data;
 }
 

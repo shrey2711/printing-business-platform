@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import multer from 'multer';
+import rateLimit from 'express-rate-limit';
 
 import { listProducts, getProduct, categories, navGroups } from './data/products.js';
 import { computePrice } from './data/pricing.js';
@@ -13,9 +14,50 @@ import { findCoupon, applyCoupon } from './data/coupons.js';
 dotenv.config();
 
 const app = express();
+app.set('trust proxy', 1); // behind Vercel's proxy — needed for correct client IPs
 
 app.use(cors());
+
+// The Stripe webhook needs the RAW request body for signature verification,
+// so it must be registered BEFORE the JSON body parser.
+app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  if (!stripe || !supabaseAdmin) return res.status(503).end();
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  let event;
+  try {
+    event = secret
+      ? stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], secret)
+      : JSON.parse(req.body); // fallback if no secret set (dev only)
+  } catch (err) {
+    return res.status(400).send(`Webhook signature error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    const orderId = session.metadata?.orderId;
+    if (orderId && session.payment_status === 'paid') {
+      await supabaseAdmin
+        .from('orders')
+        .update({ status: 'paid' })
+        .eq('id', orderId)
+        .eq('status', 'submitted'); // don't downgrade later statuses
+    }
+  }
+  res.json({ received: true });
+});
+
 app.use(express.json({ limit: '2mb' }));
+
+// Rate limiter for write / expensive endpoints (abuse & spam protection).
+// Read-only pricing/catalog stay unthrottled. In-memory per instance; pair with
+// a shared store (e.g. Upstash) if you later run a single always-on server.
+const writeLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 40,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests — please slow down and try again shortly.' }
+});
 
 // Memory storage keeps this stateless so it works on Vercel serverless.
 const upload = multer({ storage: multer.memoryStorage() });
@@ -50,7 +92,7 @@ app.post('/api/price', (req, res) => {
 });
 
 // Guest quote request (authenticated orders go through Supabase directly).
-app.post('/api/quote', upload.single('file'), (req, res) => {
+app.post('/api/quote', writeLimiter, upload.single('file'), (req, res) => {
   res.json({
     success: true,
     message: 'Quote request received',
@@ -70,7 +112,7 @@ app.post('/api/quote', upload.single('file'), (req, res) => {
 // ============================================================================
 
 // Create a Stripe Checkout Session for an existing order the caller owns.
-app.post('/api/checkout', async (req, res) => {
+app.post('/api/checkout', writeLimiter, async (req, res) => {
   if (!stripe || !supabaseAdmin) {
     return res.status(503).json({ error: 'Payments are not configured.' });
   }
@@ -136,14 +178,14 @@ app.post('/api/checkout', async (req, res) => {
 });
 
 // Validate a coupon code (for showing the discount before paying).
-app.post('/api/coupon', (req, res) => {
+app.post('/api/coupon', writeLimiter, (req, res) => {
   const coupon = findCoupon((req.body || {}).code);
   if (!coupon) return res.status(404).json({ valid: false, error: 'Invalid or expired code.' });
   res.json({ valid: true, code: coupon.code, type: coupon.type, value: coupon.value, label: coupon.label });
 });
 
 // Send confirmation to the customer + alert to staff after an order is placed.
-app.post('/api/orders/:id/notify', async (req, res) => {
+app.post('/api/orders/:id/notify', writeLimiter, async (req, res) => {
   if (!supabaseAdmin) return res.status(503).json({ error: 'Not configured.' });
   const user = await getUserFromToken(req.headers.authorization);
   if (!user) return res.status(401).json({ error: 'Not signed in.' });
@@ -157,7 +199,7 @@ app.post('/api/orders/:id/notify', async (req, res) => {
 });
 
 // Confirm payment on return from Stripe and mark the order paid.
-app.post('/api/checkout/confirm', async (req, res) => {
+app.post('/api/checkout/confirm', writeLimiter, async (req, res) => {
   if (!stripe || !supabaseAdmin) return res.status(503).json({ error: 'Payments are not configured.' });
   const user = await getUserFromToken(req.headers.authorization);
   if (!user) return res.status(401).json({ error: 'Not signed in.' });

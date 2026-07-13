@@ -94,6 +94,19 @@ store still runs and shows "not enabled yet" messages. See `.env.example` for a 
 
 ### Coupons
 Edit the code list in [`backend/data/coupons.js`](backend/data/coupons.js). Starter codes: `WELCOME10`, `SAVE25`, `FREESHIP`, `FIRST20`.
+
+### Stripe webhook (reliable payment status — recommended for production)
+Without a webhook, an order is only marked **paid** when the customer returns from
+Stripe. A webhook marks it paid reliably even if they close the tab.
+1. Stripe Dashboard → **Developers → Webhooks → Add endpoint**.
+2. Endpoint URL: `https://YOUR-DOMAIN/api/stripe/webhook`
+3. Events to send: **`checkout.session.completed`**.
+4. Copy the **Signing secret** (`whsec_...`) into the `STRIPE_WEBHOOK_SECRET` env var and redeploy.
+
+### Scaling & safety notes
+- **Idempotency:** orders carry an `idempotency_key`, so double-clicks/retries can't create duplicates (unique index in the schema).
+- **Rate limiting:** write endpoints (checkout, coupon, quote, notify) are limited to 40 req/min per IP. It's in-memory per serverless instance; for a hard global limit, add a shared store (e.g. Upstash Redis).
+- **High-volume bursts:** on a large simultaneous spike, upgrade **Resend** (free tier is 100 emails/day) and consider batching the admin new-order alerts into a digest. Order saving never blocks on email — email failures are ignored.
 6. After the first deploy, add your Vercel URL to Supabase under
    **Authentication → URL Configuration → Site URL / Redirect URLs**
    (e.g. `https://your-app.vercel.app`).
