@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage';
@@ -9,12 +9,14 @@ import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AccountPage from './pages/AccountPage';
-import DesignStudio from './pages/DesignStudio';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import AdminPage from './pages/AdminPage';
 import LocationsPage from './pages/LocationsPage';
 import LocationPage from './pages/LocationPage';
 import CityPage from './pages/CityPage';
+
+// The Design Studio pulls in fabric.js (~250KB) — load it only when visited.
+const DesignStudio = lazy(() => import('./pages/DesignStudio'));
 
 const topNav = [
   { label: 'All Products', to: '/products' },
@@ -145,6 +147,7 @@ function App() {
   return (
     <div className="app-shell">
       <Header />
+      <Suspense fallback={<main className="page"><p className="muted">Loading…</p></main>}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
@@ -161,6 +164,7 @@ function App() {
         <Route path="/locations/:stateSlug/:citySlug" element={<CityPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
+      </Suspense>
       <Footer />
     </div>
   );

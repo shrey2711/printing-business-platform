@@ -3,9 +3,10 @@
 
 const BG = '#eef1f5';
 
-function Frame({ children }) {
+function Frame({ children, label }) {
   return (
-    <svg viewBox="0 0 240 180" className="art-svg" role="img" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 0 240 180" className="art-svg" role="img" aria-label={label || 'Product illustration'} preserveAspectRatio="xMidYMid meet">
+      {label ? <title>{label}</title> : null}
       <rect width="240" height="180" fill={BG} />
       {children}
     </svg>

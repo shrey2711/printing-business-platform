@@ -14,8 +14,8 @@ const valueProps = [
 
 export default function HomePage() {
   useDocumentMeta(
-    'Wholesale Banners, Signs & Displays with Instant Pricing',
-    'Order custom vinyl banners, yard signs, feather flags and trade-show displays online with instant wholesale pricing and nationwide shipping.'
+    'Wholesale Banners, Signs & Displays',
+    'Get instant pricing on wholesale banners, custom signs, feather flags and trade-show displays. Choose your size, quantity and finishing online, with fast nationwide shipping.'
   );
   const [products, setProducts] = useState([]);
 

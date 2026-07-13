@@ -1,20 +1,58 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-// Lightweight per-page SEO: sets the document <title> and meta description.
-// (Google renders client-side JS, so these are picked up for indexing.)
-export default function useDocumentMeta(title, description) {
+function upsertMeta(attr, key, content) {
+  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function upsertLink(rel, href) {
+  let el = document.head.querySelector(`link[rel="${rel}"]`);
+  if (!el) {
+    el = document.createElement('link');
+    el.setAttribute('rel', rel);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('href', href);
+}
+
+// Per-page SEO: sets a unique <title>, description, canonical URL, Open Graph /
+// Twitter tags, and optional JSON-LD structured data. Canonical/OG URLs use the
+// live origin so they stay correct on any custom domain.
+export default function useDocumentMeta(title, description, jsonLd) {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     const fullTitle = title ? `${title} | PrintUSA` : 'PrintUSA — Wholesale Banners, Signs & Displays';
     document.title = fullTitle;
 
+    const url = window.location.origin + pathname;
+    upsertLink('canonical', url); // overrides the static homepage canonical per page
+    upsertMeta('property', 'og:title', fullTitle);
+    upsertMeta('property', 'og:url', url);
+    upsertMeta('name', 'twitter:title', fullTitle);
+
     if (description) {
-      let tag = document.querySelector('meta[name="description"]');
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', 'description');
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', description);
+      upsertMeta('name', 'description', description);
+      upsertMeta('property', 'og:description', description);
+      upsertMeta('name', 'twitter:description', description);
     }
-  }, [title, description]);
+
+    // Optional per-page structured data (Product, BreadcrumbList, …).
+    const existing = document.getElementById('page-jsonld');
+    if (jsonLd) {
+      const el = existing || document.createElement('script');
+      el.type = 'application/ld+json';
+      el.id = 'page-jsonld';
+      el.textContent = JSON.stringify(jsonLd);
+      if (!existing) document.head.appendChild(el);
+    } else if (existing) {
+      existing.remove();
+    }
+  }, [title, description, pathname, jsonLd]);
 }
