@@ -36,8 +36,33 @@ export async function getUserFromToken(authHeader) {
   return data.user || null;
 }
 
-export function isAdmin(user) {
+// True if the user is on the env allowlist. This is the BOOTSTRAP path: it keeps
+// working before the admin_users table is populated, so no one is ever locked out.
+export function isAllowlisted(user) {
   return Boolean(user && adminEmails.includes((user.email || '').toLowerCase()));
+}
+
+// Resolve a user's role. The admin_users table is authoritative; the env
+// allowlist is a fallback that grants 'admin' (bootstrap). Returns 'admin',
+// 'editor', or null (no access). Order matters: an explicit DB row wins, but an
+// allowlisted user with no row still gets admin so the first login works.
+export async function getRole(user) {
+  if (!user) return null;
+  if (supabaseAdmin) {
+    const { data } = await supabaseAdmin
+      .from('admin_users')
+      .select('role')
+      .eq('user_id', user.id)
+      .maybeSingle();
+    if (data?.role) return data.role;
+  }
+  return isAllowlisted(user) ? 'admin' : null;
+}
+
+// Back-compat: existing callers of isAdmin() still work (allowlist check).
+// Role-aware routes should use getRole()/requireRole() instead.
+export function isAdmin(user) {
+  return isAllowlisted(user);
 }
 
 // Base URL for Stripe redirects: prefer explicit env, else the request origin.

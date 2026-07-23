@@ -52,7 +52,7 @@ function CurrencySwitch() {
 }
 
 function HeaderAuth() {
-  const { isAuthenticated, isAdmin, displayName, login, logout, isSupabaseReady } = useAuth();
+  const { isAuthenticated, canSeeAdmin, displayName, login, logout, isSupabaseReady } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
   const [err, setErr] = useState(false);
@@ -61,7 +61,7 @@ function HeaderAuth() {
     return (
       <div className="header-account">
         <Link to="/account" className="acct-link">👤 {displayName?.split(' ')[0] || 'Account'}</Link>
-        {isAdmin && <Link to="/admin" className="btn btn-outline btn-sm">Admin</Link>}
+        {canSeeAdmin && <Link to="/admin" className="btn btn-outline btn-sm">Dashboard</Link>}
         <Link to="/account" className="btn btn-blue btn-sm">My Orders</Link>
         <button className="btn btn-outline btn-sm" onClick={async () => { await logout(); navigate('/'); }}>
           Sign out

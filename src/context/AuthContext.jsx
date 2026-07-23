@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase, isSupabaseReady, adminEmails } from '../lib/supabase';
+import { supabase, isSupabaseReady, adminEmails, authHeader } from '../lib/supabase';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
     if (!isSupabaseReady) {
@@ -22,6 +23,29 @@ export function AuthProvider({ children }) {
     });
     return () => sub.subscription.unsubscribe();
   }, []);
+
+  // Resolve the DB-backed role whenever the user changes. The email allowlist
+  // is only a client-side hint for showing the Admin link; the server is
+  // authoritative via /api/me (and re-checks on every admin request).
+  useEffect(() => {
+    let alive = true;
+    if (!user) {
+      setRole(null);
+      return;
+    }
+    (async () => {
+      try {
+        const res = await fetch('/api/me', { headers: { ...(await authHeader()) } });
+        const data = res.ok ? await res.json() : null;
+        if (alive) setRole(data?.role ?? null);
+      } catch {
+        if (alive) setRole(null);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [user]);
 
   const register = async ({ name, company, email, password }) => {
     if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
@@ -47,12 +71,19 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
+  // Client-side allowlist hint: shows the Admin link immediately on login,
+  // before /api/me resolves. `role` (from the server) is the real gate.
+  const allowlisted = Boolean(user && adminEmails.includes((user.email || '').toLowerCase()));
+
   const value = {
     user,
     loading,
     isSupabaseReady,
     isAuthenticated: Boolean(user),
-    isAdmin: Boolean(user && adminEmails.includes((user.email || '').toLowerCase())),
+    role,
+    isAdmin: role === 'admin' || allowlisted,
+    isEditor: role === 'admin' || role === 'editor' || allowlisted,
+    canSeeAdmin: role === 'admin' || role === 'editor' || allowlisted,
     displayName: user?.user_metadata?.full_name || user?.email || '',
     register,
     login,

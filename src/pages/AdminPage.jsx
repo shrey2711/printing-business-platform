@@ -1,73 +1,33 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getAllOrders, updateOrder, deleteOrder } from '../services/admin';
+import OrdersTab from './admin/OrdersTab';
+import BlogTab from './admin/BlogTab';
+import UsersTab from './admin/UsersTab';
 
-const STATUSES = [
-  'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'cancelled'
+// Dashboard tabs. `roles` lists who may see each; admins see everything.
+const TABS = [
+  { id: 'orders', label: 'Orders', roles: ['admin'], Comp: OrdersTab },
+  { id: 'blog', label: 'Blog', roles: ['admin', 'editor'], Comp: BlogTab },
+  { id: 'content', label: 'Content', roles: ['admin', 'editor'], Comp: null },
+  { id: 'seo', label: 'SEO', roles: ['admin', 'editor'], Comp: null },
+  { id: 'users', label: 'Users', roles: ['admin'], Comp: UsersTab }
 ];
-const statusColor = {
-  submitted: 'st-blue', paid: 'st-green', proof_ready: 'st-amber', proof_approved: 'st-blue',
-  in_production: 'st-amber', shipped: 'st-green', cancelled: 'st-red'
-};
 
 export default function AdminPage() {
-  const { isAuthenticated, loading } = useAuth();
-  const [orders, setOrders] = useState([]);
+  const { isAuthenticated, loading, role, isAdmin, canSeeAdmin } = useAuth();
+  const [params, setParams] = useSearchParams();
   const [error, setError] = useState('');
   const [toast, setToast] = useState('');
-  const [loadingOrders, setLoadingOrders] = useState(true);
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      setLoadingOrders(false);
-      return;
-    }
-    getAllOrders()
-      .then(setOrders)
-      .catch((e) => setError(e.message))
-      .finally(() => setLoadingOrders(false));
-  }, [isAuthenticated]);
 
   const flash = (msg) => {
     setToast(msg);
+    setError('');
     setTimeout(() => setToast(''), 4000);
   };
-
-  const changeStatus = async (o, status) => {
-    try {
-      const { order, email } = await updateOrder(o.id, { status });
-      setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, status: order.status } : x)));
-      flash(
-        email?.sent
-          ? `✓ Status updated — email sent to ${o.customer_email}`
-          : `✓ Status updated — email NOT sent (reason: ${email?.reason || 'unknown'})`
-      );
-    } catch (e) {
-      setError(e.message);
-    }
-  };
-
-  const removeOrder = async (o) => {
-    if (!window.confirm(`Delete order #${String(o.id).slice(0, 8)} from ${o.customer_email || 'customer'}? This cannot be undone.`)) return;
-    try {
-      await deleteOrder(o.id);
-      setOrders((prev) => prev.filter((x) => x.id !== o.id));
-      flash('✓ Order deleted');
-    } catch (e) {
-      setError(e.message);
-    }
-  };
-
-  const saveTracking = async (o, tracking_number) => {
-    if (tracking_number === (o.tracking_number || '')) return;
-    try {
-      const { order } = await updateOrder(o.id, { tracking_number });
-      setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, tracking_number: order.tracking_number } : x)));
-      flash('✓ Tracking saved');
-    } catch (e) {
-      setError(e.message);
-    }
+  const fail = (msg) => {
+    setError(msg);
+    setTimeout(() => setError(''), 6000);
   };
 
   if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
@@ -76,72 +36,68 @@ export default function AdminPage() {
     return (
       <main className="page auth-page">
         <div className="auth-card card">
-          <h1>Admin</h1>
-          <p className="muted">Sign in with a staff account to manage orders.</p>
+          <h1>Dashboard</h1>
+          <p className="muted">Sign in with a staff account to manage the site.</p>
           <Link className="btn btn-red" to="/login" state={{ from: '/admin' }}>Sign in</Link>
         </div>
       </main>
     );
   }
 
+  // Signed in but not staff (no DB role and not allowlisted).
+  if (!canSeeAdmin) {
+    return (
+      <main className="page auth-page">
+        <div className="auth-card card">
+          <h1>No access</h1>
+          <p className="muted">This account doesn't have dashboard permissions. Ask an admin to grant you a role.</p>
+          <Link className="btn btn-outline" to="/account">Back to my account</Link>
+        </div>
+      </main>
+    );
+  }
+
+  // Effective role: an allowlisted user with no DB row still acts as admin.
+  const effectiveRole = role || (isAdmin ? 'admin' : 'editor');
+  const visible = TABS.filter((t) => effectiveRole === 'admin' || t.roles.includes(effectiveRole));
+
+  const active = visible.find((t) => t.id === params.get('tab')) || visible[0];
+  const setTab = (id) => setParams({ tab: id }, { replace: true });
+
   return (
     <main className="page">
       <div className="account-head">
         <div>
-          <span className="eyebrow">Admin</span>
-          <h1>All orders</h1>
+          <span className="eyebrow">Dashboard</span>
+          <h1>{active?.label}</h1>
         </div>
-        <span className="muted">{orders.length} order{orders.length === 1 ? '' : 's'}</span>
+        <span className="admin-role-badge">{effectiveRole}</span>
       </div>
+
+      <nav className="admin-tabs">
+        {visible.map((t) => (
+          <button
+            key={t.id}
+            className={`admin-tab ${active?.id === t.id ? 'admin-tab-active' : ''}`}
+            onClick={() => setTab(t.id)}
+          >
+            {t.label}
+          </button>
+        ))}
+      </nav>
 
       {error && <div className="status-message status-error">{error}</div>}
       {toast && <div className="status-message status-success">{toast}</div>}
 
-      {loadingOrders ? (
-        <p className="muted">Loading orders…</p>
-      ) : orders.length === 0 && !error ? (
-        <div className="empty-state card"><p>No orders yet.</p></div>
-      ) : (
-        <div className="orders-table admin-table card">
-          <div className="orders-row admin-row orders-head">
-            <span>Order</span><span>Customer</span><span>Product / specs</span>
-            <span>Amount</span><span>Status</span><span>Tracking #</span><span>Art</span><span></span>
+      <div className="admin-tab-body">
+        {active?.Comp ? (
+          <active.Comp onError={fail} onFlash={flash} role={effectiveRole} />
+        ) : (
+          <div className="empty-state card">
+            <p>The <strong>{active?.label}</strong> tab is coming next.</p>
           </div>
-          {orders.map((o) => (
-            <div className="orders-row admin-row" key={o.id}>
-              <span className="mono">#{String(o.id).slice(0, 8)}</span>
-              <span className="wrap">{o.customer_email || '—'}</span>
-              <span className="wrap">{o.product}<br /><small className="muted">{o.specs} · Qty {o.quantity}</small></span>
-              <span>{o.amount_total ? `$${Number(o.amount_total).toFixed(2)}` : o.estimated_price || '—'}</span>
-              <span>
-                <select
-                  className={`status-select ${statusColor[o.status] || ''}`}
-                  value={o.status}
-                  onChange={(e) => changeStatus(o, e.target.value)}
-                >
-                  {STATUSES.map((s) => (
-                    <option key={s} value={s}>{s.replace('_', ' ')}</option>
-                  ))}
-                </select>
-              </span>
-              <span>
-                <input
-                  className="track-input"
-                  defaultValue={o.tracking_number || ''}
-                  placeholder="add #"
-                  onBlur={(e) => saveTracking(o, e.target.value.trim())}
-                />
-              </span>
-              <span>
-                {o.designUrl ? <a href={o.designUrl} target="_blank" rel="noreferrer">View</a> : <span className="muted">—</span>}
-              </span>
-              <span>
-                <button className="btn btn-ghost-danger btn-sm" onClick={() => removeOrder(o)} title="Delete order">✕</button>
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
+        )}
+      </div>
     </main>
   );
 }

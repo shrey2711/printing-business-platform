@@ -7,7 +7,7 @@ import rateLimit from 'express-rate-limit';
 import { listProducts, getProduct, categories, navGroups } from './data/products.js';
 import { computePrice } from './data/pricing.js';
 import { getProductFaqs } from './data/faqs.js';
-import { stripe, supabaseAdmin, getUserFromToken, isAdmin, adminEmails, baseUrl } from './lib/clients.js';
+import { stripe, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } from './lib/mailer.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
 import { currencies, BASE_CURRENCY } from '../src/config/brand.js';
@@ -285,7 +285,10 @@ app.post('/api/checkout/confirm', writeLimiter, async (req, res) => {
 // Admin (email allowlist)
 // ============================================================================
 
-async function requireAdmin(req, res) {
+// Gate a route by role. Pass the roles allowed to proceed; 'admin' always
+// satisfies an 'editor' requirement (admins can do everything editors can).
+// Returns { user, role } on success, or null after having sent the response.
+async function requireRole(req, res, ...allowed) {
   if (!supabaseAdmin) {
     res.status(503).json({ error: 'Admin is not configured.' });
     return null;
@@ -295,12 +298,30 @@ async function requireAdmin(req, res) {
     res.status(401).json({ error: 'Not signed in.' });
     return null;
   }
-  if (!isAdmin(user)) {
+  const role = await getRole(user);
+  const ok = role === 'admin' || (allowed.length ? allowed.includes(role) : Boolean(role));
+  if (!ok) {
     res.status(403).json({ error: 'Not authorized.' });
     return null;
   }
-  return user;
+  return { user, role };
 }
+
+// Admin-only gate. Returns the user (back-compat with existing callers that
+// expect a truthy user object) or null after responding.
+async function requireAdmin(req, res) {
+  const ctx = await requireRole(req, res, 'admin');
+  return ctx ? ctx.user : null;
+}
+
+// Identity + role for the current caller, so the dashboard can show the right
+// tabs. Never errors on auth — an anonymous caller just gets role: null.
+app.get('/api/me', async (req, res) => {
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.json({ authenticated: false, role: null });
+  const role = await getRole(user);
+  res.json({ authenticated: true, email: user.email, role });
+});
 
 app.get('/api/admin/orders', async (req, res) => {
   const admin = await requireAdmin(req, res);
@@ -387,6 +408,83 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   }
 
   res.json({ order: data, email });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DASHBOARD: user roles (admin only)
+// ─────────────────────────────────────────────────────────────────────────────
+
+// List staff with roles, resolving each user's email for display.
+app.get('/api/admin/users', async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+  const { data, error } = await supabaseAdmin
+    .from('admin_users')
+    .select('*')
+    .order('created_at', { ascending: true });
+  if (error) return res.status(500).json({ error: error.message });
+
+  const users = await Promise.all(
+    (data || []).map(async (row) => {
+      const { data: u } = await supabaseAdmin.auth.admin.getUserById(row.user_id);
+      return { ...row, email: u?.user?.email || null };
+    })
+  );
+  res.json({ users });
+});
+
+// Grant or change a role. Looks the user up by email (they must have signed up
+// already), then upserts their admin_users row.
+app.post('/api/admin/users', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+  const { email, role } = req.body || {};
+  if (!email || !['admin', 'editor'].includes(role)) {
+    return res.status(400).json({ error: 'Provide an email and a role of admin or editor.' });
+  }
+
+  // Resolve the email to a user id. listUsers is paginated; scan for a match.
+  const target = email.trim().toLowerCase();
+  let found = null;
+  for (let page = 1; page <= 10 && !found; page++) {
+    const { data, error } = await supabaseAdmin.auth.admin.listUsers({ page, perPage: 200 });
+    if (error) return res.status(500).json({ error: error.message });
+    found = (data?.users || []).find((u) => (u.email || '').toLowerCase() === target);
+    if (!data?.users?.length || data.users.length < 200) break;
+  }
+  if (!found) return res.status(404).json({ error: 'No signed-up user has that email. Ask them to register first.' });
+
+  const { data, error } = await supabaseAdmin
+    .from('admin_users')
+    .upsert({ user_id: found.id, role }, { onConflict: 'user_id' })
+    .select()
+    .single();
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ user: { ...data, email: found.email } });
+});
+
+// Revoke a role. Guard against removing the last admin so the dashboard can
+// never be locked out.
+app.delete('/api/admin/users/:userId', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+
+  const { count } = await supabaseAdmin
+    .from('admin_users')
+    .select('*', { count: 'exact', head: true })
+    .eq('role', 'admin');
+  const { data: victim } = await supabaseAdmin
+    .from('admin_users')
+    .select('role')
+    .eq('user_id', req.params.userId)
+    .maybeSingle();
+  if (victim?.role === 'admin' && (count || 0) <= 1) {
+    return res.status(400).json({ error: 'Cannot remove the last admin.' });
+  }
+
+  const { error } = await supabaseAdmin.from('admin_users').delete().eq('user_id', req.params.userId);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
 });
 
 export default app;
