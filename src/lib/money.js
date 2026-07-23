@@ -1,23 +1,31 @@
 // Central money formatting. Catalog prices are stored in the base currency
-// (USD) — convert once here so display, checkout and emails never disagree.
-// Replaces the scattered `$${n.toFixed(2)}` template literals.
+// (USD) and converted at render time using a LIVE rate supplied by the caller
+// (see CurrencyContext, which fetches /api/rates). These functions stay pure —
+// they never fetch — so the rate in play is always explicit.
 
 import { BASE_CURRENCY, getCurrency } from '../config/brand';
 
 const STORAGE_KEY = 'currency';
 
+// Resolve the rate to use: caller-supplied live rate, else the static fallback.
+function resolveRate(code, rate) {
+  const n = Number(rate);
+  if (Number.isFinite(n) && n > 0) return n;
+  return getCurrency(code).fallbackRate ?? 1;
+}
+
 // Convert a base-currency (USD) amount into `code`.
-export function convert(amount, code) {
+export function convert(amount, code, rate) {
   const n = Number(amount);
   if (!Number.isFinite(n)) return 0;
-  return n * getCurrency(code).rate;
+  return n * resolveRate(code, rate);
 }
 
 // Format a BASE-currency amount for display in `code`.
-// formatMoney(1049, 'CAD') -> "CA$1,447.62"
-export function formatMoney(amount, code = BASE_CURRENCY, { cents = true } = {}) {
+// formatMoney(1049, 'CAD', { rate: 1.3712 }) -> "CA$1,438.39"
+export function formatMoney(amount, code = BASE_CURRENCY, { cents = true, rate } = {}) {
   const cur = getCurrency(code);
-  const value = convert(amount, code);
+  const value = convert(amount, code, rate);
   try {
     return new Intl.NumberFormat(cur.locale, {
       style: 'currency',
@@ -31,9 +39,9 @@ export function formatMoney(amount, code = BASE_CURRENCY, { cents = true } = {})
   }
 }
 
-// Whole-dollar variant for "from $X" badges on cards and listings.
-export function formatMoneyRounded(amount, code = BASE_CURRENCY) {
-  return formatMoney(Math.round(convert(amount, code) / getCurrency(code).rate), code, { cents: false });
+// Whole-unit variant for "from $X" badges on cards and listings.
+export function formatMoneyRounded(amount, code = BASE_CURRENCY, rate) {
+  return formatMoney(amount, code, { cents: false, rate });
 }
 
 // Format an amount that is ALREADY denominated in `code` — a Stripe charge, a

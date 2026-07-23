@@ -11,6 +11,7 @@ import { stripe, supabaseAdmin, getUserFromToken, isAdmin, adminEmails, baseUrl 
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } from './lib/mailer.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
 import { currencies, BASE_CURRENCY } from '../src/config/brand.js';
+import { getRates, getRate } from './lib/fx.js';
 
 dotenv.config();
 
@@ -70,6 +71,17 @@ app.get('/api/health', (req, res) => {
 // Catalog ------------------------------------------------------------------
 app.get('/api/categories', (req, res) => {
   res.json({ categories, navGroups });
+});
+
+// Live FX rates against the base currency, for price display. The browser reads
+// this rather than calling an FX provider directly, so the rate the customer
+// sees is the same cached rate the server will charge at. Always 200s — a
+// provider outage degrades to the last good (or fallback) rate, never an error.
+app.get('/api/rates', async (req, res) => {
+  const { rates, live, fetchedAt, source } = await getRates();
+  // Let the CDN hold this briefly; the server-side cache does the real work.
+  res.set('Cache-Control', 'public, max-age=300');
+  res.json({ base: BASE_CURRENCY, rates, live, fetchedAt, source });
 });
 
 app.get('/api/products', (req, res) => {
@@ -143,10 +155,12 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
   const { discount, total, coupon: applied } = applyCoupon(subtotal, coupon);
 
   // Charge in the currency the buyer was quoted. Only codes we actually define
-  // are honoured, so a crafted request cannot invent a favourable rate.
+  // are honoured, so a crafted request cannot invent a favourable rate, and the
+  // rate itself comes from the server's FX cache — never from the request body.
   const cur = currencies[requestedCurrency] || currencies[BASE_CURRENCY];
-  const chargeAmount = total * cur.rate;
-  const chargeDiscount = discount * cur.rate;
+  const fxRate = await getRate(cur.code);
+  const chargeAmount = total * fxRate;
+  const chargeDiscount = discount * fxRate;
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',

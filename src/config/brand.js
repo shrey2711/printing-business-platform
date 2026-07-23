@@ -38,14 +38,15 @@ export const brand = {
 
 // ─── Currency ────────────────────────────────────────────────────────────────
 // All catalog prices are stored in BASE_CURRENCY (USD). Display and checkout
-// convert via `rate`. Keep `rate` under review — it is a fixed constant, not a
-// live FX feed, so it drifts. See src/lib/money.js for formatting.
+// convert using a LIVE rate fetched by backend/lib/fx.js and served at
+// /api/rates. `fallbackRate` below is only used if the FX provider has never
+// responded successfully — it is a floor, not the working rate.
 
 export const BASE_CURRENCY = 'USD';
 
 export const currencies = {
-  USD: { code: 'USD', label: 'USD', symbol: '$', rate: 1, locale: 'en-US', stripe: 'usd' },
-  CAD: { code: 'CAD', label: 'CAD', symbol: '$', rate: 1.38, locale: 'en-CA', stripe: 'cad' }
+  USD: { code: 'USD', label: 'USD', symbol: '$', fallbackRate: 1, locale: 'en-US', stripe: 'usd' },
+  CAD: { code: 'CAD', label: 'CAD', symbol: '$', fallbackRate: 1.38, locale: 'en-CA', stripe: 'cad' }
 };
 
 export const currencyCodes = Object.keys(currencies);
