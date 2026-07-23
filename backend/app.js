@@ -14,6 +14,7 @@ import { currencies, BASE_CURRENCY } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
 import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
 import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
+import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
 
 dotenv.config();
 
@@ -603,6 +604,145 @@ app.post('/api/admin/rebuild', writeLimiter, async (req, res) => {
   }
   const rebuild = await triggerRebuild();
   res.json(rebuild);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CMS: content overrides + per-route SEO (public read, editor CRUD)
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Public: all content overrides as { key: value }. The site merges these over
+// its hardcoded defaults, so editors' copy changes show within the cache window.
+app.get('/api/content', async (req, res) => {
+  const map = await getContentMap();
+  res.set('Cache-Control', 'public, max-age=60');
+  res.json({ content: map });
+});
+
+// Public: SEO override for one route (used by the SPA at runtime).
+app.get('/api/seo', async (req, res) => {
+  const map = await getSeoMap();
+  const path = req.query.path;
+  res.set('Cache-Control', 'public, max-age=60');
+  res.json({ seo: path ? map[path] || null : map });
+});
+
+// Admin: list content overrides (full rows).
+app.get('/api/admin/content', async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const { data, error } = await supabaseAdmin
+    .from('content_overrides').select('*').order('key');
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ content: data || [] });
+});
+
+// Admin: upsert or delete a content override. Empty value deletes (reverts to
+// the code default).
+app.put('/api/admin/content/:key', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const key = req.params.key;
+  const { value } = req.body || {};
+
+  if (value === undefined || value === null || value === '') {
+    const { error } = await supabaseAdmin.from('content_overrides').delete().eq('key', key);
+    if (error) return res.status(500).json({ error: error.message });
+    invalidateContentCache();
+    return res.json({ ok: true, deleted: true });
+  }
+
+  const { data, error } = await supabaseAdmin
+    .from('content_overrides')
+    .upsert({ key, value, updated_at: new Date().toISOString(), updated_by: ctx.user.id }, { onConflict: 'key' })
+    .select()
+    .single();
+  if (error) return res.status(500).json({ error: error.message });
+  invalidateContentCache();
+  res.json({ content: data });
+});
+
+// Admin: list SEO overrides.
+app.get('/api/admin/seo', async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const { data, error } = await supabaseAdmin.from('seo_overrides').select('*').order('path');
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ seo: data || [] });
+});
+
+// Admin: upsert/delete a per-route SEO override. SEO is baked into static HTML,
+// so a change triggers a rebuild.
+app.put('/api/admin/seo/:path(*)', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const path = '/' + String(req.params.path || '').replace(/^\/+/, '');
+  const body = req.body || {};
+
+  // No meaningful fields → delete the override.
+  const fields = ['title', 'description', 'canonical', 'robots', 'og_image_path', 'jsonld', 'sitemap_priority'];
+  const patch = { path };
+  let hasValue = false;
+  for (const f of fields) {
+    if (body[f] !== undefined && body[f] !== '' && body[f] !== null) {
+      patch[f] = body[f];
+      hasValue = true;
+    }
+  }
+
+  if (!hasValue) {
+    const { error } = await supabaseAdmin.from('seo_overrides').delete().eq('path', path);
+    if (error) return res.status(500).json({ error: error.message });
+    invalidateContentCache();
+    const rebuild = await triggerRebuild();
+    return res.json({ ok: true, deleted: true, rebuild });
+  }
+
+  patch.updated_at = new Date().toISOString();
+  const { data, error } = await supabaseAdmin
+    .from('seo_overrides').upsert(patch, { onConflict: 'path' }).select().single();
+  if (error) return res.status(500).json({ error: error.message });
+  invalidateContentCache();
+  const rebuild = await triggerRebuild();
+  res.json({ seo: data, rebuild });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// REDIRECTS (editor CRUD). Baked into the edge middleware at build time.
+// ─────────────────────────────────────────────────────────────────────────────
+
+app.get('/api/admin/redirects', async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const { data, error } = await supabaseAdmin.from('redirects').select('*').order('created_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ redirects: data || [] });
+});
+
+app.post('/api/admin/redirects', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  let { source, destination, code } = req.body || {};
+  source = String(source || '').trim();
+  destination = String(destination || '').trim();
+  code = [301, 302, 308].includes(Number(code)) ? Number(code) : 301;
+  if (!source.startsWith('/')) return res.status(400).json({ error: 'Source must be a path starting with /.' });
+  if (!destination) return res.status(400).json({ error: 'Destination is required.' });
+  if (source === destination) return res.status(400).json({ error: 'Source and destination are identical.' });
+
+  const { data, error } = await supabaseAdmin
+    .from('redirects').upsert({ source, destination, code }, { onConflict: 'source' }).select().single();
+  if (error) return res.status(500).json({ error: error.message });
+  const rebuild = await triggerRebuild();
+  res.json({ redirect: data, rebuild });
+});
+
+app.delete('/api/admin/redirects/:id', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const { error } = await supabaseAdmin.from('redirects').delete().eq('id', req.params.id);
+  if (error) return res.status(500).json({ error: error.message });
+  const rebuild = await triggerRebuild();
+  res.json({ ok: true, rebuild });
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

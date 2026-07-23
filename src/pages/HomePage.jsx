@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import CanopyPreview from '../components/CanopyPreview';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useMoney } from '../context/CurrencyContext';
+import { useContentResolver } from '../context/ContentContext';
 import { brand } from '../config/brand';
 
 const trustBadges = [
@@ -50,6 +51,7 @@ export default function HomePage() {
     brand.description
   );
   const money = useMoney();
+  const c = useContentResolver();
   const [products, setProducts] = useState([]);
   const [canopy, setCanopy] = useState(null);
 
@@ -80,12 +82,9 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-copy">
-            <span className="hero-eyebrow">Custom printed canopy tents</span>
-            <h1>Your brand on a tent, priced before you ask.</h1>
-            <p>
-              Choose the size, frame and how much of the canopy gets printed — the price updates as
-              you go. No quote forms, no waiting on a sales rep. Free artwork proof on every order.
-            </p>
+            <span className="hero-eyebrow">{c('home.hero.eyebrow')}</span>
+            <h1>{c('home.hero.title')}</h1>
+            <p>{c('home.hero.subtitle')}</p>
             <div className="hero-actions">
               <Link className="btn btn-red" to="/products/canopy-tents">Build your canopy</Link>
               <Link className="btn btn-outline" to="/products/canopy-packages">See packages</Link>
@@ -105,8 +104,8 @@ export default function HomePage() {
       {/* Size picker — the primary entry point on a canopy site */}
       <section className="size-section">
         <div className="section-head">
-          <h2>Start with a size</h2>
-          <p>Every size is printed to order. 10&nbsp;×&nbsp;10 is the standard vendor booth.</p>
+          <h2>{c('home.sizes.title')}</h2>
+          <p>{c('home.sizes.subtitle')}</p>
         </div>
         <div className="size-grid">
           {sizes.length === 0
@@ -248,8 +247,8 @@ export default function HomePage() {
 
       {/* Closing CTA */}
       <section className="turnaround-band">
-        <p className="turn-main">Most canopies ship in 6–8 business days after proof approval</p>
-        <p className="turn-sub">Need it sooner? Ask us about rush production before you order.</p>
+        <p className="turn-main">{c('home.cta.main')}</p>
+        <p className="turn-sub">{c('home.cta.sub')}</p>
         <Link className="btn btn-red" to="/products/canopy-tents">Build your canopy</Link>
       </section>
     </>

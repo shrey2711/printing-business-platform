@@ -13,7 +13,8 @@ import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
-import { loadPublishedPosts } from './buildData.mjs';
+import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects } from './buildData.mjs';
+import { resolveContent } from '../src/data/content.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
@@ -41,12 +42,25 @@ const NAV = `<nav aria-label="Primary">
   <a href="/contact">Contact</a>
 </nav>`;
 
+// Populated by top-level await before the render loop runs.
+let seoMap = {};
+let contentMap = {};
+
 function render({ path, title, description, body, jsonLd, robots }) {
+  // Per-route SEO overrides from the dashboard win over the page's own values.
+  const o = seoMap[path];
+  if (o) {
+    if (o.title) title = o.title;
+    if (o.description) description = o.description;
+    if (o.robots) robots = o.robots;
+    if (o.jsonld) jsonLd = o.jsonld;
+  }
+  const canonical = o?.canonical || ORIGIN + path;
   const url = ORIGIN + path;
   let html = template;
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`);
   html = html.replace(/(<meta name="description" content=")[\s\S]*?(")/, `$1${esc(description)}$2`);
-  html = html.replace(/(<link rel="canonical" href=")[\s\S]*?(")/, `$1${url}$2`);
+  html = html.replace(/(<link rel="canonical" href=")[\s\S]*?(")/, `$1${canonical}$2`);
   html = html.replace(/(<meta property="og:title" content=")[\s\S]*?(")/, `$1${esc(title)}$2`);
   html = html.replace(/(<meta property="og:url" content=")[\s\S]*?(")/, `$1${url}$2`);
   html = html.replace(/(<meta property="og:description" content=")[\s\S]*?(")/, `$1${esc(description)}$2`);
@@ -59,7 +73,9 @@ function render({ path, title, description, body, jsonLd, robots }) {
   }
   // Prerendered content lives inside #root; React replaces it on hydration.
   html = html.replace('<div id="root"></div>', `<div id="root"><div id="seo-prerender">${body}${NAV}</div></div>`);
-  return html;
+  // Prepend an explicit write-path marker so a custom canonical override can't
+  // confuse where the file is written. Stripped before writing.
+  return `<!--PP:${path}-->${html}`;
 }
 
 function write(path, html) {
@@ -383,8 +399,11 @@ routes.push(() =>
   })
 );
 
-// ---- Blog (read published posts from Supabase at build time) ----
+// ---- Load dashboard-authored content from Supabase at build time ----
 const posts = await loadPublishedPosts();
+seoMap = await loadSeoMap();
+contentMap = await loadContentMap();
+const redirectRules = await loadRedirects();
 
 // Blog index
 routes.push(() => {
@@ -431,10 +450,11 @@ for (const p of posts) {
 
 for (const build of routes) {
   try {
-    const html = build();
-    // Recover path from the rendered canonical for writing.
-    const m = html.match(/<link rel="canonical" href="([^"]+)"/);
-    const path = m ? m[1].replace(ORIGIN, '') || '/' : '/';
+    const raw = build();
+    // Read and strip the explicit write-path marker (independent of canonical).
+    const m = raw.match(/^<!--PP:([^>]*)-->/);
+    const path = m ? m[1] : '/';
+    const html = raw.replace(/^<!--PP:[^>]*-->/, '');
     write(path, html);
     count++;
   } catch (e) {
@@ -445,8 +465,14 @@ for (const build of routes) {
 console.log(`Prerendered ${count} pages (${posts.length} blog posts).`);
 
 // ---- Sitemap: INDEXABLE pages only (city pages are noindex, so excluded) ----
-const smUrl = (loc, priority, changefreq) =>
-  `  <url><loc>${ORIGIN}${loc}</loc>${changefreq ? `<changefreq>${changefreq}</changefreq>` : ''}<priority>${priority}</priority></url>`;
+// A dashboard SEO override can force a route out (robots: noindex) or reset its
+// priority; both are honoured here.
+const smUrl = (loc, priority, changefreq) => {
+  const o = seoMap[loc];
+  if (o?.robots && /noindex/i.test(o.robots)) return null; // dropped from sitemap
+  const p = o?.sitemap_priority != null ? String(o.sitemap_priority) : priority;
+  return `  <url><loc>${ORIGIN}${loc}</loc>${changefreq ? `<changefreq>${changefreq}</changefreq>` : ''}<priority>${p}</priority></url>`;
+};
 const sm = [];
 sm.push(smUrl('/', '1.0', 'weekly'));
 sm.push(smUrl('/products', '0.9', 'weekly'));
@@ -459,8 +485,17 @@ sm.push(smUrl('/blog', '0.6', 'weekly'));
 posts.forEach((p) => sm.push(smUrl(`/blog/${p.slug}`, '0.6')));
 sm.push(smUrl('/quote', '0.4'));
 sm.push(smUrl('/contact', '0.4'));
+const smRows = sm.filter(Boolean); // drop routes forced to noindex via overrides
 writeFileSync(
   join(DIST, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sm.join('\n')}\n</urlset>\n`
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smRows.join('\n')}\n</urlset>\n`
 );
-console.log(`Sitemap: ${sm.length} indexable URLs (city pages excluded).`);
+console.log(`Sitemap: ${smRows.length} indexable URLs (city pages excluded).`);
+
+// ---- Redirects: bake into a module the edge middleware imports ----
+const redirectsModule =
+  `// AUTO-GENERATED by scripts/prerender.mjs from the redirects table. Do not edit.\n` +
+  `export const redirects = ${JSON.stringify(redirectRules, null, 2)};\n`;
+mkdirSync(join(__dirname, '..', 'src', 'generated'), { recursive: true });
+writeFileSync(join(__dirname, '..', 'src', 'generated', 'redirects.js'), redirectsModule);
+console.log(`Redirects: ${redirectRules.length} rule(s) baked into middleware.`);

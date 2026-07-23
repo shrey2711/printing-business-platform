@@ -49,3 +49,41 @@ export async function loadPublishedPosts() {
     updatedAt: row.updated_at
   }));
 }
+
+// Content overrides as { key: value }, for baking edited copy into prerendered
+// HTML. Empty if the DB is unconfigured/unreachable — the code defaults apply.
+export async function loadContentMap() {
+  if (!client) return {};
+  const { data, error } = await client.from('content_overrides').select('key, value');
+  if (error) {
+    console.warn(`[build] could not load content overrides: ${error.message}`);
+    return {};
+  }
+  const map = {};
+  for (const row of data || []) map[row.key] = row.value;
+  return map;
+}
+
+// Per-route SEO overrides as { path: overrideRow }.
+export async function loadSeoMap() {
+  if (!client) return {};
+  const { data, error } = await client.from('seo_overrides').select('*');
+  if (error) {
+    console.warn(`[build] could not load SEO overrides: ${error.message}`);
+    return {};
+  }
+  const map = {};
+  for (const row of data || []) map[row.path] = row;
+  return map;
+}
+
+// Redirects, for baking into the edge middleware module.
+export async function loadRedirects() {
+  if (!client) return [];
+  const { data, error } = await client.from('redirects').select('source, destination, code');
+  if (error) {
+    console.warn(`[build] could not load redirects: ${error.message}`);
+    return [];
+  }
+  return data || [];
+}

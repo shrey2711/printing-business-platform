@@ -39,3 +39,18 @@ export async function uploadMedia(file) {
   form.append('file', file);
   return req('/api/admin/media', { method: 'POST', body: form, isForm: true });
 }
+
+// ── Content overrides ────────────────────────────────────────────────────────
+export const listContent = () => req('/api/admin/content').then((r) => r.content);
+export const saveContent = (key, value) =>
+  req(`/api/admin/content/${encodeURIComponent(key)}`, { method: 'PUT', body: { value } });
+
+// ── SEO overrides ────────────────────────────────────────────────────────────
+export const listSeo = () => req('/api/admin/seo').then((r) => r.seo);
+export const saveSeo = (path, fields) =>
+  req(`/api/admin/seo/${path.replace(/^\//, '')}`, { method: 'PUT', body: fields });
+
+// ── Redirects ────────────────────────────────────────────────────────────────
+export const listRedirects = () => req('/api/admin/redirects').then((r) => r.redirects);
+export const saveRedirect = (redirect) => req('/api/admin/redirects', { method: 'POST', body: redirect });
+export const deleteRedirect = (id) => req(`/api/admin/redirects/${id}`, { method: 'DELETE' });

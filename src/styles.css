@@ -643,6 +643,23 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .cms-inline-form { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; padding: 1.1rem; margin-bottom: 1.2rem; }
 .cms-inline-form .field { margin-bottom: 0; flex: 1; min-width: 180px; }
 
+/* Content editor */
+.cms-fields { display: grid; gap: 1rem; }
+.cms-field { padding: 1rem 1.1rem; }
+.cms-field-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; }
+.cms-field-head label { font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+.cms-field input, .cms-field textarea { width: 100%; }
+.cms-field textarea { min-height: 80px; }
+.cms-field-actions { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.6rem; flex-wrap: wrap; }
+.cms-key { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
+.cms-tag-custom { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #b7791f; background: #fdf3e0; padding: 0.15rem 0.5rem; border-radius: 999px; }
+
+/* SEO editor */
+.admin-subtabs { display: flex; gap: 0.4rem; margin-bottom: 1.2rem; }
+.admin-subtab { border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 600; color: var(--muted); cursor: pointer; }
+.admin-subtab.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+.seo-editor { max-width: 640px; }
+
 /* Blog editor */
 .blog-editor { display: grid; grid-template-columns: 1fr 320px; gap: 1.3rem; align-items: start; }
 .blog-editor-main .field textarea.body-md { min-height: 380px; font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 0.85rem; line-height: 1.55; }

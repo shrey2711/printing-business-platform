@@ -3,14 +3,16 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import OrdersTab from './admin/OrdersTab';
 import BlogTab from './admin/BlogTab';
+import ContentTab from './admin/ContentTab';
+import SeoTab from './admin/SeoTab';
 import UsersTab from './admin/UsersTab';
 
 // Dashboard tabs. `roles` lists who may see each; admins see everything.
 const TABS = [
   { id: 'orders', label: 'Orders', roles: ['admin'], Comp: OrdersTab },
   { id: 'blog', label: 'Blog', roles: ['admin', 'editor'], Comp: BlogTab },
-  { id: 'content', label: 'Content', roles: ['admin', 'editor'], Comp: null },
-  { id: 'seo', label: 'SEO', roles: ['admin', 'editor'], Comp: null },
+  { id: 'content', label: 'Content', roles: ['admin', 'editor'], Comp: ContentTab },
+  { id: 'seo', label: 'SEO', roles: ['admin', 'editor'], Comp: SeoTab },
   { id: 'users', label: 'Users', roles: ['admin'], Comp: UsersTab }
 ];
 
