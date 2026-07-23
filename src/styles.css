@@ -654,6 +654,18 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .cms-key { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
 .cms-tag-custom { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #b7791f; background: #fdf3e0; padding: 0.15rem 0.5rem; border-radius: 999px; }
 
+/* Pricing editor */
+.pricing-warning { background: #fdf3e0; border: 1px solid var(--gold); border-radius: 6px; padding: 0.7rem 0.9rem; font-size: 0.85rem; color: #8a5a00; margin-bottom: 1.2rem; }
+.pricing-editor .back-link { background: none; border: 0; cursor: pointer; padding: 0; }
+.pricing-group { padding: 1rem 1.1rem; margin-bottom: 1rem; }
+.pricing-group h3 { margin: 0 0 0.7rem; font-size: 1rem; }
+.pricing-choice { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.4rem 0; border-bottom: 1px solid var(--line-soft); }
+.pricing-choice:last-child { border-bottom: none; }
+.pricing-choice label { font-size: 0.88rem; color: var(--ink); }
+.pricing-input { display: flex; align-items: center; gap: 0.3rem; }
+.pricing-input span { color: var(--muted); font-weight: 700; }
+.pricing-input input { width: 100px; text-align: right; }
+
 /* SEO editor */
 .admin-subtabs { display: flex; gap: 0.4rem; margin-bottom: 1.2rem; }
 .admin-subtab { border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 600; color: var(--muted); cursor: pointer; }

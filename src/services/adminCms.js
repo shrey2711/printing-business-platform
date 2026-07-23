@@ -54,3 +54,10 @@ export const saveSeo = (path, fields) =>
 export const listRedirects = () => req('/api/admin/redirects').then((r) => r.redirects);
 export const saveRedirect = (redirect) => req('/api/admin/redirects', { method: 'POST', body: redirect });
 export const deleteRedirect = (id) => req(`/api/admin/redirects/${id}`, { method: 'DELETE' });
+
+// ── Pricing (admin only) ─────────────────────────────────────────────────────
+export const listPricing = () => req('/api/admin/pricing').then((r) => r.products);
+export const savePricing = (slug, pricing, confirm) =>
+  req(`/api/admin/pricing/${slug}`, { method: 'PUT', body: { pricing, confirm } });
+export const revertPricing = (slug) =>
+  req(`/api/admin/pricing/${slug}`, { method: 'PUT', body: { pricing: null } });

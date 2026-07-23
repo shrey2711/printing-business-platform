@@ -15,6 +15,7 @@ import { getRates, getRate } from './lib/fx.js';
 import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
 import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
 import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
+import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from './lib/pricingOverrides.js';
 
 dotenv.config();
 
@@ -101,8 +102,10 @@ app.get('/api/products/:slug', (req, res) => {
 });
 
 // Instant pricing ----------------------------------------------------------
-app.post('/api/price', (req, res) => {
-  const result = computePrice(req.body || {});
+app.post('/api/price', async (req, res) => {
+  const body = req.body || {};
+  const pricing = await getPricingOverride(body.slug);
+  const result = computePrice(body, pricing ? { pricing } : {});
   if (!result.ok) return res.status(400).json(result);
   res.json(result);
 });
@@ -144,10 +147,12 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
   if (error || !order) return res.status(404).json({ error: 'Order not found.' });
   if (order.user_id !== user.id) return res.status(403).json({ error: 'Not your order.' });
 
-  // Re-price server-side from the stored config (never trust the browser).
+  // Re-price server-side from the stored config (never trust the browser),
+  // applying any live pricing override so checkout charges the current price.
   let subtotal = 0;
   if (order.config && order.config.slug) {
-    const priced = computePrice(order.config);
+    const pricing = await getPricingOverride(order.config.slug);
+    const priced = computePrice(order.config, pricing ? { pricing } : {});
     if (priced.ok) subtotal = priced.total;
   }
   if (!subtotal || subtotal <= 0) {
@@ -743,6 +748,111 @@ app.delete('/api/admin/redirects/:id', writeLimiter, async (req, res) => {
   if (error) return res.status(500).json({ error: error.message });
   const rebuild = await triggerRebuild();
   res.json({ ok: true, rebuild });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PRICING OVERRIDES (admin only — this charges real money)
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Validate a candidate pricing block by actually pricing the product with it.
+// Rejects anything that can't produce a positive, finite total — a bad edit
+// must never reach a live product. Returns { ok, error }.
+function validatePricingBlock(slug, pricing) {
+  if (!pricing || typeof pricing !== 'object' || !pricing.model) {
+    return { ok: false, error: 'Pricing must be an object with a model.' };
+  }
+  const inputs = [{ slug, quantity: 1 }];
+
+  // Exercise representative selections so a broken choice is caught, not just
+  // the default path.
+  if (pricing.model === 'configured') {
+    for (const g of pricing.optionGroups || []) {
+      if (g.type === 'select') {
+        for (const c of g.choices || []) inputs.push({ slug, quantity: 1, selections: { [g.id]: c.id } });
+      }
+    }
+  } else if (pricing.model === 'unit') {
+    for (const v of pricing.variants || []) inputs.push({ slug, quantity: 1, variantId: v.id });
+  }
+
+  for (const input of inputs) {
+    const r = computePrice(input, { pricing });
+    if (!r.ok) return { ok: false, error: `Priced to an error (${r.error}) for ${JSON.stringify(input.selections || input.variantId || 'default')}.` };
+    if (!Number.isFinite(r.total) || r.total <= 0) {
+      return { ok: false, error: `Produced a non-positive total for ${JSON.stringify(input.selections || input.variantId || 'default')}.` };
+    }
+  }
+  return { ok: true };
+}
+
+// List products with their EFFECTIVE pricing (override if present, else code
+// default) so the editor shows what's live.
+app.get('/api/admin/pricing', async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+  const overrides = await getPricingOverrides();
+  const products = listProducts({ includeInactive: true }).map((p) => {
+    const full = getProduct(p.slug);
+    return {
+      slug: p.slug,
+      name: p.name,
+      active: p.active !== false,
+      overridden: Boolean(overrides[p.slug]),
+      pricing: overrides[p.slug] || full.pricing
+    };
+  });
+  res.json({ products });
+});
+
+// Upsert (or clear) a product's pricing override. Admin only; validated;
+// audited; rebuilds the site so prerendered "from $X" badges update.
+app.put('/api/admin/pricing/:slug', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+  const slug = req.params.slug;
+  const product = getProduct(slug);
+  if (!product) return res.status(404).json({ error: 'Unknown product.' });
+
+  const { pricing, confirm } = req.body || {};
+
+  // Clear the override → revert to the code default.
+  if (pricing === null) {
+    const before = (await getPricingOverride(slug)) || product.pricing;
+    const { error } = await supabaseAdmin.from('pricing_overrides').delete().eq('slug', slug);
+    if (error) return res.status(500).json({ error: error.message });
+    await supabaseAdmin.from('pricing_audit').insert({ actor: ctx.user.id, slug, before, after: null });
+    invalidatePricingCache();
+    const rebuild = await triggerRebuild();
+    return res.json({ ok: true, reverted: true, rebuild });
+  }
+
+  if (!confirm) return res.status(400).json({ error: 'Pricing changes require explicit confirmation.' });
+
+  const check = validatePricingBlock(slug, pricing);
+  if (!check.ok) return res.status(400).json({ error: `Rejected: ${check.error}` });
+
+  const before = (await getPricingOverride(slug)) || product.pricing;
+  const { data, error } = await supabaseAdmin
+    .from('pricing_overrides')
+    .upsert({ slug, pricing, updated_at: new Date().toISOString(), updated_by: ctx.user.id }, { onConflict: 'slug' })
+    .select()
+    .single();
+  if (error) return res.status(500).json({ error: error.message });
+
+  await supabaseAdmin.from('pricing_audit').insert({ actor: ctx.user.id, slug, before, after: pricing });
+  invalidatePricingCache();
+  const rebuild = await triggerRebuild();
+  res.json({ pricing: data.pricing, rebuild });
+});
+
+// Recent pricing changes, for the audit trail.
+app.get('/api/admin/pricing/audit', async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+  const { data, error } = await supabaseAdmin
+    .from('pricing_audit').select('*').order('at', { ascending: false }).limit(50);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ audit: data || [] });
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

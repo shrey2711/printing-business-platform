@@ -6,14 +6,14 @@ import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
-import { listProducts, getProduct } from '../backend/data/products.js';
+import { listProducts, getProduct, startingPriceFor } from '../backend/data/products.js';
 import { getProductFaqs } from '../backend/data/faqs.js';
 import { territories, slugify } from '../src/data/states.js';
 import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
-import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects } from './buildData.mjs';
+import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -404,6 +404,12 @@ const posts = await loadPublishedPosts();
 seoMap = await loadSeoMap();
 contentMap = await loadContentMap();
 const redirectRules = await loadRedirects();
+
+// Reflect pricing overrides in the prerendered "from $X" listing badges.
+const pricingOverrides = await loadPricingOverrides();
+for (const p of productList) {
+  if (pricingOverrides[p.slug]) p.startingPrice = startingPriceFor(pricingOverrides[p.slug]);
+}
 
 // Blog index
 routes.push(() => {

@@ -77,6 +77,20 @@ export async function loadSeoMap() {
   return map;
 }
 
+// Pricing overrides as { slug: pricingBlock }, for baking overridden starting
+// prices into prerendered listing badges.
+export async function loadPricingOverrides() {
+  if (!client) return {};
+  const { data, error } = await client.from('pricing_overrides').select('slug, pricing');
+  if (error) {
+    console.warn(`[build] could not load pricing overrides: ${error.message}`);
+    return {};
+  }
+  const map = {};
+  for (const row of data || []) map[row.slug] = row.pricing;
+  return map;
+}
+
 // Redirects, for baking into the edge middleware module.
 export async function loadRedirects() {
   if (!client) return [];

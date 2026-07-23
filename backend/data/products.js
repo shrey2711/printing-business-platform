@@ -1484,6 +1484,12 @@ export function getProduct(slug) {
   return products.find((p) => p.slug === slug) || null;
 }
 
+// Exported so the build can recompute "from $X" badges when a pricing override
+// changes the cheapest reachable configuration.
+export function startingPriceFor(pricing) {
+  return estimateStartingPrice(pricing);
+}
+
 function estimateStartingPrice(pricing) {
   if (pricing.model === 'configured') {
     // Cheapest reachable build: smallest base, lowest multiplier on every axis,

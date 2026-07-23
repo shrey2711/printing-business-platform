@@ -2,7 +2,10 @@ import { getProduct, getQuantityDiscount } from './products.js';
 
 // Compute an instant price for a configured product.
 // Returns a structured breakdown so the frontend can show the math (like B2Sign).
-export function computePrice(input) {
+// `opts.pricing` replaces the product's code-default pricing block — used to
+// apply a dashboard pricing override at request time (display AND checkout), so
+// the quoted price and the charged price always agree.
+export function computePrice(input, opts = {}) {
   const { slug, quantity = 1, width, height, materialId, variantId, options = [] } = input;
   const product = getProduct(slug);
   if (!product) {
@@ -10,7 +13,7 @@ export function computePrice(input) {
   }
 
   const qty = clampInt(quantity, 1, 100000);
-  const pricing = product.pricing;
+  const pricing = opts.pricing || product.pricing;
   const selectedOptions = Array.isArray(options) ? options : [];
 
   let perPieceGoods = 0;
