@@ -2,11 +2,17 @@
 // The browser never renders markdown — it receives already-clean HTML — so no
 // sanitizer ships in the client bundle. Blog bodies are admin-authored, but we
 // sanitize anyway: an editor account is not a licence for stored XSS.
+//
+// Uses markdown-it (CommonJS), NOT marked: Vercel bundles the serverless
+// function to CommonJS, and marked v18 is ESM-only, so a compiled require()
+// of it throws ERR_REQUIRE_ESM and takes down the entire API. markdown-it is
+// CJS and bundles cleanly. `html: false` also escapes raw HTML in the source,
+// so sanitize-html is defence-in-depth over an already-safe pipeline.
 
-import { marked } from 'marked';
+import MarkdownIt from 'markdown-it';
 import sanitizeHtml from 'sanitize-html';
 
-marked.setOptions({ gfm: true, breaks: false });
+const md = new MarkdownIt({ html: false, linkify: true, breaks: false, typographer: false });
 
 const OPTS = {
   allowedTags: [
@@ -37,14 +43,14 @@ const OPTS = {
   }
 };
 
-export function renderMarkdown(md) {
-  if (!md) return '';
-  return sanitizeHtml(marked.parse(String(md)), OPTS);
+export function renderMarkdown(source) {
+  if (!source) return '';
+  return sanitizeHtml(md.render(String(source)), OPTS);
 }
 
 // First ~N chars of plain text, for auto-excerpts and meta descriptions.
-export function excerptFromMarkdown(md, max = 160) {
-  const text = sanitizeHtml(marked.parse(String(md || '')), { allowedTags: [], allowedAttributes: {} })
+export function excerptFromMarkdown(source, max = 160) {
+  const text = sanitizeHtml(md.render(String(source || '')), { allowedTags: [], allowedAttributes: {} })
     .replace(/\s+/g, ' ')
     .trim();
   return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
