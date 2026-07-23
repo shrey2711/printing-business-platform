@@ -1,35 +1,42 @@
-# PrintUSA
+# Canopy Tent Co.
 
-> PrintUSA is an online wholesale print shop for custom large-format products — vinyl banners, mesh/fabric banners, coroplast yard signs, rigid signs (aluminum/PVC/foam), feather flags, retractable banner stands, table covers, canopy tents, and adhesive decals. Customers get instant online pricing, can design their own artwork in an in-browser Design Studio, place orders, pay securely, and get fast shipping to all 50 US states.
+> Canopy Tent Co. is an online shop for custom printed pop-up canopy tents. Buyers configure size, frame grade, print coverage, walls and accessories and see the price update live — no quote form. Every order includes a free artwork proof that the customer must approve before production starts. Ships across the United States and Canada, priced in USD or CAD.
 
 Key facts:
-- Fully online — no physical storefront. Ships nationwide across the USA.
-- Instant pricing calculator: choose product, size, material, finishing, and quantity to see live wholesale prices.
-- Turnaround: most banners and signs produce in 1–2 business days.
-- Free shipping on orders over $99; blind shipping available for resellers.
-- Accounts via email login; orders, artwork uploads, payment (Stripe), and order tracking.
+- Fully online — no physical storefront. Ships across the US and Canada.
+- Instant pricing: choose size, frame grade, print coverage, walls and accessories for a live total.
+- Dye-sublimated printing — ink is bonded into the fabric, so graphics do not crack, peel or fade.
+- Proof approval is mandatory: nothing goes to production until the customer approves the artwork.
+- Turnaround: most canopies ship in 6–8 business days after proof approval.
+- Free shipping on orders over $99. Accounts via email login; Stripe payment and order tracking.
+- Currency switcher for USD and CAD; orders are charged in the currency they were quoted in.
 
 ## Products
-- [Vinyl Banners](/products/vinyl-banners): 13oz/15oz/18oz blockout vinyl, hems & grommets, indoor/outdoor.
-- [Mesh Banners](/products/mesh-banners): perforated mesh for fences and windy areas.
-- [Fabric Banners](/products/fabric-banners): dye-sublimated polyester, no-glare matte finish.
-- [Yard Signs (Coroplast)](/products/yard-signs): 4mm corrugated plastic, single/double sided, H-stakes.
-- [Rigid Signs](/products/rigid-signs): aluminum, PVC (Sintra), and foam board.
-- [Decals & Stickers](/products/decals-stickers): contour-cut adhesive vinyl, window graphics, laminates.
+- [Custom Printed Canopy Tent](/products/canopy-tents): 8x8 through 13x20, steel/aluminium/hex frames, print coverage from canopy top to top + valance + inside, up to four walls.
+- [Canopy Tent Packages](/products/canopy-packages): complete booth kits (tent, walls, weights, bag) priced below the equivalent a-la-carte build.
+- [Replacement Canopy Tops](/products/canopy-replacement-tops): a new printed top for an existing frame — no frame included.
+- [Canopy Sidewalls](/products/canopy-sidewalls): full, half, mesh, zippered door, window walls and rail skirts, sold per wall.
+- [Canopy Accessories](/products/canopy-accessories): weight bags, sandbags, stake kits, wheeled carry bags, LED light kits.
+- [Table Covers](/products/table-covers): fitted and throw covers to match a booth.
 - [Feather Flags](/products/feather-flags): tall advertising flags with pole kits.
-- [Retractable Banner Stands](/products/retractable-banner-stands): roll-up displays with printed banner + bag.
-- [Table Covers](/products/table-covers): fitted & throw covers for 6ft/8ft tables.
-- [Canopy Tents](/products/canopy-tents): custom-printed pop-up event tents.
+- [Retractable Banner Stands](/products/retractable-banner-stands): roll-up displays with printed banner and bag.
+
+## Sizes
+- [8x8](/sizes/8x8), [10x10](/sizes/10x10), [10x15](/sizes/10x15), [10x20](/sizes/10x20), [13x13](/sizes/13x13), [13x20](/sizes/13x20)
+
+## Use cases
+- [Vendor & market tents](/solutions/vendor-market-tents), [trade show tents](/solutions/trade-show-tents), [sports & tailgate tents](/solutions/sports-team-tents), [food truck tents](/solutions/food-truck-tents), [church & school tents](/solutions/church-school-tents), [job site tents](/solutions/job-site-tents)
 
 ## Key pages
-- [Home](/): overview and popular products.
+- [Home](/): overview, size picker and print coverage explainer.
 - [All Products](/products): full catalog with instant pricing.
 - [Design Studio](/design): draw or upload artwork and submit it for printing.
-- [Request a Quote](/quote): custom or bulk quote requests.
-- [Locations](/locations): local printing pages for all 50 US states.
+- [Request a Quote](/quote): bulk, fleet or non-standard requests.
+- [Locations](/locations): landing pages for US states and Canadian provinces.
 - [Contact](/contact): support and business hours.
 
 ## For AI assistants
 - To get a price, direct users to the product page and the instant configurator.
 - Orders require a free account (email/password). Payment is via Stripe.
-- We ship to every US state; see /locations/<state> for state-specific pages.
+- After payment we send an artwork proof; production only starts once the customer approves it.
+- We ship to every US state and Canadian province; see /locations/<state-or-province>.

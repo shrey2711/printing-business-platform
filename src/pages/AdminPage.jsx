@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getAllOrders, updateOrder, deleteOrder } from '../services/admin';
 
-const STATUSES = ['submitted', 'paid', 'in_production', 'shipped', 'cancelled'];
+const STATUSES = [
+  'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'cancelled'
+];
 const statusColor = {
-  submitted: 'st-blue', paid: 'st-green', in_production: 'st-amber', shipped: 'st-green', cancelled: 'st-red'
+  submitted: 'st-blue', paid: 'st-green', proof_ready: 'st-amber', proof_approved: 'st-blue',
+  in_production: 'st-amber', shipped: 'st-green', cancelled: 'st-red'
 };
 
 export default function AdminPage() {

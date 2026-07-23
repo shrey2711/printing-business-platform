@@ -21,8 +21,15 @@ create table if not exists public.orders (
   tracking_number   text,
   carrier           text,
   idempotency_key   text,              -- prevents duplicate orders on retry/double-submit
+  currency          text not null default 'USD',  -- currency amount_total is denominated in
+  proof_path        text,              -- artwork proof in the 'designs' bucket
+  proof_sent_at     timestamptz,
+  proof_approved_at timestamptz,
+  proof_feedback    text,              -- customer's requested changes, if any
   status            text not null default 'submitted'
-                      check (status in ('submitted','paid','in_production','shipped','cancelled')),
+                      check (status in (
+                        'submitted','paid','proof_ready','proof_approved','in_production','shipped','cancelled'
+                      )),
   created_at        timestamptz not null default now()
 );
 
@@ -40,9 +47,23 @@ alter table public.orders add column if not exists carrier text;
 alter table public.orders add column if not exists idempotency_key text;
 create unique index if not exists orders_idempotency_key_uidx
   on public.orders (idempotency_key) where idempotency_key is not null;
+
+-- Currency the order was quoted and charged in. amount_total is stored in THIS
+-- currency, so it must never be run through the USD->CAD conversion again.
+alter table public.orders add column if not exists currency text not null default 'USD';
+
+-- Artwork proof approval. Nothing goes to production until the customer
+-- approves, so custom printed tents cannot be produced from a bad file.
+alter table public.orders add column if not exists proof_path text;      -- 'designs' bucket path
+alter table public.orders add column if not exists proof_sent_at timestamptz;
+alter table public.orders add column if not exists proof_approved_at timestamptz;
+alter table public.orders add column if not exists proof_feedback text;  -- customer change request
+
 alter table public.orders drop constraint if exists orders_status_check;
 alter table public.orders add constraint orders_status_check
-  check (status in ('submitted','paid','in_production','shipped','cancelled'));
+  check (status in (
+    'submitted','paid','proof_ready','proof_approved','in_production','shipped','cancelled'
+  ));
 
 -- 2) Row Level Security: users only see/manage their own orders -----------------
 alter table public.orders enable row level security;

@@ -6,85 +6,53 @@
 //
 // All prices are illustrative wholesale rates and are easy to tune in one place.
 
+// Active categories for the canopy storefront.
 export const categories = [
+  { id: 'tents', name: 'Canopy Tents' },
+  { id: 'packages', name: 'Packages' },
+  { id: 'walls', name: 'Sidewalls' },
+  { id: 'accessories', name: 'Accessories' },
+  { id: 'events', name: 'Event Add-ons' }
+];
+
+// Categories belonging to the dormant full-print catalog. Restore these into
+// `categories` when expanding back beyond canopies — the products themselves
+// are still below, carrying `active: false`.
+export const dormantCategories = [
   { id: 'banners', name: 'Banners' },
   { id: 'signs', name: 'Signs & Boards' },
   { id: 'displays', name: 'Displays & Stands' },
   { id: 'flags', name: 'Flags' },
-  { id: 'events', name: 'Events & Trade Show' },
   { id: 'decals', name: 'Decals & Stickers' },
   { id: 'large-format', name: 'Large Format' }
 ];
 
-// Left-hand catalog navigation groups, modeled after B2Sign's sidebar.
-// Every slug here must resolve to an entry in `products` below, or the
-// configurator route (/products/:slug) will render a not-found page.
+// Left-hand catalog navigation. Every slug here must resolve to an ACTIVE entry
+// in `products` below, or the configurator route (/products/:slug) will render a
+// not-found page.
 export const navGroups = [
   {
-    name: 'Banners',
+    name: 'Canopy Tents',
     items: [
-      { name: '13oz Vinyl Banner', slug: 'vinyl-banners' },
-      { name: '18oz Blockout Banner', slug: 'blockout-banners' },
-      { name: 'Backlit Banner', slug: 'backlit-banners' },
-      { name: 'Mesh Banner', slug: 'mesh-banners' },
-      { name: 'Indoor Banner', slug: 'indoor-banners' },
-      { name: 'Pole Banner', slug: 'pole-banners' },
-      { name: '9oz Fabric Banner', slug: 'fabric-banners' },
-      { name: 'Blockout Fabric Banner', slug: 'blockout-fabric-banners' },
-      { name: 'Tension Fabric', slug: 'tension-fabric' },
-      { name: 'Hand Banner', slug: 'hand-banners' }
+      { name: 'Custom Printed Canopy', slug: 'canopy-tents' },
+      { name: 'Canopy Packages', slug: 'canopy-packages' },
+      { name: 'Replacement Tops', slug: 'canopy-replacement-tops' }
     ]
   },
   {
-    name: 'Signs & Letters',
-    items: [
-      { name: 'Coroplast Yard Signs', slug: 'yard-signs' },
-      { name: 'Aluminum / PVC / Foam', slug: 'rigid-signs' },
-      { name: 'Channel Letters', slug: 'channel-letters' },
-      { name: 'Real Estate Signs', slug: 'real-estate-signs' },
-      { name: 'A-Frames & Sign Holders', slug: 'a-frame-signs' }
-    ]
+    name: 'Walls & Sidewalls',
+    items: [{ name: 'Canopy Sidewalls', slug: 'canopy-sidewalls' }]
   },
   {
-    name: 'Indoor / Outdoor Displays',
-    items: [
-      { name: 'Retractable Banner Stands', slug: 'retractable-banner-stands' },
-      { name: 'Step & Repeat Backdrops', slug: 'step-repeat-backdrops' },
-      { name: 'SEG Light Boxes', slug: 'seg-displays' },
-      { name: 'Trade Show Displays', slug: 'trade-show-displays' },
-      { name: 'Hardware Only', slug: 'display-hardware' }
-    ]
+    name: 'Accessories',
+    items: [{ name: 'Weights, Stakes & Bags', slug: 'canopy-accessories' }]
   },
   {
-    name: 'Flags',
-    items: [{ name: 'Feather & Teardrop Flags', slug: 'feather-flags' }]
-  },
-  {
-    name: 'Events & Trade Show',
+    name: 'Event Add-ons',
     items: [
       { name: 'Table Covers & Throws', slug: 'table-covers' },
-      { name: 'Canopy Tents', slug: 'canopy-tents' }
-    ]
-  },
-  {
-    name: 'Large Format',
-    items: [
-      { name: 'Posters', slug: 'posters' },
-      { name: 'Wall Art', slug: 'wall-art' },
-      { name: 'Wall Murals', slug: 'wall-murals' },
-      { name: 'Canvas Prints', slug: 'canvas-prints' },
-      { name: 'Styrene', slug: 'styrene' },
-      { name: 'Backlit Film', slug: 'backlit-film' },
-      { name: 'Reflective Products', slug: 'reflective-signs' },
-      { name: 'Dry Erase Products', slug: 'dry-erase' }
-    ]
-  },
-  {
-    name: 'Adhesive & Decals',
-    items: [
-      { name: 'Decals & Stickers', slug: 'decals-stickers' },
-      { name: 'Magnets', slug: 'magnets' },
-      { name: 'Premium Window Cling', slug: 'window-clings' }
+      { name: 'Feather & Teardrop Flags', slug: 'feather-flags' },
+      { name: 'Retractable Banner Stands', slug: 'retractable-banner-stands' }
     ]
   }
 ];
@@ -92,6 +60,7 @@ export const navGroups = [
 const products = [
   {
     slug: 'vinyl-banners',
+    active: false,
     name: 'Vinyl Banners',
     category: 'banners',
     badge: 'Best Seller',
@@ -126,6 +95,7 @@ const products = [
   },
   {
     slug: 'mesh-banners',
+    active: false,
     name: 'Mesh Banners',
     category: 'banners',
     badge: 'Wind Friendly',
@@ -154,6 +124,7 @@ const products = [
   },
   {
     slug: 'fabric-banners',
+    active: false,
     name: 'Fabric Banners',
     category: 'banners',
     badge: 'Premium',
@@ -185,6 +156,7 @@ const products = [
   },
   {
     slug: 'yard-signs',
+    active: false,
     name: 'Yard Signs (Coroplast)',
     category: 'signs',
     badge: 'Fast Ship',
@@ -214,6 +186,7 @@ const products = [
   },
   {
     slug: 'rigid-signs',
+    active: false,
     name: 'Rigid Signs',
     category: 'signs',
     badge: 'Durable',
@@ -248,6 +221,7 @@ const products = [
   },
   {
     slug: 'decals-stickers',
+    active: false,
     name: 'Decals & Stickers',
     category: 'decals',
     badge: 'Custom Cut',
@@ -282,7 +256,7 @@ const products = [
   {
     slug: 'feather-flags',
     name: 'Feather Flags',
-    category: 'flags',
+    category: 'events',
     badge: 'Eye Catching',
     emoji: '🚩',
     tagline: 'Tall feather / teardrop flags that grab attention roadside.',
@@ -311,7 +285,7 @@ const products = [
   {
     slug: 'retractable-banner-stands',
     name: 'Retractable Banner Stands',
-    category: 'displays',
+    category: 'events',
     badge: 'Reusable',
     emoji: '📐',
     tagline: 'Roll-up retractable stands with printed banner + carry bag.',
@@ -365,37 +339,338 @@ const products = [
       ]
     }
   },
+  // ───────────────────────────────────────────────────────────────────────────
+  // CANOPY RANGE — the active catalog.
+  // Prices are USD (the base currency, see src/config/brand.js) and are
+  // benchmarked against the market: a 10x20 with a printed top on a commercial
+  // aluminium frame lands at $1,269 ≈ CA$1,751, and printing the inside adds
+  // 40%. These are still estimates — replace with real cost/margin data.
+  // ───────────────────────────────────────────────────────────────────────────
   {
+    // Slug deliberately unchanged from the old product so the already-indexed
+    // /products/canopy-tents URL and its inbound links keep working.
     slug: 'canopy-tents',
-    name: 'Canopy Tents',
-    category: 'events',
-    badge: 'Outdoor',
+    name: 'Custom Printed Canopy Tent',
+    category: 'tents',
+    badge: 'Best Seller',
     emoji: '⛺',
-    tagline: 'Custom-printed pop-up canopy tents for outdoor events.',
+    tagline: 'Full-colour dye-sublimated pop-up canopy — your size, frame and print coverage.',
     description:
-      'Full-color printed pop-up tents with an aluminum or steel frame. Great for markets, fairs, and sporting events. Add walls and a carry bag.',
-    features: ['Pop-up frame included', 'Full canopy print', 'Wheeled carry bag', 'Optional side walls'],
+      'A commercial-grade pop-up canopy printed edge to edge in full colour. Choose the footprint, ' +
+      'frame grade and exactly how much of the tent is printed — peak, valance, inside and walls. ' +
+      'Dye sublimation bonds ink into the fabric, so graphics will not crack, peel or fade.',
+    features: [
+      'Dye-sublimated full-bleed printing',
+      'Steel, commercial or heavy-duty hex frame',
+      'Sets up in minutes with no tools',
+      'Free artwork proof before production'
+    ],
+    turnaround: 'Ships in 6–8 business days',
+    pricing: {
+      model: 'configured',
+      optionGroups: [
+        {
+          id: 'size',
+          label: 'Tent size',
+          type: 'select',
+          pricing: 'base',
+          help: 'Footprint of the canopy. 10x10 is the standard vendor booth.',
+          choices: [
+            { id: '8x8', label: "8' × 8'", price: 749 },
+            { id: '10x10', label: "10' × 10'", price: 899, default: true },
+            { id: '10x15', label: "10' × 15'", price: 1149 },
+            { id: '10x20', label: "10' × 20'", price: 1269 },
+            { id: '13x13', label: "13' × 13'", price: 1449 },
+            { id: '13x20', label: "13' × 20'", price: 1849 }
+          ]
+        },
+        {
+          id: 'frame',
+          label: 'Frame grade',
+          type: 'select',
+          pricing: 'multiplier',
+          help: 'Heavier frames survive more setups and higher wind.',
+          choices: [
+            { id: 'steel', label: 'Steel — economy', mult: 0.85 },
+            { id: 'aluminium', label: 'Commercial aluminium', mult: 1, default: true },
+            { id: 'hex', label: 'Heavy-duty hex aluminium', mult: 1.22 }
+          ]
+        },
+        {
+          id: 'print',
+          label: 'Print coverage',
+          type: 'select',
+          pricing: 'multiplier',
+          help: 'How much of the canopy carries your artwork.',
+          choices: [
+            { id: 'blank', label: 'Blank — no printing', mult: 0.62 },
+            { id: 'top', label: 'Canopy top', mult: 1, default: true },
+            { id: 'top-valance', label: 'Top + valance', mult: 1.1 },
+            { id: 'top-inside', label: 'Top + valance + inside', mult: 1.4 }
+          ]
+        },
+        {
+          id: 'walls',
+          label: 'Walls',
+          type: 'multi',
+          pricing: 'add',
+          help: 'Up to four per tent. Walls attach with hook-and-loop to the frame.',
+          choices: [
+            { id: 'full-wall', label: 'Full wall — printed', price: 249, max: 4 },
+            { id: 'half-wall', label: 'Half wall — printed', price: 179, max: 4 },
+            { id: 'mesh-wall', label: 'Mesh wall', price: 159, max: 4 },
+            { id: 'door-wall', label: 'Zippered door wall', price: 229, max: 2 },
+            { id: 'rail-skirt', label: 'Rail skirt', price: 129, max: 4 },
+            { id: 'blank-wall', label: 'Full wall — blank', price: 119, max: 4 }
+          ]
+        },
+        {
+          id: 'extras',
+          label: 'Accessories',
+          type: 'multi',
+          pricing: 'add',
+          help: 'Weights are strongly recommended — most event organisers require them.',
+          choices: [
+            { id: 'weight-bags', label: 'Weight bags (set of 4)', price: 89 },
+            { id: 'sandbags', label: 'Sandbag set (set of 4)', price: 69 },
+            { id: 'stake-kit', label: 'Stake & rope kit', price: 29 },
+            { id: 'roller-bag', label: 'Wheeled carry bag', price: 79 },
+            { id: 'led-kit', label: 'LED light kit', price: 119 },
+            { id: 'clamps', label: 'Sidewall clamps (set of 8)', price: 24 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'canopy-packages',
+    name: 'Canopy Tent Packages',
+    category: 'packages',
+    badge: 'Best Value',
+    emoji: '📦',
+    tagline: 'Tent, walls, weights and bag bundled — cheaper than buying separately.',
+    description:
+      'Complete booth kits built around the same printed canopy, bundled with the walls and ' +
+      'accessories most vendors end up buying anyway. Every package costs less than the same ' +
+      'items configured individually.',
+    features: [
+      'Cheaper than à-la-carte',
+      'Everything needed for one booth',
+      'Same dye-sublimated printing',
+      'Free artwork proof before production'
+    ],
+    turnaround: 'Ships in 6–8 business days',
+    pricing: {
+      model: 'configured',
+      optionGroups: [
+        {
+          id: 'package',
+          label: 'Package',
+          type: 'select',
+          pricing: 'base',
+          help: 'All packages include a printed canopy top.',
+          choices: [
+            { id: 'starter', label: 'Starter — tent + carry bag', price: 949, default: true },
+            { id: 'vendor', label: 'Vendor — tent + 3 walls + weights + bag', price: 1549 },
+            { id: 'pro', label: 'Pro — tent + 4 walls + weights + LED + roller bag', price: 1949 }
+          ]
+        },
+        {
+          id: 'size',
+          label: 'Tent size',
+          type: 'select',
+          pricing: 'multiplier',
+          choices: [
+            { id: '8x8', label: "8' × 8'", mult: 0.86 },
+            { id: '10x10', label: "10' × 10'", mult: 1, default: true },
+            { id: '10x15', label: "10' × 15'", mult: 1.26 },
+            { id: '10x20', label: "10' × 20'", mult: 1.42 }
+          ]
+        },
+        {
+          id: 'frame',
+          label: 'Frame grade',
+          type: 'select',
+          pricing: 'multiplier',
+          choices: [
+            { id: 'steel', label: 'Steel — economy', mult: 0.9 },
+            { id: 'aluminium', label: 'Commercial aluminium', mult: 1, default: true },
+            { id: 'hex', label: 'Heavy-duty hex aluminium', mult: 1.18 }
+          ]
+        },
+        {
+          id: 'print',
+          label: 'Print coverage',
+          type: 'select',
+          pricing: 'multiplier',
+          choices: [
+            { id: 'top', label: 'Canopy top', mult: 1, default: true },
+            { id: 'top-valance', label: 'Top + valance', mult: 1.08 },
+            { id: 'top-inside', label: 'Top + valance + inside', mult: 1.32 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'canopy-replacement-tops',
+    name: 'Replacement Canopy Tops',
+    category: 'tents',
+    badge: 'Fits Most Frames',
+    emoji: '🔁',
+    tagline: 'A new printed top for the frame you already own.',
+    description:
+      'Replacement canopy tops printed to order and cut to fit standard pop-up frames. The most ' +
+      'economical way to rebrand — keep the frame, change the graphics. Confirm your frame ' +
+      'measurements before ordering; we check fit against your specs at proof stage.',
+    features: [
+      'Fits standard pop-up frames',
+      'No frame included',
+      'Dye-sublimated full colour',
+      'Fit checked at proof stage'
+    ],
     turnaround: 'Ships in 5–7 business days',
+    pricing: {
+      model: 'configured',
+      optionGroups: [
+        {
+          id: 'size',
+          label: 'Top size',
+          type: 'select',
+          pricing: 'base',
+          help: 'Measure your existing frame corner to corner.',
+          choices: [
+            { id: '8x8', label: "8' × 8'", price: 329 },
+            { id: '10x10', label: "10' × 10'", price: 399, default: true },
+            { id: '10x15', label: "10' × 15'", price: 519 },
+            { id: '10x20', label: "10' × 20'", price: 589 },
+            { id: '13x13', label: "13' × 13'", price: 679 }
+          ]
+        },
+        {
+          id: 'fabric',
+          label: 'Fabric',
+          type: 'select',
+          pricing: 'multiplier',
+          choices: [
+            { id: '600d', label: '600D polyester — standard', mult: 1, default: true },
+            { id: '600d-fr', label: '600D fire-retardant certified', mult: 1.25 }
+          ]
+        },
+        {
+          id: 'print',
+          label: 'Print coverage',
+          type: 'select',
+          pricing: 'multiplier',
+          choices: [
+            { id: 'blank', label: 'Blank — no printing', mult: 0.6 },
+            { id: 'top', label: 'Canopy top', mult: 1, default: true },
+            { id: 'top-valance', label: 'Top + valance', mult: 1.12 },
+            { id: 'top-inside', label: 'Top + valance + inside', mult: 1.4 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'canopy-sidewalls',
+    name: 'Canopy Sidewalls',
+    category: 'walls',
+    badge: 'Sold Separately',
+    emoji: '🧱',
+    tagline: 'Add walls to an existing tent — printed or blank.',
+    description:
+      'Individual sidewalls that attach to a standard pop-up frame with hook-and-loop. Add ' +
+      'weather protection, privacy and a lot more branding surface. Sold per wall.',
+    features: [
+      'Sold per wall',
+      'Hook-and-loop attachment',
+      'Printed or blank',
+      'Fits standard pop-up frames'
+    ],
+    turnaround: 'Ships in 4–6 business days',
+    pricing: {
+      model: 'configured',
+      optionGroups: [
+        {
+          id: 'style',
+          label: 'Wall style',
+          type: 'select',
+          pricing: 'base',
+          choices: [
+            { id: 'full', label: 'Full wall', price: 249, default: true },
+            { id: 'half', label: 'Half wall', price: 179 },
+            { id: 'mesh', label: 'Mesh wall', price: 159 },
+            { id: 'door', label: 'Zippered door wall', price: 229 },
+            { id: 'window', label: 'Window wall', price: 239 },
+            { id: 'skirt', label: 'Rail skirt', price: 129 }
+          ]
+        },
+        {
+          id: 'length',
+          label: 'Wall length',
+          type: 'select',
+          pricing: 'multiplier',
+          help: 'Match this to the side of the tent the wall covers.',
+          choices: [
+            { id: '8ft', label: "8' side", mult: 0.88 },
+            { id: '10ft', label: "10' side", mult: 1, default: true },
+            { id: '15ft', label: "15' side", mult: 1.4 },
+            { id: '20ft', label: "20' side", mult: 1.78 }
+          ]
+        },
+        {
+          id: 'print',
+          label: 'Printing',
+          type: 'select',
+          pricing: 'multiplier',
+          choices: [
+            { id: 'blank', label: 'Blank — no printing', mult: 0.55 },
+            { id: 'outside', label: 'Printed outside', mult: 1, default: true },
+            { id: 'both', label: 'Printed both sides', mult: 1.45 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'canopy-accessories',
+    name: 'Canopy Accessories',
+    category: 'accessories',
+    badge: 'Add-ons',
+    emoji: '🧰',
+    tagline: 'Weights, stakes, bags and lighting for your canopy.',
+    description:
+      'The hardware that keeps a canopy anchored, lit and easy to transport. Most event and ' +
+      'market organisers require weights on every leg — check your venue rules before the day.',
+    features: [
+      'Weights required by most venues',
+      'Fits standard pop-up frames',
+      'Ships fast — no printing needed',
+      'Sold individually or as sets'
+    ],
+    turnaround: 'Ships in 1–3 business days',
     pricing: {
       model: 'unit',
       variants: [
-        { id: '10x10', name: '10 ft x 10 ft', unitPrice: 349 },
-        { id: '10x15', name: '10 ft x 15 ft', unitPrice: 469 },
-        { id: '10x20', name: '10 ft x 20 ft', unitPrice: 599 }
+        { id: 'weight-bags', name: 'Weight bags (set of 4)', unitPrice: 89 },
+        { id: 'sandbags', name: 'Sandbag set (set of 4)', unitPrice: 69 },
+        { id: 'stake-kit', name: 'Stake & rope kit', unitPrice: 29 },
+        { id: 'roller-bag', name: 'Wheeled carry bag', unitPrice: 79 },
+        { id: 'led-kit', name: 'LED light kit', unitPrice: 119 },
+        { id: 'clamps', name: 'Sidewall clamps (set of 8)', unitPrice: 24 },
+        { id: 'leg-skirt', name: 'Leg skirts (set of 4)', unitPrice: 59 }
       ],
-      materials: [
-        { id: 'steel', name: 'Steel frame', multiplier: 1 },
-        { id: 'aluminum', name: 'Aluminum frame (lighter)', multiplier: 1.3 }
-      ],
+      materials: [{ id: 'standard', name: 'Standard', multiplier: 1 }],
       finishing: [
-        { id: 'canopy-only', name: 'Printed canopy only', type: 'perUnit', rate: 0, default: true },
-        { id: 'half-wall', name: 'Add printed half wall', type: 'perUnit', rate: 89 },
-        { id: 'full-wall', name: 'Add printed full back wall', type: 'perUnit', rate: 129 }
+        { id: 'as-listed', name: 'As listed', type: 'perUnit', rate: 0, default: true },
+        { id: 'spare-parts', name: 'Add spare parts kit', type: 'perUnit', rate: 34 }
       ]
     }
   },
   {
     slug: 'blockout-banners',
+    active: false,
     name: '18oz Blockout Banner',
     category: 'banners',
     badge: 'Double Sided',
@@ -427,6 +702,7 @@ const products = [
   },
   {
     slug: 'backlit-banners',
+    active: false,
     name: 'Backlit Banner',
     category: 'banners',
     badge: 'Illuminated',
@@ -460,6 +736,7 @@ const products = [
   },
   {
     slug: 'indoor-banners',
+    active: false,
     name: 'Indoor Banner',
     category: 'banners',
     badge: 'Value',
@@ -488,6 +765,7 @@ const products = [
   },
   {
     slug: 'pole-banners',
+    active: false,
     name: 'Pole Banner',
     category: 'banners',
     badge: 'Street Ready',
@@ -521,6 +799,7 @@ const products = [
   },
   {
     slug: 'blockout-fabric-banners',
+    active: false,
     name: 'Blockout Fabric Banner',
     category: 'banners',
     badge: 'Premium',
@@ -550,6 +829,7 @@ const products = [
   },
   {
     slug: 'tension-fabric',
+    active: false,
     name: 'Tension Fabric Graphic',
     category: 'banners',
     badge: 'SEG Ready',
@@ -582,6 +862,7 @@ const products = [
   },
   {
     slug: 'hand-banners',
+    active: false,
     name: 'Hand Banner',
     category: 'banners',
     badge: 'Events',
@@ -613,6 +894,7 @@ const products = [
   },
   {
     slug: 'channel-letters',
+    active: false,
     name: 'Channel Letters',
     category: 'signs',
     badge: 'Storefront',
@@ -645,6 +927,7 @@ const products = [
   },
   {
     slug: 'real-estate-signs',
+    active: false,
     name: 'Real Estate Signs',
     category: 'signs',
     badge: 'Agent Favorite',
@@ -679,6 +962,7 @@ const products = [
   },
   {
     slug: 'a-frame-signs',
+    active: false,
     name: 'A-Frames & Sign Holders',
     category: 'signs',
     badge: 'Sidewalk',
@@ -707,6 +991,7 @@ const products = [
   },
   {
     slug: 'step-repeat-backdrops',
+    active: false,
     name: 'Step & Repeat Backdrops',
     category: 'displays',
     badge: 'Media Wall',
@@ -736,6 +1021,7 @@ const products = [
   },
   {
     slug: 'seg-displays',
+    active: false,
     name: 'SEG Light Boxes',
     category: 'displays',
     badge: 'Seamless',
@@ -766,6 +1052,7 @@ const products = [
   },
   {
     slug: 'trade-show-displays',
+    active: false,
     name: 'Trade Show Displays',
     category: 'displays',
     badge: 'Booth Kit',
@@ -796,6 +1083,7 @@ const products = [
   },
   {
     slug: 'display-hardware',
+    active: false,
     name: 'Hardware Only',
     category: 'displays',
     badge: 'No Print',
@@ -823,6 +1111,7 @@ const products = [
   },
   {
     slug: 'posters',
+    active: false,
     name: 'Posters',
     category: 'large-format',
     badge: 'Fast Ship',
@@ -856,6 +1145,7 @@ const products = [
   },
   {
     slug: 'wall-art',
+    active: false,
     name: 'Wall Art',
     category: 'large-format',
     badge: 'Gallery',
@@ -889,6 +1179,7 @@ const products = [
   },
   {
     slug: 'wall-murals',
+    active: false,
     name: 'Wall Murals',
     category: 'large-format',
     badge: 'Peel & Stick',
@@ -922,6 +1213,7 @@ const products = [
   },
   {
     slug: 'canvas-prints',
+    active: false,
     name: 'Canvas Prints',
     category: 'large-format',
     badge: 'Textured',
@@ -954,6 +1246,7 @@ const products = [
   },
   {
     slug: 'styrene',
+    active: false,
     name: 'Styrene',
     category: 'large-format',
     badge: 'Lightweight',
@@ -988,6 +1281,7 @@ const products = [
   },
   {
     slug: 'backlit-film',
+    active: false,
     name: 'Backlit Film',
     category: 'large-format',
     badge: 'Illuminated',
@@ -1019,6 +1313,7 @@ const products = [
   },
   {
     slug: 'reflective-signs',
+    active: false,
     name: 'Reflective Products',
     category: 'large-format',
     badge: 'DOT Grade',
@@ -1052,6 +1347,7 @@ const products = [
   },
   {
     slug: 'dry-erase',
+    active: false,
     name: 'Dry Erase Products',
     category: 'large-format',
     badge: 'Writable',
@@ -1085,6 +1381,7 @@ const products = [
   },
   {
     slug: 'magnets',
+    active: false,
     name: 'Magnets',
     category: 'decals',
     badge: 'Vehicle',
@@ -1117,6 +1414,7 @@ const products = [
   },
   {
     slug: 'window-clings',
+    active: false,
     name: 'Premium Window Cling',
     category: 'decals',
     badge: 'No Adhesive',
@@ -1168,12 +1466,18 @@ export function getQuantityDiscount(quantity) {
   return discount;
 }
 
-export function listProducts() {
-  return products.map(({ pricing, ...rest }) => ({
-    ...rest,
-    model: pricing.model,
-    startingPrice: estimateStartingPrice(pricing)
-  }));
+// Products carrying `active: false` are dormant: kept in the data (so the full
+// print catalog can be switched back on later) but never surfaced in nav, the
+// home page, /products or the sitemap. Direct URLs still resolve, so existing
+// inbound links do not break.
+export function listProducts({ includeInactive = false } = {}) {
+  return products
+    .filter((p) => includeInactive || p.active !== false)
+    .map(({ pricing, ...rest }) => ({
+      ...rest,
+      model: pricing.model,
+      startingPrice: estimateStartingPrice(pricing)
+    }));
 }
 
 export function getProduct(slug) {
@@ -1181,6 +1485,20 @@ export function getProduct(slug) {
 }
 
 function estimateStartingPrice(pricing) {
+  if (pricing.model === 'configured') {
+    // Cheapest reachable build: smallest base, lowest multiplier on every axis,
+    // no add-ons. A genuine floor for "from $X".
+    const groups = pricing.optionGroups || [];
+    const baseGroup = groups.find((g) => g.pricing === 'base');
+    const bases = (baseGroup?.choices || []).map((c) => Number(c.price)).filter(Number.isFinite);
+    let price = bases.length ? Math.min(...bases) : 0;
+    for (const g of groups) {
+      if (g.pricing !== 'multiplier') continue;
+      const mults = (g.choices || []).map((c) => Number(c.mult)).filter(Number.isFinite);
+      if (mults.length) price *= Math.min(...mults);
+    }
+    return Math.round(price);
+  }
   if (pricing.model === 'unit') {
     const cheapest = Math.min(...pricing.variants.map((v) => v.unitPrice));
     return Math.round(cheapest);

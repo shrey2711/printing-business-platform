@@ -1,92 +1,78 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../services/api';
+import { getProducts, getProduct } from '../services/api';
 import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
-import ProductArt from '../components/ProductArt';
+import CanopyPreview from '../components/CanopyPreview';
 import useDocumentMeta from '../hooks/useDocumentMeta';
-
-const valueProps = [
-  { stat: '24/7', label: 'Online ordering & instant pricing' },
-  { stat: '50', label: 'States shipped nationwide' },
-  { stat: '1–2 days', label: 'Typical production time' },
-  { stat: 'Free', label: 'Artwork file check on every order' }
-];
-
-// Promo blocks under the hero. Each points at a real configurator route.
-const featured = [
-  {
-    slug: 'vinyl-banners',
-    eyebrow: 'Most ordered',
-    title: 'Custom Vinyl Banners',
-    copy: 'Full-color 13oz scrim vinyl, cut to any size. Free hem and grommets on every banner.',
-    cta: 'Build a banner'
-  },
-  {
-    slug: 'feather-flags',
-    eyebrow: 'Roadside impact',
-    title: 'Feather & Teardrop Flags',
-    copy: 'Complete pole kits that swivel in the wind. Ground spike or cross base included.',
-    cta: 'Shop flags'
-  },
-  {
-    slug: 'trade-show-displays',
-    eyebrow: 'Booth ready',
-    title: 'Trade Show Displays',
-    copy: 'Pop-up walls, counters and backdrops that set up in minutes and pack into a wheeled case.',
-    cta: 'See displays'
-  }
-];
+import { useMoney } from '../context/CurrencyContext';
+import { brand } from '../config/brand';
 
 const trustBadges = [
-  { icon: '🇺🇸', title: 'Printed in the USA', copy: 'Produced and shipped from US facilities.' },
-  { icon: '⚡', title: 'Fast turnaround', copy: 'Most orders ship in 1–2 business days.' },
-  { icon: '🔒', title: 'Secure checkout', copy: 'Encrypted payments, no card data stored.' },
-  { icon: '🎨', title: 'Free file check', copy: 'A human reviews your artwork before print.' }
+  { icon: '🖨️', title: 'Dye-sublimated print', copy: 'Ink bonded into the fabric — it will not crack, peel or fade.' },
+  { icon: '📐', title: 'Free artwork proof', copy: 'You approve a visual proof before anything goes to production.' },
+  { icon: '🚚', title: 'US & Canada shipping', copy: 'Priced in USD or CAD, delivered across both countries.' },
+  { icon: '💬', title: 'Real people on support', copy: 'Talk to someone who knows tents, not a ticket queue.' }
 ];
 
-// Category rails shown on the home page, in order.
-const rails = [
-  { id: 'banners', title: 'Banners', blurb: 'Vinyl, mesh, fabric and backlit — cut to any size.' },
-  { id: 'signs', title: 'Signs & Letters', blurb: 'Yard signs, rigid boards, A-frames and storefront letters.' },
-  { id: 'displays', title: 'Displays & Stands', blurb: 'Retractables, backdrops, light boxes and booth kits.' },
-  { id: 'large-format', title: 'Large Format', blurb: 'Posters, murals, canvas, reflective and backlit film.' }
+// How the print-coverage choice actually changes the tent.
+const coverage = [
+  { id: 'top', title: 'Canopy top', copy: 'Your artwork across all four roof panels — the highest-visibility surface from a distance.' },
+  { id: 'top-valance', title: 'Top + valance', copy: 'Adds the hanging skirt at eye level, where people read it as they walk past.' },
+  { id: 'top-inside', title: 'Top + valance + inside', copy: 'Prints the underside too, so everyone standing in your booth sees the brand.' }
 ];
 
-// TODO: replace with real, attributed customer reviews before launch.
-// These are placeholders showing the layout only — do not ship them as genuine.
-const placeholderReviews = [
-  { quote: 'Replace this with a real customer quote about turnaround time.', name: 'Customer name', role: 'Company, State' },
-  { quote: 'Replace this with a real customer quote about print quality.', name: 'Customer name', role: 'Company, State' },
-  { quote: 'Replace this with a real customer quote about the ordering process.', name: 'Customer name', role: 'Company, State' }
+const frames = [
+  { id: 'steel', title: 'Steel — economy', copy: 'Heaviest and lowest cost. Best where the tent lives in one place and rarely moves.' },
+  { id: 'aluminium', title: 'Commercial aluminium', copy: 'The everyday choice. Noticeably lighter to carry and set up, holds up to weekly use.' },
+  { id: 'hex', title: 'Heavy-duty hex', copy: 'Thickest legs and strongest joints — for crews setting up and tearing down constantly.' }
+];
+
+const solutions = [
+  { icon: '🧺', title: 'Vendor & market booths', copy: 'Weekend markets and craft fairs where the booth is the storefront.' },
+  { icon: '🎪', title: 'Trade shows', copy: 'Outdoor expo space that needs to match your indoor booth branding.' },
+  { icon: '🏟️', title: 'Sports & tailgates', copy: 'Team colours, shade for the bench, and something to find in a crowded lot.' },
+  { icon: '🌮', title: 'Food trucks & concessions', copy: 'Menu on the valance, shade over the queue.' },
+  { icon: '⛪', title: 'Churches & schools', copy: 'Registration desks, fundraisers and open days.' },
+  { icon: '🏗️', title: 'Job sites & safety', copy: 'Shade and a visible company mark on active sites.' }
+];
+
+const steps = [
+  { n: 1, title: 'Configure and see the price', copy: 'Pick size, frame, print coverage and walls. The price updates as you go — no quote form.' },
+  { n: 2, title: 'Upload your artwork', copy: 'Send a print-ready file or build one in the Design Studio.' },
+  { n: 3, title: 'Approve the proof', copy: 'We send a visual proof. Nothing prints until you say yes.' },
+  { n: 4, title: 'We print and ship', copy: 'Production runs after approval, then it ships to your door.' }
 ];
 
 export default function HomePage() {
   useDocumentMeta(
-    'Wholesale Banners, Signs & Displays',
-    'Get instant pricing on wholesale banners, custom signs, feather flags and trade-show displays. Choose your size, quantity and finishing online, with fast nationwide shipping.'
+    'Custom Printed Canopy Tents — Instant Pricing',
+    brand.description
   );
+  const money = useMoney();
   const [products, setProducts] = useState([]);
+  const [canopy, setCanopy] = useState(null);
 
   useEffect(() => {
     let alive = true;
-    getProducts()
-      .then((prods) => alive && setProducts(prods))
-      .catch(() => {});
+    getProducts().then((p) => alive && setProducts(p)).catch(() => {});
+    // Full product (with optionGroups) so size cards show real catalog prices.
+    getProduct('canopy-tents').then((p) => alive && setCanopy(p)).catch(() => {});
     return () => {
       alive = false;
     };
   }, []);
 
+  const sizes = useMemo(() => {
+    const group = canopy?.pricing?.optionGroups?.find((g) => g.id === 'size');
+    return group?.choices || [];
+  }, [canopy]);
+
   const byCategory = useMemo(() => {
     const map = {};
-    for (const p of products) {
-      (map[p.category] ||= []).push(p);
-    }
+    for (const p of products) (map[p.category] ||= []).push(p);
     return map;
   }, [products]);
-
-  const findProduct = (slug) => products.find((p) => p.slug === slug);
 
   return (
     <>
@@ -94,49 +80,47 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-copy">
-            <span className="hero-eyebrow">Wholesale trade printing</span>
-            <h1>From yard signs to trade show walls — priced instantly, shipped fast.</h1>
+            <span className="hero-eyebrow">Custom printed canopy tents</span>
+            <h1>Your brand on a tent, priced before you ask.</h1>
             <p>
-              Pick your size, material and finishing and watch the price update as you go. No quotes to
-              chase, no sales calls. Blind shipping to all 50 states.
+              Choose the size, frame and how much of the canopy gets printed — the price updates as
+              you go. No quote forms, no waiting on a sales rep. Free artwork proof on every order.
             </p>
             <div className="hero-actions">
-              <Link className="btn btn-red" to="/products">Shop all products</Link>
-              <Link className="btn btn-outline" to="/quote">Request a custom quote</Link>
+              <Link className="btn btn-red" to="/products/canopy-tents">Build your canopy</Link>
+              <Link className="btn btn-outline" to="/products/canopy-packages">See packages</Link>
             </div>
             <ul className="hero-ticks">
-              <li>Instant online pricing</li>
-              <li>Free artwork file check</li>
-              <li>Ships in 1–2 business days</li>
+              <li>Live pricing</li>
+              <li>Proof before production</li>
+              <li>Ships US &amp; Canada</li>
             </ul>
           </div>
           <div className="hero-art">
-            <ProductArt slug="vinyl-banners" />
+            <CanopyPreview size="10x20" print="top-valance" walls={2} label="Custom printed canopy tent" />
           </div>
         </div>
       </section>
 
-      {/* Featured promo blocks */}
-      <section className="featured-row">
-        {featured.map((f) => {
-          const product = findProduct(f.slug);
-          return (
-            <Link className="featured-card" to={`/products/${f.slug}`} key={f.slug}>
-              <div className="featured-art">
-                <ProductArt slug={f.slug} />
-              </div>
-              <div className="featured-body">
-                <span className="featured-eyebrow">{f.eyebrow}</span>
-                <h3>{f.title}</h3>
-                <p>{f.copy}</p>
-                <span className="featured-cta">
-                  {f.cta}
-                  {product ? <em> — from ${product.startingPrice}</em> : null}
-                </span>
-              </div>
-            </Link>
-          );
-        })}
+      {/* Size picker — the primary entry point on a canopy site */}
+      <section className="size-section">
+        <div className="section-head">
+          <h2>Start with a size</h2>
+          <p>Every size is printed to order. 10&nbsp;×&nbsp;10 is the standard vendor booth.</p>
+        </div>
+        <div className="size-grid">
+          {sizes.length === 0
+            ? <p className="muted">Loading sizes…</p>
+            : sizes.map((s) => (
+                <Link className="size-card" to="/products/canopy-tents" key={s.id}>
+                  <CanopyPreview size={s.id} print="top" walls={0} label={`${s.label} canopy`} />
+                  <div className="size-card-body">
+                    <strong>{s.label}</strong>
+                    <span>from {money(s.price, { cents: false })}</span>
+                  </div>
+                </Link>
+              ))}
+        </div>
       </section>
 
       {/* Trust badges */}
@@ -152,20 +136,94 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* Catalog: sidebar + category rails */}
+      {/* Print coverage explainer */}
+      <section className="coverage-section">
+        <div className="section-head">
+          <h2>Decide how much gets printed</h2>
+          <p>Coverage is the biggest lever on both impact and price.</p>
+        </div>
+        <div className="coverage-grid">
+          {coverage.map((c) => (
+            <article className="coverage-card" key={c.id}>
+              <CanopyPreview size="10x10" print={c.id} walls={0} label={c.title} />
+              <h3>{c.title}</h3>
+              <p>{c.copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="section-foot">
+          <Link className="btn btn-blue" to="/products/canopy-tents">Compare coverage and price</Link>
+        </div>
+      </section>
+
+      {/* Frame comparison */}
+      <section className="frame-section">
+        <div className="section-head">
+          <h2>Pick a frame that matches the use</h2>
+          <p>The frame decides how long the tent survives repeated setups and weather.</p>
+        </div>
+        <div className="frame-grid">
+          {frames.map((f) => (
+            <article className="frame-card" key={f.id}>
+              <h3>{f.title}</h3>
+              <p>{f.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* How it works — replaces the old placeholder testimonials */}
+      <section className="steps-section">
+        <div className="section-head">
+          <h2>How ordering works</h2>
+          <p>Four steps, and you approve the artwork before anything prints.</p>
+        </div>
+        <ol className="steps-row">
+          {steps.map((s) => (
+            <li className="step" key={s.n}>
+              <span className="step-n">{s.n}</span>
+              <strong>{s.title}</strong>
+              <p>{s.copy}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Use cases */}
+      <section className="solutions-section">
+        <div className="section-head">
+          <h2>Built for the way you use it</h2>
+        </div>
+        <div className="solutions-grid">
+          {solutions.map((s) => (
+            <article className="solution-card" key={s.title}>
+              <span className="solution-icon" aria-hidden="true">{s.icon}</span>
+              <strong>{s.title}</strong>
+              <p>{s.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Catalog */}
       <div className="catalog-shell">
         <CategorySidebar />
-
         <main className="catalog-main">
           <div className="catalog-heading">
-            <h1>Shop by category</h1>
-            <p>Order today before 6am PST — ships today. Wholesale pricing, blind shipping nationwide.</p>
+            <h1>Shop the range</h1>
+            <p>Tents, packages, walls and the hardware that goes with them.</p>
           </div>
 
           {products.length === 0 ? (
             <p className="muted">Loading products…</p>
           ) : (
-            rails.map((rail) => {
+            [
+              { id: 'tents', title: 'Canopy tents', blurb: 'Printed to order in six footprints.' },
+              { id: 'packages', title: 'Packages', blurb: 'Complete booth kits, cheaper than à-la-carte.' },
+              { id: 'walls', title: 'Sidewalls', blurb: 'Add weather protection and branding surface.' },
+              { id: 'accessories', title: 'Accessories', blurb: 'Weights, stakes, bags and lighting.' },
+              { id: 'events', title: 'Event add-ons', blurb: 'Table covers, flags and stands to match your booth.' }
+            ].map((rail) => {
               const items = byCategory[rail.id] || [];
               if (!items.length) return null;
               return (
@@ -175,12 +233,9 @@ export default function HomePage() {
                       <h2>{rail.title}</h2>
                       <p>{rail.blurb}</p>
                     </div>
-                    <Link className="cat-rail-all" to={`/products?category=${rail.id}`}>
-                      View all {items.length} →
-                    </Link>
                   </div>
                   <div className="pcard-grid">
-                    {items.slice(0, 6).map((product) => (
+                    {items.map((product) => (
                       <ProductCard key={product.slug} product={product} />
                     ))}
                   </div>
@@ -191,41 +246,11 @@ export default function HomePage() {
         </main>
       </div>
 
-      {/* Online value props band */}
-      <section className="facilities">
-        <h2>A fully online print shop — order anytime, ships to your door</h2>
-        <div className="facility-row">
-          {valueProps.map((f, i) => (
-            <div className="facility" key={i}>
-              <span className="facility-size">{f.stat}</span>
-              <span className="facility-label">{f.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Reviews — placeholder content, see note above */}
-      <section className="reviews">
-        <h2>What customers say</h2>
-        <div className="review-row">
-          {placeholderReviews.map((r, i) => (
-            <figure className="review" key={i}>
-              <div className="review-stars" aria-label="5 out of 5">★★★★★</div>
-              <blockquote>{r.quote}</blockquote>
-              <figcaption>
-                <strong>{r.name}</strong>
-                <span>{r.role}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      {/* Turnaround messaging */}
+      {/* Closing CTA */}
       <section className="turnaround-band">
-        <p className="turn-main">Orders placed by 4pm PST ship the next business day</p>
-        <p className="turn-sub">Same-day service is also available if ordered by 12pm PST</p>
-        <Link className="btn btn-red" to="/products">Shop All Products</Link>
+        <p className="turn-main">Most canopies ship in 6–8 business days after proof approval</p>
+        <p className="turn-sub">Need it sooner? Ask us about rush production before you order.</p>
+        <Link className="btn btn-red" to="/products/canopy-tents">Build your canopy</Link>
       </section>
     </>
   );

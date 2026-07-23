@@ -11,9 +11,9 @@ export default function LocationPage() {
   const [products, setProducts] = useState([]);
 
   useDocumentMeta(
-    state ? `Custom Banners, Signs & Displays in ${state.name}` : 'Location',
+    state ? `Custom Printed Canopy Tents in ${state.name}` : 'Location',
     state
-      ? `Order custom banners, yard signs, feather flags and trade-show displays in ${state.name} with instant online pricing and fast shipping to ${state.cities.slice(0, 3).join(', ')} and statewide.`
+      ? `Order custom printed canopy tents, sidewalls and accessories in ${state.name} with instant online pricing and shipping to ${state.cities.slice(0, 3).join(', ')} and beyond.`
       : ''
   );
 
@@ -39,24 +39,24 @@ export default function LocationPage() {
       <nav className="crumbs"><Link to="/locations">Locations</Link> / <span>{state.name}</span></nav>
 
       <section className="loc-hero">
-        <span className="eyebrow">Serving {state.name} · {state.region} USA</span>
-        <h1>Custom Banners, Signs &amp; Displays in {state.name}</h1>
+        <span className="eyebrow">Serving {state.name} · {state.region}</span>
+        <h1>Custom Printed Canopy Tents in {state.name}</h1>
         <p className="lead">
-          PrintUSA is your online wholesale print shop for {state.name}. Order custom vinyl banners,
-          coroplast yard signs, feather flags, retractable stands and trade-show displays with
-          <strong> instant pricing</strong> — printed fast and shipped to {cityList} and everywhere across {state.name} ({state.abbr}).
+          Order custom printed pop-up canopy tents, sidewalls and accessories for {state.name} with
+          <strong> instant pricing</strong> — choose your size, frame grade and print coverage online,
+          then we ship to {cityList} and everywhere across {state.name} ({state.abbr}).
         </p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem' }}>
-          <Link className="btn btn-red" to="/products">Shop &amp; price products</Link>
+          <Link className="btn btn-red" to="/products/canopy-tents">Build your canopy</Link>
           <Link className="btn btn-outline" to="/quote">Request a quote</Link>
         </div>
       </section>
 
       <section className="badge-row">
-        <div className="badge"><span className="badge-icon">🚚</span><div><strong>Fast shipping to {state.abbr}</strong><p>Delivered to {state.cities[0]} and statewide.</p></div></div>
-        <div className="badge"><span className="badge-icon">⚡</span><div><strong>Next-day production</strong><p>Most banners &amp; signs print in 1–2 days.</p></div></div>
+        <div className="badge"><span className="badge-icon">🚚</span><div><strong>Shipping to {state.abbr}</strong><p>Delivered to {state.cities[0]} and beyond.</p></div></div>
+        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Colour bonded into the fabric — no peeling.</p></div></div>
         <div className="badge"><span className="badge-icon">💲</span><div><strong>Instant pricing</strong><p>See your price online — no sales rep needed.</p></div></div>
-        <div className="badge"><span className="badge-icon">🎨</span><div><strong>Free file check</strong><p>We proof your artwork before printing.</p></div></div>
+        <div className="badge"><span className="badge-icon">📐</span><div><strong>Free artwork proof</strong><p>You approve it before anything prints.</p></div></div>
       </section>
 
       <section className="section-block-bare">
@@ -67,16 +67,15 @@ export default function LocationPage() {
       </section>
 
       <section className="section-block card">
-        <h2>Printing for businesses across {state.name}</h2>
+        <h2>Canopy tents for businesses across {state.name}</h2>
         <p className="muted">
-          From storefronts and events in {state.cities[0]} to trade shows in {state.cities[1] || state.cities[0]},
-          businesses throughout {state.name} trust PrintUSA for durable, full-color large-format printing.
-          We ship to every city in {state.name}, including {cityList}. Order online 24/7 and get wholesale
-          pricing with no minimums.
+          From weekend markets in {state.cities[0]} to trade shows in {state.cities[1] || state.cities[0]},
+          a printed canopy is often the whole booth. We ship to every city in {state.name}, including
+          {' '}{cityList}. Configure and order online at any hour — no minimums.
         </p>
         <p className="muted">
-          Whether you need a single banner for a {state.cities[0]} grand opening or a bulk order of yard
-          signs for a statewide campaign, our online tools make it easy to design, price, and order in minutes.
+          Whether it is a single 10&nbsp;×&nbsp;10 for a {state.cities[0]} market stall or a matching set for a
+          season of events, you pick the size, frame and print coverage and see the price as you go.
         </p>
       </section>
 

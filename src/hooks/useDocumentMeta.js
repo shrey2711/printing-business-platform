@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { brand } from '../config/brand';
 
 function upsertMeta(attr, key, content) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`);
@@ -28,7 +29,7 @@ export default function useDocumentMeta(title, description, jsonLd, robots) {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const fullTitle = title ? `${title} | PrintUSA` : 'PrintUSA — Wholesale Banners, Signs & Displays';
+    const fullTitle = title ? `${title} | ${brand.name}` : `${brand.name} — ${brand.tagline}`;
     document.title = fullTitle;
 
     const url = window.location.origin + pathname;

@@ -42,6 +42,58 @@ export function computePrice(input) {
 
     // Some finishing (e.g. double sided) multiplies the whole area cost.
     perPieceGoods = applyAreaMultipliers(pricing.finishing, selectedOptions, base, perPieceGoods, breakdown);
+  } else if (pricing.model === 'configured') {
+    // Multi-axis configuration (canopy tents): one base group sets the starting
+    // price, any number of multiplier groups scale it, and additive groups bolt
+    // on extras with their own quantities.
+    const selections = input.selections && typeof input.selections === 'object' ? input.selections : {};
+    const groups = pricing.optionGroups || [];
+    const chosen = {};
+
+    // 1. Base — e.g. tent size.
+    const baseGroup = groups.find((g) => g.pricing === 'base');
+    const baseChoice = pickChoice(baseGroup, selections[baseGroup?.id]);
+    let running = baseChoice ? Number(baseChoice.price) || 0 : 0;
+    if (baseGroup && baseChoice) {
+      chosen[baseGroup.id] = baseChoice.label || baseChoice.id;
+      breakdown.push({ label: `${baseGroup.label} — ${baseChoice.label}`, amount: round2(running) });
+    }
+
+    // 2. Multipliers — e.g. frame grade, print coverage.
+    for (const g of groups) {
+      if (g.pricing !== 'multiplier') continue;
+      const choice = pickChoice(g, selections[g.id]);
+      if (!choice) continue;
+      chosen[g.id] = choice.label || choice.id;
+      const mult = Number(choice.mult);
+      if (!Number.isFinite(mult) || mult === 1) continue;
+      const before = running;
+      running *= mult;
+      breakdown.push({ label: `${g.label} — ${choice.label}`, amount: round2(running - before) });
+    }
+
+    // 3. Add-ons — e.g. walls, weights, lighting.
+    for (const g of groups) {
+      if (g.pricing !== 'add') continue;
+      const picked = pickMulti(g, selections[g.id]);
+      if (picked.length) {
+        chosen[g.id] = picked.map((p) => (p.count > 1 ? `${p.choice.label} x${p.count}` : p.choice.label)).join(', ');
+      }
+      for (const { choice, count } of picked) {
+        const amt = (Number(choice.price) || 0) * count;
+        if (!amt) continue;
+        running += amt;
+        breakdown.push({
+          label: count > 1 ? `${choice.label} × ${count}` : choice.label,
+          amount: round2(amt)
+        });
+      }
+    }
+
+    dims.configuration = chosen;
+    // Readable one-liner for order specs / emails, matching how `unit` reports.
+    dims.variant = Object.values(chosen).filter(Boolean).join(' • ');
+    perPieceGoods = running;
   } else {
     const variant = pickVariant(pricing.variants, variantId);
     const material = pickMaterial(pricing.materials, materialId);
@@ -120,6 +172,42 @@ function applyAreaMultipliers(finishing = [], selected, base, current, breakdown
 function isSelected(opt, selected) {
   if (opt.default && selected.length === 0) return true;
   return selected.includes(opt.id);
+}
+
+// Resolve a single-select option group to a choice: explicit id, else the one
+// flagged `default`, else the first. Never returns undefined for a valid group.
+function pickChoice(group, value) {
+  if (!group || !Array.isArray(group.choices) || !group.choices.length) return null;
+  return (
+    group.choices.find((c) => c.id === value) ||
+    group.choices.find((c) => c.default) ||
+    group.choices[0]
+  );
+}
+
+// Normalise a multi-select value into [{ choice, count }].
+// Accepts ['walls'] or { walls: 3 }; undefined falls back to `default` choices.
+// Counts are clamped to each choice's `max` so a hand-crafted API call cannot
+// price 999 walls onto a tent.
+function pickMulti(group, value) {
+  if (!group || !Array.isArray(group.choices)) return [];
+  const out = [];
+  const add = (id, count) => {
+    const choice = group.choices.find((c) => c.id === id);
+    if (!choice) return;
+    const max = Number(choice.max) > 0 ? Number(choice.max) : 1;
+    const n = Math.min(Math.max(Math.round(Number(count) || 0), 0), max);
+    if (n > 0) out.push({ choice, count: n });
+  };
+
+  if (Array.isArray(value)) {
+    for (const id of value) add(id, 1);
+  } else if (value && typeof value === 'object') {
+    for (const [id, count] of Object.entries(value)) add(id, count);
+  } else if (value === undefined) {
+    for (const c of group.choices) if (c.default) add(c.id, 1);
+  }
+  return out;
 }
 
 function pickMaterial(materials = [], id) {

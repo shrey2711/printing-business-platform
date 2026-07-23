@@ -14,19 +14,42 @@ import AdminPage from './pages/AdminPage';
 import LocationsPage from './pages/LocationsPage';
 import LocationPage from './pages/LocationPage';
 import CityPage from './pages/CityPage';
+import SizePage from './pages/SizePage';
+import SolutionPage from './pages/SolutionPage';
+import { brand, currencyCodes } from './config/brand';
+import { useCurrency } from './context/CurrencyContext';
 
 // The Design Studio pulls in fabric.js (~250KB) — load it only when visited.
 const DesignStudio = lazy(() => import('./pages/DesignStudio'));
 
 const topNav = [
+  { label: 'Canopy Tents', to: '/products/canopy-tents' },
+  { label: 'Packages', to: '/products/canopy-packages' },
+  { label: 'Sidewalls', to: '/products/canopy-sidewalls' },
+  { label: 'Replacement Tops', to: '/products/canopy-replacement-tops' },
+  { label: 'Accessories', to: '/products/canopy-accessories' },
   { label: 'All Products', to: '/products' },
-  { label: 'Banners', to: '/products?category=banners' },
-  { label: 'Flags', to: '/products?category=flags' },
-  { label: 'Banner Stands', to: '/products?category=displays' },
-  { label: 'Trade Show', to: '/products?category=events' },
-  { label: 'Rigids', to: '/products/rigid-signs' },
   { label: 'Design Studio', to: '/design' }
 ];
+
+function CurrencySwitch() {
+  const { currency, setCurrency } = useCurrency();
+  return (
+    <div className="currency-switch" role="group" aria-label="Display currency">
+      {currencyCodes.map((code) => (
+        <button
+          key={code}
+          type="button"
+          className={currency === code ? 'cur-active' : ''}
+          aria-pressed={currency === code}
+          onClick={() => setCurrency(code)}
+        >
+          {code}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 function HeaderAuth() {
   const { isAuthenticated, isAdmin, displayName, login, logout, isSupabaseReady } = useAuth();
@@ -79,11 +102,12 @@ function Header() {
     <header className="site-header">
       <div className="header-top">
         <Link className="logo" to="/">
-          <span className="logo-mark">P2</span>
-          <span className="logo-text">Print<b>USA</b></span>
+          <span className="logo-mark">⛺</span>
+          <span className="logo-text">{brand.logoText.first}<b>{brand.logoText.accent}</b></span>
         </Link>
-        <span className="wl-badge">Online Print Shop</span>
+        <span className="wl-badge">{brand.tagline}</span>
         <div className="header-spacer" />
+        <CurrencySwitch />
         <HeaderAuth />
       </div>
       <HeaderNav />
@@ -121,18 +145,20 @@ function Footer() {
       <div className="footer-rainbow" />
       <div className="footer-grid">
         <div>
-          <span className="logo-text" style={{ color: '#fff' }}>Print<b>USA</b></span>
-          <p className="ft-blurb">A fully online wholesale print shop. Order banners, signs, flags and displays
-            with instant pricing and nationwide shipping — no storefront visit required.</p>
+          <span className="logo-text" style={{ color: '#fff' }}>
+            {brand.logoText.first}<b>{brand.logoText.accent}</b>
+          </span>
+          <p className="ft-blurb">{brand.description}</p>
         </div>
         <div>
           <h4>Shop</h4>
           <div className="ft-links">
-            <Link to="/products">All Products</Link>
-            <Link to="/products/vinyl-banners">Vinyl Banners</Link>
-            <Link to="/products/yard-signs">Yard Signs</Link>
+            <Link to="/products/canopy-tents">Custom Canopy Tents</Link>
+            <Link to="/products/canopy-packages">Canopy Packages</Link>
+            <Link to="/products/canopy-sidewalls">Sidewalls</Link>
+            <Link to="/products/canopy-replacement-tops">Replacement Tops</Link>
             <Link to="/design">Design Studio</Link>
-            <Link to="/locations">Locations (All 50 States)</Link>
+            <Link to="/locations">Locations</Link>
           </div>
         </div>
         <div>
@@ -148,14 +174,14 @@ function Footer() {
         <div>
           <h4>Contact</h4>
           <p className="ft-muted">Customer Service Hours:</p>
-          <p>Mon – Fri: 8:00am – 6:00pm ET</p>
+          <p>{brand.hours}</p>
           <p className="ft-muted">Email:</p>
-          <p><a href="mailto:sales@printusa.com">sales@printusa.com</a></p>
-          <p><a href="tel:+18005550148">1 (800) 555-0148</a></p>
+          <p><a href={`mailto:${brand.email}`}>{brand.email}</a></p>
+          <p><a href={`tel:${brand.phoneHref}`}>{brand.phone}</a></p>
         </div>
       </div>
       <div className="footer-legal">
-        © {new Date().getFullYear()} PrintUSA • Online wholesale large-format printing • Ships nationwide
+        © {new Date().getFullYear()} {brand.name} • Custom printed canopy tents • {brand.shippingBlurb}
       </div>
     </footer>
   );
@@ -170,6 +196,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:slug" element={<ProductConfigurator />} />
+        <Route path="/sizes/:size" element={<SizePage />} />
+        <Route path="/solutions/:useCase" element={<SolutionPage />} />
         <Route path="/design" element={<DesignStudio />} />
         <Route path="/order" element={<PlaceOrderPage />} />
         <Route path="/quote" element={<QuotePage />} />

@@ -11,9 +11,9 @@ export default function CityPage() {
   const [products, setProducts] = useState([]);
 
   useDocumentMeta(
-    match ? `Custom Banners & Signs in ${match.city}, ${match.state.abbr}` : 'Location',
+    match ? `Custom Canopy Tents in ${match.city}, ${match.state.abbr}` : 'Location',
     match
-      ? `Order custom banners, yard signs, feather flags and displays in ${match.city}, ${match.state.name} with instant online pricing and fast shipping.`
+      ? `Order custom printed canopy tents, sidewalls and accessories in ${match.city}, ${match.state.name} with instant online pricing and fast shipping.`
       : '',
     undefined,
     'noindex, follow' // templated page — noindex until it has unique local content
@@ -45,23 +45,23 @@ export default function CityPage() {
 
       <section className="loc-hero">
         <span className="eyebrow">Serving {city}, {state.abbr}</span>
-        <h1>Custom Banners &amp; Signs in {city}, {state.name}</h1>
+        <h1>Custom Printed Canopy Tents in {city}, {state.name}</h1>
         <p className="lead">
-          Need custom printing in {city}? PrintUSA delivers vinyl banners, coroplast yard signs,
-          feather flags, retractable stands and trade-show displays to {city} and the surrounding
-          {' '}{state.name} area — with <strong>instant online pricing</strong> and fast shipping.
+          Need a branded canopy in {city}? We print pop-up tents, sidewalls and replacement tops and
+          ship them to {city} and the surrounding {state.name} area — with
+          {' '}<strong>instant online pricing</strong> and a free artwork proof.
         </p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem' }}>
-          <Link className="btn btn-red" to="/products">Shop &amp; price products</Link>
+          <Link className="btn btn-red" to="/products/canopy-tents">Build your canopy</Link>
           <Link className="btn btn-outline" to="/quote">Request a quote</Link>
         </div>
       </section>
 
       <section className="badge-row">
-        <div className="badge"><span className="badge-icon">🚚</span><div><strong>Ships to {city}</strong><p>Fast, tracked delivery across {state.abbr}.</p></div></div>
-        <div className="badge"><span className="badge-icon">⚡</span><div><strong>Next-day production</strong><p>Most banners &amp; signs print in 1–2 days.</p></div></div>
+        <div className="badge"><span className="badge-icon">🚚</span><div><strong>Ships to {city}</strong><p>Tracked delivery across {state.abbr}.</p></div></div>
+        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Colour bonded in — it won't peel or crack.</p></div></div>
         <div className="badge"><span className="badge-icon">💲</span><div><strong>Instant pricing</strong><p>See your {city} price online, 24/7.</p></div></div>
-        <div className="badge"><span className="badge-icon">🎨</span><div><strong>Free file check</strong><p>We proof your artwork before printing.</p></div></div>
+        <div className="badge"><span className="badge-icon">📐</span><div><strong>Free artwork proof</strong><p>You approve it before anything prints.</p></div></div>
       </section>
 
       <section className="section-block-bare">
@@ -72,11 +72,11 @@ export default function CityPage() {
       </section>
 
       <section className="section-block card">
-        <h2>Custom printing shipped to {city}</h2>
+        <h2>Canopy tents shipped to {city}</h2>
         <p className="muted">
-          PrintUSA is a fully online nationwide print shop — we don't have a storefront in {city}, and you
-          don't need one. From storefront signage and event banners to trade-show displays, {city} businesses
-          design or upload artwork, get an instant quote online, and we print and ship it to {city}, {state.name}.
+          We're an online shop — there's no storefront in {city}, and you don't need one. Market
+          vendors, teams and event organisers in {city} configure a tent, upload artwork, approve the
+          proof we send back, and we print and ship it to {city}, {state.name}.
         </p>
       </section>
 

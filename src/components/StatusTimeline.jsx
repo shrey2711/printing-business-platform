@@ -2,6 +2,8 @@
 const STEPS = [
   { key: 'submitted', label: 'Submitted' },
   { key: 'paid', label: 'Paid' },
+  { key: 'proof_ready', label: 'Proof sent' },
+  { key: 'proof_approved', label: 'Approved' },
   { key: 'in_production', label: 'In production' },
   { key: 'shipped', label: 'Shipped' }
 ];

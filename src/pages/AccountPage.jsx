@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getMyOrders, getDesignUrl, deleteOrder } from '../services/orders';
-import { startCheckout, confirmCheckout } from '../services/checkout';
+import { startCheckout, confirmCheckout, respondToProof } from '../services/checkout';
 import StatusTimeline from '../components/StatusTimeline';
+import { useCurrency } from '../context/CurrencyContext';
+import { formatCharged } from '../lib/money';
 
 const statusColor = {
   submitted: 'st-blue',
   paid: 'st-green',
+  proof_ready: 'st-amber',
+  proof_approved: 'st-blue',
   in_production: 'st-amber',
   shipped: 'st-green',
   cancelled: 'st-red'
@@ -18,6 +22,7 @@ const isPaid = (o) => ['paid', 'in_production', 'shipped'].includes(o.status);
 
 export default function AccountPage() {
   const { displayName, isAuthenticated, isSupabaseReady, loading } = useAuth();
+  const { currency } = useCurrency();
   const location = useLocation();
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
@@ -27,6 +32,8 @@ export default function AccountPage() {
   const [designUrls, setDesignUrls] = useState({});
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [payMsg, setPayMsg] = useState('');
+  const [proofNotes, setProofNotes] = useState({});
+  const [proofBusy, setProofBusy] = useState(null);
 
   const loadOrders = async () => {
     const rows = await getMyOrders();
@@ -54,9 +61,26 @@ export default function AccountPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
+  const sendProof = async (orderId, approved) => {
+    setProofBusy(orderId);
+    try {
+      const { order } = await respondToProof(orderId, approved, proofNotes[orderId]);
+      setOrders((prev) => prev.map((o) => (o.id === orderId ? { ...o, ...order } : o)));
+      setPayMsg(
+        approved
+          ? 'Proof approved — your order is moving into production.'
+          : 'Thanks — we have your changes and will send an updated proof.'
+      );
+    } catch (e) {
+      setPayMsg(e.message);
+    } finally {
+      setProofBusy(null);
+    }
+  };
+
   const payNow = async (orderId) => {
     try {
-      const { url, unavailable } = await startCheckout(orderId);
+      const { url, unavailable } = await startCheckout(orderId, undefined, currency);
       if (unavailable) return setPayMsg("Online payment isn't enabled yet — we'll invoice you directly.");
       if (url) window.location.href = url;
     } catch (e) {
@@ -151,14 +175,50 @@ export default function AccountPage() {
 
               <StatusTimeline status={o.status} />
 
+              {o.status === 'proof_ready' && (
+                <div className="proof-panel">
+                  <strong>Your artwork proof is ready</strong>
+                  <p>
+                    Check the proof carefully — spelling, colours and logo placement. Nothing goes to
+                    production until you approve it.
+                  </p>
+                  {designUrls[o.id] && (
+                    <a className="proof-link" href={designUrls[o.id]} target="_blank" rel="noreferrer">
+                      View proof
+                    </a>
+                  )}
+                  <textarea
+                    placeholder="Need a change? Tell us what to fix (optional)"
+                    value={proofNotes[o.id] || ''}
+                    onChange={(e) => setProofNotes({ ...proofNotes, [o.id]: e.target.value })}
+                  />
+                  <div className="proof-actions">
+                    <button
+                      className="btn btn-red btn-sm"
+                      disabled={proofBusy === o.id}
+                      onClick={() => sendProof(o.id, true)}
+                    >
+                      Approve &amp; start production
+                    </button>
+                    <button
+                      className="btn btn-outline btn-sm"
+                      disabled={proofBusy === o.id || !(proofNotes[o.id] || '').trim()}
+                      onClick={() => sendProof(o.id, false)}
+                    >
+                      Request changes
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <div className="order-card-meta">
                 <span>Qty <strong>{o.quantity}</strong></span>
                 <span>
                   {isPaid(o) ? 'Paid ' : 'Est. '}
                   <strong>
-                    {isPaid(o) && o.amount_total
-                      ? `$${Number(o.amount_total).toFixed(2)}`
-                      : o.estimated_price || (o.amount_total ? `$${Number(o.amount_total).toFixed(2)}` : '—')}
+                    {o.amount_total
+                      ? formatCharged(o.amount_total, o.currency)
+                      : o.estimated_price || '—'}
                   </strong>
                 </span>
                 {o.tracking_number && (

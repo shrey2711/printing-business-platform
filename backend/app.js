@@ -10,6 +10,7 @@ import { getProductFaqs } from './data/faqs.js';
 import { stripe, supabaseAdmin, getUserFromToken, isAdmin, adminEmails, baseUrl } from './lib/clients.js';
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } from './lib/mailer.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
+import { currencies, BASE_CURRENCY } from '../src/config/brand.js';
 
 dotenv.config();
 
@@ -119,7 +120,7 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
   const user = await getUserFromToken(req.headers.authorization);
   if (!user) return res.status(401).json({ error: 'Not signed in.' });
 
-  const { orderId, coupon } = req.body || {};
+  const { orderId, coupon, currency: requestedCurrency } = req.body || {};
   const { data: order, error } = await supabaseAdmin
     .from('orders')
     .select('*')
@@ -138,8 +139,14 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
     return res.status(400).json({ error: 'This order needs a manual quote before payment.' });
   }
 
-  // Apply coupon server-side.
+  // Apply coupon server-side. Totals here are in the base currency (USD).
   const { discount, total, coupon: applied } = applyCoupon(subtotal, coupon);
+
+  // Charge in the currency the buyer was quoted. Only codes we actually define
+  // are honoured, so a crafted request cannot invent a favourable rate.
+  const cur = currencies[requestedCurrency] || currencies[BASE_CURRENCY];
+  const chargeAmount = total * cur.rate;
+  const chargeDiscount = discount * cur.rate;
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
@@ -147,11 +154,14 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
       {
         quantity: 1,
         price_data: {
-          currency: 'usd',
-          unit_amount: Math.round(total * 100),
+          currency: cur.stripe,
+          unit_amount: Math.round(chargeAmount * 100),
           product_data: {
             name: order.product,
-            description: [order.specs, applied ? `Coupon ${applied.code} (-$${discount})` : null]
+            description: [
+              order.specs,
+              applied ? `Coupon ${applied.code} (-${cur.code} ${chargeDiscount.toFixed(2)})` : null
+            ]
               .filter(Boolean)
               .join(' — ') || undefined
           }
@@ -168,13 +178,50 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
     .from('orders')
     .update({
       stripe_session_id: session.id,
-      amount_total: total,
+      // Store the CHARGED amount and its currency together — amount_total is
+      // denominated in `currency`, so it must not be FX-converted on display.
+      amount_total: chargeAmount,
+      currency: cur.code,
       coupon_code: applied?.code || null,
-      discount: discount || null
+      discount: chargeDiscount || null
     })
     .eq('id', order.id);
 
   res.json({ url: session.url });
+});
+
+// Customer approves the artwork proof, or asks for changes. Production only
+// starts after approval, so a bad file never reaches the press.
+app.post('/api/orders/:id/proof', writeLimiter, async (req, res) => {
+  if (!supabaseAdmin) return res.status(503).json({ error: 'Not configured.' });
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Not signed in.' });
+
+  const { approved, feedback } = req.body || {};
+  const { data: order } = await supabaseAdmin
+    .from('orders')
+    .select('*')
+    .eq('id', req.params.id)
+    .single();
+
+  if (!order || order.user_id !== user.id) return res.status(404).json({ error: 'Order not found.' });
+  if (order.status !== 'proof_ready') {
+    return res.status(400).json({ error: 'There is no proof awaiting your approval on this order.' });
+  }
+
+  const patch = approved
+    ? { status: 'proof_approved', proof_approved_at: new Date().toISOString(), proof_feedback: null }
+    : { status: 'paid', proof_feedback: String(feedback || '').slice(0, 2000) };
+
+  const { data, error } = await supabaseAdmin
+    .from('orders')
+    .update(patch)
+    .eq('id', order.id)
+    .select()
+    .single();
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true, order: data });
 });
 
 // Validate a coupon code (for showing the discount before paying).
@@ -292,7 +339,9 @@ app.delete('/api/admin/orders/:id', async (req, res) => {
 app.patch('/api/admin/orders/:id', async (req, res) => {
   const admin = await requireAdmin(req, res);
   if (!admin) return;
-  const allowed = ['submitted', 'paid', 'in_production', 'shipped', 'cancelled'];
+  const allowed = [
+    'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'cancelled'
+  ];
   const { status, tracking_number, carrier } = req.body || {};
 
   const patch = {};

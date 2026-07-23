@@ -1,12 +1,16 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProduct, getPrice } from '../services/api';
 import ProductArt from '../components/ProductArt';
+import CanopyPreview from '../components/CanopyPreview';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { useCurrency, useMoney } from '../context/CurrencyContext';
 
 export default function ProductConfigurator() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const money = useMoney();
+  const { currency } = useCurrency();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -57,7 +61,9 @@ export default function ProductConfigurator() {
     return () => clearTimeout(debounceRef.current);
   }, [slug, product, config]);
 
-  const isArea = product?.pricing?.model === 'area';
+  const model = product?.pricing?.model;
+  const isArea = model === 'area';
+  const isConfigured = model === 'configured';
 
   const toggleOption = (id) => {
     setConfig((prev) => {
@@ -66,11 +72,24 @@ export default function ProductConfigurator() {
     });
   };
 
+  // --- `configured` model handlers -----------------------------------------
+  const setSelect = (groupId, choiceId) =>
+    setConfig((prev) => ({ ...prev, selections: { ...prev.selections, [groupId]: choiceId } }));
+
+  const setMultiCount = (groupId, choiceId, count) =>
+    setConfig((prev) => {
+      const group = { ...(prev.selections[groupId] || {}) };
+      if (count > 0) group[choiceId] = count;
+      else delete group[choiceId];
+      return { ...prev, selections: { ...prev.selections, [groupId]: group } };
+    });
+
   const orderState = () => ({
     product: product.name,
     quantity: config.quantity,
-    specs: describeConfig(product, config, price),
-    estimatedPrice: price ? `$${price.total.toFixed(2)}` : '',
+    specs: describeConfig(product, config),
+    estimatedPrice: price ? money(price.total) : '',
+    currency,
     // Raw pricing config so the server can re-price authoritatively at checkout.
     config: { slug, ...config }
   });
@@ -84,11 +103,12 @@ export default function ProductConfigurator() {
     return (
       <main className="page">
         <p className="muted">We couldn't find that product.</p>
-        <Link className="btn btn-secondary" to="/products">← Back to products</Link>
+        <Link className="btn btn-outline" to="/products">← Back to products</Link>
       </main>
     );
 
   const p = product.pricing;
+  const sel = config?.selections || {};
 
   return (
     <main className="page">
@@ -98,7 +118,17 @@ export default function ProductConfigurator() {
         {/* Left: product visual + info */}
         <div className="config-visual">
           <div className="config-hero-thumb">
-            <ProductArt slug={product.slug} />
+            {isConfigured && hasCanopyShape(p) ? (
+              <CanopyPreview
+                size={sel.size || sel.length}
+                frame={sel.frame}
+                print={sel.print}
+                walls={countWalls(sel.walls)}
+                label={`${product.name} preview`}
+              />
+            ) : (
+              <ProductArt slug={product.slug} />
+            )}
           </div>
           <div className="config-info">
             <span className="eyebrow">{product.badge}</span>
@@ -117,7 +147,81 @@ export default function ProductConfigurator() {
         <div className="config-form card">
           <h2>Build your order</h2>
 
-          {isArea ? (
+          {isConfigured ? (
+            (p.optionGroups || []).map((group) => (
+              <div className="field opt-group" key={group.id}>
+                <label>{group.label}</label>
+                {group.help && <small className="opt-help">{group.help}</small>}
+
+                {group.type === 'multi' ? (
+                  <div className="option-list">
+                    {group.choices.map((choice) => {
+                      const count = Number(sel[group.id]?.[choice.id]) || 0;
+                      const max = choice.max || 1;
+                      return (
+                        <div className={`opt-row ${count ? 'opt-row-on' : ''}`} key={choice.id}>
+                          <label className="checkbox">
+                            <input
+                              type="checkbox"
+                              checked={count > 0}
+                              onChange={() => setMultiCount(group.id, choice.id, count > 0 ? 0 : 1)}
+                            />
+                            <span>{choice.label}</span>
+                          </label>
+                          <div className="opt-right">
+                            {max > 1 && count > 0 && (
+                              <div className="stepper">
+                                <button
+                                  type="button"
+                                  aria-label={`Decrease ${choice.label}`}
+                                  onClick={() => setMultiCount(group.id, choice.id, count - 1)}
+                                >
+                                  −
+                                </button>
+                                <span>{count}</span>
+                                <button
+                                  type="button"
+                                  aria-label={`Increase ${choice.label}`}
+                                  disabled={count >= max}
+                                  onClick={() => setMultiCount(group.id, choice.id, count + 1)}
+                                >
+                                  +
+                                </button>
+                              </div>
+                            )}
+                            <span className="opt-price">+{money(choice.price)}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="choice-grid">
+                    {group.choices.map((choice) => {
+                      const activeChoice =
+                        (sel[group.id] || defaultChoiceId(group)) === choice.id;
+                      return (
+                        <button
+                          type="button"
+                          key={choice.id}
+                          className={`choice-card ${activeChoice ? 'choice-active' : ''}`}
+                          aria-pressed={activeChoice}
+                          onClick={() => setSelect(group.id, choice.id)}
+                        >
+                          <span className="choice-label">{choice.label}</span>
+                          <span className="choice-meta">
+                            {group.pricing === 'base'
+                              ? money(choice.price)
+                              : multiplierHint(choice.mult)}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            ))
+          ) : isArea ? (
             <div className="size-row">
               <div className="field">
                 <label>Width (inches)</label>
@@ -157,7 +261,7 @@ export default function ProductConfigurator() {
             </div>
           )}
 
-          {p.materials?.length > 1 && (
+          {!isConfigured && p.materials?.length > 1 && (
             <div className="field">
               <label>{isArea ? 'Material' : 'Option'}</label>
               <select
@@ -171,7 +275,7 @@ export default function ProductConfigurator() {
             </div>
           )}
 
-          {p.finishing?.length > 0 && (
+          {!isConfigured && p.finishing?.length > 0 && (
             <div className="field">
               <label>Finishing options</label>
               <div className="option-list">
@@ -192,7 +296,7 @@ export default function ProductConfigurator() {
           <div className="field">
             <label>Quantity</label>
             <div className="qty-row">
-              {[1, 5, 10, 25, 50, 100].map((q) => (
+              {[1, 2, 5, 10, 25, 50].map((q) => (
                 <button
                   key={q}
                   type="button"
@@ -217,41 +321,43 @@ export default function ProductConfigurator() {
         <aside className="price-panel card">
           <h3>Instant price</h3>
           <div className={`price-big ${pricing ? 'is-updating' : ''}`}>
-            {price ? `$${price.total.toFixed(2)}` : '—'}
+            {price ? money(price.total) : '—'}
           </div>
           {price && (
             <>
               <p className="price-sub">
-                {price.quantity} {price.quantity > 1 ? 'pieces' : 'piece'} · $
-                {price.perPieceAfterDiscount.toFixed(2)} each
+                {price.quantity} {price.quantity > 1 ? 'pieces' : 'piece'} ·{' '}
+                {money(price.perPieceAfterDiscount)} each
               </p>
 
               <div className="breakdown">
                 {price.breakdown.map((line, i) => (
                   <div className="breakdown-row" key={i}>
                     <span>{line.label}</span>
-                    <span>${line.amount.toFixed(2)}</span>
+                    <span>{money(line.amount)}</span>
                   </div>
                 ))}
                 <div className="breakdown-row subtle">
                   <span>× {price.quantity} qty</span>
-                  <span>${price.subtotal.toFixed(2)}</span>
+                  <span>{money(price.subtotal)}</span>
                 </div>
                 {price.quantityDiscountPct > 0 && (
                   <div className="breakdown-row discount">
                     <span>Volume discount ({price.quantityDiscountPct}%)</span>
-                    <span>−${price.discountAmount.toFixed(2)}</span>
+                    <span>−{money(price.discountAmount)}</span>
                   </div>
                 )}
               </div>
 
               <div className="price-total-row">
                 <span>Total</span>
-                <span>${price.total.toFixed(2)}</span>
+                <span>{money(price.total)}</span>
               </div>
 
               <div className="ship-note">
-                {price.freeShipping ? '✅ Qualifies for free shipping' : `Add $${(99 - price.total).toFixed(2)} for free shipping`}
+                {price.freeShipping
+                  ? '✅ Qualifies for free shipping'
+                  : `Add ${money(99 - price.total)} for free shipping`}
               </div>
             </>
           )}
@@ -262,7 +368,9 @@ export default function ProductConfigurator() {
           <button className="btn btn-outline btn-block" onClick={designIt} disabled={!price} style={{ marginTop: '0.5rem' }}>
             🎨 Design it online
           </button>
-          <p className="panel-foot">Upload a print-ready file or draw your own on the next step.</p>
+          <p className="panel-foot">
+            We send a free artwork proof for your approval before anything goes to production.
+          </p>
         </aside>
       </div>
 
@@ -283,8 +391,46 @@ export default function ProductConfigurator() {
   );
 }
 
+function defaultChoiceId(group) {
+  const def = group.choices?.find((c) => c.default) || group.choices?.[0];
+  return def?.id;
+}
+
+// Render a multiplier as a human hint rather than a raw factor.
+function multiplierHint(mult) {
+  const m = Number(mult);
+  if (!Number.isFinite(m) || m === 1) return 'Included';
+  const pct = Math.round((m - 1) * 100);
+  return pct > 0 ? `+${pct}%` : `${pct}%`;
+}
+
+function hasCanopyShape(pricing) {
+  const ids = (pricing.optionGroups || []).map((g) => g.id);
+  return ids.includes('print') && (ids.includes('size') || ids.includes('length'));
+}
+
+function countWalls(wallSelection) {
+  if (!wallSelection || typeof wallSelection !== 'object') return 0;
+  return Object.values(wallSelection).reduce((n, v) => n + (Number(v) || 0), 0);
+}
+
 function buildDefaultConfig(product) {
   const p = product.pricing;
+
+  if (p.model === 'configured') {
+    const selections = {};
+    for (const group of p.optionGroups || []) {
+      if (group.type === 'multi') {
+        const picked = {};
+        for (const c of group.choices) if (c.default) picked[c.id] = 1;
+        selections[group.id] = picked;
+      } else {
+        selections[group.id] = defaultChoiceId(group);
+      }
+    }
+    return { selections, quantity: 1 };
+  }
+
   const defaultOptions = (p.finishing || []).filter((o) => o.default).map((o) => o.id);
   if (p.model === 'area') {
     return {
@@ -303,9 +449,31 @@ function buildDefaultConfig(product) {
   };
 }
 
-function describeConfig(product, config, price) {
+function describeConfig(product, config) {
   const p = product.pricing;
   const parts = [];
+
+  if (p.model === 'configured') {
+    for (const group of p.optionGroups || []) {
+      const value = config.selections?.[group.id];
+      if (group.type === 'multi') {
+        const picked = Object.entries(value || {})
+          .map(([id, count]) => {
+            const choice = group.choices.find((c) => c.id === id);
+            if (!choice) return null;
+            return count > 1 ? `${choice.label} ×${count}` : choice.label;
+          })
+          .filter(Boolean);
+        if (picked.length) parts.push(`${group.label}: ${picked.join(', ')}`);
+      } else {
+        const choice = group.choices.find((c) => c.id === value) || group.choices.find((c) => c.default);
+        if (choice) parts.push(`${group.label}: ${choice.label}`);
+      }
+    }
+    parts.push(`Qty ${config.quantity}`);
+    return parts.join(' • ');
+  }
+
   if (p.model === 'area') {
     parts.push(`${config.width}" × ${config.height}"`);
   } else {

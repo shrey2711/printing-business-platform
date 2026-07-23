@@ -8,11 +8,16 @@ import { fileURLToPath } from 'url';
 
 import { listProducts, getProduct } from '../backend/data/products.js';
 import { getProductFaqs } from '../backend/data/faqs.js';
-import { states, slugify } from '../src/data/states.js';
+import { territories, slugify } from '../src/data/states.js';
+import { brand } from '../src/config/brand.js';
+// Size / use-case landing pages target the winnable long tail (size x use case
+// x location) — head terms belong to 15-20 year old domains.
+import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
-const ORIGIN = 'https://printing-business-platform-frontend.vercel.app';
+const ORIGIN = brand.origin;
+const BRAND = brand.name;
 
 const template = readFileSync(join(DIST, 'index.html'), 'utf8');
 
@@ -23,14 +28,12 @@ const esc = (s = '') =>
 const NAV = `<nav aria-label="Primary">
   <a href="/">Home</a>
   <a href="/products">All Products</a>
-  <a href="/products/vinyl-banners">Vinyl Banners</a>
-  <a href="/products/mesh-banners">Mesh Banners</a>
-  <a href="/products/yard-signs">Yard Signs</a>
-  <a href="/products/rigid-signs">Rigid Signs</a>
-  <a href="/products/feather-flags">Feather Flags</a>
-  <a href="/products/retractable-banner-stands">Banner Stands</a>
-  <a href="/products/table-covers">Table Covers</a>
-  <a href="/products/canopy-tents">Canopy Tents</a>
+  <a href="/products/canopy-tents">Custom Canopy Tents</a>
+  <a href="/products/canopy-packages">Canopy Packages</a>
+  <a href="/products/canopy-sidewalls">Sidewalls</a>
+  <a href="/products/canopy-replacement-tops">Replacement Tops</a>
+  <a href="/products/canopy-accessories">Accessories</a>
+  ${SIZES.map((s) => `<a href="/sizes/${s.slug}">${s.slug} canopy tent</a>`).join('\n  ')}
   <a href="/design">Design Studio</a>
   <a href="/locations">Locations</a>
   <a href="/quote">Get a Quote</a>
@@ -71,21 +74,26 @@ const routes = [];
 // ---- Home ----
 routes.push(() => {
   const body = `
-    <h1>Wholesale Custom Banners, Signs &amp; Displays with Instant Pricing</h1>
-    <p>PrintUSA is an online wholesale print shop for vinyl banners, yard signs, feather flags,
-    retractable banner stands, table covers, canopy tents and more — with instant online pricing,
-    fast production and shipping to all 50 US states.</p>
-    <h2>Shop products</h2>
+    <h1>Custom Printed Canopy Tents with Instant Pricing</h1>
+    <p>${esc(BRAND)} prints custom pop-up canopy tents in ${SIZES.map((s) => s.slug).join(', ')}.
+    Choose your frame grade, print coverage, walls and accessories and see the price update live —
+    no quote form. Every order includes a free artwork proof, and nothing goes to production until
+    you approve it. ${esc(brand.shippingBlurb)}.</p>
+    <h2>Shop canopy tents</h2>
     <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}. ${esc(p.tagline)}</li>`).join('')}</ul>
-    <h2>Order in three steps</h2>
-    <ol><li>Configure your product and see the price instantly.</li>
+    <h2>Canopy tent sizes</h2>
+    <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
+    <h2>What people use them for</h2>
+    <ul>${SOLUTIONS.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
+    <h2>Order in four steps</h2>
+    <ol><li>Configure size, frame, print coverage and walls — the price updates as you go.</li>
     <li>Upload artwork or design it in our Design Studio.</li>
-    <li>We print and ship it fast, nationwide.</li></ol>`;
+    <li>Approve the artwork proof we send you.</li>
+    <li>We print and ship it.</li></ol>`;
   return render({
     path: '/',
-    title: 'Wholesale Banners, Signs & Displays | PrintUSA',
-    description:
-      'Get instant pricing on wholesale banners, custom signs, feather flags and trade-show displays. Choose your size, quantity and finishing online, with fast nationwide shipping.',
+    title: `Custom Printed Canopy Tents — Instant Pricing | ${BRAND}`,
+    description: brand.description,
     body
   });
 });
@@ -94,16 +102,95 @@ routes.push(() => {
 routes.push(() => {
   const body = `
     <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Products</span></nav>
-    <h1>Shop All Products &amp; Get Instant Pricing</h1>
-    <p>Browse banners, signs, flags, displays and decals. Configure size and quantity for live wholesale pricing.</p>
+    <h1>Shop Canopy Tents, Walls &amp; Accessories</h1>
+    <p>Custom printed canopy tents, complete booth packages, sidewalls, replacement tops and the
+    hardware that goes with them. Configure any product for live pricing.</p>
     <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}. ${esc(p.tagline)}</li>`).join('')}</ul>`;
   return render({
     path: '/products',
-    title: 'Shop All Products & Instant Pricing | PrintUSA',
-    description: 'Browse wholesale banners, signs, flags, displays and decals. Configure size and quantity for instant online pricing.',
+    title: `Shop Canopy Tents & Accessories | ${BRAND}`,
+    description: 'Browse custom printed canopy tents, booth packages, sidewalls, replacement tops and accessories with instant online pricing.',
     body
   });
 });
+
+// ---- Size landing pages ----
+for (const size of SIZES) {
+  routes.push(() => {
+    const others = SIZES.filter((s) => s.slug !== size.slug);
+    const body = `
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(size.slug)}</span></nav>
+      <h1>${esc(size.label)} Custom Printed Canopy Tent</h1>
+      <p>${esc(size.blurb)} Printed to order in full colour with your choice of frame grade and print
+      coverage, and priced instantly — pick your options and the total updates as you go.</p>
+      <h2>What you can configure</h2>
+      <ul>
+        <li>Frame grade — steel economy, commercial aluminium or heavy-duty hex</li>
+        <li>Print coverage — canopy top, top plus valance, or top, valance and inside</li>
+        <li>Walls — full, half, mesh, zippered door and rail skirts, up to four per tent</li>
+        <li>Accessories — weight bags, stake kits, wheeled carry bags and LED lighting</li>
+      </ul>
+      <p><a href="/products/canopy-tents">Configure a ${esc(size.label)} canopy tent</a> or
+      <a href="/products/canopy-packages">see complete packages</a>.</p>
+      <h2>Other sizes</h2>
+      <ul>${others.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a></li>`).join('')}</ul>
+      <h2>Common uses</h2>
+      <ul>${SOLUTIONS.slice(0, 4).map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;
+    return render({
+      path: `/sizes/${size.slug}`,
+      title: `${size.slug} Custom Canopy Tent — Instant Pricing | ${BRAND}`,
+      description: `Custom printed ${size.label} pop-up canopy tent. Choose frame grade, print coverage, walls and accessories with instant online pricing.`,
+      body,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Sizes', item: `${ORIGIN}/products` },
+          { '@type': 'ListItem', position: 3, name: `${size.slug} canopy tent`, item: `${ORIGIN}/sizes/${size.slug}` }
+        ]
+      }
+    });
+  });
+}
+
+// ---- Use-case (solution) landing pages ----
+for (const sol of SOLUTIONS) {
+  routes.push(() => {
+    const others = SOLUTIONS.filter((s) => s.slug !== sol.slug);
+    const body = `
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(sol.title)}</span></nav>
+      <h1>${esc(sol.title)}</h1>
+      <p>${esc(sol.blurb)} Every tent is printed to order, so the size, frame and print coverage are
+      chosen to match how often it goes up and how much branding you need.</p>
+      <h2>Choose a size</h2>
+      <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
+      <h2>What to order</h2>
+      <ul>
+        <li><a href="/products/canopy-tents">Custom printed canopy tent</a> — configure from scratch</li>
+        <li><a href="/products/canopy-packages">Canopy packages</a> — tent, walls and weights bundled</li>
+        <li><a href="/products/canopy-sidewalls">Sidewalls</a> — add weather protection and branding</li>
+        <li><a href="/products/canopy-accessories">Accessories</a> — weights, stakes, bags and lighting</li>
+      </ul>
+      <h2>Other uses</h2>
+      <ul>${others.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;
+    return render({
+      path: `/solutions/${sol.slug}`,
+      title: `${sol.title} — Custom Printed | ${BRAND}`,
+      description: `${sol.blurb} Custom printed canopy tents with instant online pricing and a free artwork proof.`,
+      body,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Solutions', item: `${ORIGIN}/products` },
+          { '@type': 'ListItem', position: 3, name: sol.title, item: `${ORIGIN}/solutions/${sol.slug}` }
+        ]
+      }
+    });
+  });
+}
 
 // ---- Each product ----
 for (const summary of productList) {
@@ -140,7 +227,7 @@ for (const summary of productList) {
       <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>`;
     return render({
       path: `/products/${product.slug}`,
-      title: `${product.name} | Wholesale Pricing | PrintUSA`,
+      title: `${product.name} | Instant Pricing | ${BRAND}`,
       description: `${product.tagline} Order ${product.name.toLowerCase()} online with instant pricing from $${startingPrice}. ${product.turnaround}.`,
       body,
       jsonLd: [
@@ -149,7 +236,7 @@ for (const summary of productList) {
           '@type': 'Product',
           name: product.name,
           description: product.description,
-          brand: { '@type': 'Brand', name: 'PrintUSA' },
+          brand: { '@type': 'Brand', name: BRAND },
           offers: {
             '@type': 'Offer',
             priceCurrency: 'USD',
@@ -183,36 +270,46 @@ for (const summary of productList) {
 
 // ---- Locations hub ----
 routes.push(() => {
+  const us = territories.filter((t) => t.country === 'US');
+  const ca = territories.filter((t) => t.country === 'CA');
   const body = `
     <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Locations</span></nav>
-    <h1>Custom Printing Across the USA — All 50 States</h1>
-    <p>PrintUSA ships custom banners, signs, flags and displays to every US state.</p>
-    <ul>${states.map((s) => `<li><a href="/locations/${s.slug}">Custom printing in ${esc(s.name)}</a></li>`).join('')}</ul>`;
+    <h1>Custom Canopy Tents Across the US and Canada</h1>
+    <p>${esc(BRAND)} ships custom printed canopy tents, walls and accessories to every US state and
+    Canadian province, priced in USD or CAD.</p>
+    <h2>United States</h2>
+    <ul>${us.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
+    <h2>Canada</h2>
+    <ul>${ca.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>`;
   return render({
     path: '/locations',
-    title: 'Custom Printing Across the USA — All 50 States | PrintUSA',
-    description: 'PrintUSA ships custom banners, signs, flags and displays to all 50 states with instant online pricing and fast delivery.',
+    title: `Custom Canopy Tents Across the US & Canada | ${BRAND}`,
+    description: 'Custom printed canopy tents shipped to every US state and Canadian province, with instant online pricing in USD or CAD.',
     body
   });
 });
 
-// ---- Each state + city ----
-for (const s of states) {
+// ---- Each state/province + city ----
+for (const s of territories) {
+  const areaWord = s.country === 'CA' ? 'province-wide' : 'statewide';
   routes.push(() => {
     const cityLinks = s.cities
-      .map((c) => `<li><a href="/locations/${s.slug}/${slugify(c)}">Printing in ${esc(c)}, ${s.abbr}</a></li>`)
+      .map((c) => `<li><a href="/locations/${s.slug}/${slugify(c)}">Canopy tents in ${esc(c)}, ${s.abbr}</a></li>`)
       .join('');
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <span>${esc(s.name)}</span></nav>
-      <h1>Custom Banners, Signs &amp; Displays in ${esc(s.name)}</h1>
-      <p>Order custom vinyl banners, yard signs, feather flags and displays in ${esc(s.name)} with instant pricing and fast shipping to ${esc(s.cities.join(', '))} and statewide.</p>
+      <h1>Custom Printed Canopy Tents in ${esc(s.name)}</h1>
+      <p>Order custom printed pop-up canopy tents, sidewalls and accessories in ${esc(s.name)} with
+      instant online pricing and shipping to ${esc(s.cities.join(', '))} and ${areaWord}.</p>
       <h2>Popular products</h2>
       <ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>
+      <h2>Canopy sizes</h2>
+      <ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>
       <h2>Cities we serve in ${esc(s.name)}</h2><ul>${cityLinks}</ul>`;
     return render({
       path: `/locations/${s.slug}`,
-      title: `Custom Banners & Signs in ${s.name} | PrintUSA`,
-      description: `Custom banners, signs, flags and displays in ${s.name}. Instant online pricing and fast shipping to ${s.cities.slice(0, 3).join(', ')} and statewide.`,
+      title: `Custom Canopy Tents in ${s.name} | ${BRAND}`,
+      description: `Custom printed canopy tents in ${s.name}. Instant online pricing and shipping to ${s.cities.slice(0, 3).join(', ')} and ${areaWord}.`,
       body,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -231,14 +328,15 @@ for (const s of states) {
     routes.push(() => {
       const body = `
         <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <a href="/locations/${s.slug}">${esc(s.name)}</a> / <span>${esc(c)}</span></nav>
-        <h1>Custom Banners &amp; Signs in ${esc(c)}, ${esc(s.name)}</h1>
-        <p>PrintUSA delivers vinyl banners, yard signs, feather flags and displays to ${esc(c)}, ${esc(s.name)} with instant online pricing and fast shipping.</p>
+        <h1>Custom Printed Canopy Tents in ${esc(c)}, ${esc(s.name)}</h1>
+        <p>${esc(BRAND)} ships custom printed canopy tents, sidewalls and accessories to ${esc(c)},
+        ${esc(s.name)} with instant online pricing and a free artwork proof on every order.</p>
         <h2>Popular products in ${esc(c)}</h2>
         <ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
       return render({
         path: `/locations/${s.slug}/${citySlug}`,
-        title: `Custom Banners & Signs in ${c}, ${s.abbr} | PrintUSA`,
-        description: `Order custom banners, signs, flags and displays in ${c}, ${s.name} with instant online pricing and fast shipping.`,
+        title: `Custom Canopy Tents in ${c}, ${s.abbr} | ${BRAND}`,
+        description: `Order custom printed canopy tents in ${c}, ${s.name} with instant online pricing and fast shipping.`,
         // City pages are templated — keep them accessible but noindex until each
         // has genuinely unique content (avoids doorway-page risk).
         robots: 'noindex, follow',
@@ -262,21 +360,25 @@ for (const s of states) {
 routes.push(() =>
   render({
     path: '/contact',
-    title: 'Contact Us | PrintUSA',
-    description: 'Contact PrintUSA — online wholesale printing with nationwide shipping. Email, phone and business hours.',
+    title: `Contact Us | ${BRAND}`,
+    description: `Contact ${BRAND} — custom printed canopy tents shipped across the US and Canada. Email, phone and business hours.`,
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Contact</span></nav>
-      <h1>Contact PrintUSA</h1>
-      <p>We support businesses across the United States with fast quotes, blind shipping and dependable delivery. Email sales@printusa.com or call 1 (800) 555-0148, Mon–Fri 8am–6pm ET.</p>`
+      <h1>Contact ${esc(BRAND)}</h1>
+      <p>We help businesses, teams and event vendors across the US and Canada get branded canopy
+      tents produced and delivered. Email ${esc(brand.email)} or call ${esc(brand.phone)},
+      ${esc(brand.hours)}.</p>`
   })
 );
 routes.push(() =>
   render({
     path: '/quote',
-    title: 'Request a Quote | PrintUSA',
-    description: 'Request a custom or bulk print quote from PrintUSA. Tell us your product, size and quantity and upload artwork.',
+    title: `Request a Quote | ${BRAND}`,
+    description: `Request a bulk or custom canopy tent quote from ${BRAND}. Tell us your size, quantity and print coverage and upload artwork.`,
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Quote</span></nav>
       <h1>Request a Custom Quote</h1>
-      <p>Tell us about your print job — product, size, quantity and finishing — and upload your artwork. We'll send a proof and final pricing.</p>`
+      <p>Most canopy configurations are priced instantly on the product pages. For large fleet
+      orders, non-standard sizes or anything unusual, tell us the size, quantity and print coverage
+      and upload your artwork — we'll come back with pricing and a proof.</p>`
   })
 );
 
@@ -302,8 +404,10 @@ const sm = [];
 sm.push(smUrl('/', '1.0', 'weekly'));
 sm.push(smUrl('/products', '0.9', 'weekly'));
 productList.forEach((p) => sm.push(smUrl(`/products/${p.slug}`, '0.8')));
+SIZES.forEach((s) => sm.push(smUrl(`/sizes/${s.slug}`, '0.7')));
+SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));
 sm.push(smUrl('/locations', '0.6', 'monthly'));
-states.forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
+territories.forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
 sm.push(smUrl('/quote', '0.4'));
 sm.push(smUrl('/contact', '0.4'));
 writeFileSync(

@@ -5,8 +5,8 @@
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 // EMAIL_FROM must use a domain you've verified in Resend. For quick testing,
 // "onboarding@resend.dev" only delivers to your own Resend account email.
-const EMAIL_FROM = process.env.EMAIL_FROM || 'PrintUSA <onboarding@resend.dev>';
-const BRAND = process.env.BRAND_NAME || 'PrintUSA';
+const EMAIL_FROM = process.env.EMAIL_FROM || 'Canopy Tent Co. <onboarding@resend.dev>';
+const BRAND = process.env.BRAND_NAME || 'Canopy Tent Co.';
 const DEFAULT_APP_URL = (process.env.PUBLIC_BASE_URL || '').replace(/\/$/, '');
 
 // --- Brand palette --------------------------------------------------------
@@ -22,8 +22,15 @@ const C = {
   bg: '#f4f6f8'
 };
 
-const STEPS = ['submitted', 'paid', 'in_production', 'shipped'];
-const STEP_LABEL = { submitted: 'Submitted', paid: 'Paid', in_production: 'In production', shipped: 'Shipped' };
+const STEPS = ['submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'];
+const STEP_LABEL = {
+  submitted: 'Submitted',
+  paid: 'Paid',
+  proof_ready: 'Proof sent',
+  proof_approved: 'Approved',
+  in_production: 'In production',
+  shipped: 'Shipped'
+};
 
 const STATUS_META = {
   submitted: {
@@ -37,6 +44,20 @@ const STATUS_META = {
     subject: 'is paid — thank you!',
     heading: 'Payment received — thank you! ✅',
     body: "Your payment has been confirmed and your order is queued for production. We'll let you know when printing begins."
+  },
+  proof_ready: {
+    color: C.amber,
+    subject: '— your artwork proof is ready 📐',
+    heading: 'Your artwork proof is ready to review',
+    body:
+      'We have prepared a visual proof of your canopy. Please check the spelling, colours and logo ' +
+      'placement carefully, then approve it in your account. Nothing goes to production until you do.'
+  },
+  proof_approved: {
+    color: C.blue,
+    subject: '— proof approved ✅',
+    heading: 'Thanks — your proof is approved',
+    body: 'Your artwork is approved and your order is now queued for production.'
   },
   in_production: {
     color: C.amber,
@@ -59,15 +80,17 @@ const STATUS_META = {
 };
 
 const shortId = (id) => `#${String(id).slice(0, 8)}`;
-const money = (n) => `$${Number(n).toFixed(2)}`;
+// `amount_total` is stored in the currency it was charged in, so label it
+// explicitly rather than assuming dollars — CA$ and US$ both render as "$".
+const money = (n, code = 'USD') => `${code} ${Number(n).toFixed(2)}`;
 
 // --- Building blocks ------------------------------------------------------
 function header() {
   return `
   <tr><td style="background:${C.navy};padding:22px 28px;">
     <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-      <td style="background:#0f1a2e;border-radius:8px;width:40px;height:40px;text-align:center;vertical-align:middle;color:#fff;font-family:Arial,sans-serif;font-weight:800;font-size:16px;">P2</td>
-      <td style="padding-left:12px;font-family:Arial,sans-serif;font-weight:800;font-size:22px;color:#ffffff;">Print<span style="color:${C.red};">USA</span></td>
+      <td style="background:#0f1a2e;border-radius:8px;width:40px;height:40px;text-align:center;vertical-align:middle;color:#fff;font-family:Arial,sans-serif;font-weight:800;font-size:16px;">&#9978;</td>
+      <td style="padding-left:12px;font-family:Arial,sans-serif;font-weight:800;font-size:22px;color:#ffffff;">Canopy<span style="color:${C.red};">Tent Co.</span></td>
     </tr></table>
   </td></tr>`;
 }
@@ -75,8 +98,8 @@ function header() {
 function footer() {
   return `
   <tr><td style="background:${C.bg};padding:20px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.6;">
-    <strong style="color:${C.navy};">${BRAND}</strong> — online wholesale printing, shipped nationwide.<br/>
-    Questions? Reply to this email or contact sales@printusa.com.<br/>
+    <strong style="color:${C.navy};">${BRAND}</strong> — custom printed canopy tents, shipped across the US and Canada.<br/>
+    Questions? Reply to this email or contact sales@example.com.<br/>
     <span style="color:#9aa3b0;">You're receiving this because you placed an order with ${BRAND}.</span>
   </td></tr>`;
 }
@@ -121,8 +144,8 @@ function detailsCard(order, { showAmount = true } = {}) {
   if (order.specs) rows.push(['Specs', order.specs]);
   rows.push(['Quantity', String(order.quantity || 1)]);
   if (showAmount) {
-    const paid = ['paid', 'in_production', 'shipped'].includes(order.status);
-    if (paid && order.amount_total != null) rows.push(['Total paid', money(order.amount_total)]);
+    const paid = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status);
+    if (paid && order.amount_total != null) rows.push(['Total paid', money(order.amount_total, order.currency)]);
     else if (order.estimated_price) rows.push(['Estimated', order.estimated_price]);
   }
   if (order.tracking_number) rows.push(['Tracking', `${order.carrier ? order.carrier + ' ' : ''}${order.tracking_number}`]);
@@ -148,7 +171,7 @@ function shell(innerHtml, preheader = '') {
           ${innerHtml}
         </table>
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;"><tr>
-          <td align="center" style="padding:16px;font-family:Arial,sans-serif;font-size:11px;color:#9aa3b0;">© ${new Date().getFullYear()} ${BRAND} • Ships nationwide across the USA</td>
+          <td align="center" style="padding:16px;font-family:Arial,sans-serif;font-size:11px;color:#9aa3b0;">© ${new Date().getFullYear()} ${BRAND} • Custom printed canopy tents &bull; US & Canada</td>
         </tr></table>
       </td></tr>
     </table>

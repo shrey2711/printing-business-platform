@@ -54,10 +54,35 @@ export const states = [
   { slug: 'washington-dc', name: 'Washington, D.C.', abbr: 'DC', region: 'Northeast', cities: ['Washington'] }
 ];
 
-export const regions = ['Northeast', 'South', 'Midwest', 'West'];
+// Canadian provinces and territories. Same shape as `states` so every location
+// page, helper and prerender route works across both markets unchanged.
+export const provinces = [
+  { slug: 'ontario', name: 'Ontario', abbr: 'ON', region: 'Canada', country: 'CA', cities: ['Toronto', 'Ottawa', 'Mississauga', 'Hamilton', 'London'] },
+  { slug: 'quebec', name: 'Quebec', abbr: 'QC', region: 'Canada', country: 'CA', cities: ['Montreal', 'Quebec City', 'Laval', 'Gatineau'] },
+  { slug: 'british-columbia', name: 'British Columbia', abbr: 'BC', region: 'Canada', country: 'CA', cities: ['Vancouver', 'Surrey', 'Victoria', 'Burnaby', 'Kelowna'] },
+  { slug: 'alberta', name: 'Alberta', abbr: 'AB', region: 'Canada', country: 'CA', cities: ['Calgary', 'Edmonton', 'Red Deer', 'Lethbridge'] },
+  { slug: 'manitoba', name: 'Manitoba', abbr: 'MB', region: 'Canada', country: 'CA', cities: ['Winnipeg', 'Brandon', 'Steinbach'] },
+  { slug: 'saskatchewan', name: 'Saskatchewan', abbr: 'SK', region: 'Canada', country: 'CA', cities: ['Saskatoon', 'Regina', 'Prince Albert'] },
+  { slug: 'nova-scotia', name: 'Nova Scotia', abbr: 'NS', region: 'Canada', country: 'CA', cities: ['Halifax', 'Sydney', 'Truro'] },
+  { slug: 'new-brunswick', name: 'New Brunswick', abbr: 'NB', region: 'Canada', country: 'CA', cities: ['Moncton', 'Saint John', 'Fredericton'] },
+  { slug: 'newfoundland-and-labrador', name: 'Newfoundland and Labrador', abbr: 'NL', region: 'Canada', country: 'CA', cities: ["St. John's", 'Mount Pearl', 'Corner Brook'] },
+  { slug: 'prince-edward-island', name: 'Prince Edward Island', abbr: 'PE', region: 'Canada', country: 'CA', cities: ['Charlottetown', 'Summerside'] },
+  { slug: 'yukon', name: 'Yukon', abbr: 'YT', region: 'Canada', country: 'CA', cities: ['Whitehorse'] },
+  { slug: 'northwest-territories', name: 'Northwest Territories', abbr: 'NT', region: 'Canada', country: 'CA', cities: ['Yellowknife'] },
+  { slug: 'nunavut', name: 'Nunavut', abbr: 'NU', region: 'Canada', country: 'CA', cities: ['Iqaluit'] }
+];
+
+// Every serviced region across both markets. US states carry no `country` key,
+// so default them to 'US' here rather than editing all 50 entries.
+export const territories = [
+  ...states.map((s) => ({ ...s, country: s.country || 'US' })),
+  ...provinces
+];
+
+export const regions = ['Northeast', 'South', 'Midwest', 'West', 'Canada'];
 
 export function getState(slug) {
-  return states.find((s) => s.slug === slug) || null;
+  return territories.find((s) => s.slug === slug) || null;
 }
 
 // Turn a city name into a URL slug, e.g. "St. Louis" -> "st-louis".
@@ -77,7 +102,7 @@ export function getCity(stateSlug, citySlug) {
   return city ? { state, city } : null;
 }
 
-// Every [state, city] pair, for sitemap/link generation.
+// Every [territory, city] pair across both markets, for sitemap/link generation.
 export function allCities() {
-  return states.flatMap((s) => s.cities.map((c) => ({ state: s, city: c, citySlug: slugify(c) })));
+  return territories.flatMap((s) => s.cities.map((c) => ({ state: s, city: c, citySlug: slugify(c) })));
 }
