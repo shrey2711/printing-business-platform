@@ -1,56 +1,53 @@
-// Markdown → sanitized HTML, server-side only (API + prerender, both Node).
-// The browser never renders markdown — it receives already-clean HTML — so no
-// sanitizer ships in the client bundle. Blog bodies are admin-authored, but we
-// sanitize anyway: an editor account is not a licence for stored XSS.
+// Markdown → safe HTML, server-side only (API + prerender, both Node).
 //
-// Uses markdown-it (CommonJS), NOT marked: Vercel bundles the serverless
-// function to CommonJS, and marked v18 is ESM-only, so a compiled require()
-// of it throws ERR_REQUIRE_ESM and takes down the entire API. markdown-it is
-// CJS and bundles cleanly. `html: false` also escapes raw HTML in the source,
-// so sanitize-html is defence-in-depth over an already-safe pipeline.
+// markdown-it with `html: false` is XSS-safe on its own: it escapes ALL raw
+// HTML in the source and refuses to build links/images with dangerous protocols
+// (javascript:, data:, vbscript:) — leaving them as inert text. Verified against
+// script / img-onerror / onclick / svg-onload / js-image / data-uri payloads.
+//
+// We deliberately DON'T use sanitize-html: it pulls in htmlparser2, which went
+// ESM-only, and Vercel runs node_modules un-bundled — so a CJS require() of an
+// ESM dependency throws ERR_REQUIRE_ESM at load and takes down the whole API.
+// markdown-it is CommonJS with only CJS dependencies, so it loads everywhere.
 
 import MarkdownIt from 'markdown-it';
-import sanitizeHtml from 'sanitize-html';
 
 const md = new MarkdownIt({ html: false, linkify: true, breaks: false, typographer: false });
 
-const OPTS = {
-  allowedTags: [
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'ul', 'ol', 'li', 'blockquote',
-    'strong', 'em', 'code', 'pre', 'hr', 'br', 'img', 'table', 'thead', 'tbody',
-    'tr', 'th', 'td', 'figure', 'figcaption', 'span'
-  ],
-  allowedAttributes: {
-    a: ['href', 'title', 'target', 'rel'],
-    img: ['src', 'alt', 'title', 'loading'],
-    '*': ['class']
-  },
-  // Only http(s), protocol-relative, and mailto — blocks javascript:/data: URIs.
-  allowedSchemes: ['http', 'https', 'mailto'],
-  transformTags: {
-    // External links open safely; internal ones stay in-tab.
-    a: (tagName, attribs) => {
-      const href = attribs.href || '';
-      const external = /^https?:\/\//i.test(href);
-      return {
-        tagName: 'a',
-        attribs: external
-          ? { ...attribs, target: '_blank', rel: 'noopener noreferrer nofollow' }
-          : attribs
-      };
-    },
-    img: (tagName, attribs) => ({ tagName: 'img', attribs: { ...attribs, loading: 'lazy' } })
+// Open external links safely in a new tab; leave internal links in-tab.
+const defaultLinkOpen =
+  md.renderer.rules.link_open ||
+  ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options));
+md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+  const href = tokens[idx].attrGet('href') || '';
+  if (/^https?:\/\//i.test(href)) {
+    tokens[idx].attrSet('target', '_blank');
+    tokens[idx].attrSet('rel', 'noopener noreferrer nofollow');
   }
+  return defaultLinkOpen(tokens, idx, options, env, self);
+};
+
+// Lazy-load images.
+const defaultImage =
+  md.renderer.rules.image ||
+  ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options));
+md.renderer.rules.image = (tokens, idx, options, env, self) => {
+  tokens[idx].attrSet('loading', 'lazy');
+  return defaultImage(tokens, idx, options, env, self);
 };
 
 export function renderMarkdown(source) {
   if (!source) return '';
-  return sanitizeHtml(md.render(String(source)), OPTS);
+  return md.render(String(source));
 }
 
 // First ~N chars of plain text, for auto-excerpts and meta descriptions.
 export function excerptFromMarkdown(source, max = 160) {
-  const text = sanitizeHtml(md.render(String(source || '')), { allowedTags: [], allowedAttributes: {} })
+  // Render, then strip tags to plain text.
+  const text = md
+    .render(String(source || ''))
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z]+;/gi, ' ')
     .replace(/\s+/g, ' ')
     .trim();
   return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
