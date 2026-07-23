@@ -1,6 +1,7 @@
 -- ============================================================================
--- PrintUSA — Supabase schema, security policies, and storage setup
+-- Canopy Tent Co. — Supabase schema, security policies, and storage setup
 -- Run this in your Supabase project: SQL Editor → New query → paste → Run.
+-- Safe to re-run: every statement is idempotent.
 -- ============================================================================
 
 -- 1) Orders table --------------------------------------------------------------
