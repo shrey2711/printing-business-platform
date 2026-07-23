@@ -13,6 +13,7 @@ import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
+import { loadPublishedPosts } from './buildData.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
@@ -382,6 +383,52 @@ routes.push(() =>
   })
 );
 
+// ---- Blog (read published posts from Supabase at build time) ----
+const posts = await loadPublishedPosts();
+
+// Blog index
+routes.push(() => {
+  const items = posts
+    .map(
+      (p) =>
+        `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` — ${esc(p.excerpt)}` : ''}</li>`
+    )
+    .join('');
+  return render({
+    path: '/blog',
+    title: `Blog — Canopy Guides & Ideas | ${BRAND}`,
+    description: 'Guides, tips and ideas for custom printed canopy tents — sizing, print coverage, event setup and more.',
+    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>
+      <h1>Canopy guides &amp; ideas</h1>
+      <ul>${items || '<li>Posts coming soon.</li>'}</ul>`
+  });
+});
+
+// Each published post — full rendered HTML + BlogPosting JSON-LD.
+for (const p of posts) {
+  routes.push(() =>
+    render({
+      path: `/blog/${p.slug}`,
+      title: `${p.seo?.title || p.title} | ${BRAND}`,
+      description: p.seo?.description || p.excerpt,
+      body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / <span>${esc(p.title)}</span></nav>
+        <article><h1>${esc(p.title)}</h1>${p.html}</article>`,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: p.title,
+        description: p.seo?.description || p.excerpt,
+        image: p.coverUrl || undefined,
+        datePublished: p.publishedAt || undefined,
+        dateModified: p.updatedAt || undefined,
+        author: { '@type': 'Organization', name: BRAND },
+        publisher: { '@type': 'Organization', name: BRAND },
+        mainEntityOfPage: `${ORIGIN}/blog/${p.slug}`
+      }
+    })
+  );
+}
+
 for (const build of routes) {
   try {
     const html = build();
@@ -395,7 +442,7 @@ for (const build of routes) {
   }
 }
 
-console.log(`Prerendered ${count} pages.`);
+console.log(`Prerendered ${count} pages (${posts.length} blog posts).`);
 
 // ---- Sitemap: INDEXABLE pages only (city pages are noindex, so excluded) ----
 const smUrl = (loc, priority, changefreq) =>
@@ -408,6 +455,8 @@ SIZES.forEach((s) => sm.push(smUrl(`/sizes/${s.slug}`, '0.7')));
 SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));
 sm.push(smUrl('/locations', '0.6', 'monthly'));
 territories.forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
+sm.push(smUrl('/blog', '0.6', 'weekly'));
+posts.forEach((p) => sm.push(smUrl(`/blog/${p.slug}`, '0.6')));
 sm.push(smUrl('/quote', '0.4'));
 sm.push(smUrl('/contact', '0.4'));
 writeFileSync(

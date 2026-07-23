@@ -12,6 +12,8 @@ import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } f
 import { findCoupon, applyCoupon } from './data/coupons.js';
 import { currencies, BASE_CURRENCY } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
+import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
+import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
 
 dotenv.config();
 
@@ -408,6 +410,199 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   }
 
   res.json({ order: data, email });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BLOG — public read + admin CRUD (editor or admin)
+// ─────────────────────────────────────────────────────────────────────────────
+
+const slugifyTitle = (s) =>
+  String(s || '').toLowerCase().trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 80);
+
+const publicMediaUrl = (path) => {
+  if (!path || !supabaseAdmin) return null;
+  return supabaseAdmin.storage.from('media').getPublicUrl(path).data?.publicUrl || null;
+};
+
+// Shape a stored row into the public payload: rendered HTML + resolved cover URL.
+function publicPost(row) {
+  return {
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt || excerptFromMarkdown(row.body_md),
+    html: renderMarkdown(row.body_md),
+    coverUrl: publicMediaUrl(row.cover_path),
+    tags: row.tags || [],
+    seo: row.seo || {},
+    publishedAt: row.published_at,
+    updatedAt: row.updated_at
+  };
+}
+
+// Public: list published posts (newest first).
+app.get('/api/blog', async (req, res) => {
+  if (!supabaseAdmin) return res.json({ posts: [] });
+  const { data, error } = await supabaseAdmin
+    .from('blog_posts')
+    .select('*')
+    .eq('status', 'published')
+    .order('published_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ posts: (data || []).map(publicPost) });
+});
+
+// Public: a single published post by slug.
+app.get('/api/blog/:slug', async (req, res) => {
+  if (!supabaseAdmin) return res.status(404).json({ error: 'Not found.' });
+  const { data, error } = await supabaseAdmin
+    .from('blog_posts')
+    .select('*')
+    .eq('slug', req.params.slug)
+    .eq('status', 'published')
+    .maybeSingle();
+  if (error) return res.status(500).json({ error: error.message });
+  if (!data) return res.status(404).json({ error: 'Not found.' });
+  res.json({ post: publicPost(data) });
+});
+
+// Admin: list ALL posts (drafts included), newest first.
+app.get('/api/admin/blog', async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const { data, error } = await supabaseAdmin
+    .from('blog_posts')
+    .select('*')
+    .order('updated_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  const posts = (data || []).map((p) => ({ ...p, coverUrl: publicMediaUrl(p.cover_path) }));
+  res.json({ posts });
+});
+
+app.get('/api/admin/blog/:id', async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const { data, error } = await supabaseAdmin
+    .from('blog_posts')
+    .select('*')
+    .eq('id', req.params.id)
+    .maybeSingle();
+  if (error) return res.status(500).json({ error: error.message });
+  if (!data) return res.status(404).json({ error: 'Not found.' });
+  res.json({ post: { ...data, coverUrl: publicMediaUrl(data.cover_path) } });
+});
+
+// Build the DB patch from an incoming post body, and detect publish transitions.
+async function buildPostPatch(body, actorId, existing) {
+  const patch = {};
+  if (body.title !== undefined) patch.title = String(body.title).slice(0, 200);
+  if (body.excerpt !== undefined) patch.excerpt = body.excerpt ? String(body.excerpt).slice(0, 400) : null;
+  if (body.body_md !== undefined) patch.body_md = String(body.body_md);
+  if (body.cover_path !== undefined) patch.cover_path = body.cover_path || null;
+  if (body.tags !== undefined) patch.tags = Array.isArray(body.tags) ? body.tags.slice(0, 20) : [];
+  if (body.seo !== undefined && typeof body.seo === 'object') patch.seo = body.seo;
+
+  if (body.slug !== undefined) {
+    const s = slugifyTitle(body.slug) || slugifyTitle(body.title) || `post-${Date.now()}`;
+    patch.slug = s;
+  }
+
+  if (body.status !== undefined && ['draft', 'published'].includes(body.status)) {
+    patch.status = body.status;
+    const wasPublished = existing?.status === 'published';
+    if (body.status === 'published' && !wasPublished) {
+      patch.published_at = existing?.published_at || new Date().toISOString();
+    }
+  }
+  patch.updated_at = new Date().toISOString();
+  return patch;
+}
+
+app.post('/api/admin/blog', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const body = req.body || {};
+  if (!body.title) return res.status(400).json({ error: 'A title is required.' });
+
+  const patch = await buildPostPatch(body, ctx.user.id);
+  if (!patch.slug) patch.slug = slugifyTitle(body.title) || `post-${Date.now()}`;
+  patch.author_id = ctx.user.id;
+
+  const { data, error } = await supabaseAdmin.from('blog_posts').insert(patch).select().single();
+  if (error) {
+    if (error.code === '23505') return res.status(409).json({ error: 'That slug is already taken.' });
+    return res.status(500).json({ error: error.message });
+  }
+
+  let rebuild = { triggered: false, reason: 'draft' };
+  if (data.status === 'published') rebuild = await triggerRebuild();
+  res.json({ post: { ...data, coverUrl: publicMediaUrl(data.cover_path) }, rebuild });
+});
+
+app.put('/api/admin/blog/:id', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+
+  const { data: existing } = await supabaseAdmin
+    .from('blog_posts').select('*').eq('id', req.params.id).maybeSingle();
+  if (!existing) return res.status(404).json({ error: 'Not found.' });
+
+  const patch = await buildPostPatch(req.body || {}, ctx.user.id, existing);
+  const { data, error } = await supabaseAdmin
+    .from('blog_posts').update(patch).eq('id', req.params.id).select().single();
+  if (error) {
+    if (error.code === '23505') return res.status(409).json({ error: 'That slug is already taken.' });
+    return res.status(500).json({ error: error.message });
+  }
+
+  // Rebuild if the post is (or just became, or just stopped being) public — any
+  // change to a published post, or a publish/unpublish transition, affects the
+  // static site.
+  const affectsPublic = data.status === 'published' || existing.status === 'published';
+  const rebuild = affectsPublic ? await triggerRebuild() : { triggered: false, reason: 'draft' };
+  res.json({ post: { ...data, coverUrl: publicMediaUrl(data.cover_path) }, rebuild });
+});
+
+app.delete('/api/admin/blog/:id', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  const { data: existing } = await supabaseAdmin
+    .from('blog_posts').select('status').eq('id', req.params.id).maybeSingle();
+  const { error } = await supabaseAdmin.from('blog_posts').delete().eq('id', req.params.id);
+  if (error) return res.status(500).json({ error: error.message });
+  const rebuild = existing?.status === 'published' ? await triggerRebuild() : { triggered: false, reason: 'draft' };
+  res.json({ ok: true, rebuild });
+});
+
+// Upload an image to the public 'media' bucket; returns its path + public URL.
+app.post('/api/admin/media', writeLimiter, upload.single('file'), async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  if (!req.file) return res.status(400).json({ error: 'No file provided.' });
+  if (!/^image\//.test(req.file.mimetype)) return res.status(400).json({ error: 'Images only.' });
+
+  const ext = (req.file.originalname.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const path = `blog/${Date.now()}-${Math.round(Math.random() * 1e6)}.${ext}`;
+  const { error } = await supabaseAdmin.storage
+    .from('media')
+    .upload(path, req.file.buffer, { contentType: req.file.mimetype, upsert: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ path, url: publicMediaUrl(path) });
+});
+
+// Manual "rebuild the site now" button, for content changes that need baking.
+app.post('/api/admin/rebuild', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'editor');
+  if (!ctx) return;
+  if (!rebuildConfigured()) {
+    return res.status(503).json({ error: 'No deploy hook configured. Set VERCEL_DEPLOY_HOOK_URL.' });
+  }
+  const rebuild = await triggerRebuild();
+  res.json(rebuild);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

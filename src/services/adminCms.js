@@ -28,8 +28,9 @@ export const removeStaff = (userId) => req(`/api/admin/users/${userId}`, { metho
 // ── Blog ─────────────────────────────────────────────────────────────────────
 export const listPosts = () => req('/api/admin/blog').then((r) => r.posts);
 export const getPost = (id) => req(`/api/admin/blog/${id}`).then((r) => r.post);
-export const createPost = (post) => req('/api/admin/blog', { method: 'POST', body: post }).then((r) => r.post);
-export const updatePost = (id, patch) => req(`/api/admin/blog/${id}`, { method: 'PUT', body: patch }).then((r) => r.post);
+// create/update return { post, rebuild } so the editor can report the rebuild.
+export const createPost = (post) => req('/api/admin/blog', { method: 'POST', body: post });
+export const updatePost = (id, patch) => req(`/api/admin/blog/${id}`, { method: 'PUT', body: patch });
 export const deletePost = (id) => req(`/api/admin/blog/${id}`, { method: 'DELETE' });
 export const requestRebuild = () => req('/api/admin/rebuild', { method: 'POST' });
 

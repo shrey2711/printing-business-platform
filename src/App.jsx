@@ -16,6 +16,8 @@ import LocationPage from './pages/LocationPage';
 import CityPage from './pages/CityPage';
 import SizePage from './pages/SizePage';
 import SolutionPage from './pages/SolutionPage';
+import BlogIndex from './pages/BlogIndex';
+import BlogPost from './pages/BlogPost';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
 
@@ -158,6 +160,7 @@ function Footer() {
             <Link to="/products/canopy-sidewalls">Sidewalls</Link>
             <Link to="/products/canopy-replacement-tops">Replacement Tops</Link>
             <Link to="/design">Design Studio</Link>
+            <Link to="/blog">Blog</Link>
             <Link to="/locations">Locations</Link>
           </div>
         </div>
@@ -198,6 +201,8 @@ function App() {
         <Route path="/products/:slug" element={<ProductConfigurator />} />
         <Route path="/sizes/:size" element={<SizePage />} />
         <Route path="/solutions/:useCase" element={<SolutionPage />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/design" element={<DesignStudio />} />
         <Route path="/order" element={<PlaceOrderPage />} />
         <Route path="/quote" element={<QuotePage />} />
