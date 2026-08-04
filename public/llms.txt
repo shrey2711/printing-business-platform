@@ -11,18 +11,11 @@ Key facts:
 - Free shipping on orders over $99. Accounts via email login; Stripe payment and order tracking.
 - Currency switcher for USD and CAD; orders are charged in the currency they were quoted in.
 
-## Products
-- [Custom Printed Canopy Tent](/products/canopy-tents): 8x8 through 13x20, steel/aluminium/hex frames, print coverage from canopy top to top + valance + inside, up to four walls.
-- [Canopy Tent Packages](/products/canopy-packages): complete booth kits (tent, walls, weights, bag) priced below the equivalent a-la-carte build.
-- [Replacement Canopy Tops](/products/canopy-replacement-tops): a new printed top for an existing frame — no frame included.
-- [Canopy Sidewalls](/products/canopy-sidewalls): full, half, mesh, zippered door, window walls and rail skirts, sold per wall.
-- [Canopy Accessories](/products/canopy-accessories): weight bags, sandbags, stake kits, wheeled carry bags, LED light kits.
-- [Table Covers](/products/table-covers): fitted and throw covers to match a booth.
-- [Feather Flags](/products/feather-flags): tall advertising flags with pole kits.
-- [Retractable Banner Stands](/products/retractable-banner-stands): roll-up displays with printed banner and bag.
-
-## Sizes
-- [8x8](/sizes/8x8), [10x10](/sizes/10x10), [10x15](/sizes/10x15), [10x20](/sizes/10x20), [13x13](/sizes/13x13), [13x20](/sizes/13x20)
+## Products (three sizes of custom printed canopy tent)
+- [10' x 10' Canopy Tent](/products/canopy-tent-10x10): from $835 (1-2 units), $799 each at 3+. Add 1-3 walls at $275/wall.
+- [10' x 15' Canopy Tent](/products/canopy-tent-10x15): from $1375 (1-2 units), $1250 each at 3+. Add 1-3 walls at $365/wall.
+- [10' x 20' Canopy Tent](/products/canopy-tent-10x20): from $1635 (1-2 units), $1445 each at 3+. Add 1-3 walls at $365/wall.
+- Walls are half or full (same price). All prices USD.
 
 ## Use cases
 - [Vendor & market tents](/solutions/vendor-market-tents), [trade show tents](/solutions/trade-show-tents), [sports & tailgate tents](/solutions/sports-team-tents), [food truck tents](/solutions/food-truck-tents), [church & school tents](/solutions/church-school-tents), [job site tents](/solutions/job-site-tents)

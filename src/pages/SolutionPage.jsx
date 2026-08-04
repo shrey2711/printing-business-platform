@@ -4,10 +4,10 @@ import CanopyPreview from '../components/CanopyPreview';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 const whatToOrder = [
-  { to: '/products/canopy-tents', title: 'Custom printed canopy tent', copy: 'Configure size, frame, print coverage and walls from scratch.' },
-  { to: '/products/canopy-packages', title: 'Canopy packages', copy: 'Tent, walls and weights bundled below the à-la-carte price.' },
-  { to: '/products/canopy-sidewalls', title: 'Sidewalls', copy: 'Add weather protection, privacy and more branding surface.' },
-  { to: '/products/canopy-accessories', title: 'Accessories', copy: 'Weights, stakes, wheeled bags and LED lighting.' }
+  { to: '/products', title: 'Custom printed canopy tent', copy: 'Configure size, frame, print coverage and walls from scratch.' },
+  { to: '/products', title: 'Canopy packages', copy: 'Tent, walls and weights bundled below the à-la-carte price.' },
+  { to: '/products', title: 'Sidewalls', copy: 'Add weather protection, privacy and more branding surface.' },
+  { to: '/products', title: 'Accessories', copy: 'Weights, stakes, wheeled bags and LED lighting.' }
 ];
 
 export default function SolutionPage() {
@@ -23,7 +23,7 @@ export default function SolutionPage() {
     return (
       <main className="page">
         <p className="muted">We couldn't find that page.</p>
-        <Link className="btn btn-outline" to="/products/canopy-tents">Browse canopy tents</Link>
+        <Link className="btn btn-outline" to="/products">Browse canopy tents</Link>
       </main>
     );
   }
@@ -44,7 +44,7 @@ export default function SolutionPage() {
             how often it goes up and how much branding you need.
           </p>
           <div className="hero-actions">
-            <Link className="btn btn-red" to="/products/canopy-tents">Build your canopy</Link>
+            <Link className="btn btn-red" to="/products">Build your canopy</Link>
             <Link className="btn btn-outline" to="/quote">Ask about bulk orders</Link>
           </div>
         </div>

@@ -7,13 +7,7 @@
 // All prices are illustrative wholesale rates and are easy to tune in one place.
 
 // Active categories for the canopy storefront.
-export const categories = [
-  { id: 'tents', name: 'Canopy Tents' },
-  { id: 'packages', name: 'Packages' },
-  { id: 'walls', name: 'Sidewalls' },
-  { id: 'accessories', name: 'Accessories' },
-  { id: 'events', name: 'Event Add-ons' }
-];
+export const categories = [{ id: 'tents', name: 'Canopy Tents' }];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
 // `categories` when expanding back beyond canopies — the products themselves
@@ -34,30 +28,80 @@ export const navGroups = [
   {
     name: 'Canopy Tents',
     items: [
-      { name: 'Custom Printed Canopy', slug: 'canopy-tents' },
-      { name: 'Canopy Packages', slug: 'canopy-packages' },
-      { name: 'Replacement Tops', slug: 'canopy-replacement-tops' }
-    ]
-  },
-  {
-    name: 'Walls & Sidewalls',
-    items: [{ name: 'Canopy Sidewalls', slug: 'canopy-sidewalls' }]
-  },
-  {
-    name: 'Accessories',
-    items: [{ name: 'Weights, Stakes & Bags', slug: 'canopy-accessories' }]
-  },
-  {
-    name: 'Event Add-ons',
-    items: [
-      { name: 'Table Covers & Throws', slug: 'table-covers' },
-      { name: 'Feather & Teardrop Flags', slug: 'feather-flags' },
-      { name: 'Retractable Banner Stands', slug: 'retractable-banner-stands' }
+      { name: "10' × 10' Canopy Tent", slug: 'canopy-tent-10x10' },
+      { name: "10' × 15' Canopy Tent", slug: 'canopy-tent-10x15' },
+      { name: "10' × 20' Canopy Tent", slug: 'canopy-tent-10x20' }
     ]
   }
 ];
 
+// Shared pricing pieces for the three sizes. Prices are USD, from the supplied
+// rate card. quantityTiers: 1-2 units vs 3+ units (tent price drops at 3+).
+// Walls are an add-on; half or full wall cost the same.
+const wallGroup = (per) => ({
+  id: 'walls',
+  label: 'Walls',
+  type: 'select',
+  pricing: 'add',
+  help: 'Half or full walls cost the same. Choose the wall style below.',
+  choices: [
+    { id: 'none', label: 'No walls', price: 0, default: true },
+    { id: '1', label: '1 wall', price: per },
+    { id: '2', label: '2 walls', price: per * 2 },
+    { id: '3', label: '3 walls', price: per * 3 }
+  ]
+});
+
+const wallStyleGroup = {
+  id: 'wallStyle',
+  label: 'Wall style',
+  type: 'select',
+  pricing: 'multiplier', // mult 1 both — spec only, no price change
+  help: 'Same price either way.',
+  choices: [
+    { id: 'full', label: 'Full walls', mult: 1, default: true },
+    { id: 'half', label: 'Half walls', mult: 1 }
+  ]
+};
+
+const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
+  slug,
+  active: true,
+  name: `${size} Canopy Tent`,
+  category: 'tents',
+  badge: 'Custom Printed',
+  emoji: '⛺',
+  tagline: `Custom printed ${size} pop-up canopy tent, full-colour dye sublimation.`,
+  description:
+    `A commercial-grade ${size} pop-up canopy printed edge to edge in full colour. Add up to three ` +
+    `printed walls. Dye sublimation bonds the ink into the fabric, so graphics will not crack, peel ` +
+    `or fade. Order 3 or more and the per-tent price drops.`,
+  features: [
+    'Dye-sublimated full-bleed printing',
+    'Up to 3 printed walls (half or full)',
+    'Sets up in minutes, no tools',
+    'Free artwork proof before production'
+  ],
+  turnaround: 'Ships in 6–8 business days',
+  pricing: {
+    model: 'configured',
+    baseLabel: `${size} canopy tent`,
+    quantityTiers: [
+      { min: 1, price: tier1 },
+      { min: 3, price: tier3 }
+    ],
+    optionGroups: [wallGroup(wallPer), wallStyleGroup]
+  }
+});
+
+const canopyTents = [
+  canopyProduct({ slug: 'canopy-tent-10x10', size: "10' × 10'", tier1: 835, tier3: 799, wallPer: 275 }),
+  canopyProduct({ slug: 'canopy-tent-10x15', size: "10' × 15'", tier1: 1375, tier3: 1250, wallPer: 365 }),
+  canopyProduct({ slug: 'canopy-tent-10x20', size: "10' × 20'", tier1: 1635, tier3: 1445, wallPer: 365 })
+];
+
 const products = [
+  ...canopyTents,
   {
     slug: 'vinyl-banners',
     active: false,
@@ -255,6 +299,7 @@ const products = [
   },
   {
     slug: 'feather-flags',
+    active: false,
     name: 'Feather Flags',
     category: 'events',
     badge: 'Eye Catching',
@@ -284,6 +329,7 @@ const products = [
   },
   {
     slug: 'retractable-banner-stands',
+    active: false,
     name: 'Retractable Banner Stands',
     category: 'events',
     badge: 'Reusable',
@@ -312,6 +358,7 @@ const products = [
   },
   {
     slug: 'table-covers',
+    active: false,
     name: 'Table Covers',
     category: 'events',
     badge: 'Trade Show',
@@ -350,6 +397,7 @@ const products = [
     // Slug deliberately unchanged from the old product so the already-indexed
     // /products/canopy-tents URL and its inbound links keep working.
     slug: 'canopy-tents',
+    active: false,
     name: 'Custom Printed Canopy Tent',
     category: 'tents',
     badge: 'Best Seller',
@@ -444,6 +492,7 @@ const products = [
   },
   {
     slug: 'canopy-packages',
+    active: false,
     name: 'Canopy Tent Packages',
     category: 'packages',
     badge: 'Best Value',
@@ -514,6 +563,7 @@ const products = [
   },
   {
     slug: 'canopy-replacement-tops',
+    active: false,
     name: 'Replacement Canopy Tops',
     category: 'tents',
     badge: 'Fits Most Frames',
@@ -574,6 +624,7 @@ const products = [
   },
   {
     slug: 'canopy-sidewalls',
+    active: false,
     name: 'Canopy Sidewalls',
     category: 'walls',
     badge: 'Sold Separately',
@@ -635,6 +686,7 @@ const products = [
   },
   {
     slug: 'canopy-accessories',
+    active: false,
     name: 'Canopy Accessories',
     category: 'accessories',
     badge: 'Add-ons',
@@ -1495,9 +1547,16 @@ function estimateStartingPrice(pricing) {
     // Cheapest reachable build: smallest base, lowest multiplier on every axis,
     // no add-ons. A genuine floor for "from $X".
     const groups = pricing.optionGroups || [];
-    const baseGroup = groups.find((g) => g.pricing === 'base');
-    const bases = (baseGroup?.choices || []).map((c) => Number(c.price)).filter(Number.isFinite);
-    let price = bases.length ? Math.min(...bases) : 0;
+    let price;
+    if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
+      // "From" = the single-unit (lowest-min) tier price, what a shopper sees first.
+      const entry = pricing.quantityTiers.reduce((a, b) => (b.min < a.min ? b : a));
+      price = Number(entry.price) || 0;
+    } else {
+      const baseGroup = groups.find((g) => g.pricing === 'base');
+      const bases = (baseGroup?.choices || []).map((c) => Number(c.price)).filter(Number.isFinite);
+      price = bases.length ? Math.min(...bases) : 0;
+    }
     for (const g of groups) {
       if (g.pricing !== 'multiplier') continue;
       const mults = (g.choices || []).map((c) => Number(c.mult)).filter(Number.isFinite);

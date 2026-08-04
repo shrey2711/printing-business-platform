@@ -25,13 +25,12 @@ import { useCurrency } from './context/CurrencyContext';
 const DesignStudio = lazy(() => import('./pages/DesignStudio'));
 
 const topNav = [
-  { label: 'Canopy Tents', to: '/products/canopy-tents' },
-  { label: 'Packages', to: '/products/canopy-packages' },
-  { label: 'Sidewalls', to: '/products/canopy-sidewalls' },
-  { label: 'Replacement Tops', to: '/products/canopy-replacement-tops' },
-  { label: 'Accessories', to: '/products/canopy-accessories' },
-  { label: 'All Products', to: '/products' },
-  { label: 'Design Studio', to: '/design' }
+  { label: 'All Canopies', to: '/products' },
+  { label: "10' × 10'", to: '/products/canopy-tent-10x10' },
+  { label: "10' × 15'", to: '/products/canopy-tent-10x15' },
+  { label: "10' × 20'", to: '/products/canopy-tent-10x20' },
+  { label: 'Design Studio', to: '/design' },
+  { label: 'Blog', to: '/blog' }
 ];
 
 function CurrencySwitch() {
@@ -155,10 +154,10 @@ function Footer() {
         <div>
           <h4>Shop</h4>
           <div className="ft-links">
-            <Link to="/products/canopy-tents">Custom Canopy Tents</Link>
-            <Link to="/products/canopy-packages">Canopy Packages</Link>
-            <Link to="/products/canopy-sidewalls">Sidewalls</Link>
-            <Link to="/products/canopy-replacement-tops">Replacement Tops</Link>
+            <Link to="/products">All Canopy Tents</Link>
+            <Link to="/products/canopy-tent-10x10">10' × 10' Canopy</Link>
+            <Link to="/products/canopy-tent-10x15">10' × 15' Canopy</Link>
+            <Link to="/products/canopy-tent-10x20">10' × 20' Canopy</Link>
             <Link to="/design">Design Studio</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/locations">Locations</Link>

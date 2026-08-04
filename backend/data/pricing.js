@@ -53,13 +53,23 @@ export function computePrice(input, opts = {}) {
     const groups = pricing.optionGroups || [];
     const chosen = {};
 
-    // 1. Base — e.g. tent size.
-    const baseGroup = groups.find((g) => g.pricing === 'base');
-    const baseChoice = pickChoice(baseGroup, selections[baseGroup?.id]);
-    let running = baseChoice ? Number(baseChoice.price) || 0 : 0;
-    if (baseGroup && baseChoice) {
-      chosen[baseGroup.id] = baseChoice.label || baseChoice.id;
-      breakdown.push({ label: `${baseGroup.label} — ${baseChoice.label}`, amount: round2(running) });
+    // 1. Base. Two ways to set it:
+    //    a) quantityTiers: base price changes by order quantity (e.g. 1-2 units
+    //       vs 3+ units). The tier IS the volume discount — no % discount added.
+    //    b) a base option group where the customer picks (e.g. tent size).
+    let running = 0;
+    if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
+      const tier = pickTier(pricing.quantityTiers, qty);
+      running = Number(tier.price) || 0;
+      breakdown.push({ label: `${pricing.baseLabel || 'Base price'}${tier.min > 1 ? ` (${tier.min}+ units)` : ''}`, amount: round2(running) });
+    } else {
+      const baseGroup = groups.find((g) => g.pricing === 'base');
+      const baseChoice = pickChoice(baseGroup, selections[baseGroup?.id]);
+      running = baseChoice ? Number(baseChoice.price) || 0 : 0;
+      if (baseGroup && baseChoice) {
+        chosen[baseGroup.id] = baseChoice.label || baseChoice.id;
+        breakdown.push({ label: `${baseGroup.label} — ${baseChoice.label}`, amount: round2(running) });
+      }
     }
 
     // 2. Multipliers — e.g. frame grade, print coverage.
@@ -75,9 +85,24 @@ export function computePrice(input, opts = {}) {
       breakdown.push({ label: `${g.label} — ${choice.label}`, amount: round2(running - before) });
     }
 
-    // 3. Add-ons — e.g. walls, weights, lighting.
+    // 3. Add-ons. A 'select' add group adds the chosen option's price once
+    //    (e.g. walls: none/1/2/3). A 'multi' add group adds each picked option
+    //    times its count (e.g. accessories).
     for (const g of groups) {
       if (g.pricing !== 'add') continue;
+
+      if (g.type === 'select') {
+        const choice = pickChoice(g, selections[g.id]);
+        if (!choice) continue;
+        chosen[g.id] = choice.label || choice.id;
+        const amt = Number(choice.price) || 0;
+        if (amt) {
+          running += amt;
+          breakdown.push({ label: `${g.label} — ${choice.label}`, amount: round2(amt) });
+        }
+        continue;
+      }
+
       const picked = pickMulti(g, selections[g.id]);
       if (picked.length) {
         chosen[g.id] = picked.map((p) => (p.count > 1 ? `${p.choice.label} x${p.count}` : p.choice.label)).join(', ');
@@ -113,7 +138,9 @@ export function computePrice(input, opts = {}) {
     });
   }
 
-  const discount = getQuantityDiscount(qty);
+  // quantityTiers already price in the volume break, so don't stack a % discount.
+  const usesTiers = pricing.model === 'configured' && Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length;
+  const discount = usesTiers ? 0 : getQuantityDiscount(qty);
   const unitPrice = round2(perPieceGoods);
   const goodsSubtotal = perPieceGoods * qty;
   const discountAmount = goodsSubtotal * discount;
@@ -211,6 +238,15 @@ function pickMulti(group, value) {
     for (const c of group.choices) if (c.default) add(c.id, 1);
   }
   return out;
+}
+
+// Pick the pricing tier for an order quantity: the highest `min` that is <= qty.
+function pickTier(tiers, qty) {
+  let chosen = tiers[0];
+  for (const t of tiers) {
+    if (qty >= t.min && t.min >= (chosen?.min ?? 0)) chosen = t;
+  }
+  return chosen || { min: 1, price: 0 };
 }
 
 function pickMaterial(materials = [], id) {

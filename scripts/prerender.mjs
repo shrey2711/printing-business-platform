@@ -29,13 +29,10 @@ const esc = (s = '') =>
 // Shared crawlable navigation, on every prerendered page.
 const NAV = `<nav aria-label="Primary">
   <a href="/">Home</a>
-  <a href="/products">All Products</a>
-  <a href="/products/canopy-tents">Custom Canopy Tents</a>
-  <a href="/products/canopy-packages">Canopy Packages</a>
-  <a href="/products/canopy-sidewalls">Sidewalls</a>
-  <a href="/products/canopy-replacement-tops">Replacement Tops</a>
-  <a href="/products/canopy-accessories">Accessories</a>
-  ${SIZES.map((s) => `<a href="/sizes/${s.slug}">${s.slug} canopy tent</a>`).join('\n  ')}
+  <a href="/products">All Canopy Tents</a>
+  <a href="/products/canopy-tent-10x10">10x10 Canopy Tent</a>
+  <a href="/products/canopy-tent-10x15">10x15 Canopy Tent</a>
+  <a href="/products/canopy-tent-10x20">10x20 Canopy Tent</a>
   <a href="/design">Design Studio</a>
   <a href="/locations">Locations</a>
   <a href="/quote">Get a Quote</a>
@@ -147,8 +144,8 @@ for (const size of SIZES) {
         <li>Walls — full, half, mesh, zippered door and rail skirts, up to four per tent</li>
         <li>Accessories — weight bags, stake kits, wheeled carry bags and LED lighting</li>
       </ul>
-      <p><a href="/products/canopy-tents">Configure a ${esc(size.label)} canopy tent</a> or
-      <a href="/products/canopy-packages">see complete packages</a>.</p>
+      <p><a href="/products">Configure a ${esc(size.label)} canopy tent</a> or
+      <a href="/products">see complete packages</a>.</p>
       <h2>Other sizes</h2>
       <ul>${others.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a></li>`).join('')}</ul>
       <h2>Common uses</h2>
@@ -184,10 +181,10 @@ for (const sol of SOLUTIONS) {
       <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
       <h2>What to order</h2>
       <ul>
-        <li><a href="/products/canopy-tents">Custom printed canopy tent</a> — configure from scratch</li>
-        <li><a href="/products/canopy-packages">Canopy packages</a> — tent, walls and weights bundled</li>
-        <li><a href="/products/canopy-sidewalls">Sidewalls</a> — add weather protection and branding</li>
-        <li><a href="/products/canopy-accessories">Accessories</a> — weights, stakes, bags and lighting</li>
+        <li><a href="/products">Custom printed canopy tent</a> — configure from scratch</li>
+        <li><a href="/products">Canopy packages</a> — tent, walls and weights bundled</li>
+        <li><a href="/products">Sidewalls</a> — add weather protection and branding</li>
+        <li><a href="/products">Accessories</a> — weights, stakes, bags and lighting</li>
       </ul>
       <h2>Other uses</h2>
       <ul>${others.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;

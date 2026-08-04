@@ -23,7 +23,7 @@ export default function SizePage() {
     return (
       <main className="page">
         <p className="muted">We don't print that size.</p>
-        <Link className="btn btn-outline" to="/products/canopy-tents">See available sizes</Link>
+        <Link className="btn btn-outline" to="/products">See available sizes</Link>
       </main>
     );
   }
@@ -44,8 +44,8 @@ export default function SizePage() {
             priced instantly — pick your options and the total updates as you go.
           </p>
           <div className="hero-actions">
-            <Link className="btn btn-red" to="/products/canopy-tents">Configure a {size.label} tent</Link>
-            <Link className="btn btn-outline" to="/products/canopy-packages">See packages</Link>
+            <Link className="btn btn-red" to="/products">Configure a {size.label} tent</Link>
+            <Link className="btn btn-outline" to="/products">See packages</Link>
           </div>
         </div>
         <div className="landing-art">

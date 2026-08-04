@@ -120,7 +120,7 @@ export default function ProductConfigurator() {
           <div className="config-hero-thumb">
             {isConfigured && hasCanopyShape(p) ? (
               <CanopyPreview
-                size={sel.size || sel.length}
+                size={product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : (sel.size || sel.length)}
                 frame={sel.frame}
                 print={sel.print}
                 walls={countWalls(sel.walls)}
@@ -406,12 +406,15 @@ function multiplierHint(mult) {
 
 function hasCanopyShape(pricing) {
   const ids = (pricing.optionGroups || []).map((g) => g.id);
-  return ids.includes('print') && (ids.includes('size') || ids.includes('length'));
+  return ids.includes('walls') || (ids.includes('print') && (ids.includes('size') || ids.includes('length')));
 }
 
+// Walls may be a select ('none'/'1'/'2'/'3') or a multi ({id: count}).
 function countWalls(wallSelection) {
-  if (!wallSelection || typeof wallSelection !== 'object') return 0;
-  return Object.values(wallSelection).reduce((n, v) => n + (Number(v) || 0), 0);
+  if (wallSelection == null) return 0;
+  if (typeof wallSelection === 'string') return Number(wallSelection) || 0;
+  if (typeof wallSelection === 'object') return Object.values(wallSelection).reduce((n, v) => n + (Number(v) || 0), 0);
+  return Number(wallSelection) || 0;
 }
 
 function buildDefaultConfig(product) {
