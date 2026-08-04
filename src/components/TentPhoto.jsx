@@ -7,7 +7,7 @@ import CanopyPreview from './CanopyPreview';
 // never shows a broken image before the photos are uploaded.
 export default function TentPhoto({ size, walls = 1, label }) {
   const n = Math.min(3, Math.max(1, Number(walls) || 1)); // no 0-wall photo → show 1-wall
-  const src = `/images/tents/${size}-${n}wall.png`;
+  const src = `/images/tents/${size}-${n}wall.webp`;
   const [broken, setBroken] = useState(false);
 
   // Retry when the src changes (size/wall switch in the configurator).
