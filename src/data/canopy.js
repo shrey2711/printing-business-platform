@@ -3,13 +3,12 @@
 // drift apart. Plain ESM, no React imports — the prerender script imports it
 // directly (same pattern as src/data/states.js).
 
+// Only the three sizes we sell. Each /sizes/:slug landing page links to its
+// matching product.
 export const SIZES = [
-  { slug: '8x8', label: "8' × 8'", blurb: 'The compact footprint — fits tighter market stalls and single-vendor pitches.' },
-  { slug: '10x10', label: "10' × 10'", blurb: 'The standard vendor booth, and the size most event organisers allocate by default.' },
-  { slug: '10x15', label: "10' × 15'", blurb: 'Half again the width, for when one table is not enough.' },
-  { slug: '10x20', label: "10' × 20'", blurb: 'A double booth under one roof — the widest single-canopy span most shows allow.' },
-  { slug: '13x13', label: "13' × 13'", blurb: 'A larger square footprint with more usable shade than a 10x10.' },
-  { slug: '13x20', label: "13' × 20'", blurb: 'The largest pop-up we print — maximum covered area and branding surface.' }
+  { slug: '10x10', label: "10' × 10'", blurb: 'The standard vendor booth, and the size most event organisers allocate by default.', product: 'canopy-tent-10x10' },
+  { slug: '10x15', label: "10' × 15'", blurb: 'Half again the width, for when one table is not enough.', product: 'canopy-tent-10x15' },
+  { slug: '10x20', label: "10' × 20'", blurb: 'A double booth under one roof — the widest single-canopy span most shows allow.', product: 'canopy-tent-10x20' }
 ];
 
 export const SOLUTIONS = [
