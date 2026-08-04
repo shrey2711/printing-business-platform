@@ -5,15 +5,18 @@ import { useMoney } from '../context/CurrencyContext';
 
 // Catalog card: corner ribbon, product mockup, bullet specs and a
 // "Starting at $X" footer in the visitor's selected currency.
-// `previewSize` (e.g. "10x20") renders the canopy preview instead of ProductArt.
+// Canopy products (slug canopy-tent-<size>) show their photo automatically;
+// `previewSize` can override the detected size.
 export default function ProductCard({ product, previewSize }) {
   const money = useMoney();
+  // Auto-detect the tent size from the slug so the photo shows on every page.
+  const size = previewSize || (product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : null);
   return (
     <Link className="pcard" to={`/products/${product.slug}`}>
       <div className="pcard-media">
         {product.badge ? <span className="pcard-ribbon">{product.badge}</span> : null}
-        {previewSize ? (
-          <TentPhoto size={previewSize} walls={1} label={product.name} />
+        {size ? (
+          <TentPhoto size={size} walls={1} label={product.name} />
         ) : (
           <ProductArt slug={product.slug} />
         )}
