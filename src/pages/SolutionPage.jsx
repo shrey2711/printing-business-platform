@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { SIZES, SOLUTIONS, getSolution } from '../data/canopy';
-import CanopyPreview from '../components/CanopyPreview';
+import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 const whatToOrder = [
@@ -49,7 +49,7 @@ export default function SolutionPage() {
           </div>
         </div>
         <div className="landing-art">
-          <CanopyPreview size="10x10" print="top-valance" walls={2} label={solution.title} />
+          <TentPhoto size="10x10" walls={2} label={solution.title} />
         </div>
       </div>
 
@@ -60,7 +60,7 @@ export default function SolutionPage() {
         <div className="size-grid">
           {SIZES.map((s) => (
             <Link className="size-card" to={`/sizes/${s.slug}`} key={s.slug}>
-              <CanopyPreview size={s.slug} print="top" walls={0} label={`${s.label} canopy`} />
+              <TentPhoto size={s.slug} walls={1} label={`${s.label} canopy`} />
               <div className="size-card-body">
                 <strong>{s.label}</strong>
                 <span>View</span>

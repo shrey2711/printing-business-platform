@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { SIZES, SOLUTIONS, getSize } from '../data/canopy';
-import CanopyPreview from '../components/CanopyPreview';
+import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 const configurable = [
@@ -49,7 +49,7 @@ export default function SizePage() {
           </div>
         </div>
         <div className="landing-art">
-          <CanopyPreview size={size.slug} print="top-valance" walls={1} label={`${size.label} canopy tent`} />
+          <TentPhoto size={size.slug} walls={1} label={`${size.label} canopy tent`} />
         </div>
       </div>
 
@@ -74,7 +74,7 @@ export default function SizePage() {
         <div className="size-grid">
           {others.map((s) => (
             <Link className="size-card" to={`/sizes/${s.slug}`} key={s.slug}>
-              <CanopyPreview size={s.slug} print="top" walls={0} label={`${s.label} canopy`} />
+              <TentPhoto size={s.slug} walls={1} label={`${s.label} canopy`} />
               <div className="size-card-body">
                 <strong>{s.label}</strong>
                 <span>View</span>
