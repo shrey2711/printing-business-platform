@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
-import CanopyPreview from '../components/CanopyPreview';
+import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useContentResolver } from '../context/ContentContext';
 import { brand } from '../config/brand';
@@ -66,7 +66,7 @@ export default function HomePage() {
             </ul>
           </div>
           <div className="hero-art">
-            <CanopyPreview size="10x20" print="top-valance" walls={2} label="Custom printed canopy tent" />
+            <TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" />
           </div>
         </div>
       </section>
