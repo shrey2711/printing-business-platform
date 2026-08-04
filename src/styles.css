@@ -244,6 +244,10 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
   box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
 .art-svg { display: block; width: 100%; height: auto; }
+/* Real tent product photos (white studio bg → contain, not crop). */
+.tent-photo { display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.pcard-media .tent-photo { aspect-ratio: 4 / 3; }
+.config-hero-thumb .tent-photo { aspect-ratio: 4 / 3; width: 100%; }
 .pcard-body { padding: 0.9rem 1rem 0.5rem; flex: 1; }
 .pcard-body h3 { margin: 0 0 0.5rem; font-size: 1.15rem; font-weight: 700; }
 .pcard-specs { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }

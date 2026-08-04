@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProduct, getPrice } from '../services/api';
 import ProductArt from '../components/ProductArt';
-import CanopyPreview from '../components/CanopyPreview';
+import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 
@@ -119,12 +119,10 @@ export default function ProductConfigurator() {
         <div className="config-visual">
           <div className="config-hero-thumb">
             {isConfigured && hasCanopyShape(p) ? (
-              <CanopyPreview
+              <TentPhoto
                 size={product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : (sel.size || sel.length)}
-                frame={sel.frame}
-                print={sel.print}
                 walls={countWalls(sel.walls)}
-                label={`${product.name} preview`}
+                label={`${product.name} — ${countWalls(sel.walls)} wall preview`}
               />
             ) : (
               <ProductArt slug={product.slug} />

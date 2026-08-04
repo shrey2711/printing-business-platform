@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ProductArt from './ProductArt';
-import CanopyPreview from './CanopyPreview';
+import TentPhoto from './TentPhoto';
 import { useMoney } from '../context/CurrencyContext';
 
 // Catalog card: corner ribbon, product mockup, bullet specs and a
@@ -13,7 +13,7 @@ export default function ProductCard({ product, previewSize }) {
       <div className="pcard-media">
         {product.badge ? <span className="pcard-ribbon">{product.badge}</span> : null}
         {previewSize ? (
-          <CanopyPreview size={previewSize} print="top" walls={0} label={product.name} />
+          <TentPhoto size={previewSize} walls={1} label={product.name} />
         ) : (
           <ProductArt slug={product.slug} />
         )}
