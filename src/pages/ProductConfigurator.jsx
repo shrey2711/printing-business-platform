@@ -210,7 +210,9 @@ export default function ProductConfigurator() {
                           <span className="choice-meta">
                             {group.pricing === 'base'
                               ? money(choice.price)
-                              : multiplierHint(choice.mult)}
+                              : group.pricing === 'add'
+                                ? (Number(choice.price) ? `+${money(choice.price)}` : 'Included')
+                                : multiplierHint(choice.mult)}
                           </span>
                         </button>
                       );
