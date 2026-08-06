@@ -198,13 +198,19 @@ export default function ProductConfigurator() {
                     {group.choices.map((choice) => {
                       const activeChoice =
                         (sel[group.id] || defaultChoiceId(group)) === choice.id;
+                      // Combined cap (e.g. full + half walls <= 3): disable a
+                      // choice that would push the group total over the limit.
+                      const allowed = allowedForGroup(p.constraints, sel, group.id);
+                      const disabled = allowed != null && (Number(choice.id) || 0) > allowed;
                       return (
                         <button
                           type="button"
                           key={choice.id}
                           className={`choice-card ${activeChoice ? 'choice-active' : ''}`}
                           aria-pressed={activeChoice}
-                          onClick={() => setSelect(group.id, choice.id)}
+                          disabled={disabled}
+                          title={disabled ? 'Max 3 walls total (full + half)' : undefined}
+                          onClick={() => !disabled && setSelect(group.id, choice.id)}
                         >
                           <span className="choice-label">{choice.label}</span>
                           <span className="choice-meta">
@@ -402,6 +408,18 @@ function multiplierHint(mult) {
   if (!Number.isFinite(m) || m === 1) return 'Included';
   const pct = Math.round((m - 1) * 100);
   return pct > 0 ? `+${pct}%` : `${pct}%`;
+}
+
+// Max count this group may take given a combined-cap constraint and the other
+// groups' current selections. Returns null if the group isn't constrained.
+function allowedForGroup(constraints, sel, groupId) {
+  if (!Array.isArray(constraints)) return null;
+  const con = constraints.find((c) => c.groups.includes(groupId));
+  if (!con) return null;
+  const others = con.groups
+    .filter((g) => g !== groupId)
+    .reduce((n, g) => n + (Number(sel[g]) || 0), 0);
+  return Math.max(0, con.max - others);
 }
 
 function hasCanopyShape(pricing) {

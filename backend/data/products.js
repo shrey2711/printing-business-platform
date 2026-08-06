@@ -90,6 +90,9 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
       { min: 1, price: tier1 },
       { min: 3, price: tier3 }
     ],
+    // Full + half walls together cannot exceed 3 (a tent has 3 open sides +
+    // the back). Enforced in the configurator UI and clamped server-side.
+    constraints: [{ groups: ['wallsFull', 'wallsHalf'], max: 3 }],
     optionGroups: [
       wallSelect('wallsFull', 'Full walls', wallPer),
       wallSelect('wallsHalf', 'Half walls', wallPer),

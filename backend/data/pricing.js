@@ -49,7 +49,10 @@ export function computePrice(input, opts = {}) {
     // Multi-axis configuration (canopy tents): one base group sets the starting
     // price, any number of multiplier groups scale it, and additive groups bolt
     // on extras with their own quantities.
-    const selections = input.selections && typeof input.selections === 'object' ? input.selections : {};
+    const rawSelections = input.selections && typeof input.selections === 'object' ? input.selections : {};
+    // Enforce combined caps (e.g. full + half walls <= 3) so a crafted request
+    // can never price an impossible configuration.
+    const selections = applyConstraints(pricing.constraints, rawSelections);
     const groups = pricing.optionGroups || [];
     const chosen = {};
 
@@ -252,6 +255,25 @@ function pickMulti(group, value) {
     for (const c of group.choices) if (c.default) add(c.id, 1);
   }
   return out;
+}
+
+// Clamp numeric select groups so their combined value stays within a cap.
+// Reduces from the LAST group listed first (e.g. keep full walls, trim half).
+function applyConstraints(constraints, selections) {
+  if (!Array.isArray(constraints) || !constraints.length) return selections;
+  const s = { ...selections };
+  for (const con of constraints) {
+    let total = con.groups.reduce((n, g) => n + (Number(s[g]) || 0), 0);
+    for (let i = con.groups.length - 1; i >= 0 && total > con.max; i--) {
+      const g = con.groups[i];
+      const count = Number(s[g]) || 0;
+      const reduce = Math.min(count, total - con.max);
+      const next = count - reduce;
+      total -= reduce;
+      s[g] = next > 0 ? String(next) : 'none';
+    }
+  }
+  return s;
 }
 
 // Pick the pricing tier for an order quantity: the highest `min` that is <= qty.
