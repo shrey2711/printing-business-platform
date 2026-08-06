@@ -367,6 +367,7 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .bulk-row span:last-child { font-weight: 600; color: var(--ink); }
 .bulk-active { background: #fdeef0; }
 .bulk-active span { color: var(--red-dark) !important; font-weight: 700; }
+.notes-input { width: 100%; min-height: 90px; resize: vertical; }
 .choice-card.choice-active {
   border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); background: #f4f9fd;
 }

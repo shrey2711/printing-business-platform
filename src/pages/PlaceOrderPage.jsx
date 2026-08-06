@@ -10,7 +10,7 @@ export default function PlaceOrderPage() {
   const navigate = useNavigate();
   const incoming = location.state || {};
 
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes] = useState(incoming.notes || '');
   const [file, setFile] = useState(null);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);

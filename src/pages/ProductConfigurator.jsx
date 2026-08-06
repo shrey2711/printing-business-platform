@@ -90,6 +90,7 @@ export default function ProductConfigurator() {
     specs: describeConfig(product, config),
     estimatedPrice: price ? money(price.total) : '',
     currency,
+    notes: config.notes || '',
     // Raw pricing config so the server can re-price authoritatively at checkout.
     config: { slug, ...config }
   });
@@ -349,6 +350,16 @@ export default function ProductConfigurator() {
                 </div>
               )}
             </div>
+          </div>
+
+          <div className="field">
+            <label>Specific instructions (optional)</label>
+            <textarea
+              className="notes-input"
+              placeholder="Anything we should know? Colours to match, deadline, artwork notes…"
+              value={config.notes || ''}
+              onChange={(e) => setConfig({ ...config, notes: e.target.value })}
+            />
           </div>
         </div>
 
