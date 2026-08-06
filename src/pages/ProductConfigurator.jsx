@@ -121,8 +121,8 @@ export default function ProductConfigurator() {
             {isConfigured && hasCanopyShape(p) ? (
               <TentPhoto
                 size={product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : (sel.size || sel.length)}
-                walls={countWalls(sel.walls)}
-                label={`${product.name} — ${countWalls(sel.walls)} wall preview`}
+                walls={countWalls(sel.wallsFull) + countWalls(sel.wallsHalf) + countWalls(sel.walls)}
+                label={`${product.name} preview`}
               />
             ) : (
               <ProductArt slug={product.slug} />
@@ -406,7 +406,7 @@ function multiplierHint(mult) {
 
 function hasCanopyShape(pricing) {
   const ids = (pricing.optionGroups || []).map((g) => g.id);
-  return ids.includes('walls') || (ids.includes('print') && (ids.includes('size') || ids.includes('length')));
+  return ids.includes('wallsFull') || ids.includes('walls') || (ids.includes('print') && (ids.includes('size') || ids.includes('length')));
 }
 
 // Walls may be a select ('none'/'1'/'2'/'3') or a multi ({id: count}).

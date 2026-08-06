@@ -36,31 +36,31 @@ export const navGroups = [
 ];
 
 // Shared pricing pieces for the three sizes. Prices are USD, from the supplied
-// rate card. quantityTiers: 1-2 units vs 3+ units (tent price drops at 3+).
-// Walls are an add-on; half or full wall cost the same.
-const wallGroup = (per) => ({
-  id: 'walls',
-  label: 'Walls',
+// rate card (which is the 6–8 day price). quantityTiers: 1-2 units vs 3+ units.
+// Full walls and half walls are chosen INDEPENDENTLY (0-3 each) and cost the
+// same per wall. Rush delivery (2-3 days) is +50% on the whole order.
+const wallSelect = (id, label, per) => ({
+  id,
+  label,
   type: 'select',
   pricing: 'add',
-  help: 'Half or full walls cost the same. Choose the wall style below.',
   choices: [
-    { id: 'none', label: 'No walls', price: 0, default: true },
+    { id: 'none', label: 'No wall', price: 0, default: true },
     { id: '1', label: '1 wall', price: per },
     { id: '2', label: '2 walls', price: per * 2 },
     { id: '3', label: '3 walls', price: per * 3 }
   ]
 });
 
-const wallStyleGroup = {
-  id: 'wallStyle',
-  label: 'Wall style',
+const daysGroup = {
+  id: 'days',
+  label: 'Delivery',
   type: 'select',
-  pricing: 'multiplier', // mult 1 both — spec only, no price change
-  help: 'Same price either way.',
+  pricing: 'multiplyTotal',
+  help: 'Standard is 6-8 business days. Rush 2-3 days is +50%.',
   choices: [
-    { id: 'full', label: 'Full walls', mult: 1, default: true },
-    { id: 'half', label: 'Half walls', mult: 1 }
+    { id: '6-8', label: '6-8 days (standard)', mult: 1, default: true },
+    { id: '2-3', label: '2-3 days (rush +50%)', mult: 1.5 }
   ]
 };
 
@@ -73,16 +73,16 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
   emoji: '⛺',
   tagline: `Custom printed ${size} pop-up canopy tent, full-colour dye sublimation.`,
   description:
-    `A commercial-grade ${size} pop-up canopy printed edge to edge in full colour. Add up to three ` +
-    `printed walls. Dye sublimation bonds the ink into the fabric, so graphics will not crack, peel ` +
+    `A commercial-grade ${size} pop-up canopy printed edge to edge in full colour. Add printed full ` +
+    `or half walls. Dye sublimation bonds the ink into the fabric, so graphics will not crack, peel ` +
     `or fade. Order 3 or more and the per-tent price drops.`,
   features: [
     'Dye-sublimated full-bleed printing',
-    'Up to 3 printed walls (half or full)',
-    'Sets up in minutes, no tools',
+    'Full and half printed walls (up to 3 each)',
+    'Heavy-duty aluminium hex frame',
     'Free artwork proof before production'
   ],
-  turnaround: 'Ships in 6–8 business days',
+  turnaround: '6-8 days standard · 2-3 days rush (+50%)',
   pricing: {
     model: 'configured',
     baseLabel: `${size} canopy tent`,
@@ -90,7 +90,11 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
       { min: 1, price: tier1 },
       { min: 3, price: tier3 }
     ],
-    optionGroups: [wallGroup(wallPer), wallStyleGroup]
+    optionGroups: [
+      wallSelect('wallsFull', 'Full walls', wallPer),
+      wallSelect('wallsHalf', 'Half walls', wallPer),
+      daysGroup
+    ]
   }
 });
 

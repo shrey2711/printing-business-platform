@@ -118,6 +118,20 @@ export function computePrice(input, opts = {}) {
       }
     }
 
+    // 4. Whole-order multipliers (e.g. rush delivery), applied AFTER add-ons so
+    //    they scale base + walls together.
+    for (const g of groups) {
+      if (g.pricing !== 'multiplyTotal') continue;
+      const choice = pickChoice(g, selections[g.id]);
+      if (!choice) continue;
+      chosen[g.id] = choice.label || choice.id;
+      const mult = Number(choice.mult);
+      if (!Number.isFinite(mult) || mult === 1) continue;
+      const before = running;
+      running *= mult;
+      breakdown.push({ label: `${g.label} — ${choice.label}`, amount: round2(running - before) });
+    }
+
     dims.configuration = chosen;
     // Readable one-liner for order specs / emails, matching how `unit` reports.
     dims.variant = Object.values(chosen).filter(Boolean).join(' • ');
