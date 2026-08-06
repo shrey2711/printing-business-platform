@@ -347,6 +347,26 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .choice-card:hover { border-color: var(--blue); }
 .choice-card:disabled { opacity: 0.4; cursor: not-allowed; }
 .choice-card:disabled:hover { border-color: var(--line); }
+
+/* Quantity stepper + bulk brackets */
+.qty-block { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+.qty-stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.qty-stepper button {
+  width: 40px; height: 44px; border: 0; background: var(--panel); font-size: 1.2rem; font-weight: 700;
+  color: var(--navy); cursor: pointer; line-height: 1;
+}
+.qty-stepper button:hover { background: #e7ebf1; }
+.qty-stepper input {
+  width: 64px; height: 44px; border: 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line);
+  text-align: center; font-size: 1rem; font-weight: 700; -moz-appearance: textfield;
+}
+.qty-stepper input::-webkit-outer-spin-button, .qty-stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.bulk-brackets { min-width: 220px; }
+.bulk-brackets-head { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+.bulk-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.35rem 0.6rem; border-radius: 5px; font-size: 0.85rem; color: var(--muted); }
+.bulk-row span:last-child { font-weight: 600; color: var(--ink); }
+.bulk-active { background: #fdeef0; }
+.bulk-active span { color: var(--red-dark) !important; font-weight: 700; }
 .choice-card.choice-active {
   border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); background: #f4f9fd;
 }

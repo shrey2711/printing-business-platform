@@ -95,8 +95,6 @@ export default function ProductConfigurator() {
   });
 
   const requestOrder = () => navigate('/order', { state: orderState() });
-  const designIt = () =>
-    navigate(`/design?product=${encodeURIComponent(product.name)}`, { state: orderState() });
 
   if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
   if (notFound || !product)
@@ -109,6 +107,20 @@ export default function ProductConfigurator() {
 
   const p = product.pricing;
   const sel = config?.selections || {};
+
+  // Volume pricing brackets from quantityTiers, e.g. "1-2 units $835/unit",
+  // "3+ units $799/unit", with the row matching the current quantity marked.
+  const qtyNow = Number(config?.quantity) || 1;
+  const tierRows = [...(p?.quantityTiers || [])]
+    .sort((a, b) => a.min - b.min)
+    .map((t, i, arr) => {
+      const next = arr[i + 1];
+      return {
+        label: next ? `${t.min}-${next.min - 1} units` : `${t.min}+ units`,
+        price: t.price,
+        active: qtyNow >= t.min && (!next || qtyNow < next.min)
+      };
+    });
 
   return (
     <main className="page">
@@ -299,26 +311,43 @@ export default function ProductConfigurator() {
             </div>
           )}
 
-          <div className="field">
+          <div className="field qty-field">
             <label>Quantity</label>
-            <div className="qty-row">
-              {[1, 2, 5, 10, 25, 50].map((q) => (
+            <div className="qty-block">
+              <div className="qty-stepper">
                 <button
-                  key={q}
                   type="button"
-                  className={`qty-chip ${Number(config.quantity) === q ? 'qty-active' : ''}`}
-                  onClick={() => setConfig({ ...config, quantity: q })}
+                  aria-label="Decrease quantity"
+                  onClick={() => setConfig({ ...config, quantity: Math.max(1, Number(config.quantity) - 1) })}
                 >
-                  {q}
+                  −
                 </button>
-              ))}
-              <input
-                type="number"
-                min="1"
-                className="qty-input"
-                value={config.quantity}
-                onChange={(e) => setConfig({ ...config, quantity: numberOr(e.target.value, config.quantity) })}
-              />
+                <input
+                  type="number"
+                  min="1"
+                  value={config.quantity}
+                  onChange={(e) => setConfig({ ...config, quantity: Math.max(1, numberOr(e.target.value, config.quantity)) })}
+                />
+                <button
+                  type="button"
+                  aria-label="Increase quantity"
+                  onClick={() => setConfig({ ...config, quantity: Number(config.quantity) + 1 })}
+                >
+                  +
+                </button>
+              </div>
+
+              {tierRows.length > 1 && (
+                <div className="bulk-brackets">
+                  <div className="bulk-brackets-head">Bulk discount brackets</div>
+                  {tierRows.map((r) => (
+                    <div className={`bulk-row ${r.active ? 'bulk-active' : ''}`} key={r.label}>
+                      <span>{r.label}</span>
+                      <span>{money(r.price)}/unit</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -370,9 +399,6 @@ export default function ProductConfigurator() {
 
           <button className="btn btn-red btn-block" onClick={requestOrder} disabled={!price}>
             Order &amp; upload artwork
-          </button>
-          <button className="btn btn-outline btn-block" onClick={designIt} disabled={!price} style={{ marginTop: '0.5rem' }}>
-            🎨 Design it online
           </button>
           <p className="panel-foot">
             We send a free artwork proof for your approval before anything goes to production.
