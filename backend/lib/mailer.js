@@ -197,9 +197,13 @@ async function send({ to, subject, html }) {
 }
 
 // --- Public API -----------------------------------------------------------
-function customerEmailHtml(order, status, appUrl) {
+function customerEmailHtml(order, status, appUrl, invoiceUrl) {
   const meta = STATUS_META[status] || STATUS_META.submitted;
   const accent = meta.color;
+  const invoiceBlock = invoiceUrl
+    ? `<p style="margin:14px 0 0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">Your invoice is ready — pay securely online:</p>
+       ${button(invoiceUrl, 'Pay your invoice', C.red)}`
+    : '';
   const inner = `
     ${header()}
     <tr><td style="height:5px;background:${accent};"></td></tr>
@@ -209,7 +213,8 @@ function customerEmailHtml(order, status, appUrl) {
       <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">${meta.body}</p>
       ${progress(status)}
       ${detailsCard(order)}
-      ${button(appUrl ? `${appUrl}/account` : '', status === 'shipped' ? 'Track your order' : 'View your order', accent)}
+      ${invoiceBlock}
+      ${invoiceUrl ? '' : button(appUrl ? `${appUrl}/account` : '', status === 'shipped' ? 'Track your order' : 'View your order', accent)}
     </td></tr>
     ${footer()}`;
   return shell(inner, meta.heading);
@@ -220,8 +225,8 @@ export async function sendOrderStatusEmail({ to, order, status, appUrl = DEFAULT
   return send({ to, subject: `Your ${BRAND} order ${shortId(order.id)} ${meta.subject}`, html: customerEmailHtml(order, status, appUrl) });
 }
 
-export async function sendOrderConfirmationEmail({ to, order, appUrl = DEFAULT_APP_URL }) {
-  return send({ to, subject: `${BRAND} — order ${shortId(order.id)} received`, html: customerEmailHtml(order, 'submitted', appUrl) });
+export async function sendOrderConfirmationEmail({ to, order, appUrl = DEFAULT_APP_URL, invoiceUrl }) {
+  return send({ to, subject: `${BRAND} — order ${shortId(order.id)} received`, html: customerEmailHtml(order, 'submitted', appUrl, invoiceUrl) });
 }
 
 export function adminAlertHtml(order, customerEmail, appUrl) {
