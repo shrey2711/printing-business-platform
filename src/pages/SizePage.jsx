@@ -1,51 +1,46 @@
 import { Link, useParams } from 'react-router-dom';
-import { SIZES, SOLUTIONS, getSize } from '../data/canopy';
+import { SIZES, getSize } from '../data/canopy';
 import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
-const configurable = [
-  { title: 'Frame grade', copy: 'Steel economy, commercial aluminium, or heavy-duty hex for constant setups.' },
-  { title: 'Print coverage', copy: 'Canopy top, top plus valance, or top, valance and the inside as well.' },
-  { title: 'Walls', copy: 'Full, half, mesh, zippered door and rail skirts — up to four per tent.' },
-  { title: 'Accessories', copy: 'Weight bags, stake kits, wheeled carry bags and LED lighting.' }
-];
-
+// INFORMATIONAL size guide. Mirrors the prerendered /sizes/<slug> HTML in
+// scripts/prerender.mjs so crawler and hydrated app match. Deliberately NOT a
+// second commercial page for the size — it hands off to /products/<product>.
 export default function SizePage() {
   const { size: slug } = useParams();
   const size = getSize(slug);
 
   useDocumentMeta(
-    size ? `${size.slug} Custom Canopy Tent — Instant Pricing` : 'Canopy tent sizes',
-    size ? `Custom printed ${size.label} pop-up canopy tent with instant online pricing.` : undefined
+    size ? size.guide.title : 'Canopy tent size guides',
+    size ? size.guide.metaDescription : undefined
   );
 
   if (!size) {
     return (
       <main className="page">
-        <p className="muted">We don't print that size.</p>
+        <p className="muted">We don't have a guide for that size.</p>
         <Link className="btn btn-outline" to="/products">See available sizes</Link>
       </main>
     );
   }
 
+  const g = size.guide;
   const others = SIZES.filter((s) => s.slug !== size.slug);
 
   return (
     <main className="page">
-      <Link className="back-link" to="/products">← All products</Link>
+      <Link className="back-link" to="/products">← All canopy tents</Link>
 
       <div className="landing-hero">
         <div>
-          <span className="eyebrow">Canopy tent size</span>
-          <h1>{size.label} Custom Printed Canopy Tent</h1>
+          <span className="eyebrow">{size.slug} size guide</span>
+          <h1>{g.title}</h1>
           <p className="lead">{size.blurb}</p>
-          <p>
-            Printed to order in full colour with your choice of frame grade and print coverage, and
-            priced instantly — pick your options and the total updates as you go.
-          </p>
+          <p>{g.footprint}</p>
           <div className="hero-actions">
-            <Link className="btn btn-red" to="/products">Configure a {size.label} tent</Link>
-            <Link className="btn btn-outline" to="/products">See packages</Link>
+            <Link className="btn btn-red" to={`/products/${size.product}`}>
+              Shop the {size.label} canopy tent
+            </Link>
           </div>
         </div>
         <div className="landing-art">
@@ -55,28 +50,54 @@ export default function SizePage() {
 
       <section className="steps-section">
         <div className="section-head">
-          <h2>What you can configure</h2>
+          <h2>How many tables and people fit</h2>
         </div>
-        <div className="frame-grid">
-          {configurable.map((c) => (
-            <article className="frame-card" key={c.title}>
-              <h3>{c.title}</h3>
-              <p>{c.copy}</p>
-            </article>
-          ))}
-        </div>
+        <ul className="guide-list">
+          {g.capacity.map((c) => <li key={c}>{c}</li>)}
+        </ul>
       </section>
 
       <section className="steps-section">
         <div className="section-head">
-          <h2>Other sizes</h2>
+          <h2>Booth layout ideas</h2>
         </div>
+        <ul className="guide-list">
+          {g.layouts.map((c) => <li key={c}>{c}</li>)}
+        </ul>
+      </section>
+
+      <section className="steps-section">
+        <div className="section-head">
+          <h2>Wall options for a {size.label}</h2>
+        </div>
+        <p className="muted">
+          Add up to 3 printed walls, in any mix of full-height and half-height (both cost the same per
+          wall) — for shade, a printed backdrop, weather protection and privacy while keeping the front
+          open. You can also print the canopy top and valance, and choose standard 6–8 day or rush
+          2–3 day production.
+        </p>
+      </section>
+
+      <section className="steps-section">
+        <div className="section-head">
+          <h2>Common uses for a {size.label}</h2>
+        </div>
+        <ul className="guide-list">
+          {g.uses.map((c) => <li key={c}>{c}</li>)}
+        </ul>
+      </section>
+
+      <section className="steps-section">
+        <div className="section-head">
+          <h2>{size.slug} vs other sizes</h2>
+        </div>
+        <p className="muted">{g.comparison}</p>
         <div className="size-grid">
           {others.map((s) => (
             <Link className="size-card" to={`/sizes/${s.slug}`} key={s.slug}>
               <TentPhoto size={s.slug} walls={1} label={`${s.label} canopy`} />
               <div className="size-card-body">
-                <strong>{s.label}</strong>
+                <strong>{s.slug} size guide</strong>
                 <span>View</span>
               </div>
             </Link>
@@ -84,18 +105,12 @@ export default function SizePage() {
         </div>
       </section>
 
-      <section className="solutions-section">
-        <div className="section-head">
-          <h2>Common uses for a {size.label}</h2>
-        </div>
-        <div className="solutions-grid">
-          {SOLUTIONS.slice(0, 6).map((s) => (
-            <Link className="solution-card" to={`/solutions/${s.slug}`} key={s.slug}>
-              <strong>{s.title}</strong>
-              <p>{s.blurb}</p>
-            </Link>
-          ))}
-        </div>
+      <section className="turnaround-band">
+        <p className="turn-main">Ready to order your {size.label} canopy tent?</p>
+        <p className="turn-sub">Configure walls, print and delivery and see the price update live.</p>
+        <Link className="btn btn-red" to={`/products/${size.product}`}>
+          Shop the {size.label} Custom Canopy Tent
+        </Link>
       </section>
     </main>
   );

@@ -71,3 +71,33 @@ export const ORDERING_STEPS = [
   'Approve the free proof we send — nothing prints until you say yes.',
   'We print with dye sublimation and ship it to you.'
 ];
+
+// Factual reference sections shared across state pages. These are genuine
+// buying guidance (not invented local claims); the unique intro + events above
+// carry each state's local signal.
+export const SIZE_COMPARISON = [
+  ['10x10', '100 sq ft — a single vendor booth. The most portable size and the easiest for one or two people to set up.'],
+  ['10x15', '150 sq ft — about 50% more frontage than a 10×10, for two front tables or a bigger product display.'],
+  ['10x20', '200 sq ft — a full double booth or walk-through layout, the widest single-canopy span most shows allow.']
+];
+
+export const OUTDOOR_CONSIDERATIONS = [
+  'Always anchor the frame — weight bags on hard surfaces, stakes on grass. Open lots and waterfronts get gusty fast.',
+  'Dye-sublimation printing bonds the ink into the fabric, so colours hold up under strong, repeated sun exposure.',
+  'Add full or half walls on the windward side for shade and wind protection while keeping the front open.',
+  'Choose standard 6–8 day production, or 2–3 day rush if your event date is close.'
+];
+
+export const ARTWORK_NOTES = [
+  'Send a print-ready vector file (PDF, AI or EPS) or a high-resolution PNG/JPG — logos, full-colour backgrounds and photos all print.',
+  'You can print the canopy top, the valance and the walls; each is a separate branding surface.',
+  'No print-ready file? Add our design service and we build the artwork for you.',
+  'Every order includes a free visual proof — nothing goes to production until you approve it.'
+];
+
+export const STATE_FAQS = [
+  ['How long does a custom canopy tent take?', 'Standard production is 6–8 business days after you approve the proof, with an optional 2–3 day rush.'],
+  ['Can I print my logo on the tent?', 'Yes — full-colour dye sublimation on the top, valance and walls. Send your logo or full artwork.'],
+  ['How many walls can I add?', 'Up to 3 printed walls in any mix of full-height and half-height; both cost the same per wall.'],
+  ['Do you offer bulk pricing?', 'Yes — order 3 or more tents and volume pricing applies automatically as you increase the quantity.']
+];

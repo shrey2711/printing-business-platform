@@ -52,7 +52,7 @@ export function getProductFaqs(product) {
   // Artwork / files
   faqs.push({
     q: `What artwork file formats do you accept?`,
-    a: `We accept print-ready PDF, AI, EPS, and high-resolution PNG or JPG files. No design yet? Create one free in our online Design Studio, or upload your file and we'll check it at no charge.`
+    a: `We accept print-ready PDF, AI, EPS, and high-resolution PNG or JPG files. Send us your file — or just a logo — and we'll check it at no charge and send a free proof before printing.`
   });
 
   // Bulk / wholesale discounts

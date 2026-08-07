@@ -1,23 +1,30 @@
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { SIZES, SOLUTIONS, getSolution } from '../data/canopy';
+import { getProducts } from '../services/api';
+import ProductCard from '../components/ProductCard';
 import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
-const whatToOrder = [
-  { to: '/products', title: 'Custom printed canopy tent', copy: 'Configure size, frame, print coverage and walls from scratch.' },
-  { to: '/products', title: 'Canopy packages', copy: 'Tent, walls and weights bundled below the à-la-carte price.' },
-  { to: '/products', title: 'Sidewalls', copy: 'Add weather protection, privacy and more branding surface.' },
-  { to: '/products', title: 'Accessories', copy: 'Weights, stakes, wheeled bags and LED lighting.' }
-];
+const sizeKey = (slug) => slug.replace('canopy-tent-', '');
 
 export default function SolutionPage() {
   const { useCase } = useParams();
   const solution = getSolution(useCase);
+  const [products, setProducts] = useState([]);
 
   useDocumentMeta(
     solution ? `${solution.title} — Custom Printed` : 'Canopy tent solutions',
-    solution?.blurb
+    solution?.guide?.metaDescription
   );
+
+  useEffect(() => {
+    let alive = true;
+    getProducts().then((p) => alive && setProducts(p)).catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   if (!solution) {
     return (
@@ -28,23 +35,21 @@ export default function SolutionPage() {
     );
   }
 
+  const g = solution.guide;
   const others = SOLUTIONS.filter((s) => s.slug !== solution.slug);
 
   return (
     <main className="page">
-      <Link className="back-link" to="/products">← All products</Link>
+      <Link className="back-link" to="/products">← All canopy tents</Link>
 
       <div className="landing-hero">
         <div>
           <span className="eyebrow">Canopy tents for</span>
           <h1>{solution.title}</h1>
           <p className="lead">{solution.blurb}</p>
-          <p>
-            Every tent is printed to order, so the size, frame and print coverage are chosen to match
-            how often it goes up and how much branding you need.
-          </p>
+          <p>{g.intro}</p>
           <div className="hero-actions">
-            <Link className="btn btn-red" to="/products">Build your canopy</Link>
+            <Link className="btn btn-red" to="/products">Shop canopy tents</Link>
             <Link className="btn btn-outline" to="/quote">Ask about bulk orders</Link>
           </div>
         </div>
@@ -55,14 +60,24 @@ export default function SolutionPage() {
 
       <section className="steps-section">
         <div className="section-head">
-          <h2>Choose a size</h2>
+          <h2>What matters for {solution.title.toLowerCase()}</h2>
+        </div>
+        <ul className="guide-list">
+          {g.focus.map((f) => <li key={f}>{f}</li>)}
+        </ul>
+      </section>
+
+      <section className="steps-section">
+        <div className="section-head">
+          <h2>Choosing a size</h2>
+          <p>{g.sizing}</p>
         </div>
         <div className="size-grid">
           {SIZES.map((s) => (
             <Link className="size-card" to={`/sizes/${s.slug}`} key={s.slug}>
               <TentPhoto size={s.slug} walls={1} label={`${s.label} canopy`} />
               <div className="size-card-body">
-                <strong>{s.label}</strong>
+                <strong>{s.slug} size guide</strong>
                 <span>View</span>
               </div>
             </Link>
@@ -72,16 +87,23 @@ export default function SolutionPage() {
 
       <section className="steps-section">
         <div className="section-head">
-          <h2>What to order</h2>
+          <h2>Wall &amp; print setup</h2>
         </div>
-        <div className="frame-grid">
-          {whatToOrder.map((w) => (
-            <Link className="frame-card" to={w.to} key={w.to}>
-              <h3>{w.title}</h3>
-              <p>{w.copy}</p>
-            </Link>
-          ))}
+        <p className="muted">{g.walls}</p>
+      </section>
+
+      <section className="size-section">
+        <div className="section-head">
+          <h2>Order your canopy tent</h2>
+          <p>Pick a size and configure walls, print and delivery for an instant price.</p>
         </div>
+        {products.length > 0 && (
+          <div className="pcard-grid">
+            {products.map((p) => (
+              <ProductCard key={p.slug} product={p} previewSize={sizeKey(p.slug)} />
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="solutions-section">

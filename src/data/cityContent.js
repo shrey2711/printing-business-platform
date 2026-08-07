@@ -3,10 +3,13 @@
 // hard weather claims — just genuine local event context. Priority cities are
 // indexed with this content; every other city stays noindex.
 
+// Tight, defensible shortlist of indexed city pages (13). Every other city —
+// including the ones with content below that aren't in this set — stays
+// noindex, so we never expose hundreds of near-identical city URLs.
 export const PRIORITY_CITIES = new Set([
   'los-angeles', 'san-diego', 'san-francisco', 'houston', 'dallas', 'austin',
-  'miami', 'orlando', 'new-york-city', 'phoenix', 'las-vegas', 'seattle',
-  'chicago', 'atlanta', 'charlotte'
+  'miami', 'orlando', 'new-york-city', 'las-vegas', 'seattle',
+  'vancouver', 'toronto'
 ]);
 
 export const cityContent = {
@@ -69,5 +72,13 @@ export const cityContent = {
   charlotte: {
     intro: 'Charlotte runs craft fairs, motorsports-adjacent events and regional festivals. A dye-sublimated canopy handles humidity and sun so a booth looks consistent across a full season.',
     events: ['Craft & artisan fairs', 'Motorsports & sports events', 'Regional festivals', 'Farmers markets']
+  },
+  vancouver: {
+    intro: 'Vancouver vendors work rain or shine — public and farmers markets, waterfront festivals and neighbourhood events across the Lower Mainland. A canopy with printed side walls gives real weather cover and a branded backdrop through a damp, busy market season.',
+    events: ['Public & farmers markets', 'Waterfront & park festivals', 'Night markets', 'Community & cultural events']
+  },
+  toronto: {
+    intro: 'Toronto runs a dense event calendar — street festivals across the city, waterfront markets, cultural events and consumer shows. A crisp printed canopy claims a professional booth in a crowded vendor row and packs down fast between weekend events.',
+    events: ['Street & neighbourhood festivals', 'Waterfront & park markets', 'Cultural & food events', 'Trade & consumer shows']
   }
 };

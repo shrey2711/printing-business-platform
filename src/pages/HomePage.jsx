@@ -25,7 +25,7 @@ const solutions = [
 
 const steps = [
   { n: 1, title: 'Pick a size and see the price', copy: 'Choose 10×10, 10×15 or 10×20, add walls. The price updates as you go — no quote form.' },
-  { n: 2, title: 'Upload your artwork', copy: 'Send a print-ready file or build one in the Design Studio.' },
+  { n: 2, title: 'Upload your artwork', copy: 'Send a print-ready file, or a logo for us to place. We send a free proof before printing.' },
   { n: 3, title: 'Approve the proof', copy: 'We send a visual proof. Nothing prints until you say yes.' },
   { n: 4, title: 'We print and ship', copy: 'Production runs after approval, then it ships to your door.' }
 ];

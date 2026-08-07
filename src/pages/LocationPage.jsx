@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import { getState, slugify } from '../data/states';
-import { PRIORITY_STATES, stateContent } from '../data/stateContent';
+import {
+  PRIORITY_STATES, stateContent, ORDERING_STEPS,
+  SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
+} from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
@@ -16,7 +19,7 @@ export default function LocationPage() {
   useDocumentMeta(
     state ? `Custom Printed Canopy Tents in ${state.name}` : 'Location',
     state
-      ? `Order custom printed canopy tents, sidewalls and accessories in ${state.name} with instant online pricing and shipping to ${state.cities.slice(0, 3).join(', ')} and beyond.`
+      ? `Order custom printed pop-up canopy tents in ${state.name} with up to 3 printed walls, instant online pricing and shipping to ${state.cities.slice(0, 3).join(', ')} and beyond.`
       : '',
     undefined,
     // Templated long-tail states are noindex until they earn unique content.
@@ -48,8 +51,8 @@ export default function LocationPage() {
         <span className="eyebrow">Serving {state.name} · {state.region}</span>
         <h1>Custom Printed Canopy Tents in {state.name}</h1>
         <p className="lead">
-          Order custom printed pop-up canopy tents, sidewalls and accessories for {state.name} with
-          <strong> instant pricing</strong> — choose your size, frame grade and print coverage online,
+          Order custom printed pop-up canopy tents for {state.name} with
+          <strong> instant pricing</strong> — choose your size, printed walls and print coverage online,
           then we ship to {cityList} and everywhere across {state.name} ({state.abbr}).
         </p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem' }}>
@@ -81,6 +84,28 @@ export default function LocationPage() {
             <ul className="feature-list">
               {content.events.map((e) => <li key={e}>{e}</li>)}
             </ul>
+            <h3>Choosing a canopy size for {state.name} events</h3>
+            <ul className="feature-list">
+              {SIZE_COMPARISON.map(([sz, txt]) => (
+                <li key={sz}><Link to={`/sizes/${sz}`}>{sz} canopy tent</Link> — {txt}</li>
+              ))}
+            </ul>
+            <h3>Outdoor event considerations</h3>
+            <ul className="feature-list">
+              {OUTDOOR_CONSIDERATIONS.map((x) => <li key={x}>{x}</li>)}
+            </ul>
+            <h3>Artwork &amp; branding</h3>
+            <ul className="feature-list">
+              {ARTWORK_NOTES.map((x) => <li key={x}>{x}</li>)}
+            </ul>
+            <h3>How ordering works</h3>
+            <ol className="feature-list">
+              {ORDERING_STEPS.map((x) => <li key={x}>{x}</li>)}
+            </ol>
+            <h3>Custom canopy tent FAQs</h3>
+            {STATE_FAQS.map(([q, a]) => (
+              <details key={q}><summary>{q}</summary><p>{a}</p></details>
+            ))}
           </>
         ) : (
           <p className="muted">

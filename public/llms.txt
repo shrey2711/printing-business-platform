@@ -31,6 +31,8 @@ Canonical website: https://www.apextradeshow.com/
 
 ## Company
 
+* [About Apex Trade Show](https://www.apextradeshow.com/about): What the company makes, how tents are printed, and how ordering works.
+* [Artwork Guidelines](https://www.apextradeshow.com/artwork-guidelines): Accepted file types, resolution, colour and the free proof process.
 * [Contact](https://www.apextradeshow.com/contact): Email and phone for questions and support.
 * [Request a Quote](https://www.apextradeshow.com/quote): For bulk, fleet or non-standard orders.
 * [Blog](https://www.apextradeshow.com/blog): Guides and resources on custom canopy tents.

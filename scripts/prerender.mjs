@@ -13,7 +13,11 @@ import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
-import { PRIORITY_STATES, stateContent, ORDERING_STEPS } from '../src/data/stateContent.js';
+import { PAGES } from '../src/data/pages.js';
+import {
+  PRIORITY_STATES, stateContent, ORDERING_STEPS,
+  SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
+} from '../src/data/stateContent.js';
 import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
@@ -35,9 +39,21 @@ const NAV = `<nav aria-label="Primary">
   <a href="/products/canopy-tent-10x10">10x10 Canopy Tent</a>
   <a href="/products/canopy-tent-10x15">10x15 Canopy Tent</a>
   <a href="/products/canopy-tent-10x20">10x20 Canopy Tent</a>
-  <a href="/design">Design Studio</a>
   <a href="/locations">Locations</a>
   <a href="/quote">Get a Quote</a>
+  <a href="/contact">Contact</a>
+</nav>`;
+
+// Crawlable trust/company links on every prerendered page — mirrors the site
+// footer so search engines see identifiable business information everywhere.
+const FOOTER = `<nav aria-label="Company">
+  <a href="/about">About Apex Trade Show</a>
+  <a href="/artwork-guidelines">Artwork Guidelines</a>
+  <a href="/shipping">Shipping</a>
+  <a href="/returns">Returns</a>
+  <a href="/warranty">Warranty</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
   <a href="/contact">Contact</a>
 </nav>`;
 
@@ -71,7 +87,7 @@ function render({ path, title, description, body, jsonLd, robots }) {
     html = html.replace('</head>', `${script}\n</head>`);
   }
   // Prerendered content lives inside #root; React replaces it on hydration.
-  html = html.replace('<div id="root"></div>', `<div id="root"><div id="seo-prerender">${body}${NAV}</div></div>`);
+  html = html.replace('<div id="root"></div>', `<div id="root"><div id="seo-prerender">${body}${NAV}${FOOTER}</div></div>`);
   // Prepend an explicit write-path marker so a custom canonical override can't
   // confuse where the file is written. Stripped before writing.
   return `<!--PP:${path}-->${html}`;
@@ -97,13 +113,13 @@ routes.push(() => {
     you approve it. ${esc(brand.shippingBlurb)}.</p>
     <h2>Shop canopy tents</h2>
     <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}. ${esc(p.tagline)}</li>`).join('')}</ul>
-    <h2>Canopy tent sizes</h2>
-    <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
+    <h2>Canopy tent size guides</h2>
+    <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
     <h2>What people use them for</h2>
     <ul>${SOLUTIONS.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
     <h2>Order in four steps</h2>
     <ol><li>Configure size, frame, print coverage and walls — the price updates as you go.</li>
-    <li>Upload artwork or design it in our Design Studio.</li>
+    <li>Upload your artwork or logo — we send a free proof for your approval before production.</li>
     <li>Approve the artwork proof we send you.</li>
     <li>We print and ship it.</li></ol>`;
   return render({
@@ -117,53 +133,67 @@ routes.push(() => {
 // ---- Products listing ----
 routes.push(() => {
   const body = `
-    <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Products</span></nav>
-    <h1>Shop Canopy Tents, Walls &amp; Accessories</h1>
-    <p>Custom printed canopy tents, complete booth packages, sidewalls, replacement tops and the
-    hardware that goes with them. Configure any product for live pricing.</p>
-    <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}. ${esc(p.tagline)}</li>`).join('')}</ul>`;
+    <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Canopy Tents</span></nav>
+    <h1>Custom Printed Canopy Tents</h1>
+    <p>Custom printed pop-up canopy tents in three sizes — 10x10, 10x15 and 10x20 — with up to 3
+    printed walls, full-colour dye-sublimation printing and a free artwork proof. Configure any size
+    for instant online pricing.</p>
+    <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}. ${esc(p.tagline)}</li>`).join('')}</ul>
+    <p>Not sure which size? Read the <a href="/sizes/10x10">10x10</a>, <a href="/sizes/10x15">10x15</a>
+    and <a href="/sizes/10x20">10x20</a> size guides.</p>`;
   return render({
     path: '/products',
-    title: `Shop Canopy Tents & Accessories | ${BRAND}`,
-    description: 'Browse custom printed canopy tents, booth packages, sidewalls, replacement tops and accessories with instant online pricing.',
+    title: `Custom Printed Canopy Tents — 10x10, 10x15 & 10x20 | ${BRAND}`,
+    description: 'Shop custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with printed walls and instant online pricing. Free artwork proof, ships across the US & Canada.',
     body
   });
 });
 
-// ---- Size landing pages ----
+// ---- Size guide pages (INFORMATIONAL — research intent, not commercial) ----
+// These deliberately do NOT compete with /products/canopy-tent-<size>. They
+// explain dimensions, capacity, layout and uses, then hand off to the product
+// page with a single clear "Shop the …" call to action.
 for (const size of SIZES) {
   routes.push(() => {
+    const g = size.guide;
     const others = SIZES.filter((s) => s.slug !== size.slug);
     const body = `
-      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(size.slug)}</span></nav>
-      <h1>${esc(size.label)} Custom Printed Canopy Tent</h1>
-      <p>${esc(size.blurb)} Printed to order in full colour with your choice of frame grade and print
-      coverage, and priced instantly — pick your options and the total updates as you go.</p>
-      <h2>What you can configure</h2>
-      <ul>
-        <li>Frame grade — steel economy, commercial aluminium or heavy-duty hex</li>
-        <li>Print coverage — canopy top, top plus valance, or top, valance and inside</li>
-        <li>Walls — full, half, mesh, zippered door and rail skirts, up to four per tent</li>
-        <li>Accessories — weight bags, stake kits, wheeled carry bags and LED lighting</li>
-      </ul>
-      <p><a href="/products">Configure a ${esc(size.label)} canopy tent</a> or
-      <a href="/products">see complete packages</a>.</p>
-      <h2>Other sizes</h2>
-      <ul>${others.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a></li>`).join('')}</ul>
-      <h2>Common uses</h2>
-      <ul>${SOLUTIONS.slice(0, 4).map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Canopy Tents</a> / <span>${esc(size.slug)} Size Guide</span></nav>
+      <h1>${esc(g.title)}</h1>
+      <p>${esc(size.blurb)} This guide covers the ${esc(size.slug)} canopy tent's dimensions, how many
+      tables and people it fits, booth layout ideas and what it is best used for — so you can pick the
+      right size before you configure and buy.</p>
+      <h2>Dimensions &amp; footprint</h2>
+      <p>${esc(g.footprint)}</p>
+      <h2>How many tables and people fit</h2>
+      <ul>${g.capacity.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+      <h2>Booth layout ideas</h2>
+      <ul>${g.layouts.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+      <h2>Wall options for a ${esc(size.label)}</h2>
+      <p>Add up to 3 printed walls, in any mix of full-height and half-height (both cost the same per
+      wall). Walls give you shade, a printed backdrop, weather protection and privacy while keeping
+      the front open. You can also print the canopy top and valance, and choose standard 6–8 day or
+      rush 2–3 day production.</p>
+      <h2>Common uses for a ${esc(size.label)}</h2>
+      <ul>${g.uses.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+      <h2>${esc(size.slug)} vs other sizes</h2>
+      <p>${esc(g.comparison)}</p>
+      <ul>${others.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a></li>`).join('')}</ul>
+      <h2>Shop the ${esc(size.label)} Custom Canopy Tent</h2>
+      <p>Ready to order? <a href="/products/${size.product}">Configure the ${esc(size.label)} custom
+      canopy tent and get an instant price →</a></p>`;
     return render({
       path: `/sizes/${size.slug}`,
-      title: `${size.slug} Custom Canopy Tent — Instant Pricing | ${BRAND}`,
-      description: `Custom printed ${size.label} pop-up canopy tent. Choose frame grade, print coverage, walls and accessories with instant online pricing.`,
+      title: `${g.title} | ${BRAND}`,
+      description: g.metaDescription,
       body,
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'Sizes', item: `${ORIGIN}/products` },
-          { '@type': 'ListItem', position: 3, name: `${size.slug} canopy tent`, item: `${ORIGIN}/sizes/${size.slug}` }
+          { '@type': 'ListItem', position: 2, name: 'Canopy Tents', item: `${ORIGIN}/products` },
+          { '@type': 'ListItem', position: 3, name: `${size.slug} Size Guide`, item: `${ORIGIN}/sizes/${size.slug}` }
         ]
       }
     });
@@ -173,27 +203,28 @@ for (const size of SIZES) {
 // ---- Use-case (solution) landing pages ----
 for (const sol of SOLUTIONS) {
   routes.push(() => {
+    const g = sol.guide;
     const others = SOLUTIONS.filter((s) => s.slug !== sol.slug);
     const body = `
-      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(sol.title)}</span></nav>
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Canopy Tents</a> / <span>${esc(sol.title)}</span></nav>
       <h1>${esc(sol.title)}</h1>
-      <p>${esc(sol.blurb)} Every tent is printed to order, so the size, frame and print coverage are
-      chosen to match how often it goes up and how much branding you need.</p>
-      <h2>Choose a size</h2>
-      <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.label)} canopy tent</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
-      <h2>What to order</h2>
-      <ul>
-        <li><a href="/products">Custom printed canopy tent</a> — configure from scratch</li>
-        <li><a href="/products">Canopy packages</a> — tent, walls and weights bundled</li>
-        <li><a href="/products">Sidewalls</a> — add weather protection and branding</li>
-        <li><a href="/products">Accessories</a> — weights, stakes, bags and lighting</li>
-      </ul>
+      <p>${esc(g.intro)}</p>
+      <h2>What matters for ${esc(sol.title.toLowerCase())}</h2>
+      <ul>${g.focus.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+      <h2>Choosing a size</h2>
+      <p>${esc(g.sizing)}</p>
+      <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a></li>`).join('')}</ul>
+      <h2>Wall &amp; print setup</h2>
+      <p>${esc(g.walls)}</p>
+      <h2>Order your ${esc(sol.title.toLowerCase().replace(/ tents$/, ' tent'))}</h2>
+      <p>Pick a size and configure walls, print and delivery for an instant price:</p>
+      <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>
       <h2>Other uses</h2>
       <ul>${others.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;
     return render({
       path: `/solutions/${sol.slug}`,
       title: `${sol.title} — Custom Printed | ${BRAND}`,
-      description: `${sol.blurb} Custom printed canopy tents with instant online pricing and a free artwork proof.`,
+      description: g.metaDescription,
       body,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -262,6 +293,12 @@ for (const summary of productList) {
     const related = productList.filter((x) => x.slug !== product.slug).slice(0, 5);
     const faqs = getProductFaqs(product);
     const seoTitle = productSeoTitle(product);
+    // Real product images (dye-sub photos we actually ship), absolute URLs for
+    // Product schema. Derived from the size in the slug.
+    const sizeM = product.slug.match(/(\d+x\d+)/);
+    const productImages = sizeM
+      ? [1, 2, 3].map((n) => `${ORIGIN}/images/tents/${sizeM[1]}-${n}wall.webp`)
+      : [];
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>
       <h1>${esc(seoTitle.h1)}</h1>
@@ -286,12 +323,15 @@ for (const summary of productList) {
           '@type': 'Product',
           name: product.name,
           description: product.description,
+          ...(productImages.length ? { image: productImages } : {}),
+          sku: product.slug,
           brand: { '@type': 'Brand', name: BRAND },
           offers: {
             '@type': 'Offer',
             priceCurrency: 'USD',
             price: String(startingPrice),
             availability: 'https://schema.org/InStock',
+            itemCondition: 'https://schema.org/NewCondition',
             url: `${ORIGIN}/products/${product.slug}`
           }
         },
@@ -327,8 +367,8 @@ routes.push(() => {
   const body = `
     <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Locations</span></nav>
     <h1>Custom Canopy Tents Across the US and Canada</h1>
-    <p>${esc(BRAND)} ships custom printed canopy tents, walls and accessories to every US state and
-    Canadian province, priced in USD or CAD.</p>
+    <p>${esc(BRAND)} ships custom printed pop-up canopy tents, with up to 3 printed walls, to every
+    US state and Canadian province, priced in USD or CAD.</p>
     <h2>United States</h2>
     <ul>${us.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
     <h2>Canada</h2>
@@ -352,19 +392,32 @@ for (const s of territories) {
       .join('');
     const products6 = `<ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
     const sizesList = `<ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>`;
+    const sizePhotos = SIZES
+      .map((z) => `<img src="/images/tents/${z.slug}-1wall.webp" alt="${esc(z.label)} custom printed canopy tent" width="1200" height="900" loading="lazy" decoding="async">`)
+      .join('');
+    const sizeComparison = `<ul>${SIZE_COMPARISON.map(([sz, txt]) => `<li><a href="/sizes/${sz}">${sz} canopy tent</a> — ${esc(txt)}</li>`).join('')}</ul>`;
 
     // Priority markets get genuinely unique, useful content; the long tail gets
     // a minimal page and is noindex'd (see robots below).
     const richBody = isPriority && content
       ? `<h2>Custom canopy tents in ${esc(s.name)}</h2><p>${esc(content.intro)}</p>
+         <p>${sizePhotos}</p>
          <h2>Popular event uses in ${esc(s.name)}</h2>
          <ul>${content.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
-         <h2>Choose a size</h2>${sizesList}
-         <h2>Wall &amp; print options</h2>
-         <p>Add full or half printed walls (up to 3), print the canopy top and valance, and pick
-         standard 6-8 day or rush 2-3 day production. Order 3+ tents for volume pricing.</p>
+         <h2>Choosing a canopy size for ${esc(s.name)} events</h2>
+         ${sizeComparison}
+         <h2>Outdoor event considerations</h2>
+         <ul>${OUTDOOR_CONSIDERATIONS.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+         <h2>Printed wall options</h2>
+         <p>Add full or half printed walls (up to 3, any mix — both cost the same per wall), print the
+         canopy top and valance, and pick standard 6-8 day or rush 2-3 day production. Order 3+ tents
+         for volume pricing.</p>
+         <h2>Artwork &amp; branding</h2>
+         <ul>${ARTWORK_NOTES.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
          <h2>How ordering works</h2><ol>${ORDERING_STEPS.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
-         <h2>Shop canopy tents</h2>${products6}`
+         <h2>Shop canopy tents</h2>${products6}
+         <h2>Custom canopy tent FAQs</h2>
+         ${STATE_FAQS.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}`
       : `<p>Order custom printed pop-up canopy tents in ${esc(s.name)} with instant online pricing and
          shipping to ${esc(s.cities.join(', '))} and ${areaWord}.</p>
          <h2>Canopy sizes</h2>${sizesList}
@@ -401,17 +454,23 @@ for (const s of territories) {
     const cc = cityContent[citySlug];
     routes.push(() => {
       const products6 = `<ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
-      const sizesList = `<ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>`;
+      const cityPhotos = SIZES
+        .map((z) => `<img src="/images/tents/${z.slug}-1wall.webp" alt="${esc(z.label)} custom printed canopy tent" width="1200" height="900" loading="lazy" decoding="async">`)
+        .join('');
+      const cityComparison = `<ul>${SIZE_COMPARISON.map(([sz, txt]) => `<li><a href="/sizes/${sz}">${sz} canopy tent</a> — ${esc(txt)}</li>`).join('')}</ul>`;
       const richBody = cityIsPriority && cc
         ? `<h2>Custom canopy tents in ${esc(c)}</h2><p>${esc(cc.intro)}</p>
+           <p>${cityPhotos}</p>
            <h2>Where canopy tents get used in ${esc(c)}</h2>
            <ul>${cc.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
-           <h2>Popular sizes</h2>${sizesList}
+           <h2>Choosing a size for ${esc(c)} events</h2>${cityComparison}
            <h2>Ordering &amp; artwork</h2>
            <ol>${ORDERING_STEPS.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
            <h2>Shop canopy tents</h2>${products6}
+           <h2>Custom canopy tent FAQs</h2>
+           ${STATE_FAQS.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}
            <p><a href="/locations/${s.slug}">More about custom canopy tents in ${esc(s.name)} →</a></p>`
-        : `<p>${esc(BRAND)} ships custom printed canopy tents, sidewalls and accessories to ${esc(c)},
+        : `<p>${esc(BRAND)} ships custom printed canopy tents to ${esc(c)},
            ${esc(s.name)} with instant online pricing and a free artwork proof on every order.</p>
            <h2>Popular products in ${esc(c)}</h2>${products6}`;
       const body = `
@@ -466,6 +525,30 @@ routes.push(() =>
       and upload your artwork — we'll come back with pricing and a proof.</p>`
   })
 );
+
+// ---- Static info / trust pages (About, Artwork, Shipping, Returns, etc.) ----
+for (const page of PAGES) {
+  routes.push(() => {
+    const blocks = page.blocks
+      .map((b) => {
+        const h = b.h ? `<h2>${esc(b.h)}</h2>` : '';
+        const p = b.p ? `<p>${esc(b.p)}</p>` : '';
+        const list = b.list ? `<ul>${b.list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>` : '';
+        return h + p + list;
+      })
+      .join('');
+    return render({
+      path: `/${page.slug}`,
+      title: `${page.title} | ${BRAND}`,
+      description: page.description,
+      // Stub policy pages (shipping/returns/warranty) are noindex until they
+      // carry real terms — linked and reachable, but not indexed thin.
+      robots: page.stub ? 'noindex, follow' : undefined,
+      body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(page.nav)}</span></nav>
+        <h1>${esc(page.title)}</h1>${blocks}`
+    });
+  });
+}
 
 // ---- Load dashboard-authored content from Supabase at build time ----
 const posts = await loadPublishedPosts();
@@ -566,6 +649,8 @@ sm.push(smUrl('/blog', '0.6', 'weekly'));
 posts.forEach((p) => sm.push(smUrl(`/blog/${p.slug}`, '0.6')));
 sm.push(smUrl('/quote', '0.4'));
 sm.push(smUrl('/contact', '0.4'));
+// Indexable trust pages (stub policy pages are noindex and excluded).
+PAGES.filter((p) => !p.stub).forEach((p) => sm.push(smUrl(`/${p.slug}`, '0.4')));
 const smRows = sm.filter(Boolean); // drop routes forced to noindex via overrides
 writeFileSync(
   join(DIST, 'sitemap.xml'),

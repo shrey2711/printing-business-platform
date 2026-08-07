@@ -15,7 +15,15 @@ export const config = {
   matcher: ['/((?!api/|assets/|favicon|robots.txt|sitemap.xml|.*\\.[a-zA-Z0-9]+$).*)']
 };
 
-const bySource = new Map(redirects.map((r) => [r.source.replace(/\/$/, '') || '/', r]));
+// Built-in permanent redirects for removed routes, independent of the DB table
+// (so they survive even if the redirects table is empty). The Design Studio was
+// removed — /design must not serve a duplicate of the homepage.
+const BUILT_IN = [{ source: '/design', destination: '/artwork-guidelines', code: 301 }];
+
+// DB-managed rules can still override a built-in source if ever needed.
+const bySource = new Map(
+  [...BUILT_IN, ...redirects].map((r) => [r.source.replace(/\/$/, '') || '/', r])
+);
 
 export default function middleware(request) {
   const url = new URL(request.url);

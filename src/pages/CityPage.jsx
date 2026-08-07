@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import { getCity, slugify } from '../data/states';
 import { PRIORITY_CITIES, cityContent } from '../data/cityContent';
+import { SIZE_COMPARISON, STATE_FAQS } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
@@ -16,7 +17,7 @@ export default function CityPage() {
   useDocumentMeta(
     match ? `Custom Canopy Tents in ${match.city}, ${match.state.abbr}` : 'Location',
     match
-      ? `Order custom printed canopy tents, sidewalls and accessories in ${match.city}, ${match.state.name} with instant online pricing and fast shipping.`
+      ? `Order custom printed pop-up canopy tents in ${match.city}, ${match.state.name} with printed walls, instant online pricing and fast shipping.`
       : '',
     undefined,
     // Priority cities have unique content and are indexed; the rest stay noindex.
@@ -51,8 +52,8 @@ export default function CityPage() {
         <span className="eyebrow">Serving {city}, {state.abbr}</span>
         <h1>Custom Printed Canopy Tents in {city}, {state.name}</h1>
         <p className="lead">
-          Need a branded canopy in {city}? We print pop-up tents, sidewalls and replacement tops and
-          ship them to {city} and the surrounding {state.name} area — with
+          Need a branded canopy in {city}? We print pop-up canopy tents with up to 3 walls and ship
+          them to {city} and the surrounding {state.name} area — with
           {' '}<strong>instant online pricing</strong> and a free artwork proof.
         </p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem' }}>
@@ -84,6 +85,16 @@ export default function CityPage() {
             <ul className="feature-list">
               {cc.events.map((e) => <li key={e}>{e}</li>)}
             </ul>
+            <h3>Choosing a size for {city} events</h3>
+            <ul className="feature-list">
+              {SIZE_COMPARISON.map(([sz, txt]) => (
+                <li key={sz}><Link to={`/sizes/${sz}`}>{sz} canopy tent</Link> — {txt}</li>
+              ))}
+            </ul>
+            <h3>Custom canopy tent FAQs</h3>
+            {STATE_FAQS.map(([q, a]) => (
+              <details key={q}><summary>{q}</summary><p>{a}</p></details>
+            ))}
             <p className="muted">
               We're online-only — configure your tent, upload artwork, approve the free proof, and we
               print and ship it to {city}. <Link to={`/locations/${state.slug}`}>More on {state.name} →</Link>

@@ -1,6 +1,6 @@
 import { supabase, isSupabaseReady, DESIGN_BUCKET, authHeader } from '../lib/supabase';
 
-// Convert a canvas dataURL (from the Design Studio) into a File for upload.
+// Convert a dataURL into a File for upload (kept as a generic helper).
 function dataUrlToFile(dataUrl, filename) {
   const [meta, b64] = dataUrl.split(',');
   const mime = meta.match(/:(.*?);/)?.[1] || 'image/png';
@@ -10,7 +10,7 @@ function dataUrlToFile(dataUrl, filename) {
   return new File([bytes], filename, { type: mime });
 }
 
-// Upload an artwork file (uploaded OR drawn) to Supabase Storage.
+// Upload an uploaded artwork file to Supabase Storage.
 async function uploadDesign(userId, source) {
   if (!source) return null;
   const file =

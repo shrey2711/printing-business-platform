@@ -35,9 +35,6 @@ export default function PlaceOrderPage() {
     }
   };
 
-  // Design can arrive as a dataURL (from Design Studio) or an uploaded file.
-  const drawnDesign = incoming.design || null;
-
   if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
 
   if (!isAuthenticated) {
@@ -67,7 +64,7 @@ export default function PlaceOrderPage() {
         quantity: incoming.quantity || 1,
         estimatedPrice: incoming.estimatedPrice || '',
         notes,
-        design: file || drawnDesign,
+        design: file,
         config: incoming.config || null,
         idempotencyKey
       });
@@ -113,20 +110,12 @@ export default function PlaceOrderPage() {
 
           <div className="field">
             <label>Artwork</label>
-            {drawnDesign ? (
-              <div className="design-preview">
-                <img src={drawnDesign} alt="Your design" />
-                <span>✓ Design from the Design Studio attached</span>
-              </div>
-            ) : (
-              <>
-                <input type="file" accept="image/*,application/pdf,.ai,.eps"
-                  onChange={(e) => setFile(e.target.files?.[0] || null)} />
-                <small>
-                  Upload a print-ready file, or <Link to={`/design?product=${encodeURIComponent(incoming.product || '')}`}>draw it in the Design Studio</Link>.
-                </small>
-              </>
-            )}
+            <input type="file" accept="image/*,application/pdf,.ai,.eps"
+              onChange={(e) => setFile(e.target.files?.[0] || null)} />
+            <small>
+              Upload a print-ready file (PDF, AI, EPS, or high-resolution PNG/JPG). We send a free
+              artwork proof for your approval before anything goes to production.
+            </small>
           </div>
 
           <div className="field">

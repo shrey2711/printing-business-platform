@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage';
@@ -18,11 +18,9 @@ import SizePage from './pages/SizePage';
 import SolutionPage from './pages/SolutionPage';
 import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
+import InfoPage from './pages/InfoPage';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
-
-// The Design Studio pulls in fabric.js (~250KB) — load it only when visited.
-const DesignStudio = lazy(() => import('./pages/DesignStudio'));
 
 const topNav = [
   { label: 'All Canopies', to: '/products' },
@@ -172,6 +170,18 @@ function Footer() {
           </div>
         </div>
         <div>
+          <h4>Company</h4>
+          <div className="ft-links">
+            <Link to="/about">About Apex Trade Show</Link>
+            <Link to="/artwork-guidelines">Artwork Guidelines</Link>
+            <Link to="/shipping">Shipping</Link>
+            <Link to="/returns">Returns</Link>
+            <Link to="/warranty">Warranty</Link>
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms</Link>
+          </div>
+        </div>
+        <div>
           <h4>Contact</h4>
           <p className="ft-muted">Customer Service Hours:</p>
           <p>{brand.hours}</p>
@@ -200,7 +210,6 @@ function App() {
         <Route path="/solutions/:useCase" element={<SolutionPage />} />
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/design" element={<DesignStudio />} />
         <Route path="/order" element={<PlaceOrderPage />} />
         <Route path="/quote" element={<QuotePage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -211,6 +220,13 @@ function App() {
         <Route path="/locations/:stateSlug" element={<LocationPage />} />
         <Route path="/locations/:stateSlug/:citySlug" element={<CityPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<InfoPage slug="about" />} />
+        <Route path="/artwork-guidelines" element={<InfoPage slug="artwork-guidelines" />} />
+        <Route path="/shipping" element={<InfoPage slug="shipping" />} />
+        <Route path="/returns" element={<InfoPage slug="returns" />} />
+        <Route path="/warranty" element={<InfoPage slug="warranty" />} />
+        <Route path="/privacy" element={<InfoPage slug="privacy" />} />
+        <Route path="/terms" element={<InfoPage slug="terms" />} />
       </Routes>
       </Suspense>
       <Footer />
