@@ -64,6 +64,21 @@ const daysGroup = {
   ]
 };
 
+// Full set (printed canopy + frame + bag) vs canopy-only (printed top, no
+// frame). Canopy-only is 20% off the tent price. Multiplier applies to the base
+// tent before walls, so walls (if added) stay full price.
+const kitGroup = {
+  id: 'kit',
+  label: 'What you get',
+  type: 'select',
+  pricing: 'multiplier',
+  help: 'Full set includes the aluminium frame + carry bag. Canopy only is just the printed top.',
+  choices: [
+    { id: 'full', label: 'Full set — canopy + frame + bag', mult: 1, default: true },
+    { id: 'canopy', label: 'Canopy only — printed top', mult: 0.8 }
+  ]
+};
+
 // One-time design service (flat, not per tent).
 const designGroup = {
   id: 'design',
@@ -107,6 +122,7 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
     // the back). Enforced in the configurator UI and clamped server-side.
     constraints: [{ groups: ['wallsFull', 'wallsHalf'], max: 3 }],
     optionGroups: [
+      kitGroup,
       wallSelect('wallsFull', 'Full walls', wallPer),
       wallSelect('wallsHalf', 'Half walls', wallPer),
       daysGroup,
