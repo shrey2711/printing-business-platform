@@ -11,22 +11,22 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const brand = {
-  placeholder: true,
+  placeholder: false,
 
-  name: 'Canopy Tent Co.',
-  shortName: 'Canopy Tent Co.',
+  name: 'Apex Trade Show',
+  shortName: 'Apex',
   // Rendered in the header logo as two-tone text: <first><accent>
-  logoText: { first: 'Canopy', accent: 'Tent Co.' },
+  logoText: { first: 'Apex', accent: 'Trade Show' },
 
   tagline: 'Custom printed canopy tents, priced instantly',
   description:
-    'Custom printed pop-up canopy tents in 8x8, 10x10, 10x15 and 10x20. Choose your frame ' +
-    'grade, print coverage, walls and accessories and see the price update live. Free artwork ' +
-    'proof on every order, shipped across the US and Canada.',
+    'Custom printed pop-up canopy tents in 10x10, 10x15 and 10x20. Choose full or half walls, ' +
+    'add rush delivery, and see the price update live. Free artwork proof on every order, ' +
+    'shipped across the US and Canada.',
 
   origin: 'https://www.apextradeshow.com',
 
-  email: 'sales@example.com',
+  email: 'sales@apextradeshow.com',
   phone: '1 (800) 555-0148',
   phoneHref: '+18005550148',
   hours: 'Mon – Fri: 8:00am – 6:00pm ET',

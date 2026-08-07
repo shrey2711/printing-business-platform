@@ -5,8 +5,8 @@
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 // EMAIL_FROM must use a domain you've verified in Resend. For quick testing,
 // "onboarding@resend.dev" only delivers to your own Resend account email.
-const EMAIL_FROM = process.env.EMAIL_FROM || 'Canopy Tent Co. <onboarding@resend.dev>';
-const BRAND = process.env.BRAND_NAME || 'Canopy Tent Co.';
+const EMAIL_FROM = process.env.EMAIL_FROM || 'Apex Trade Show <onboarding@resend.dev>';
+const BRAND = process.env.BRAND_NAME || 'Apex Trade Show';
 const DEFAULT_APP_URL = (process.env.PUBLIC_BASE_URL || '').replace(/\/$/, '');
 
 // --- Brand palette --------------------------------------------------------
@@ -90,7 +90,7 @@ function header() {
   <tr><td style="background:${C.navy};padding:22px 28px;">
     <table role="presentation" cellpadding="0" cellspacing="0"><tr>
       <td style="background:#0f1a2e;border-radius:8px;width:40px;height:40px;text-align:center;vertical-align:middle;color:#fff;font-family:Arial,sans-serif;font-weight:800;font-size:16px;">&#9978;</td>
-      <td style="padding-left:12px;font-family:Arial,sans-serif;font-weight:800;font-size:22px;color:#ffffff;">Canopy<span style="color:${C.red};">Tent Co.</span></td>
+      <td style="padding-left:12px;font-family:Arial,sans-serif;font-weight:800;font-size:22px;color:#ffffff;">Apex<span style="color:${C.red};"> Trade Show</span></td>
     </tr></table>
   </td></tr>`;
 }
@@ -99,7 +99,7 @@ function footer() {
   return `
   <tr><td style="background:${C.bg};padding:20px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.6;">
     <strong style="color:${C.navy};">${BRAND}</strong> — custom printed canopy tents, shipped across the US and Canada.<br/>
-    Questions? Reply to this email or contact sales@example.com.<br/>
+    Questions? Reply to this email or contact sales@apextradeshow.com.<br/>
     <span style="color:#9aa3b0;">You're receiving this because you placed an order with ${BRAND}.</span>
   </td></tr>`;
 }
