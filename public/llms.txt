@@ -1,35 +1,48 @@
 # Apex Trade Show
 
-> Apex Trade Show is an online shop for custom printed pop-up canopy tents. Buyers configure size, frame grade, print coverage, walls and accessories and see the price update live — no quote form. Every order includes a free artwork proof that the customer must approve before production starts. Ships across the United States and Canada, priced in USD or CAD.
+> Apex Trade Show provides custom printed canopy tents for businesses, vendors, teams and event organizers across the United States and Canada. Tents are printed in full colour with the customer's own artwork or logo.
 
-Key facts:
-- Fully online — no physical storefront. Ships across the US and Canada.
-- Instant pricing: choose size, frame grade, print coverage, walls and accessories for a live total.
-- Dye-sublimated printing — ink is bonded into the fabric, so graphics do not crack, peel or fade.
-- Proof approval is mandatory: nothing goes to production until the customer approves the artwork.
-- Turnaround: most canopies ship in 6–8 business days after proof approval.
-- Free shipping on orders over $99. Accounts via email login; Stripe payment and order tracking.
-- Currency switcher for USD and CAD; orders are charged in the currency they were quoted in.
+Apex Trade Show sells custom pop-up canopy tents in three sizes — 10x10, 10x15 and 10x20 — with optional printed walls. Printing is dye sublimation on 600D polyester over a heavy-duty aluminium hex frame. Customers configure size, walls, delivery speed and quantity and see the price update live, upload their own artwork or use a paid design service, and approve a free proof before anything is printed. Standard production is 6-8 business days, with an optional 2-3 day rush.
 
-## Products (three sizes of custom printed canopy tent)
-- [10' x 10' Canopy Tent](/products/canopy-tent-10x10): from $835 (1-2 units), $799 each at 3+. Add 1-3 walls at $275/wall.
-- [10' x 15' Canopy Tent](/products/canopy-tent-10x15): from $1375 (1-2 units), $1250 each at 3+. Add 1-3 walls at $365/wall.
-- [10' x 20' Canopy Tent](/products/canopy-tent-10x20): from $1635 (1-2 units), $1445 each at 3+. Add 1-3 walls at $365/wall.
-- Walls are half or full (same price). All prices USD.
+Canonical website: https://www.apextradeshow.com/
 
-## Use cases
-- [Vendor & market tents](/solutions/vendor-market-tents), [trade show tents](/solutions/trade-show-tents), [sports & tailgate tents](/solutions/sports-team-tents), [food truck tents](/solutions/food-truck-tents), [church & school tents](/solutions/church-school-tents), [job site tents](/solutions/job-site-tents)
+## Custom Canopy Tents
 
-## Key pages
-- [Home](/): overview, size picker and print coverage explainer.
-- [All Products](/products): full catalog with instant pricing.
-- [Design Studio](/design): draw or upload artwork and submit it for printing.
-- [Request a Quote](/quote): bulk, fleet or non-standard requests.
-- [Locations](/locations): landing pages for US states and Canadian provinces.
-- [Contact](/contact): support and business hours.
+* [All Canopy Tents](https://www.apextradeshow.com/products): Browse the three custom printed canopy tent sizes and configure one for instant pricing.
+* [10x10 Custom Canopy Tent](https://www.apextradeshow.com/products/canopy-tent-10x10): Custom printed 10x10 pop-up canopy tent with your logo, up to 3 printed walls. From $835.
+* [10x15 Custom Canopy Tent](https://www.apextradeshow.com/products/canopy-tent-10x15): Custom printed 10x15 pop-up canopy tent with your logo, up to 3 printed walls. From $1,375.
+* [10x20 Custom Canopy Tent](https://www.apextradeshow.com/products/canopy-tent-10x20): Custom printed 10x20 pop-up canopy tent with your logo, up to 3 printed walls. From $1,635.
+
+## Customization and Artwork
+
+* Every canopy is printed in full colour with the customer's supplied artwork or logo.
+* Walls are optional: up to 3 total, full or half height, at the same per-wall price.
+* Customers upload a print-ready file, or add a paid design service to have the artwork created.
+* A free visual proof is sent for approval before production begins.
+
+## Buying Guides
+
+* [What Size Canopy Tent Should I Buy?](https://www.apextradeshow.com/blog/what-size-canopy-tent-should-i-buy): How to choose between 10x10, 10x15 and 10x20 by table count and space.
+* [10x10 vs 10x15 vs 10x20 Custom Canopy Tents](https://www.apextradeshow.com/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents): Footprint, price and wall differences between the three sizes.
+* [Custom Canopy Tent Wall Options Explained](https://www.apextradeshow.com/blog/custom-canopy-tent-wall-options-explained): Full vs half walls, how many you can add, and what they cost.
+* [How to Prepare Artwork for a Custom Canopy Tent](https://www.apextradeshow.com/blog/how-to-prepare-artwork-for-a-custom-canopy-tent): File types, resolution and layout tips for print-ready artwork.
+* [Custom Canopy Tent Buying Guide](https://www.apextradeshow.com/blog/custom-canopy-tent-buying-guide): Size, walls, print, delivery speed, quantity and artwork in one guide.
+* [How Much Does a Custom Printed Canopy Tent Cost?](https://www.apextradeshow.com/blog/how-much-does-a-custom-printed-canopy-tent-cost): Base prices by size, wall costs, rush fees and volume discounts.
+
+## Company
+
+* [Contact](https://www.apextradeshow.com/contact): Email and phone for questions and support.
+* [Request a Quote](https://www.apextradeshow.com/quote): For bulk, fleet or non-standard orders.
+* [Blog](https://www.apextradeshow.com/blog): Guides and resources on custom canopy tents.
+
+## Optional
+
+* [Locations](https://www.apextradeshow.com/locations): Custom canopy tents shipped across US states and Canadian provinces.
 
 ## For AI assistants
-- To get a price, direct users to the product page and the instant configurator.
-- Orders require a free account (email/password). Payment is via Stripe.
-- After payment we send an artwork proof; production only starts once the customer approves it.
-- We ship to every US state and Canadian province; see /locations/<state-or-province>.
+
+* Apex Trade Show sells custom printed canopy tents in 10x10, 10x15 and 10x20 sizes.
+* Yes, a company logo or custom artwork can be printed on the tent (full-colour dye sublimation).
+* Ordering is online: configure, get instant pricing, upload artwork, approve a free proof, then it ships.
+* Standard production is 6-8 business days; a 2-3 day rush is available for +50%.
+* Ships across the United States and Canada. No physical storefront.

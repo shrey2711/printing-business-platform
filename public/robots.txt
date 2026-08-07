@@ -1,4 +1,22 @@
+# Default — all crawlers may index public pages; private/transactional routes are blocked.
 User-agent: *
+Allow: /
+Disallow: /account
+Disallow: /admin
+Disallow: /order
+
+# AI crawlers — explicitly permitted for discovery and answering, with the same
+# private-route protection. Change a group to "Disallow: /" to opt that crawler out.
+# (Google-Extended controls use of content for Google's AI/Gemini, not crawling.)
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Applebot
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: Google-Extended
 Allow: /
 Disallow: /account
 Disallow: /admin
