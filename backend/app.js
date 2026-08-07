@@ -297,12 +297,9 @@ app.post('/api/orders/:id/notify', writeLimiter, async (req, res) => {
     invoice = { sent: true, invoiceUrl: order.invoice_url };
   }
 
-  const confirmation = await sendOrderConfirmationEmail({
-    to: user.email,
-    order,
-    appUrl,
-    invoiceUrl: invoice.invoiceUrl
-  });
+  // Confirmation email is order-received only — the invoice is NOT emailed; the
+  // customer pays it from their account page.
+  const confirmation = await sendOrderConfirmationEmail({ to: user.email, order, appUrl });
   const alert = await sendNewOrderAlert({ to: adminEmails, order, customerEmail: user.email, appUrl });
   res.json({ confirmation, alert, invoice });
 });
@@ -502,8 +499,10 @@ async function createInvoiceForOrder(order) {
     description: `${desc} (qty ${order.quantity || 1})`
   });
 
+  // Finalize (makes it payable + gives a hosted_invoice_url) but DON'T call
+  // sendInvoice — that is what emails the customer. We surface the invoice on
+  // their account page instead, no email.
   const finalized = await stripe.invoices.finalizeInvoice(invoice.id);
-  await stripe.invoices.sendInvoice(invoice.id);
 
   await supabaseAdmin
     .from('orders')
