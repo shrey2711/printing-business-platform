@@ -123,6 +123,22 @@ const canopyTents = [
 
 const products = [
   ...canopyTents,
+  // TEMPORARY $1 live-payment test. active:false = hidden from catalog/home/
+  // sitemap, but reachable at /products/payment-test and orderable. REMOVE after
+  // confirming Stripe charges + webhook mark the order paid.
+  {
+    slug: 'payment-test',
+    active: false,
+    name: 'Payment Test ($1)',
+    category: 'tents',
+    badge: 'Test',
+    emoji: '🧪',
+    tagline: 'Internal $1 live-payment test. Remove after testing.',
+    description: 'Charges $1 to verify the live Stripe checkout + webhook end to end.',
+    features: ['$1 charge', 'Hidden from catalog', 'Delete after test'],
+    turnaround: 'n/a',
+    pricing: { model: 'unit', variants: [{ id: 'one', name: '$1 test', unitPrice: 1 }] }
+  },
   {
     slug: 'vinyl-banners',
     active: false,
