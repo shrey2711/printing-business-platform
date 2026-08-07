@@ -16,12 +16,21 @@ export default function TentPhoto({ size, walls = 1, label }) {
   if (broken || !size) {
     return <CanopyPreview size={size} print="top" walls={Number(walls) || 0} label={label} />;
   }
+  // Descriptive, keyword-relevant ALT (image SEO) — falls back to a specific
+  // default, not a generic "tent image".
+  const wallText = n > 1 ? `${n} printed walls` : '1 printed wall';
+  const alt = label
+    ? `${size} custom printed canopy tent — ${label}`
+    : `${size} custom printed canopy tent with ${wallText}`;
   return (
     <img
       className="tent-photo"
       src={src}
-      alt={label || `${size} canopy tent, ${n} wall${n > 1 ? 's' : ''}`}
+      alt={alt}
+      width="1200"
+      height="900"
       loading="lazy"
+      decoding="async"
       onError={() => setBroken(true)}
     />
   );

@@ -206,34 +206,68 @@ for (const sol of SOLUTIONS) {
   });
 }
 
+// Commercial-intent title/H1/description per product. Canopy sizes target
+// "<size> custom canopy tent with logo"; others keep a sensible default.
+function productSeoTitle(product) {
+  const m = product.slug.match(/canopy-tent-(\d+x\d+)/);
+  if (m) {
+    const size = m[1];
+    return {
+      title: `${size} Custom Canopy Tent With Logo`,
+      h1: `${product.name} — Custom Printed With Your Logo`,
+      description: (price) =>
+        `Custom printed ${size} canopy tent with your logo — full-colour dye sublimation, full or half walls, from $${price}. Free artwork proof, ships across the US & Canada.`
+    };
+  }
+  return {
+    title: `${product.name} | Instant Pricing`,
+    h1: `${product.name} — Custom Printing & Instant Pricing`,
+    description: (price, prod) => `${prod.tagline} Order online with instant pricing from $${price}. ${prod.turnaround}.`
+  };
+}
+
 // ---- Each product ----
 for (const summary of productList) {
   const product = getProduct(summary.slug);
   const startingPrice = summary.startingPrice;
   routes.push(() => {
     const p = product.pricing;
-    let materials = '';
-    let sizes = '';
+    // Build a specifications list per pricing model — never emit empty labels.
+    const specs = [];
     if (p.model === 'area') {
-      materials = (p.materials || []).map((m) => m.name).join(', ');
-      sizes = `Custom sizes from ${p.minWidthIn}"×${p.minHeightIn}" up to ${p.maxWidthIn}"×${p.maxHeightIn}".`;
+      const materials = (p.materials || []).map((m) => m.name).join(', ');
+      if (materials) specs.push(['Materials', materials]);
+      specs.push(['Sizes', `Custom sizes from ${p.minWidthIn}"×${p.minHeightIn}" up to ${p.maxWidthIn}"×${p.maxHeightIn}"`]);
+      const finishing = (p.finishing || []).map((f) => f.name).join(', ');
+      if (finishing) specs.push(['Finishing', finishing]);
+    } else if (p.model === 'configured') {
+      const sizeMatch = product.slug.match(/(\d+x\d+)/);
+      if (sizeMatch) specs.push(['Size', sizeMatch[1].replace('x', "' × ") + "'"]);
+      specs.push(['Fabric', '600D polyester, dye-sublimated full-colour print']);
+      specs.push(['Frame', 'Heavy-duty aluminium hex, telescopic legs']);
+      // Each configurable option group and its choices.
+      for (const g of p.optionGroups || []) {
+        const choices = (g.choices || []).map((c) => c.label).join(', ');
+        if (choices) specs.push([g.label, choices]);
+      }
     } else {
-      sizes = (p.variants || []).map((v) => v.name).join(', ');
-      materials = (p.materials || []).map((m) => m.name).join(', ');
+      const variants = (p.variants || []).map((v) => v.name).join(', ');
+      if (variants) specs.push(['Options', variants]);
+      const materials = (p.materials || []).map((m) => m.name).join(', ');
+      if (materials) specs.push(['Materials', materials]);
     }
-    const finishing = (p.finishing || []).map((f) => f.name).join(', ');
+
     const related = productList.filter((x) => x.slug !== product.slug).slice(0, 5);
     const faqs = getProductFaqs(product);
+    const seoTitle = productSeoTitle(product);
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>
-      <h1>${esc(product.name)} — Custom Printing &amp; Instant Pricing</h1>
+      <h1>${esc(seoTitle.h1)}</h1>
       <p>${esc(product.description)}</p>
       <p><strong>Starting at $${startingPrice}.</strong> ${esc(product.turnaround)}.</p>
       <h2>Features</h2><ul>${product.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
-      <h2>Materials &amp; options</h2>
-      <p>Materials: ${esc(materials)}.</p>
-      <p>Sizes: ${esc(sizes)}</p>
-      ${finishing ? `<p>Finishing: ${esc(finishing)}.</p>` : ''}
+      <h2>Specifications</h2>
+      ${specs.map(([k, v]) => `<p><strong>${esc(k)}:</strong> ${esc(v)}</p>`).join('')}
       <p><a href="/products/${product.slug}">Configure your ${esc(product.name)} and get an instant price →</a></p>
       <h2>Frequently asked questions</h2>
       ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
@@ -241,8 +275,8 @@ for (const summary of productList) {
       <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>`;
     return render({
       path: `/products/${product.slug}`,
-      title: `${product.name} | Instant Pricing | ${BRAND}`,
-      description: `${product.tagline} Order ${product.name.toLowerCase()} online with instant pricing from $${startingPrice}. ${product.turnaround}.`,
+      title: `${seoTitle.title} | ${BRAND}`,
+      description: seoTitle.description(startingPrice, product),
       body,
       jsonLd: [
         {
@@ -268,15 +302,17 @@ for (const summary of productList) {
             { '@type': 'ListItem', position: 3, name: product.name, item: `${ORIGIN}/products/${product.slug}` }
           ]
         },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map((f) => ({
-            '@type': 'Question',
-            name: f.q,
-            acceptedAnswer: { '@type': 'Answer', text: f.a }
-          }))
-        }
+        ...(faqs.length
+          ? [{
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: faqs.map((f) => ({
+                '@type': 'Question',
+                name: f.q,
+                acceptedAnswer: { '@type': 'Answer', text: f.a }
+              }))
+            }]
+          : [])
       ]
     });
   });

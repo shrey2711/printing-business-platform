@@ -21,8 +21,14 @@ export default function ProductConfigurator() {
   const [pricing, setPricing] = useState(false);
   const debounceRef = useRef(null);
 
+  // Commercial-intent title for canopy sizes (matches the prerendered title).
+  const canopySize = product?.slug?.match(/canopy-tent-(\d+x\d+)/)?.[1];
   useDocumentMeta(
-    product ? `${product.name} — Custom Printing & Instant Pricing` : 'Product',
+    product
+      ? canopySize
+        ? `${canopySize} Custom Canopy Tent With Logo`
+        : `${product.name} — Custom Printing & Instant Pricing`
+      : 'Product',
     product?.tagline
   );
 
