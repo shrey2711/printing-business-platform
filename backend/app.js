@@ -509,11 +509,12 @@ async function createInvoiceForOrder(order) {
     .update({
       stripe_invoice_id: finalized.id,
       invoice_url: finalized.hosted_invoice_url,
+      invoice_pdf: finalized.invoice_pdf,
       invoice_status: finalized.status
     })
     .eq('id', order.id);
 
-  return { invoiceUrl: finalized.hosted_invoice_url, invoiceId: finalized.id };
+  return { invoiceUrl: finalized.hosted_invoice_url, invoicePdf: finalized.invoice_pdf, invoiceId: finalized.id };
 }
 
 // Admin re-send / manual invoice button.

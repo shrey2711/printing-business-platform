@@ -235,6 +235,11 @@ export default function AccountPage() {
                     {isPaid(o) ? 'View invoice' : 'Pay invoice'}
                   </a>
                 )}
+                {o.invoice_pdf && (
+                  <a className="btn btn-outline btn-sm" href={o.invoice_pdf} target="_blank" rel="noreferrer">
+                    ⬇ PDF
+                  </a>
+                )}
                 {!isPaid(o) && !o.invoice_url && o.status === 'submitted' && o.config?.slug && (
                   <button className="btn btn-blue btn-sm" onClick={() => payNow(o.id)}>Pay now</button>
                 )}
