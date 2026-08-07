@@ -297,9 +297,14 @@ app.post('/api/orders/:id/notify', writeLimiter, async (req, res) => {
     invoice = { sent: true, invoiceUrl: order.invoice_url };
   }
 
-  // Confirmation email is order-received only — the invoice is NOT emailed; the
-  // customer pays it from their account page.
-  const confirmation = await sendOrderConfirmationEmail({ to: user.email, order, appUrl });
+  // Email the customer their order confirmation WITH the invoice pay link (via
+  // our own SMTP, not Stripe). Still viewable on their account page too.
+  const confirmation = await sendOrderConfirmationEmail({
+    to: user.email,
+    order,
+    appUrl,
+    invoiceUrl: invoice.invoiceUrl
+  });
   const alert = await sendNewOrderAlert({ to: adminEmails, order, customerEmail: user.email, appUrl });
   res.json({ confirmation, alert, invoice });
 });
