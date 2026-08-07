@@ -129,15 +129,15 @@ const products = [
   {
     slug: 'payment-test',
     active: false,
-    name: 'Payment Test ($1)',
+    name: 'Payment Test ($0.50)',
     category: 'tents',
     badge: 'Test',
     emoji: '🧪',
-    tagline: 'Internal $1 live-payment test. Remove after testing.',
-    description: 'Charges $1 to verify the live Stripe checkout + webhook end to end.',
-    features: ['$1 charge', 'Hidden from catalog', 'Delete after test'],
+    tagline: 'Internal $0.50 live-payment test. Remove after testing.',
+    description: 'Charges $0.50 to verify the live Stripe checkout + invoice + webhook end to end.',
+    features: ['$0.50 charge', 'Hidden from catalog', 'Delete after test'],
     turnaround: 'n/a',
-    pricing: { model: 'unit', variants: [{ id: 'one', name: '$1 test', unitPrice: 1 }] }
+    pricing: { model: 'unit', variants: [{ id: 'one', name: '$0.50 test', unitPrice: 0.5 }] }
   },
   {
     slug: 'vinyl-banners',
