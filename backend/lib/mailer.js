@@ -179,21 +179,55 @@ function shell(innerHtml, preheader = '') {
 }
 
 // --- Low-level send -------------------------------------------------------
+// Generic SMTP (Brevo, SES, Mailgun, …) — set SMTP_HOST/PORT/USER/PASS. Falls
+// back to the Resend HTTP API if SMTP isn't configured but RESEND_API_KEY is.
+// Lazily created so the module loads even when nodemailer isn't needed.
+let smtpTransport;
+function getSmtp() {
+  if (!process.env.SMTP_HOST) return null;
+  if (smtpTransport) return smtpTransport;
+  // Dynamic require keeps nodemailer out of the load path unless SMTP is used.
+  const nodemailer = require('nodemailer');
+  smtpTransport = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT) || 587,
+    secure: Number(process.env.SMTP_PORT) === 465, // 465 = implicit TLS, 587 = STARTTLS
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+  });
+  return smtpTransport;
+}
+
 async function send({ to, subject, html }) {
-  if (!RESEND_API_KEY) return { sent: false, reason: 'email-not-configured' };
   const recipients = (Array.isArray(to) ? to : [to]).filter(Boolean);
   if (!recipients.length) return { sent: false, reason: 'no-recipient' };
-  try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: EMAIL_FROM, to: recipients, subject, html })
-    });
-    if (!res.ok) return { sent: false, reason: (await res.text()).slice(0, 300) };
-    return { sent: true };
-  } catch (e) {
-    return { sent: false, reason: e.message };
+
+  // Preferred: SMTP (Brevo etc).
+  const smtp = getSmtp();
+  if (smtp) {
+    try {
+      await smtp.sendMail({ from: EMAIL_FROM, to: recipients, subject, html });
+      return { sent: true, via: 'smtp' };
+    } catch (e) {
+      return { sent: false, reason: e.message };
+    }
   }
+
+  // Fallback: Resend HTTP API.
+  if (RESEND_API_KEY) {
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from: EMAIL_FROM, to: recipients, subject, html })
+      });
+      if (!res.ok) return { sent: false, reason: (await res.text()).slice(0, 300) };
+      return { sent: true, via: 'resend' };
+    } catch (e) {
+      return { sent: false, reason: e.message };
+    }
+  }
+
+  return { sent: false, reason: 'email-not-configured' };
 }
 
 // --- Public API -----------------------------------------------------------
