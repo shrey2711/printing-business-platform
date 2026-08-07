@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAllOrders, updateOrder, deleteOrder } from '../../services/admin';
+import { getAllOrders, updateOrder, deleteOrder, sendInvoice } from '../../services/admin';
 import { formatCharged } from '../../lib/money';
 
 const STATUSES = [
@@ -44,6 +44,17 @@ export default function OrdersTab({ onError, onFlash }) {
       const { order } = await updateOrder(o.id, { tracking_number });
       setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, tracking_number: order.tracking_number } : x)));
       onFlash('✓ Tracking saved');
+    } catch (e) {
+      onError(e.message);
+    }
+  };
+
+  const invoice = async (o) => {
+    if (!window.confirm(`Create & email a Stripe invoice to ${o.customer_email || 'the customer'} for order #${String(o.id).slice(0, 8)}?`)) return;
+    try {
+      const { invoiceUrl } = await sendInvoice(o.id);
+      setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, invoice_url: invoiceUrl, invoice_status: 'open' } : x)));
+      onFlash('✓ Invoice sent to customer');
     } catch (e) {
       onError(e.message);
     }
@@ -101,7 +112,12 @@ export default function OrdersTab({ onError, onFlash }) {
             <span>
               {o.designUrl ? <a href={o.designUrl} target="_blank" rel="noreferrer">View</a> : <span className="muted">—</span>}
             </span>
-            <span>
+            <span style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}>
+              {o.invoice_url ? (
+                <a className="btn btn-outline btn-sm" href={o.invoice_url} target="_blank" rel="noreferrer" title="View invoice">📄</a>
+              ) : (
+                <button className="btn btn-outline btn-sm" onClick={() => invoice(o)} title="Create & email invoice">Invoice</button>
+              )}
               <button className="btn btn-ghost-danger btn-sm" onClick={() => removeOrder(o)} title="Delete order">✕</button>
             </span>
           </div>

@@ -29,3 +29,14 @@ export async function deleteOrder(id) {
   if (!res.ok) throw new Error('Could not delete the order.');
   return res.json();
 }
+
+// Create + email a Stripe invoice for an order. Returns { invoiceUrl }.
+export async function sendInvoice(id) {
+  const res = await fetch(`/api/admin/orders/${id}/invoice`, {
+    method: 'POST',
+    headers: { ...(await authHeader()) }
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Could not create the invoice.');
+  return data;
+}

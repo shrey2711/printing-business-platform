@@ -49,6 +49,24 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
         .eq('status', 'submitted'); // don't downgrade later statuses
     }
   }
+
+  // An invoice was paid by the customer on the hosted invoice page.
+  if (event.type === 'invoice.paid') {
+    const inv = event.data.object;
+    const orderId = inv.metadata?.orderId;
+    if (orderId) {
+      await supabaseAdmin
+        .from('orders')
+        .update({
+          status: 'paid',
+          invoice_status: 'paid',
+          amount_total: inv.amount_paid / 100,
+          currency: (inv.currency || 'usd').toUpperCase()
+        })
+        .eq('id', orderId)
+        .in('status', ['submitted']); // only advance an unpaid order
+    }
+  }
   res.json({ received: true });
 });
 
@@ -416,6 +434,76 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   }
 
   res.json({ order: data, email });
+});
+
+// Create + send a Stripe Invoice for an order (admin). Re-prices from the
+// stored config, emails the customer a hosted invoice, and records it. Payment
+// is captured via the invoice.paid webhook.
+app.post('/api/admin/orders/:id/invoice', writeLimiter, async (req, res) => {
+  const admin = await requireAdmin(req, res);
+  if (!admin) return;
+  if (!stripe) return res.status(503).json({ error: 'Payments are not configured.' });
+
+  const { data: order } = await supabaseAdmin.from('orders').select('*').eq('id', req.params.id).single();
+  if (!order) return res.status(404).json({ error: 'Order not found.' });
+  if (order.stripe_invoice_id) return res.status(400).json({ error: 'An invoice already exists for this order.' });
+
+  // Re-price server-side (never trust stored display price), applying any live
+  // pricing override — same rule as checkout.
+  let subtotal = 0;
+  if (order.config?.slug) {
+    const pricing = await getPricingOverride(order.config.slug);
+    const priced = computePrice(order.config, pricing ? { pricing } : {});
+    if (priced.ok) subtotal = priced.total;
+  }
+  if (!(subtotal > 0)) return res.status(400).json({ error: 'This order has no priceable configuration.' });
+
+  const cur = currencies[order.currency] || currencies[BASE_CURRENCY];
+  const amountCents = Math.round(subtotal * cur.rate * 100);
+
+  // Customer email from the order's user.
+  const { data: u } = await supabaseAdmin.auth.admin.getUserById(order.user_id);
+  const email = u?.user?.email;
+  if (!email) return res.status(400).json({ error: 'No customer email on this order.' });
+
+  try {
+    // Find or create the Stripe customer by email.
+    const existing = await stripe.customers.list({ email, limit: 1 });
+    const customer = existing.data[0] || (await stripe.customers.create({ email }));
+
+    // Draft invoice first so the item attaches to it (not a floating charge).
+    const invoice = await stripe.invoices.create({
+      customer: customer.id,
+      collection_method: 'send_invoice',
+      days_until_due: 14,
+      currency: cur.stripe,
+      metadata: { orderId: order.id },
+      description: `${order.product}${order.specs ? ' — ' + order.specs : ''}`
+    });
+    await stripe.invoiceItems.create({
+      customer: customer.id,
+      invoice: invoice.id,
+      amount: amountCents,
+      currency: cur.stripe,
+      description: `${order.product}${order.specs ? ' — ' + order.specs : ''} (qty ${order.quantity || 1})`
+    });
+
+    const finalized = await stripe.invoices.finalizeInvoice(invoice.id);
+    await stripe.invoices.sendInvoice(invoice.id);
+
+    await supabaseAdmin
+      .from('orders')
+      .update({
+        stripe_invoice_id: finalized.id,
+        invoice_url: finalized.hosted_invoice_url,
+        invoice_status: finalized.status
+      })
+      .eq('id', order.id);
+
+    res.json({ ok: true, invoiceUrl: finalized.hosted_invoice_url, invoiceId: finalized.id });
+  } catch (err) {
+    res.status(500).json({ error: `Stripe: ${err.message}` });
+  }
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
