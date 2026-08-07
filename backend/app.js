@@ -470,7 +470,8 @@ async function createInvoiceForOrder(order) {
     const priced = computePrice(order.config, pricing ? { pricing } : {});
     if (priced.ok) subtotal = priced.total;
   }
-  if (!(subtotal > 0)) throw new Error('This order has no priceable configuration.');
+  // Allow $0 (a free/test order): Stripe finalizes a $0 invoice as paid.
+  if (subtotal < 0 || !Number.isFinite(subtotal)) throw new Error('This order has no priceable configuration.');
 
   const cur = currencies[order.currency] || currencies[BASE_CURRENCY];
   const amountCents = Math.round(subtotal * cur.rate * 100);
@@ -491,28 +492,33 @@ async function createInvoiceForOrder(order) {
     metadata: { orderId: order.id },
     description: desc
   });
-  await stripe.invoiceItems.create({
-    customer: customer.id,
-    invoice: invoice.id,
-    amount: amountCents,
-    currency: cur.stripe,
-    description: `${desc} (qty ${order.quantity || 1})`
-  });
+  if (amountCents > 0) {
+    await stripe.invoiceItems.create({
+      customer: customer.id,
+      invoice: invoice.id,
+      amount: amountCents,
+      currency: cur.stripe,
+      description: `${desc} (qty ${order.quantity || 1})`
+    });
+  }
 
   // Finalize (makes it payable + gives a hosted_invoice_url) but DON'T call
   // sendInvoice — that is what emails the customer. We surface the invoice on
-  // their account page instead, no email.
+  // their account page instead, no email. A $0 invoice finalizes as 'paid'.
   const finalized = await stripe.invoices.finalizeInvoice(invoice.id);
 
-  await supabaseAdmin
-    .from('orders')
-    .update({
-      stripe_invoice_id: finalized.id,
-      invoice_url: finalized.hosted_invoice_url,
-      invoice_pdf: finalized.invoice_pdf,
-      invoice_status: finalized.status
-    })
-    .eq('id', order.id);
+  const patch = {
+    stripe_invoice_id: finalized.id,
+    invoice_url: finalized.hosted_invoice_url,
+    invoice_pdf: finalized.invoice_pdf,
+    invoice_status: finalized.status
+  };
+  // $0 invoices are paid on finalize and may not fire a webhook — mark it here.
+  if (finalized.status === 'paid' && order.status === 'submitted') {
+    patch.status = 'paid';
+    patch.amount_total = (finalized.amount_paid || 0) / 100;
+  }
+  await supabaseAdmin.from('orders').update(patch).eq('id', order.id);
 
   return { invoiceUrl: finalized.hosted_invoice_url, invoicePdf: finalized.invoice_pdf, invoiceId: finalized.id };
 }
