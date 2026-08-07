@@ -424,9 +424,8 @@ export default function ProductConfigurator() {
               </div>
 
               <div className="ship-note">
-                {price.freeShipping
-                  ? '✅ Qualifies for free shipping'
-                  : `Add ${money(99 - price.total)} for free shipping`}
+                Ships across the US &amp; Canada after proof approval — see the{' '}
+                <Link to="/shipping">Shipping page</Link> for details.
               </div>
             </>
           )}

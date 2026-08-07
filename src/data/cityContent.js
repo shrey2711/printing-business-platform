@@ -9,7 +9,7 @@
 export const PRIORITY_CITIES = new Set([
   'los-angeles', 'san-diego', 'san-francisco', 'houston', 'dallas', 'austin',
   'miami', 'orlando', 'new-york-city', 'las-vegas', 'seattle',
-  'vancouver', 'toronto'
+  'vancouver', 'toronto', 'calgary', 'montreal'
 ]);
 
 export const cityContent = {
@@ -80,5 +80,13 @@ export const cityContent = {
   toronto: {
     intro: 'Toronto runs a dense event calendar — street festivals across the city, waterfront markets, cultural events and consumer shows. A crisp printed canopy claims a professional booth in a crowded vendor row and packs down fast between weekend events.',
     events: ['Street & neighbourhood festivals', 'Waterfront & park markets', 'Cultural & food events', 'Trade & consumer shows']
+  },
+  calgary: {
+    intro: 'Calgary events run big and outdoors — Stampede-season crowds, city festivals, farmers markets and trade expos. A printed canopy with a back wall stands up to wind off the foothills while branding the booth across open grounds.',
+    events: ['Stampede & rodeo events', 'City festivals', 'Farmers & artisan markets', 'Trade & home expos']
+  },
+  montreal: {
+    intro: "Montreal's festival season fills the calendar — street festivals, public markets and cultural events across the city. A full-colour printed canopy claims a professional, photo-ready booth in a crowded, lively vendor row.",
+    events: ['Street & music festivals', 'Public & farmers markets', 'Cultural & food events', 'Trade & consumer shows']
   }
 };

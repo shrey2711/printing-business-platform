@@ -197,7 +197,6 @@ export function computePrice(input, opts = {}) {
     subtotal: round2(goodsSubtotal),
     total: round2(total),
     perPieceAfterDiscount: round2(total / qty),
-    freeShipping: total >= 99,
     turnaround: product.turnaround
   };
 }

@@ -7,8 +7,11 @@
 // province is noindex'd (thin, templated) until it earns unique content.
 
 export const PRIORITY_STATES = new Set([
+  // USA
   'california', 'texas', 'florida', 'new-york',
-  'arizona', 'nevada', 'washington', 'illinois', 'georgia', 'north-carolina'
+  'arizona', 'nevada', 'washington', 'illinois', 'georgia', 'north-carolina',
+  // Canada
+  'british-columbia', 'ontario', 'alberta', 'quebec'
 ]);
 
 export const stateContent = {
@@ -61,6 +64,26 @@ export const stateContent = {
     intro:
       'North Carolina runs a strong mix of craft fairs, ACC sports, mountain and coastal festivals. A dye-sublimated canopy handles humidity and sun without fading, so a booth looks consistent across a full season of events.',
     events: ['Craft & artisan fairs', 'ACC sports & tailgates', 'Mountain & coastal festivals', 'Farmers markets']
+  },
+  'british-columbia': {
+    intro:
+      'British Columbia vendors work rain or shine — Lower Mainland and Island public markets, waterfront festivals and outdoor events from Vancouver to Victoria and the Okanagan. A canopy with printed side walls gives real weather cover and a branded backdrop through a wet, busy market season.',
+    events: ['Public & farmers markets', 'Waterfront & park festivals', 'Night markets', 'Okanagan wine & food events']
+  },
+  ontario: {
+    intro:
+      'Ontario runs a dense event calendar across Toronto, Ottawa and the surrounding cities — street festivals, waterfront markets, cultural events and consumer shows. A crisp printed canopy claims a professional booth in a crowded vendor row and packs down fast between weekends.',
+    events: ['City street festivals', 'Farmers & waterfront markets', 'Cultural & food events', 'Trade & consumer shows']
+  },
+  alberta: {
+    intro:
+      'Alberta pairs big outdoor events with a strong fair and rodeo season — Calgary and Edmonton festivals, Stampede-season crowds, farmers markets and trade expos. A bold printed top and a back wall anchor a booth or hospitality tent on wide, open grounds.',
+    events: ['Stampede & rodeo season', 'City festivals', 'Farmers & artisan markets', 'Trade & home expos']
+  },
+  quebec: {
+    intro:
+      "Quebec's calendar is packed with festivals and markets — Montreal and Quebec City street events, public markets and cultural celebrations through the warmer months. A full-colour printed canopy makes a booth stand out in a lively, crowded festival setting.",
+    events: ['Montreal & Quebec City festivals', 'Public & farmers markets', 'Cultural celebrations', 'Trade & consumer shows']
   }
 };
 

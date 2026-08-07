@@ -31,7 +31,7 @@ export function getProductFaqs(product) {
   // Turnaround + shipping
   faqs.push({
     q: `How fast is production and shipping?`,
-    a: `${product.turnaround}. We ship nationwide to all 50 states, and free shipping applies to orders over $99.`
+    a: `${product.turnaround}. We ship across the United States and Canada — see our Shipping page for delivery details.`
   });
 
   // Finishing / double-sided
