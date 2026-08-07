@@ -14,6 +14,7 @@ import { brand } from '../src/config/brand.js';
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
 import { PRIORITY_STATES, stateContent, ORDERING_STEPS } from '../src/data/stateContent.js';
+import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
 
@@ -396,21 +397,34 @@ for (const s of territories) {
 
   for (const c of s.cities) {
     const citySlug = slugify(c);
+    const cityIsPriority = PRIORITY_CITIES.has(citySlug);
+    const cc = cityContent[citySlug];
     routes.push(() => {
+      const products6 = `<ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
+      const sizesList = `<ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>`;
+      const richBody = cityIsPriority && cc
+        ? `<h2>Custom canopy tents in ${esc(c)}</h2><p>${esc(cc.intro)}</p>
+           <h2>Where canopy tents get used in ${esc(c)}</h2>
+           <ul>${cc.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
+           <h2>Popular sizes</h2>${sizesList}
+           <h2>Ordering &amp; artwork</h2>
+           <ol>${ORDERING_STEPS.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
+           <h2>Shop canopy tents</h2>${products6}
+           <p><a href="/locations/${s.slug}">More about custom canopy tents in ${esc(s.name)} →</a></p>`
+        : `<p>${esc(BRAND)} ships custom printed canopy tents, sidewalls and accessories to ${esc(c)},
+           ${esc(s.name)} with instant online pricing and a free artwork proof on every order.</p>
+           <h2>Popular products in ${esc(c)}</h2>${products6}`;
       const body = `
         <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <a href="/locations/${s.slug}">${esc(s.name)}</a> / <span>${esc(c)}</span></nav>
         <h1>Custom Printed Canopy Tents in ${esc(c)}, ${esc(s.name)}</h1>
-        <p>${esc(BRAND)} ships custom printed canopy tents, sidewalls and accessories to ${esc(c)},
-        ${esc(s.name)} with instant online pricing and a free artwork proof on every order.</p>
-        <h2>Popular products in ${esc(c)}</h2>
-        <ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
+        ${richBody}`;
       return render({
         path: `/locations/${s.slug}/${citySlug}`,
         title: `Custom Canopy Tents in ${c}, ${s.abbr} | ${BRAND}`,
         description: `Order custom printed canopy tents in ${c}, ${s.name} with instant online pricing and fast shipping.`,
-        // City pages are templated — keep them accessible but noindex until each
-        // has genuinely unique content (avoids doorway-page risk).
-        robots: 'noindex, follow',
+        // Priority cities have unique content and are indexed; the rest stay
+        // noindex to avoid doorway-page risk.
+        robots: cityIsPriority ? undefined : 'noindex, follow',
         body,
         jsonLd: {
           '@context': 'https://schema.org',
@@ -542,6 +556,12 @@ SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));
 sm.push(smUrl('/locations', '0.6', 'monthly'));
 // Only priority state pages are indexable; the templated long tail is noindex.
 territories.filter((s) => PRIORITY_STATES.has(s.slug)).forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
+// Priority cities (with unique content) are indexable too.
+territories.forEach((s) =>
+  s.cities.forEach((c) => {
+    if (PRIORITY_CITIES.has(slugify(c))) sm.push(smUrl(`/locations/${s.slug}/${slugify(c)}`, '0.4'));
+  })
+);
 sm.push(smUrl('/blog', '0.6', 'weekly'));
 posts.forEach((p) => sm.push(smUrl(`/blog/${p.slug}`, '0.6')));
 sm.push(smUrl('/quote', '0.4'));

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import { getCity, slugify } from '../data/states';
+import { PRIORITY_CITIES, cityContent } from '../data/cityContent';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
@@ -9,6 +10,8 @@ export default function CityPage() {
   const { stateSlug, citySlug } = useParams();
   const match = getCity(stateSlug, citySlug);
   const [products, setProducts] = useState([]);
+  const cityPriority = match && PRIORITY_CITIES.has(slugify(match.city));
+  const cc = match && cityContent[slugify(match.city)];
 
   useDocumentMeta(
     match ? `Custom Canopy Tents in ${match.city}, ${match.state.abbr}` : 'Location',
@@ -16,7 +19,8 @@ export default function CityPage() {
       ? `Order custom printed canopy tents, sidewalls and accessories in ${match.city}, ${match.state.name} with instant online pricing and fast shipping.`
       : '',
     undefined,
-    'noindex, follow' // templated page — noindex until it has unique local content
+    // Priority cities have unique content and are indexed; the rest stay noindex.
+    match && !cityPriority ? 'noindex, follow' : undefined
   );
 
   useEffect(() => {
@@ -72,12 +76,26 @@ export default function CityPage() {
       </section>
 
       <section className="section-block card">
-        <h2>Canopy tents shipped to {city}</h2>
-        <p className="muted">
-          We're an online shop — there's no storefront in {city}, and you don't need one. Market
-          vendors, teams and event organisers in {city} configure a tent, upload artwork, approve the
-          proof we send back, and we print and ship it to {city}, {state.name}.
-        </p>
+        <h2>Custom canopy tents in {city}</h2>
+        {cityPriority && cc ? (
+          <>
+            <p>{cc.intro}</p>
+            <h3>Where canopy tents get used in {city}</h3>
+            <ul className="feature-list">
+              {cc.events.map((e) => <li key={e}>{e}</li>)}
+            </ul>
+            <p className="muted">
+              We're online-only — configure your tent, upload artwork, approve the free proof, and we
+              print and ship it to {city}. <Link to={`/locations/${state.slug}`}>More on {state.name} →</Link>
+            </p>
+          </>
+        ) : (
+          <p className="muted">
+            We're an online shop — there's no storefront in {city}, and you don't need one. Market
+            vendors, teams and event organisers in {city} configure a tent, upload artwork, approve the
+            proof we send back, and we print and ship it to {city}, {state.name}.
+          </p>
+        )}
       </section>
 
       {others.length > 0 && (
