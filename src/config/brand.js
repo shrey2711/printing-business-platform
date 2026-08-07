@@ -24,7 +24,7 @@ export const brand = {
     'grade, print coverage, walls and accessories and see the price update live. Free artwork ' +
     'proof on every order, shipped across the US and Canada.',
 
-  origin: 'https://printing-business-platform-frontend.vercel.app',
+  origin: 'https://www.apextradeshow.com',
 
   email: 'sales@example.com',
   phone: '1 (800) 555-0148',
