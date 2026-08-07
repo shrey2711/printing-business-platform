@@ -124,16 +124,9 @@ export default function ProductConfigurator() {
       };
     });
 
-  // Pre-multiplier subtotal, so a whole-order multiplier (rush) can show its
-  // real dollar value instead of a bare percentage.
-  const totalMultGroup = (p?.optionGroups || []).find((g) => g.pricing === 'multiplyTotal');
-  const curTotalMult = (() => {
-    if (!totalMultGroup) return 1;
-    const c = totalMultGroup.choices.find((x) => x.id === sel[totalMultGroup.id]) ||
-      totalMultGroup.choices.find((x) => x.default);
-    return Number(c?.mult) || 1;
-  })();
-  const preMultTotal = price && curTotalMult ? price.subtotal / curTotalMult : 0;
+  // Server-computed subtotal before rush/whole-order multipliers, so the rush
+  // card can show its exact $ value without dividing a lagging total (no flicker).
+  const preMultTotal = price?.preMultipliedSubtotal || 0;
 
   return (
     <main className="page">

@@ -17,6 +17,7 @@ export function computePrice(input, opts = {}) {
   const selectedOptions = Array.isArray(options) ? options : [];
 
   let perPieceGoods = 0;
+  let preMultUnit = null; // per-piece price before whole-order multipliers (rush)
   const breakdown = [];
   const flatAddons = []; // one-time order charges (e.g. design service), not x qty
   const dims = {};
@@ -122,6 +123,10 @@ export function computePrice(input, opts = {}) {
       }
     }
 
+    // Snapshot the price BEFORE whole-order multipliers, so the UI can show a
+    // rush add-on's dollar value without dividing a lagging total (avoids flicker).
+    preMultUnit = running;
+
     // 4. Whole-order multipliers (e.g. rush delivery), applied AFTER add-ons so
     //    they scale base + walls together.
     for (const g of groups) {
@@ -182,6 +187,9 @@ export function computePrice(input, opts = {}) {
     quantity: qty,
     dims,
     unitPrice,
+    // Subtotal before rush/whole-order multipliers, x qty — lets the UI show a
+    // rush add-on's exact $ without dividing a lagging total.
+    preMultipliedSubtotal: round2((preMultUnit ?? perPieceGoods) * qty),
     breakdown,
     flatAddons,
     quantityDiscountPct: Math.round(discount * 100),
