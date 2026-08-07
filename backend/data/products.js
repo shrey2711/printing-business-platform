@@ -64,6 +64,19 @@ const daysGroup = {
   ]
 };
 
+// One-time design service (flat, not per tent).
+const designGroup = {
+  id: 'design',
+  label: 'Artwork',
+  type: 'select',
+  pricing: 'addFlat',
+  help: 'Upload your own print-ready file, or let our team design it for you.',
+  choices: [
+    { id: 'self', label: "I'll upload my artwork", price: 0, default: true },
+    { id: 'service', label: 'Design service — we design it', price: 35 }
+  ]
+};
+
 const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
   slug,
   active: true,
@@ -96,7 +109,8 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
     optionGroups: [
       wallSelect('wallsFull', 'Full walls', wallPer),
       wallSelect('wallsHalf', 'Half walls', wallPer),
-      daysGroup
+      daysGroup,
+      designGroup
     ]
   }
 });

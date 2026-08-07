@@ -368,6 +368,26 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .bulk-active { background: #fdeef0; }
 .bulk-active span { color: var(--red-dark) !important; font-weight: 700; }
 .notes-input { width: 100%; min-height: 90px; resize: vertical; }
+.flat-tag { font-style: normal; font-size: 0.7rem; color: var(--muted); background: var(--panel); padding: 0.05rem 0.35rem; border-radius: 4px; margin-left: 0.3rem; }
+
+/* Product detail tabs */
+.ptabs { max-width: 1000px; margin: 2.5rem auto 0; }
+.ptabs-nav { display: flex; flex-wrap: wrap; gap: 0.3rem; border-bottom: 2px solid var(--line-soft); }
+.ptab { border: 0; background: none; padding: 0.7rem 1rem; font-size: 0.92rem; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.ptab:hover { color: var(--navy); }
+.ptab-on { color: var(--red); border-bottom-color: var(--red); }
+.ptabs-body { padding: 1.4rem 0; }
+.ptab-panel h2 { font-size: 1.3rem; margin: 0 0 0.7rem; }
+.ptab-panel h3 { font-size: 1.05rem; margin: 1.2rem 0 0.5rem; }
+.ptab-panel p { color: var(--ink); line-height: 1.7; }
+.ptab-list { margin: 0.5rem 0 0 1.2rem; }
+.ptab-list li { margin-bottom: 0.4rem; }
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table th, .spec-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line-soft); font-size: 0.9rem; vertical-align: top; }
+.spec-table th { width: 30%; color: var(--muted); font-weight: 600; }
+.template-list { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.template-list a { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; color: var(--blue-dark); border: 1px solid var(--line); border-radius: 6px; padding: 0.7rem 1rem; }
+.template-list a:hover { border-color: var(--blue); background: var(--panel); }
 .choice-card.choice-active {
   border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); background: #f4f9fd;
 }

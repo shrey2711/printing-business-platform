@@ -18,6 +18,7 @@ export function computePrice(input, opts = {}) {
 
   let perPieceGoods = 0;
   const breakdown = [];
+  const flatAddons = []; // one-time order charges (e.g. design service), not x qty
   const dims = {};
 
   if (pricing.model === 'area') {
@@ -135,6 +136,16 @@ export function computePrice(input, opts = {}) {
       breakdown.push({ label: `${g.label} — ${choice.label}`, amount: round2(running - before) });
     }
 
+    // 5. Flat add-ons — charged ONCE per order, not per piece (e.g. design fee).
+    for (const g of groups) {
+      if (g.pricing !== 'addFlat') continue;
+      const choice = pickChoice(g, selections[g.id]);
+      if (!choice) continue;
+      chosen[g.id] = choice.label || choice.id;
+      const amt = Number(choice.price) || 0;
+      if (amt) flatAddons.push({ label: `${g.label} — ${choice.label}`, amount: round2(amt) });
+    }
+
     dims.configuration = chosen;
     // Readable one-liner for order specs / emails, matching how `unit` reports.
     dims.variant = Object.values(chosen).filter(Boolean).join(' • ');
@@ -161,7 +172,8 @@ export function computePrice(input, opts = {}) {
   const unitPrice = round2(perPieceGoods);
   const goodsSubtotal = perPieceGoods * qty;
   const discountAmount = goodsSubtotal * discount;
-  const total = goodsSubtotal - discountAmount;
+  const flatTotal = flatAddons.reduce((n, a) => n + a.amount, 0);
+  const total = goodsSubtotal - discountAmount + flatTotal;
 
   return {
     ok: true,
@@ -171,6 +183,7 @@ export function computePrice(input, opts = {}) {
     dims,
     unitPrice,
     breakdown,
+    flatAddons,
     quantityDiscountPct: Math.round(discount * 100),
     discountAmount: round2(discountAmount),
     subtotal: round2(goodsSubtotal),

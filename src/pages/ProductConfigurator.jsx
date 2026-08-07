@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProduct, getPrice } from '../services/api';
 import ProductArt from '../components/ProductArt';
+import ProductTabs from '../components/ProductTabs';
 import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
@@ -240,7 +241,7 @@ export default function ProductConfigurator() {
                           <span className="choice-meta">
                             {group.pricing === 'base'
                               ? money(choice.price)
-                              : group.pricing === 'add'
+                              : group.pricing === 'add' || group.pricing === 'addFlat'
                                 ? (Number(choice.price) ? `+${money(choice.price)}` : 'Included')
                                 : group.pricing === 'multiplyTotal'
                                   ? (Number(choice.mult) === 1 || !Number.isFinite(Number(choice.mult))
@@ -410,6 +411,12 @@ export default function ProductConfigurator() {
                     <span>−{money(price.discountAmount)}</span>
                   </div>
                 )}
+                {(price.flatAddons || []).map((a, i) => (
+                  <div className="breakdown-row" key={`flat-${i}`}>
+                    <span>{a.label} <em className="flat-tag">one-time</em></span>
+                    <span>{money(a.amount)}</span>
+                  </div>
+                ))}
               </div>
 
               <div className="price-total-row">
@@ -434,19 +441,7 @@ export default function ProductConfigurator() {
         </aside>
       </div>
 
-      {product.faqs?.length > 0 && (
-        <section className="faq-section">
-          <h2>{product.name} — Frequently Asked Questions</h2>
-          <div className="faq-list">
-            {product.faqs.map((f, i) => (
-              <details className="faq-item" key={i} open={i === 0}>
-                <summary>{f.q}</summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-      )}
+      <ProductTabs product={product} />
     </main>
   );
 }
