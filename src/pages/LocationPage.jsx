@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import { getState, slugify } from '../data/states';
+import { PRIORITY_STATES, stateContent } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
@@ -9,12 +10,17 @@ export default function LocationPage() {
   const { stateSlug } = useParams();
   const state = getState(stateSlug);
   const [products, setProducts] = useState([]);
+  const priority = state && PRIORITY_STATES.has(state.slug);
+  const content = state && stateContent[state.slug];
 
   useDocumentMeta(
     state ? `Custom Printed Canopy Tents in ${state.name}` : 'Location',
     state
       ? `Order custom printed canopy tents, sidewalls and accessories in ${state.name} with instant online pricing and shipping to ${state.cities.slice(0, 3).join(', ')} and beyond.`
-      : ''
+      : '',
+    undefined,
+    // Templated long-tail states are noindex until they earn unique content.
+    state && !priority ? 'noindex, follow' : undefined
   );
 
   useEffect(() => {
@@ -67,16 +73,22 @@ export default function LocationPage() {
       </section>
 
       <section className="section-block card">
-        <h2>Canopy tents for businesses across {state.name}</h2>
-        <p className="muted">
-          From weekend markets in {state.cities[0]} to trade shows in {state.cities[1] || state.cities[0]},
-          a printed canopy is often the whole booth. We ship to every city in {state.name}, including
-          {' '}{cityList}. Configure and order online at any hour — no minimums.
-        </p>
-        <p className="muted">
-          Whether it is a single 10&nbsp;×&nbsp;10 for a {state.cities[0]} market stall or a matching set for a
-          season of events, you pick the size, frame and print coverage and see the price as you go.
-        </p>
+        <h2>Custom canopy tents in {state.name}</h2>
+        {priority && content ? (
+          <>
+            <p>{content.intro}</p>
+            <h3>Popular event uses in {state.name}</h3>
+            <ul className="feature-list">
+              {content.events.map((e) => <li key={e}>{e}</li>)}
+            </ul>
+          </>
+        ) : (
+          <p className="muted">
+            From weekend markets in {state.cities[0]} to trade shows in {state.cities[1] || state.cities[0]},
+            a printed canopy is often the whole booth. We ship to every city in {state.name}, including
+            {' '}{cityList}. Configure and order online at any hour — no minimums.
+          </p>
+        )}
       </section>
 
       <section className="section-block-bare">

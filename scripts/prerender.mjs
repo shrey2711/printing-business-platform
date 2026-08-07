@@ -13,6 +13,7 @@ import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
+import { PRIORITY_STATES, stateContent, ORDERING_STEPS } from '../src/data/stateContent.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
 
@@ -342,24 +343,44 @@ routes.push(() => {
 // ---- Each state/province + city ----
 for (const s of territories) {
   const areaWord = s.country === 'CA' ? 'province-wide' : 'statewide';
+  const isPriority = PRIORITY_STATES.has(s.slug);
+  const content = stateContent[s.slug];
   routes.push(() => {
     const cityLinks = s.cities
       .map((c) => `<li><a href="/locations/${s.slug}/${slugify(c)}">Canopy tents in ${esc(c)}, ${s.abbr}</a></li>`)
       .join('');
+    const products6 = `<ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
+    const sizesList = `<ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>`;
+
+    // Priority markets get genuinely unique, useful content; the long tail gets
+    // a minimal page and is noindex'd (see robots below).
+    const richBody = isPriority && content
+      ? `<h2>Custom canopy tents in ${esc(s.name)}</h2><p>${esc(content.intro)}</p>
+         <h2>Popular event uses in ${esc(s.name)}</h2>
+         <ul>${content.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
+         <h2>Choose a size</h2>${sizesList}
+         <h2>Wall &amp; print options</h2>
+         <p>Add full or half printed walls (up to 3), print the canopy top and valance, and pick
+         standard 6-8 day or rush 2-3 day production. Order 3+ tents for volume pricing.</p>
+         <h2>How ordering works</h2><ol>${ORDERING_STEPS.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
+         <h2>Shop canopy tents</h2>${products6}`
+      : `<p>Order custom printed pop-up canopy tents in ${esc(s.name)} with instant online pricing and
+         shipping to ${esc(s.cities.join(', '))} and ${areaWord}.</p>
+         <h2>Canopy sizes</h2>${sizesList}
+         <h2>Popular products</h2>${products6}`;
+
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <span>${esc(s.name)}</span></nav>
       <h1>Custom Printed Canopy Tents in ${esc(s.name)}</h1>
-      <p>Order custom printed pop-up canopy tents, sidewalls and accessories in ${esc(s.name)} with
-      instant online pricing and shipping to ${esc(s.cities.join(', '))} and ${areaWord}.</p>
-      <h2>Popular products</h2>
-      <ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>
-      <h2>Canopy sizes</h2>
-      <ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>
+      ${richBody}
       <h2>Cities we serve in ${esc(s.name)}</h2><ul>${cityLinks}</ul>`;
     return render({
       path: `/locations/${s.slug}`,
       title: `Custom Canopy Tents in ${s.name} | ${BRAND}`,
       description: `Custom printed canopy tents in ${s.name}. Instant online pricing and shipping to ${s.cities.slice(0, 3).join(', ')} and ${areaWord}.`,
+      // Long-tail state/province pages are templated — noindex until they earn
+      // unique content, so they don't dilute the priority markets.
+      robots: isPriority ? undefined : 'noindex, follow',
       body,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -519,7 +540,8 @@ productList.forEach((p) => sm.push(smUrl(`/products/${p.slug}`, '0.8')));
 SIZES.forEach((s) => sm.push(smUrl(`/sizes/${s.slug}`, '0.7')));
 SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));
 sm.push(smUrl('/locations', '0.6', 'monthly'));
-territories.forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
+// Only priority state pages are indexable; the templated long tail is noindex.
+territories.filter((s) => PRIORITY_STATES.has(s.slug)).forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
 sm.push(smUrl('/blog', '0.6', 'weekly'));
 posts.forEach((p) => sm.push(smUrl(`/blog/${p.slug}`, '0.6')));
 sm.push(smUrl('/quote', '0.4'));
