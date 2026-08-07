@@ -123,6 +123,17 @@ export default function ProductConfigurator() {
       };
     });
 
+  // Pre-multiplier subtotal, so a whole-order multiplier (rush) can show its
+  // real dollar value instead of a bare percentage.
+  const totalMultGroup = (p?.optionGroups || []).find((g) => g.pricing === 'multiplyTotal');
+  const curTotalMult = (() => {
+    if (!totalMultGroup) return 1;
+    const c = totalMultGroup.choices.find((x) => x.id === sel[totalMultGroup.id]) ||
+      totalMultGroup.choices.find((x) => x.default);
+    return Number(c?.mult) || 1;
+  })();
+  const preMultTotal = price && curTotalMult ? price.subtotal / curTotalMult : 0;
+
   return (
     <main className="page">
       <Link className="back-link" to="/products">← All products</Link>
@@ -231,7 +242,13 @@ export default function ProductConfigurator() {
                               ? money(choice.price)
                               : group.pricing === 'add'
                                 ? (Number(choice.price) ? `+${money(choice.price)}` : 'Included')
-                                : multiplierHint(choice.mult)}
+                                : group.pricing === 'multiplyTotal'
+                                  ? (Number(choice.mult) === 1 || !Number.isFinite(Number(choice.mult))
+                                      ? 'Included'
+                                      : preMultTotal
+                                        ? `+${money(preMultTotal * (Number(choice.mult) - 1))}`
+                                        : multiplierHint(choice.mult))
+                                  : multiplierHint(choice.mult)}
                           </span>
                         </button>
                       );
