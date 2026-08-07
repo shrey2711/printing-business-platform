@@ -1,5 +1,6 @@
 import { useState, lazy, Suspense } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
@@ -214,6 +215,7 @@ function App() {
       </Routes>
       </Suspense>
       <Footer />
+      <SpeedInsights />
     </div>
   );
 }
