@@ -230,9 +230,9 @@ export default function AccountPage() {
               </div>
 
               <div className="order-card-actions">
-                {!isPaid(o) && o.invoice_url && (
+                {o.invoice_url && (
                   <a className="btn btn-blue btn-sm" href={o.invoice_url} target="_blank" rel="noreferrer">
-                    Pay invoice
+                    {isPaid(o) ? 'View invoice' : 'Pay invoice'}
                   </a>
                 )}
                 {!isPaid(o) && !o.invoice_url && o.status === 'submitted' && o.config?.slug && (
