@@ -16,7 +16,7 @@ one file per combo, per size (`10x10`, `10x15`, `10x20`):
 | `<size>-full3.webp` | 3 | 0 | ✅ |
 | `<size>-half1.webp` | 0 | 1 | ✅ |
 | `<size>-half2.webp` | 0 | 2 | ✅ |
-| `<size>-half3.webp` | 0 | 3 | ⬜ not in photo set → falls back to half2 |
+| `<size>-half3.webp` | 0 | 3 | ✅ |
 | `<size>-f1h1.webp`  | 1 | 1 | ✅ |
 | `<size>-f1h2.webp`  | 1 | 2 | ✅ |
 | `<size>-f2h1.webp`  | 2 | 1 | ✅ |
