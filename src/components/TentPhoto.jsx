@@ -32,12 +32,14 @@ function comboKeys(full, half) {
   return [...new Set([exact, fallback].filter(Boolean))];
 }
 
-export default function TentPhoto({ size, walls = 1, fullWalls, halfWalls, label }) {
+export default function TentPhoto({ size, walls = 1, fullWalls, halfWalls, sandbags, label }) {
   const configMode = fullWalls != null || halfWalls != null;
   const total = configMode ? clampWall(fullWalls) + clampWall(halfWalls) : Number(walls) || 0;
   const n = Math.min(3, Math.max(1, total || 1)); // no 0-wall count photo → show 1-wall
 
   const candidates = [];
+  // When sandbags are selected, show the tent-with-sandbags photo first.
+  if (sandbags) candidates.push('/images/tents/sandbags.webp');
   if (size && configMode) {
     for (const k of comboKeys(fullWalls, halfWalls)) candidates.push(`/images/tents/${size}-${k}.webp`);
   }

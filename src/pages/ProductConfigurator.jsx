@@ -149,6 +149,7 @@ export default function ProductConfigurator() {
                 fullWalls={countWalls(sel.wallsFull)}
                 halfWalls={countWalls(sel.wallsHalf) + countWalls(sel.walls)}
                 walls={countWalls(sel.wallsFull) + countWalls(sel.wallsHalf) + countWalls(sel.walls)}
+                sandbags={sel.sandbags === 'set4'}
                 label={`${product.name} preview`}
               />
             ) : product.slug === 'table-covers' ? (

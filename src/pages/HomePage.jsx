@@ -33,6 +33,14 @@ const steps = [
 // preview size key ('10x20') from product slug ('canopy-tent-10x20')
 const sizeKey = (slug) => slug.replace('canopy-tent-', '');
 
+// Show a DIFFERENT wall configuration on each tent card so the three don't
+// look identical (they share the same base art).
+const cardPreview = {
+  'canopy-tent-10x10': { full: 3, half: 0 }, // fully walled
+  'canopy-tent-10x15': { full: 0, half: 2 }, // two half walls
+  'canopy-tent-10x20': { full: 1, half: 0 }  // single back wall
+};
+
 export default function HomePage() {
   useDocumentMeta('Custom Printed Canopy Tents — Instant Pricing', brand.description);
   const c = useContentResolver();
@@ -81,9 +89,19 @@ export default function HomePage() {
           <p className="muted">Loading…</p>
         ) : (
           <div className="pcard-grid">
-            {products.map((p) => (
-              <ProductCard key={p.slug} product={p} previewSize={sizeKey(p.slug)} />
-            ))}
+            {products.map((p) => {
+              const isTent = p.slug.startsWith('canopy-tent-');
+              const cfg = cardPreview[p.slug] || {};
+              return (
+                <ProductCard
+                  key={p.slug}
+                  product={p}
+                  previewSize={isTent ? sizeKey(p.slug) : undefined}
+                  previewFull={cfg.full}
+                  previewHalf={cfg.half}
+                />
+              );
+            })}
           </div>
         )}
       </section>

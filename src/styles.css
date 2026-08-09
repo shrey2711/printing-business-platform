@@ -155,6 +155,24 @@ h1, h2, h3, h4 { color: var(--navy); }
 .tc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .tc-thumb:hover { border-color: var(--blue); }
 .tc-thumb.is-active { border-color: var(--navy); }
+/* Tent accessories */
+.acc-section { margin-top: 2.5rem; }
+.acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+.acc-card {
+  display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; background: #fff; transition: border-color 0.12s, box-shadow 0.12s;
+}
+.acc-card:hover { border-color: var(--blue); box-shadow: 0 8px 20px rgba(22,35,59,0.1); }
+.acc-media {
+  aspect-ratio: 4 / 3; background: var(--panel); display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.acc-media img { width: 100%; height: 100%; object-fit: cover; }
+.acc-icon { font-size: 3rem; }
+.acc-body { padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.acc-body h3 { margin: 0; font-size: 1.05rem; }
+.acc-price { color: var(--navy); font-weight: 700; font-size: 0.95rem; }
+.acc-body p { color: var(--muted); font-size: 0.9rem; line-height: 1.45; margin: 0; }
+.acc-cta { color: var(--blue-dark); font-weight: 600; font-size: 0.88rem; margin-top: 0.2rem; }
 a.frame-card, a.solution-card { display: block; transition: border-color 0.12s, box-shadow 0.12s; }
 a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shadow: 0 8px 20px rgba(22, 35, 59, 0.1); }
 

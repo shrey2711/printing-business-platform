@@ -3,7 +3,15 @@ import { useSearchParams } from 'react-router-dom';
 import { getProducts, getCategories } from '../services/api';
 import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
+import AccessoriesSection from '../components/AccessoriesSection';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+
+// Vary the wall configuration per tent so cards don't look identical.
+const cardPreview = {
+  'canopy-tent-10x10': { full: 3, half: 0 },
+  'canopy-tent-10x15': { full: 0, half: 2 },
+  'canopy-tent-10x20': { full: 1, half: 0 }
+};
 
 export default function ProductsPage() {
   useDocumentMeta('Custom Printed Canopy Tents — 10x10, 10x15 & 10x20', 'Shop custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with up to 3 printed walls and instant online pricing. Free artwork proof, ships across the US & Canada.');
@@ -69,11 +77,21 @@ export default function ProductsPage() {
           <p className="muted">Loading products…</p>
         ) : (
           <div className="pcard-grid">
-            {visible.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
+            {visible.map((product) => {
+              const cfg = cardPreview[product.slug] || {};
+              return (
+                <ProductCard
+                  key={product.slug}
+                  product={product}
+                  previewFull={cfg.full}
+                  previewHalf={cfg.half}
+                />
+              );
+            })}
           </div>
         )}
+
+        <AccessoriesSection />
       </main>
     </div>
   );

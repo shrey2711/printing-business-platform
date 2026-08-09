@@ -8,7 +8,7 @@ import { useMoney } from '../context/CurrencyContext';
 // "Starting at $X" footer in the visitor's selected currency.
 // Canopy products (slug canopy-tent-<size>) show their photo automatically;
 // `previewSize` can override the detected size.
-export default function ProductCard({ product, previewSize }) {
+export default function ProductCard({ product, previewSize, previewFull, previewHalf }) {
   const money = useMoney();
   // Auto-detect the tent size from the slug so the photo shows on every page.
   const size = previewSize || (product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : null);
@@ -17,7 +17,7 @@ export default function ProductCard({ product, previewSize }) {
       <div className="pcard-media">
         {product.badge ? <span className="pcard-ribbon">{product.badge}</span> : null}
         {size ? (
-          <TentPhoto size={size} walls={1} label={product.name} />
+          <TentPhoto size={size} walls={1} fullWalls={previewFull} halfWalls={previewHalf} label={product.name} />
         ) : product.slug === 'table-covers' ? (
           <TableCoverPhoto style="pleated" label={product.name} />
         ) : (
