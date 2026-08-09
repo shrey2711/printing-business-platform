@@ -79,6 +79,21 @@ const kitGroup = {
   ]
 };
 
+// Leg weights. Priced per tent (a set of 4 = one per leg) as an 'add', so it
+// scales with quantity and is NOT reduced by the canopy-only multiplier (which
+// applies to the base tent only). $50 for a set of 4.
+const sandbagGroup = {
+  id: 'sandbags',
+  label: 'Sandbags',
+  type: 'select',
+  pricing: 'add',
+  help: 'Weight bags anchor the legs — most venues require weights. A set is 4 pieces, one per leg.',
+  choices: [
+    { id: 'none', label: 'No sandbags', price: 0, default: true },
+    { id: 'set4', label: 'Sandbag set (4 pieces)', price: 50 }
+  ]
+};
+
 // One-time design service (flat, not per tent).
 const designGroup = {
   id: 'design',
@@ -125,6 +140,7 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
       kitGroup,
       wallSelect('wallsFull', 'Full walls', wallPer),
       wallSelect('wallsHalf', 'Half walls', wallPer),
+      sandbagGroup,
       daysGroup,
       designGroup
     ]

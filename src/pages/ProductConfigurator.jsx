@@ -145,6 +145,8 @@ export default function ProductConfigurator() {
             {isConfigured && hasCanopyShape(p) ? (
               <TentPhoto
                 size={product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : (sel.size || sel.length)}
+                fullWalls={countWalls(sel.wallsFull)}
+                halfWalls={countWalls(sel.wallsHalf) + countWalls(sel.walls)}
                 walls={countWalls(sel.wallsFull) + countWalls(sel.wallsHalf) + countWalls(sel.walls)}
                 label={`${product.name} preview`}
               />
