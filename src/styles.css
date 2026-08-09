@@ -144,6 +144,17 @@ h1, h2, h3, h4 { color: var(--navy); }
 .info-block h2 { font-size: 1.2rem; margin: 1.2rem 0 0.5rem; }
 .info-block p { color: var(--muted); line-height: 1.6; }
 .info-cta { display: flex; gap: 0.6rem; margin-top: 1.5rem; flex-wrap: wrap; }
+/* Table-cover product gallery */
+.tc-gallery { display: flex; flex-direction: column; gap: 0.6rem; }
+.tc-main { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+.tc-thumbs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.tc-thumb {
+  width: 64px; height: 64px; padding: 0; border: 2px solid var(--line); border-radius: 6px;
+  overflow: hidden; background: #fff; cursor: pointer; transition: border-color 0.12s;
+}
+.tc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tc-thumb:hover { border-color: var(--blue); }
+.tc-thumb.is-active { border-color: var(--navy); }
 a.frame-card, a.solution-card { display: block; transition: border-color 0.12s, box-shadow 0.12s; }
 a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shadow: 0 8px 20px rgba(22, 35, 59, 0.1); }
 
