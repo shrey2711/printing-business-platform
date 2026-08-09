@@ -173,6 +173,18 @@ h1, h2, h3, h4 { color: var(--navy); }
 .acc-price { color: var(--navy); font-weight: 700; font-size: 0.95rem; }
 .acc-body p { color: var(--muted); font-size: 0.9rem; line-height: 1.45; margin: 0; }
 .acc-cta { color: var(--blue-dark); font-weight: 600; font-size: 0.88rem; margin-top: 0.2rem; }
+/* Tent product gallery (live preview + additional photos) */
+.tent-gallery { display: flex; flex-direction: column; gap: 0.6rem; }
+.tent-gallery-main { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+.tent-gallery-main img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.tent-thumbs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.tent-thumb {
+  width: 68px; height: 68px; padding: 0; border: 2px solid var(--line); border-radius: 6px;
+  overflow: hidden; background: #fff; cursor: pointer; transition: border-color 0.12s;
+}
+.tent-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tent-thumb:hover { border-color: var(--blue); }
+.tent-thumb.is-active { border-color: var(--navy); }
 a.frame-card, a.solution-card { display: block; transition: border-color 0.12s, box-shadow 0.12s; }
 a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shadow: 0 8px 20px rgba(22, 35, 59, 0.1); }
 
