@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import ProductArt from './ProductArt';
 import TentPhoto from './TentPhoto';
+import TableCoverPhoto from './TableCoverPhoto';
 import { useMoney } from '../context/CurrencyContext';
 
 // Catalog card: corner ribbon, product mockup, bullet specs and a
@@ -17,6 +18,8 @@ export default function ProductCard({ product, previewSize }) {
         {product.badge ? <span className="pcard-ribbon">{product.badge}</span> : null}
         {size ? (
           <TentPhoto size={size} walls={1} label={product.name} />
+        ) : product.slug === 'table-covers' ? (
+          <TableCoverPhoto style="pleated" label={product.name} />
         ) : (
           <ProductArt slug={product.slug} />
         )}

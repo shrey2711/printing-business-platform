@@ -296,9 +296,12 @@ for (const summary of productList) {
     // Real product images (dye-sub photos we actually ship), absolute URLs for
     // Product schema. Derived from the size in the slug.
     const sizeM = product.slug.match(/(\d+x\d+)/);
-    const productImages = sizeM
-      ? [1, 2, 3].map((n) => `${ORIGIN}/images/tents/${sizeM[1]}-${n}wall.webp`)
-      : [];
+    let productImages = [];
+    if (sizeM) {
+      productImages = [1, 2, 3].map((n) => `${ORIGIN}/images/tents/${sizeM[1]}-${n}wall.webp`);
+    } else if (product.slug === 'table-covers') {
+      productImages = ['pleated', 'stretch'].map((k) => `${ORIGIN}/images/table-covers/${k}.webp`);
+    }
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>
       <h1>${esc(seoTitle.h1)}</h1>

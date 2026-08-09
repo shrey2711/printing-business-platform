@@ -7,7 +7,10 @@
 // All prices are illustrative wholesale rates and are easy to tune in one place.
 
 // Active categories for the canopy storefront.
-export const categories = [{ id: 'tents', name: 'Canopy Tents' }];
+export const categories = [
+  { id: 'tents', name: 'Canopy Tents' },
+  { id: 'table-covers', name: 'Table Covers' }
+];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
 // `categories` when expanding back beyond canopies — the products themselves
@@ -32,6 +35,10 @@ export const navGroups = [
       { name: "10' × 15' Canopy Tent", slug: 'canopy-tent-10x15' },
       { name: "10' × 20' Canopy Tent", slug: 'canopy-tent-10x20' }
     ]
+  },
+  {
+    name: 'Table Covers',
+    items: [{ name: 'Custom Table Covers', slug: 'table-covers' }]
   }
 ];
 
@@ -61,6 +68,20 @@ const daysGroup = {
   choices: [
     { id: '6-8', label: '6-8 days (standard)', mult: 1, default: true },
     { id: '2-3', label: '2-3 days (rush +50%)', mult: 1.5 }
+  ]
+};
+
+// Delivery for table covers: rush 2-3 days is +15% (NOT the canopy's +50%),
+// reproducing the supplied two-column price card.
+const daysGroup15 = {
+  id: 'days',
+  label: 'Delivery',
+  type: 'select',
+  pricing: 'multiplyTotal',
+  help: 'Standard is 6-8 business days. Rush 2-3 days is +15%.',
+  choices: [
+    { id: '6-8', label: '6-8 days (standard)', mult: 1, default: true },
+    { id: '2-3', label: '2-3 days (rush +15%)', mult: 1.15 }
   ]
 };
 
@@ -153,8 +174,52 @@ const canopyTents = [
   canopyProduct({ slug: 'canopy-tent-10x20', size: "10' × 20'", tier1: 1635, tier3: 1445, wallPer: 365 })
 ];
 
+const tableCovers = {
+  slug: 'table-covers',
+  active: true,
+  name: 'Custom Table Covers',
+  category: 'table-covers',
+  badge: 'Custom Printed',
+  emoji: '🎪',
+  tagline: 'Full-colour dye-sublimated table covers — pleated or stretch, closed back.',
+  description:
+    'Custom printed table covers for trade shows, markets and events. Dye-sublimated full-colour ' +
+    'print on wrinkle-resistant polyester, cut for a closed-back (4-sided) fit. Choose a pleated ' +
+    'throw or a fitted stretch cover in your table size, standard 6-8 day or rush 2-3 day.',
+  features: [
+    'Dye-sublimated full-colour print',
+    'Closed back — covers all four sides',
+    'Wrinkle-resistant, machine washable',
+    'Free artwork proof before production'
+  ],
+  turnaround: '6-8 days standard · 2-3 days rush (+15%)',
+  pricing: {
+    model: 'configured',
+    baseLabel: 'Table cover',
+    optionGroups: [
+      {
+        id: 'style',
+        label: 'Style & size',
+        type: 'select',
+        pricing: 'base',
+        help: 'Pleated throws drape with rounded corners; stretch covers fit tight to the table. All closed-back (4-sided).',
+        choices: [
+          { id: '4ft-pleated', label: '4 ft Pleated — closed back', price: 199, default: true },
+          { id: '6ft-pleated', label: '6 ft Pleated — closed back', price: 215 },
+          { id: '8ft-pleated', label: '8 ft Pleated — closed back', price: 255 },
+          { id: '6ft-stretch', label: '6 ft Stretch — closed back', price: 285 },
+          { id: '8ft-stretch', label: '8 ft Stretch — closed back', price: 345 }
+        ]
+      },
+      daysGroup15,
+      designGroup
+    ]
+  }
+};
+
 const products = [
   ...canopyTents,
+  tableCovers,
   {
     slug: 'vinyl-banners',
     active: false,

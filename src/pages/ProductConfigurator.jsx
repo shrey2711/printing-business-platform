@@ -4,6 +4,7 @@ import { getProduct, getPrice } from '../services/api';
 import ProductArt from '../components/ProductArt';
 import ProductTabs from '../components/ProductTabs';
 import TentPhoto from '../components/TentPhoto';
+import TableCoverPhoto from '../components/TableCoverPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 
@@ -150,6 +151,8 @@ export default function ProductConfigurator() {
                 walls={countWalls(sel.wallsFull) + countWalls(sel.wallsHalf) + countWalls(sel.walls)}
                 label={`${product.name} preview`}
               />
+            ) : product.slug === 'table-covers' ? (
+              <TableCoverPhoto style={sel.style} label={`${product.name} preview`} />
             ) : (
               <ProductArt slug={product.slug} />
             )}
