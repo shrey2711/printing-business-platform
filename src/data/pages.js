@@ -10,6 +10,8 @@
 //
 // A block is { h?, p?, list? }: h => <h2>, p => <p>, list => <ul>.
 
+import { brand } from '../config/brand.js';
+
 export const PAGES = [
   {
     slug: 'about',
@@ -72,13 +74,22 @@ export const PAGES = [
   {
     slug: 'returns',
     nav: 'Returns',
-    title: 'Returns',
-    stub: true,
+    title: 'Returns, Refunds & Reprints',
     description:
-      'Custom printed canopy tents are made to order. Our full returns policy is being finalised — contact us with any issue and we will make it right.',
+      'How Apex Trade Show handles problems with a custom canopy tent order — report within 5 business days, how defect claims work, rush charges, and how reprints are handled.',
     blocks: [
-      { p: 'Every canopy tent is custom printed to order from artwork you approve, so returns work differently than for off-the-shelf goods.' },
-      { h: 'Our full returns policy is being finalised', p: 'We are still finalising the written returns and exchange policy for this store. In the meantime, if anything is wrong with your order — a print defect, damage in transit, or an error on our side — contact us right away and we will make it right.' }
+      { p: 'We want your canopy tent to arrive right. Because every tent is custom printed to order from a proof you approve, returns work differently than they would for a stock item — there is nothing generic to resend. If something is wrong with your order, tell us within five (5) business days of delivery and we will sort it out.' },
+      { h: 'After you approve your proof', p: 'Your tent goes into production the moment you approve your proof. From that point the order cannot be cancelled, and it is not refundable — production has already started on a one-off, made-for-you item.' },
+      { h: 'If something is wrong with your order', list: [
+        `Contact us within five (5) business days of delivery — email ${brand.email} or call ${brand.phone}.`,
+        'We log your issue and open a claim for your reference while we work out the best fix.',
+        'We will usually ask for a few photos showing the problem so we can see what happened.',
+        'If we need the tent back to inspect it, we will arrange that with you within a reasonable time. If the fault is confirmed to be ours, we cover your return shipping.'
+      ] },
+      { h: 'Rush charges', p: 'Rush printing and rush shipping fees are not refundable unless the tent is defective or the courier could not deliver it.' },
+      { h: 'Reprints', p: 'When a reprint is the right fix, we decide between a refund or a rework and set the turnaround and shipping based on current production capacity. Reprint turnaround starts from your written proof approval — we only take written approval as final, never verbal.' },
+      { h: 'A note on colour', p: 'Screen and printed colours can vary slightly. A proof is produced differently from the final press print, so it will not match the finished tent exactly — if precise colour matters, tell us in your order notes and we will confirm on the proof.' },
+      { h: 'Questions', p: `Reach us any time at ${brand.email} or ${brand.phone}.` }
     ]
   },
   {
@@ -118,16 +129,21 @@ export const PAGES = [
   {
     slug: 'terms',
     nav: 'Terms',
-    title: 'Terms of Service',
+    title: 'Terms and Conditions',
     description:
-      'The basic terms for ordering custom printed canopy tents from Apex Trade Show — pricing, proof approval, custom-made goods and contact.',
+      'The terms for using apextradeshow.com and ordering custom printed canopy tents — your artwork and rights, proof approval, cancellation, colour, and how we handle problems.',
     blocks: [
-      { p: 'These are the basic terms for using this site and ordering from Apex Trade Show. Contact us if anything is unclear.' },
-      { h: 'Pricing & payment', p: 'Prices are shown on the product pages and update live as you configure your tent. You can view pricing in USD or CAD; payment is processed securely through Stripe. Prices and product details may change without notice.' },
-      { h: 'Custom-made goods', p: 'Canopy tents are printed to order from artwork you supply and approve. By approving your proof you confirm the artwork, spelling, colours and layout are correct for production.' },
-      { h: 'Proof approval', p: 'Nothing is printed until you approve the free proof we send. Please review it carefully — production follows your approved proof.' },
-      { h: 'Returns & warranty', p: 'See the Returns and Warranty pages. Those policies are being finalised; contact us with any issue in the meantime.' },
-      { h: 'Contact', p: 'Questions about these terms? Reach us using the details on the Contact page.' }
+      { p: 'These terms cover using apextradeshow.com and ordering custom printed canopy tents from Apex Trade Show. By using the site or placing an order, you agree to them. We may update the site and these terms from time to time; the version posted here is the one that applies, and continuing to use the site means you accept it.' },
+      { h: 'Your artwork and your rights', p: 'You are responsible for the artwork you send us. By placing an order you confirm that you own it or have permission to print it — including logos, images, fonts and any other third-party material — and you authorise us to print it on your tent. Please don’t send anything unlawful or offensive, or anything that infringes someone else’s trademark, copyright, privacy or publicity rights. We may decline or stop an order that breaks this.' },
+      { h: 'Approving your proof', p: 'Every order includes a free proof, and nothing is printed until you approve it. We only accept written approval — never verbal. Approving your proof means you have checked the spelling, layout, artwork and colours; we are not responsible for mistakes that were present in artwork you approved, so please review it carefully.' },
+      { h: 'Cancellation', p: 'Because your tent is made to order, production begins as soon as you approve your proof. After approval an order cannot be cancelled and is not refundable.' },
+      { h: 'If something goes wrong', p: 'If there is a problem with your order, we will make it right. See the Returns page for how to report an issue (within five business days of delivery), how defect claims work, and how refunds and reprints are handled.' },
+      { h: 'A note on colour', p: 'A proof is produced differently from the final press print, so screen and printed colours can vary slightly and a proof will not match the finished tent exactly.' },
+      { h: 'Pricing and payment', p: 'Prices show on the product pages and update live as you configure your tent. You can view pricing in USD or CAD, and payment is handled securely by Stripe. Prices and product details can change without notice.' },
+      { h: 'Our site content', p: 'The text, images, layouts and designs on apextradeshow.com belong to Apex Trade Show or its licensors and are provided for browsing the site and placing orders — not for copying, redistribution or any other use.' },
+      { h: 'Responsibility', p: 'You agree to cover Apex Trade Show against any claim, loss or cost that arises from the artwork you supplied or from your misuse of the site — for example, a third-party claim over material you asked us to print.' },
+      { h: 'Right to refuse', p: 'We may decline service or an order at our discretion.' },
+      { h: 'Contact', p: `Questions about these terms? Email ${brand.email} or call ${brand.phone}.` }
     ]
   }
 ];

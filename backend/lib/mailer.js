@@ -99,7 +99,7 @@ function footer() {
   return `
   <tr><td style="background:${C.bg};padding:20px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.6;">
     <strong style="color:${C.navy};">${BRAND}</strong> — custom printed canopy tents, shipped across the US and Canada.<br/>
-    Questions? Reply to this email or contact sales@apextradeshow.com.<br/>
+    Questions? Reply to this email or contact info@apextradeshow.com.<br/>
     <span style="color:#9aa3b0;">You're receiving this because you placed an order with ${BRAND}.</span>
   </td></tr>`;
 }
