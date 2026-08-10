@@ -1,4 +1,4 @@
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage';
@@ -22,13 +22,40 @@ import InfoPage from './pages/InfoPage';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
 
-const topNav = [
-  { label: 'All Products', to: '/products' },
-  { label: 'Canopy Tents', to: '/products?category=tents' },
-  { label: 'Banner Stands', to: '/products?category=banner-stands' },
-  { label: 'Backdrops', to: '/products?category=backdrops' },
-  { label: 'Table Covers', to: '/products?category=table-covers' },
-  { label: 'Blog', to: '/blog' }
+// Shop menu — grouped by the real categories, one level deep, every link a real
+// destination (category filter or product page). Shared by the desktop dropdown
+// and the mobile accordion.
+const shopMenu = [
+  {
+    label: 'Custom Canopies',
+    to: '/products?category=tents',
+    items: [
+      { label: "10' × 10' Canopy", to: '/products/canopy-tent-10x10' },
+      { label: "10' × 15' Canopy", to: '/products/canopy-tent-10x15' },
+      { label: "10' × 20' Canopy", to: '/products/canopy-tent-10x20' },
+      { label: 'Size guides', to: '/sizes/10x10' }
+    ]
+  },
+  {
+    label: 'Banner Stands',
+    to: '/products?category=banner-stands',
+    items: [
+      { label: 'Standard Retractable', to: '/products/standard-retractable-banner' },
+      { label: 'Deluxe Retractable', to: '/products/deluxe-retractable-banner' },
+      { label: 'X-Stand Banner', to: '/products/x-stand-banner' },
+      { label: 'Table Top Banner', to: '/products/table-top-banner-stand' }
+    ]
+  },
+  {
+    label: 'Backdrops',
+    to: '/products?category=backdrops',
+    items: [{ label: 'Step & Repeat Backdrop', to: '/products/step-and-repeat-backdrop' }]
+  },
+  {
+    label: 'Table Covers',
+    to: '/products?category=table-covers',
+    items: [{ label: 'Pleated & Stretch Covers', to: '/products/table-covers' }]
+  }
 ];
 
 function CurrencySwitch() {
@@ -114,27 +141,86 @@ function Header() {
   );
 }
 
-// Custom active state that also compares the ?category query — otherwise every
-// "/products?category=..." link lights up at once on the /products page.
+// Desktop: a "Shop" mega-dropdown (CSS hover/focus) plus quick links + a
+// prominent quote CTA. Mobile: a hamburger that opens an accordion with large
+// tap targets, one level deep. Both reuse `shopMenu`.
 function HeaderNav() {
   const location = useLocation();
-  const currentCategory = new URLSearchParams(location.search).get('category');
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState(null);
 
-  const isActive = (to) => {
-    const [path, query = ''] = to.split('?');
-    if (path !== location.pathname) return false;
-    const itemCategory = new URLSearchParams(query).get('category');
-    return (itemCategory || null) === (currentCategory || null);
-  };
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => { setMobileOpen(false); }, [location]);
 
   return (
-    <nav className="header-nav">
-      {topNav.map((item) => (
-        <Link key={item.label} to={item.to} className={isActive(item.to) ? 'active' : ''}>
-          {item.label}
-        </Link>
-      ))}
-    </nav>
+    <>
+      {/* Desktop navigation */}
+      <nav className="header-nav" aria-label="Primary">
+        <div className="shop-dd">
+          <Link className="shop-dd-trigger" to="/products">
+            Shop <span aria-hidden="true">▾</span>
+          </Link>
+          <div className="shop-menu">
+            {shopMenu.map((g) => (
+              <div className="shop-col" key={g.label}>
+                <Link className="shop-col-head" to={g.to}>{g.label}</Link>
+                {g.items.map((it) => (
+                  <Link key={it.to} to={it.to}>{it.label}</Link>
+                ))}
+              </div>
+            ))}
+            <Link className="shop-all" to="/products">Shop all products →</Link>
+          </div>
+        </div>
+        <Link to="/products?category=tents">Canopies</Link>
+        <Link to="/locations">Locations</Link>
+        <Link to="/blog">Blog</Link>
+        <span className="nav-spacer" />
+        <Link className="btn btn-outline btn-sm" to="/products">Shop All</Link>
+        <Link className="btn btn-red btn-sm" to="/quote">Get a Quote</Link>
+      </nav>
+
+      {/* Mobile navigation */}
+      <div className="header-nav-m">
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMobileOpen((o) => !o)}
+        >
+          <span aria-hidden="true">{mobileOpen ? '✕' : '☰'}</span> Menu
+        </button>
+        <Link className="btn btn-red btn-sm" to="/quote">Get a Quote</Link>
+      </div>
+      {mobileOpen && (
+        <div className="m-menu" id="mobile-menu">
+          <Link className="m-all" to="/products">Shop all products</Link>
+          {shopMenu.map((g, i) => (
+            <div className="m-group" key={g.label}>
+              <button
+                type="button"
+                className="m-group-head"
+                aria-expanded={openGroup === i}
+                onClick={() => setOpenGroup(openGroup === i ? null : i)}
+              >
+                {g.label} <span aria-hidden="true">{openGroup === i ? '−' : '+'}</span>
+              </button>
+              {openGroup === i && (
+                <div className="m-sub">
+                  <Link to={g.to}>All {g.label}</Link>
+                  {g.items.map((it) => (
+                    <Link key={it.to} to={it.to}>{it.label}</Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          <Link className="m-link" to="/locations">Locations</Link>
+          <Link className="m-link" to="/blog">Blog</Link>
+        </div>
+      )}
+    </>
   );
 }
 
