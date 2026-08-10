@@ -20,6 +20,7 @@ import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
 import InfoPage from './pages/InfoPage';
 import CategoryPage from './pages/CategoryPage';
+import BoothPackagesPage from './pages/BoothPackagesPage';
 import Logo from './components/Logo';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
@@ -178,6 +179,7 @@ function HeaderNav() {
         </div>
         <Link to="/trade-show-displays">Displays</Link>
         <Link to="/custom-canopies">Canopies</Link>
+        <Link to="/trade-show-booth-packages">Booth Packages</Link>
         <Link to="/blog">Blog</Link>
         <span className="nav-spacer" />
         <Link className="btn btn-outline btn-sm" to="/products">Shop All</Link>
@@ -220,6 +222,7 @@ function HeaderNav() {
               )}
             </div>
           ))}
+          <Link className="m-link" to="/trade-show-booth-packages">Booth Packages</Link>
           <Link className="m-link" to="/locations">Locations</Link>
           <Link className="m-link" to="/blog">Blog</Link>
         </div>
@@ -247,6 +250,7 @@ function Footer() {
             <Link to="/banner-stands">Banner Stands</Link>
             <Link to="/backdrops">Backdrops</Link>
             <Link to="/table-covers">Table Covers</Link>
+            <Link to="/trade-show-booth-packages">Booth Packages</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/locations">Locations</Link>
           </div>
@@ -317,6 +321,7 @@ function App() {
         <Route path="/banner-stands" element={<CategoryPage slug="banner-stands" />} />
         <Route path="/table-covers" element={<CategoryPage slug="table-covers" />} />
         <Route path="/backdrops" element={<CategoryPage slug="backdrops" />} />
+        <Route path="/trade-show-booth-packages" element={<BoothPackagesPage />} />
         <Route path="/about" element={<InfoPage slug="about" />} />
         <Route path="/artwork-guidelines" element={<InfoPage slug="artwork-guidelines" />} />
         <Route path="/shipping" element={<InfoPage slug="shipping" />} />

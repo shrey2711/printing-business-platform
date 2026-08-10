@@ -16,6 +16,10 @@ import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
 import { PAGES } from '../src/data/pages.js';
 import { CATEGORY_PAGES, SUBCATEGORIES } from '../src/data/categoryPages.js';
 import {
+  BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
+  BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
+} from '../src/data/boothPackages.js';
+import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../src/data/stateContent.js';
@@ -42,6 +46,7 @@ const NAV = `<nav aria-label="Primary">
   <a href="/banner-stands">Banner Stands</a>
   <a href="/backdrops">Backdrops</a>
   <a href="/table-covers">Table Covers</a>
+  <a href="/trade-show-booth-packages">Booth Packages</a>
   <a href="/locations">Locations</a>
   <a href="/quote">Get a Quote</a>
   <a href="/contact">Contact</a>
@@ -179,7 +184,7 @@ for (const cp of CATEGORY_PAGES) {
   routes.push(() => {
     const catProducts = cp.category ? productList.filter((p) => p.category === cp.category) : productList;
     const subTiles = cp.hub
-      ? `<h2>Shop by category</h2><ul>${SUBCATEGORIES.map((sc) => `<li><a href="/${sc.slug}">${esc(sc.h1)}</a></li>`).join('')}</ul>`
+      ? `<h2>Shop by category</h2><ul>${SUBCATEGORIES.map((sc) => `<li><a href="/${sc.slug}">${esc(sc.h1)}</a></li>`).join('')}<li><a href="/trade-show-booth-packages">Trade Show Booth Packages</a> — build a complete booth</li></ul>`
       : '';
     const guides = cp.guideLinks
       ? `<h2>Canopy size guides</h2><ul>${cp.guideLinks.map((g) => `<li><a href="${g.to}">${esc(g.label)}</a></li>`).join('')}</ul>`
@@ -220,6 +225,72 @@ for (const cp of CATEGORY_PAGES) {
     });
   });
 }
+
+// ---- Trade Show Booth Packages (recommended combinations of existing products) ----
+// Additional sales path. No package price/SKU — every component links to its own
+// product page. Targets "complete booth / display kit" intent; must NOT
+// cannibalize the individual tent/product pages.
+routes.push(() => {
+  const m = BOOTH_PACKAGES_META;
+  const bySlug = Object.fromEntries(productList.map((p) => [p.slug, p]));
+  const shopLinks = SHOP_INDIVIDUALLY.map((s) => `<a href="${s.to}">${esc(s.label)}</a>`).join(' · ');
+  const pkgs = BOOTH_PACKAGES.map((pkg) => `
+    <div class="booth-pkg">
+      <h3>${esc(pkg.name)}</h3>
+      <p>${esc(pkg.tagline)}</p>
+      <ul>${pkg.components.map((slug) => {
+        const p = bySlug[slug];
+        return `<li><a href="/products/${slug}">${esc(p ? p.name : slug)}</a> — ${p ? priceFrom(p) : 'request a quote'}</li>`;
+      }).join('')}</ul>
+      <p><strong>Best for:</strong> ${esc(pkg.bestFor)}</p>
+    </div>`).join('');
+  const body = `
+    <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/trade-show-displays">Trade Show Displays</a> / <span>Booth Packages</span></nav>
+    <h1>${esc(m.h1)}</h1>
+    <p>Need a whole booth, not just one piece? These packages combine Apex products that work well
+    together — canopy tents, banner stands, table covers and backdrops, all printed to match. Every
+    item is also sold individually, with its own price and checkout — you never have to buy a bundle.</p>
+    <h2>Buy the whole booth, or any single product</h2>
+    <p>${shopLinks}</p>
+    <h2>Recommended booth packages</h2>
+    ${pkgs}
+    <h2>Where these booths work</h2><ul>${BOOTH_USE_CASES.map((u) => `<li>${esc(u)}</li>`).join('')}</ul>
+    <h2>Booth package FAQs</h2>${BOOTH_FAQS.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
+  return render({
+    path: `/${m.slug}`,
+    title: `${m.title} | ${BRAND}`,
+    description: m.description,
+    body,
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Trade Show Displays', item: `${ORIGIN}/trade-show-displays` },
+          { '@type': 'ListItem', position: 3, name: m.h1, item: `${ORIGIN}/${m.slug}` }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Products in Apex booth packages',
+        itemListElement: BOOTH_COMPONENT_SLUGS.map((slug, i) => ({
+          '@type': 'ListItem', position: i + 1, url: `${ORIGIN}/products/${slug}`,
+          name: (getProduct(slug) || {}).name || slug
+        }))
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: BOOTH_FAQS.map((f) => ({
+          '@type': 'Question', name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a }
+        }))
+      }
+    ]
+  });
+});
 
 // ---- Size guide pages (INFORMATIONAL — research intent, not commercial) ----
 // These deliberately do NOT compete with /products/canopy-tent-<size>. They
@@ -801,6 +872,7 @@ sm.push(smUrl('/', '1.0', 'weekly'));
 sm.push(smUrl('/products', '0.9', 'weekly'));
 // Indexable category / collection pages.
 CATEGORY_PAGES.forEach((cp) => sm.push(smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly')));
+sm.push(smUrl('/trade-show-booth-packages', '0.8', 'weekly'));
 productList.forEach((p) => sm.push(smUrl(`/products/${p.slug}`, '0.8')));
 SIZES.forEach((s) => sm.push(smUrl(`/sizes/${s.slug}`, '0.7')));
 SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));

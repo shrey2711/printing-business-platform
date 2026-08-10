@@ -97,6 +97,12 @@ export default function CategoryPage({ slug }) {
                 </div>
               </Link>
             ))}
+            <Link className="cat-card" to="/trade-show-booth-packages" key="booth-packages">
+              <div className="cat-card-body">
+                <strong>Booth Packages</strong>
+                <span>Build a complete trade show booth</span>
+              </div>
+            </Link>
           </div>
         </section>
       )}
