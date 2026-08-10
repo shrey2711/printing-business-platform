@@ -22,7 +22,24 @@ const BUILT_IN = [
   { source: '/design', destination: '/artwork-guidelines', code: 301 },
   // Table covers split into Pleated + Stretch products; send the old single
   // product URL to the category page that lists both.
-  { source: '/products/table-covers', destination: '/table-covers', code: 301 }
+  { source: '/products/table-covers', destination: '/table-covers', code: 301 },
+  // Dormant legacy products (active:false) still resolve via the SPA — thin
+  // duplicates. Consolidate each to its live category so any historical
+  // authority (e.g. the previously-indexed /products/canopy-tents) is preserved.
+  { source: '/products/canopy-tents', destination: '/custom-canopies', code: 301 },
+  { source: '/products/canopy-packages', destination: '/custom-canopies', code: 301 },
+  { source: '/products/canopy-replacement-tops', destination: '/custom-canopies', code: 301 },
+  { source: '/products/canopy-sidewalls', destination: '/custom-canopies', code: 301 },
+  { source: '/products/canopy-accessories', destination: '/custom-canopies', code: 301 },
+  { source: '/products/retractable-banner-stands', destination: '/banner-stands', code: 301 },
+  // Old full-print catalog (never part of the canopy store) — send to the catalog.
+  { source: '/products/vinyl-banners', destination: '/products', code: 301 },
+  { source: '/products/mesh-banners', destination: '/products', code: 301 },
+  { source: '/products/fabric-banners', destination: '/products', code: 301 },
+  { source: '/products/yard-signs', destination: '/products', code: 301 },
+  { source: '/products/rigid-signs', destination: '/products', code: 301 },
+  { source: '/products/decals-stickers', destination: '/products', code: 301 },
+  { source: '/products/feather-flags', destination: '/products', code: 301 }
 ];
 
 // DB-managed rules can still override a built-in source if ever needed.
