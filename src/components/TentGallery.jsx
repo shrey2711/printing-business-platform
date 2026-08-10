@@ -9,6 +9,9 @@ import TentPhoto from './TentPhoto';
 export default function TentGallery({ size, fullWalls, halfWalls, walls, sandbags, label }) {
   const extras = [
     { key: 'info', src: `/images/tents/${size}-infographic.webp`, label: 'Customize every side' },
+    { key: 'frame-folded', src: '/images/tents/frame-folded.webp', label: 'Folded frame — packs down small' },
+    { key: 'frame-open', src: '/images/tents/frame-open.webp', label: 'Frame set up in minutes' },
+    { key: 'ropes', src: '/images/tents/ropes-stakes.webp', label: '4 ropes & 4 stakes included' },
     { key: 'sand', src: '/images/tents/sandbags.webp', label: 'With leg sandbags' }
   ];
   const [active, setActive] = useState('live'); // 'live' or an extra key
