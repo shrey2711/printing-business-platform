@@ -1,3 +1,8 @@
+/* Prerendered SEO fallback lives inside #root for crawlers/no-JS. React
+   (createRoot) replaces #root on mount; hide the fallback so users never see a
+   flash of unstyled text before hydration. It stays in the HTML source. */
+#seo-prerender { display: none; }
+
 :root {
   --red: #c8102e;
   --red-dark: #a50d25;
