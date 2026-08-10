@@ -70,7 +70,7 @@ export default function CityPage() {
       </section>
 
       <section className="section-block-bare">
-        <div className="section-head-row"><h2>Popular products in {city}</h2><Link className="link-arrow" to="/products">View all →</Link></div>
+        <div className="section-head-row"><h2>Popular products in {city}</h2><Link className="link-arrow" to="/products">View all products →</Link></div>
         <div className="pcard-grid">
           {products.map((p) => <ProductCard key={p.slug} product={p} />)}
         </div>

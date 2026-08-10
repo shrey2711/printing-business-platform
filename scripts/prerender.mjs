@@ -113,6 +113,8 @@ const priceFrom = (p) => (p.startingPrice != null ? `from $${p.startingPrice}` :
 // Canopy-focused pages (home, locations) list only the core retail products.
 const coreProducts = productList.filter((p) => p.category === 'tents' || p.category === 'table-covers');
 const displayProducts = productList.filter((p) => p.category === 'banner-stands' || p.category === 'backdrops');
+// Product category id -> its category landing page (for breadcrumb up-links).
+const CAT_BY_PRODUCT = Object.fromEntries(CATEGORY_PAGES.filter((c) => c.category).map((c) => [c.category, c]));
 let count = 0;
 const routes = [];
 
@@ -472,8 +474,12 @@ for (const summary of productList) {
     } else if (product.slug.startsWith('standard-') || product.slug.startsWith('deluxe-') || product.slug === 'x-stand-banner' || product.slug === 'step-and-repeat-backdrop' || product.slug === 'table-top-banner-stand') {
       productImages = [`${ORIGIN}/images/displays/${product.slug}.webp`];
     }
+    const cat = CAT_BY_PRODUCT[product.category];
+    const crumbParent = cat
+      ? `<a href="/${cat.slug}">${esc(cat.nav)}</a>`
+      : `<a href="/products">Products</a>`;
     const body = `
-      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / ${crumbParent} / <span>${esc(product.name)}</span></nav>
       <h1>${esc(seoTitle.h1)}</h1>
       <p>${esc(product.description)}</p>
       <p>${startingPrice != null
@@ -537,7 +543,9 @@ for (const summary of productList) {
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-            { '@type': 'ListItem', position: 2, name: 'Products', item: `${ORIGIN}/products` },
+            cat
+              ? { '@type': 'ListItem', position: 2, name: cat.nav, item: `${ORIGIN}/${cat.slug}` }
+              : { '@type': 'ListItem', position: 2, name: 'Products', item: `${ORIGIN}/products` },
             { '@type': 'ListItem', position: 3, name: product.name, item: `${ORIGIN}/products/${product.slug}` }
           ]
         },

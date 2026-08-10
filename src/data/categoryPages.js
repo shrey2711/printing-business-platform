@@ -110,3 +110,11 @@ export const CATEGORY_PAGES = [
 export const getCategoryPage = (slug) => CATEGORY_PAGES.find((c) => c.slug === slug) || null;
 // Subcategory tiles for the hub (everything except the hub itself).
 export const SUBCATEGORIES = CATEGORY_PAGES.filter((c) => !c.hub);
+
+// Map a product's `category` id (tents, banner-stands, backdrops, table-covers)
+// to its category landing page, so product pages breadcrumb + link UP to their
+// category instead of the flat /products list (Home > Category > Product).
+export const CATEGORY_BY_PRODUCT = Object.fromEntries(
+  CATEGORY_PAGES.filter((c) => c.category).map((c) => [c.category, c])
+);
+export const getCategoryForProduct = (categoryId) => CATEGORY_BY_PRODUCT[categoryId] || null;

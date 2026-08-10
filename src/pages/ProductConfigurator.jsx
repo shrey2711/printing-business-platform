@@ -8,6 +8,7 @@ import TentGallery from '../components/TentGallery';
 import TableCoverPhoto from '../components/TableCoverPhoto';
 import DisplayPhoto from '../components/DisplayPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { getCategoryForProduct } from '../data/categoryPages';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 
 export default function ProductConfigurator() {
@@ -148,6 +149,8 @@ export default function ProductConfigurator() {
 
   const p = product.pricing;
   const sel = config?.selections || {};
+  // Up-link to the product's category (Home > Category > Product), not the flat list.
+  const cat = getCategoryForProduct(product.category);
 
   // Volume pricing brackets from quantityTiers, e.g. "1-2 units $835/unit",
   // "3+ units $799/unit", with the row matching the current quantity marked.
@@ -169,7 +172,7 @@ export default function ProductConfigurator() {
 
   return (
     <main className="page">
-      <Link className="back-link" to="/products">← All products</Link>
+      <Link className="back-link" to={cat ? `/${cat.slug}` : '/products'}>← All {cat ? cat.nav : 'products'}</Link>
 
       <div className="config-layout">
         {/* Left: product visual + info */}

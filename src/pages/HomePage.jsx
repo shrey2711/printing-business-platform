@@ -198,6 +198,7 @@ export default function HomePage() {
         <div className="section-head">
           <h2>Build your trade show booth</h2>
           <p>Coordinate Apex products into one branded booth. Examples to start from — mix and match.</p>
+          <p><Link className="link-arrow" to="/trade-show-booth-packages">See all booth packages →</Link></p>
         </div>
         <div className="booth-tiers">
           {boothSetups.map((s) => (
