@@ -20,6 +20,7 @@ import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
 import InfoPage from './pages/InfoPage';
 import CategoryPage from './pages/CategoryPage';
+import Logo from './components/Logo';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
 
@@ -128,9 +129,8 @@ function Header() {
   return (
     <header className="site-header">
       <div className="header-top">
-        <Link className="logo" to="/">
-          <span className="logo-mark">⛺</span>
-          <span className="logo-text">{brand.logoText.first}<b>{brand.logoText.accent}</b></span>
+        <Link className="logo" to="/" aria-label={brand.name}>
+          <Logo />
         </Link>
         <span className="wl-badge">{brand.tagline}</span>
         <div className="header-spacer" />

@@ -123,9 +123,16 @@ function specsFor(product, sizeKey) {
   return rows;
 }
 
-// One template PDF per canopy size. Filenames the store owner uploads to
-// public/templates/.
+// Official artwork templates uploaded to public/templates/, per canopy size.
+// Only sizes with real files appear; others show "coming soon".
+const TEMPLATE_SETS = {
+  '10x10': [
+    { file: 'canopy-10x10-canopy.pdf', label: '10×10 canopy top template' },
+    { file: 'canopy-10x10-fullwall.pdf', label: '10×10 full wall template' },
+    { file: 'canopy-10x10-halfwall.pdf', label: '10×10 half wall template' }
+  ]
+};
+
 function templatesFor(sizeKey) {
-  if (!sizeKey) return [];
-  return [{ file: `canopy-${sizeKey}-template.pdf`, label: `${sizeKey.replace('x', '×')} full artwork template` }];
+  return (sizeKey && TEMPLATE_SETS[sizeKey]) || [];
 }

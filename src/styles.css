@@ -56,6 +56,7 @@ h1, h2, h3, h4 { color: var(--navy); }
   padding: 0.5rem 1.5rem; max-width: 1400px; margin: 0 auto;
 }
 .logo { display: flex; align-items: center; gap: 0.55rem; }
+.brand-logo { height: 42px; width: auto; display: block; }
 .logo-mark {
   background: var(--navy); color: #fff; font-weight: 800; font-size: 1.1rem;
   width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; letter-spacing: -0.02em;
