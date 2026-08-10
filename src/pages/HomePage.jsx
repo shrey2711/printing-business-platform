@@ -89,7 +89,9 @@ export default function HomePage() {
           <p className="muted">Loading…</p>
         ) : (
           <div className="pcard-grid">
-            {products.map((p) => {
+            {products
+              .filter((p) => p.category === 'tents' || p.category === 'table-covers')
+              .map((p) => {
               const isTent = p.slug.startsWith('canopy-tent-');
               const cfg = cardPreview[p.slug] || {};
               return (

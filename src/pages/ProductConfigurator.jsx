@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getProduct, getPrice } from '../services/api';
+import { getProduct, getPrice, getProducts } from '../services/api';
 import ProductArt from '../components/ProductArt';
+import ProductCard from '../components/ProductCard';
 import ProductTabs from '../components/ProductTabs';
 import TentGallery from '../components/TentGallery';
 import TableCoverGallery from '../components/TableCoverGallery';
@@ -26,12 +27,30 @@ export default function ProductConfigurator() {
   const canopySize = product?.slug?.match(/canopy-tent-(\d+x\d+)/)?.[1];
   useDocumentMeta(
     product
-      ? canopySize
-        ? `${canopySize} Custom Canopy Tent With Logo`
-        : `${product.name} — Custom Printing & Instant Pricing`
+      ? product.seoTitle
+        ? product.seoTitle
+        : canopySize
+          ? `${canopySize} Custom Canopy Tent With Logo`
+          : `${product.name} — Custom Printing & Instant Pricing`
       : 'Product',
-    product?.tagline
+    product?.seoDescription || product?.tagline
   );
+
+  // Related products (by slug) for the detail page.
+  const [related, setRelated] = useState([]);
+  useEffect(() => {
+    const slugs = product?.related;
+    if (!slugs?.length) { setRelated([]); return; }
+    let alive = true;
+    getProducts()
+      .then((all) => {
+        if (!alive) return;
+        const bySlug = new Map(all.map((p) => [p.slug, p]));
+        setRelated(slugs.map((s) => bySlug.get(s)).filter(Boolean));
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, [product]);
 
   // Load the product and seed default configuration.
   useEffect(() => {
@@ -59,7 +78,8 @@ export default function ProductConfigurator() {
     debounceRef.current = setTimeout(async () => {
       try {
         const result = await getPrice({ slug, ...config });
-        setPrice(result);
+        // A quote-only / unpriced result (ok:false) is treated as "no price".
+        setPrice(result && result.ok !== false ? result : null);
       } catch {
         setPrice(null);
       } finally {
@@ -72,6 +92,7 @@ export default function ProductConfigurator() {
   const model = product?.pricing?.model;
   const isArea = model === 'area';
   const isConfigured = model === 'configured';
+  const isQuoteModel = model === 'quote' || model === 'competitive';
 
   const toggleOption = (id) => {
     setConfig((prev) => {
@@ -104,6 +125,16 @@ export default function ProductConfigurator() {
   });
 
   const requestOrder = () => navigate('/order', { state: orderState() });
+
+  // Quote-only / unpriced products route to the existing quote + artwork flow.
+  const requestQuote = () =>
+    navigate('/quote', {
+      state: {
+        product: product.name,
+        specs: product.sizeLabel || product.size || '',
+        quantity: config?.quantity || 1
+      }
+    });
 
   if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
   if (notFound || !product)
@@ -244,7 +275,9 @@ export default function ProductConfigurator() {
                         >
                           <span className="choice-label">{choice.label}</span>
                           <span className="choice-meta">
-                            {group.pricing === 'base'
+                            {group.pricing === 'baseKit'
+                              ? ''
+                              : group.pricing === 'base'
                               ? money(choice.price)
                               : group.pricing === 'add' || group.pricing === 'addFlat'
                                 ? (Number(choice.price) ? `+${money(choice.price)}` : 'Included')
@@ -386,8 +419,24 @@ export default function ProductConfigurator() {
           </div>
         </div>
 
-        {/* Right: live price panel */}
+        {/* Right: live price panel (or quote CTA when unpriced) */}
         <aside className="price-panel card">
+          {isQuoteModel && !price ? (
+            <>
+              <h3>Pricing</h3>
+              <p className="price-sub">
+                This product is quoted per order. Tell us your size, quantity and artwork and we'll
+                send pricing and a free proof.
+              </p>
+              <button className="btn btn-red btn-block" onClick={requestQuote}>
+                Request a Quote
+              </button>
+              <p className="panel-foot">
+                Upload your artwork on the quote form — we send a free proof before production.
+              </p>
+            </>
+          ) : (
+          <>
           <h3>Instant price</h3>
           <div className={`price-big ${pricing ? 'is-updating' : ''}`}>
             {price ? money(price.total) : '—'}
@@ -442,10 +491,25 @@ export default function ProductConfigurator() {
           <p className="panel-foot">
             We send a free artwork proof for your approval before anything goes to production.
           </p>
+          </>
+          )}
         </aside>
       </div>
 
       <ProductTabs product={product} />
+
+      {related.length > 0 && (
+        <section className="related-section">
+          <div className="section-head">
+            <h2>Related products</h2>
+          </div>
+          <div className="pcard-grid">
+            {related.map((r) => (
+              <ProductCard key={r.slug} product={r} />
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

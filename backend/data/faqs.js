@@ -2,6 +2,8 @@
 // (sizes, materials, finishing, turnaround). Used on the product page and
 // prerendered as FAQPage structured data.
 export function getProductFaqs(product) {
+  // A product may carry its own curated FAQs (e.g. quote-only displays).
+  if (Array.isArray(product.faqs) && product.faqs.length) return product.faqs;
   const p = product.pricing;
   const name = product.name;
   const lower = name.toLowerCase();

@@ -44,6 +44,14 @@ export default function ProductTabs({ product }) {
             <ul className="ptab-list">
               {(product.features || []).map((f) => <li key={f}>{f}</li>)}
             </ul>
+            {Array.isArray(product.applications) && product.applications.length > 0 && (
+              <>
+                <h3>Applications &amp; best uses</h3>
+                <ul className="ptab-list">
+                  {product.applications.map((a) => <li key={a}>{a}</li>)}
+                </ul>
+              </>
+            )}
           </div>
         )}
 
@@ -102,6 +110,8 @@ export default function ProductTabs({ product }) {
 }
 
 function specsFor(product, sizeKey) {
+  // Products may carry their own spec table (e.g. trade-show displays).
+  if (Array.isArray(product.specs) && product.specs.length) return product.specs;
   const rows = [];
   if (sizeKey) rows.push(['Size', sizeKey.replace('x', "' × ") + "'"]);
   rows.push(['Frame', 'Heavy-duty aluminium hex, telescopic legs']);

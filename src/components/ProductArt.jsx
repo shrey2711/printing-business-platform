@@ -194,6 +194,69 @@ function Tent() {
   );
 }
 
+// Premium retractable — wider base + chrome-style end caps (vs the Standard).
+function DeluxeStand() {
+  return (
+    <Frame>
+      <rect x="84" y="18" width="72" height="120" fill="#fff" stroke="#c7cfdb" />
+      <SampleGraphic x="90" y="24" w="60" h="108" />
+      <rect x="66" y="138" width="108" height="12" rx="4" fill="#aeb7c4" />
+      <rect x="58" y="137" width="14" height="14" rx="3" fill="#e8edf3" stroke="#c3cbd6" />
+      <rect x="168" y="137" width="14" height="14" rx="3" fill="#e8edf3" stroke="#c3cbd6" />
+      <rect x="118" y="18" width="4" height="120" fill="#cfd6df" />
+      <ellipse cx="120" cy="158" rx="48" ry="5" fill="#e0e5ec" />
+    </Frame>
+  );
+}
+
+// X-frame banner — visibly an X, not a retractable cassette.
+function XStand() {
+  return (
+    <Frame>
+      <line x1="86" y1="30" x2="154" y2="150" stroke="#9aa4b2" strokeWidth="4" />
+      <line x1="154" y1="30" x2="86" y2="150" stroke="#9aa4b2" strokeWidth="4" />
+      <rect x="98" y="40" width="44" height="100" fill="#fff" stroke="#c7cfdb" />
+      <SampleGraphic x="102" y="44" w="36" h="92" />
+      {[[98, 40], [142, 40], [98, 140], [142, 140]].map(([cx, cy]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="2.6" fill="#8b95a6" />
+      ))}
+    </Frame>
+  );
+}
+
+// Wide step & repeat backdrop with repeating logo motifs.
+function StepRepeat() {
+  return (
+    <Frame>
+      <rect x="24" y="34" width="192" height="104" fill="#16233b" stroke="#0f1830" />
+      {Array.from({ length: 3 }).map((_, r) =>
+        Array.from({ length: 5 }).map((_, c) => (
+          <g key={`${r}-${c}`} transform={`translate(${44 + c * 34} ${54 + r * 30})`}>
+            <path d="M0 10 L8 -6 L16 10 Z" fill="#1f8fd6" />
+            <rect x="-2" y="13" width="20" height="3" rx="1" fill="#ffffff" />
+          </g>
+        ))
+      )}
+      <rect x="24" y="138" width="6" height="18" fill="#9aa4b2" />
+      <rect x="210" y="138" width="6" height="18" fill="#9aa4b2" />
+    </Frame>
+  );
+}
+
+// Small tabletop banner sitting on a table — obviously compact.
+function TableTop() {
+  return (
+    <Frame>
+      <rect x="34" y="120" width="172" height="8" fill="#c3cbd6" />
+      <rect x="48" y="128" width="6" height="34" fill="#aeb7c4" />
+      <rect x="186" y="128" width="6" height="34" fill="#aeb7c4" />
+      <rect x="104" y="58" width="32" height="62" fill="#fff" stroke="#c7cfdb" />
+      <SampleGraphic x="107" y="61" w="26" h="56" />
+      <rect x="98" y="118" width="44" height="6" rx="2" fill="#9aa4b2" />
+    </Frame>
+  );
+}
+
 const MAP = {
   'vinyl-banners': <Banner />,
   'mesh-banners': <Banner mesh />,
@@ -203,6 +266,11 @@ const MAP = {
   'decals-stickers': <Decals />,
   'feather-flags': <FeatherFlag />,
   'retractable-banner-stands': <BannerStand />,
+  'standard-retractable-banner': <BannerStand />,
+  'deluxe-retractable-banner': <DeluxeStand />,
+  'x-stand-banner': <XStand />,
+  'step-and-repeat-backdrop': <StepRepeat />,
+  'table-top-banner-stand': <TableTop />,
   'table-covers': <TableCover />,
   'canopy-tents': <Tent />
 };

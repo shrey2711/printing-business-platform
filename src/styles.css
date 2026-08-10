@@ -185,6 +185,9 @@ h1, h2, h3, h4 { color: var(--navy); }
 .tent-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .tent-thumb:hover { border-color: var(--blue); }
 .tent-thumb.is-active { border-color: var(--navy); }
+/* Related products on the product page */
+.related-section { max-width: 1400px; margin: 2.5rem auto 0; padding: 0 1.5rem; }
+.related-section .section-head { margin-bottom: 1rem; }
 a.frame-card, a.solution-card { display: block; transition: border-color 0.12s, box-shadow 0.12s; }
 a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shadow: 0 8px 20px rgba(22, 35, 59, 0.1); }
 

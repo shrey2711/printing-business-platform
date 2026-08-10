@@ -33,10 +33,19 @@ export default function ProductCard({ product, previewSize, previewFull, preview
         </ul>
       </div>
       <div className="pcard-foot">
-        <span className="pcard-price">
-          Starting at <strong>{money(product.startingPrice, { cents: false })}</strong>
-        </span>
-        <span className="pcard-cta">Configure &amp; Price ›</span>
+        {product.startingPrice != null ? (
+          <>
+            <span className="pcard-price">
+              Starting at <strong>{money(product.startingPrice, { cents: false })}</strong>
+            </span>
+            <span className="pcard-cta">Configure &amp; Price ›</span>
+          </>
+        ) : (
+          <>
+            <span className="pcard-price">Request a Quote</span>
+            <span className="pcard-cta">Get a Quote ›</span>
+          </>
+        )}
       </div>
     </Link>
   );

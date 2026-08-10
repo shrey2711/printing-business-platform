@@ -1,4 +1,5 @@
 import { getProduct, getQuantityDiscount } from './products.js';
+import { calculateCompetitivePrice, competitorCurrentPrice } from './competitive.js';
 
 // Compute an instant price for a configured product.
 // Returns a structured breakdown so the frontend can show the math (like B2Sign).
@@ -14,6 +15,11 @@ export function computePrice(input, opts = {}) {
 
   const qty = clampInt(quantity, 1, 100000);
   const pricing = opts.pricing || product.pricing;
+
+  // Quote-only products have no computed price — surfaced as "Request a Quote".
+  if (pricing.model === 'quote') {
+    return { ok: false, quote: true, error: 'Quote required' };
+  }
   const selectedOptions = Array.isArray(options) ? options : [];
 
   let perPieceGoods = 0;
@@ -65,7 +71,18 @@ export function computePrice(input, opts = {}) {
     let running = 0;
     if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
       const tier = pickTier(pricing.quantityTiers, qty);
-      running = Number(tier.price) || 0;
+      // Base may vary by a "kit" selection (e.g. full set vs graphic only):
+      // tier.prices = { full: 835, canopy: 510 }. Falls back to tier.price.
+      if (tier.prices && pricing.kitGroupId) {
+        const kitId = selections[pricing.kitGroupId];
+        running = Number(tier.prices[kitId] != null ? tier.prices[kitId] : Object.values(tier.prices)[0]) || 0;
+        // Record the kit choice so it shows in the order spec line.
+        const kitGroup = groups.find((g) => g.id === pricing.kitGroupId);
+        const kitChoice = pickChoice(kitGroup, kitId);
+        if (kitGroup && kitChoice) chosen[kitGroup.id] = kitChoice.label || kitChoice.id;
+      } else {
+        running = Number(tier.price) || 0;
+      }
       breakdown.push({ label: `${pricing.baseLabel || 'Base price'}${tier.min > 1 ? ` (${tier.min}+ units)` : ''}`, amount: round2(running) });
     } else {
       const baseGroup = groups.find((g) => g.pricing === 'base');
@@ -155,6 +172,15 @@ export function computePrice(input, opts = {}) {
     // Readable one-liner for order specs / emails, matching how `unit` reports.
     dims.variant = Object.values(chosen).filter(Boolean).join(' • ');
     perPieceGoods = running;
+  } else if (pricing.model === 'competitive') {
+    // Apex price = competitor's comparable selling price × (1 − discount%).
+    // competitorPrice is entered manually; null → quote required.
+    const variant = (pricing.variants || []).find((v) => v.id === variantId) || (pricing.variants || [])[0];
+    const apex = variant ? calculateCompetitivePrice(competitorCurrentPrice(variant), pricing.discountPercent) : null;
+    if (apex == null) return { ok: false, quote: true, error: 'Quote required' };
+    dims.variant = variant.name || variant.id;
+    breakdown.push({ label: `${product.name} — ${variant.name || variant.id}`, amount: round2(apex) });
+    perPieceGoods = apex;
   } else {
     const variant = pickVariant(pricing.variants, variantId);
     const material = pickMaterial(pricing.materials, materialId);
@@ -173,7 +199,8 @@ export function computePrice(input, opts = {}) {
 
   // quantityTiers already price in the volume break, so don't stack a % discount.
   const usesTiers = pricing.model === 'configured' && Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length;
-  const discount = usesTiers ? 0 : getQuantityDiscount(qty);
+  // Competitive products are already priced per variant — no extra volume % on top.
+  const discount = usesTiers || pricing.model === 'competitive' ? 0 : getQuantityDiscount(qty);
   const unitPrice = round2(perPieceGoods);
   const goodsSubtotal = perPieceGoods * qty;
   const discountAmount = goodsSubtotal * discount;

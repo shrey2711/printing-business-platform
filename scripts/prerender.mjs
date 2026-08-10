@@ -100,6 +100,11 @@ function write(path, html) {
 }
 
 const productList = listProducts();
+// "from $X" for priced products, "Request a quote" for quote/competitive ones.
+const priceFrom = (p) => (p.startingPrice != null ? `from $${p.startingPrice}` : 'Request a quote');
+// Canopy-focused pages (home, locations) list only the core retail products.
+const coreProducts = productList.filter((p) => p.category === 'tents' || p.category === 'table-covers');
+const displayProducts = productList.filter((p) => p.category === 'displays');
 let count = 0;
 const routes = [];
 
@@ -112,7 +117,7 @@ routes.push(() => {
     no quote form. Every order includes a free artwork proof, and nothing goes to production until
     you approve it. ${esc(brand.shippingBlurb)}.</p>
     <h2>Shop canopy tents</h2>
-    <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}. ${esc(p.tagline)}</li>`).join('')}</ul>
+    <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
     <h2>Canopy tent size guides</h2>
     <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
     <h2>What people use them for</h2>
@@ -138,9 +143,11 @@ routes.push(() => {
     <p>Custom printed pop-up canopy tents in three sizes — 10x10, 10x15 and 10x20 — with up to 3
     printed walls, full-colour dye-sublimation printing and a free artwork proof. Configure any size
     for instant online pricing.</p>
-    <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}. ${esc(p.tagline)}</li>`).join('')}</ul>
+    <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
     <p>Not sure which size? Read the <a href="/sizes/10x10">10x10</a>, <a href="/sizes/10x15">10x15</a>
-    and <a href="/sizes/10x20">10x20</a> size guides.</p>`;
+    and <a href="/sizes/10x20">10x20</a> size guides.</p>
+    ${displayProducts.length ? `<h2>Trade show displays</h2>
+    <ul>${displayProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>` : ''}`;
   return render({
     path: '/products',
     title: `Custom Printed Canopy Tents — 10x10, 10x15 & 10x20 | ${BRAND}`,
@@ -218,7 +225,7 @@ for (const sol of SOLUTIONS) {
       <p>${esc(g.walls)}</p>
       <h2>Order your ${esc(sol.title.toLowerCase().replace(/ tents$/, ' tent'))}</h2>
       <p>Pick a size and configure walls, print and delivery for an instant price:</p>
-      <ul>${productList.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>
+      <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>
       <h2>Other uses</h2>
       <ul>${others.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;
     return render({
@@ -242,6 +249,14 @@ for (const sol of SOLUTIONS) {
 // Commercial-intent title/H1/description per product. Canopy sizes target
 // "<size> custom canopy tent with logo"; others keep a sensible default.
 function productSeoTitle(product) {
+  // Products can carry their own SEO title/description (e.g. trade-show displays).
+  if (product.seoTitle) {
+    return {
+      title: product.seoTitle,
+      h1: product.name,
+      description: () => product.seoDescription || product.tagline
+    };
+  }
   const m = product.slug.match(/canopy-tent-(\d+x\d+)/);
   if (m) {
     const size = m[1];
@@ -265,9 +280,12 @@ for (const summary of productList) {
   const startingPrice = summary.startingPrice;
   routes.push(() => {
     const p = product.pricing;
-    // Build a specifications list per pricing model — never emit empty labels.
+    // Build a specifications list — never emit empty labels. Products may carry
+    // their own spec table (trade-show displays); otherwise derive per model.
     const specs = [];
-    if (p.model === 'area') {
+    if (Array.isArray(product.specs) && product.specs.length) {
+      for (const [k, v] of product.specs) specs.push([k, v]);
+    } else if (p.model === 'area') {
       const materials = (p.materials || []).map((m) => m.name).join(', ');
       if (materials) specs.push(['Materials', materials]);
       specs.push(['Sizes', `Custom sizes from ${p.minWidthIn}"×${p.minHeightIn}" up to ${p.maxWidthIn}"×${p.maxHeightIn}"`]);
@@ -290,7 +308,13 @@ for (const summary of productList) {
       if (materials) specs.push(['Materials', materials]);
     }
 
-    const related = productList.filter((x) => x.slug !== product.slug).slice(0, 5);
+    // Related: explicit list from the product when set, else other products.
+    const relatedSlugs = Array.isArray(product.related) && product.related.length
+      ? product.related
+      : productList.filter((x) => x.slug !== product.slug).slice(0, 5).map((x) => x.slug);
+    const related = relatedSlugs
+      .map((s) => productList.find((x) => x.slug === s))
+      .filter(Boolean);
     const faqs = getProductFaqs(product);
     const seoTitle = productSeoTitle(product);
     // Real product images (dye-sub photos we actually ship), absolute URLs for
@@ -306,14 +330,15 @@ for (const summary of productList) {
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>
       <h1>${esc(seoTitle.h1)}</h1>
       <p>${esc(product.description)}</p>
-      <p><strong>Starting at $${startingPrice}.</strong> ${esc(product.turnaround)}.</p>
+      <p>${startingPrice != null ? `<strong>Starting at $${startingPrice}.</strong>` : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}.</p>
       <h2>Features</h2><ul>${product.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+      ${Array.isArray(product.applications) && product.applications.length ? `<h2>Applications</h2><ul>${product.applications.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
       <h2>Specifications</h2>
       ${specs.map(([k, v]) => `<p><strong>${esc(k)}:</strong> ${esc(v)}</p>`).join('')}
-      <p><a href="/products/${product.slug}">Configure your ${esc(product.name)} and get an instant price →</a></p>
+      <p><a href="/products/${product.slug}">${startingPrice != null ? `Configure your ${esc(product.name)} and get an instant price →` : `Configure your ${esc(product.name)} and request a quote →`}</a></p>
       <h2>Frequently asked questions</h2>
       ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
-      <h2>More products</h2>
+      <h2>Related products</h2>
       <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>`;
     return render({
       path: `/products/${product.slug}`,
@@ -329,14 +354,19 @@ for (const summary of productList) {
           ...(productImages.length ? { image: productImages } : {}),
           sku: product.slug,
           brand: { '@type': 'Brand', name: BRAND },
-          offers: {
-            '@type': 'Offer',
-            priceCurrency: 'USD',
-            price: String(startingPrice),
-            availability: 'https://schema.org/InStock',
-            itemCondition: 'https://schema.org/NewCondition',
-            url: `${ORIGIN}/products/${product.slug}`
-          }
+          // Offer only when there is a real price — no fake price on quote products.
+          ...(startingPrice != null
+            ? {
+                offers: {
+                  '@type': 'Offer',
+                  priceCurrency: 'USD',
+                  price: String(startingPrice),
+                  availability: 'https://schema.org/InStock',
+                  itemCondition: 'https://schema.org/NewCondition',
+                  url: `${ORIGIN}/products/${product.slug}`
+                }
+              }
+            : {})
         },
         {
           '@context': 'https://schema.org',
@@ -393,7 +423,7 @@ for (const s of territories) {
     const cityLinks = s.cities
       .map((c) => `<li><a href="/locations/${s.slug}/${slugify(c)}">Canopy tents in ${esc(c)}, ${s.abbr}</a></li>`)
       .join('');
-    const products6 = `<ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
+    const products6 = `<ul>${coreProducts.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>`;
     const sizesList = `<ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>`;
     const sizePhotos = SIZES
       .map((z) => `<img src="/images/tents/${z.slug}-1wall.webp" alt="${esc(z.label)} custom printed canopy tent" width="1200" height="900" loading="lazy" decoding="async">`)
@@ -456,7 +486,7 @@ for (const s of territories) {
     const cityIsPriority = PRIORITY_CITIES.has(citySlug);
     const cc = cityContent[citySlug];
     routes.push(() => {
-      const products6 = `<ul>${productList.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — from $${p.startingPrice}</li>`).join('')}</ul>`;
+      const products6 = `<ul>${coreProducts.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>`;
       const cityPhotos = SIZES
         .map((z) => `<img src="/images/tents/${z.slug}-1wall.webp" alt="${esc(z.label)} custom printed canopy tent" width="1200" height="900" loading="lazy" decoding="async">`)
         .join('');

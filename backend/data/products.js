@@ -6,10 +6,13 @@
 //
 // All prices are illustrative wholesale rates and are easy to tune in one place.
 
+import { calculateCompetitivePrice, competitorCurrentPrice } from './competitive.js';
+
 // Active categories for the canopy storefront.
 export const categories = [
   { id: 'tents', name: 'Canopy Tents' },
-  { id: 'table-covers', name: 'Table Covers' }
+  { id: 'table-covers', name: 'Table Covers' },
+  { id: 'displays', name: 'Trade Show Displays' }
 ];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
@@ -39,6 +42,16 @@ export const navGroups = [
   {
     name: 'Table Covers',
     items: [{ name: 'Custom Table Covers', slug: 'table-covers' }]
+  },
+  {
+    name: 'Trade Show Displays',
+    items: [
+      { name: 'Standard Retractable Banner Stand', slug: 'standard-retractable-banner' },
+      { name: 'Deluxe Retractable Banner Stand', slug: 'deluxe-retractable-banner' },
+      { name: 'X-Stand Banner', slug: 'x-stand-banner' },
+      { name: 'Step and Repeat Backdrop', slug: 'step-and-repeat-backdrop' },
+      { name: 'Table Top Banner Stand', slug: 'table-top-banner-stand' }
+    ]
   }
 ];
 
@@ -88,15 +101,19 @@ const daysGroup15 = {
 // Full set (printed canopy + frame + bag) vs canopy-only (printed top, no
 // frame). Canopy-only is 20% off the tent price. Multiplier applies to the base
 // tent before walls, so walls (if added) stay full price.
+// The kit choice selects WHICH base-price column applies (full set vs graphic
+// only). It is not a multiplier — each kit has its own per-size, per-tier price
+// (see quantityTiers.prices). pricing:'baseKit' is handled by computePrice's
+// base step and ignored by the multiplier/add loops.
 const kitGroup = {
   id: 'kit',
   label: 'What you get',
   type: 'select',
-  pricing: 'multiplier',
-  help: 'Full set includes the aluminium frame + carry bag. Canopy only is just the printed top.',
+  pricing: 'baseKit',
+  help: 'Full set includes the aluminium frame + carry bag. Graphic only is just the printed top.',
   choices: [
-    { id: 'full', label: 'Full set — canopy + frame + bag', mult: 1, default: true },
-    { id: 'canopy', label: 'Canopy only — printed top', mult: 0.8 }
+    { id: 'full', label: 'Full set — canopy + frame + bag', default: true },
+    { id: 'canopy', label: 'Graphic only — printed top' }
   ]
 };
 
@@ -128,7 +145,7 @@ const designGroup = {
   ]
 };
 
-const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
+const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) => ({
   slug,
   active: true,
   name: `${size} Canopy Tent`,
@@ -150,9 +167,12 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
   pricing: {
     model: 'configured',
     baseLabel: `${size} canopy tent`,
+    // The kit selection picks the price column; each size/tier has its own
+    // full-set and graphic-only price (from the supplied rate card).
+    kitGroupId: 'kit',
     quantityTiers: [
-      { min: 1, price: tier1 },
-      { min: 3, price: tier3 }
+      { min: 1, prices: { full: full1, canopy: canopy1 } },
+      { min: 3, prices: { full: full3, canopy: canopy3 } }
     ],
     // Full + half walls together cannot exceed 3 (a tent has 3 open sides +
     // the back). Enforced in the configurator UI and clamped server-side.
@@ -169,9 +189,10 @@ const canopyProduct = ({ slug, size, tier1, tier3, wallPer }) => ({
 });
 
 const canopyTents = [
-  canopyProduct({ slug: 'canopy-tent-10x10', size: "10' × 10'", tier1: 835, tier3: 799, wallPer: 275 }),
-  canopyProduct({ slug: 'canopy-tent-10x15', size: "10' × 15'", tier1: 1375, tier3: 1250, wallPer: 365 }),
-  canopyProduct({ slug: 'canopy-tent-10x20', size: "10' × 20'", tier1: 1635, tier3: 1445, wallPer: 365 })
+  // From the supplied rate card. full = Frame + Graphic; canopy = Graphic Only.
+  canopyProduct({ slug: 'canopy-tent-10x10', size: "10' × 10'", full1: 835, full3: 799, canopy1: 510, canopy3: 485, wallPer: 275 }),
+  canopyProduct({ slug: 'canopy-tent-10x15', size: "10' × 15'", full1: 1375, full3: 1250, canopy1: 545, canopy3: 540, wallPer: 365 }),
+  canopyProduct({ slug: 'canopy-tent-10x20', size: "10' × 20'", full1: 1635, full3: 1445, canopy1: 915, canopy3: 805, wallPer: 365 })
 ];
 
 const tableCovers = {
@@ -217,9 +238,245 @@ const tableCovers = {
   }
 };
 
+// ─── Trade Show Displays (quote-only) ────────────────────────────────────────
+// Banner stands, backdrops and tabletop displays. No pricing was provided, so
+// these use the `quote` model: the card and product page show "Request a Quote"
+// and route to the existing /quote + artwork-upload flow. Replace with a real
+// pricing model once rates exist. `specs`/`applications`/`related`/`seo*` are
+// read by ProductTabs, the configurator and the prerenderer.
+const tradeShowDisplays = [
+  {
+    slug: 'standard-retractable-banner',
+    active: true,
+    name: 'Standard Retractable Banner Stand',
+    category: 'displays',
+    badge: 'Retractable',
+    emoji: '📐',
+    tagline: 'Compact retractable banner stand with a replaceable printed graphic.',
+    description:
+      'A portable retractable banner stand with a compact aluminium base and two stabilising feet. ' +
+      'The printed graphic rolls into the base for travel and pops up in seconds — ideal for trade ' +
+      'shows, lobbies and events. The graphic is replaceable, so you can reuse the hardware.',
+    size: '33" × 81"',
+    features: [
+      'Compact aluminium retractable base',
+      'Two stabilising feet',
+      'Quick tool-free setup',
+      'Portable trade-show display',
+      'Replaceable printed graphic',
+      'Travel-friendly design'
+    ],
+    applications: ['Trade shows and expos', 'Conferences and lobbies', 'Retail and showroom displays', 'Events and promotions'],
+    specs: [
+      ['Display size', '33" × 81"'],
+      ['Type', 'Retractable banner stand'],
+      ['Base', 'Compact aluminium with two stabilising feet'],
+      ['Graphic', 'Replaceable printed banner'],
+      ['Setup', 'Tool-free — pops up in seconds'],
+      ['Included', 'Stand + printed graphic + carry bag']
+    ],
+    turnaround: 'Ships in 2–4 business days',
+    related: ['deluxe-retractable-banner', 'x-stand-banner'],
+    seoTitle: 'Standard Retractable Banner Stand',
+    seoDescription:
+      'Custom Apex retractable banner stand, 33×81 in. Compact aluminium base, quick tool-free setup and a replaceable printed graphic for trade shows and events.',
+    pricing: {
+      model: 'competitive',
+      discountPercent: 5,
+      // Enter the competitor's comparable (stand + printed graphic) selling price
+      // per size. competitorPrice null → "Request a Quote" until filled.
+      variants: [
+        { id: '33x81', name: '33" × 81"', competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      ]
+    },
+    faqs: [
+      { q: 'What size is the Standard Retractable Banner Stand?', a: 'The printed graphic is 33" wide × 81" tall. Ask us for other sizes when you request a quote.' },
+      { q: 'Can I replace the graphic later?', a: 'Yes — the banner is replaceable, so you can reuse the stand and just reprint the graphic.' },
+      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+    ]
+  },
+  {
+    slug: 'deluxe-retractable-banner',
+    active: true,
+    name: 'Deluxe Retractable Banner Stand',
+    category: 'displays',
+    badge: 'Premium',
+    emoji: '🏆',
+    tagline: 'Premium retractable banner stand with chrome-style end caps and an adjustable pole.',
+    description:
+      'A premium retractable banner stand with heavier aluminium hardware, chrome-style end caps and an ' +
+      'adjustable support pole for a polished, professional look. The printed graphic is replaceable and ' +
+      'the stand packs into a padded bag for travel.',
+    size: '33" × 81"',
+    features: [
+      'Premium aluminium hardware',
+      'Chrome-style end caps',
+      'Adjustable support pole',
+      'Professional premium appearance',
+      'Portable, easy tool-free setup',
+      'Replaceable printed graphic'
+    ],
+    applications: ['Trade shows and conferences', 'Corporate and retail displays', 'Showrooms and events', 'Reception and lobby branding'],
+    specs: [
+      ['Display size', '33" × 81"'],
+      ['Type', 'Premium retractable banner stand'],
+      ['Base', 'Heavy aluminium with chrome-style end caps'],
+      ['Pole', 'Adjustable support pole'],
+      ['Graphic', 'Replaceable printed banner'],
+      ['Included', 'Stand + printed graphic + padded bag']
+    ],
+    turnaround: 'Ships in 2–4 business days',
+    related: ['standard-retractable-banner', 'x-stand-banner'],
+    seoTitle: 'Deluxe Retractable Banner Stand',
+    seoDescription:
+      'Premium Apex retractable banner stand, 33×81 in, with chrome-style end caps and an adjustable pole. Replaceable graphic for a polished trade-show display.',
+    pricing: {
+      model: 'competitive',
+      discountPercent: 5,
+      variants: [
+        { id: '33x81', name: '33" × 81"', competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      ]
+    },
+    faqs: [
+      { q: 'How is the Deluxe different from the Standard stand?', a: 'The Deluxe uses heavier aluminium hardware, chrome-style end caps and an adjustable pole for a more premium, professional look.' },
+      { q: 'Is the graphic replaceable?', a: 'Yes — reuse the premium hardware and reprint the banner whenever your message changes.' },
+      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+    ]
+  },
+  {
+    slug: 'x-stand-banner',
+    active: true,
+    name: 'X-Stand Banner',
+    category: 'displays',
+    badge: 'Economical',
+    emoji: '✖️',
+    tagline: 'Lightweight X-frame banner stand — an economical, portable display.',
+    description:
+      'A lightweight X-frame banner stand — not a retractable. The banner mounts to a collapsible ' +
+      'X-shaped frame with grommets at the corners, so graphics are quick to swap. It folds flat, sets ' +
+      'up in seconds and is one of the most economical portable displays for events and promotions.',
+    size: '24" × 63"',
+    features: [
+      'Lightweight X-frame hardware',
+      'Grommet-mounted banner',
+      'Easy graphic replacement',
+      'Fast tool-free setup',
+      'Lightweight and portable',
+      'Economical option for events'
+    ],
+    applications: ['Events and promotions', 'Retail and point-of-sale', 'Registration and info points', 'Budget-friendly signage'],
+    specs: [
+      ['Display size', '24" × 63"'],
+      ['Type', 'X-frame banner stand (not retractable)'],
+      ['Frame', 'Collapsible lightweight X-frame'],
+      ['Mounting', 'Grommets at the four corners'],
+      ['Setup', 'Folds flat — sets up in seconds'],
+      ['Included', 'X-frame + printed banner']
+    ],
+    turnaround: 'Ships in 2–4 business days',
+    related: ['standard-retractable-banner', 'deluxe-retractable-banner'],
+    seoTitle: 'X-Stand Banner Display',
+    seoDescription:
+      'Apex X-Stand banner, 24×63 in — a lightweight X-frame display with a grommet-mounted, easy-to-swap graphic. Economical, portable signage for events.',
+    pricing: { model: 'quote' },
+    faqs: [
+      { q: 'Is the X-Stand a retractable banner?', a: 'No — the X-Stand uses a collapsible X-shaped frame and a grommet-mounted banner, not a roll-up cassette. It is lighter and more economical.' },
+      { q: 'How does the banner attach?', a: 'The printed banner has grommets at the corners that hook onto the X-frame, so it is fast to mount and swap.' },
+      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+    ]
+  },
+  {
+    slug: 'step-and-repeat-backdrop',
+    active: true,
+    name: 'Step and Repeat Backdrop',
+    category: 'displays',
+    badge: 'Backdrop',
+    emoji: '📸',
+    tagline: 'Large-format step & repeat media wall for event photography and branding.',
+    description:
+      'A large-format fabric step & repeat backdrop on an adjustable frame — the media wall behind ' +
+      'press, red-carpet and event photos. Print repeating logos or artwork across the full surface for ' +
+      'consistent branding in every shot. The graphic is replaceable and the frame packs down for transport.',
+    size: '120" × 96"',
+    sizeLabel: "10' × 8' (120\" × 96\")",
+    features: [
+      'Large-format fabric backdrop',
+      'Adjustable frame system',
+      'Designed for event photography',
+      'Excellent for repeating logo branding',
+      'Professional photo backdrop',
+      'Portable frame',
+      'Replaceable graphic'
+    ],
+    applications: ['Event and press photography', 'Red-carpet / step-and-repeat walls', 'Conferences and galas', 'Brand activations'],
+    specs: [
+      ['Display size', "10' × 8' (120\" × 96\")"],
+      ['Type', 'Step & repeat event backdrop'],
+      ['Frame', 'Adjustable, portable frame system'],
+      ['Graphic', 'Large-format fabric — replaceable'],
+      ['Best for', 'Repeating logos and photo backdrops'],
+      ['Included', 'Frame + printed graphic + carry bag']
+    ],
+    turnaround: 'Ships in 4–6 business days',
+    related: ['table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
+    seoTitle: 'Step and Repeat Backdrop',
+    seoDescription:
+      'Apex 10×8 ft step and repeat backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
+    pricing: { model: 'quote' },
+    faqs: [
+      { q: 'What size is the step and repeat backdrop?', a: "The standard display is 10' × 8' (120\" × 96\"). Ask about other sizes when you request a quote." },
+      { q: 'Can it show repeating logos?', a: 'Yes — that is what it is built for. We space your logos or artwork evenly across the full surface so they read in every photo.' },
+      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+    ]
+  },
+  {
+    slug: 'table-top-banner-stand',
+    active: true,
+    name: 'Table Top Banner Stand',
+    category: 'displays',
+    badge: 'Tabletop',
+    emoji: '🪧',
+    tagline: 'Compact tabletop retractable banner for counters and registration desks.',
+    description:
+      'A compact retractable banner that sits on a table or counter — a mini version of a full-height ' +
+      'retractable. The small aluminium base holds a replaceable printed graphic and sets up in seconds. ' +
+      'Perfect for registration desks, retail counters, restaurants and trade-show tables.',
+    size: '11.5" × 17.5"',
+    features: [
+      'Compact retractable tabletop banner',
+      'Small aluminium base',
+      'Quick tool-free setup',
+      'Lightweight and portable',
+      'Replaceable printed graphic',
+      'Fits counters and tabletops'
+    ],
+    applications: ['Registration and welcome desks', 'Retail and restaurant counters', 'Exhibition and trade-show tables', 'Point-of-sale displays'],
+    specs: [
+      ['Display size', '11.5" × 17.5" (tabletop)'],
+      ['Type', 'Tabletop retractable banner'],
+      ['Base', 'Compact aluminium tabletop base'],
+      ['Graphic', 'Replaceable printed banner'],
+      ['Setup', 'Tool-free — pops up in seconds'],
+      ['Included', 'Tabletop stand + printed graphic']
+    ],
+    turnaround: 'Ships in 2–4 business days',
+    related: ['standard-retractable-banner', 'table-covers'],
+    seoTitle: 'Table Top Banner Stand',
+    seoDescription:
+      'Compact Apex tabletop retractable banner, 11.5×17.5 in. Small aluminium base and replaceable graphic for counters, registration desks and trade-show tables.',
+    pricing: { model: 'quote' },
+    faqs: [
+      { q: 'How big is the Table Top Banner Stand?', a: 'The graphic is 11.5" wide × 17.5" tall — a compact tabletop size, not a full-height floor banner.' },
+      { q: 'Where is it used?', a: 'On tables and counters — registration desks, retail and restaurant counters, and trade-show tables.' },
+      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+    ]
+  }
+];
+
 const products = [
   ...canopyTents,
   tableCovers,
+  ...tradeShowDisplays,
   {
     slug: 'vinyl-banners',
     active: false,
@@ -1661,15 +1918,28 @@ export function startingPriceFor(pricing) {
 }
 
 function estimateStartingPrice(pricing) {
+  // Quote-only products carry no price; the card/pages show "Request a Quote".
+  if (pricing.model === 'quote') return null;
+  // Competitive products: cheapest variant priced from its competitorPrice.
+  // If none are filled in yet, null → "Request a Quote".
+  if (pricing.model === 'competitive') {
+    const prices = (pricing.variants || [])
+      .map((v) => calculateCompetitivePrice(competitorCurrentPrice(v), pricing.discountPercent))
+      .filter((n) => n != null);
+    return prices.length ? Math.round(Math.min(...prices)) : null;
+  }
   if (pricing.model === 'configured') {
     // Cheapest reachable build: smallest base, lowest multiplier on every axis,
     // no add-ons. A genuine floor for "from $X".
     const groups = pricing.optionGroups || [];
     let price;
     if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
-      // "From" = the single-unit (lowest-min) tier price, what a shopper sees first.
+      // "From" = the cheapest single-unit (lowest-min) tier price — the graphic-
+      // only column when a kit price table is present.
       const entry = pricing.quantityTiers.reduce((a, b) => (b.min < a.min ? b : a));
-      price = Number(entry.price) || 0;
+      price = entry.prices
+        ? Math.min(...Object.values(entry.prices).map(Number).filter(Number.isFinite))
+        : (Number(entry.price) || 0);
     } else {
       const baseGroup = groups.find((g) => g.pricing === 'base');
       const bases = (baseGroup?.choices || []).map((c) => Number(c.price)).filter(Number.isFinite);
