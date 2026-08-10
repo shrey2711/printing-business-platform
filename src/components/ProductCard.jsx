@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import ProductArt from './ProductArt';
 import TentPhoto from './TentPhoto';
 import TableCoverPhoto from './TableCoverPhoto';
+import DisplayPhoto from './DisplayPhoto';
 import { useMoney } from '../context/CurrencyContext';
 
 // Catalog card: corner ribbon, product mockup, bullet specs and a
@@ -21,7 +21,7 @@ export default function ProductCard({ product, previewSize, previewFull, preview
         ) : product.slug === 'table-covers' ? (
           <TableCoverPhoto style="pleated" label={product.name} />
         ) : (
-          <ProductArt slug={product.slug} />
+          <DisplayPhoto slug={product.slug} label={product.name} />
         )}
       </div>
       <div className="pcard-body">

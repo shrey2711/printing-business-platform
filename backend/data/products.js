@@ -384,7 +384,13 @@ const tradeShowDisplays = [
     seoTitle: 'X-Stand Banner Display',
     seoDescription:
       'Apex X-Stand banner, 24×63 in — a lightweight X-frame display with a grommet-mounted, easy-to-swap graphic. Economical, portable signage for events.',
-    pricing: { model: 'quote' },
+    pricing: {
+      model: 'competitive',
+      discountPercent: 5,
+      variants: [
+        { id: '24x63', name: '24" × 63"', competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      ]
+    },
     faqs: [
       { q: 'Is the X-Stand a retractable banner?', a: 'No — the X-Stand uses a collapsible X-shaped frame and a grommet-mounted banner, not a roll-up cassette. It is lighter and more economical.' },
       { q: 'How does the banner attach?', a: 'The printed banner has grommets at the corners that hook onto the X-frame, so it is fast to mount and swap.' },
@@ -428,7 +434,13 @@ const tradeShowDisplays = [
     seoTitle: 'Step and Repeat Backdrop',
     seoDescription:
       'Apex 10×8 ft step and repeat backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
-    pricing: { model: 'quote' },
+    pricing: {
+      model: 'competitive',
+      discountPercent: 5,
+      variants: [
+        { id: '120x96', name: "10' × 8' (120\" × 96\")", competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      ]
+    },
     faqs: [
       { q: 'What size is the step and repeat backdrop?', a: "The standard display is 10' × 8' (120\" × 96\"). Ask about other sizes when you request a quote." },
       { q: 'Can it show repeating logos?', a: 'Yes — that is what it is built for. We space your logos or artwork evenly across the full surface so they read in every photo.' },
@@ -470,7 +482,13 @@ const tradeShowDisplays = [
     seoTitle: 'Table Top Banner Stand',
     seoDescription:
       'Compact Apex tabletop retractable banner, 11.5×17.5 in. Small aluminium base and replaceable graphic for counters, registration desks and trade-show tables.',
-    pricing: { model: 'quote' },
+    pricing: {
+      model: 'competitive',
+      discountPercent: 5,
+      variants: [
+        { id: '11.5x17.5', name: '11.5" × 17.5"', competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      ]
+    },
     faqs: [
       { q: 'How big is the Table Top Banner Stand?', a: 'The graphic is 11.5" wide × 17.5" tall — a compact tabletop size, not a full-height floor banner.' },
       { q: 'Where is it used?', a: 'On tables and counters — registration desks, retail and restaurant counters, and trade-show tables.' },

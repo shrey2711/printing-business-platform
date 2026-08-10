@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import ProductTabs from '../components/ProductTabs';
 import TentGallery from '../components/TentGallery';
 import TableCoverGallery from '../components/TableCoverGallery';
+import DisplayPhoto from '../components/DisplayPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 
@@ -186,7 +187,7 @@ export default function ProductConfigurator() {
             ) : product.slug === 'table-covers' ? (
               <TableCoverGallery style={sel.style} />
             ) : (
-              <ProductArt slug={product.slug} />
+              <DisplayPhoto slug={product.slug} label={product.name} />
             )}
           </div>
           <div className="config-info">
@@ -322,7 +323,7 @@ export default function ProductConfigurator() {
                 <small>{p.minHeightIn}"–{p.maxHeightIn}"</small>
               </div>
             </div>
-          ) : (
+          ) : p.variants?.length ? (
             <div className="field">
               <label>Size</label>
               <select
@@ -333,6 +334,12 @@ export default function ProductConfigurator() {
                   <option key={v.id} value={v.id}>{v.name}</option>
                 ))}
               </select>
+            </div>
+          ) : (
+            // Quote-only product with no size variants — show the fixed size.
+            <div className="field">
+              <label>Size</label>
+              <p className="muted">{product.sizeLabel || product.size || 'One size'}</p>
             </div>
           )}
 
