@@ -24,7 +24,7 @@ export const STATIC_ARTICLES = [
       description:
         'Compare the Apex Standard and Deluxe retractable banner stands — hardware, finish, portability and which fits your trade show needs. Both 33×81 in with replaceable graphics.'
     },
-    coverUrl: null,
+    coverUrl: '/images/displays/standard-retractable-banner.webp',
     publishedAt: '2026-08-10T00:00:00.000Z',
     updatedAt: '2026-08-10T00:00:00.000Z',
     html: `
@@ -52,6 +52,11 @@ export const STATIC_ARTICLES = [
 <h2>Construction and hardware</h2>
 <p>The Standard stand uses a compact aluminium base with two stabilising feet that fold out to keep it upright. It is light, simple and does exactly what a retractable stand needs to do.</p>
 <p>The Deluxe steps up the hardware: heavier aluminium, chrome-style end caps that finish the base cleanly, and an adjustable support pole instead of a fixed one. The extra material and the end caps are what you are paying for — a base built to be handled, packed and re-packed many times.</p>
+
+<figure class="blog-fig">
+  <img src="/images/displays/deluxe-retractable-banner.webp" alt="Apex Deluxe retractable banner stand with a full-colour printed graphic, chrome-style end caps and an adjustable pole" loading="lazy" decoding="async" width="900" height="700">
+  <figcaption>The Deluxe stand — heavier base and chrome-style end caps for a finished look up close.</figcaption>
+</figure>
 
 <h2>Appearance and professional presentation</h2>
 <p>From across an aisle, both stands read the same, because the graphic is identical. The difference shows up close, at the base, where visitors standing at your booth actually see it. The Standard base is functional and unobtrusive. The Deluxe base, with its chrome-style end caps, looks deliberately finished — the kind of detail that matters at a corporate booth, a showroom or a reception area where people are standing right next to it.</p>

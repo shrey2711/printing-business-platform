@@ -841,13 +841,13 @@ for (const p of posts) {
       title: `${p.seo?.title || p.title} | ${BRAND}`,
       description: p.seo?.description || p.excerpt,
       body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / <span>${esc(p.title)}</span></nav>
-        <article><h1>${esc(p.title)}</h1>${p.html}</article>`,
+        <article><h1>${esc(p.title)}</h1>${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}</article>`,
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: p.title,
         description: p.seo?.description || p.excerpt,
-        image: p.coverUrl || undefined,
+        image: p.coverUrl ? (/^https?:\/\//.test(p.coverUrl) ? p.coverUrl : ORIGIN + p.coverUrl) : undefined,
         datePublished: p.publishedAt || undefined,
         dateModified: p.updatedAt || undefined,
         author: { '@type': 'Organization', name: BRAND },

@@ -963,6 +963,9 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .blog-article-body table { width: 100%; border-collapse: collapse; margin: 0 0 1.2rem; font-size: 0.95rem; display: block; overflow-x: auto; }
 .blog-article-body th, .blog-article-body td { border: 1px solid var(--line); padding: 0.55rem 0.7rem; text-align: left; vertical-align: top; }
 .blog-article-body thead th { background: var(--panel); }
+.blog-fig { margin: 1.4rem 0; }
+.blog-fig img { max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line-soft); background: #fff; }
+.blog-fig figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted); text-align: center; }
 .blog-article-cta { margin-top: 2.5rem; padding: 1.5rem; text-align: center; }
 .blog-article-cta h3 { margin: 0 0 0.4rem; }
 .blog-article-cta p { color: var(--muted); margin: 0 0 1rem; }
