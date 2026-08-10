@@ -333,6 +333,8 @@ h1, h2, h3, h4 { color: var(--navy); }
 .display-photo { width: 100%; height: 100%; object-fit: contain; background: #fff; display: block; }
 .pcard-media .display-photo { aspect-ratio: 1 / 1; }
 .config-hero-thumb .display-photo { max-height: 560px; }
+/* Show full banner/backdrop (not cropped) inside the home collage + category cards. */
+.hc-tile .display-photo, .cat-card-media .display-photo { object-fit: contain; background: #fff; }
 
 /* Related products on the product page */
 .related-section { max-width: 1400px; margin: 2.5rem auto 0; padding: 0 1.5rem; }

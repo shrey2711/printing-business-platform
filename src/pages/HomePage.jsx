@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
-import ProductArt from '../components/ProductArt';
+import DisplayPhoto from '../components/DisplayPhoto';
 import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useContentResolver } from '../context/ContentContext';
@@ -140,8 +140,8 @@ export default function HomePage() {
           <div className="hero-collage" aria-label="A complete Apex trade show booth: canopy, table cover, banner stand and backdrop">
             <div className="hc-tile hc-canopy"><TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" /></div>
             <div className="hc-tile"><img src="/images/table-covers/pleated.webp" alt="Branded table cover" loading="lazy" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><ProductArt slug="standard-retractable-banner" /></div>
-            <div className="hc-tile"><ProductArt slug="step-and-repeat-backdrop" /></div>
+            <div className="hc-tile"><DisplayPhoto slug="standard-retractable-banner" label="Retractable banner stand" /></div>
+            <div className="hc-tile"><DisplayPhoto slug="step-and-repeat-backdrop" label="Step & repeat backdrop" /></div>
           </div>
         </div>
       </section>
@@ -159,7 +159,7 @@ export default function HomePage() {
                 {cat.img ? (
                   <img src={cat.img} alt={cat.title} loading="lazy" decoding="async" width="600" height="450" />
                 ) : (
-                  <ProductArt slug={cat.art} />
+                  <DisplayPhoto slug={cat.art} label={cat.title} />
                 )}
               </div>
               <div className="cat-card-body">
