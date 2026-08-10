@@ -29,7 +29,7 @@ export default function SizePage() {
 
   return (
     <main className="page">
-      <Link className="back-link" to="/products">← All canopy tents</Link>
+      <Link className="back-link" to="/custom-canopies">← All canopies</Link>
 
       <div className="landing-hero">
         <div>

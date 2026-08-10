@@ -30,7 +30,7 @@ export default function SolutionPage() {
     return (
       <main className="page">
         <p className="muted">We couldn't find that page.</p>
-        <Link className="btn btn-outline" to="/products">Browse canopy tents</Link>
+        <Link className="btn btn-outline" to="/custom-canopies">Browse canopies</Link>
       </main>
     );
   }
@@ -40,7 +40,7 @@ export default function SolutionPage() {
 
   return (
     <main className="page">
-      <Link className="back-link" to="/products">← All canopy tents</Link>
+      <Link className="back-link" to="/custom-canopies">← All canopies</Link>
 
       <div className="landing-hero">
         <div>
@@ -49,7 +49,7 @@ export default function SolutionPage() {
           <p className="lead">{solution.blurb}</p>
           <p>{g.intro}</p>
           <div className="hero-actions">
-            <Link className="btn btn-red" to="/products">Shop canopy tents</Link>
+            <Link className="btn btn-red" to="/custom-canopies">Shop canopies</Link>
             <Link className="btn btn-outline" to="/quote">Ask about bulk orders</Link>
           </div>
         </div>

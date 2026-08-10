@@ -60,7 +60,7 @@ export default function BlogPost() {
         <div className="blog-article-cta card">
           <h3>Ready to build your canopy?</h3>
           <p>Configure size, frame and print coverage and see the price instantly.</p>
-          <Link className="btn btn-red" to="/products">Build your canopy</Link>
+          <Link className="btn btn-red" to="/custom-canopies">Build your canopy</Link>
         </div>
       </article>
     </main>

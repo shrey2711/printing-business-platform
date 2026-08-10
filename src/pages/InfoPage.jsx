@@ -41,7 +41,7 @@ export default function InfoPage({ slug }) {
         </div>
       ))}
       <p className="info-cta">
-        <Link className="btn btn-red" to="/products">Shop canopy tents</Link>
+        <Link className="btn btn-red" to="/products">Shop all products</Link>
         <Link className="btn btn-outline" to="/contact">Contact us</Link>
       </p>
     </main>

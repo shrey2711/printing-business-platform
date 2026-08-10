@@ -56,7 +56,7 @@ export default function LocationPage() {
           then we ship to {cityList} and everywhere across {state.name} ({state.abbr}).
         </p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem' }}>
-          <Link className="btn btn-red" to="/products">Build your canopy</Link>
+          <Link className="btn btn-red" to="/custom-canopies">Build your canopy</Link>
           <Link className="btn btn-outline" to="/quote">Request a quote</Link>
         </div>
       </section>

@@ -36,9 +36,7 @@ const esc = (s = '') =>
 // Shared crawlable navigation, on every prerendered page.
 const NAV = `<nav aria-label="Primary">
   <a href="/">Home</a>
-  <a href="/products">All Canopy Tents</a>
-  <a href="/products/canopy-tent-10x10">10x10 Canopy Tent</a>
-  <a href="/products/canopy-tent-10x15">10x15 Canopy Tent</a>
+  <a href="/products">All Products</a>
   <a href="/trade-show-displays">Trade Show Displays</a>
   <a href="/custom-canopies">Custom Canopies</a>
   <a href="/banner-stands">Banner Stands</a>
@@ -232,7 +230,7 @@ for (const size of SIZES) {
     const g = size.guide;
     const others = SIZES.filter((s) => s.slug !== size.slug);
     const body = `
-      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Canopy Tents</a> / <span>${esc(size.slug)} Size Guide</span></nav>
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/custom-canopies">Custom Canopies</a> / <span>${esc(size.slug)} Size Guide</span></nav>
       <h1>${esc(g.title)}</h1>
       <p>${esc(size.blurb)} This guide covers the ${esc(size.slug)} canopy tent's dimensions, how many
       tables and people it fits, booth layout ideas and what it is best used for — so you can pick the
@@ -266,7 +264,7 @@ for (const size of SIZES) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'Canopy Tents', item: `${ORIGIN}/products` },
+          { '@type': 'ListItem', position: 2, name: 'Custom Canopies', item: `${ORIGIN}/custom-canopies` },
           { '@type': 'ListItem', position: 3, name: `${size.slug} Size Guide`, item: `${ORIGIN}/sizes/${size.slug}` }
         ]
       }
@@ -280,7 +278,7 @@ for (const sol of SOLUTIONS) {
     const g = sol.guide;
     const others = SOLUTIONS.filter((s) => s.slug !== sol.slug);
     const body = `
-      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Canopy Tents</a> / <span>${esc(sol.title)}</span></nav>
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/custom-canopies">Custom Canopies</a> / <span>${esc(sol.title)}</span></nav>
       <h1>${esc(sol.title)}</h1>
       <p>${esc(g.intro)}</p>
       <h2>What matters for ${esc(sol.title.toLowerCase())}</h2>
@@ -305,7 +303,7 @@ for (const sol of SOLUTIONS) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'Solutions', item: `${ORIGIN}/products` },
+          { '@type': 'ListItem', position: 2, name: 'Custom Canopies', item: `${ORIGIN}/custom-canopies` },
           { '@type': 'ListItem', position: 3, name: sol.title, item: `${ORIGIN}/solutions/${sol.slug}` }
         ]
       }
