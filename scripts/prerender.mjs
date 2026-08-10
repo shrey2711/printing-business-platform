@@ -445,7 +445,8 @@ for (const summary of productList) {
                       lowPrice: String(startingPrice),
                       highPrice: String(priceDisp.full.price),
                       offerCount: 2,
-                      availability: 'https://schema.org/InStock',
+                      // Every item is custom printed to order — not held in stock.
+                      availability: 'https://schema.org/MadeToOrder',
                       itemCondition: 'https://schema.org/NewCondition',
                       url: `${ORIGIN}/products/${product.slug}`
                     }
@@ -453,7 +454,7 @@ for (const summary of productList) {
                       '@type': 'Offer',
                       priceCurrency: 'USD',
                       price: String(startingPrice),
-                      availability: 'https://schema.org/InStock',
+                      availability: 'https://schema.org/MadeToOrder',
                       itemCondition: 'https://schema.org/NewCondition',
                       url: `${ORIGIN}/products/${product.slug}`
                     }
