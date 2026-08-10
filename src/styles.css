@@ -205,6 +205,31 @@ h1, h2, h3, h4 { color: var(--navy); }
 .booth-band-inner .hero-actions { justify-content: center; }
 .section-more { text-align: center; margin-top: 1.4rem; }
 
+/* Build your booth — merchandising tiers */
+.booth-builder { max-width: 1400px; margin: 2.8rem auto 0; padding: 0 1.5rem; }
+.booth-tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.4rem; margin-top: 1.2rem; }
+.booth-tier {
+  position: relative; display: flex; flex-direction: column; gap: 0.45rem;
+  border: 1px solid var(--line); border-radius: 12px; padding: 1.6rem 1.4rem; background: #fff;
+  transition: box-shadow 0.12s, transform 0.12s;
+}
+.booth-tier:hover { box-shadow: 0 12px 28px rgba(22, 35, 59, 0.12); transform: translateY(-3px); }
+.booth-tier.is-featured { border-color: var(--navy); box-shadow: 0 12px 30px rgba(22, 35, 59, 0.16); }
+.bt-flag {
+  position: absolute; top: -0.7rem; right: 1.2rem; background: var(--gold); color: #4a3800;
+  font-weight: 800; font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 0.28rem 0.6rem; border-radius: 4px;
+}
+.bt-icon { font-size: 1.9rem; }
+.booth-tier h3 { margin: 0; font-size: 1.2rem; color: var(--navy); }
+.bt-tag { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.4rem; }
+.bt-items { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.bt-items li { position: relative; padding-left: 1.3rem; font-size: 0.92rem; }
+.bt-items li::before { content: '✓'; position: absolute; left: 0; color: var(--blue); font-weight: 800; }
+.bt-items a { color: var(--ink); font-weight: 600; }
+.bt-items a:hover { color: var(--red); }
+.booth-note { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 1.2rem; }
+
 /* ---------- Shared section furniture ---------- */
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 1.6rem; }
 .section-head h2 { font-size: 1.6rem; font-weight: 700; margin: 0 0 0.35rem; }

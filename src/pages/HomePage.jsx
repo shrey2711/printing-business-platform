@@ -44,6 +44,45 @@ const displayTypes = [
   { label: 'All Displays', to: '/trade-show-displays' }
 ];
 
+// "Build your booth" merchandising examples — coordinated sets of EXISTING
+// products. Not fixed bundles: no package price, no SKU. Each line links to the
+// real product/category; the CTA seeds a quote with the set.
+const boothSetups = [
+  {
+    tier: 'Essential Setup',
+    icon: '🎯',
+    tagline: 'Show up looking sharp.',
+    items: [
+      { label: 'Custom Canopy (10×10)', to: '/products/canopy-tent-10x10' },
+      { label: 'Branded Table Cover', to: '/products/table-covers' },
+      { label: 'Retractable Banner', to: '/products/standard-retractable-banner' }
+    ]
+  },
+  {
+    tier: 'Professional Setup',
+    icon: '🏆',
+    featured: true,
+    tagline: 'A fuller, more branded presence.',
+    items: [
+      { label: 'Custom Canopy + Back Wall', to: '/products/canopy-tent-10x10' },
+      { label: 'Branded Table Cover', to: '/products/table-covers' },
+      { label: 'Two Banner Stands', to: '/banner-stands' }
+    ]
+  },
+  {
+    tier: 'Complete Brand Experience',
+    icon: '💎',
+    tagline: 'The whole booth, coordinated.',
+    items: [
+      { label: 'Custom Canopy + Walls', to: '/products/canopy-tent-10x10' },
+      { label: 'Branded Table Cover', to: '/products/table-covers' },
+      { label: 'Banner Stands', to: '/banner-stands' },
+      { label: 'Event Backdrop', to: '/products/step-and-repeat-backdrop' },
+      { label: 'Accessories', to: '/products' }
+    ]
+  }
+];
+
 // A mix across categories for product discovery (all real, in-database products).
 const featuredSlugs = [
   'canopy-tent-10x10',
@@ -152,6 +191,39 @@ export default function HomePage() {
             <Link className="btn btn-outline" to="/quote">Plan a complete booth</Link>
           </div>
         </div>
+      </section>
+
+      {/* Build your booth — merchandising examples (no fixed packages) */}
+      <section className="booth-builder">
+        <div className="section-head">
+          <h2>Build your trade show booth</h2>
+          <p>Coordinate Apex products into one branded booth. Examples to start from — mix and match.</p>
+        </div>
+        <div className="booth-tiers">
+          {boothSetups.map((s) => (
+            <div className={`booth-tier ${s.featured ? 'is-featured' : ''}`} key={s.tier}>
+              {s.featured && <span className="bt-flag">Most popular</span>}
+              <span className="bt-icon" aria-hidden="true">{s.icon}</span>
+              <h3>{s.tier}</h3>
+              <p className="bt-tag">{s.tagline}</p>
+              <ul className="bt-items">
+                {s.items.map((it) => (
+                  <li key={it.label}><Link to={it.to}>{it.label}</Link></li>
+                ))}
+              </ul>
+              <Link
+                className="btn btn-outline btn-block"
+                to="/quote"
+                state={{ product: `${s.tier} — booth`, specs: s.items.map((i) => i.label).join(', ') }}
+              >
+                Quote this setup
+              </Link>
+            </div>
+          ))}
+        </div>
+        <p className="booth-note">
+          Pricing is per product — request a quote and we'll coordinate the set. No fixed package pricing.
+        </p>
       </section>
 
       {/* Product discovery — a mix across categories */}
