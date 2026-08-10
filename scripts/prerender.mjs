@@ -768,7 +768,14 @@ const PRIVATE_ROUTES = [
   { path: '/register', title: 'Create Account', h1: 'Create an account' },
   { path: '/account', title: 'My Account', h1: 'My account' },
   { path: '/admin', title: 'Admin', h1: 'Admin' },
-  { path: '/order', title: 'Place Your Order', h1: 'Place your order' }
+  { path: '/order', title: 'Place Your Order', h1: 'Place your order' },
+  // Defensive noindex stubs for private/transactional paths that are not React
+  // routes today — without a stub the SPA rewrite would serve HOME content at
+  // these URLs (an indexable home duplicate) if they were ever hit or linked.
+  { path: '/cart', title: 'Cart', h1: 'Your cart' },
+  { path: '/checkout', title: 'Checkout', h1: 'Checkout' },
+  { path: '/reset-password', title: 'Reset Password', h1: 'Reset your password' },
+  { path: '/forgot-password', title: 'Forgot Password', h1: 'Forgot your password' }
 ];
 for (const r of PRIVATE_ROUTES) {
   routes.push(() =>
