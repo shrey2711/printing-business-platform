@@ -7,6 +7,7 @@ import rateLimit from 'express-rate-limit';
 import { listProducts, getProduct, categories, navGroups } from './data/products.js';
 import { computePrice } from './data/pricing.js';
 import { getProductFaqs } from './data/faqs.js';
+import { STATIC_ARTICLES, getStaticArticle } from './data/staticArticles.js';
 import { stripe, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } from './lib/mailer.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
@@ -574,20 +575,34 @@ function publicPost(row) {
   };
 }
 
-// Public: list published posts (newest first).
+// Merge in-repo static articles with Supabase posts; static wins on slug clash.
+// Sort newest-first by publishedAt.
+function mergePosts(supabasePosts) {
+  const bySlug = new Map();
+  for (const p of supabasePosts) bySlug.set(p.slug, p);
+  for (const a of STATIC_ARTICLES) bySlug.set(a.slug, a); // static overrides
+  return [...bySlug.values()].sort(
+    (a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
+  );
+}
+
+// Public: list published posts (newest first). Static articles always appear,
+// even when Supabase is not configured.
 app.get('/api/blog', async (req, res) => {
-  if (!supabaseAdmin) return res.json({ posts: [] });
+  if (!supabaseAdmin) return res.json({ posts: mergePosts([]) });
   const { data, error } = await supabaseAdmin
     .from('blog_posts')
     .select('*')
     .eq('status', 'published')
     .order('published_at', { ascending: false });
   if (error) return res.status(500).json({ error: error.message });
-  res.json({ posts: (data || []).map(publicPost) });
+  res.json({ posts: mergePosts((data || []).map(publicPost)) });
 });
 
-// Public: a single published post by slug.
+// Public: a single published post by slug. Static articles resolve first.
 app.get('/api/blog/:slug', async (req, res) => {
+  const stat = getStaticArticle(req.params.slug);
+  if (stat) return res.json({ post: stat });
   if (!supabaseAdmin) return res.status(404).json({ error: 'Not found.' });
   const { data, error } = await supabaseAdmin
     .from('blog_posts')

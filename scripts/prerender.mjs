@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 
 import { listProducts, getProduct, startingPriceFor, priceDisplayFor } from '../backend/data/products.js';
 import { getProductFaqs } from '../backend/data/faqs.js';
+import { STATIC_ARTICLES } from '../backend/data/staticArticles.js';
 import { territories, slugify } from '../src/data/states.js';
 import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
@@ -782,7 +783,14 @@ for (const r of PRIVATE_ROUTES) {
 }
 
 // ---- Load dashboard-authored content from Supabase at build time ----
-const posts = await loadPublishedPosts();
+const supabasePosts = await loadPublishedPosts();
+// Merge in-repo static articles (static wins on slug clash), newest first.
+const postBySlug = new Map();
+for (const p of supabasePosts) postBySlug.set(p.slug, p);
+for (const a of STATIC_ARTICLES) postBySlug.set(a.slug, a);
+const posts = [...postBySlug.values()].sort(
+  (a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
+);
 seoMap = await loadSeoMap();
 contentMap = await loadContentMap();
 const redirectRules = await loadRedirects();
