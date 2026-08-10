@@ -231,8 +231,8 @@ function Footer() {
       <div className="footer-rainbow" />
       <div className="footer-grid">
         <div>
-          <span className="logo-text" style={{ color: '#fff' }}>
-            {brand.logoText.first}<b>{brand.logoText.accent}</b>
+          <span className="ft-logo">
+            <img src="/images/logo.webp" alt={brand.name} width="180" height="46" />
           </span>
           <p className="ft-blurb">{brand.description}</p>
         </div>

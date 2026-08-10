@@ -57,6 +57,8 @@ h1, h2, h3, h4 { color: var(--navy); }
 }
 .logo { display: flex; align-items: center; gap: 0.55rem; }
 .brand-logo { height: 42px; width: auto; display: block; }
+.ft-logo { display: inline-block; background: #fff; padding: 0.45rem 0.7rem; border-radius: 8px; }
+.ft-logo img { height: 34px; width: auto; display: block; }
 .logo-mark {
   background: var(--navy); color: #fff; font-weight: 800; font-size: 1.1rem;
   width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; letter-spacing: -0.02em;
