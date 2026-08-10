@@ -166,6 +166,45 @@ h1, h2, h3, h4 { color: var(--navy); }
 .hero-ticks li::before { content: '✓'; position: absolute; left: 0; color: #4ade80; font-weight: 800; }
 .hero-art { border-radius: 8px; overflow: hidden; box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35); }
 
+/* Hero complete-booth collage (2×2 of real category assets) */
+.hero-collage { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.hc-tile {
+  border-radius: 8px; overflow: hidden; background: #fff; aspect-ratio: 4 / 3;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+.hc-tile img, .hc-tile .tent-photo, .hc-tile .art-svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Home category cards */
+.cat-cards-section { max-width: 1400px; margin: 0 auto; padding: 2.8rem 1.5rem 0; }
+.cat-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+.cat-card {
+  display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; background: #fff; transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
+}
+.cat-card:hover { border-color: var(--blue); box-shadow: 0 10px 24px rgba(22, 35, 59, 0.12); transform: translateY(-2px); }
+.cat-card-media { aspect-ratio: 4 / 3; background: var(--panel); overflow: hidden; }
+.cat-card-media img, .cat-card-media .art-svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cat-card-body { padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.2rem; }
+.cat-card-body strong { color: var(--navy); font-size: 1.02rem; }
+.cat-card-body span { color: var(--muted); font-size: 0.85rem; }
+
+/* Shop-by-display-type chips */
+.display-types { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 1.4rem; }
+.dt-label { font-weight: 700; color: var(--navy); font-size: 0.9rem; margin-right: 0.2rem; }
+.dt-chip {
+  padding: 0.45rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem;
+  font-weight: 600; color: var(--ink); background: #fff; transition: border-color 0.12s, color 0.12s;
+}
+.dt-chip:hover { border-color: var(--blue); color: var(--blue-dark); }
+
+/* One brand, one booth band */
+.booth-band { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 2.8rem; }
+.booth-band-inner { max-width: 900px; margin: 0 auto; padding: 2.6rem 1.5rem; text-align: center; }
+.booth-band-inner h2 { font-size: 1.7rem; color: var(--navy); margin: 0 0 0.6rem; }
+.booth-band-inner p { color: var(--muted); max-width: 60ch; margin: 0 auto 1.3rem; line-height: 1.6; }
+.booth-band-inner .hero-actions { justify-content: center; }
+.section-more { text-align: center; margin-top: 1.4rem; }
+
 /* ---------- Shared section furniture ---------- */
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 1.6rem; }
 .section-head h2 { font-size: 1.6rem; font-weight: 700; margin: 0 0 0.35rem; }
@@ -880,6 +919,7 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
   .hero-inner { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
   .hero-copy h1 { font-size: 2.1rem; }
   .hero-art { max-width: 460px; }
+  .hero-collage { max-width: 480px; }
   .trust-row { grid-template-columns: repeat(2, 1fr); }
   .landing-hero { grid-template-columns: 1fr; gap: 1.5rem; }
   .landing-art { max-width: 460px; }
