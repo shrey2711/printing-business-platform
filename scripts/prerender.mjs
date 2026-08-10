@@ -14,6 +14,7 @@ import { brand } from '../src/config/brand.js';
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
 import { PAGES } from '../src/data/pages.js';
+import { CATEGORY_PAGES, SUBCATEGORIES } from '../src/data/categoryPages.js';
 import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
@@ -38,10 +39,11 @@ const NAV = `<nav aria-label="Primary">
   <a href="/products">All Canopy Tents</a>
   <a href="/products/canopy-tent-10x10">10x10 Canopy Tent</a>
   <a href="/products/canopy-tent-10x15">10x15 Canopy Tent</a>
-  <a href="/products/canopy-tent-10x20">10x20 Canopy Tent</a>
-  <a href="/products?category=banner-stands">Banner Stands</a>
-  <a href="/products?category=backdrops">Backdrops</a>
-  <a href="/products?category=table-covers">Table Covers</a>
+  <a href="/trade-show-displays">Trade Show Displays</a>
+  <a href="/custom-canopies">Custom Canopies</a>
+  <a href="/banner-stands">Banner Stands</a>
+  <a href="/backdrops">Backdrops</a>
+  <a href="/table-covers">Table Covers</a>
   <a href="/locations">Locations</a>
   <a href="/quote">Get a Quote</a>
   <a href="/contact">Contact</a>
@@ -148,17 +150,19 @@ routes.push(() => {
   });
 });
 
-// ---- Products listing ----
+// ---- Products listing (flat "all products" catalog) ----
+// The keyword-primary "trade show displays" landing is /trade-show-displays;
+// this page is the browse-everything catalog, so it does not compete for the
+// same head term.
 routes.push(() => {
   const body = `
-    <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Products</span></nav>
-    <h1>Trade Show Displays, Custom Canopies &amp; Banner Stands</h1>
-    <p>${esc(BRAND)} supplies the complete trade show booth from one place — custom canopy tents,
-    retractable banner stands, step &amp; repeat backdrops and table covers, all custom printed in
-    your brand with a free artwork proof.</p>
+    <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>All products</span></nav>
+    <h1>Shop All Apex Products</h1>
+    <p>Browse every Apex trade show display and event-branding product — or jump straight to a
+    category.</p>
+    <h2>Shop by category</h2>
+    <ul>${CATEGORY_PAGES.map((cp) => `<li><a href="/${cp.slug}">${esc(cp.h1)}</a></li>`).join('')}</ul>
     <h2>Custom canopy tents</h2>
-    <p>Custom printed pop-up canopy tents in three sizes — 10x10, 10x15 and 10x20 — with up to 3
-    printed walls and instant online pricing.</p>
     <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
     <p>Not sure which size? Read the <a href="/sizes/10x10">10x10</a>, <a href="/sizes/10x15">10x15</a>
     and <a href="/sizes/10x20">10x20</a> size guides.</p>
@@ -166,11 +170,58 @@ routes.push(() => {
     <ul>${displayProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>` : ''}`;
   return render({
     path: '/products',
-    title: `Trade Show Displays, Canopies & Banner Stands | ${BRAND}`,
-    description: 'Shop the complete trade show booth from Apex — custom canopy tents (instant pricing), retractable banner stands, step & repeat backdrops and table covers. Free artwork proof, US & Canada.',
+    title: `Shop All Products | ${BRAND}`,
+    description: 'Browse all Apex trade show display and event-branding products — custom canopy tents, banner stands, step & repeat backdrops and table covers. Free artwork proof, US & Canada.',
     body
   });
 });
+
+// ---- Category / collection landing pages (indexable) ----
+for (const cp of CATEGORY_PAGES) {
+  routes.push(() => {
+    const catProducts = cp.category ? productList.filter((p) => p.category === cp.category) : productList;
+    const subTiles = cp.hub
+      ? `<h2>Shop by category</h2><ul>${SUBCATEGORIES.map((sc) => `<li><a href="/${sc.slug}">${esc(sc.h1)}</a></li>`).join('')}</ul>`
+      : '';
+    const guides = cp.guideLinks
+      ? `<h2>Canopy size guides</h2><ul>${cp.guideLinks.map((g) => `<li><a href="${g.to}">${esc(g.label)}</a></li>`).join('')}</ul>`
+      : '';
+    const body = `
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.nav)}</span></nav>
+      <h1>${esc(cp.h1)}</h1>
+      <p>${esc(cp.intro)}</p>
+      <h2>What's included</h2><ul>${cp.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>
+      ${subTiles}
+      <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
+      <ul>${catProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
+      ${guides}`;
+    return render({
+      path: `/${cp.slug}`,
+      title: `${cp.title} | ${BRAND}`,
+      description: cp.description,
+      body,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+            { '@type': 'ListItem', position: 2, name: cp.h1, item: `${ORIGIN}/${cp.slug}` }
+          ]
+        },
+        ...(catProducts.length
+          ? [{
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              itemListElement: catProducts.map((p, i) => ({
+                '@type': 'ListItem', position: i + 1, url: `${ORIGIN}/products/${p.slug}`, name: p.name
+              }))
+            }]
+          : [])
+      ]
+    });
+  });
+}
 
 // ---- Size guide pages (INFORMATIONAL — research intent, not commercial) ----
 // These deliberately do NOT compete with /products/canopy-tent-<size>. They
@@ -682,6 +733,8 @@ const smUrl = (loc, priority, changefreq) => {
 const sm = [];
 sm.push(smUrl('/', '1.0', 'weekly'));
 sm.push(smUrl('/products', '0.9', 'weekly'));
+// Indexable category / collection pages.
+CATEGORY_PAGES.forEach((cp) => sm.push(smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly')));
 productList.forEach((p) => sm.push(smUrl(`/products/${p.slug}`, '0.8')));
 SIZES.forEach((s) => sm.push(smUrl(`/sizes/${s.slug}`, '0.7')));
 SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));

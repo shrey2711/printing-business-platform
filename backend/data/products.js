@@ -168,6 +168,8 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
     'Free artwork proof before production'
   ],
   turnaround: '6-8 days standard · 2-3 days rush (+50%)',
+  // Cross-sell the rest of the booth (complete-solution internal linking).
+  related: ['table-covers', 'standard-retractable-banner', 'step-and-repeat-backdrop'],
   pricing: {
     model: 'configured',
     baseLabel: `${size} canopy tent`,

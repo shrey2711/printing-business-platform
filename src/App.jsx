@@ -19,6 +19,7 @@ import SolutionPage from './pages/SolutionPage';
 import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
 import InfoPage from './pages/InfoPage';
+import CategoryPage from './pages/CategoryPage';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
 
@@ -28,7 +29,7 @@ import { useCurrency } from './context/CurrencyContext';
 const shopMenu = [
   {
     label: 'Custom Canopies',
-    to: '/products?category=tents',
+    to: '/custom-canopies',
     items: [
       { label: "10' × 10' Canopy", to: '/products/canopy-tent-10x10' },
       { label: "10' × 15' Canopy", to: '/products/canopy-tent-10x15' },
@@ -38,7 +39,7 @@ const shopMenu = [
   },
   {
     label: 'Banner Stands',
-    to: '/products?category=banner-stands',
+    to: '/banner-stands',
     items: [
       { label: 'Standard Retractable', to: '/products/standard-retractable-banner' },
       { label: 'Deluxe Retractable', to: '/products/deluxe-retractable-banner' },
@@ -48,12 +49,12 @@ const shopMenu = [
   },
   {
     label: 'Backdrops',
-    to: '/products?category=backdrops',
+    to: '/backdrops',
     items: [{ label: 'Step & Repeat Backdrop', to: '/products/step-and-repeat-backdrop' }]
   },
   {
     label: 'Table Covers',
-    to: '/products?category=table-covers',
+    to: '/table-covers',
     items: [{ label: 'Pleated & Stretch Covers', to: '/products/table-covers' }]
   }
 ];
@@ -172,8 +173,8 @@ function HeaderNav() {
             <Link className="shop-all" to="/products">Shop all products →</Link>
           </div>
         </div>
-        <Link to="/products?category=tents">Canopies</Link>
-        <Link to="/locations">Locations</Link>
+        <Link to="/trade-show-displays">Displays</Link>
+        <Link to="/custom-canopies">Canopies</Link>
         <Link to="/blog">Blog</Link>
         <span className="nav-spacer" />
         <Link className="btn btn-outline btn-sm" to="/products">Shop All</Link>
@@ -238,11 +239,11 @@ function Footer() {
         <div>
           <h4>Shop</h4>
           <div className="ft-links">
-            <Link to="/products">All Products</Link>
-            <Link to="/products?category=tents">Canopy Tents</Link>
-            <Link to="/products?category=banner-stands">Banner Stands</Link>
-            <Link to="/products?category=backdrops">Backdrops</Link>
-            <Link to="/products?category=table-covers">Table Covers</Link>
+            <Link to="/trade-show-displays">Trade Show Displays</Link>
+            <Link to="/custom-canopies">Canopy Tents</Link>
+            <Link to="/banner-stands">Banner Stands</Link>
+            <Link to="/backdrops">Backdrops</Link>
+            <Link to="/table-covers">Table Covers</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/locations">Locations</Link>
           </div>
@@ -308,6 +309,11 @@ function App() {
         <Route path="/locations/:stateSlug" element={<LocationPage />} />
         <Route path="/locations/:stateSlug/:citySlug" element={<CityPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/trade-show-displays" element={<CategoryPage slug="trade-show-displays" />} />
+        <Route path="/custom-canopies" element={<CategoryPage slug="custom-canopies" />} />
+        <Route path="/banner-stands" element={<CategoryPage slug="banner-stands" />} />
+        <Route path="/table-covers" element={<CategoryPage slug="table-covers" />} />
+        <Route path="/backdrops" element={<CategoryPage slug="backdrops" />} />
         <Route path="/about" element={<InfoPage slug="about" />} />
         <Route path="/artwork-guidelines" element={<InfoPage slug="artwork-guidelines" />} />
         <Route path="/shipping" element={<InfoPage slug="shipping" />} />

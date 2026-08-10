@@ -27,21 +27,21 @@ const solutions = [
 // Visually strong category cards, using real product images where we have them
 // (banner stands / backdrops fall back to the ProductArt illustration).
 const categoryCards = [
-  { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/products?category=tents', img: '/images/tents/10x20-full3.webp' },
-  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/products?category=banner-stands', art: 'standard-retractable-banner' },
-  { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/products?category=table-covers', img: '/images/table-covers/pleated.webp' },
-  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/products?category=backdrops', art: 'step-and-repeat-backdrop' },
-  { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/products', img: '/images/tents/10x10-infographic.webp' },
+  { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/tents/10x20-full3.webp' },
+  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', art: 'standard-retractable-banner' },
+  { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/table-covers/pleated.webp' },
+  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', art: 'step-and-repeat-backdrop' },
+  { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/tents/10x10-infographic.webp' },
   { title: 'Accessories', copy: 'Weights, sandbags & hardware', to: '/products', img: '/images/tents/sandbags.webp' }
 ];
 
-// Purpose-led discovery — maps a shopper's intent to a real category filter.
+// Purpose-led discovery — maps a shopper's intent to a category landing page.
 const displayTypes = [
-  { label: 'Canopies & Outdoor', to: '/products?category=tents' },
-  { label: 'Banner Stands', to: '/products?category=banner-stands' },
-  { label: 'Backdrops', to: '/products?category=backdrops' },
-  { label: 'Table Displays', to: '/products?category=table-covers' },
-  { label: 'All Displays', to: '/products' }
+  { label: 'Canopies & Outdoor', to: '/custom-canopies' },
+  { label: 'Banner Stands', to: '/banner-stands' },
+  { label: 'Backdrops', to: '/backdrops' },
+  { label: 'Table Displays', to: '/table-covers' },
+  { label: 'All Displays', to: '/trade-show-displays' }
 ];
 
 // A mix across categories for product discovery (all real, in-database products).
