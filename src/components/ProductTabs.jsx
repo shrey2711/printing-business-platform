@@ -110,17 +110,21 @@ export default function ProductTabs({ product }) {
 }
 
 function specsFor(product, sizeKey) {
-  // Products may carry their own spec table (e.g. trade-show displays).
+  // A product's own spec table always wins (table covers, trade-show displays…).
   if (Array.isArray(product.specs) && product.specs.length) return product.specs;
-  const rows = [];
-  if (sizeKey) rows.push(['Size', sizeKey.replace('x', "' × ") + "'"]);
-  rows.push(['Frame', 'Heavy-duty aluminium hex, telescopic legs']);
-  rows.push(['Fabric', '600D polyester, dye-sublimated full-bleed']);
-  rows.push(['Print', 'Full colour, edge to edge — does not crack, peel or fade']);
-  rows.push(['Walls', 'Full and half printed walls (up to 3 combined)']);
-  rows.push(['Included', 'Printed canopy + frame + carry bag']);
-  rows.push(['Turnaround', product.turnaround || '6-8 business days']);
-  return rows;
+  // The canopy default spec sheet applies ONLY to real canopy products (which
+  // have a size key). Any other product without its own specs gets none, rather
+  // than accidentally inheriting canopy hardware (frame / legs / walls).
+  if (!sizeKey) return [];
+  return [
+    ['Size', sizeKey.replace('x', "' × ") + "'"],
+    ['Frame', 'Heavy-duty aluminium hex, telescopic legs'],
+    ['Fabric', '600D polyester, dye-sublimated full-bleed'],
+    ['Print', 'Full colour, edge to edge — does not crack, peel or fade'],
+    ['Walls', 'Full and half printed walls (up to 3 combined)'],
+    ['Included', 'Printed canopy + frame + carry bag'],
+    ['Turnaround', product.turnaround || '6-8 business days']
+  ];
 }
 
 // Official artwork templates uploaded to public/templates/, per canopy size.

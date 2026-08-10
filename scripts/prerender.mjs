@@ -359,10 +359,14 @@ for (const summary of productList) {
       const finishing = (p.finishing || []).map((f) => f.name).join(', ');
       if (finishing) specs.push(['Finishing', finishing]);
     } else if (p.model === 'configured') {
+      // Canopy fabric/frame only for real canopy products (size in the slug) —
+      // never leak canopy hardware onto other configured products.
       const sizeMatch = product.slug.match(/(\d+x\d+)/);
-      if (sizeMatch) specs.push(['Size', sizeMatch[1].replace('x', "' × ") + "'"]);
-      specs.push(['Fabric', '600D polyester, dye-sublimated full-colour print']);
-      specs.push(['Frame', 'Heavy-duty aluminium hex, telescopic legs']);
+      if (sizeMatch) {
+        specs.push(['Size', sizeMatch[1].replace('x', "' × ") + "'"]);
+        specs.push(['Fabric', '600D polyester, dye-sublimated full-colour print']);
+        specs.push(['Frame', 'Heavy-duty aluminium hex, telescopic legs']);
+      }
       // Each configurable option group and its choices.
       for (const g of p.optionGroups || []) {
         const choices = (g.choices || []).map((c) => c.label).join(', ');
