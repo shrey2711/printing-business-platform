@@ -31,6 +31,13 @@ export default function InfoPage({ slug }) {
               {b.list.map((li) => <li key={li}>{li}</li>)}
             </ul>
           )}
+          {b.links && (
+            <p className="info-links">
+              {b.links.map((l, j) => (
+                <span key={l.to}>{j > 0 && ' · '}<Link to={l.to}>{l.label}</Link></span>
+              ))}
+            </p>
+          )}
         </div>
       ))}
       <p className="info-cta">

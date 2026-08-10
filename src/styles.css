@@ -277,6 +277,9 @@ h1, h2, h3, h4 { color: var(--navy); }
 .info-block h2 { font-size: 1.2rem; margin: 1.2rem 0 0.5rem; }
 .info-block p { color: var(--muted); line-height: 1.6; }
 .info-cta { display: flex; gap: 0.6rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.info-links { margin: 0.3rem 0 0.6rem; }
+.info-links a { color: var(--blue-dark); font-weight: 600; }
+.info-links a:hover { color: var(--red); }
 /* Table-cover product gallery */
 .tc-gallery { display: flex; flex-direction: column; gap: 0.6rem; }
 .tc-main { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }

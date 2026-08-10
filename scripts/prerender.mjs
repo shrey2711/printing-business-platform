@@ -637,7 +637,8 @@ for (const page of PAGES) {
         const h = b.h ? `<h2>${esc(b.h)}</h2>` : '';
         const p = b.p ? `<p>${esc(b.p)}</p>` : '';
         const list = b.list ? `<ul>${b.list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>` : '';
-        return h + p + list;
+        const links = b.links ? `<p>${b.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>` : '';
+        return h + p + list + links;
       })
       .join('');
     return render({
