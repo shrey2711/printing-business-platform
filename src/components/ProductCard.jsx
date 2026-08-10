@@ -18,8 +18,8 @@ export default function ProductCard({ product, previewSize, previewFull, preview
         {product.badge ? <span className="pcard-ribbon">{product.badge}</span> : null}
         {size ? (
           <TentPhoto size={size} walls={1} fullWalls={previewFull} halfWalls={previewHalf} label={product.name} />
-        ) : product.slug === 'table-covers' ? (
-          <TableCoverPhoto style="pleated" label={product.name} />
+        ) : product.category === 'table-covers' ? (
+          <TableCoverPhoto style={product.slug.includes('stretch') ? 'stretch' : 'pleated'} label={product.name} />
         ) : (
           <DisplayPhoto slug={product.slug} label={product.name} />
         )}

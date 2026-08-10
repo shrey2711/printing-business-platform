@@ -56,7 +56,10 @@ const shopMenu = [
   {
     label: 'Table Covers',
     to: '/table-covers',
-    items: [{ label: 'Pleated & Stretch Covers', to: '/products/table-covers' }]
+    items: [
+      { label: 'Pleated Table Covers', to: '/products/pleated-table-covers' },
+      { label: 'Stretch Table Covers', to: '/products/stretch-table-covers' }
+    ]
   }
 ];
 

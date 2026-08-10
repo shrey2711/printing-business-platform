@@ -54,7 +54,7 @@ const boothSetups = [
     tagline: 'Show up looking sharp.',
     items: [
       { label: 'Custom Canopy (10×10)', to: '/products/canopy-tent-10x10' },
-      { label: 'Branded Table Cover', to: '/products/table-covers' },
+      { label: 'Branded Table Cover', to: '/table-covers' },
       { label: 'Retractable Banner', to: '/products/standard-retractable-banner' }
     ]
   },
@@ -65,7 +65,7 @@ const boothSetups = [
     tagline: 'A fuller, more branded presence.',
     items: [
       { label: 'Custom Canopy + Back Wall', to: '/products/canopy-tent-10x10' },
-      { label: 'Branded Table Cover', to: '/products/table-covers' },
+      { label: 'Branded Table Cover', to: '/table-covers' },
       { label: 'Two Banner Stands', to: '/banner-stands' }
     ]
   },
@@ -75,7 +75,7 @@ const boothSetups = [
     tagline: 'The whole booth, coordinated.',
     items: [
       { label: 'Custom Canopy + Walls', to: '/products/canopy-tent-10x10' },
-      { label: 'Branded Table Cover', to: '/products/table-covers' },
+      { label: 'Branded Table Cover', to: '/table-covers' },
       { label: 'Banner Stands', to: '/banner-stands' },
       { label: 'Event Backdrop', to: '/products/step-and-repeat-backdrop' },
       { label: 'Accessories', to: '/products' }
@@ -87,7 +87,7 @@ const boothSetups = [
 const featuredSlugs = [
   'canopy-tent-10x10',
   'standard-retractable-banner',
-  'table-covers',
+  'pleated-table-covers',
   'step-and-repeat-backdrop',
   'x-stand-banner',
   'table-top-banner-stand'

@@ -42,7 +42,10 @@ export const navGroups = [
   },
   {
     name: 'Table Covers',
-    items: [{ name: 'Custom Table Covers', slug: 'table-covers' }]
+    items: [
+      { name: 'Pleated Table Covers', slug: 'pleated-table-covers' },
+      { name: 'Stretch Table Covers', slug: 'stretch-table-covers' }
+    ]
   },
   {
     name: 'Banner Stands',
@@ -169,7 +172,7 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
   ],
   turnaround: '6-8 days standard · 2-3 days rush (+50%)',
   // Cross-sell the rest of the booth (complete-solution internal linking).
-  related: ['table-covers', 'standard-retractable-banner', 'step-and-repeat-backdrop'],
+  related: ['pleated-table-covers', 'standard-retractable-banner', 'step-and-repeat-backdrop'],
   pricing: {
     model: 'configured',
     baseLabel: `${size} canopy tent`,
@@ -201,41 +204,103 @@ const canopyTents = [
   canopyProduct({ slug: 'canopy-tent-10x20', size: "10' × 20'", full1: 1635, full3: 1445, canopy1: 915, canopy3: 805, wallPer: 365 })
 ];
 
-const tableCovers = {
-  slug: 'table-covers',
+const pleatedCovers = {
+  slug: 'pleated-table-covers',
   active: true,
-  name: 'Custom Table Covers',
+  name: 'Pleated Table Covers',
   category: 'table-covers',
   badge: 'Custom Printed',
   emoji: '🎪',
-  tagline: 'Full-colour dye-sublimated table covers — pleated or stretch, closed back.',
+  tagline: 'Full-colour pleated table throws — draped fit, closed back.',
   description:
-    'Custom printed table covers for trade shows, markets and events. Dye-sublimated full-colour ' +
-    'print on wrinkle-resistant polyester, cut for a closed-back (4-sided) fit. Choose a pleated ' +
-    'throw or a fitted stretch cover in your table size, standard 6-8 day or rush 2-3 day.',
+    'Custom printed pleated table covers (throws) for trade shows, markets and events. Dye-sublimated ' +
+    'full-colour print on wrinkle-resistant polyester with a draped, rounded-corner fit and a closed ' +
+    'back (4-sided). Choose 4, 6 or 8 ft, standard 6-8 day or rush 2-3 day.',
   features: [
-    'Dye-sublimated full-colour print',
+    'Draped pleated throw with rounded corners',
     'Closed back — covers all four sides',
-    'Wrinkle-resistant, machine washable',
-    'Free artwork proof before production'
+    'Dye-sublimated full-colour print',
+    'Wrinkle-resistant, machine washable'
+  ],
+  applications: ['Trade show and market tables', 'Registration and welcome desks', 'Retail and event counters', 'Fundraisers and open days'],
+  specs: [
+    ['Style', 'Pleated throw (draped, rounded corners)'],
+    ['Sizes', '4 ft, 6 ft, 8 ft'],
+    ['Back', 'Closed back (4-sided)'],
+    ['Fabric', 'Wrinkle-resistant polyester, dye-sublimated'],
+    ['Turnaround', '6-8 days standard · 2-3 days rush']
   ],
   turnaround: '6-8 days standard · 2-3 days rush (+15%)',
+  seoTitle: 'Pleated Table Covers — 4, 6 & 8 ft',
+  seoDescription:
+    'Custom printed pleated table covers (throws) in 4, 6 and 8 ft — draped closed-back fit, full-colour dye sublimation, free artwork proof. From $199.',
+  related: ['stretch-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
   pricing: {
     model: 'configured',
-    baseLabel: 'Table cover',
+    baseLabel: 'Pleated table cover',
     optionGroups: [
       {
         id: 'style',
-        label: 'Style & size',
+        label: 'Size',
         type: 'select',
         pricing: 'base',
-        help: 'Pleated throws drape with rounded corners; stretch covers fit tight to the table. All closed-back (4-sided).',
+        help: 'Pleated throws drape with rounded corners. Closed-back (4-sided).',
         choices: [
-          { id: '4ft-pleated', label: '4 ft Pleated — closed back', price: 199, default: true },
-          { id: '6ft-pleated', label: '6 ft Pleated — closed back', price: 215 },
-          { id: '8ft-pleated', label: '8 ft Pleated — closed back', price: 255 },
-          { id: '6ft-stretch', label: '6 ft Stretch — closed back', price: 285 },
-          { id: '8ft-stretch', label: '8 ft Stretch — closed back', price: 345 }
+          { id: '4ft', label: '4 ft — closed back', price: 199, default: true },
+          { id: '6ft', label: '6 ft — closed back', price: 215 },
+          { id: '8ft', label: '8 ft — closed back', price: 255 }
+        ]
+      },
+      daysGroup15,
+      designGroup
+    ]
+  }
+};
+
+const stretchCovers = {
+  slug: 'stretch-table-covers',
+  active: true,
+  name: 'Stretch Table Covers',
+  category: 'table-covers',
+  badge: 'Custom Printed',
+  emoji: '🎪',
+  tagline: 'Full-colour fitted stretch covers — tight fit, closed back.',
+  description:
+    'Custom printed stretch table covers for trade shows and events. A fitted, spandex-style cover ' +
+    'that pulls tight to the table for a clean, modern look, closed back (4-sided) and dye-sublimated ' +
+    'in full colour. Choose 6 or 8 ft, standard 6-8 day or rush 2-3 day.',
+  features: [
+    'Fitted stretch cover — tight, modern fit',
+    'Closed back — covers all four sides',
+    'Dye-sublimated full-colour print',
+    'Wrinkle-resistant, machine washable'
+  ],
+  applications: ['Trade show and expo tables', 'Modern booth and counter looks', 'Product demo tables', 'Corporate and event branding'],
+  specs: [
+    ['Style', 'Fitted stretch (tight to the table)'],
+    ['Sizes', '6 ft, 8 ft'],
+    ['Back', 'Closed back (4-sided)'],
+    ['Fabric', 'Stretch polyester, dye-sublimated'],
+    ['Turnaround', '6-8 days standard · 2-3 days rush']
+  ],
+  turnaround: '6-8 days standard · 2-3 days rush (+15%)',
+  seoTitle: 'Stretch Table Covers — 6 & 8 ft',
+  seoDescription:
+    'Custom printed fitted stretch table covers in 6 and 8 ft — tight closed-back fit, full-colour dye sublimation, free artwork proof. From $285.',
+  related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
+  pricing: {
+    model: 'configured',
+    baseLabel: 'Stretch table cover',
+    optionGroups: [
+      {
+        id: 'style',
+        label: 'Size',
+        type: 'select',
+        pricing: 'base',
+        help: 'Fitted stretch covers pull tight to the table. Closed-back (4-sided).',
+        choices: [
+          { id: '6ft', label: '6 ft — closed back', price: 285, default: true },
+          { id: '8ft', label: '8 ft — closed back', price: 345 }
         ]
       },
       daysGroup15,
@@ -430,7 +495,7 @@ const tradeShowDisplays = [
       ['Included', 'Frame + printed graphic + carry bag']
     ],
     turnaround: 'Ships in 4–6 business days',
-    related: ['table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
+    related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
     seoTitle: 'Step and Repeat Backdrop',
     seoDescription:
       'Apex 10×8 ft step and repeat backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
@@ -478,7 +543,7 @@ const tradeShowDisplays = [
       ['Included', 'Tabletop stand + printed graphic']
     ],
     turnaround: 'Ships in 2–4 business days',
-    related: ['standard-retractable-banner', 'table-covers'],
+    related: ['standard-retractable-banner', 'pleated-table-covers'],
     seoTitle: 'Table Top Banner Stand',
     seoDescription:
       'Compact Apex tabletop retractable banner, 11.5×17.5 in. Small aluminium base and replaceable graphic for counters, registration desks and trade-show tables.',
@@ -499,7 +564,8 @@ const tradeShowDisplays = [
 
 const products = [
   ...canopyTents,
-  tableCovers,
+  pleatedCovers,
+  stretchCovers,
   ...tradeShowDisplays,
   {
     slug: 'vinyl-banners',

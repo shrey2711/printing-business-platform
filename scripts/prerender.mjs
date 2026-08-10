@@ -390,8 +390,11 @@ for (const summary of productList) {
     let productImages = [];
     if (sizeM) {
       productImages = [1, 2, 3].map((n) => `${ORIGIN}/images/tents/${sizeM[1]}-${n}wall.webp`);
-    } else if (product.slug === 'table-covers') {
-      productImages = ['pleated', 'stretch'].map((k) => `${ORIGIN}/images/table-covers/${k}.webp`);
+    } else if (product.category === 'table-covers') {
+      const k = product.slug.includes('stretch') ? 'stretch' : 'pleated';
+      productImages = [`${ORIGIN}/images/table-covers/${k}.webp`];
+    } else if (product.slug.startsWith('standard-') || product.slug.startsWith('deluxe-') || product.slug === 'x-stand-banner' || product.slug === 'step-and-repeat-backdrop' || product.slug === 'table-top-banner-stand') {
+      productImages = [`${ORIGIN}/images/displays/${product.slug}.webp`];
     }
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>

@@ -272,6 +272,8 @@ const MAP = {
   'step-and-repeat-backdrop': <StepRepeat />,
   'table-top-banner-stand': <TableTop />,
   'table-covers': <TableCover />,
+  'pleated-table-covers': <TableCover />,
+  'stretch-table-covers': <TableCover />,
   'canopy-tents': <Tent />
 };
 

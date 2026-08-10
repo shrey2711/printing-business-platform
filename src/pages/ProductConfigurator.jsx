@@ -5,7 +5,7 @@ import ProductArt from '../components/ProductArt';
 import ProductCard from '../components/ProductCard';
 import ProductTabs from '../components/ProductTabs';
 import TentGallery from '../components/TentGallery';
-import TableCoverGallery from '../components/TableCoverGallery';
+import TableCoverPhoto from '../components/TableCoverPhoto';
 import DisplayPhoto from '../components/DisplayPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
@@ -184,8 +184,8 @@ export default function ProductConfigurator() {
                 sandbags={sel.sandbags === 'set4'}
                 label={`${product.name} preview`}
               />
-            ) : product.slug === 'table-covers' ? (
-              <TableCoverGallery style={sel.style} />
+            ) : product.category === 'table-covers' ? (
+              <TableCoverPhoto style={product.slug.includes('stretch') ? 'stretch' : 'pleated'} label={product.name} />
             ) : (
               <DisplayPhoto slug={product.slug} label={product.name} />
             )}
