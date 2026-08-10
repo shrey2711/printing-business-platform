@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
-import { listProducts, getProduct, startingPriceFor } from '../backend/data/products.js';
+import { listProducts, getProduct, startingPriceFor, priceDisplayFor } from '../backend/data/products.js';
 import { getProductFaqs } from '../backend/data/faqs.js';
 import { territories, slugify } from '../src/data/states.js';
 import { brand } from '../src/config/brand.js';
@@ -343,6 +343,9 @@ function productSeoTitle(product) {
 for (const summary of productList) {
   const product = getProduct(summary.slug);
   const startingPrice = summary.startingPrice;
+  // For canopy kit products the "from" floor is graphic-only while the default
+  // build is the full set — carry both so the badge + schema are unambiguous.
+  const priceDisp = priceDisplayFor(product.pricing);
   routes.push(() => {
     const p = product.pricing;
     // Build a specifications list — never emit empty labels. Products may carry
@@ -402,7 +405,9 @@ for (const summary of productList) {
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products">Products</a> / <span>${esc(product.name)}</span></nav>
       <h1>${esc(seoTitle.h1)}</h1>
       <p>${esc(product.description)}</p>
-      <p>${startingPrice != null ? `<strong>Starting at $${startingPrice}.</strong>` : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}.</p>
+      <p>${startingPrice != null
+        ? `<strong>Starting at $${startingPrice}${priceDisp.startingNote ? ` — ${esc(priceDisp.startingNote.toLowerCase())}` : ''}.</strong>${priceDisp.full ? ` ${esc(priceDisp.full.label)}: $${priceDisp.full.price}.` : ''}`
+        : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}.</p>
       <h2>Features</h2><ul>${product.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
       ${Array.isArray(product.applications) && product.applications.length ? `<h2>Applications</h2><ul>${product.applications.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
       <h2>Specifications</h2>
@@ -426,17 +431,32 @@ for (const summary of productList) {
           ...(productImages.length ? { image: productImages } : {}),
           sku: product.slug,
           brand: { '@type': 'Brand', name: BRAND },
-          // Offer only when there is a real price — no fake price on quote products.
+          // Offer only when there is a real price — no fake price on quote
+          // products. When the "from" floor is a cheaper configuration than the
+          // default build (canopy: graphic-only vs full set), emit an
+          // AggregateOffer with lowPrice/highPrice so Google is never told the
+          // floor price represents the complete product.
           ...(startingPrice != null
             ? {
-                offers: {
-                  '@type': 'Offer',
-                  priceCurrency: 'USD',
-                  price: String(startingPrice),
-                  availability: 'https://schema.org/InStock',
-                  itemCondition: 'https://schema.org/NewCondition',
-                  url: `${ORIGIN}/products/${product.slug}`
-                }
+                offers: priceDisp.full
+                  ? {
+                      '@type': 'AggregateOffer',
+                      priceCurrency: 'USD',
+                      lowPrice: String(startingPrice),
+                      highPrice: String(priceDisp.full.price),
+                      offerCount: 2,
+                      availability: 'https://schema.org/InStock',
+                      itemCondition: 'https://schema.org/NewCondition',
+                      url: `${ORIGIN}/products/${product.slug}`
+                    }
+                  : {
+                      '@type': 'Offer',
+                      priceCurrency: 'USD',
+                      price: String(startingPrice),
+                      availability: 'https://schema.org/InStock',
+                      itemCondition: 'https://schema.org/NewCondition',
+                      url: `${ORIGIN}/products/${product.slug}`
+                    }
               }
             : {})
         },
@@ -610,24 +630,25 @@ routes.push(() =>
   render({
     path: '/contact',
     title: `Contact Us | ${BRAND}`,
-    description: `Contact ${BRAND} — custom printed canopy tents shipped across the US and Canada. Email, phone and business hours.`,
+    description: `Contact ${BRAND} — custom printed trade show displays shipped across the US and Canada. Email, phone and business hours.`,
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Contact</span></nav>
       <h1>Contact ${esc(BRAND)}</h1>
-      <p>We help businesses, teams and event vendors across the US and Canada get branded canopy
-      tents produced and delivered. Email ${esc(brand.email)} or call ${esc(brand.phone)},
-      ${esc(brand.hours)}.</p>`
+      <p>We help businesses, teams and event vendors across the US and Canada get branded trade show
+      displays — canopy tents, banner stands, backdrops and table covers — produced and delivered.
+      Email ${esc(brand.email)} or call ${esc(brand.phone)}, ${esc(brand.hours)}.</p>`
   })
 );
 routes.push(() =>
   render({
     path: '/quote',
     title: `Request a Quote | ${BRAND}`,
-    description: `Request a bulk or custom canopy tent quote from ${BRAND}. Tell us your size, quantity and print coverage and upload artwork.`,
+    description: `Request a bulk or custom trade show display quote from ${BRAND} — canopy tents, banner stands, backdrops and table covers. Tell us your size, quantity and artwork.`,
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Quote</span></nav>
       <h1>Request a Custom Quote</h1>
-      <p>Most canopy configurations are priced instantly on the product pages. For large fleet
-      orders, non-standard sizes or anything unusual, tell us the size, quantity and print coverage
-      and upload your artwork — we'll come back with pricing and a proof.</p>`
+      <p>Most configurations — canopy tents, banner stands, backdrops and table covers — are priced
+      instantly on the product pages. For large fleet orders, non-standard sizes or anything unusual,
+      tell us the size, quantity and print coverage and upload your artwork — we'll come back with
+      pricing and a proof.</p>`
   })
 );
 

@@ -1990,11 +1990,19 @@ export function getQuantityDiscount(quantity) {
 export function listProducts({ includeInactive = false } = {}) {
   return products
     .filter((p) => includeInactive || p.active !== false)
-    .map(({ pricing, ...rest }) => ({
-      ...rest,
-      model: pricing.model,
-      startingPrice: estimateStartingPrice(pricing)
-    }));
+    .map(({ pricing, ...rest }) => {
+      const disp = priceDisplayFor(pricing);
+      return {
+        ...rest,
+        model: pricing.model,
+        startingPrice: disp.startingPrice,
+        // For canopy kit products the "from" price is the graphic-only column,
+        // while the default configuration is the full set — surface both so the
+        // UI can say what "Starting at $X" actually buys.
+        startingNote: disp.startingNote || null,
+        fullConfig: disp.full || null
+      };
+    });
 }
 
 export function getProduct(slug) {
@@ -2005,6 +2013,57 @@ export function getProduct(slug) {
 // changes the cheapest reachable configuration.
 export function startingPriceFor(pricing) {
   return estimateStartingPrice(pricing);
+}
+
+// Display context for the "Starting at $X" badge. All numbers come from the
+// pricing data itself — nothing is hardcoded. For canopy kit products the
+// cheapest reachable price is the GRAPHIC-ONLY column, while the configurator
+// DEFAULT is the full set (canopy + frame + bag). Without a qualifier "Starting
+// at $510" reads as the price of the whole kit, so we return:
+//   - startingPrice : the "from" floor (unchanged)
+//   - startingNote  : short label of the config that floor buys (e.g. "Graphic only")
+//   - full          : { price, label } of the DEFAULT (full-set) configuration
+// Non-kit products (table covers, banner stands, etc.) have no such split, so
+// startingNote/full are null and the badge stays a plain "Starting at $X".
+export function priceDisplayFor(pricing) {
+  const startingPrice = estimateStartingPrice(pricing);
+  if (startingPrice == null) return { startingPrice: null };
+  if (
+    pricing.model === 'configured' &&
+    Array.isArray(pricing.quantityTiers) &&
+    pricing.quantityTiers.length &&
+    pricing.kitGroupId
+  ) {
+    const kit = (pricing.optionGroups || []).find((g) => g.id === pricing.kitGroupId);
+    // Lowest-min tier holds the single-unit prices the "from" badge is built on.
+    const tier = pricing.quantityTiers.reduce((a, b) => (b.min < a.min ? b : a));
+    if (kit && tier && tier.prices) {
+      const short = (label) => (label ? String(label).split('—')[0].trim() : null);
+      let minId = null;
+      let minVal = Infinity;
+      let defId = null;
+      for (const c of kit.choices || []) {
+        const v = Number(tier.prices[c.id]);
+        if (Number.isFinite(v) && v < minVal) {
+          minVal = v;
+          minId = c.id;
+        }
+        if (c.default) defId = c.id;
+      }
+      const defChoice = (kit.choices || []).find((c) => c.id === defId);
+      const defVal = defChoice ? Number(tier.prices[defChoice.id]) : NaN;
+      // Only annotate when the default config costs MORE than the "from" floor —
+      // i.e. the floor really is a cheaper, different configuration.
+      if (defChoice && Number.isFinite(defVal) && minId && minId !== defId) {
+        return {
+          startingPrice,
+          startingNote: short(kit.choices.find((c) => c.id === minId)?.label),
+          full: { price: Math.round(defVal), label: defChoice.label }
+        };
+      }
+    }
+  }
+  return { startingPrice };
 }
 
 function estimateStartingPrice(pricing) {

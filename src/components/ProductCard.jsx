@@ -35,8 +35,18 @@ export default function ProductCard({ product, previewSize, previewFull, preview
       <div className="pcard-foot">
         {product.startingPrice != null ? (
           <>
-            <span className="pcard-price">
-              Starting at <strong>{money(product.startingPrice, { cents: false })}</strong>
+            <span className="pcard-price-wrap">
+              <span className="pcard-price">
+                Starting at <strong>{money(product.startingPrice, { cents: false })}</strong>
+                {product.startingNote ? (
+                  <span className="pcard-price-note"> — {product.startingNote.toLowerCase()}</span>
+                ) : null}
+              </span>
+              {product.fullConfig ? (
+                <span className="pcard-price-full">
+                  {product.fullConfig.label}: {money(product.fullConfig.price, { cents: false })}
+                </span>
+              ) : null}
             </span>
             <span className="pcard-cta">Configure &amp; Price ›</span>
           </>

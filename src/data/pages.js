@@ -51,22 +51,18 @@ export const PAGES = [
   {
     slug: 'artwork-guidelines',
     nav: 'Artwork Guidelines',
-    title: 'Artwork Guidelines for Custom Canopy Tents',
+    title: 'Artwork Guidelines for Trade Show Displays',
     description:
-      'How to prepare artwork for a custom printed canopy tent — accepted file types, resolution, colour, the print surfaces available, and the free proof process.',
+      'How to prepare artwork for custom printed trade show displays — canopy tents, banner stands, backdrops and table covers. Accepted file types, resolution, colour and the free proof process.',
     blocks: [
-      { p: 'Good print starts with good artwork. These guidelines cover the files we accept and how to prepare them so your canopy prints crisp and on-colour. Not sure about your file? Send it anyway — we check every file at no charge and send a free proof before printing.' },
+      { p: 'Good print starts with good artwork. These guidelines cover the files we accept and how to prepare them so your canopy tent, banner, backdrop or table cover prints crisp and on-colour. Not sure about your file? Send it anyway — we check every file at no charge and send a free proof before printing.' },
       { h: 'Accepted file formats', list: [
-        'Vector (preferred): print-ready PDF, AI or EPS — these scale to tent size with no loss of quality.',
+        'Vector (preferred): print-ready PDF, AI or EPS — these scale to any display size with no loss of quality.',
         'Raster: high-resolution PNG or JPG. Supply the largest, highest-resolution version you have.'
       ] },
-      { h: 'Resolution & scale', p: 'Because a canopy is large, low-resolution images can look soft when scaled up. Vector artwork is best for logos and text. For photos or raster art, provide the highest resolution available. Our team flags anything that may not hold up before it prints.' },
+      { h: 'Resolution & scale', p: 'Trade show graphics print large, so low-resolution images can look soft when scaled up. Vector artwork is best for logos and text. For photos or raster art, provide the highest resolution available. Our team flags anything that may not hold up before it prints.' },
       { h: 'Colour', p: 'Printing is full-colour dye sublimation. Solid brand colours, gradients, photos and full-bleed backgrounds all print. If exact brand-colour matching matters, tell us in your order notes and we will confirm on the proof.' },
-      { h: 'What you can print', list: [
-        'Canopy top — the roof panels.',
-        'Valance — the hanging border, ideal for your business name.',
-        'Walls — full or half height; each wall is its own printable surface.'
-      ] },
+      { h: 'What you can print', p: 'The printable area depends on the product — a canopy tent prints on the top, valance and walls; banner stands, backdrops and table covers print across the full graphic. Each product page lists the print surfaces and finished sizes for that item.' },
       { h: 'No print-ready file?', p: 'Add our design service at checkout and we build the artwork for you from your logo and direction.' },
       { h: 'The proof', p: 'Every order includes a free visual proof for your approval. Nothing goes to production until you say yes.' }
     ]
@@ -77,13 +73,10 @@ export const PAGES = [
     title: 'Shipping',
     stub: true,
     description:
-      'Apex Trade Show ships custom printed canopy tents across the US and Canada after proof approval. Full shipping details are being finalised — contact us for a delivery estimate.',
+      'Apex Trade Show ships custom printed trade show displays — canopy tents, banner stands, backdrops and table covers — across the US and Canada after proof approval. Full shipping details are being finalised — contact us for a delivery estimate.',
     blocks: [
-      { p: 'We ship custom printed canopy tents across the United States and Canada. Production starts after you approve your free proof.' },
-      { h: 'Production time', list: [
-        'Standard production: 6–8 business days after proof approval.',
-        'Rush production: 2–3 business days (available as an option at checkout).'
-      ] },
+      { p: 'We ship custom printed trade show displays — canopy tents, banner stands, backdrops and table covers — across the United States and Canada. Production starts after you approve your free proof.' },
+      { h: 'Production time', p: 'Production time depends on the product, and each product page shows its turnaround. Canopy tents and table covers are 6–8 business days standard, with a 2–3 business day rush option at checkout. Banner stands, backdrops and other displays show their own lead time on the product page.' },
       { h: 'Delivery', p: 'Full shipping details — carriers, transit times and costs by destination — are being finalised. For a delivery estimate to your city before you order, please contact us and we will confirm.' }
     ]
   },
@@ -92,19 +85,19 @@ export const PAGES = [
     nav: 'Returns',
     title: 'Returns, Refunds & Reprints',
     description:
-      'How Apex Trade Show handles problems with a custom canopy tent order — report within 5 business days, how defect claims work, rush charges, and how reprints are handled.',
+      'How Apex Trade Show handles problems with a custom printed order — report within 5 business days, how defect claims work, rush charges, and how reprints are handled.',
     blocks: [
-      { p: 'We want your canopy tent to arrive right. Because every tent is custom printed to order from a proof you approve, returns work differently than they would for a stock item — there is nothing generic to resend. If something is wrong with your order, tell us within five (5) business days of delivery and we will sort it out.' },
-      { h: 'After you approve your proof', p: 'Your tent goes into production the moment you approve your proof. From that point the order cannot be cancelled, and it is not refundable — production has already started on a one-off, made-for-you item.' },
+      { p: 'We want your order to arrive right. Because every item is custom printed to order from a proof you approve, returns work differently than they would for a stock item — there is nothing generic to resend. If something is wrong with your order, tell us within five (5) business days of delivery and we will sort it out.' },
+      { h: 'After you approve your proof', p: 'Your order goes into production the moment you approve your proof. From that point the order cannot be cancelled, and it is not refundable — production has already started on a one-off, made-for-you item.' },
       { h: 'If something is wrong with your order', list: [
         `Contact us within five (5) business days of delivery — email ${brand.email} or call ${brand.phone}.`,
         'We log your issue and open a claim for your reference while we work out the best fix.',
         'We will usually ask for a few photos showing the problem so we can see what happened.',
-        'If we need the tent back to inspect it, we will arrange that with you within a reasonable time. If the fault is confirmed to be ours, we cover your return shipping.'
+        'If we need the item back to inspect it, we will arrange that with you within a reasonable time. If the fault is confirmed to be ours, we cover your return shipping.'
       ] },
-      { h: 'Rush charges', p: 'Rush printing and rush shipping fees are not refundable unless the tent is defective or the courier could not deliver it.' },
+      { h: 'Rush charges', p: 'Rush printing and rush shipping fees are not refundable unless the item is defective or the courier could not deliver it.' },
       { h: 'Reprints', p: 'When a reprint is the right fix, we decide between a refund or a rework and set the turnaround and shipping based on current production capacity. Reprint turnaround starts from your written proof approval — we only take written approval as final, never verbal.' },
-      { h: 'A note on colour', p: 'Screen and printed colours can vary slightly. A proof is produced differently from the final press print, so it will not match the finished tent exactly — if precise colour matters, tell us in your order notes and we will confirm on the proof.' },
+      { h: 'A note on colour', p: 'Screen and printed colours can vary slightly. A proof is produced differently from the final press print, so it will not match the finished item exactly — if precise colour matters, tell us in your order notes and we will confirm on the proof.' },
       { h: 'Questions', p: `Reach us any time at ${brand.email} or ${brand.phone}.` }
     ]
   },
@@ -114,10 +107,10 @@ export const PAGES = [
     title: 'Warranty',
     stub: true,
     description:
-      'Apex Trade Show canopy tents are built from heavy-duty aluminium frames and dye-sublimated fabric. Full warranty terms are being finalised — contact us with any concern.',
+      'Apex Trade Show displays are built for repeated event use — aluminium hardware and dye-sublimated graphics. Full warranty terms are being finalised — contact us with any concern.',
     blocks: [
-      { p: 'Our canopy tents use heavy-duty aluminium hex frames and dye-sublimated 600D polyester tops built for repeated outdoor use.' },
-      { h: 'Our full warranty terms are being finalised', p: 'The written warranty terms for this store are still being finalised. If you have a concern about a frame or print defect, contact us and we will help.' }
+      { p: 'Our displays are built for repeated event use. Canopy tents use heavy-duty aluminium hex frames and dye-sublimated 600D polyester tops; banner stands and backdrops use aluminium hardware with replaceable dye-sublimated printed graphics.' },
+      { h: 'Our full warranty terms are being finalised', p: 'The written warranty terms for this store are still being finalised. If you have a concern about a frame, hardware or print defect, contact us and we will help.' }
     ]
   },
   {
