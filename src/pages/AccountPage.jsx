@@ -6,6 +6,7 @@ import { startCheckout, confirmCheckout, respondToProof } from '../services/chec
 import StatusTimeline from '../components/StatusTimeline';
 import { useCurrency } from '../context/CurrencyContext';
 import { formatCharged } from '../lib/money';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 const statusColor = {
   submitted: 'st-blue',
@@ -21,6 +22,7 @@ const statusColor = {
 const isPaid = (o) => ['paid', 'in_production', 'shipped'].includes(o.status);
 
 export default function AccountPage() {
+  useDocumentMeta('My Account', undefined, undefined, 'noindex, follow');
   const { displayName, isAuthenticated, isSupabaseReady, loading } = useAuth();
   const { currency } = useCurrency();
   const location = useLocation();

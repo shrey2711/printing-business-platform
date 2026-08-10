@@ -3,8 +3,10 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { placeOrder, notifyOrderPlaced } from '../services/orders';
 import { startCheckout, validateCoupon } from '../services/checkout';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function PlaceOrderPage() {
+  useDocumentMeta('Place Your Order', undefined, undefined, 'noindex, follow');
   const { user, isAuthenticated, isSupabaseReady, loading } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();

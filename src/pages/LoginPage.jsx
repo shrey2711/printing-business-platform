@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function LoginPage() {
+  useDocumentMeta('Sign In', undefined, undefined, 'noindex, follow');
   const { login, isSupabaseReady } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();

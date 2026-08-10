@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function RegisterPage() {
+  useDocumentMeta('Create Account', undefined, undefined, 'noindex, follow');
   const { register, isSupabaseReady } = useAuth();
   const navigate = useNavigate();
 

@@ -653,6 +653,30 @@ for (const page of PAGES) {
   });
 }
 
+// ---- Private / app routes: noindex stubs ----
+// These React routes are not prerendered, so without a stub the SPA rewrite
+// serves the HOME index.html for them — which would index /login etc. as a
+// duplicate of the homepage. Each stub is noindex,follow with a self canonical
+// and non-home content; React replaces it with the real page on mount.
+const PRIVATE_ROUTES = [
+  { path: '/login', title: 'Sign In', h1: 'Sign in to your account' },
+  { path: '/register', title: 'Create Account', h1: 'Create an account' },
+  { path: '/account', title: 'My Account', h1: 'My account' },
+  { path: '/admin', title: 'Admin', h1: 'Admin' },
+  { path: '/order', title: 'Place Your Order', h1: 'Place your order' }
+];
+for (const r of PRIVATE_ROUTES) {
+  routes.push(() =>
+    render({
+      path: r.path,
+      title: `${r.title} | ${BRAND}`,
+      description: `${r.title} — a private ${BRAND} account page.`,
+      robots: 'noindex, follow',
+      body: `<h1>${esc(r.h1)}</h1><p>This is a private page. <a href="/">Return to the home page</a>.</p>`
+    })
+  );
+}
+
 // ---- Load dashboard-authored content from Supabase at build time ----
 const posts = await loadPublishedPosts();
 seoMap = await loadSeoMap();
