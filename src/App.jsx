@@ -23,10 +23,11 @@ import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
 
 const topNav = [
-  { label: 'All Canopies', to: '/products' },
-  { label: "10' × 10'", to: '/products/canopy-tent-10x10' },
-  { label: "10' × 15'", to: '/products/canopy-tent-10x15' },
-  { label: "10' × 20'", to: '/products/canopy-tent-10x20' },
+  { label: 'All Products', to: '/products' },
+  { label: 'Canopy Tents', to: '/products?category=tents' },
+  { label: 'Banner Stands', to: '/products?category=banner-stands' },
+  { label: 'Backdrops', to: '/products?category=backdrops' },
+  { label: 'Table Covers', to: '/products?category=table-covers' },
   { label: 'Blog', to: '/blog' }
 ];
 
@@ -151,10 +152,11 @@ function Footer() {
         <div>
           <h4>Shop</h4>
           <div className="ft-links">
-            <Link to="/products">All Canopy Tents</Link>
-            <Link to="/products/canopy-tent-10x10">10' × 10' Canopy</Link>
-            <Link to="/products/canopy-tent-10x15">10' × 15' Canopy</Link>
-            <Link to="/products/canopy-tent-10x20">10' × 20' Canopy</Link>
+            <Link to="/products">All Products</Link>
+            <Link to="/products?category=tents">Canopy Tents</Link>
+            <Link to="/products?category=banner-stands">Banner Stands</Link>
+            <Link to="/products?category=backdrops">Backdrops</Link>
+            <Link to="/products?category=table-covers">Table Covers</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/locations">Locations</Link>
           </div>

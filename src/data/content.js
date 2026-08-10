@@ -8,22 +8,23 @@
 
 export const CONTENT_FIELDS = [
   // Home hero
-  { key: 'home.hero.eyebrow', label: 'Home — hero eyebrow', default: 'Custom printed canopy tents' },
-  { key: 'home.hero.title', label: 'Home — hero title', default: 'Your brand on a tent, priced before you ask.' },
+  { key: 'home.hero.eyebrow', label: 'Home — hero eyebrow', default: 'Complete trade show displays & event branding' },
+  { key: 'home.hero.title', label: 'Home — hero title', default: 'Everything for your trade show booth, from one supplier.' },
   {
     key: 'home.hero.subtitle',
     label: 'Home — hero subtitle',
     multiline: true,
     default:
-      'Choose the size, frame and how much of the canopy gets printed — the price updates as you go. ' +
-      'No quote forms, no waiting on a sales rep. Free artwork proof on every order.'
+      'Custom canopy tents, retractable banner stands, step & repeat backdrops, table covers and ' +
+      'event branding accessories — all in your brand. Instant online pricing on canopies and a ' +
+      'free artwork proof on every order.'
   },
   // Home size section
-  { key: 'home.sizes.title', label: 'Home — sizes heading', default: 'Start with a size' },
+  { key: 'home.sizes.title', label: 'Home — sizes heading', default: 'Custom canopy tents' },
   {
     key: 'home.sizes.subtitle',
     label: 'Home — sizes subheading',
-    default: 'Every size is printed to order. 10 × 10 is the standard vendor booth.'
+    default: 'Our most popular category — printed to order with instant pricing. 10 × 10 is the standard vendor booth.'
   },
   // Closing band
   {

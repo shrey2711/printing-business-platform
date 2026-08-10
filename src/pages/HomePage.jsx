@@ -23,6 +23,15 @@ const solutions = [
   { icon: '🏗️', title: 'Job sites & safety', copy: 'Shade and a visible company mark on active sites.' }
 ];
 
+const categoryTiles = [
+  { icon: '⛺', title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/products?category=tents' },
+  { icon: '📐', title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/products?category=banner-stands' },
+  { icon: '📸', title: 'Backdrops', copy: 'Step & repeat media walls', to: '/products?category=backdrops' },
+  { icon: '🎪', title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/products?category=table-covers' },
+  { icon: '🧰', title: 'Accessories', copy: 'Weights, flags & hardware', to: '/products' },
+  { icon: '🏢', title: 'Complete Booth', copy: 'Everything for your booth', to: '/quote' }
+];
+
 const steps = [
   { n: 1, title: 'Pick a size and see the price', copy: 'Choose 10×10, 10×15 or 10×20, add walls. The price updates as you go — no quote form.' },
   { n: 2, title: 'Upload your artwork', copy: 'Send a print-ready file, or a logo for us to place. We send a free proof before printing.' },
@@ -64,13 +73,13 @@ export default function HomePage() {
             <h1>{c('home.hero.title')}</h1>
             <p>{c('home.hero.subtitle')}</p>
             <div className="hero-actions">
-              <Link className="btn btn-red" to="/products">Shop canopy tents</Link>
-              <Link className="btn btn-outline" to="/products/canopy-tent-10x10">Start with a 10×10</Link>
+              <Link className="btn btn-red" to="/products">Shop all displays</Link>
+              <Link className="btn btn-outline" to="/products?category=tents">Custom canopies</Link>
             </div>
             <ul className="hero-ticks">
-              <li>Live pricing</li>
-              <li>Proof before production</li>
-              <li>Bulk price at 3+</li>
+              <li>Canopies · banners · backdrops</li>
+              <li>Free artwork proof</li>
+              <li>One supplier for your booth</li>
             </ul>
           </div>
           <div className="hero-art">
@@ -79,7 +88,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* The three sizes */}
+      {/* Shop by category — signals the full range up front */}
+      <section className="cat-tiles-section">
+        <div className="section-head">
+          <h2>Everything you need to build a professional booth</h2>
+          <p>One supplier for your whole trade show presence.</p>
+        </div>
+        <div className="cat-tiles">
+          {categoryTiles.map((c) => (
+            <Link className="cat-tile" to={c.to} key={c.title}>
+              <span className="cat-tile-icon" aria-hidden="true">{c.icon}</span>
+              <strong>{c.title}</strong>
+              <span className="cat-tile-copy">{c.copy}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Canopy tents — our most popular category */}
       <section className="size-section">
         <div className="section-head">
           <h2>{c('home.sizes.title')}</h2>

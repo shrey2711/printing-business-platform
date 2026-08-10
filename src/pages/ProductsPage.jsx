@@ -14,7 +14,7 @@ const cardPreview = {
 };
 
 export default function ProductsPage() {
-  useDocumentMeta('Custom Printed Canopy Tents — 10x10, 10x15 & 10x20', 'Shop custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with up to 3 printed walls and instant online pricing. Free artwork proof, ships across the US & Canada.');
+  useDocumentMeta('Trade Show Displays, Canopies & Banner Stands', 'Shop the complete trade show booth from Apex — custom canopy tents (instant pricing), retractable banner stands, step & repeat backdrops and table covers. Free artwork proof, US & Canada.');
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'all';
 
@@ -50,9 +50,9 @@ export default function ProductsPage() {
 
       <main className="catalog-main">
         <div className="catalog-heading">
-          <h1>Custom Printed Canopy Tents</h1>
-          <p>Pop-up canopy tents in 10×10, 10×15 and 10×20 — printed in full colour with your logo,
-          up to 3 walls, priced instantly. Pick a size and see the price update as you configure it.</p>
+          <h1>Trade Show Displays &amp; Custom Canopies</h1>
+          <p>Everything for a professional booth from one supplier — canopy tents, banner stands,
+          backdrops and table covers. Filter by category, then configure and price your product.</p>
         </div>
 
         <div className="filter-bar">

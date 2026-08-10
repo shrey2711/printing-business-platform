@@ -18,11 +18,12 @@ export const brand = {
   // Rendered in the header logo as two-tone text: <first><accent>
   logoText: { first: 'Apex', accent: 'Trade Show' },
 
-  tagline: 'Custom printed canopy tents, priced instantly',
+  tagline: 'Complete trade show displays & event branding',
   description:
-    'Custom printed pop-up canopy tents in 10x10, 10x15 and 10x20. Choose full or half walls, ' +
-    'add rush delivery, and see the price update live. Free artwork proof on every order, ' +
-    'shipped across the US and Canada.',
+    'Everything you need to build a professional trade show booth from one supplier — custom ' +
+    'canopy tents, retractable banner stands, step & repeat backdrops, table covers and event ' +
+    'branding accessories. Instant online pricing on canopies, a free artwork proof on every ' +
+    'order, shipped across the US and Canada.',
 
   origin: 'https://www.apextradeshow.com',
 

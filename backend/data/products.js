@@ -11,8 +11,9 @@ import { calculateCompetitivePrice, competitorCurrentPrice } from './competitive
 // Active categories for the canopy storefront.
 export const categories = [
   { id: 'tents', name: 'Canopy Tents' },
-  { id: 'table-covers', name: 'Table Covers' },
-  { id: 'displays', name: 'Trade Show Displays' }
+  { id: 'banner-stands', name: 'Banner Stands' },
+  { id: 'backdrops', name: 'Backdrops' },
+  { id: 'table-covers', name: 'Table Covers' }
 ];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
@@ -44,14 +45,17 @@ export const navGroups = [
     items: [{ name: 'Custom Table Covers', slug: 'table-covers' }]
   },
   {
-    name: 'Trade Show Displays',
+    name: 'Banner Stands',
     items: [
       { name: 'Standard Retractable Banner Stand', slug: 'standard-retractable-banner' },
       { name: 'Deluxe Retractable Banner Stand', slug: 'deluxe-retractable-banner' },
       { name: 'X-Stand Banner', slug: 'x-stand-banner' },
-      { name: 'Step and Repeat Backdrop', slug: 'step-and-repeat-backdrop' },
       { name: 'Table Top Banner Stand', slug: 'table-top-banner-stand' }
     ]
+  },
+  {
+    name: 'Backdrops',
+    items: [{ name: 'Step and Repeat Backdrop', slug: 'step-and-repeat-backdrop' }]
   }
 ];
 
@@ -249,7 +253,7 @@ const tradeShowDisplays = [
     slug: 'standard-retractable-banner',
     active: true,
     name: 'Standard Retractable Banner Stand',
-    category: 'displays',
+    category: 'banner-stands',
     badge: 'Retractable',
     emoji: '📐',
     tagline: 'Compact retractable banner stand with a replaceable printed graphic.',
@@ -299,7 +303,7 @@ const tradeShowDisplays = [
     slug: 'deluxe-retractable-banner',
     active: true,
     name: 'Deluxe Retractable Banner Stand',
-    category: 'displays',
+    category: 'banner-stands',
     badge: 'Premium',
     emoji: '🏆',
     tagline: 'Premium retractable banner stand with chrome-style end caps and an adjustable pole.',
@@ -347,7 +351,7 @@ const tradeShowDisplays = [
     slug: 'x-stand-banner',
     active: true,
     name: 'X-Stand Banner',
-    category: 'displays',
+    category: 'banner-stands',
     badge: 'Economical',
     emoji: '✖️',
     tagline: 'Lightweight X-frame banner stand — an economical, portable display.',
@@ -389,7 +393,7 @@ const tradeShowDisplays = [
     slug: 'step-and-repeat-backdrop',
     active: true,
     name: 'Step and Repeat Backdrop',
-    category: 'displays',
+    category: 'backdrops',
     badge: 'Backdrop',
     emoji: '📸',
     tagline: 'Large-format step & repeat media wall for event photography and branding.',
@@ -433,7 +437,7 @@ const tradeShowDisplays = [
     slug: 'table-top-banner-stand',
     active: true,
     name: 'Table Top Banner Stand',
-    category: 'displays',
+    category: 'banner-stands',
     badge: 'Tabletop',
     emoji: '🪧',
     tagline: 'Compact tabletop retractable banner for counters and registration desks.',

@@ -185,6 +185,19 @@ h1, h2, h3, h4 { color: var(--navy); }
 .tent-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .tent-thumb:hover { border-color: var(--blue); }
 .tent-thumb.is-active { border-color: var(--navy); }
+/* Home "shop by category" tiles */
+.cat-tiles-section { max-width: 1400px; margin: 0 auto; padding: 2.5rem 1.5rem 0; }
+.cat-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.cat-tile {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem;
+  padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+.cat-tile:hover { border-color: var(--blue); box-shadow: 0 8px 20px rgba(22, 35, 59, 0.1); }
+.cat-tile-icon { font-size: 1.8rem; }
+.cat-tile strong { color: var(--navy); }
+.cat-tile-copy { color: var(--muted); font-size: 0.85rem; }
+
 /* Related products on the product page */
 .related-section { max-width: 1400px; margin: 2.5rem auto 0; padding: 0 1.5rem; }
 .related-section .section-head { margin-bottom: 1rem; }

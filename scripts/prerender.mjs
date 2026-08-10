@@ -39,6 +39,9 @@ const NAV = `<nav aria-label="Primary">
   <a href="/products/canopy-tent-10x10">10x10 Canopy Tent</a>
   <a href="/products/canopy-tent-10x15">10x15 Canopy Tent</a>
   <a href="/products/canopy-tent-10x20">10x20 Canopy Tent</a>
+  <a href="/products?category=banner-stands">Banner Stands</a>
+  <a href="/products?category=backdrops">Backdrops</a>
+  <a href="/products?category=table-covers">Table Covers</a>
   <a href="/locations">Locations</a>
   <a href="/quote">Get a Quote</a>
   <a href="/contact">Contact</a>
@@ -104,20 +107,30 @@ const productList = listProducts();
 const priceFrom = (p) => (p.startingPrice != null ? `from $${p.startingPrice}` : 'Request a quote');
 // Canopy-focused pages (home, locations) list only the core retail products.
 const coreProducts = productList.filter((p) => p.category === 'tents' || p.category === 'table-covers');
-const displayProducts = productList.filter((p) => p.category === 'displays');
+const displayProducts = productList.filter((p) => p.category === 'banner-stands' || p.category === 'backdrops');
 let count = 0;
 const routes = [];
 
 // ---- Home ----
 routes.push(() => {
   const body = `
-    <h1>Custom Printed Canopy Tents with Instant Pricing</h1>
-    <p>${esc(BRAND)} prints custom pop-up canopy tents in ${SIZES.map((s) => s.slug).join(', ')}.
-    Choose your frame grade, print coverage, walls and accessories and see the price update live —
-    no quote form. Every order includes a free artwork proof, and nothing goes to production until
-    you approve it. ${esc(brand.shippingBlurb)}.</p>
-    <h2>Shop canopy tents</h2>
+    <h1>Complete Trade Show Displays &amp; Event Branding</h1>
+    <p>${esc(BRAND)} is your one supplier for a professional trade show booth — custom canopy tents,
+    retractable banner stands, step &amp; repeat backdrops, table covers and event branding
+    accessories, all in your brand. Instant online pricing on canopies, a free artwork proof on every
+    order. ${esc(brand.shippingBlurb)}.</p>
+    <h2>Shop by category</h2>
+    <ul>
+      <li><a href="/products?category=tents">Custom Canopy Tents</a> — printed pop-up tents &amp; walls</li>
+      <li><a href="/products?category=banner-stands">Banner Stands</a> — retractable &amp; X-stand banners</li>
+      <li><a href="/products?category=backdrops">Backdrops</a> — step &amp; repeat media walls</li>
+      <li><a href="/products?category=table-covers">Table Covers</a> — pleated &amp; stretch throws</li>
+      <li><a href="/products">All products</a> — the complete range</li>
+    </ul>
+    <h2>Custom canopy tents</h2>
     <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
+    ${displayProducts.length ? `<h2>Banner stands &amp; backdrops</h2>
+    <ul>${displayProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>` : ''}
     <h2>Canopy tent size guides</h2>
     <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
     <h2>What people use them for</h2>
@@ -129,7 +142,7 @@ routes.push(() => {
     <li>We print and ship it.</li></ol>`;
   return render({
     path: '/',
-    title: `Custom Printed Canopy Tents — Instant Pricing | ${BRAND}`,
+    title: `Trade Show Displays, Canopies, Banners & Backdrops | ${BRAND}`,
     description: brand.description,
     body
   });
@@ -138,20 +151,23 @@ routes.push(() => {
 // ---- Products listing ----
 routes.push(() => {
   const body = `
-    <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Canopy Tents</span></nav>
-    <h1>Custom Printed Canopy Tents</h1>
+    <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Products</span></nav>
+    <h1>Trade Show Displays, Custom Canopies &amp; Banner Stands</h1>
+    <p>${esc(BRAND)} supplies the complete trade show booth from one place — custom canopy tents,
+    retractable banner stands, step &amp; repeat backdrops and table covers, all custom printed in
+    your brand with a free artwork proof.</p>
+    <h2>Custom canopy tents</h2>
     <p>Custom printed pop-up canopy tents in three sizes — 10x10, 10x15 and 10x20 — with up to 3
-    printed walls, full-colour dye-sublimation printing and a free artwork proof. Configure any size
-    for instant online pricing.</p>
+    printed walls and instant online pricing.</p>
     <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
     <p>Not sure which size? Read the <a href="/sizes/10x10">10x10</a>, <a href="/sizes/10x15">10x15</a>
     and <a href="/sizes/10x20">10x20</a> size guides.</p>
-    ${displayProducts.length ? `<h2>Trade show displays</h2>
+    ${displayProducts.length ? `<h2>Banner stands &amp; backdrops</h2>
     <ul>${displayProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>` : ''}`;
   return render({
     path: '/products',
-    title: `Custom Printed Canopy Tents — 10x10, 10x15 & 10x20 | ${BRAND}`,
-    description: 'Shop custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with printed walls and instant online pricing. Free artwork proof, ships across the US & Canada.',
+    title: `Trade Show Displays, Canopies & Banner Stands | ${BRAND}`,
+    description: 'Shop the complete trade show booth from Apex — custom canopy tents (instant pricing), retractable banner stands, step & repeat backdrops and table covers. Free artwork proof, US & Canada.',
     body
   });
 });
