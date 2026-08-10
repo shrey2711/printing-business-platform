@@ -722,13 +722,27 @@ routes.push(() => {
         `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` — ${esc(p.excerpt)}` : ''}</li>`
     )
     .join('');
+  const topics = [
+    ['/trade-show-displays', 'All trade show displays'],
+    ['/custom-canopies', 'Custom canopy tents'],
+    ['/banner-stands', 'Retractable & X-stand banners'],
+    ['/table-covers', 'Table covers'],
+    ['/backdrops', 'Backdrops'],
+    ['/artwork-guidelines', 'Artwork preparation']
+  ].map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('');
   return render({
     path: '/blog',
-    title: `Blog — Canopy Guides & Ideas | ${BRAND}`,
-    description: 'Guides, tips and ideas for custom printed canopy tents — sizing, print coverage, event setup and more.',
-    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>
-      <h1>Canopy guides &amp; ideas</h1>
-      <ul>${items || '<li>Posts coming soon.</li>'}</ul>`
+    title: `Trade Show Resources & Buying Guides | ${BRAND}`,
+    description:
+      'Buying guides, size charts and setup tips for trade show displays — custom canopy tents, retractable and X-stand banner stands, table covers, backdrops, booth planning and artwork preparation.',
+    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Resources</span></nav>
+      <h1>Trade Show Resources &amp; Buying Guides</h1>
+      <p>Practical guides to help you choose, print and set up a professional trade show booth — from
+      custom canopy tents and banner stands to table covers, backdrops, artwork prep and booth planning.</p>
+      <h2>Browse by topic</h2>
+      <ul>${topics}</ul>
+      <h2>Latest articles</h2>
+      <ul>${items || '<li>Articles coming soon.</li>'}</ul>`
   });
 });
 

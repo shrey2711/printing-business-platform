@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom';
 import { getBlogPosts } from '../services/blog';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
+const TOPICS = [
+  { to: '/trade-show-displays', label: 'All trade show displays' },
+  { to: '/custom-canopies', label: 'Custom canopy tents' },
+  { to: '/banner-stands', label: 'Retractable & X-stand banners' },
+  { to: '/table-covers', label: 'Table covers' },
+  { to: '/backdrops', label: 'Backdrops' },
+  { to: '/artwork-guidelines', label: 'Artwork preparation' }
+];
+
 export default function BlogIndex() {
   useDocumentMeta(
-    'Blog — canopy tips, buying guides & event ideas',
-    'Guides, tips and ideas for custom printed canopy tents — sizing, print coverage, event setup and more.'
+    'Trade Show Resources & Buying Guides',
+    'Buying guides, size charts and setup tips for trade show displays — custom canopy tents, retractable and X-stand banner stands, table covers, backdrops, booth planning and artwork preparation.'
   );
   const [posts, setPosts] = useState(null);
 
@@ -21,10 +30,17 @@ export default function BlogIndex() {
   return (
     <main className="page">
       <section className="section-head" style={{ marginTop: '1rem' }}>
-        <span className="eyebrow">Blog</span>
-        <h1>Canopy guides &amp; ideas</h1>
-        <p>Sizing, print coverage, event setup and everything else worth knowing before you order.</p>
+        <span className="eyebrow">Resources</span>
+        <h1>Trade Show Resources &amp; Buying Guides</h1>
+        <p>Practical guides to help you choose, print and set up a professional trade show booth — from
+        custom canopy tents and banner stands to table covers, backdrops, artwork prep and booth planning.</p>
       </section>
+
+      <nav className="filter-bar" aria-label="Browse by topic">
+        {TOPICS.map((t) => (
+          <Link className="chip" to={t.to} key={t.to}>{t.label}</Link>
+        ))}
+      </nav>
 
       {posts === null ? (
         <p className="muted">Loading…</p>
@@ -37,7 +53,7 @@ export default function BlogIndex() {
               {p.coverUrl ? (
                 <div className="blog-card-cover"><img src={p.coverUrl} alt="" loading="lazy" /></div>
               ) : (
-                <div className="blog-card-cover blog-card-cover-blank" aria-hidden="true">⛺</div>
+                <div className="blog-card-cover blog-card-cover-blank" aria-hidden="true">📋</div>
               )}
               <div className="blog-card-body">
                 {p.tags?.[0] && <span className="blog-card-tag">{p.tags[0]}</span>}
