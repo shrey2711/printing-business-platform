@@ -32,6 +32,15 @@ const bySource = new Map(
 
 export default function middleware(request) {
   const url = new URL(request.url);
+
+  // Enforce the canonical host: apex (non-www) -> www, preserving path + query,
+  // as a 301. Guarded to the production apex domain only, so preview
+  // (*.vercel.app) and localhost are untouched. HTTP->HTTPS is handled by Vercel.
+  if (url.hostname === 'apextradeshow.com') {
+    url.hostname = 'www.apextradeshow.com';
+    return Response.redirect(url.toString(), 301);
+  }
+
   const path = url.pathname.replace(/\/$/, '') || '/';
   const rule = bySource.get(path);
   if (!rule) return; // continue to normal routing
