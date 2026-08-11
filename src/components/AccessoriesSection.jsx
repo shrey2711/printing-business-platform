@@ -14,14 +14,14 @@ const ITEMS = [
   },
   {
     title: 'Tent Flag Kit',
-    icon: '🚩',
+    img: '/images/tents/flag-kit.webp',
     copy: 'Tent-compatible feather flag to mark your booth and pull traffic from across the lot.',
     to: '/quote',
     cta: 'Request a quote'
   },
   {
     title: 'Hardware & Carry Bags',
-    icon: '🧰',
+    img: '/images/tents/hardware-carry-bags.webp',
     copy: 'Replacement frames, leg weights and wheeled carry bags for your canopy.',
     to: '/quote',
     cta: 'Request a quote'
