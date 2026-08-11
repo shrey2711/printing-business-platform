@@ -198,7 +198,7 @@ for (const cp of CATEGORY_PAGES) {
     const localForHub = { 'custom-canopies': 'canopies', 'trade-show-displays': 'displays', 'banner-stands': 'banner-stands' }[cp.slug];
     const lc = localForHub && LOCAL_CATEGORIES.find((l) => l.key === localForHub);
     const cities = lc
-      ? `<h2>${esc(lc.label)} by city</h2><ul>${SEO_CITIES.filter((c) => c.tier === 1).map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}, ${esc(c.abbr)}</a></li>`).join('')}</ul>`
+      ? `<h2>${esc(lc.label)} by city</h2><ul>${SEO_CITIES.filter((c) => c.tier <= 2).map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}, ${esc(c.abbr)}</a></li>`).join('')}</ul>`
       : '';
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.nav)}</span></nav>
@@ -341,7 +341,7 @@ for (const lc of LOCAL_CATEGORIES) {
         path: `/${lc.slug}/${city.slug}`,
         title: `${lc.label} in ${city.city}, ${city.abbr} | ${BRAND}`,
         description: `${lc.label} in ${city.city}, ${city.stateName}. ${lc.lead(city)}`.slice(0, 300),
-        robots: city.tier !== 1 ? 'noindex, follow' : undefined,
+        robots: city.tier > 2 ? 'noindex, follow' : undefined,
         body,
         jsonLd: {
           '@context': 'https://schema.org',
@@ -974,10 +974,10 @@ territories.forEach((s) =>
     if (PRIORITY_CITIES.has(slugify(c)) && !redirectedLoc.has(path)) sm.push(smUrl(path, '0.4'));
   })
 );
-// Tier-1 city × category local pages (Tier 2/3 are noindex and excluded).
+// Tier 1 + 2 city × category local pages are indexed (Tier 3 noindex, excluded).
 for (const lc of LOCAL_CATEGORIES) {
   for (const city of SEO_CITIES) {
-    if (city.tier === 1) sm.push(smUrl(`/${lc.slug}/${city.slug}`, '0.6', 'weekly'));
+    if (city.tier <= 2) sm.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly'));
   }
 }
 sm.push(smUrl('/blog', '0.6', 'weekly'));

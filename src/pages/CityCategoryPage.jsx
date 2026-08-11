@@ -22,7 +22,9 @@ export default function CityCategoryPage({ categoryKey }) {
     return () => { alive = false; };
   }, []);
 
-  const indexed = city && city.tier === 1;
+  // Tier 1 + 2 are indexed (each carries unique local content); Tier 3 stays
+  // noindex until it earns depth.
+  const indexed = city && city.tier <= 2;
   useDocumentMeta(
     city ? `${cat.label} in ${city.city}, ${city.abbr}` : cat?.label || 'Location',
     city ? `${cat.label} in ${city.city}, ${city.stateName}. ${cat.lead(city)}`.slice(0, 300) : undefined,
