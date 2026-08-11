@@ -20,6 +20,7 @@ import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
+import { LOCAL_CATEGORIES, SEO_CITIES } from '../src/data/citySeo.js';
 import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
@@ -193,6 +194,12 @@ for (const cp of CATEGORY_PAGES) {
       ? `<h2>Canopy size guides</h2><ul>${cp.guideLinks.map((g) => `<li><a href="${g.to}">${esc(g.label)}</a></li>`).join('')}</ul>`
       : '';
     const included = `<h2>What's included</h2><ul>${cp.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>`;
+    // Link the hub to its Tier-1 city landing pages so they sit in the crawl graph.
+    const localForHub = { 'custom-canopies': 'canopies', 'trade-show-displays': 'displays', 'banner-stands': 'banner-stands' }[cp.slug];
+    const lc = localForHub && LOCAL_CATEGORIES.find((l) => l.key === localForHub);
+    const cities = lc
+      ? `<h2>${esc(lc.label)} by city</h2><ul>${SEO_CITIES.filter((c) => c.tier === 1).map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}, ${esc(c.abbr)}</a></li>`).join('')}</ul>`
+      : '';
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.nav)}</span></nav>
       <h1>${esc(cp.h1)}</h1>
@@ -201,6 +208,7 @@ for (const cp of CATEGORY_PAGES) {
       <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
       <ul>${catProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
       ${included}
+      ${cities}
       ${guides}`;
     return render({
       path: `/${cp.slug}`,
@@ -295,6 +303,59 @@ routes.push(() => {
     ]
   });
 });
+
+// ---- City × category local landing pages ----
+// /trade-show-canopies|trade-show-displays|banner-stands/[city]. Tier 1 cities
+// are indexed with unique local content; Tier 2/3 are noindex,follow until they
+// earn depth (anti-thin-page gate). These are the canonical local pages — old
+// /locations/[state]/[city] canopy pages 301 into /trade-show-canopies/[city].
+for (const lc of LOCAL_CATEGORIES) {
+  for (const city of SEO_CITIES) {
+    routes.push(() => {
+      const items = productList.filter((p) => lc.productCats.includes(p.category));
+      const siblings = LOCAL_CATEGORIES.filter((l) => l.key !== lc.key);
+      const others = SEO_CITIES.filter((c) => c.slug !== city.slug).slice(0, 8);
+      const productLis = items
+        .map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`)
+        .join('');
+      const siblingLinks = siblings
+        .map((s) => `<a href="/${s.slug}/${city.slug}">${esc(s.label)} in ${esc(city.city)}</a>`)
+        .join(' · ');
+      const otherLis = others
+        .map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}</a></li>`)
+        .join('');
+      const body = `
+        <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="${lc.hub}">${esc(lc.hubLabel)}</a> / <span>${esc(city.city)}</span></nav>
+        <h1>${esc(lc.label)} in ${esc(city.city)}, ${esc(city.abbr)}</h1>
+        <p>${esc(lc.lead(city))}</p>
+        <h2>${esc(lc.label)} for ${esc(city.city)} events</h2>
+        <ul>${productLis}</ul>
+        <h2>Trade shows in ${esc(city.city)}</h2>
+        <p>${esc(city.city)} hosts ${esc(city.scene)}. Whether you're exhibiting at ${esc(city.venue)} or
+        running an outdoor activation nearby, ${esc(BRAND)} prints your ${esc(lc.label.toLowerCase())} in your
+        brand and ships them to ${esc(city.city)}, ${esc(city.stateName)}.</p>
+        <p>Building a full booth in ${esc(city.city)}? ${siblingLinks}</p>
+        <h2>${esc(lc.label)} in other cities</h2>
+        <ul>${otherLis}</ul>`;
+      return render({
+        path: `/${lc.slug}/${city.slug}`,
+        title: `${lc.label} in ${city.city}, ${city.abbr} | ${BRAND}`,
+        description: `${lc.label} in ${city.city}, ${city.stateName}. ${lc.lead(city)}`.slice(0, 300),
+        robots: city.tier !== 1 ? 'noindex, follow' : undefined,
+        body,
+        jsonLd: {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+            { '@type': 'ListItem', position: 2, name: lc.hubLabel, item: `${ORIGIN}${lc.hub}` },
+            { '@type': 'ListItem', position: 3, name: `${lc.label} in ${city.city}`, item: `${ORIGIN}/${lc.slug}/${city.slug}` }
+          ]
+        }
+      });
+    });
+  }
+}
 
 // ---- Size guide pages (INFORMATIONAL — research intent, not commercial) ----
 // These deliberately do NOT compete with /products/canopy-tent-<size>. They
@@ -903,12 +964,22 @@ SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));
 sm.push(smUrl('/locations', '0.6', 'monthly'));
 // Only priority state pages are indexable; the templated long tail is noindex.
 territories.filter((s) => PRIORITY_STATES.has(s.slug)).forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
-// Priority cities (with unique content) are indexable too.
+// Location city pages that 301 to a /trade-show-canopies/[city] page must NOT
+// appear in the sitemap (a sitemap URL must be 200, not a redirect).
+const redirectedLoc = new Set(SEO_CITIES.filter((c) => c.stateSlug).map((c) => `/locations/${c.stateSlug}/${c.slug}`));
+// Priority cities (with unique content) are indexable too — unless redirected.
 territories.forEach((s) =>
   s.cities.forEach((c) => {
-    if (PRIORITY_CITIES.has(slugify(c))) sm.push(smUrl(`/locations/${s.slug}/${slugify(c)}`, '0.4'));
+    const path = `/locations/${s.slug}/${slugify(c)}`;
+    if (PRIORITY_CITIES.has(slugify(c)) && !redirectedLoc.has(path)) sm.push(smUrl(path, '0.4'));
   })
 );
+// Tier-1 city × category local pages (Tier 2/3 are noindex and excluded).
+for (const lc of LOCAL_CATEGORIES) {
+  for (const city of SEO_CITIES) {
+    if (city.tier === 1) sm.push(smUrl(`/${lc.slug}/${city.slug}`, '0.6', 'weekly'));
+  }
+}
 sm.push(smUrl('/blog', '0.6', 'weekly'));
 posts.forEach((p) => sm.push(smUrl(`/blog/${p.slug}`, '0.6')));
 sm.push(smUrl('/quote', '0.4'));

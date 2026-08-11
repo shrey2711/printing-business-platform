@@ -21,6 +21,7 @@ import BlogPost from './pages/BlogPost';
 import InfoPage from './pages/InfoPage';
 import CategoryPage from './pages/CategoryPage';
 import BoothPackagesPage from './pages/BoothPackagesPage';
+import CityCategoryPage from './pages/CityCategoryPage';
 import Logo from './components/Logo';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
@@ -329,6 +330,10 @@ function App() {
         <Route path="/table-covers" element={<CategoryPage slug="table-covers" />} />
         <Route path="/backdrops" element={<CategoryPage slug="backdrops" />} />
         <Route path="/trade-show-booth-packages" element={<BoothPackagesPage />} />
+        {/* City × category local landing pages (option A canonical local pages) */}
+        <Route path="/trade-show-canopies/:city" element={<CityCategoryPage categoryKey="canopies" />} />
+        <Route path="/trade-show-displays/:city" element={<CityCategoryPage categoryKey="displays" />} />
+        <Route path="/banner-stands/:city" element={<CityCategoryPage categoryKey="banner-stands" />} />
         <Route path="/about" element={<InfoPage slug="about" />} />
         <Route path="/artwork-guidelines" element={<InfoPage slug="artwork-guidelines" />} />
         <Route path="/shipping" element={<InfoPage slug="shipping" />} />

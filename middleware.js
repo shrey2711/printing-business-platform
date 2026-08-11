@@ -9,6 +9,7 @@
 // client-side redirect, this preserves SEO signal and works for crawlers.
 
 import { redirects } from './src/generated/redirects.js';
+import { SEO_CITIES } from './src/data/citySeo.js';
 
 // Skip assets and API — only page routes should be considered for redirects.
 export const config = {
@@ -42,9 +43,22 @@ const BUILT_IN = [
   { source: '/products/feather-flags', destination: '/products', code: 301 }
 ];
 
+// Option-A consolidation: the /trade-show-canopies/[city] pages are the
+// canonical local canopy pages, so the old /locations/[state]/[city] canopy
+// pages 301 into them. The bare /trade-show-canopies path goes to the canopy
+// category.
+const CITY_REDIRECTS = [
+  { source: '/trade-show-canopies', destination: '/custom-canopies', code: 301 },
+  ...SEO_CITIES.filter((c) => c.stateSlug).map((c) => ({
+    source: `/locations/${c.stateSlug}/${c.slug}`,
+    destination: `/trade-show-canopies/${c.slug}`,
+    code: 301
+  }))
+];
+
 // DB-managed rules can still override a built-in source if ever needed.
 const bySource = new Map(
-  [...BUILT_IN, ...redirects].map((r) => [r.source.replace(/\/$/, '') || '/', r])
+  [...BUILT_IN, ...CITY_REDIRECTS, ...redirects].map((r) => [r.source.replace(/\/$/, '') || '/', r])
 );
 
 export default function middleware(request) {
