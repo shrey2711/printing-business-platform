@@ -76,15 +76,6 @@ export default function CategoryPage({ slug }) {
         </div>
       </section>
 
-      {page.points?.length > 0 && (
-        <section className="section-block card">
-          <h2>What's included</h2>
-          <ul className="feature-list">
-            {page.points.map((pt) => <li key={pt}>{pt}</li>)}
-          </ul>
-        </section>
-      )}
-
       {page.hub && (
         <section className="cat-cards-section">
           <div className="section-head"><h2>Shop by category</h2></div>
@@ -129,6 +120,15 @@ export default function CategoryPage({ slug }) {
           </div>
         )}
       </section>
+
+      {page.points?.length > 0 && (
+        <section className="section-block card">
+          <h2>What's included</h2>
+          <ul className="feature-list">
+            {page.points.map((pt) => <li key={pt}>{pt}</li>)}
+          </ul>
+        </section>
+      )}
 
       {page.guideLinks?.length > 0 && (
         <section className="section-block-bare">

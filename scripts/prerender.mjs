@@ -192,14 +192,15 @@ for (const cp of CATEGORY_PAGES) {
     const guides = cp.guideLinks
       ? `<h2>Canopy size guides</h2><ul>${cp.guideLinks.map((g) => `<li><a href="${g.to}">${esc(g.label)}</a></li>`).join('')}</ul>`
       : '';
+    const included = `<h2>What's included</h2><ul>${cp.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>`;
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.nav)}</span></nav>
       <h1>${esc(cp.h1)}</h1>
       <p>${esc(cp.intro)}</p>
-      <h2>What's included</h2><ul>${cp.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>
       ${subTiles}
       <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
       <ul>${catProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
+      ${included}
       ${guides}`;
     return render({
       path: `/${cp.slug}`,
