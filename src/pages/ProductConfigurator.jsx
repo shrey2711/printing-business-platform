@@ -155,13 +155,24 @@ export default function ProductConfigurator() {
   // Volume pricing brackets from quantityTiers, e.g. "1-2 units $835/unit",
   // "3+ units $799/unit", with the row matching the current quantity marked.
   const qtyNow = Number(config?.quantity) || 1;
+  // Canopy tiers carry per-kit columns (prices:{full,canopy}) rather than a flat
+  // `price`, so read the column for the selected kit (falling back to the first).
+  const kitGroupId = p?.kitGroupId;
+  const kitId = kitGroupId ? sel[kitGroupId] : null;
+  const tierUnitPrice = (t) => {
+    if (t && t.prices) {
+      const id = kitId && t.prices[kitId] != null ? kitId : Object.keys(t.prices)[0];
+      return Number(t.prices[id]);
+    }
+    return Number(t?.price) || 0;
+  };
   const tierRows = [...(p?.quantityTiers || [])]
     .sort((a, b) => a.min - b.min)
     .map((t, i, arr) => {
       const next = arr[i + 1];
       return {
         label: next ? `${t.min}-${next.min - 1} units` : `${t.min}+ units`,
-        price: t.price,
+        price: tierUnitPrice(t),
         active: qtyNow >= t.min && (!next || qtyNow < next.min)
       };
     });
