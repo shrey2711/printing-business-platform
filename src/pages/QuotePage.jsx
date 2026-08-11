@@ -28,6 +28,14 @@ export default function QuotePage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // The submit button goes live (theme blue) only once the required fields —
+  // name, email, quantity and project details — are filled; dimmed otherwise.
+  const canSubmit =
+    formData.name.trim() &&
+    formData.email.trim() &&
+    formData.quantity.trim() &&
+    formData.description.trim();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -114,7 +122,7 @@ export default function QuotePage() {
             <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
           </div>
 
-          <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+          <button className="btn btn-blue btn-block" type="submit" disabled={isSubmitting || !canSubmit}>
             {isSubmitting ? 'Submitting…' : 'Submit request'}
           </button>
         </form>
