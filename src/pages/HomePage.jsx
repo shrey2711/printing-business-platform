@@ -7,6 +7,7 @@ import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useContentResolver } from '../context/ContentContext';
 import { brand } from '../config/brand';
+import { SHOWCASE } from '../data/showcase';
 
 const trustBadges = [
   { icon: '🖨️', title: 'Dye-sublimated print', copy: 'Ink bonded into the fabric — it will not crack, peel or fade.' },
@@ -228,6 +229,22 @@ export default function HomePage() {
         <p className="booth-note">
           Pricing is per product — request a quote and we'll coordinate the set. No fixed package pricing.
         </p>
+      </section>
+
+      {/* What we print — sample booths in a range of customer brands */}
+      <section className="showcase-section">
+        <div className="section-head">
+          <h2>What we print for our customers</h2>
+          <p>Every booth is printed in the customer's own brand — a few examples across canopies, banners, backdrops and table covers.</p>
+        </div>
+        <div className="showcase-grid">
+          {SHOWCASE.map((s) => (
+            <figure className="showcase-item" key={s.file}>
+              <img src={`/images/showcase/${s.file}`} alt={`${s.product} printed for ${s.brand}`} loading="lazy" decoding="async" width="900" height="675" />
+              <figcaption><strong>{s.brand}</strong><span>{s.product}</span></figcaption>
+            </figure>
+          ))}
+        </div>
       </section>
 
       {/* Product discovery — a mix across categories */}
