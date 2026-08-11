@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import { getCity, slugify } from '../data/states';
+import { getSeoCity } from '../data/citySeo';
 import { PRIORITY_CITIES, cityContent } from '../data/cityContent';
 import { SIZE_COMPARISON, STATE_FAQS } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
@@ -29,6 +30,14 @@ export default function CityPage() {
     getProducts().then((p) => alive && setProducts(p.slice(0, 6))).catch(() => {});
     return () => { alive = false; };
   }, []);
+
+  // Option-A consolidation: for the priority SEO cities, the canonical canopy
+  // page is /trade-show-canopies/[city]. The edge middleware 301s direct hits;
+  // this mirrors it for in-app (SPA) navigation so clicks land on the same page.
+  const seoCity = getSeoCity(citySlug);
+  if (seoCity && seoCity.stateSlug === stateSlug) {
+    return <Navigate to={`/trade-show-canopies/${citySlug}`} replace />;
+  }
 
   if (!match) {
     return (
