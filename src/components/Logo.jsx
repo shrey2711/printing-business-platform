@@ -15,8 +15,8 @@ export default function Logo() {
         className="brand-logo"
         src={CANDIDATES[idx]}
         alt={brand.name}
-        width="200"
-        height="52"
+        width="223"
+        height="58"
         onError={() => setIdx((i) => i + 1)}
       />
     );
