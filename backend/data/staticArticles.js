@@ -24,7 +24,7 @@ export const STATIC_ARTICLES = [
       description:
         'Compare the Apex Standard and Deluxe retractable banner stands — hardware, finish, portability and which fits your trade show needs. Both 33×81 in with replaceable graphics.'
     },
-    coverUrl: '/images/displays/standard-retractable-banner.webp',
+    coverUrl: '/images/showcase/banner-summit-outdoors.webp',
     publishedAt: '2026-08-10T00:00:00.000Z',
     updatedAt: '2026-08-10T00:00:00.000Z',
     html: `
@@ -94,7 +94,7 @@ export const STATIC_ARTICLES = [
       description:
         'Compare the Apex X-Stand banner (24×63 in) and retractable banner stands (33×81 in) — mechanism, durability, portability and cost — to pick the right display for your booth.'
     },
-    coverUrl: '/images/displays/x-stand-banner.webp',
+    coverUrl: '/images/showcase/xstand-volt.webp',
     publishedAt: '2026-08-11T00:00:00.000Z',
     updatedAt: '2026-08-11T00:00:00.000Z',
     html: `
@@ -151,7 +151,7 @@ export const STATIC_ARTICLES = [
       description:
         'Choosing a retractable banner size: tabletop (11.5×17.5 in) for counters and desks, or a full-height 33×81 in floor stand for aisles and entrances. A quick Apex sizing guide.'
     },
-    coverUrl: '/images/displays/table-top-banner-stand.webp',
+    coverUrl: '/images/showcase/xstand-sunset-yoga.webp',
     publishedAt: '2026-08-12T00:00:00.000Z',
     updatedAt: '2026-08-12T00:00:00.000Z',
     html: `
@@ -201,7 +201,7 @@ export const STATIC_ARTICLES = [
       description:
         'Choosing between a 6 ft and 8 ft custom table cover — how to match the size to your folding table, in pleated or stretch, closed-back and full-colour from Apex.'
     },
-    coverUrl: '/images/table-covers/pleated.webp',
+    coverUrl: '/images/showcase/tablecover-brightpath-dental.webp',
     publishedAt: '2026-08-13T00:00:00.000Z',
     updatedAt: '2026-08-13T00:00:00.000Z',
     html: `
@@ -247,7 +247,7 @@ export const STATIC_ARTICLES = [
       description:
         'Compare Apex pleated (draped throw) and stretch (fitted) table covers — fit, look and best use. Both closed-back, full-colour, wrinkle-resistant and machine washable.'
     },
-    coverUrl: '/images/table-covers/stretch.webp',
+    coverUrl: '/images/showcase/tablecover-corner-cafe.webp',
     publishedAt: '2026-08-14T00:00:00.000Z',
     updatedAt: '2026-08-14T00:00:00.000Z',
     html: `
@@ -300,7 +300,7 @@ export const STATIC_ARTICLES = [
       description:
         'How to size a step & repeat backdrop — the Apex 10×8 ft media wall, how much it covers, and how to space repeating logos so your branding reads in every photo.'
     },
-    coverUrl: '/images/displays/step-and-repeat-backdrop.webp',
+    coverUrl: '/images/showcase/backdrop-greenleaf.webp',
     publishedAt: '2026-08-15T00:00:00.000Z',
     updatedAt: '2026-08-15T00:00:00.000Z',
     html: `
@@ -346,7 +346,7 @@ export const STATIC_ARTICLES = [
       description:
         'A practical trade show booth checklist — canopy or backdrop, table cover, banner stands, artwork and accessories — with links to the right products for each part of your booth.'
     },
-    coverUrl: '/images/tents/10x10-3wall.webp',
+    coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-16T00:00:00.000Z',
     updatedAt: '2026-08-16T00:00:00.000Z',
     html: `
@@ -395,7 +395,7 @@ export const STATIC_ARTICLES = [
       description:
         'Trade show display pricing from Apex — custom canopy tents from $510, table covers from $199, plus banner stands and backdrops priced on request. How to budget a full booth.'
     },
-    coverUrl: '/images/tents/10x20-3wall.webp',
+    coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-17T00:00:00.000Z',
     updatedAt: '2026-08-17T00:00:00.000Z',
     html: `
@@ -450,7 +450,7 @@ export const STATIC_ARTICLES = [
       description:
         'How to order a custom printed canopy tent — size, complete set vs printed top only, walls, print, production speed and artwork.'
     },
-    coverUrl: '/images/tents/10x10-1wall.webp',
+    coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-05T00:00:00.000Z',
     updatedAt: '2026-08-11T00:00:00.000Z',
     html: `
@@ -486,7 +486,7 @@ export const STATIC_ARTICLES = [
       description:
         'Custom canopy tent pricing — complete-set base prices by size, the printed-top-only option, wall costs, rush production and volume discounts.'
     },
-    coverUrl: '/images/tents/10x20-full3.webp',
+    coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-06T00:00:00.000Z',
     updatedAt: '2026-08-11T00:00:00.000Z',
     html: `

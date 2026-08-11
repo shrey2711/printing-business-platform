@@ -46,7 +46,7 @@ export default function BlogPost() {
     <main className="page">
       <article className="blog-article">
         <Link className="back-link" to="/blog">← All posts</Link>
-        {post.tags?.[0] && <span className="blog-card-tag">{post.tags[0]}</span>}
+        {post.tags?.[0] && <span className="blog-article-tag">{post.tags[0]}</span>}
         <h1>{post.title}</h1>
         {post.publishedAt && (
           <p className="blog-article-meta">
