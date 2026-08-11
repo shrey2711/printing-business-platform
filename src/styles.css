@@ -501,12 +501,26 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .colorway img { width: 108px; height: 108px; object-fit: contain; border: 1px solid var(--line); border-radius: 8px; background: #fff; display: block; }
 .colorway figcaption { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 0.25rem; }
 
+/* Content sections + cards: interior padding so text never touches the edge.
+   Applies site-wide (booth, landing, city, location, category pages). */
+.section-block { padding: 1.4rem 1.6rem; margin: 1.2rem 0; }
+.section-block > h2:first-child, .section-block > h3:first-child { margin-top: 0; }
+.section-block > *:last-child { margin-bottom: 0; }
+.section-block-bare { margin: 1.7rem 0; }
+.section-block-bare > .section-title:first-child { margin-top: 0; }
+
 /* Booth-packages page */
-.booth-pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.booth-pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+.booth-pkg { padding: 1.4rem 1.5rem; }
 .booth-pkg h3 { margin: 0 0 0.3rem; }
 .booth-pkg-tag { color: var(--muted); margin-bottom: 0.6rem; }
 .booth-pkg-best { margin-top: 0.6rem; }
 .booth-pkg-note { font-size: 0.8rem; margin-top: 0.4rem; }
+
+/* Call-to-action band (booth / landing pages) */
+.cta-banner { text-align: center; padding: 2.1rem 1.6rem; margin: 2rem 0 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.cta-banner h2 { margin: 0 0 0.4rem; }
+.cta-banner p { color: var(--muted); margin: 0 0 1rem; }
 
 .pcard-price-wrap { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
 .pcard-price { font-size: 0.85rem; color: var(--muted); }
