@@ -339,7 +339,7 @@ const tradeShowDisplays = [
     ],
     applications: ['Trade shows and expos', 'Conferences and lobbies', 'Retail and showroom displays', 'Events and promotions'],
     specs: [
-      ['Display size', '33" × 81"'],
+      ['Display size', '33" × 81" or 47" × 81"'],
       ['Type', 'Retractable banner stand'],
       ['Base', 'Compact aluminium with two stabilising feet'],
       ['Graphic', 'Replaceable printed banner'],
@@ -352,18 +352,32 @@ const tradeShowDisplays = [
     seoDescription:
       'Custom Apex retractable banner stand, 33×81 in. Compact aluminium base, quick tool-free setup and a replaceable printed graphic for trade shows and events.',
     pricing: {
-      model: 'competitive',
-      discountPercent: 5,
-      // Enter the competitor's comparable (stand + printed graphic) selling price
-      // per size. competitorPrice null → "Request a Quote" until filled.
-      variants: [
-        { id: '33x81', name: '33" × 81"', competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      model: 'configured',
+      baseLabel: 'Retractable banner',
+      // Each choice = size × production speed (stand + printed graphic included).
+      // Prices are USD from the supplied rate card. No Graphic-Only option for
+      // the Standard stand.
+      optionGroups: [
+        {
+          id: 'option',
+          label: 'Size & production',
+          type: 'select',
+          pricing: 'base',
+          help: 'Includes the stand + printed graphic. Rush is 2-3 business days.',
+          choices: [
+            { id: '33x81-6to8', label: '33" × 81" · 6-8 days', price: 145, default: true },
+            { id: '33x81-rush', label: '33" × 81" · 2-3 days (rush)', price: 199 },
+            { id: '47x81-6to8', label: '47" × 81" · 6-8 days', price: 299 },
+            { id: '47x81-rush', label: '47" × 81" · 2-3 days (rush)', price: 445 }
+          ]
+        },
+        designGroup
       ]
     },
     faqs: [
       { q: 'What size is the Standard Retractable Banner Stand?', a: 'The printed graphic is 33" wide × 81" tall. Ask us for other sizes when you request a quote.' },
       { q: 'Can I replace the graphic later?', a: 'Yes — the banner is replaceable, so you can reuse the stand and just reprint the graphic.' },
-      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+      { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size and production speed for an instant price. Upload artwork or add our design service, and every order includes a free proof before printing.' }
     ]
   },
   {
@@ -402,16 +416,30 @@ const tradeShowDisplays = [
     seoDescription:
       'Premium Apex retractable banner stand, 33×81 in, with chrome-style end caps and an adjustable pole. Replaceable graphic for a polished trade-show display.',
     pricing: {
-      model: 'competitive',
-      discountPercent: 5,
-      variants: [
-        { id: '33x81', name: '33" × 81"', competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      model: 'configured',
+      baseLabel: 'Deluxe retractable banner',
+      // NOTE: supplied rate card lists 2-3 day ($225) below 6-8 day ($281) for
+      // the Deluxe — entered exactly as given; looks inverted, pending owner
+      // confirmation. No Graphic-Only option for the Deluxe.
+      optionGroups: [
+        {
+          id: 'option',
+          label: 'Size & production',
+          type: 'select',
+          pricing: 'base',
+          help: 'Includes the stand + printed graphic. Rush is 2-3 business days.',
+          choices: [
+            { id: '33x81-6to8', label: '33" × 81" · 6-8 days', price: 281, default: true },
+            { id: '33x81-rush', label: '33" × 81" · 2-3 days (rush)', price: 225 }
+          ]
+        },
+        designGroup
       ]
     },
     faqs: [
       { q: 'How is the Deluxe different from the Standard stand?', a: 'The Deluxe uses heavier aluminium hardware, chrome-style end caps and an adjustable pole for a more premium, professional look.' },
       { q: 'Is the graphic replaceable?', a: 'Yes — reuse the premium hardware and reprint the banner whenever your message changes.' },
-      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+      { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size and production speed for an instant price. Upload artwork or add our design service, and every order includes a free proof before printing.' }
     ]
   },
   {
@@ -437,7 +465,7 @@ const tradeShowDisplays = [
     ],
     applications: ['Events and promotions', 'Retail and point-of-sale', 'Registration and info points', 'Budget-friendly signage'],
     specs: [
-      ['Display size', '24" × 63"'],
+      ['Display size', '24" × 63" or 32" × 71"'],
       ['Type', 'X-frame banner stand (not retractable)'],
       ['Frame', 'Collapsible lightweight X-frame'],
       ['Mounting', 'Grommets at the four corners'],
@@ -450,16 +478,34 @@ const tradeShowDisplays = [
     seoDescription:
       'Apex X-Stand banner, 24×63 in — a lightweight X-frame display with a grommet-mounted, easy-to-swap graphic. Economical, portable signage for events.',
     pricing: {
-      model: 'competitive',
-      discountPercent: 5,
-      variants: [
-        { id: '24x63', name: '24" × 63"', competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      model: 'configured',
+      baseLabel: 'X-stand banner',
+      // size × kit (with stand / graphic only) × production speed. USD rate card.
+      optionGroups: [
+        {
+          id: 'option',
+          label: 'Size, kit & production',
+          type: 'select',
+          pricing: 'base',
+          help: 'Choose the stand + graphic, or the graphic only. Rush is 2-3 business days.',
+          choices: [
+            { id: '24x63-stand-6to8', label: '24" × 63" · with stand · 6-8 days', price: 99, default: true },
+            { id: '24x63-stand-rush', label: '24" × 63" · with stand · 2-3 days (rush)', price: 145 },
+            { id: '24x63-graphic-6to8', label: '24" × 63" · graphic only · 6-8 days', price: 65 },
+            { id: '24x63-graphic-rush', label: '24" × 63" · graphic only · 2-3 days (rush)', price: 99 },
+            { id: '32x71-stand-6to8', label: '32" × 71" · with stand · 6-8 days', price: 119 },
+            { id: '32x71-stand-rush', label: '32" × 71" · with stand · 2-3 days (rush)', price: 159 },
+            { id: '32x71-graphic-6to8', label: '32" × 71" · graphic only · 6-8 days', price: 85 },
+            { id: '32x71-graphic-rush', label: '32" × 71" · graphic only · 2-3 days (rush)', price: 105 }
+          ]
+        },
+        designGroup
       ]
     },
     faqs: [
       { q: 'Is the X-Stand a retractable banner?', a: 'No — the X-Stand uses a collapsible X-shaped frame and a grommet-mounted banner, not a roll-up cassette. It is lighter and more economical.' },
       { q: 'How does the banner attach?', a: 'The printed banner has grommets at the corners that hook onto the X-frame, so it is fast to mount and swap.' },
-      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+      { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size, choose the stand or graphic only, and your production speed for an instant price. Every order includes a free proof before printing.' }
     ]
   },
   {
@@ -487,7 +533,7 @@ const tradeShowDisplays = [
     ],
     applications: ['Event and press photography', 'Red-carpet / step-and-repeat walls', 'Conferences and galas', 'Brand activations'],
     specs: [
-      ['Display size', "10' × 8' (120\" × 96\")"],
+      ['Display size', "8' × 8' or 10' × 8' (up to 120\" × 96\")"],
       ['Type', 'Step & repeat event backdrop'],
       ['Frame', 'Adjustable, portable frame system'],
       ['Graphic', 'Large-format fabric — replaceable'],
@@ -500,16 +546,34 @@ const tradeShowDisplays = [
     seoDescription:
       'Apex 10×8 ft step and repeat backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
     pricing: {
-      model: 'competitive',
-      discountPercent: 5,
-      variants: [
-        { id: '120x96', name: "10' × 8' (120\" × 96\")", competitorPrice: null, competitorRegularPrice: null, lastChecked: null }
+      model: 'configured',
+      baseLabel: 'Step & repeat backdrop',
+      // size × kit (with frame / graphic only) × production speed. USD rate card.
+      optionGroups: [
+        {
+          id: 'option',
+          label: 'Size, kit & production',
+          type: 'select',
+          pricing: 'base',
+          help: 'Choose the frame + graphic, or the graphic only. Rush is 2-3 business days.',
+          choices: [
+            { id: '8x8-frame-6to8', label: "8' × 8' · with frame · 6-8 days", price: 440, default: true },
+            { id: '8x8-frame-rush', label: "8' × 8' · with frame · 2-3 days (rush)", price: 545 },
+            { id: '8x8-graphic-6to8', label: "8' × 8' · graphic only · 6-8 days", price: 245 },
+            { id: '8x8-graphic-rush', label: "8' × 8' · graphic only · 2-3 days (rush)", price: 299 },
+            { id: '10x8-frame-6to8', label: "10' × 8' · with frame · 6-8 days", price: 465 },
+            { id: '10x8-frame-rush', label: "10' × 8' · with frame · 2-3 days (rush)", price: 565 },
+            { id: '10x8-graphic-6to8', label: "10' × 8' · graphic only · 6-8 days", price: 299 },
+            { id: '10x8-graphic-rush', label: "10' × 8' · graphic only · 2-3 days (rush)", price: 350 }
+          ]
+        },
+        designGroup
       ]
     },
     faqs: [
       { q: 'What size is the step and repeat backdrop?', a: "The standard display is 10' × 8' (120\" × 96\"). Ask about other sizes when you request a quote." },
       { q: 'Can it show repeating logos?', a: 'Yes — that is what it is built for. We space your logos or artwork evenly across the full surface so they read in every photo.' },
-      { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
+      { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size, choose the frame or graphic only, and your production speed for an instant price. Every order includes a free proof before printing.' }
     ]
   },
   {
