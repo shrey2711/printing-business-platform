@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { getCategoryPage, SUBCATEGORIES } from '../data/categoryPages';
+import { LANDING_PAGES } from '../data/landingPages';
 
 const cardPreview = {
   'canopy-tent-10x10': { full: 3, half: 0 },
@@ -94,6 +95,14 @@ export default function CategoryPage({ slug }) {
                 <span>Build a complete trade show booth</span>
               </div>
             </Link>
+            {LANDING_PAGES.map((lp) => (
+              <Link className="cat-card" to={`/${lp.slug}`} key={lp.slug}>
+                <div className="cat-card-body">
+                  <strong>{lp.nav}</strong>
+                  <span>{lp.h1}</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
       )}

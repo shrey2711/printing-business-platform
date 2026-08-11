@@ -21,6 +21,7 @@ import {
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
 import { LOCAL_CATEGORIES, SEO_CITIES } from '../src/data/citySeo.js';
+import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
@@ -188,7 +189,7 @@ for (const cp of CATEGORY_PAGES) {
   routes.push(() => {
     const catProducts = cp.category ? productList.filter((p) => p.category === cp.category) : productList;
     const subTiles = cp.hub
-      ? `<h2>Shop by category</h2><ul>${SUBCATEGORIES.map((sc) => `<li><a href="/${sc.slug}">${esc(sc.h1)}</a></li>`).join('')}<li><a href="/trade-show-booth-packages">Trade Show Booth Packages</a> — build a complete booth</li></ul>`
+      ? `<h2>Shop by category</h2><ul>${SUBCATEGORIES.map((sc) => `<li><a href="/${sc.slug}">${esc(sc.h1)}</a></li>`).join('')}<li><a href="/trade-show-booth-packages">Trade Show Booth Packages</a> — build a complete booth</li>${LANDING_PAGES.map((lp) => `<li><a href="/${lp.slug}">${esc(lp.nav)}</a></li>`).join('')}</ul>`
       : '';
     const guides = cp.guideLinks
       ? `<h2>Canopy size guides</h2><ul>${cp.guideLinks.map((g) => `<li><a href="${g.to}">${esc(g.label)}</a></li>`).join('')}</ul>`
@@ -355,6 +356,51 @@ for (const lc of LOCAL_CATEGORIES) {
       });
     });
   }
+}
+
+// ---- Display-type SEO landing pages (SEG, tension fabric, pop-up, flags) ----
+// Content-first, quote-based (no invented specs/prices). Breadcrumb + FAQ schema.
+for (const lp of LANDING_PAGES) {
+  routes.push(() => {
+    const sections = lp.sections
+      .map((s) => `<h2>${esc(s.h2)}</h2>${s.p ? `<p>${esc(s.p)}</p>` : ''}${s.list ? `<ul>${s.list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>` : ''}`)
+      .join('');
+    const faqsHtml = lp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('');
+    const relatedHtml = lp.related.map((r) => `<a href="${r.to}">${esc(r.label)}</a>`).join(' · ');
+    const body = `
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/trade-show-displays">Trade Show Displays</a> / <span>${esc(lp.nav)}</span></nav>
+      <h1>${esc(lp.h1)}</h1>
+      <p>${esc(lp.intro)}</p>
+      ${sections}
+      <h2>Frequently asked questions</h2>${faqsHtml}
+      <h2>Related displays</h2><p>${relatedHtml}</p>
+      <p><a href="/quote">Request a quote for ${esc(lp.nav.toLowerCase())} →</a></p>`;
+    return render({
+      path: `/${lp.slug}`,
+      title: `${lp.title} | ${BRAND}`,
+      description: lp.description,
+      body,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+            { '@type': 'ListItem', position: 2, name: 'Trade Show Displays', item: `${ORIGIN}/trade-show-displays` },
+            { '@type': 'ListItem', position: 3, name: lp.h1, item: `${ORIGIN}/${lp.slug}` }
+          ]
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: lp.faqs.map((f) => ({
+            '@type': 'Question', name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a }
+          }))
+        }
+      ]
+    });
+  });
 }
 
 // ---- Size guide pages (INFORMATIONAL — research intent, not commercial) ----
@@ -983,7 +1029,8 @@ const smPages = [
 const smCategories = [
   smUrl('/products', '0.9', 'weekly'),
   ...CATEGORY_PAGES.map((cp) => smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly')),
-  smUrl('/trade-show-booth-packages', '0.8', 'weekly')
+  smUrl('/trade-show-booth-packages', '0.8', 'weekly'),
+  ...LANDING_PAGES.map((lp) => smUrl(`/${lp.slug}`, '0.7', 'weekly'))
 ];
 const smProducts = productList.map((p) => smUrl(`/products/${p.slug}`, '0.8'));
 const smBlog = [smUrl('/blog', '0.6', 'weekly'), ...posts.map((p) => smUrl(`/blog/${p.slug}`, '0.6'))];

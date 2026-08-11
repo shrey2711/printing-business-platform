@@ -24,6 +24,7 @@ const InfoPage = lazy(() => import('./pages/InfoPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const BoothPackagesPage = lazy(() => import('./pages/BoothPackagesPage'));
 const CityCategoryPage = lazy(() => import('./pages/CityCategoryPage'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 import Logo from './components/Logo';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
@@ -260,6 +261,10 @@ function Footer() {
             <Link to="/banner-stands">Banner Stands</Link>
             <Link to="/backdrops">Backdrops</Link>
             <Link to="/table-covers">Table Covers</Link>
+            <Link to="/seg-displays">SEG Displays</Link>
+            <Link to="/tension-fabric-displays">Tension Fabric Displays</Link>
+            <Link to="/pop-up-displays">Pop-Up Displays</Link>
+            <Link to="/flags">Flags</Link>
             <Link to="/trade-show-booth-packages">Booth Packages</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/locations">Locations</Link>
@@ -341,6 +346,11 @@ function App() {
         <Route path="/table-covers" element={<CategoryPage slug="table-covers" />} />
         <Route path="/backdrops" element={<CategoryPage slug="backdrops" />} />
         <Route path="/trade-show-booth-packages" element={<BoothPackagesPage />} />
+        {/* Display-type SEO landing pages (quote-based, no invented pricing) */}
+        <Route path="/seg-displays" element={<LandingPage slug="seg-displays" />} />
+        <Route path="/tension-fabric-displays" element={<LandingPage slug="tension-fabric-displays" />} />
+        <Route path="/pop-up-displays" element={<LandingPage slug="pop-up-displays" />} />
+        <Route path="/flags" element={<LandingPage slug="flags" />} />
         {/* City × category local landing pages (option A canonical local pages) */}
         <Route path="/trade-show-canopies/:city" element={<CityCategoryPage categoryKey="canopies" />} />
         <Route path="/trade-show-displays/:city" element={<CityCategoryPage categoryKey="displays" />} />
