@@ -245,7 +245,7 @@ function Footer() {
       <div className="footer-grid">
         <div>
           <span className="ft-logo">
-            <img src="/images/logo.webp" alt={brand.name} width="180" height="46" />
+            <img src="/images/logo.webp" alt={brand.name} width="203" height="46" />
           </span>
           <p className="ft-blurb">{brand.description}</p>
         </div>
