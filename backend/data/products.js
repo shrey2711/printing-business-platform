@@ -84,10 +84,10 @@ const daysGroup = {
   label: 'Delivery',
   type: 'select',
   pricing: 'multiplyTotal',
-  help: 'Standard is 6-8 business days. Rush 2-3 days is +50%.',
+  help: 'Production time after proof approval — standard 6–8 business days, rush 2–3 business days (+50%). Shipping/transit is additional.',
   choices: [
-    { id: '6-8', label: '6-8 days (standard)', mult: 1, default: true },
-    { id: '2-3', label: '2-3 days (rush +50%)', mult: 1.5 }
+    { id: '6-8', label: '6-8 business days (standard production)', mult: 1, default: true },
+    { id: '2-3', label: '2-3 business days (rush production +50%)', mult: 1.5 }
   ]
 };
 
@@ -105,22 +105,21 @@ const daysGroup15 = {
   ]
 };
 
-// Full set (printed canopy + frame + bag) vs canopy-only (printed top, no
-// frame). Canopy-only is 20% off the tent price. Multiplier applies to the base
-// tent before walls, so walls (if added) stay full price.
-// The kit choice selects WHICH base-price column applies (full set vs graphic
-// only). It is not a multiplier — each kit has its own per-size, per-tier price
-// (see quantityTiers.prices). pricing:'baseKit' is handled by computePrice's
-// base step and ignored by the multiplier/add loops.
+// Complete Canopy Set (printed top + aluminium frame + carry bag) vs Printed
+// Canopy Top Only (the printed fabric top on its own, for a frame the customer
+// already owns). Each kit is a SEPARATE, explicitly-configured price column per
+// size/tier (see quantityTiers.prices) — it is NOT a percentage discount off the
+// other. pricing:'baseKit' is handled by computePrice's base step and ignored by
+// the multiplier/add loops.
 const kitGroup = {
   id: 'kit',
   label: 'What you get',
   type: 'select',
   pricing: 'baseKit',
-  help: 'Full set includes the aluminium frame + carry bag. Graphic only is just the printed top.',
+  help: 'Complete Canopy Set = printed canopy top + aluminium frame + carry bag. Printed Canopy Top Only = the custom-printed fabric top on its own (no frame, no carry bag) — for customers who already have a compatible frame.',
   choices: [
-    { id: 'full', label: 'Full set — canopy + frame + bag', default: true },
-    { id: 'canopy', label: 'Graphic only — printed top' }
+    { id: 'full', label: 'Complete Canopy Set — top + frame + bag', default: true },
+    { id: 'canopy', label: 'Printed Canopy Top Only — no frame' }
   ]
 };
 
@@ -166,13 +165,23 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
     `or fade. Order 3 or more and the per-tent price drops.`,
   features: [
     'Dye-sublimated full-bleed printing',
-    'Full and half printed walls (up to 3 each)',
+    'Add up to 3 printed walls total — any mix of full and half height',
     'Heavy-duty aluminium hex frame',
     'Free artwork proof before production'
   ],
-  turnaround: '6-8 days standard · 2-3 days rush (+50%)',
+  // Production time (after proof approval) — shipping/transit is additional.
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+50%). Shipping additional.',
   // Cross-sell the rest of the booth (complete-solution internal linking).
   related: ['pleated-table-covers', 'standard-retractable-banner', 'step-and-repeat-backdrop'],
+  // AEO/GEO: concise factual answers, using this product's own explicit prices.
+  faqs: [
+    { q: `What does the $${canopy1.toLocaleString('en-US')} ${size} canopy price include?`, a: `The $${canopy1.toLocaleString('en-US')} starting price is for the custom-printed ${size} canopy top only. It does not include the aluminium frame or carry bag.` },
+    { q: `How much is the complete ${size} custom canopy set?`, a: `The complete ${size} set is $${full1.toLocaleString('en-US')} and includes the custom-printed canopy top, the aluminium frame and a carry bag.` },
+    { q: 'Can I purchase only the printed canopy top?', a: 'Yes. Customers who already have a compatible frame can order the printed canopy top on its own — choose "Printed Canopy Top Only" on the product page.' },
+    { q: 'How long does production take?', a: 'Standard production is 6–8 business days after you approve your free proof; rush production is 2–3 business days. Shipping/transit time is additional and depends on your destination.' },
+    { q: 'How many walls can I add?', a: 'Up to 3 printed walls total, in any combination of full-height and half-height walls.' },
+    { q: 'What sizes are available?', a: 'Custom canopy tents come in three sizes: 10×10, 10×15 and 10×20.' }
+  ],
   pricing: {
     model: 'configured',
     baseLabel: `${size} canopy tent`,
@@ -228,10 +237,10 @@ const pleatedCovers = {
     ['Sizes', '4 ft, 6 ft, 8 ft'],
     ['Back', 'Closed back (4-sided)'],
     ['Fabric', 'Wrinkle-resistant polyester, dye-sublimated'],
-    ['Turnaround', '6-8 days standard · 2-3 days rush']
+    ['Turnaround', '6–8 business days production (2–3 day rush); shipping additional']
   ],
-  turnaround: '6-8 days standard · 2-3 days rush (+15%)',
-  seoTitle: 'Pleated Table Covers — 4, 6 & 8 ft',
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
+  seoTitle: 'Custom Pleated Table Covers | Printed 4, 6 & 8 ft Throws',
   seoDescription:
     'Custom printed pleated table covers (throws) in 4, 6 and 8 ft — draped closed-back fit, full-colour dye sublimation, free artwork proof. From $199.',
   related: ['stretch-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
@@ -281,10 +290,10 @@ const stretchCovers = {
     ['Sizes', '6 ft, 8 ft'],
     ['Back', 'Closed back (4-sided)'],
     ['Fabric', 'Stretch polyester, dye-sublimated'],
-    ['Turnaround', '6-8 days standard · 2-3 days rush']
+    ['Turnaround', '6–8 business days production (2–3 day rush); shipping additional']
   ],
-  turnaround: '6-8 days standard · 2-3 days rush (+15%)',
-  seoTitle: 'Stretch Table Covers — 6 & 8 ft',
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
+  seoTitle: 'Custom Stretch Table Covers | Fitted 6 & 8 ft Tablecloths',
   seoDescription:
     'Custom printed fitted stretch table covers in 6 and 8 ft — tight closed-back fit, full-colour dye sublimation, free artwork proof. From $285.',
   related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
@@ -346,9 +355,9 @@ const tradeShowDisplays = [
       ['Setup', 'Tool-free — pops up in seconds'],
       ['Included', 'Stand + printed graphic + carry bag']
     ],
-    turnaround: 'Ships in 2–4 business days',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['deluxe-retractable-banner', 'x-stand-banner'],
-    seoTitle: 'Standard Retractable Banner Stand',
+    seoTitle: 'Standard Retractable Banner Stand | Custom Printed Roll-Up',
     seoDescription:
       'Custom Apex retractable banner stand, 33×81 in. Compact aluminium base, quick tool-free setup and a replaceable printed graphic for trade shows and events.',
     pricing: {
@@ -409,9 +418,9 @@ const tradeShowDisplays = [
       ['Graphic', 'Replaceable printed banner'],
       ['Included', 'Stand + printed graphic + padded bag']
     ],
-    turnaround: 'Ships in 2–4 business days',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['standard-retractable-banner', 'x-stand-banner'],
-    seoTitle: 'Deluxe Retractable Banner Stand',
+    seoTitle: 'Deluxe Retractable Banner Stand | Premium Printed Roll-Up',
     seoDescription:
       'Premium Apex retractable banner stand, 33×81 in, with chrome-style end caps and an adjustable pole. Replaceable graphic for a polished trade-show display.',
     pricing: {
@@ -465,9 +474,9 @@ const tradeShowDisplays = [
       ['Setup', 'Folds flat — sets up in seconds'],
       ['Included', 'X-frame + printed banner']
     ],
-    turnaround: 'Ships in 2–4 business days',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['standard-retractable-banner', 'deluxe-retractable-banner'],
-    seoTitle: 'X-Stand Banner Display',
+    seoTitle: 'Custom X-Stand Banner | Portable Printed Display',
     seoDescription:
       'Apex X-Stand banner, 24×63 in — a lightweight X-frame display with a grommet-mounted, easy-to-swap graphic. Economical, portable signage for events.',
     pricing: {
@@ -535,9 +544,9 @@ const tradeShowDisplays = [
       ['Best for', 'Repeating logos and photo backdrops'],
       ['Included', 'Frame + printed graphic + carry bag']
     ],
-    turnaround: 'Ships in 4–6 business days',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
-    seoTitle: 'Step and Repeat Backdrop',
+    seoTitle: 'Step & Repeat Backdrop | Custom Printed Media Wall',
     seoDescription:
       'Apex 10×8 ft step and repeat backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
     pricing: {
@@ -605,7 +614,7 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Ships in 2–4 business days',
     related: ['standard-retractable-banner', 'pleated-table-covers'],
-    seoTitle: 'Table Top Banner Stand',
+    seoTitle: 'Tabletop Retractable Banner | Custom Printed Counter Display',
     seoDescription:
       'Compact Apex tabletop retractable banner, 11.5×17.5 in. Small aluminium base and replaceable graphic for counters, registration desks and trade-show tables.',
     pricing: {

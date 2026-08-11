@@ -405,16 +405,16 @@ export const STATIC_ARTICLES = [
 <table>
   <thead><tr><th>Product</th><th>Starting price (USD)</th></tr></thead>
   <tbody>
-    <tr><td><a href="/products/canopy-tent-10x10">10×10 canopy tent</a></td><td>From $510 graphic only · $835 full set (canopy + frame + bag)</td></tr>
-    <tr><td><a href="/products/canopy-tent-10x15">10×15 canopy tent</a></td><td>From $545 graphic only · $1,375 full set</td></tr>
-    <tr><td><a href="/products/canopy-tent-10x20">10×20 canopy tent</a></td><td>From $915 graphic only · $1,635 full set</td></tr>
+    <tr><td><a href="/products/canopy-tent-10x10">10×10 canopy tent</a></td><td>$510 printed top only · $835 complete set (top + frame + bag)</td></tr>
+    <tr><td><a href="/products/canopy-tent-10x15">10×15 canopy tent</a></td><td>$545 printed top only · $1,375 complete set</td></tr>
+    <tr><td><a href="/products/canopy-tent-10x20">10×20 canopy tent</a></td><td>$915 printed top only · $1,635 complete set</td></tr>
     <tr><td><a href="/products/pleated-table-covers">Pleated table cover</a></td><td>From $199 (4 ft) · $215 (6 ft) · $255 (8 ft)</td></tr>
     <tr><td><a href="/products/stretch-table-covers">Stretch table cover</a></td><td>From $285 (6 ft) · $345 (8 ft)</td></tr>
     <tr><td><a href="/banner-stands">Banner stands</a> (retractable, X-stand, tabletop)</td><td>Priced on request</td></tr>
     <tr><td><a href="/backdrops">Step &amp; repeat backdrop</a></td><td>Priced on request</td></tr>
   </tbody>
 </table>
-<p>Canopy prices are per unit and drop when you order three or more. "Graphic only" is the printed top on its own; the "full set" adds the aluminium frame and carry bag — the difference is explained on each product page.</p>
+<p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" is the custom-printed fabric top on its own (for customers who already have a compatible frame); the "Complete Canopy Set" adds the aluminium frame and carry bag — the difference is explained on each product page.</p>
 
 <figure class="blog-fig">
   <img src="/images/displays/standard-retractable-banner.webp" alt="Apex retractable banner stand, one piece of a trade show booth budget" loading="lazy" decoding="async" width="900" height="700">
@@ -428,11 +428,92 @@ export const STATIC_ARTICLES = [
 <p>A full booth is the sum of its pieces, not a discounted bundle — each product keeps its own price and configuration. A simple outdoor setup might be a 10×10 canopy plus a table cover; a larger booth adds banner stands and a backdrop. See how the pieces fit together in the <a href="/blog/trade-show-booth-checklist">booth checklist</a>, or browse recommended combinations on the <a href="/trade-show-booth-packages">booth packages</a> page. For a full-booth total, <a href="/quote">request a quote</a> listing everything you need.</p>
 
 <h3>Frequently asked questions</h3>
-<p><strong>What's the cheapest way to start?</strong> A canopy graphic-only top or a pleated table cover are the lowest entry points; add pieces as your booth grows.</p>
+<p><strong>What's the cheapest way to start?</strong> A printed canopy top only or a pleated table cover are the lowest entry points; add pieces as your booth grows.</p>
 <p><strong>Do canopies get cheaper in bulk?</strong> Yes — the per-unit canopy price drops at three or more.</p>
 <p><strong>Are there package discounts?</strong> No hidden bundle price — packages are priced as their individual products. Ask for a quote on large or multi-item orders.</p>
 
 <p>Price a <a href="/custom-canopies">canopy</a> or <a href="/table-covers">table cover</a> instantly, or <a href="/quote">request a quote</a> for banner stands, backdrops or a full booth.</p>
+`
+  },
+  // ── Overrides for the obsolete Supabase canopy posts (static wins on slug) ──
+  // These drop the retired top-only-discount claim and the old per-wall-limit
+  // wording; top-only is an explicitly-configured separate price per size, and
+  // walls are capped at three total in any full/half combination.
+  {
+    slug: 'custom-canopy-tent-buying-guide',
+    title: 'Custom Canopy Tent Buying Guide',
+    excerpt:
+      'Everything to decide before ordering a custom printed canopy tent: size, what you get, walls, print coverage, delivery speed and artwork.',
+    tags: ['buying guide'],
+    seo: {
+      title: 'Custom Canopy Tent Buying Guide',
+      description:
+        'How to order a custom printed canopy tent — size, complete set vs printed top only, walls, print, production speed and artwork.'
+    },
+    coverUrl: '/images/tents/10x10-1wall.webp',
+    publishedAt: '2026-08-05T00:00:00.000Z',
+    updatedAt: '2026-08-11T00:00:00.000Z',
+    html: `
+<p>Everything to decide before ordering a custom printed canopy tent — size, what you get, walls, print, delivery speed and artwork.</p>
+<h2>1. Size</h2>
+<p>Pick by table count and booth space — 10×10 (standard), 10×15 (more room), 10×20 (double booth). See <a href="/blog/what-size-canopy-tent-should-i-buy">what size to buy</a>.</p>
+<h2>2. What you get</h2>
+<ul>
+  <li><strong>Complete Canopy Set</strong> — the printed canopy top + aluminium hex frame + carry bag.</li>
+  <li><strong>Printed Canopy Top Only</strong> — the custom-printed fabric top on its own (no frame, no carry bag), for customers who already have a compatible frame. Pricing varies by canopy size; see the relevant product page for current pricing.</li>
+</ul>
+<h2>3. Walls</h2>
+<p>Add up to <strong>3 printed walls total</strong> — any combination of full-height and half-height walls — for weather cover and branding. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options</a>.</p>
+<h2>4. Print</h2>
+<p>Every canopy is <strong>dye-sublimated</strong> — ink bonded into the fabric, so it will not crack, peel or fade in the sun.</p>
+<h2>5. Delivery speed</h2>
+<p><strong>Production</strong> is 6–8 business days (standard) or 2–3 business days (rush, +50%) after you approve your free proof. Shipping/transit time is additional and depends on your destination.</p>
+<h2>6. Quantity</h2>
+<p>Ordering <strong>3 or more</strong> drops the per-tent price automatically.</p>
+<h2>7. Artwork</h2>
+<p>Upload a print-ready file or add the <strong>design service ($35)</strong>. You approve a free proof before anything prints.</p>
+<p><a href="/custom-canopies">Start configuring →</a></p>
+`
+  },
+  {
+    slug: 'how-much-does-a-custom-printed-canopy-tent-cost',
+    title: 'How Much Does a Custom Printed Canopy Tent Cost?',
+    excerpt:
+      'Transparent pricing for custom printed canopy tents — complete-set vs printed-top-only prices, wall costs, rush fees and volume discounts.',
+    tags: ['buying guide', 'pricing'],
+    seo: {
+      title: 'How Much Does a Custom Printed Canopy Tent Cost?',
+      description:
+        'Custom canopy tent pricing — complete-set base prices by size, the printed-top-only option, wall costs, rush production and volume discounts.'
+    },
+    coverUrl: '/images/tents/10x20-full3.webp',
+    publishedAt: '2026-08-06T00:00:00.000Z',
+    updatedAt: '2026-08-11T00:00:00.000Z',
+    html: `
+<p>Transparent pricing for custom printed canopy tents — what each option includes, wall costs, rush fees and volume discounts. Prices update live as you configure on the product page.</p>
+<h2>Complete Canopy Set — base price by size</h2>
+<p>The complete set is the printed canopy top + aluminium hex frame + carry bag.</p>
+<table>
+  <thead><tr><th>Size</th><th>1–2 units</th><th>3+ units (each)</th></tr></thead>
+  <tbody>
+    <tr><td>10×10</td><td>$835</td><td>$799</td></tr>
+    <tr><td>10×15</td><td>$1,375</td><td>$1,250</td></tr>
+    <tr><td>10×20</td><td>$1,635</td><td>$1,445</td></tr>
+  </tbody>
+</table>
+<h2>Printed Canopy Top Only</h2>
+<p>Already have a compatible frame? You can order the <strong>printed canopy top only</strong> — the custom-printed fabric top on its own, at a lower price than the complete set. Each size has its own top-only price shown live on the product page (the 10×10 top only starts at $510). It is a separate configuration, not a percentage discount off the set.</p>
+<h2>Add-ons</h2>
+<ul>
+  <li><strong>Walls</strong> (up to 3 total, any mix of full or half): $275 each on 10×10, $365 each on 10×15 and 10×20.</li>
+  <li><strong>Rush production</strong> (2–3 business days instead of 6–8): +50% of the order. This is production time — shipping is additional.</li>
+  <li><strong>Design service</strong> (we create the artwork): one-time $35.</li>
+</ul>
+<h2>Example</h2>
+<p>A 10×10 complete set with one printed back wall, standard production: <strong>$835 + $275 = $1,110</strong>. Order three and the tent price drops to $799 each.</p>
+<h2>No hidden quotes</h2>
+<p>Every price updates live as you configure — no waiting on a sales rep.</p>
+<p><a href="/custom-canopies">Price your canopy now →</a></p>
 `
   }
 ];
