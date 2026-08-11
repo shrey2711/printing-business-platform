@@ -515,6 +515,295 @@ export const STATIC_ARTICLES = [
 <p>Every price updates live as you configure — no waiting on a sales rep.</p>
 <p><a href="/custom-canopies">Price your canopy now →</a></p>
 `
+  },
+  // ── Rich overrides for the older, thin Supabase canopy posts ──────────────
+  {
+    slug: 'what-size-canopy-tent-should-i-buy',
+    title: 'What Size Canopy Tent Should I Buy?',
+    excerpt:
+      'A practical way to choose between a 10x10, 10x15 and 10x20 custom canopy tent — by booth space, table count, staff and what you sell.',
+    tags: ['Buying Guide', 'Sizing'],
+    seo: {
+      title: 'What Size Canopy Tent Should I Buy? (10x10 vs 10x15 vs 10x20)',
+      description:
+        'Choose the right custom canopy tent size — 10x10, 10x15 or 10x20 — by booth space, table count and staff. Dimensions, capacity and real examples from Apex.'
+    },
+    coverUrl: '/images/showcase/canopy-nova-tech.webp',
+    publishedAt: '2026-08-01T00:00:00.000Z',
+    updatedAt: '2026-08-11T00:00:00.000Z',
+    html: `
+<p>Buying the right size canopy is mostly about two things: the <strong>space you're given</strong> and <strong>what has to fit under cover</strong>. Get those right and the rest follows. Here's how to decide between a 10×10, 10×15 and 10×20 without guesswork.</p>
+
+<h2>Start with your booth space</h2>
+<p>Most markets, fairs and trade shows assign booths in <strong>10-foot increments</strong> — a 10×10 single, a 10×20 double, and sometimes 10×15 in between. Check your vendor packet first: if the show gives you a 10×10 space, a 10×10 canopy is the answer and the decision is made for you. If you have a choice, size up from what you need to fit.</p>
+
+<h2>Match the size to what you're doing</h2>
+<table>
+  <thead><tr><th>Size</th><th>Footprint</th><th>Comfortably fits</th><th>Best for</th></tr></thead>
+  <tbody>
+    <tr><td><strong>10×10</strong></td><td>100 sq ft</td><td>One 6 ft table + 1–2 staff</td><td>The standard single vendor booth</td></tr>
+    <tr><td><strong>10×15</strong></td><td>150 sq ft</td><td>1–2 tables + a small product display</td><td>A little more room to work and store stock</td></tr>
+    <tr><td><strong>10×20</strong></td><td>200 sq ft</td><td>Two tables, a queue, or a full display wall</td><td>A double booth under one roof</td></tr>
+  </tbody>
+</table>
+
+<h2>Capacity rules of thumb</h2>
+<ul>
+  <li><strong>Selling from one table?</strong> A 10×10 covers a single 6 ft table with room to stand and serve.</li>
+  <li><strong>Running a line, demo or tasting?</strong> Step up to 10×15 or 10×20 so customers stay under shade while they wait.</li>
+  <li><strong>Sharing the booth, or storing boxes and stock?</strong> Go bigger — vendors almost always fill the extra space.</li>
+  <li><strong>Two staff working at once?</strong> 10×15 or 10×20 keeps you from bumping elbows behind the table.</li>
+</ul>
+
+<h2>Walls change the equation</h2>
+<p>A printed <strong>back wall</strong> turns any size into a branded backdrop, and side walls add weather cover and privacy. You can add <strong>up to 3 printed walls total</strong>, in any combination of full-height and half-height — so factor walls into your plan, not just the roof. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options explained</a>.</p>
+
+<h2>A quick example</h2>
+<p>A coffee roaster doing weekend markets from one table and a grinder chose a <strong>10×10</strong> with a printed back wall — enough for the table, a queue in front, and branding overhead. When they added a second market with a full tasting bar and two staff, they moved to a <strong>10×20</strong> so the line stayed under shade.</p>
+
+<h2>Still unsure? Default to 10×10</h2>
+<p>If you're tight on space or budget, the 10×10 is the safe standard and the most widely allowed booth size. You can always add walls for presence without going bigger.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>Which size is most common?</strong> The 10×10 — it's what most events allocate by default and fits a single vendor table.</p>
+<p><strong>Can I fit two tables under a 10×10?</strong> It's tight. For two tables plus staff, choose a 10×15 or 10×20.</p>
+<p><strong>Do bigger tents cost more per unit?</strong> Yes, and walls are priced per wall — but ordering 3 or more of any size drops the per-tent price. See <a href="/blog/how-much-does-a-custom-printed-canopy-tent-cost">canopy pricing</a>.</p>
+
+<p>Compare sizes and price yours: <a href="/products/canopy-tent-10x10">10×10</a>, <a href="/products/canopy-tent-10x15">10×15</a> or <a href="/products/canopy-tent-10x20">10×20</a>, or read the full <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">size comparison</a>.</p>
+`
+  },
+  {
+    slug: '10x10-vs-10x15-vs-10x20-custom-canopy-tents',
+    title: '10x10 vs 10x15 vs 10x20 Custom Canopy Tents',
+    excerpt:
+      'A side-by-side comparison of the three custom canopy tent sizes — footprint, price, wall count and when each one makes sense.',
+    tags: ['Buying Guide', 'Comparison'],
+    seo: {
+      title: '10x10 vs 10x15 vs 10x20 Custom Canopy Tents Compared',
+      description:
+        'Compare 10x10, 10x15 and 10x20 custom canopy tents — footprint, price (top only vs complete set), walls and best use. Apex dye-sublimation, US & Canada.'
+    },
+    coverUrl: '/images/showcase/canopy-harbor-realty.webp',
+    publishedAt: '2026-08-02T00:00:00.000Z',
+    updatedAt: '2026-08-11T00:00:00.000Z',
+    html: `
+<p>All three Apex canopies are the same commercial-grade, dye-sublimated tent on a heavy-duty aluminium hex frame. They differ in <strong>footprint, price and how much branding surface</strong> you get. Here's the side-by-side.</p>
+
+<h2>At a glance</h2>
+<table>
+  <thead><tr><th>&nbsp;</th><th>10×10</th><th>10×15</th><th>10×20</th></tr></thead>
+  <tbody>
+    <tr><td>Footprint</td><td>100 sq ft</td><td>150 sq ft</td><td>200 sq ft</td></tr>
+    <tr><td>Complete set (from)</td><td>$835</td><td>$1,375</td><td>$1,635</td></tr>
+    <tr><td>Printed top only (from)</td><td>$510</td><td>$545</td><td>$915</td></tr>
+    <tr><td>Wall price (each)</td><td>$275</td><td>$365</td><td>$365</td></tr>
+    <tr><td>Best for</td><td>Single vendor booth</td><td>More room to work</td><td>Double booth</td></tr>
+  </tbody>
+</table>
+<p>Prices are per unit and drop at 3+. "Complete set" = printed top + aluminium frame + carry bag; "printed top only" is the fabric top for a frame you already own.</p>
+
+<h2>10×10 — the standard booth</h2>
+<p>The size most events allocate by default. Fits one 6 ft table and two people, sets up in minutes, and packs down small. If you're new or unsure, this is the one.</p>
+
+<h2>10×15 — more room to work</h2>
+<p>Half again the width of a 10×10 — space for a second table, a product display, or two staff working without crowding. A good middle ground when a 10×10 feels tight but a double booth is overkill.</p>
+
+<h2>10×20 — a double booth</h2>
+<p>Effectively two booths under one roof, and the widest single-canopy span most shows allow. Ideal for a full display wall, a queue that needs shade, or sharing the space with a partner.</p>
+
+<h2>Walls scale with size</h2>
+<p>Walls are priced per wall and you can combine <strong>up to three total</strong> (full or half, same price), so a larger tent also gives you more branding surface. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options</a>.</p>
+
+<h2>Which should you pick?</h2>
+<ul>
+  <li>Unsure, or tight on space → <strong>10×10</strong>.</li>
+  <li>Need a second table or a display → <strong>10×15</strong>.</li>
+  <li>Want maximum shade, branding and a double footprint → <strong>10×20</strong>.</li>
+</ul>
+<p>Ordering <strong>3 or more</strong> of any size drops the per-tent price automatically.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>Is the 10×15 worth it over a 10×10?</strong> If you run two tables or two staff, yes — the extra 50 sq ft removes the crowding without jumping to a full double booth.</p>
+<p><strong>Can I buy just the printed top?</strong> Yes, on any size, if you already own a compatible frame. See <a href="/blog/how-much-does-a-custom-printed-canopy-tent-cost">pricing</a>.</p>
+<p><strong>Are all three the same fabric and frame?</strong> Yes — dye-sublimated 600D polyester on a heavy-duty aluminium hex frame; only the size changes.</p>
+
+<p>Build yours: <a href="/products/canopy-tent-10x10">10×10</a>, <a href="/products/canopy-tent-10x15">10×15</a> or <a href="/products/canopy-tent-10x20">10×20</a>. Not sure? <a href="/blog/what-size-canopy-tent-should-i-buy">What size should I buy?</a></p>
+`
+  },
+  {
+    slug: 'custom-canopy-tent-wall-options-explained',
+    title: 'Custom Canopy Tent Wall Options Explained',
+    excerpt:
+      'Full walls, half walls, back and side walls — what each does, what they cost, and the one rule that governs how many you can add.',
+    tags: ['Guide', 'Walls'],
+    seo: {
+      title: 'Canopy Tent Wall Options Explained (Full vs Half, How Many)',
+      description:
+        'Full walls vs half walls, back and side walls for a custom canopy tent — what each does, per-size pricing, popular setups, and the 3-walls-total rule.'
+    },
+    coverUrl: '/images/showcase/canopy-nova-tech.webp',
+    publishedAt: '2026-08-03T00:00:00.000Z',
+    updatedAt: '2026-08-11T00:00:00.000Z',
+    html: `
+<p>A canopy top gives you shade and overhead branding. <strong>Walls</strong> do three more things: block wind and sun, add privacy and security, and give you a large printed backdrop right at eye level. Here's how they work.</p>
+
+<h2>Full walls vs half walls</h2>
+<ul>
+  <li><strong>Full wall</strong> — floor-to-frame coverage. Maximum branding surface and the best choice for a back wall, weather protection or an enclosed booth.</li>
+  <li><strong>Half wall</strong> — waist height. Defines the booth and adds a branded band without closing it off — ideal for counter service, sampling and open, welcoming layouts.</li>
+</ul>
+<p>Both cost the <strong>same per wall</strong>, so choose by function, not price.</p>
+
+<h2>The one rule: up to 3 printed walls total</h2>
+<p>A pop-up canopy has three coverable sides plus an open front, so you can add <strong>up to 3 printed walls total — in any combination of full-height and half-height</strong>. For example: one full back wall + two half side walls, or three full walls for a fully enclosed space. It is three walls total, not three of each.</p>
+
+<h2>What walls cost</h2>
+<table>
+  <thead><tr><th>Size</th><th>Per wall (full or half)</th></tr></thead>
+  <tbody>
+    <tr><td>10×10</td><td>$275</td></tr>
+    <tr><td>10×15</td><td>$365</td></tr>
+    <tr><td>10×20</td><td>$365</td></tr>
+  </tbody>
+</table>
+
+<h2>Popular setups</h2>
+<ul>
+  <li><strong>1 full back wall</strong> — the classic branded backdrop; keeps the booth open and inviting.</li>
+  <li><strong>Back + 1 side</strong> — wind protection from one direction and a tidy corner booth.</li>
+  <li><strong>1 back + 2 half sides</strong> — branding on three sides while staff can still serve over the half walls.</li>
+  <li><strong>3 full walls</strong> — an enclosed, photo-ready, weather-tight space for cash handling or product security.</li>
+</ul>
+
+<h2>Weather and branding considerations</h2>
+<p>Walls catch wind, so always run weights or sandbags on every leg when walls are up — most venues require them. For branding, remember the <strong>valance</strong> (the hanging skirt on the roof) is prime eye-level space too; walls and valance together give you a wraparound brand presence.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>Can I add 3 full walls and 3 half walls?</strong> No — it's 3 walls total in any full/half mix. A tent has three coverable sides.</p>
+<p><strong>Do full and half walls cost the same?</strong> Yes, per wall, so pick by function.</p>
+<p><strong>Can I add walls later?</strong> It's easiest to order them with the tent so the print matches, but walls attach with hook-and-loop to a standard frame.</p>
+
+<p>Add walls when you <a href="/products/canopy-tent-10x10">build your canopy</a>, or see <a href="/blog/what-size-canopy-tent-should-i-buy">what size to buy</a>.</p>
+`
+  },
+  {
+    slug: 'how-to-prepare-artwork-for-a-custom-canopy-tent',
+    title: 'How to Prepare Artwork for a Custom Canopy Tent',
+    excerpt:
+      'File types, resolution, colour and layout tips so your custom canopy tent prints sharp — plus what to do if your artwork is not ready.',
+    tags: ['Guide', 'Artwork'],
+    seo: {
+      title: 'How to Prepare Artwork for a Custom Canopy Tent',
+      description:
+        'Prepare print-ready artwork for a custom canopy tent — file formats, resolution/DPI, CMYK colour, bleed and safe zones, plus the free proof and design service.'
+    },
+    coverUrl: '/images/showcase/canopy-harbor-realty.webp',
+    publishedAt: '2026-08-04T00:00:00.000Z',
+    updatedAt: '2026-08-11T00:00:00.000Z',
+    html: `
+<p>Dye sublimation prints edge to edge in full colour, so a canopy is only as sharp as the file you send. A few minutes getting the artwork right saves a reprint — here's what matters.</p>
+
+<h2>Get the file format right</h2>
+<ul>
+  <li><strong>Vector (best):</strong> print-ready PDF, AI or EPS. Vectors scale to tent size with zero loss — ideal for logos, text and solid shapes.</li>
+  <li><strong>Raster (works):</strong> high-resolution PNG or TIFF. Supply the largest, highest-quality version you have.</li>
+</ul>
+
+<h2>Resolution and scale</h2>
+<p>Because a canopy is large, low-resolution images look soft when blown up. Aim for at least <strong>150 DPI at full size</strong> for raster art. If you only have a small logo, send the vector — never upscale a tiny JPG and hope.</p>
+
+<h2>Colour</h2>
+<p>Design in <strong>CMYK</strong> where you can, so on-screen colour matches the print. Dye sublimation reproduces solid brand colours, gradients, photos and full-bleed backgrounds well. If exact brand-colour matching matters, tell us in your order notes and we'll confirm it on the proof.</p>
+
+<h2>Bleed, safe zones and seams</h2>
+<ul>
+  <li>Extend backgrounds to <strong>full bleed</strong> — past the trim edge — so there are no white slivers.</li>
+  <li>Keep logos and key text <strong>centred and away from edges and seams</strong>.</li>
+  <li>Remember the <strong>valance</strong> (the hanging skirt) is prime eye-level space — put your business name or tagline there.</li>
+</ul>
+
+<h2>Where you can print</h2>
+<p>A canopy has several printable surfaces — the top (peak panels), the valance, and full or half walls, each its own surface. Decide how much to print before you design; see <a href="/blog/print-coverage-explained">print coverage explained</a>.</p>
+
+<h2>Common mistakes to avoid</h2>
+<ul>
+  <li>Low-resolution logos pulled from a website.</li>
+  <li>Text too close to seams or the valance fold.</li>
+  <li>RGB files with neon colours that can't be printed exactly.</li>
+  <li>Busy backgrounds that bury the logo from a distance — high contrast reads across a lot.</li>
+</ul>
+
+<h2>No print-ready file? Two options</h2>
+<ol>
+  <li><strong>Upload what you have</strong> — we review it and flag any issues on the free proof.</li>
+  <li><strong>Add our design service (+$35)</strong> — our team builds the artwork from your logo and direction.</li>
+</ol>
+<p>Either way, <strong>nothing prints until you approve the proof</strong>.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>What file format is best?</strong> Vector (PDF/AI/EPS). High-resolution PNG/TIFF also works.</p>
+<p><strong>Will my colours print exactly?</strong> Close — design in CMYK and flag critical brand colours in your notes; we confirm on the proof.</p>
+<p><strong>What if I don't have a designer?</strong> Add the $35 design service and we'll create the artwork for you.</p>
+
+<p><a href="/products/canopy-tent-10x10">Configure your canopy and upload artwork →</a> or read <a href="/blog/print-coverage-explained">print coverage explained</a>.</p>
+`
+  },
+  {
+    slug: 'print-coverage-explained',
+    title: 'Canopy Print Coverage Explained: Top, Valance, Walls & Inside',
+    excerpt:
+      'What "print coverage" means on a custom canopy — the top, valance, walls and inside — and what to print where for the most impact.',
+    tags: ['Guide', 'Printing'],
+    seo: {
+      title: 'Canopy Print Coverage Explained (Top, Valance, Walls, Inside)',
+      description:
+        'Understand canopy print coverage — the top, valance, walls and inside underside — and what to print on each surface for maximum branding, full-bleed dye sublimation.'
+    },
+    coverUrl: '/images/showcase/canopy-nova-tech.webp',
+    publishedAt: '2026-08-05T12:00:00.000Z',
+    updatedAt: '2026-08-11T00:00:00.000Z',
+    html: `
+<p>"Print coverage" simply means <strong>how much of the canopy carries your artwork</strong>. A canopy is not one surface — it's several, and each does a different job. Knowing what to print where gets you the most branding for your budget.</p>
+
+<h2>The printable surfaces</h2>
+<ul>
+  <li><strong>Canopy top (peak panels)</strong> — the roof. Seen from a distance and in overhead photos. Great for a logo or a bold pattern.</li>
+  <li><strong>Valance</strong> — the hanging skirt around the roof edge, right at eye level as people walk by. The single most valuable spot for your <strong>business name or tagline</strong>.</li>
+  <li><strong>Walls (full or half)</strong> — the biggest continuous surfaces. Ideal for large graphics, product shots, QR codes and calls to action.</li>
+  <li><strong>Inside / underside</strong> — the ceiling seen by anyone standing under the tent. A "wow" surface for a pattern, brand colour or message that surrounds the customer.</li>
+</ul>
+
+<h2>What to print where</h2>
+<table>
+  <thead><tr><th>Surface</th><th>Best used for</th></tr></thead>
+  <tbody>
+    <tr><td>Valance</td><td>Business name + tagline (eye-level, read first)</td></tr>
+    <tr><td>Top</td><td>Logo or pattern (distance + overhead photos)</td></tr>
+    <tr><td>Walls</td><td>Big graphics, product imagery, offers, QR codes</td></tr>
+    <tr><td>Inside</td><td>Immersive brand colour or pattern overhead</td></tr>
+  </tbody>
+</table>
+
+<h2>It's all full-bleed dye sublimation</h2>
+<p>Every surface prints edge to edge in full colour, with the ink bonded into the fabric — so it won't crack, peel or fade in the sun. There's no upcharge for "more colours"; coverage is about how many <em>surfaces</em> you print, not how complex the art is.</p>
+
+<h2>How much coverage do you need?</h2>
+<ul>
+  <li><strong>Budget / essentials:</strong> valance + top. You're named at eye level and visible from a distance.</li>
+  <li><strong>Most vendors:</strong> add a <strong>printed back wall</strong> — a full-height branded backdrop behind your table.</li>
+  <li><strong>Maximum impact:</strong> top, valance, walls and the inside underside for a fully wrapped, photo-ready booth.</li>
+</ul>
+
+<h2>An example</h2>
+<p>A realtor kept the top and valance to their logo and name, printed a full back wall with listings and a QR code, and left the inside a clean brand navy. From the aisle you read the name; at the table you scan the code; in photos the whole booth is on-brand.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>Do more colours cost more?</strong> No — dye sublimation is full colour by default. Cost scales with size and the number of surfaces/walls, not colour count.</p>
+<p><strong>What's the most important surface?</strong> The valance — it sits at eye level and is read first. Put your name there.</p>
+<p><strong>Can I print the inside of the roof?</strong> Yes — the underside is a great surface for an immersive pattern or brand colour.</p>
+
+<p>Choose your coverage when you <a href="/products/canopy-tent-10x10">build your canopy</a>, and see <a href="/blog/how-to-prepare-artwork-for-a-custom-canopy-tent">how to prepare artwork</a>.</p>
+`
   }
 ];
 
