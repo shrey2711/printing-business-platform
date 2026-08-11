@@ -7,12 +7,16 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY;
 // "onboarding@resend.dev" only delivers to your own Resend account email.
 const EMAIL_FROM = process.env.EMAIL_FROM || 'Apex Trade Show <onboarding@resend.dev>';
 const BRAND = process.env.BRAND_NAME || 'Apex Trade Show';
-const DEFAULT_APP_URL = (process.env.PUBLIC_BASE_URL || '').replace(/\/$/, '');
+const SITE_URL = (process.env.PUBLIC_BASE_URL || 'https://www.apextradeshow.com').replace(/\/$/, '');
+const DEFAULT_APP_URL = SITE_URL;
+// PNG (not webp) so it renders in Outlook and every email client.
+const LOGO_URL = `${SITE_URL}/images/logo.png`;
+const CONTACT_EMAIL = 'info@apextradeshow.com';
 
-// --- Brand palette --------------------------------------------------------
+// --- Brand palette (official brand colours) -------------------------------
 const C = {
-  navy: '#16233b',
-  red: '#c8102e',
+  navy: '#0b1f4d',   // deep brand navy for headings
+  red: '#ED1C24',    // brand red  (C0 M100 Y100 K0)
   green: '#2f9e44',
   amber: '#e8590c',
   blue: '#1f8fd6',
@@ -87,20 +91,22 @@ const money = (n, code = 'USD') => `${code} ${Number(n).toFixed(2)}`;
 // --- Building blocks ------------------------------------------------------
 function header() {
   return `
-  <tr><td style="background:${C.navy};padding:22px 28px;">
-    <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-      <td style="background:#0f1a2e;border-radius:8px;width:40px;height:40px;text-align:center;vertical-align:middle;color:#fff;font-family:Arial,sans-serif;font-weight:800;font-size:16px;">&#9978;</td>
-      <td style="padding-left:12px;font-family:Arial,sans-serif;font-weight:800;font-size:22px;color:#ffffff;">Apex<span style="color:${C.red};"> Trade Show</span></td>
-    </tr></table>
-  </td></tr>`;
+  <tr><td style="background:#ffffff;padding:26px 28px 16px;text-align:center;">
+    <a href="${SITE_URL}" style="text-decoration:none;">
+      <img src="${LOGO_URL}" alt="${BRAND}" height="46" style="height:46px;width:auto;display:inline-block;border:0;outline:none;" />
+    </a>
+  </td></tr>
+  <tr><td style="height:4px;line-height:4px;font-size:0;background:${C.red};">&nbsp;</td></tr>`;
 }
 
 function footer() {
   return `
-  <tr><td style="background:${C.bg};padding:20px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.6;">
-    <strong style="color:${C.navy};">${BRAND}</strong> — custom printed canopy tents, shipped across the US and Canada.<br/>
-    Questions? Reply to this email or contact info@apextradeshow.com.<br/>
-    <span style="color:#9aa3b0;">You're receiving this because you placed an order with ${BRAND}.</span>
+  <tr><td style="background:${C.bg};padding:22px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.7;">
+    <strong style="color:${C.navy};font-size:13px;">${BRAND}</strong> — complete trade show displays &amp; event branding: custom canopy tents, banner stands, backdrops and table covers, printed in your brand and shipped across the US &amp; Canada.<br/>
+    <a href="${SITE_URL}/products" style="color:${C.blue};text-decoration:none;font-weight:600;">Shop</a> &nbsp;&middot;&nbsp;
+    <a href="${SITE_URL}/blog" style="color:${C.blue};text-decoration:none;font-weight:600;">Resources</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:${CONTACT_EMAIL}" style="color:${C.blue};text-decoration:none;font-weight:600;">${CONTACT_EMAIL}</a><br/>
+    <span style="color:#9aa3b0;">Questions? Just reply to this email — we're happy to help.</span>
   </td></tr>`;
 }
 
@@ -171,7 +177,7 @@ function shell(innerHtml, preheader = '') {
           ${innerHtml}
         </table>
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;"><tr>
-          <td align="center" style="padding:16px;font-family:Arial,sans-serif;font-size:11px;color:#9aa3b0;">© ${new Date().getFullYear()} ${BRAND} • Custom printed canopy tents &bull; US & Canada</td>
+          <td align="center" style="padding:16px;font-family:Arial,sans-serif;font-size:11px;color:#9aa3b0;">© ${new Date().getFullYear()} ${BRAND} &bull; Complete trade show displays &amp; event branding &bull; US &amp; Canada</td>
         </tr></table>
       </td></tr>
     </table>
@@ -318,14 +324,13 @@ function quoteStaffHtml(q) {
   ]);
   const inner = `
     ${header()}
-    <tr><td style="height:5px;background:${C.red};"></td></tr>
-    <tr><td style="padding:26px 28px 8px;">
-      <h1 style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:20px;color:${C.navy};">📝 New quote request ${esc(q.reference)}</h1>
-      <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">A customer submitted the quote form. Reply to them at ${esc(q.email) || '—'}.</p>
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:8px 0;">${table}</table>
+    <tr><td style="padding:28px 28px 6px;">
+      <h1 style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:21px;color:${C.navy};">New quote request${q.reference ? ` &middot; ${esc(q.reference)}` : ''}</h1>
+      <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:${C.muted};">A new quote just came in through the website. Reply directly to <strong style="color:${C.navy};">${esc(q.email) || 'the customer'}</strong> to follow up${q.fileName ? ' — the customer\'s artwork is attached' : ''}.</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:10px 0;">${table}</table>
     </td></tr>
     ${footer()}`;
-  return shell(inner, `New quote request ${q.reference || ''}`);
+  return shell(inner, `New quote request from ${q.name || q.email || 'a customer'}`);
 }
 
 function quoteClientHtml(q) {
@@ -333,17 +338,19 @@ function quoteClientHtml(q) {
     ['Reference', q.reference], ['Product', q.product], ['Quantity', q.quantity],
     ['Specs', q.specs], ['Artwork', q.fileName]
   ]);
+  const firstName = q.name ? esc(String(q.name).trim().split(/\s+/)[0]) : '';
   const inner = `
     ${header()}
-    <tr><td style="height:5px;background:${C.blue};"></td></tr>
-    <tr><td style="padding:28px 28px 8px;">
-      <h1 style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:22px;color:${C.navy};">We've received your quote request 🎉</h1>
-      <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">Thanks${q.name ? `, ${esc(q.name)}` : ''}! We've got your request and our team will get back to you with pricing and a free proof before anything prints.</p>
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:14px 0;">${table}</table>
-      <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">Need to add anything? Just reply to this email.</p>
+    <tr><td style="padding:30px 28px 6px;">
+      <h1 style="margin:0 0 10px;font-family:Arial,sans-serif;font-size:23px;line-height:1.3;color:${C.navy};">Thanks${firstName ? `, ${firstName}` : ''} — we've got your request</h1>
+      <p style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:15px;line-height:1.65;color:${C.ink};">Thanks for reaching out to ${BRAND}. A member of our team is reviewing your request and will follow up shortly with pricing and a <strong>free artwork proof</strong>. Nothing goes to print until you approve it.</p>
+      <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:${C.muted};">What you sent${q.reference ? ` &middot; ${esc(q.reference)}` : ''}</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:0 0 6px;">${table}</table>
+      <p style="margin:16px 0 0;font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:${C.muted};">Need to change something or send more artwork? Just reply to this email.</p>
+      ${button(`${SITE_URL}/products`, 'Browse products while you wait', C.red)}
     </td></tr>
     ${footer()}`;
-  return shell(inner, "We've received your quote request");
+  return shell(inner, `We've got your request${q.reference ? ` (${q.reference})` : ''} — our team will follow up shortly with pricing and a free proof.`);
 }
 
 // Sends the quote request to staff (with artwork attached) AND a copy to the
