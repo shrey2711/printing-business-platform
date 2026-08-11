@@ -30,12 +30,14 @@ const solutions = [
 // Each card uses a DIFFERENT product colourway so the range reads varied, not
 // all-navy (the hero collage carries the red banner + red backdrop, so these
 // deliberately use other colours/products).
+// Each card uses a DIFFERENT customer brand (from the showcase set) so the
+// range reads as "we print any brand", not all-Apex.
 const categoryCards = [
-  { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/colorways/canopy-charcoal.webp' },
-  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', img: '/images/colorways/banner-white.webp' },
-  { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/colorways/tablecover-charcoal.webp' },
-  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', art: 'step-and-repeat-backdrop' },
-  { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/colorways/canopy-red.webp' },
+  { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/showcase/canopy-nova-tech.webp' },
+  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', img: '/images/showcase/banner-summit-outdoors.webp' },
+  { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/showcase/tablecover-brightpath-dental.webp' },
+  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', img: '/images/showcase/backdrop-greenleaf.webp' },
+  { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/showcase/canopy-harbor-realty.webp' },
   { title: 'Accessories', copy: 'Weights, sandbags & hardware', to: '/products', img: '/images/tents/sandbags.webp' }
 ];
 
@@ -140,12 +142,12 @@ export default function HomePage() {
               <li>One supplier for your booth</li>
             </ul>
           </div>
-          {/* Complete-booth collage — not a canopy alone */}
-          <div className="hero-collage" aria-label="A complete Apex trade show booth: canopy, table cover, banner stand and backdrop">
+          {/* Booth collage — displays we print, in a range of customer brands */}
+          <div className="hero-collage" aria-label="Trade show displays Apex prints in any brand: canopy, table cover, banner and backdrop">
             <div className="hc-tile hc-canopy"><TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" /></div>
-            <div className="hc-tile"><img src="/images/table-covers/pleated.webp" alt="Branded table cover" loading="lazy" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><img src="/images/colorways/banner-red.webp" alt="Red custom retractable banner stand" loading="lazy" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Red step & repeat backdrop" loading="lazy" decoding="async" width="600" height="450" /></div>
+            <div className="hc-tile"><img src="/images/showcase/tablecover-corner-cafe.webp" alt="Custom printed table cover for a customer's brand" loading="lazy" decoding="async" width="600" height="450" /></div>
+            <div className="hc-tile"><img src="/images/showcase/xstand-sunset-yoga.webp" alt="Custom printed banner for a customer's brand" loading="lazy" decoding="async" width="600" height="450" /></div>
+            <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Custom step & repeat backdrop" loading="lazy" decoding="async" width="600" height="450" /></div>
           </div>
         </div>
       </section>
