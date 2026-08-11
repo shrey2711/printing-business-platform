@@ -562,7 +562,7 @@ function shortChoiceLabel(groupId, choice) {
 // span the full row; everything else flows two-per-row to cut vertical height.
 function groupSpanClass(group) {
   if (group.pricing === 'baseKit') return 'og-2 og-kit';
-  if (group.type === 'multi') return 'og-2';
+  if (group.type === 'multi' || group.fullRow) return 'og-2';
   return 'og-1';
 }
 

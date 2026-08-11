@@ -131,6 +131,7 @@ const sandbagGroup = {
   label: 'Sandbags',
   type: 'select',
   pricing: 'add',
+  fullRow: true,
   help: 'Weight bags anchor the legs — most venues require weights. A set is 4 pieces, one per leg.',
   choices: [
     { id: 'none', label: 'No sandbags', price: 0, default: true },
@@ -199,9 +200,10 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
       kitGroup,
       wallSelect('wallsFull', 'Full walls', wallPer),
       wallSelect('wallsHalf', 'Half walls', wallPer),
-      sandbagGroup,
+      // Delivery + Artwork share a row; Sandbags then sits on its own row.
       daysGroup,
-      designGroup
+      designGroup,
+      sandbagGroup
     ]
   }
 });
