@@ -317,7 +317,7 @@ export default function ProductConfigurator() {
                     })}
                   </div>
                 ) : (
-                  <div className="choice-grid">
+                  <div className={`choice-grid ${group.choices.length >= 4 ? 'cg-grid' : ''}`}>
                     {group.choices.map((choice) => {
                       const activeChoice =
                         (sel[group.id] || defaultChoiceId(group)) === choice.id;
