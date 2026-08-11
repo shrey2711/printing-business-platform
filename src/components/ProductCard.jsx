@@ -3,6 +3,7 @@ import TentPhoto from './TentPhoto';
 import TableCoverPhoto from './TableCoverPhoto';
 import DisplayPhoto from './DisplayPhoto';
 import { useMoney } from '../context/CurrencyContext';
+import { getProductBrandImage } from '../data/brandImages';
 
 // Catalog card: corner ribbon, product mockup, bullet specs and a
 // "Starting at $X" footer in the visitor's selected currency.
@@ -12,11 +13,15 @@ export default function ProductCard({ product, previewSize, previewFull, preview
   const money = useMoney();
   // Auto-detect the tent size from the slug so the photo shows on every page.
   const size = previewSize || (product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : null);
+  // Different-brand mockup for the card thumbnail (falls back to the default photo).
+  const brandImg = getProductBrandImage(product.slug);
   return (
     <Link className="pcard" to={`/products/${product.slug}`}>
       <div className="pcard-media">
         {product.badge ? <span className="pcard-ribbon">{product.badge}</span> : null}
-        {size ? (
+        {brandImg ? (
+          <img className="pcard-brand-img" src={brandImg} alt={`Custom printed ${product.name}`} loading="lazy" decoding="async" />
+        ) : size ? (
           <TentPhoto size={size} walls={1} fullWalls={previewFull} halfWalls={previewHalf} label={product.name} />
         ) : product.category === 'table-covers' ? (
           <TableCoverPhoto style={product.slug.includes('stretch') ? 'stretch' : 'pleated'} label={product.name} />
