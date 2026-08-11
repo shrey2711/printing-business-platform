@@ -610,15 +610,20 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 
 /* Single-select choices render as pressable cards rather than a <select>,
    so size/frame/print trade-offs are visible without opening a dropdown. */
-.choice-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+/* Pills fill their cell (2-up) so a row reads as full — no empty gutter — with
+   the price pushed to the trailing edge. */
+.choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem; }
+/* On a full-width row (e.g. Sandbags) keep pills a natural size, left aligned,
+   rather than stretching two of them across the whole width. */
+.opt-group.og-2:not(.og-kit) .choice-grid { grid-template-columns: repeat(2, minmax(0, 230px)); justify-content: start; }
 .choice-card {
-  display: flex; flex-direction: row; align-items: center; gap: 0.45rem;
-  padding: 0.42rem 0.62rem; border: 1px solid var(--line); border-radius: 7px;
+  display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 0.5rem;
+  padding: 0.5rem 0.72rem; border: 1px solid var(--line); border-radius: 7px;
   background: #fff; cursor: pointer; text-align: left; transition: border-color 0.12s, box-shadow 0.12s;
 }
 /* Product-type (kit) stays as two larger, clearer choices spanning the row. */
 .og-kit .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
-.og-kit .choice-card { flex-direction: column; align-items: flex-start; gap: 0.2rem; padding: 0.7rem 0.85rem; }
+.og-kit .choice-card { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 0.2rem; padding: 0.7rem 0.85rem; }
 .choice-card:hover { border-color: var(--blue); }
 .choice-card:disabled { opacity: 0.4; cursor: not-allowed; }
 .choice-card:disabled:hover { border-color: var(--line); }
