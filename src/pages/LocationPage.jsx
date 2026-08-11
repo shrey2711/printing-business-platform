@@ -75,7 +75,7 @@ export default function LocationPage() {
         </div>
       </section>
 
-      <section className="section-block card">
+      <section className="section-block card loc-content">
         <h2>Custom canopy tents in {state.name}</h2>
         {priority && content ? (
           <>
