@@ -952,46 +952,69 @@ const smUrl = (loc, priority, changefreq) => {
   const p = o?.sitemap_priority != null ? String(o.sitemap_priority) : priority;
   return `  <url><loc>${ORIGIN}${loc}</loc>${changefreq ? `<changefreq>${changefreq}</changefreq>` : ''}<priority>${p}</priority></url>`;
 };
-const sm = [];
-sm.push(smUrl('/', '1.0', 'weekly'));
-sm.push(smUrl('/products', '0.9', 'weekly'));
-// Indexable category / collection pages.
-CATEGORY_PAGES.forEach((cp) => sm.push(smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly')));
-sm.push(smUrl('/trade-show-booth-packages', '0.8', 'weekly'));
-productList.forEach((p) => sm.push(smUrl(`/products/${p.slug}`, '0.8')));
-SIZES.forEach((s) => sm.push(smUrl(`/sizes/${s.slug}`, '0.7')));
-SOLUTIONS.forEach((s) => sm.push(smUrl(`/solutions/${s.slug}`, '0.6')));
-sm.push(smUrl('/locations', '0.6', 'monthly'));
-// Only priority state pages are indexable; the templated long tail is noindex.
-territories.filter((s) => PRIORITY_STATES.has(s.slug)).forEach((s) => sm.push(smUrl(`/locations/${s.slug}`, '0.5')));
-// Location city pages that 301 to a /trade-show-canopies/[city] page must NOT
-// appear in the sitemap (a sitemap URL must be 200, not a redirect).
+// Split sitemaps by type (products / categories / pages / blog / locations),
+// tied together by a sitemap index at /sitemap.xml. Each publish/rebuild
+// regenerates them, so new products, pages, blog posts and landing pages appear
+// automatically. Redirected/noindex URLs are excluded (smUrl returns null).
+const buildUrlset = (rows) =>
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.filter(Boolean).join('\n')}\n</urlset>\n`;
+
+const smPages = [
+  smUrl('/', '1.0', 'weekly'),
+  smUrl('/quote', '0.4'),
+  smUrl('/contact', '0.4'),
+  ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7')),
+  ...SOLUTIONS.map((s) => smUrl(`/solutions/${s.slug}`, '0.6')),
+  // Indexable trust pages (stub policy pages are noindex and excluded).
+  ...PAGES.filter((p) => !p.stub).map((p) => smUrl(`/${p.slug}`, '0.4'))
+];
+const smCategories = [
+  smUrl('/products', '0.9', 'weekly'),
+  ...CATEGORY_PAGES.map((cp) => smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly')),
+  smUrl('/trade-show-booth-packages', '0.8', 'weekly')
+];
+const smProducts = productList.map((p) => smUrl(`/products/${p.slug}`, '0.8'));
+const smBlog = [smUrl('/blog', '0.6', 'weekly'), ...posts.map((p) => smUrl(`/blog/${p.slug}`, '0.6'))];
+
+// Locations. City pages that 301 to /trade-show-canopies/[city] must NOT appear
+// (a sitemap URL must be 200, not a redirect).
 const redirectedLoc = new Set(SEO_CITIES.filter((c) => c.stateSlug).map((c) => `/locations/${c.stateSlug}/${c.slug}`));
-// Priority cities (with unique content) are indexable too — unless redirected.
+const smLocations = [
+  smUrl('/locations', '0.6', 'monthly'),
+  ...territories.filter((s) => PRIORITY_STATES.has(s.slug)).map((s) => smUrl(`/locations/${s.slug}`, '0.5'))
+];
 territories.forEach((s) =>
   s.cities.forEach((c) => {
     const path = `/locations/${s.slug}/${slugify(c)}`;
-    if (PRIORITY_CITIES.has(slugify(c)) && !redirectedLoc.has(path)) sm.push(smUrl(path, '0.4'));
+    if (PRIORITY_CITIES.has(slugify(c)) && !redirectedLoc.has(path)) smLocations.push(smUrl(path, '0.4'));
   })
 );
-// Tier 1 + 2 city × category local pages are indexed (Tier 3 noindex, excluded).
 for (const lc of LOCAL_CATEGORIES) {
   for (const city of SEO_CITIES) {
-    if (city.tier <= 2) sm.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly'));
+    if (city.tier <= 2) smLocations.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly'));
   }
 }
-sm.push(smUrl('/blog', '0.6', 'weekly'));
-posts.forEach((p) => sm.push(smUrl(`/blog/${p.slug}`, '0.6')));
-sm.push(smUrl('/quote', '0.4'));
-sm.push(smUrl('/contact', '0.4'));
-// Indexable trust pages (stub policy pages are noindex and excluded).
-PAGES.filter((p) => !p.stub).forEach((p) => sm.push(smUrl(`/${p.slug}`, '0.4')));
-const smRows = sm.filter(Boolean); // drop routes forced to noindex via overrides
-writeFileSync(
-  join(DIST, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smRows.join('\n')}\n</urlset>\n`
-);
-console.log(`Sitemap: ${smRows.length} indexable URLs (city pages excluded).`);
+
+const sitemapFiles = {
+  'sitemap-pages.xml': smPages,
+  'sitemap-categories.xml': smCategories,
+  'sitemap-products.xml': smProducts,
+  'sitemap-blog.xml': smBlog,
+  'sitemap-locations.xml': smLocations
+};
+let smTotal = 0;
+for (const [name, rows] of Object.entries(sitemapFiles)) {
+  const clean = rows.filter(Boolean);
+  smTotal += clean.length;
+  writeFileSync(join(DIST, name), buildUrlset(clean));
+}
+// Sitemap index at /sitemap.xml (referenced by robots.txt).
+const sitemapIndex =
+  `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  Object.keys(sitemapFiles).map((n) => `  <sitemap><loc>${ORIGIN}/${n}</loc></sitemap>`).join('\n') +
+  `\n</sitemapindex>\n`;
+writeFileSync(join(DIST, 'sitemap.xml'), sitemapIndex);
+console.log(`Sitemap: ${smTotal} indexable URLs across ${Object.keys(sitemapFiles).length} sitemaps (index at /sitemap.xml).`);
 
 // ---- Redirects: bake into a module the edge middleware imports ----
 const redirectsModule =

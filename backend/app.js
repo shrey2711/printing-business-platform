@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import multer from 'multer';
+import crypto from 'crypto';
 import rateLimit from 'express-rate-limit';
 
 import { listProducts, getProduct, categories, navGroups } from './data/products.js';
@@ -630,6 +631,80 @@ app.get('/api/blog/:slug', async (req, res) => {
   if (error) return res.status(500).json({ error: error.message });
   if (!data) return res.status(404).json({ error: 'Not found.' });
   res.json({ post: publicPost(data) });
+});
+
+// ── External content-publishing API (for AI SEO tools) ─────────────────────
+// Token-authenticated (CONTENT_API_KEY). Accepts a rich article payload and
+// stores it as a DRAFT in blog_posts for human review — it NEVER auto-publishes.
+// Rate-limited (writeLimiter) and validated; markdown is sanitized at render
+// time by renderMarkdown. Extra SEO fields (canonical, faqs, related products,
+// internal links, schema, featured image) are packed into the seo jsonb blob so
+// no DB migration is required. Set CONTENT_API_KEY in the environment to enable.
+function contentApiAuthorized(req) {
+  const key = process.env.CONTENT_API_KEY;
+  if (!key) return { ok: false, code: 503, error: 'Publishing API not configured.' };
+  const provided = String(req.headers['x-api-key'] || (req.headers.authorization || '').replace(/^Bearer\s+/i, '')).trim();
+  if (!provided) return { ok: false, code: 401, error: 'Missing API key.' };
+  const a = Buffer.from(provided);
+  const b = Buffer.from(key);
+  const match = a.length === b.length && crypto.timingSafeEqual(a, b);
+  return match ? { ok: true } : { ok: false, code: 401, error: 'Invalid API key.' };
+}
+
+app.post('/api/content/articles', writeLimiter, async (req, res) => {
+  const auth = contentApiAuthorized(req);
+  if (!auth.ok) return res.status(auth.code).json({ error: auth.error });
+  if (!supabaseAdmin) return res.status(503).json({ error: 'Content storage not configured.' });
+
+  const b = req.body || {};
+  const title = String(b.title || '').trim();
+  const bodyMd = String(b.body_md || b.body || b.content || '');
+  if (!title || title.length > 200) return res.status(422).json({ error: 'title is required (<= 200 chars).' });
+  if (!bodyMd.trim()) return res.status(422).json({ error: 'body_md (article body) is required.' });
+
+  const slug = slugifyTitle(b.slug || title) || `post-${Date.now()}`;
+  const arr = (v, n) => (Array.isArray(v) ? v.slice(0, n) : undefined);
+  const seo = {
+    title: String(b.meta_title || b.metaTitle || '').slice(0, 200) || undefined,
+    description: String(b.meta_description || b.metaDescription || b.excerpt || '').slice(0, 300) || undefined,
+    canonical: String(b.canonical || '') || undefined,
+    featuredImage: String(b.featured_image || b.featuredImage || '') || undefined,
+    coverAlt: String(b.image_alt || b.imageAlt || '').slice(0, 200) || undefined,
+    author: String(b.author || '').slice(0, 120) || undefined,
+    category: String(b.category || '').slice(0, 80) || undefined,
+    faqs: arr(b.faqs, 20),
+    relatedProducts: arr(b.related_products || b.relatedProducts, 20),
+    internalLinks: arr(b.internal_links || b.internalLinks, 40),
+    schema: b.schema && typeof b.schema === 'object' ? b.schema : undefined,
+    source: 'content-api'
+  };
+  Object.keys(seo).forEach((k) => seo[k] === undefined && delete seo[k]);
+
+  const row = {
+    title: title.slice(0, 200),
+    slug,
+    body_md: bodyMd,
+    excerpt: String(b.excerpt || '').slice(0, 400) || null,
+    cover_path: b.cover_path ? String(b.cover_path) : null, // storage path only; external URLs go in seo.featuredImage
+    tags: arr((b.tags || []).map(String), 20) || [],
+    seo,
+    status: 'draft', // ALWAYS draft — a human publishes it from the dashboard
+    published_at: null
+  };
+
+  const { data, error } = await supabaseAdmin.from('blog_posts').insert(row).select('id, slug, status').single();
+  if (error) {
+    if (error.code === '23505') return res.status(409).json({ error: 'That slug already exists.' });
+    return res.status(500).json({ error: error.message });
+  }
+  console.log(`[content-api] draft created: ${data.slug} (id ${data.id}) from ${req.ip || 'unknown'}`);
+  res.status(201).json({
+    ok: true,
+    id: data.id,
+    slug: data.slug,
+    status: data.status,
+    message: 'Draft created for review. Approve and publish it from the admin dashboard — publishing triggers a rebuild.'
+  });
 });
 
 // Admin: list ALL posts (drafts included), newest first.
