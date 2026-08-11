@@ -91,9 +91,9 @@ const money = (n, code = 'USD') => `${code} ${Number(n).toFixed(2)}`;
 // --- Building blocks ------------------------------------------------------
 function header() {
   return `
-  <tr><td style="background:#ffffff;padding:26px 28px 16px;text-align:center;">
+  <tr><td align="center" style="background:#ffffff;padding:26px 28px 16px;text-align:center;">
     <a href="${SITE_URL}" style="text-decoration:none;">
-      <img src="${LOGO_URL}" alt="${BRAND}" height="46" style="height:46px;width:auto;display:inline-block;border:0;outline:none;" />
+      <img src="${LOGO_URL}" alt="${BRAND}" width="207" height="47" style="display:block;width:207px;height:47px;border:0;outline:none;margin:0 auto;" />
     </a>
   </td></tr>
   <tr><td style="height:4px;line-height:4px;font-size:0;background:${C.red};">&nbsp;</td></tr>`;
