@@ -9,9 +9,9 @@ import { computePrice } from './data/pricing.js';
 import { getProductFaqs } from './data/faqs.js';
 import { STATIC_ARTICLES, getStaticArticle } from './data/staticArticles.js';
 import { stripe, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
-import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert } from './lib/mailer.js';
+import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest } from './lib/mailer.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
-import { currencies, BASE_CURRENCY } from '../src/config/brand.js';
+import { currencies, BASE_CURRENCY, brand } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
 import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
 import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
@@ -130,19 +130,36 @@ app.post('/api/price', async (req, res) => {
 });
 
 // Guest quote request (authenticated orders go through Supabase directly).
-app.post('/api/quote', writeLimiter, upload.single('file'), (req, res) => {
-  res.json({
-    success: true,
-    message: 'Quote request received',
-    reference: `Q-${Date.now().toString().slice(-6)}`,
-    data: {
-      name: req.body.name,
-      email: req.body.email,
-      product: req.body.product,
-      quantity: req.body.quantity,
-      file: req.file ? req.file.originalname : null
-    }
-  });
+// Emails the quote to staff (with the artwork attached) AND a copy to the
+// customer. Email is best-effort — a mail failure never fails the submission.
+app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => {
+  const b = req.body || {};
+  const reference = `Q-${Date.now().toString().slice(-6)}`;
+  const quote = {
+    reference,
+    name: b.name,
+    email: b.email,
+    phone: b.phone,
+    product: b.product,
+    quantity: b.quantity,
+    specs: b.specs,
+    estimatedPrice: b.estimatedPrice,
+    description: b.description,
+    fileName: req.file ? req.file.originalname : null
+  };
+  // Official inbox: ADMIN_EMAILS if set, else the brand contact address, so a
+  // quote never silently goes nowhere.
+  const staffTo = adminEmails.length ? adminEmails : [brand.email];
+  const attachment = req.file ? { filename: req.file.originalname, buffer: req.file.buffer } : null;
+
+  let email;
+  try {
+    email = await sendQuoteRequest({ staffTo, quote, attachment });
+  } catch (e) {
+    email = { error: e.message };
+  }
+
+  res.json({ success: true, message: 'Quote request received', reference, email });
 });
 
 // ============================================================================
@@ -306,7 +323,7 @@ app.post('/api/orders/:id/notify', writeLimiter, async (req, res) => {
     appUrl,
     invoiceUrl: invoice.invoiceUrl
   });
-  const alert = await sendNewOrderAlert({ to: adminEmails, order, customerEmail: user.email, appUrl });
+  const alert = await sendNewOrderAlert({ to: adminEmails.length ? adminEmails : [brand.email], order, customerEmail: user.email, appUrl });
   res.json({ confirmation, alert, invoice });
 });
 

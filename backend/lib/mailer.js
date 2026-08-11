@@ -197,7 +197,7 @@ function getSmtp() {
   return smtpTransport;
 }
 
-async function send({ to, subject, html }) {
+async function send({ to, subject, html, attachments = [] }) {
   const recipients = (Array.isArray(to) ? to : [to]).filter(Boolean);
   if (!recipients.length) return { sent: false, reason: 'no-recipient' };
 
@@ -205,7 +205,10 @@ async function send({ to, subject, html }) {
   const smtp = getSmtp();
   if (smtp) {
     try {
-      await smtp.sendMail({ from: EMAIL_FROM, to: recipients, subject, html });
+      await smtp.sendMail({
+        from: EMAIL_FROM, to: recipients, subject, html,
+        attachments: attachments.map((a) => ({ filename: a.filename, content: a.buffer }))
+      });
       return { sent: true, via: 'smtp' };
     } catch (e) {
       return { sent: false, reason: e.message };
@@ -215,10 +218,14 @@ async function send({ to, subject, html }) {
   // Fallback: Resend HTTP API.
   if (RESEND_API_KEY) {
     try {
+      const body = { from: EMAIL_FROM, to: recipients, subject, html };
+      if (attachments.length) {
+        body.attachments = attachments.map((a) => ({ filename: a.filename, content: a.buffer.toString('base64') }));
+      }
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from: EMAIL_FROM, to: recipients, subject, html })
+        body: JSON.stringify(body)
       });
       if (!res.ok) return { sent: false, reason: (await res.text()).slice(0, 300) };
       return { sent: true, via: 'resend' };
@@ -287,6 +294,78 @@ export async function sendNewOrderAlert({ to, order, customerEmail, appUrl = DEF
     subject: `New order ${shortId(order.id)} — ${order.product || ''}`,
     html: adminAlertHtml(order, customerEmail, appUrl)
   });
+}
+
+// --- Quote request emails -------------------------------------------------
+const esc = (s) =>
+  String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function quoteRows(pairs) {
+  const rows = pairs.filter(([, v]) => v != null && String(v).trim() !== '');
+  return rows
+    .map(
+      ([k, v], i) => `<tr>
+        <td style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};${i ? `border-top:1px solid ${C.line};` : ''}">${esc(k)}</td>
+        <td align="right" style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:${C.navy};${i ? `border-top:1px solid ${C.line};` : ''}">${esc(v)}</td>
+      </tr>`
+    )
+    .join('');
+}
+
+function quoteStaffHtml(q) {
+  const table = quoteRows([
+    ['Reference', q.reference], ['Name', q.name], ['Email', q.email], ['Phone', q.phone],
+    ['Product', q.product], ['Quantity', q.quantity], ['Specs', q.specs],
+    ['Est. price', q.estimatedPrice], ['Notes', q.description], ['Artwork', q.fileName]
+  ]);
+  const inner = `
+    ${header()}
+    <tr><td style="height:5px;background:${C.red};"></td></tr>
+    <tr><td style="padding:26px 28px 8px;">
+      <h1 style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:20px;color:${C.navy};">📝 New quote request ${esc(q.reference)}</h1>
+      <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">A customer submitted the quote form. Reply to them at ${esc(q.email) || '—'}.</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:8px 0;">${table}</table>
+    </td></tr>
+    ${footer()}`;
+  return shell(inner, `New quote request ${q.reference || ''}`);
+}
+
+function quoteClientHtml(q) {
+  const table = quoteRows([
+    ['Reference', q.reference], ['Product', q.product], ['Quantity', q.quantity],
+    ['Specs', q.specs], ['Artwork', q.fileName]
+  ]);
+  const inner = `
+    ${header()}
+    <tr><td style="height:5px;background:${C.blue};"></td></tr>
+    <tr><td style="padding:28px 28px 8px;">
+      <h1 style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:22px;color:${C.navy};">We've received your quote request 🎉</h1>
+      <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">Thanks${q.name ? `, ${esc(q.name)}` : ''}! We've got your request and our team will get back to you with pricing and a free proof before anything prints.</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:14px 0;">${table}</table>
+      <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">Need to add anything? Just reply to this email.</p>
+    </td></tr>
+    ${footer()}`;
+  return shell(inner, "We've received your quote request");
+}
+
+// Sends the quote request to staff (with artwork attached) AND a copy to the
+// customer. Best-effort: caller should not fail the request if email fails.
+export async function sendQuoteRequest({ staffTo, quote, attachment }) {
+  const attachments = attachment ? [attachment] : [];
+  const staff = await send({
+    to: staffTo,
+    subject: `New quote request ${quote.reference || ''} — ${quote.product || ''}`.trim(),
+    html: quoteStaffHtml(quote),
+    attachments
+  });
+  const client = quote.email
+    ? await send({
+        to: quote.email,
+        subject: `${BRAND} — we received your quote request${quote.reference ? ` ${quote.reference}` : ''}`,
+        html: quoteClientHtml(quote)
+      })
+    : { sent: false, reason: 'no-client-email' };
+  return { staff, client };
 }
 
 export { customerEmailHtml };
