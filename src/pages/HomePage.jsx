@@ -140,8 +140,8 @@ export default function HomePage() {
           <div className="hero-collage" aria-label="A complete Apex trade show booth: canopy, table cover, banner stand and backdrop">
             <div className="hc-tile hc-canopy"><TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" /></div>
             <div className="hc-tile"><img src="/images/table-covers/pleated.webp" alt="Branded table cover" loading="lazy" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><DisplayPhoto slug="standard-retractable-banner" label="Retractable banner stand" /></div>
-            <div className="hc-tile"><DisplayPhoto slug="step-and-repeat-backdrop" label="Step & repeat backdrop" /></div>
+            <div className="hc-tile"><img src="/images/colorways/banner-red.webp" alt="Red custom retractable banner stand" loading="lazy" decoding="async" width="600" height="450" /></div>
+            <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Red step & repeat backdrop" loading="lazy" decoding="async" width="600" height="450" /></div>
           </div>
         </div>
       </section>

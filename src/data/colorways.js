@@ -1,21 +1,18 @@
-// Optional alternate-colour product mockups ("colorways").
+// Alternate-colour product mockups ("colorways") shown under "Also available in"
+// on the product page. Files live in public/images/colorways/. A thumbnail only
+// appears once its image actually loads, so listing a not-yet-uploaded file is
+// harmless. Only files that currently exist are listed here.
 //
-// Drop a matching image into public/images/colorways/ and it appears
-// automatically on the product page under "Also available in". A file that is
-// NOT present is silently skipped (ColorwayStrip only shows an image once it
-// actually loads) — so listing a filename here that hasn't been uploaded yet
-// breaks nothing. No code change is needed to activate a colorway; just add the
-// file. Preferred format .webp (or .png/.jpg — convert to .webp for size).
-//
-// Brand colors: red #ED1C24, navy #000066.
+// Brand colors: red #ED1C24, navy #000066. The existing product photos are the
+// navy default, so colorways here are the ALTERNATE looks (red / charcoal /
+// white). Table-cover colorways are stretch-style, so they attach only to the
+// stretch product; pleated has no alternate mockup yet.
 
 const CANOPY = [
   { file: 'canopy-red.webp', label: 'Red' },
-  { file: 'canopy-charcoal.webp', label: 'Charcoal' },
-  { file: 'canopy-white.webp', label: 'White' }
+  { file: 'canopy-charcoal.webp', label: 'Charcoal' }
 ];
-const TABLECOVER = [
-  { file: 'tablecover-red.webp', label: 'Red' },
+const STRETCH = [
   { file: 'tablecover-charcoal.webp', label: 'Charcoal' }
 ];
 const BANNER = [
@@ -23,16 +20,14 @@ const BANNER = [
   { file: 'banner-white.webp', label: 'White' }
 ];
 const BACKDROP = [
-  { file: 'backdrop-red.webp', label: 'Red' },
-  { file: 'backdrop-charcoal.webp', label: 'Charcoal' }
+  { file: 'backdrop-red.webp', label: 'Red' }
 ];
 
 export const COLORWAYS = {
   'canopy-tent-10x10': CANOPY,
   'canopy-tent-10x15': CANOPY,
   'canopy-tent-10x20': CANOPY,
-  'pleated-table-covers': TABLECOVER,
-  'stretch-table-covers': TABLECOVER,
+  'stretch-table-covers': STRETCH,
   'standard-retractable-banner': BANNER,
   'deluxe-retractable-banner': BANNER,
   'x-stand-banner': BANNER,
