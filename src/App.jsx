@@ -301,9 +301,18 @@ function Footer() {
   );
 }
 
+// On every route change, jump back to the top — otherwise a link clicked from
+// the footer leaves the new page scrolled to the bottom.
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 function App() {
   return (
     <div className="app-shell">
+      <ScrollToTop />
       <Header />
       <Suspense fallback={<main className="page"><p className="muted">Loading…</p></main>}>
       <Routes>
