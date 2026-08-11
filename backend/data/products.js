@@ -417,11 +417,10 @@ const tradeShowDisplays = [
     pricing: {
       model: 'configured',
       baseLabel: 'Deluxe retractable banner',
-      // NOTE: rate card lists 2-3 day ($225) below 6-8 day ($281) — entered as
-      // given, looks inverted, pending owner confirmation. Single size (33x81);
-      // stand + printed graphic included.
+      // Single size (33x81); stand + printed graphic included. Rush (2-3 day)
+      // is the higher price (rate card's 225/281 was inverted — swapped per owner).
       matrixGroups: ['days'],
-      priceMatrix: { '6to8': 281, 'rush': 225 },
+      priceMatrix: { '6to8': 225, 'rush': 281 },
       optionGroups: [
         { id: 'days', label: 'Production', type: 'select', pricing: 'matrix', help: '33" × 81". Rush is 2-3 business days.', choices: [
           { id: '6to8', label: '6-8 days', default: true },
