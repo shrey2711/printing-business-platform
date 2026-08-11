@@ -182,6 +182,50 @@ export default function ProductConfigurator() {
   // card can show its exact $ value without dividing a lagging total (no flicker).
   const preMultTotal = price?.preMultipliedSubtotal || 0;
 
+  // Quantity field — reused in the configured grid (next to Artwork) and below
+  // the size/material controls for the other pricing models.
+  const qtyField = (
+    <div className="field qty-field">
+      <label>Quantity</label>
+      <div className="qty-block">
+        <div className="qty-stepper">
+          <button
+            type="button"
+            aria-label="Decrease quantity"
+            onClick={() => setConfig({ ...config, quantity: Math.max(1, Number(config.quantity) - 1) })}
+          >
+            −
+          </button>
+          <input
+            type="number"
+            min="1"
+            value={config.quantity}
+            onChange={(e) => setConfig({ ...config, quantity: Math.max(1, numberOr(e.target.value, config.quantity)) })}
+          />
+          <button
+            type="button"
+            aria-label="Increase quantity"
+            onClick={() => setConfig({ ...config, quantity: Number(config.quantity) + 1 })}
+          >
+            +
+          </button>
+        </div>
+
+        {tierRows.length > 1 && (
+          <div className="bulk-brackets">
+            <div className="bulk-brackets-head">Bulk discount brackets</div>
+            {tierRows.map((r) => (
+              <div className={`bulk-row ${r.active ? 'bulk-active' : ''}`} key={r.label}>
+                <span>{r.label}</span>
+                <span>{money(r.price)}/unit</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <main className="page">
       <Link className="back-link" to={cat ? `/${cat.slug}` : '/products'}>← All {cat ? cat.nav : 'products'}</Link>
@@ -314,6 +358,7 @@ export default function ProductConfigurator() {
                 )}
               </div>
             ))}
+            {qtyField}
             </div>
           ) : isArea ? (
             <div className="size-row">
@@ -393,45 +438,7 @@ export default function ProductConfigurator() {
             </div>
           )}
 
-          <div className="field qty-field">
-            <label>Quantity</label>
-            <div className="qty-block">
-              <div className="qty-stepper">
-                <button
-                  type="button"
-                  aria-label="Decrease quantity"
-                  onClick={() => setConfig({ ...config, quantity: Math.max(1, Number(config.quantity) - 1) })}
-                >
-                  −
-                </button>
-                <input
-                  type="number"
-                  min="1"
-                  value={config.quantity}
-                  onChange={(e) => setConfig({ ...config, quantity: Math.max(1, numberOr(e.target.value, config.quantity)) })}
-                />
-                <button
-                  type="button"
-                  aria-label="Increase quantity"
-                  onClick={() => setConfig({ ...config, quantity: Number(config.quantity) + 1 })}
-                >
-                  +
-                </button>
-              </div>
-
-              {tierRows.length > 1 && (
-                <div className="bulk-brackets">
-                  <div className="bulk-brackets-head">Bulk discount brackets</div>
-                  {tierRows.map((r) => (
-                    <div className={`bulk-row ${r.active ? 'bulk-active' : ''}`} key={r.label}>
-                      <span>{r.label}</span>
-                      <span>{money(r.price)}/unit</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+          {!isConfigured && qtyField}
 
           <div className="field">
             <label>Specific instructions (optional)</label>
