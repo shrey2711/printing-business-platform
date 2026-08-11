@@ -6,13 +6,9 @@
 // Priority states are indexed with this richer content; every other state /
 // province is noindex'd (thin, templated) until it earns unique content.
 
-export const PRIORITY_STATES = new Set([
-  // USA
-  'california', 'texas', 'florida', 'new-york',
-  'arizona', 'nevada', 'washington', 'illinois', 'georgia', 'north-carolina',
-  // Canada
-  'british-columbia', 'ontario', 'alberta', 'quebec'
-]);
+// PRIORITY_STATES (the indexed set) is derived from stateContent below — every
+// state/province now has unique content, so all are indexed. Defined after
+// stateContent so it can read its keys.
 
 export const stateContent = {
   california: {
@@ -84,8 +80,273 @@ export const stateContent = {
     intro:
       "Quebec's calendar is packed with festivals and markets — Montreal and Quebec City street events, public markets and cultural celebrations through the warmer months. A full-colour printed canopy makes a booth stand out in a lively, crowded festival setting.",
     events: ['Montreal & Quebec City festivals', 'Public & farmers markets', 'Cultural celebrations', 'Trade & consumer shows']
+  },
+
+  // ── Northeast ──
+  connecticut: {
+    intro:
+      'Connecticut packs a dense calendar of town-green fairs, coastal festivals and farmers markets from Hartford and New Haven to the Stamford and Bridgeport shoreline. A printed canopy gives a market vendor or exhibitor a branded storefront that reads across a crowded New England green.',
+    events: ['Town-green fairs & festivals', 'Shoreline & coastal events', 'Farmers markets', 'Corporate & campus expos']
+  },
+  delaware: {
+    intro:
+      'From Wilmington and Dover to the Rehoboth-area beach towns, Delaware’s tax-free events, boardwalk pop-ups and community fairs draw steady summer crowds. A custom canopy turns a small-state booth into a clear, branded stop on a busy boardwalk or market row.',
+    events: ['Beach & boardwalk pop-ups', 'Community & town fairs', 'Farmers markets', 'Festivals & craft shows']
+  },
+  maine: {
+    intro:
+      'Maine’s short, busy season fills Portland, Lewiston and Bangor with seafood festivals, coastal fairs and farmers markets, plus a strong fall craft and foliage circuit. A dye-sublimated canopy stands up to coastal wind and damp while keeping your booth sharply on-brand.',
+    events: ['Seafood & coastal festivals', 'Farmers & craft markets', 'Fall foliage & harvest fairs', 'Community events']
+  },
+  maryland: {
+    intro:
+      'Maryland’s waterfront calendar runs from Baltimore’s Inner Harbor to Annapolis and Frederick — crab feasts, Chesapeake festivals and town street fairs all summer. A printed canopy anchors your booth on a busy waterfront and photographs well against the harbor.',
+    events: ['Waterfront & harbor festivals', 'Crab feasts & food events', 'Street fairs', 'Farmers markets']
+  },
+  massachusetts: {
+    intro:
+      'Boston, Worcester, Springfield and Cambridge give Massachusetts a mix of university expos, biotech shows and classic New England town-common fairs. A branded canopy works as well at a campus activation as it does at a summer market on the common.',
+    events: ['University & biotech expos', 'Town-common fairs', 'Farmers markets', 'Seasonal festivals']
+  },
+  'new-hampshire': {
+    intro:
+      'New Hampshire’s no-sales-tax shopping events, fall foliage fairs and outdoor craft markets keep Manchester, Nashua and Concord busy through the warmer months. A weather-ready printed canopy holds up on a breezy fairground while marking your booth clearly.',
+    events: ['Craft & harvest fairs', 'Fall foliage events', 'Farmers markets', 'Community festivals']
+  },
+  'new-jersey': {
+    intro:
+      'From the Jersey Shore boardwalks to Newark, Jersey City and Atlantic City, New Jersey’s dense population fuels flea markets, shore festivals and street fairs all season. A custom canopy pulls traffic on a packed boardwalk and defines your space in a crowded lot.',
+    events: ['Shore & boardwalk festivals', 'Flea & street markets', 'Community fairs', 'Consumer & trade shows']
+  },
+  pennsylvania: {
+    intro:
+      'Pennsylvania spans Philadelphia and Pittsburgh street fairs, Harrisburg farm shows and the market towns of Amish country and the Lehigh Valley. A printed canopy suits everything from an urban festival to a rural farm show or a stadium tailgate.',
+    events: ['Street fairs & festivals', 'Farm & agricultural shows', 'Farmers markets', 'Sports tailgates']
+  },
+  'rhode-island': {
+    intro:
+      'Compact and coastal, Rhode Island concentrates its scene in Providence, Warwick and Cranston — WaterFire nights, seafood festivals and dense summer markets. A branded canopy makes a small booth stand out at a busy waterfront event.',
+    events: ['Seafood & coastal festivals', 'WaterFire & downtown events', 'Farmers markets', 'Craft fairs']
+  },
+  vermont: {
+    intro:
+      'Vermont’s farmers markets, maple and craft fairs and foliage-season events keep Burlington, Montpelier and Rutland busy from spring through fall. A dye-sublimated canopy gives a local maker a clean, branded booth that fits Vermont’s market culture.',
+    events: ['Farmers & maker markets', 'Maple & craft fairs', 'Foliage-season events', 'Community festivals']
+  },
+  'washington-dc': {
+    intro:
+      'Washington, D.C. hosts national festivals, activations and conventions year-round, from events near the Mall to association trade shows across the district. A branded canopy or booth display gives your organization a professional, on-brand presence at high-profile events.',
+    events: ['National festivals & activations', 'Association trade shows', 'Farmers & street markets', 'Conferences & expos']
+  },
+
+  // ── South ──
+  alabama: {
+    intro:
+      'Alabama runs a warm-weather calendar of Gulf Coast festivals in Mobile, football tailgates statewide and city markets in Birmingham, Montgomery and Huntsville. A dye-sublimated canopy handles the heat and humidity while keeping your booth branded from across the lot.',
+    events: ['Gulf Coast & Mardi Gras festivals', 'Football tailgates', 'Farmers markets', 'Community fairs']
+  },
+  arkansas: {
+    intro:
+      'From Little Rock to Fayetteville’s Razorback crowds and Fort Smith, Arkansas fills its calendar with outdoor festivals, farmers markets and college events. A printed canopy turns a plain booth into a branded stop at a busy Ozark-region market or game day.',
+    events: ['Outdoor festivals', 'College & game-day events', 'Farmers markets', 'Craft & county fairs']
+  },
+  kentucky: {
+    intro:
+      'Kentucky’s horse country and bourbon trail drive Derby-season events, festivals and county fairs around Louisville and Lexington. A custom canopy gives vendors and sponsors a polished, branded presence at high-traffic Kentucky events.',
+    events: ['Derby & horse-country events', 'Bourbon & food festivals', 'County fairs', 'Farmers markets']
+  },
+  louisiana: {
+    intro:
+      'Louisiana’s festival culture is second to none — Mardi Gras and Jazz Fest in New Orleans, plus events across Baton Rouge, Lafayette and Shreveport. A dye-sublimated canopy stands up to Gulf heat and humidity while making your booth pop in a lively crowd.',
+    events: ['Mardi Gras & festivals', 'Food & music events', 'Farmers markets', 'Fairs & crawfish boils']
+  },
+  mississippi: {
+    intro:
+      'Mississippi’s Gulf Coast festivals, blues-heritage events and county fairs keep Jackson, Gulfport and the DeSoto County area busy in the warm season. A printed canopy handles coastal sun and marks your booth clearly at a crowded festival.',
+    events: ['Gulf Coast festivals', 'Blues & heritage events', 'County fairs', 'Farmers markets']
+  },
+  oklahoma: {
+    intro:
+      'Rodeos, the state fair and outdoor festivals fill Oklahoma City, Tulsa and Norman’s calendar — often on windy open fairgrounds where weights matter. A heavy-duty printed canopy stays anchored and on-brand in Oklahoma’s open-plains conditions.',
+    events: ['Rodeos & state fair', 'Outdoor festivals', 'Farmers markets', 'College & game-day events']
+  },
+  'south-carolina': {
+    intro:
+      'South Carolina’s coast drives Charleston food festivals, Myrtle Beach events and Greenville and Columbia markets through a long warm season. A dye-sublimated canopy handles Lowcountry heat while giving tourists a clear, branded booth to find.',
+    events: ['Coastal & beach festivals', 'Food & culture events', 'Farmers markets', 'Craft fairs']
+  },
+  tennessee: {
+    intro:
+      'Tennessee pairs Nashville’s music festivals and Memphis BBQ with Knoxville and Chattanooga fairs and markets. A printed canopy gives a vendor or sponsor a branded stage-side presence at some of the South’s busiest events.',
+    events: ['Music & BBQ festivals', 'Farmers markets', 'Fairs & craft shows', 'Sports & campus events']
+  },
+  virginia: {
+    intro:
+      'From Virginia Beach oceanfront events to Richmond, Norfolk and Arlington, Virginia mixes coastal festivals, historic town fairs and military-community gatherings. A branded canopy suits a beachfront activation as well as a historic-district market.',
+    events: ['Oceanfront & coastal festivals', 'Historic town fairs', 'Farmers markets', 'Community & military events']
+  },
+  'west-virginia': {
+    intro:
+      'West Virginia’s mountain festivals, county fairs and outdoor-adventure events keep Charleston, Huntington and Morgantown busy through the season. A dye-sublimated canopy holds up in mountain weather and marks your booth at a busy fairground.',
+    events: ['Mountain & heritage festivals', 'County fairs', 'Outdoor & adventure events', 'Farmers markets']
+  },
+
+  // ── Midwest ──
+  indiana: {
+    intro:
+      'Indiana’s motorsports culture — the Indy 500 and beyond — plus the state fair and county fairs fill Indianapolis, Fort Wayne and Evansville. A printed canopy gives a sponsor or vendor a branded presence at high-energy Indiana events.',
+    events: ['Motorsports & Indy 500 events', 'State & county fairs', 'Farmers markets', 'Festivals']
+  },
+  iowa: {
+    intro:
+      'Iowa’s famous state fair, RAGBRAI and harvest festivals anchor a calendar that runs through Des Moines, Cedar Rapids and Davenport. A custom canopy turns a farm-country booth into a branded stop at one of the Midwest’s biggest fair scenes.',
+    events: ['State fair & RAGBRAI', 'Harvest festivals', 'Farmers markets', 'County fairs']
+  },
+  kansas: {
+    intro:
+      'Kansas county fairs, rodeos and farmers markets play out on open, windy grounds across Wichita, Kansas City, Overland Park and Topeka. A heavy-duty printed canopy stays anchored with weights while keeping your booth clearly branded.',
+    events: ['County fairs & rodeos', 'Farmers markets', 'Festivals', 'Sports & campus events']
+  },
+  michigan: {
+    intro:
+      'Michigan spans Detroit auto events, Ann Arbor’s famous art fairs and Great Lakes lakeside festivals in Grand Rapids and beyond. A branded canopy works at an urban expo or a breezy lakefront market alike.',
+    events: ['Auto & industry events', 'Art fairs', 'Lakeside festivals', 'Farmers markets']
+  },
+  minnesota: {
+    intro:
+      'Minnesota’s enormous state fair, lake festivals and four-season events keep Minneapolis, Saint Paul, Rochester and Duluth busy year-round. A dye-sublimated canopy gives a vendor a branded booth at one of the country’s biggest fairs.',
+    events: ['State fair & festivals', 'Lake & waterfront events', 'Farmers markets', 'Winter & summer markets']
+  },
+  missouri: {
+    intro:
+      'Missouri’s BBQ culture, river festivals and fairs run through Kansas City, St. Louis, Springfield and Columbia. A printed canopy gives a food vendor or sponsor a branded, easy-to-find booth at a busy Missouri event.',
+    events: ['BBQ & food festivals', 'River & downtown events', 'Farmers markets', 'Fairs & sports events']
+  },
+  nebraska: {
+    intro:
+      'Nebraska’s College World Series, state fair and football tailgates fill Omaha, Lincoln and Bellevue’s calendar. A custom canopy turns a tailgate or market booth into a clearly branded spot in the crowd.',
+    events: ['College World Series & sports', 'State fair', 'Farmers markets', 'Tailgates & festivals']
+  },
+  'north-dakota': {
+    intro:
+      'North Dakota’s county fairs, harvest events and farmers markets play out on open, windy plains around Fargo, Bismarck and Grand Forks. A heavy-duty printed canopy stays anchored with weights and marks your booth clearly.',
+    events: ['County fairs & harvest events', 'Farmers markets', 'Festivals', 'Community events']
+  },
+  ohio: {
+    intro:
+      'Ohio’s big state fair, city festivals and sports tailgates keep Columbus, Cleveland, Cincinnati and Toledo busy all season. A branded canopy gives vendors and sponsors a professional presence at high-traffic Ohio events.',
+    events: ['State fair & festivals', 'Sports tailgates', 'Farmers markets', 'Arts & culture events']
+  },
+  'south-dakota': {
+    intro:
+      'From the Sturgis rally and Black Hills events to Sioux Falls and Rapid City fairs, South Dakota draws big outdoor crowds. A heavy-duty printed canopy handles open-plains wind while keeping your booth on-brand.',
+    events: ['Sturgis & Black Hills events', 'County fairs', 'Farmers markets', 'Festivals']
+  },
+  wisconsin: {
+    intro:
+      'Wisconsin’s festival scene — Summerfest, brewery events and Packers tailgates — runs through Milwaukee, Madison and Green Bay. A dye-sublimated canopy gives a vendor or sponsor a branded booth at some of the Midwest’s biggest gatherings.',
+    events: ['Summerfest & music festivals', 'Brewery & food events', 'Packers tailgates', 'Farmers markets']
+  },
+
+  // ── West ──
+  alaska: {
+    intro:
+      'Alaska packs its markets and festivals into a short, intense summer season across Anchorage, Fairbanks and Juneau. A weather-hardy dye-sublimated canopy makes the most of the daylight while keeping your booth branded and dry.',
+    events: ['Summer festivals & markets', 'Fishing & outdoor events', 'Craft & maker fairs', 'Community events']
+  },
+  colorado: {
+    intro:
+      'Colorado’s outdoor culture drives ski and gear expos, brewery festivals and farmers markets from Denver and Boulder to Colorado Springs. A printed canopy shades a booth from strong high-altitude sun while marking your brand at an active-lifestyle event.',
+    events: ['Outdoor & ski/gear expos', 'Brewery & food festivals', 'Farmers markets', 'Mountain-town events']
+  },
+  hawaii: {
+    intro:
+      'Hawaii’s year-round outdoor calendar fills Honolulu, Hilo and Kailua with craft markets, cultural celebrations and tourism events. A dye-sublimated canopy handles sun and sudden rain while giving visitors a clear, branded booth to find.',
+    events: ['Outdoor & craft markets', 'Cultural celebrations', 'Tourism & resort events', 'Food festivals']
+  },
+  idaho: {
+    intro:
+      'Idaho’s outdoor-recreation scene, farmers markets and fairs keep Boise, Meridian and Nampa busy through the warm season. A printed canopy gives a maker or sponsor a branded booth at a busy Treasure Valley event.',
+    events: ['Outdoor-recreation events', 'Farmers markets', 'County fairs', 'Festivals']
+  },
+  montana: {
+    intro:
+      'Montana’s rodeos, fly-fishing and outdoor events and county fairs run through Billings, Missoula and Bozeman on open, breezy ground. A heavy-duty printed canopy stays anchored and on-brand in Big Sky conditions.',
+    events: ['Rodeos & fairs', 'Outdoor & fly-fishing events', 'Farmers markets', 'Festivals']
+  },
+  'new-mexico': {
+    intro:
+      'New Mexico’s Balloon Fiesta, Santa Fe art markets and cultural festivals draw big crowds to Albuquerque, Santa Fe and Las Cruces under strong high-desert sun. A dye-sublimated canopy shades your booth while making it stand out at a colorful event.',
+    events: ['Balloon Fiesta & festivals', 'Art & craft markets', 'Cultural events', 'Farmers markets']
+  },
+  oregon: {
+    intro:
+      'Oregon’s farmers markets, food-cart and craft-beer festivals and outdoor events run through Portland, Eugene, Salem and Bend. A rain-ready dye-sublimated canopy keeps a booth branded and dry through a classic Pacific Northwest market day.',
+    events: ['Farmers & maker markets', 'Food-cart & beer festivals', 'Outdoor events', 'Craft fairs']
+  },
+  utah: {
+    intro:
+      'Utah’s outdoor and ski culture, festivals and farmers markets keep Salt Lake City, Provo and West Valley City busy across the seasons. A printed canopy shades a booth from strong mountain sun while marking your brand at an active event.',
+    events: ['Outdoor & ski events', 'Festivals', 'Farmers markets', 'Community & campus events']
+  },
+  wyoming: {
+    intro:
+      'Wyoming’s Cheyenne Frontier Days and rodeo culture, county fairs and outdoor events play out on open, windy plains around Cheyenne, Casper and Laramie. A heavy-duty printed canopy stays anchored with weights and keeps your booth clearly branded.',
+    events: ['Cheyenne Frontier Days & rodeos', 'County fairs', 'Outdoor events', 'Farmers markets']
+  },
+
+  // ── Canada ──
+  manitoba: {
+    intro:
+      'Manitoba’s Folklorama, summer festivals and farmers markets centre on Winnipeg, with events in Brandon and Steinbach too. A dye-sublimated canopy gives a vendor a branded, weather-ready booth through Manitoba’s busy warm season.',
+    events: ['Folklorama & festivals', 'Farmers markets', 'Community & cultural events', 'Fairs']
+  },
+  saskatchewan: {
+    intro:
+      'Saskatchewan’s prairie festivals, farmers markets and fairs run through Saskatoon, Regina and Prince Albert on open, breezy ground. A heavy-duty printed canopy stays anchored with weights while marking your booth clearly.',
+    events: ['Prairie festivals', 'Farmers markets', 'Fairs & rodeos', 'Community events']
+  },
+  'nova-scotia': {
+    intro:
+      'Nova Scotia’s coastal and seafood festivals, Halifax waterfront markets and maritime events draw crowds through the season. A dye-sublimated canopy stands up to coastal wind and damp while keeping your booth sharply branded.',
+    events: ['Seafood & coastal festivals', 'Waterfront markets', 'Maritime events', 'Farmers markets']
+  },
+  'new-brunswick': {
+    intro:
+      'New Brunswick’s riverfront markets, festivals and maritime events keep Moncton, Saint John and Fredericton busy in the warm season. A weather-ready printed canopy gives a vendor a clean, branded booth on a breezy riverfront.',
+    events: ['Festivals', 'Riverfront & farmers markets', 'Maritime events', 'Community fairs']
+  },
+  'newfoundland-and-labrador': {
+    intro:
+      'Newfoundland and Labrador’s coastal festivals, St. John’s downtown events and community gatherings pack a short, lively season. A dye-sublimated canopy handles Atlantic wind and weather while marking your booth clearly.',
+    events: ['Coastal festivals', 'Downtown & George Street events', 'Farmers markets', 'Community events']
+  },
+  'prince-edward-island': {
+    intro:
+      'Prince Edward Island’s summer festivals, lobster and oyster events and tourism markets centre on Charlottetown and Summerside. A printed canopy gives a maker or food vendor a branded booth through PEI’s busy tourist season.',
+    events: ['Seafood & summer festivals', 'Farmers & craft markets', 'Tourism events', 'Community fairs']
+  },
+  yukon: {
+    intro:
+      'The Yukon’s summer festivals and midnight-sun events centre on Whitehorse, packing a lot into a short, bright season. A weather-hardy dye-sublimated canopy makes the most of the daylight while keeping your booth branded.',
+    events: ['Summer & midnight-sun festivals', 'Markets & maker fairs', 'Outdoor events', 'Community gatherings']
+  },
+  'northwest-territories': {
+    intro:
+      'In the Northwest Territories, Yellowknife’s summer festivals, outdoor markets and midnight-sun events draw the season’s crowds. A weather-hardy printed canopy gives a vendor a branded, sheltered booth in a short northern summer.',
+    events: ['Summer festivals', 'Outdoor markets', 'Midnight-sun events', 'Community gatherings']
+  },
+  nunavut: {
+    intro:
+      'Nunavut’s community events and outdoor markets make the most of a short summer season in Iqaluit and beyond. A weather-hardy dye-sublimated canopy gives your booth shelter and clear branding in northern conditions.',
+    events: ['Community events', 'Outdoor markets', 'Cultural gatherings', 'Seasonal festivals']
   }
 };
+
+// Every state/province above now has unique content, so all location pages are
+// indexed (no thin, noindex long tail remaining). Each links back to the product
+// money-pages (canopies, displays) — clusters feeding the commercial pages.
+export const PRIORITY_STATES = new Set(Object.keys(stateContent));
 
 // Shared, non-fabricated sections reused across priority state pages.
 export const ORDERING_STEPS = [
