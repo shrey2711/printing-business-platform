@@ -63,7 +63,7 @@ h1, h2, h3, h4 { color: var(--navy); }
   padding: 0.6rem 1.5rem; max-width: 1400px; margin: 0 auto;
 }
 .logo { display: flex; align-items: center; gap: 0.55rem; }
-.brand-logo { height: 58px; width: auto; display: block; }
+.brand-logo { height: 72px; width: auto; display: block; }
 .ft-logo { display: inline-block; background: #fff; padding: 0.45rem 0.7rem; border-radius: 8px; }
 .ft-logo img { height: 34px; width: auto; display: block; }
 .logo-mark {
