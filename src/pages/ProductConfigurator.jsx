@@ -9,6 +9,7 @@ import TableCoverPhoto from '../components/TableCoverPhoto';
 import DisplayPhoto from '../components/DisplayPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getCategoryForProduct } from '../data/categoryPages';
+import ColorwayStrip from '../components/ColorwayStrip';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 
 export default function ProductConfigurator() {
@@ -214,6 +215,7 @@ export default function ProductConfigurator() {
               ))}
             </ul>
             <p className="turnaround">🕒 {product.turnaround}</p>
+            <ColorwayStrip slug={product.slug} />
           </div>
         </div>
 
