@@ -557,7 +557,7 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 }
 .card { background: #fff; border: 1px solid var(--line); border-radius: 6px; }
 
-.config-layout { display: grid; grid-template-columns: 1fr 1fr 320px; gap: 1.3rem; align-items: start; }
+.config-layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.15fr) 320px; gap: 1.3rem; align-items: start; }
 .config-visual { display: flex; flex-direction: column; gap: 1rem; }
 .config-hero-thumb { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #eef1f5; }
 .config-info h1 { margin: 0.3rem 0 0.5rem; font-size: 1.7rem; font-weight: 700; }
@@ -587,17 +587,23 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .checkbox input { width: 1rem; height: 1rem; }
 
 /* ---------- Configurator option groups (`configured` model) ---------- */
-.opt-group { margin-bottom: 1.4rem; }
-.opt-help { display: block; color: var(--muted); font-size: 0.76rem; margin: -0.15rem 0 0.5rem; }
+/* Two-column configurator: independent option groups share rows to cut height. */
+.opt-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.1rem; margin-bottom: 0.5rem; }
+.opt-group { margin-bottom: 0; }
+.opt-group.og-2 { grid-column: 1 / -1; }
+.opt-help { display: block; color: var(--muted); font-size: 0.72rem; line-height: 1.35; margin: -0.05rem 0 0.45rem; }
 
 /* Single-select choices render as pressable cards rather than a <select>,
    so size/frame/print trade-offs are visible without opening a dropdown. */
-.choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 0.5rem; }
+.choice-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .choice-card {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem;
-  padding: 0.6rem 0.7rem; border: 1px solid var(--line); border-radius: 6px;
+  display: flex; flex-direction: row; align-items: center; gap: 0.45rem;
+  padding: 0.42rem 0.62rem; border: 1px solid var(--line); border-radius: 7px;
   background: #fff; cursor: pointer; text-align: left; transition: border-color 0.12s, box-shadow 0.12s;
 }
+/* Product-type (kit) stays as two larger, clearer choices spanning the row. */
+.og-kit .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+.og-kit .choice-card { flex-direction: column; align-items: flex-start; gap: 0.2rem; padding: 0.7rem 0.85rem; }
 .choice-card:hover { border-color: var(--blue); }
 .choice-card:disabled { opacity: 0.4; cursor: not-allowed; }
 .choice-card:disabled:hover { border-color: var(--line); }
@@ -645,8 +651,9 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .choice-card.choice-active {
   border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); background: #f4f9fd;
 }
-.choice-label { font-weight: 600; font-size: 0.88rem; color: var(--navy); }
-.choice-meta { font-size: 0.76rem; color: var(--muted); }
+.choice-label { font-weight: 600; font-size: 0.82rem; color: var(--navy); }
+.choice-meta { font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+.og-kit .choice-label { font-size: 0.9rem; }
 .choice-card.choice-active .choice-meta { color: var(--blue-dark); }
 
 /* Multi-select rows with an optional quantity stepper (walls, accessories). */
@@ -1042,6 +1049,7 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
   .trust-row { grid-template-columns: 1fr; }
   .cat-rail-head { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   .steps-row { grid-template-columns: 1fr; }
-  .choice-grid { grid-template-columns: 1fr 1fr; }
+  .opt-groups { grid-template-columns: 1fr; }
+  .og-kit .choice-grid { grid-template-columns: 1fr; }
   .header-top .currency-switch { order: 3; }
 }

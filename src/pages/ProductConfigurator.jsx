@@ -224,8 +224,9 @@ export default function ProductConfigurator() {
           <h2>Build your order</h2>
 
           {isConfigured ? (
-            (p.optionGroups || []).map((group) => (
-              <div className="field opt-group" key={group.id}>
+            <div className="opt-groups">
+            {(p.optionGroups || []).map((group) => (
+              <div className={`field opt-group ${groupSpanClass(group)}`} key={group.id}>
                 <label>{group.label}</label>
                 {group.help && <small className="opt-help">{group.help}</small>}
 
@@ -290,7 +291,7 @@ export default function ProductConfigurator() {
                           title={disabled ? 'Max 3 walls total (full + half)' : undefined}
                           onClick={() => !disabled && setSelect(group.id, choice.id)}
                         >
-                          <span className="choice-label">{choice.label}</span>
+                          <span className="choice-label">{shortChoiceLabel(group.id, choice)}</span>
                           <span className="choice-meta">
                             {group.pricing === 'baseKit'
                               ? ''
@@ -312,7 +313,8 @@ export default function ProductConfigurator() {
                   </div>
                 )}
               </div>
-            ))
+            ))}
+            </div>
           ) : isArea ? (
             <div className="size-row">
               <div className="field">
@@ -535,6 +537,26 @@ export default function ProductConfigurator() {
       )}
     </main>
   );
+}
+
+// Compact, display-only labels for the pill selectors. The full `choice.label`
+// is still used for order specs (describeConfig) and the prerendered HTML — this
+// only shortens what the customer sees in the configurator pills.
+const SHORT_LABELS = {
+  days: { '6-8': '6–8 days · standard', '2-3': '2–3 days · rush', '6to8': '6–8 days', rush: '2–3 days · rush' },
+  design: { self: 'Upload my own', service: 'We design it' },
+  sandbags: { none: 'No sandbags', set4: 'Sandbag set (4)' }
+};
+function shortChoiceLabel(groupId, choice) {
+  return (SHORT_LABELS[groupId] && SHORT_LABELS[groupId][choice.id]) || choice.label;
+}
+
+// Two-column configurator layout: the product-type (kit) and multi-select groups
+// span the full row; everything else flows two-per-row to cut vertical height.
+function groupSpanClass(group) {
+  if (group.pricing === 'baseKit') return 'og-2 og-kit';
+  if (group.type === 'multi') return 'og-2';
+  return 'og-1';
 }
 
 function defaultChoiceId(group) {
