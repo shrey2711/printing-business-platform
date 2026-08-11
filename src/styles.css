@@ -603,7 +603,7 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 /* ---------- Configurator option groups (`configured` model) ---------- */
 /* Two-column configurator: independent option groups share rows to cut height.
    Roomier row gap so paired controls don't feel cramped. */
-.opt-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 1.2rem; margin-bottom: 0.6rem; }
+.opt-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 2rem; margin-bottom: 0.6rem; }
 .opt-group { margin-bottom: 0; }
 .opt-group.og-2 { grid-column: 1 / -1; }
 .opt-help { display: block; color: var(--muted); font-size: 0.72rem; line-height: 1.35; margin: -0.05rem 0 0.45rem; }
@@ -618,8 +618,8 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .opt-group.og-2:not(.og-kit) .choice-grid { grid-template-columns: repeat(2, minmax(0, 230px)); justify-content: start; }
 .choice-card {
   display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 0.5rem;
-  padding: 0.5rem 0.72rem; border: 1px solid var(--line); border-radius: 7px;
-  background: #fff; cursor: pointer; text-align: left; transition: border-color 0.12s, box-shadow 0.12s;
+  min-height: 42px; padding: 0.5rem 0.72rem; border: 1px solid var(--line); border-radius: 7px;
+  background: #fff; cursor: pointer; text-align: left; line-height: 1.25; transition: border-color 0.12s, box-shadow 0.12s;
 }
 /* Product-type (kit) stays as two larger, clearer choices spanning the row. */
 .og-kit .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }

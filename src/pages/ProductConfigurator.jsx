@@ -550,7 +550,7 @@ export default function ProductConfigurator() {
 // is still used for order specs (describeConfig) and the prerendered HTML — this
 // only shortens what the customer sees in the configurator pills.
 const SHORT_LABELS = {
-  days: { '6-8': '6–8 days · standard', '2-3': '2–3 days · rush', '6to8': '6–8 days', rush: '2–3 days · rush' },
+  days: { '6-8': '6–8 days', '2-3': '2–3 days', '6to8': '6–8 days', rush: '2–3 days rush' },
   design: { self: 'Upload my own', service: 'We design it' },
   sandbags: { none: 'No sandbags', set4: 'Sandbag set (4)' }
 };
