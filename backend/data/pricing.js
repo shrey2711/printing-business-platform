@@ -69,7 +69,27 @@ export function computePrice(input, opts = {}) {
     //       vs 3+ units). The tier IS the volume discount — no % discount added.
     //    b) a base option group where the customer picks (e.g. tent size).
     let running = 0;
-    if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
+    if (pricing.priceMatrix && Array.isArray(pricing.matrixGroups) && pricing.matrixGroups.length) {
+      // c) priceMatrix: the price is looked up from a combination of separate
+      //    select dimensions (e.g. size × kit × delivery) whose values are
+      //    irregular and can't compose as base ± multiplier/add. Each matrix
+      //    group renders as its own select, so "with stand" and "graphic only"
+      //    are a distinct choice rather than mixed into one long list.
+      const idFor = (gid) => {
+        if (selections[gid] != null) return selections[gid];
+        const g = groups.find((x) => x.id === gid);
+        const d = (g?.choices || []).find((c) => c.default) || (g?.choices || [])[0];
+        return d?.id;
+      };
+      const key = pricing.matrixGroups.map(idFor).join('|');
+      running = Number(pricing.priceMatrix[key]) || 0;
+      for (const gid of pricing.matrixGroups) {
+        const g = groups.find((x) => x.id === gid);
+        const c = pickChoice(g, idFor(gid));
+        if (g && c) chosen[g.id] = c.label || c.id;
+      }
+      breakdown.push({ label: pricing.baseLabel || 'Price', amount: round2(running) });
+    } else if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
       const tier = pickTier(pricing.quantityTiers, qty);
       // Base may vary by a "kit" selection (e.g. full set vs graphic only):
       // tier.prices = { full: 835, canopy: 510 }. Falls back to tier.price.

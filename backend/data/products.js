@@ -354,23 +354,22 @@ const tradeShowDisplays = [
     pricing: {
       model: 'configured',
       baseLabel: 'Retractable banner',
-      // Each choice = size × production speed (stand + printed graphic included).
-      // Prices are USD from the supplied rate card. No Graphic-Only option for
-      // the Standard stand.
+      // Price looked up from size × production. Stand + printed graphic always
+      // included (no graphic-only option for the Standard). USD rate card.
+      matrixGroups: ['size', 'days'],
+      priceMatrix: {
+        '33x81|6to8': 145, '33x81|rush': 199,
+        '47x81|6to8': 299, '47x81|rush': 445
+      },
       optionGroups: [
-        {
-          id: 'option',
-          label: 'Size & production',
-          type: 'select',
-          pricing: 'base',
-          help: 'Includes the stand + printed graphic. Rush is 2-3 business days.',
-          choices: [
-            { id: '33x81-6to8', label: '33" × 81" · 6-8 days', price: 145, default: true },
-            { id: '33x81-rush', label: '33" × 81" · 2-3 days (rush)', price: 199 },
-            { id: '47x81-6to8', label: '47" × 81" · 6-8 days', price: 299 },
-            { id: '47x81-rush', label: '47" × 81" · 2-3 days (rush)', price: 445 }
-          ]
-        },
+        { id: 'size', label: 'Size', type: 'select', pricing: 'matrix', choices: [
+          { id: '33x81', label: '33" × 81"', default: true },
+          { id: '47x81', label: '47" × 81"' }
+        ] },
+        { id: 'days', label: 'Production', type: 'select', pricing: 'matrix', help: 'Rush is 2-3 business days.', choices: [
+          { id: '6to8', label: '6-8 days', default: true },
+          { id: 'rush', label: '2-3 days (rush)' }
+        ] },
         designGroup
       ]
     },
@@ -418,21 +417,16 @@ const tradeShowDisplays = [
     pricing: {
       model: 'configured',
       baseLabel: 'Deluxe retractable banner',
-      // NOTE: supplied rate card lists 2-3 day ($225) below 6-8 day ($281) for
-      // the Deluxe — entered exactly as given; looks inverted, pending owner
-      // confirmation. No Graphic-Only option for the Deluxe.
+      // NOTE: rate card lists 2-3 day ($225) below 6-8 day ($281) — entered as
+      // given, looks inverted, pending owner confirmation. Single size (33x81);
+      // stand + printed graphic included.
+      matrixGroups: ['days'],
+      priceMatrix: { '6to8': 281, 'rush': 225 },
       optionGroups: [
-        {
-          id: 'option',
-          label: 'Size & production',
-          type: 'select',
-          pricing: 'base',
-          help: 'Includes the stand + printed graphic. Rush is 2-3 business days.',
-          choices: [
-            { id: '33x81-6to8', label: '33" × 81" · 6-8 days', price: 281, default: true },
-            { id: '33x81-rush', label: '33" × 81" · 2-3 days (rush)', price: 225 }
-          ]
-        },
+        { id: 'days', label: 'Production', type: 'select', pricing: 'matrix', help: '33" × 81". Rush is 2-3 business days.', choices: [
+          { id: '6to8', label: '6-8 days', default: true },
+          { id: 'rush', label: '2-3 days (rush)' }
+        ] },
         designGroup
       ]
     },
@@ -480,25 +474,27 @@ const tradeShowDisplays = [
     pricing: {
       model: 'configured',
       baseLabel: 'X-stand banner',
-      // size × kit (with stand / graphic only) × production speed. USD rate card.
+      // Price looked up from size × kit × production. USD rate card.
+      matrixGroups: ['size', 'kit', 'days'],
+      priceMatrix: {
+        '24x63|stand|6to8': 99, '24x63|stand|rush': 145,
+        '24x63|graphic|6to8': 65, '24x63|graphic|rush': 99,
+        '32x71|stand|6to8': 119, '32x71|stand|rush': 159,
+        '32x71|graphic|6to8': 85, '32x71|graphic|rush': 105
+      },
       optionGroups: [
-        {
-          id: 'option',
-          label: 'Size, kit & production',
-          type: 'select',
-          pricing: 'base',
-          help: 'Choose the stand + graphic, or the graphic only. Rush is 2-3 business days.',
-          choices: [
-            { id: '24x63-stand-6to8', label: '24" × 63" · with stand · 6-8 days', price: 99, default: true },
-            { id: '24x63-stand-rush', label: '24" × 63" · with stand · 2-3 days (rush)', price: 145 },
-            { id: '24x63-graphic-6to8', label: '24" × 63" · graphic only · 6-8 days', price: 65 },
-            { id: '24x63-graphic-rush', label: '24" × 63" · graphic only · 2-3 days (rush)', price: 99 },
-            { id: '32x71-stand-6to8', label: '32" × 71" · with stand · 6-8 days', price: 119 },
-            { id: '32x71-stand-rush', label: '32" × 71" · with stand · 2-3 days (rush)', price: 159 },
-            { id: '32x71-graphic-6to8', label: '32" × 71" · graphic only · 6-8 days', price: 85 },
-            { id: '32x71-graphic-rush', label: '32" × 71" · graphic only · 2-3 days (rush)', price: 105 }
-          ]
-        },
+        { id: 'size', label: 'Size', type: 'select', pricing: 'matrix', choices: [
+          { id: '24x63', label: '24" × 63"', default: true },
+          { id: '32x71', label: '32" × 71"' }
+        ] },
+        { id: 'kit', label: 'What you get', type: 'select', pricing: 'matrix', help: 'The X-frame stand plus the printed graphic, or the graphic on its own.', choices: [
+          { id: 'stand', label: 'With stand', default: true },
+          { id: 'graphic', label: 'Graphic only' }
+        ] },
+        { id: 'days', label: 'Production', type: 'select', pricing: 'matrix', help: 'Rush is 2-3 business days.', choices: [
+          { id: '6to8', label: '6-8 days', default: true },
+          { id: 'rush', label: '2-3 days (rush)' }
+        ] },
         designGroup
       ]
     },
@@ -548,25 +544,27 @@ const tradeShowDisplays = [
     pricing: {
       model: 'configured',
       baseLabel: 'Step & repeat backdrop',
-      // size × kit (with frame / graphic only) × production speed. USD rate card.
+      // Price looked up from size × kit × production. USD rate card.
+      matrixGroups: ['size', 'kit', 'days'],
+      priceMatrix: {
+        '8x8|frame|6to8': 440, '8x8|frame|rush': 545,
+        '8x8|graphic|6to8': 245, '8x8|graphic|rush': 299,
+        '10x8|frame|6to8': 465, '10x8|frame|rush': 565,
+        '10x8|graphic|6to8': 299, '10x8|graphic|rush': 350
+      },
       optionGroups: [
-        {
-          id: 'option',
-          label: 'Size, kit & production',
-          type: 'select',
-          pricing: 'base',
-          help: 'Choose the frame + graphic, or the graphic only. Rush is 2-3 business days.',
-          choices: [
-            { id: '8x8-frame-6to8', label: "8' × 8' · with frame · 6-8 days", price: 440, default: true },
-            { id: '8x8-frame-rush', label: "8' × 8' · with frame · 2-3 days (rush)", price: 545 },
-            { id: '8x8-graphic-6to8', label: "8' × 8' · graphic only · 6-8 days", price: 245 },
-            { id: '8x8-graphic-rush', label: "8' × 8' · graphic only · 2-3 days (rush)", price: 299 },
-            { id: '10x8-frame-6to8', label: "10' × 8' · with frame · 6-8 days", price: 465 },
-            { id: '10x8-frame-rush', label: "10' × 8' · with frame · 2-3 days (rush)", price: 565 },
-            { id: '10x8-graphic-6to8', label: "10' × 8' · graphic only · 6-8 days", price: 299 },
-            { id: '10x8-graphic-rush', label: "10' × 8' · graphic only · 2-3 days (rush)", price: 350 }
-          ]
-        },
+        { id: 'size', label: 'Size', type: 'select', pricing: 'matrix', choices: [
+          { id: '8x8', label: "8' × 8'", default: true },
+          { id: '10x8', label: "10' × 8'" }
+        ] },
+        { id: 'kit', label: 'What you get', type: 'select', pricing: 'matrix', help: 'The frame plus the printed graphic, or the graphic on its own.', choices: [
+          { id: 'frame', label: 'With frame', default: true },
+          { id: 'graphic', label: 'Graphic only' }
+        ] },
+        { id: 'days', label: 'Production', type: 'select', pricing: 'matrix', help: 'Rush is 2-3 business days.', choices: [
+          { id: '6to8', label: '6-8 days', default: true },
+          { id: 'rush', label: '2-3 days (rush)' }
+        ] },
         designGroup
       ]
     },
@@ -2146,7 +2144,11 @@ function estimateStartingPrice(pricing) {
     // no add-ons. A genuine floor for "from $X".
     const groups = pricing.optionGroups || [];
     let price;
-    if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
+    if (pricing.priceMatrix) {
+      // "From" = the cheapest entry in the price matrix.
+      const vals = Object.values(pricing.priceMatrix).map(Number).filter(Number.isFinite);
+      price = vals.length ? Math.min(...vals) : 0;
+    } else if (Array.isArray(pricing.quantityTiers) && pricing.quantityTiers.length) {
       // "From" = the cheapest single-unit (lowest-min) tier price — the graphic-
       // only column when a kit price table is present.
       const entry = pricing.quantityTiers.reduce((a, b) => (b.min < a.min ? b : a));
