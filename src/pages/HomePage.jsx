@@ -26,12 +26,15 @@ const solutions = [
 
 // Visually strong category cards, using real product images where we have them
 // (banner stands / backdrops fall back to the ProductArt illustration).
+// Each card uses a DIFFERENT product colourway so the range reads varied, not
+// all-navy (the hero collage carries the red banner + red backdrop, so these
+// deliberately use other colours/products).
 const categoryCards = [
-  { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/tents/10x20-full3.webp' },
-  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', art: 'standard-retractable-banner' },
-  { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/table-covers/pleated.webp' },
+  { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/colorways/canopy-charcoal.webp' },
+  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', img: '/images/colorways/banner-white.webp' },
+  { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/colorways/tablecover-charcoal.webp' },
   { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', art: 'step-and-repeat-backdrop' },
-  { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/tents/10x10-infographic.webp' },
+  { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/colorways/canopy-red.webp' },
   { title: 'Accessories', copy: 'Weights, sandbags & hardware', to: '/products', img: '/images/tents/sandbags.webp' }
 ];
 

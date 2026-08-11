@@ -476,8 +476,8 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .colorways { margin-top: 1.1rem; }
 .colorways-title { font-size: 0.95rem; margin: 0 0 0.5rem; color: var(--navy); }
 .colorway-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.colorway { margin: 0; width: 84px; }
-.colorway img { width: 84px; height: 84px; object-fit: contain; border: 1px solid var(--line); border-radius: 8px; background: #fff; display: block; }
+.colorway { margin: 0; width: 108px; }
+.colorway img { width: 108px; height: 108px; object-fit: contain; border: 1px solid var(--line); border-radius: 8px; background: #fff; display: block; }
 .colorway figcaption { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 0.25rem; }
 
 /* Booth-packages page */
