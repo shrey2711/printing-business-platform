@@ -54,18 +54,16 @@ h1, h2, h3, h4 { color: var(--navy); }
   border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 30; background: #fff;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
-/* Scrolling header: once the page scrolls, lift the bar with a shadow and
-   shrink it a touch so it reads as a floating, sticky header. */
+/* Scrolling header: once the page scrolls, lift the bar with a shadow so it
+   reads as a floating, sticky header. Size is kept constant on purpose — a
+   scroll-triggered shrink reflows the page and flickers around the threshold. */
 .site-header.scrolled { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09); border-bottom-color: transparent; }
 .header-top {
   display: flex; align-items: center; gap: 0.9rem;
   padding: 0.6rem 1.5rem; max-width: 1400px; margin: 0 auto;
-  transition: padding 0.2s ease;
 }
-.site-header.scrolled .header-top { padding-top: 0.35rem; padding-bottom: 0.35rem; }
 .logo { display: flex; align-items: center; gap: 0.55rem; }
-.brand-logo { height: 58px; width: auto; display: block; transition: height 0.2s ease; }
-.site-header.scrolled .brand-logo { height: 46px; }
+.brand-logo { height: 58px; width: auto; display: block; }
 .ft-logo { display: inline-block; background: #fff; padding: 0.45rem 0.7rem; border-radius: 8px; }
 .ft-logo img { height: 34px; width: auto; display: block; }
 .logo-mark {
