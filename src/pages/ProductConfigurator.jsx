@@ -271,8 +271,12 @@ export default function ProductConfigurator() {
             <div className="opt-groups">
             {(p.optionGroups || []).map((group) => (
               <div className={`field opt-group ${groupSpanClass(group)}`} key={group.id}>
-                <label>{group.label}</label>
-                {group.help && <small className="opt-help">{group.help}</small>}
+                <label className="opt-label">
+                  <span>{group.label}</span>
+                  {group.help && (
+                    <span className="opt-info" title={group.help} aria-label={group.help} role="img" tabIndex={0}>&#9432;</span>
+                  )}
+                </label>
 
                 {group.type === 'multi' ? (
                   <div className="option-list">

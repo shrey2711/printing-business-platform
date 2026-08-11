@@ -607,6 +607,11 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .opt-group { margin-bottom: 0; }
 .opt-group.og-2 { grid-column: 1 / -1; }
 .opt-help { display: block; color: var(--muted); font-size: 0.72rem; line-height: 1.35; margin: -0.05rem 0 0.45rem; }
+/* Label + inline info tooltip. Keeps every group a single-line header so the
+   pills below line up across the two columns. Full help shows on hover/focus. */
+.opt-label { display: flex; align-items: center; gap: 0.35rem; margin-bottom: 0.5rem; }
+.opt-info { cursor: help; color: var(--muted); font-size: 0.85rem; line-height: 1; }
+.opt-info:hover, .opt-info:focus { color: var(--blue); outline: none; }
 
 /* Single-select choices render as pressable cards rather than a <select>,
    so size/frame/print trade-offs are visible without opening a dropdown. */
