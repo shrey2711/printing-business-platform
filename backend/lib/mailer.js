@@ -1,6 +1,6 @@
-// Transactional email via Resend (https://resend.com) with branded, table-based
-// HTML templates that render well across email clients. No-ops safely when
-// RESEND_API_KEY is unset.
+// Transactional email via SMTP (Brevo/SES/…) or Resend, with branded,
+// table-based HTML templates. No-ops safely when neither is configured.
+import nodemailer from 'nodemailer';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 // EMAIL_FROM must use a domain you've verified in Resend. For quick testing,
@@ -186,8 +186,6 @@ let smtpTransport;
 function getSmtp() {
   if (!process.env.SMTP_HOST) return null;
   if (smtpTransport) return smtpTransport;
-  // Dynamic require keeps nodemailer out of the load path unless SMTP is used.
-  const nodemailer = require('nodemailer');
   smtpTransport = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT) || 587,
