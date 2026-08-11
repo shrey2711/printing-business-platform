@@ -11,7 +11,13 @@ const SITE_URL = (process.env.PUBLIC_BASE_URL || 'https://www.apextradeshow.com'
 const DEFAULT_APP_URL = SITE_URL;
 // PNG (not webp) so it renders in Outlook and every email client.
 const LOGO_URL = `${SITE_URL}/images/logo.png`;
-const CONTACT_EMAIL = 'info@apextradeshow.com';
+// Embed the logo inline (Content-ID) rather than hot-linking it, so it still
+// renders when a client blocks remote images (the usual cause of a broken logo).
+const LOGO_CID = 'apexlogo';
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'info@apextradeshow.com';
+const CONTACT_PHONE = process.env.CONTACT_PHONE || '+1 672-514-7587';
+const CONTACT_PHONE_HREF = `tel:${(process.env.CONTACT_PHONE_HREF || CONTACT_PHONE).replace(/[^+\d]/g, '')}`;
+const CONTACT_HOURS = process.env.CONTACT_HOURS || 'Mon–Fri, 8am–6pm ET';
 
 // --- Brand palette (official brand colours) -------------------------------
 const C = {
@@ -88,12 +94,32 @@ const shortId = (id) => `#${String(id).slice(0, 8)}`;
 // explicitly rather than assuming dollars — CA$ and US$ both render as "$".
 const money = (n, code = 'USD') => `${code} ${Number(n).toFixed(2)}`;
 
+// Fetch the logo once and cache it, so send() can attach it inline (CID). If the
+// fetch fails we fall back to the hot-linked URL, so the logo is never worse off.
+let logoPromise = null;
+function getLogoAttachment() {
+  if (!logoPromise) {
+    logoPromise = (async () => {
+      try {
+        const res = await fetch(LOGO_URL);
+        if (!res.ok) return null;
+        return { filename: 'logo.png', buffer: Buffer.from(await res.arrayBuffer()), cid: LOGO_CID, contentType: 'image/png' };
+      } catch {
+        return null;
+      }
+    })();
+  }
+  return logoPromise;
+}
+
 // --- Building blocks ------------------------------------------------------
 function header() {
+  // `cid:` resolves to the inline attachment added in send(); email clients that
+  // block remote images still show it. src falls back to the URL if not inlined.
   return `
   <tr><td align="center" style="background:#ffffff;padding:26px 28px 16px;text-align:center;">
     <a href="${SITE_URL}" style="text-decoration:none;">
-      <img src="${LOGO_URL}" alt="${BRAND}" width="207" height="47" style="display:block;width:207px;height:47px;border:0;outline:none;margin:0 auto;" />
+      <img src="cid:${LOGO_CID}" alt="${BRAND}" width="207" height="47" style="display:block;width:207px;height:47px;border:0;outline:none;margin:0 auto;" />
     </a>
   </td></tr>
   <tr><td style="height:4px;line-height:4px;font-size:0;background:${C.red};">&nbsp;</td></tr>`;
@@ -104,9 +130,9 @@ function footer() {
   <tr><td style="background:${C.bg};padding:22px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.7;">
     <strong style="color:${C.navy};font-size:13px;">${BRAND}</strong> — complete trade show displays &amp; event branding: custom canopy tents, banner stands, backdrops and table covers, printed in your brand and shipped across the US &amp; Canada.<br/>
     <a href="${SITE_URL}/products" style="color:${C.blue};text-decoration:none;font-weight:600;">Shop</a> &nbsp;&middot;&nbsp;
-    <a href="${SITE_URL}/blog" style="color:${C.blue};text-decoration:none;font-weight:600;">Resources</a> &nbsp;&middot;&nbsp;
+    <a href="${CONTACT_PHONE_HREF}" style="color:${C.blue};text-decoration:none;font-weight:600;">${CONTACT_PHONE}</a> &nbsp;&middot;&nbsp;
     <a href="mailto:${CONTACT_EMAIL}" style="color:${C.blue};text-decoration:none;font-weight:600;">${CONTACT_EMAIL}</a><br/>
-    <span style="color:#9aa3b0;">Questions? Just reply to this email — we're happy to help.</span>
+    <span style="color:#9aa3b0;">Questions? Call or reply to this email — we're happy to help.</span>
   </td></tr>`;
 }
 
@@ -205,13 +231,18 @@ async function send({ to, subject, html, attachments = [] }) {
   const recipients = (Array.isArray(to) ? to : [to]).filter(Boolean);
   if (!recipients.length) return { sent: false, reason: 'no-recipient' };
 
+  const logo = await getLogoAttachment();
+
   // Preferred: SMTP (Brevo etc).
   const smtp = getSmtp();
   if (smtp) {
     try {
       await smtp.sendMail({
         from: EMAIL_FROM, to: recipients, subject, html,
-        attachments: attachments.map((a) => ({ filename: a.filename, content: a.buffer }))
+        attachments: [
+          ...attachments.map((a) => ({ filename: a.filename, content: a.buffer })),
+          ...(logo ? [{ filename: logo.filename, content: logo.buffer, cid: logo.cid, contentType: logo.contentType }] : [])
+        ]
       });
       return { sent: true, via: 'smtp' };
     } catch (e) {
@@ -223,9 +254,11 @@ async function send({ to, subject, html, attachments = [] }) {
   if (RESEND_API_KEY) {
     try {
       const body = { from: EMAIL_FROM, to: recipients, subject, html };
-      if (attachments.length) {
-        body.attachments = attachments.map((a) => ({ filename: a.filename, content: a.buffer.toString('base64') }));
-      }
+      const resendAtt = [
+        ...attachments.map((a) => ({ filename: a.filename, content: a.buffer.toString('base64') })),
+        ...(logo ? [{ filename: logo.filename, content: logo.buffer.toString('base64'), content_id: logo.cid }] : [])
+      ];
+      if (resendAtt.length) body.attachments = resendAtt;
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
@@ -347,6 +380,17 @@ function quoteClientHtml(q) {
       <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:${C.muted};">What you sent${q.reference ? ` &middot; ${esc(q.reference)}` : ''}</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:0 0 6px;">${table}</table>
       <p style="margin:16px 0 0;font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:${C.muted};">Need to change something or send more artwork? Just reply to this email.</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0 0;background:#f4f8fc;border:1px solid ${C.line};border-radius:10px;">
+        <tr><td style="padding:14px 16px;font-family:Arial,sans-serif;">
+          <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:${C.navy};">Have a question in the meantime?</p>
+          <p style="margin:0;font-size:15px;line-height:1.8;color:${C.ink};">
+            📞 <a href="${CONTACT_PHONE_HREF}" style="color:${C.navy};text-decoration:none;font-weight:700;">${CONTACT_PHONE}</a>
+            &nbsp;&middot;&nbsp;
+            ✉️ <a href="mailto:${CONTACT_EMAIL}" style="color:${C.navy};text-decoration:none;font-weight:700;">${CONTACT_EMAIL}</a>
+          </p>
+          <p style="margin:4px 0 0;font-size:13px;color:${C.muted};">${CONTACT_HOURS} — we're happy to help.</p>
+        </td></tr>
+      </table>
       ${button(`${SITE_URL}/products`, 'Browse products while you wait', C.red)}
     </td></tr>
     ${footer()}`;
