@@ -128,8 +128,7 @@ function header() {
 function footer() {
   return `
   <tr><td style="background:${C.bg};padding:22px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.7;">
-    <strong style="color:${C.navy};font-size:13px;">${BRAND}</strong> — complete trade show displays &amp; event branding: custom canopy tents, banner stands, backdrops and table covers, printed in your brand and shipped across the US &amp; Canada.<br/>
-    <a href="${SITE_URL}/products" style="color:${C.blue};text-decoration:none;font-weight:600;">Shop</a> &nbsp;&middot;&nbsp;
+    <strong style="color:${C.navy};font-size:13px;">${BRAND}</strong><br/>
     <a href="${CONTACT_PHONE_HREF}" style="color:${C.blue};text-decoration:none;font-weight:600;">${CONTACT_PHONE}</a> &nbsp;&middot;&nbsp;
     <a href="mailto:${CONTACT_EMAIL}" style="color:${C.blue};text-decoration:none;font-weight:600;">${CONTACT_EMAIL}</a><br/>
     <span style="color:#9aa3b0;">Questions? Call or reply to this email — we're happy to help.</span>
@@ -227,18 +226,37 @@ function getSmtp() {
   return smtpTransport;
 }
 
-async function send({ to, subject, html, attachments = [] }) {
+// Plain-text version of an HTML email. A multipart/alternative message (text +
+// HTML) reads as transactional to Gmail — HTML-only is a strong "bulk/marketing"
+// signal that lands mail in the Promotions tab.
+function htmlToText(html) {
+  return String(html || '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<a [^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, '$2 ($1)')
+    .replace(/<\/(p|div|tr|h1|h2|h3|li|table)>/gi, '\n')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&middot;/g, '·').replace(/&bull;/g, '•')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#10003;/g, '✓').replace(/&#9432;/g, '')
+    .replace(/[ \t]+/g, ' ')
+    .split('\n').map((l) => l.trim()).join('\n')
+    .replace(/\n{3,}/g, '\n\n').trim();
+}
+
+async function send({ to, subject, html, text, attachments = [] }) {
   const recipients = (Array.isArray(to) ? to : [to]).filter(Boolean);
   if (!recipients.length) return { sent: false, reason: 'no-recipient' };
 
   const logo = await getLogoAttachment();
+  const plain = text || htmlToText(html);
 
   // Preferred: SMTP (Brevo etc).
   const smtp = getSmtp();
   if (smtp) {
     try {
       await smtp.sendMail({
-        from: EMAIL_FROM, to: recipients, subject, html,
+        from: EMAIL_FROM, to: recipients, subject, text: plain, html,
         attachments: [
           ...attachments.map((a) => ({ filename: a.filename, content: a.buffer })),
           ...(logo ? [{ filename: logo.filename, content: logo.buffer, cid: logo.cid, contentType: logo.contentType }] : [])
@@ -253,7 +271,7 @@ async function send({ to, subject, html, attachments = [] }) {
   // Fallback: Resend HTTP API.
   if (RESEND_API_KEY) {
     try {
-      const body = { from: EMAIL_FROM, to: recipients, subject, html };
+      const body = { from: EMAIL_FROM, to: recipients, subject, text: plain, html };
       const resendAtt = [
         ...attachments.map((a) => ({ filename: a.filename, content: a.buffer.toString('base64') })),
         ...(logo ? [{ filename: logo.filename, content: logo.buffer.toString('base64'), content_id: logo.cid }] : [])
@@ -391,7 +409,6 @@ function quoteClientHtml(q) {
           <p style="margin:4px 0 0;font-size:13px;color:${C.muted};">${CONTACT_HOURS} — we're happy to help.</p>
         </td></tr>
       </table>
-      ${button(`${SITE_URL}/products`, 'Browse products while you wait', C.red)}
     </td></tr>
     ${footer()}`;
   return shell(inner, `We've got your request${q.reference ? ` (${q.reference})` : ''} — our team will follow up shortly with pricing and a free proof.`);
