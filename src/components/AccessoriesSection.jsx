@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // Tent accessories block for the products page. Sandbags is a real priced
 // add-on (configured on any canopy); flags and hardware route to a quote so we
 // never advertise a price we haven't set.
-const ITEMS = [
+const TENT_ITEMS = [
   {
     title: 'Leg Sandbags (Set of 4)',
     img: '/images/tents/sandbags.webp',

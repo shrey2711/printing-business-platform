@@ -7,6 +7,7 @@ import ProductTabs from '../components/ProductTabs';
 import TentGallery from '../components/TentGallery';
 import TableCoverPhoto from '../components/TableCoverPhoto';
 import DisplayPhoto from '../components/DisplayPhoto';
+import ProductGallery from '../components/ProductGallery';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getCategoryForProduct } from '../data/categoryPages';
 import ColorwayStrip from '../components/ColorwayStrip';
@@ -234,7 +235,9 @@ export default function ProductConfigurator() {
         {/* Left: product visual + info */}
         <div className="config-visual">
           <div className="config-hero-thumb">
-            {isConfigured && hasCanopyShape(p) ? (
+            {product.gallery?.length ? (
+              <ProductGallery images={product.gallery} label={product.name} />
+            ) : isConfigured && hasCanopyShape(p) ? (
               <TentGallery
                 size={product.slug.startsWith('canopy-tent-') ? product.slug.replace('canopy-tent-', '') : (sel.size || sel.length)}
                 fullWalls={countWalls(sel.wallsFull)}

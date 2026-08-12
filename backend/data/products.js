@@ -334,6 +334,10 @@ const tradeShowDisplays = [
     category: 'banner-stands',
     badge: 'Retractable',
     emoji: '📐',
+    gallery: [
+      '/images/displays/standard-retractable-banner.webp',
+      '/images/displays/standard-retractable-hardware.jpg'
+    ],
     tagline: 'Compact retractable banner stand with a replaceable printed graphic.',
     description:
       'A portable retractable banner stand with a compact aluminium base and two stabilising feet. ' +
@@ -397,6 +401,11 @@ const tradeShowDisplays = [
     category: 'banner-stands',
     badge: 'Premium',
     emoji: '🏆',
+    gallery: [
+      '/images/displays/deluxe-retractable-banner.webp',
+      '/images/displays/deluxe-retractable-hardware.jpg',
+      '/images/displays/deluxe-retractable-base.jpg'
+    ],
     tagline: 'Premium retractable banner stand with chrome-style end caps and an adjustable pole.',
     description:
       'A premium retractable banner stand with heavier aluminium hardware, chrome-style end caps and an ' +
@@ -453,6 +462,10 @@ const tradeShowDisplays = [
     category: 'banner-stands',
     badge: 'Economical',
     emoji: '✖️',
+    gallery: [
+      '/images/displays/x-stand-banner.webp',
+      '/images/displays/x-stand-hardware.jpg'
+    ],
     tagline: 'Lightweight X-frame banner stand — an economical, portable display.',
     description:
       'A lightweight X-frame banner stand — not a retractable. The banner mounts to a collapsible ' +
@@ -521,6 +534,17 @@ const tradeShowDisplays = [
     category: 'backdrops',
     badge: 'Backdrop',
     emoji: '📸',
+    // Real product photos (assembled walls, frame + hardware kit). Shown as a
+    // gallery on the product page in place of the illustrated placeholder.
+    gallery: [
+      '/images/displays/step-repeat-angled.jpeg',
+      '/images/displays/step-repeat-front-back.jpeg',
+      '/images/displays/step-repeat-graphic-detail.jpeg',
+      '/images/displays/step-repeat-frame.jpeg',
+      '/images/displays/step-repeat-frame-black.jpg',
+      '/images/displays/step-repeat-kit.jpeg',
+      '/images/displays/step-repeat-detail.jpeg'
+    ],
     tagline: 'Large-format step & repeat media wall for event photography and branding.',
     description:
       'A large-format fabric step & repeat backdrop on an adjustable frame — the media wall behind ' +
