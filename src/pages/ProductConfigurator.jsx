@@ -8,6 +8,7 @@ import TentGallery from '../components/TentGallery';
 import TableCoverPhoto from '../components/TableCoverPhoto';
 import DisplayPhoto from '../components/DisplayPhoto';
 import ProductGallery from '../components/ProductGallery';
+import AccessoriesSection, { BANNER_ACCESSORIES } from '../components/AccessoriesSection';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getCategoryForProduct } from '../data/categoryPages';
 import ColorwayStrip from '../components/ColorwayStrip';
@@ -536,6 +537,14 @@ export default function ProductConfigurator() {
       </div>
 
       <ProductTabs product={product} />
+
+      {(product.category === 'banner-stands' || product.category === 'backdrops') && (
+        <AccessoriesSection
+          items={BANNER_ACCESSORIES}
+          title="Banner Stand Accessories"
+          subtitle="Lighting, replacement graphics and carry bags to complete your stand."
+        />
+      )}
 
       {related.length > 0 && (
         <section className="related-section">

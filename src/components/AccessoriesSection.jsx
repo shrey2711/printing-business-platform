@@ -28,12 +28,43 @@ const TENT_ITEMS = [
   }
 ];
 
-export default function AccessoriesSection() {
+// Accessories to complete a banner-stand order. Real photo for the LED light;
+// replacement graphic + carry bag are existing, generic add-ons (already noted
+// in the products) shown with an icon. All quote-based — no invented prices.
+export const BANNER_ACCESSORIES = [
+  {
+    title: 'LED Light for Banner Stand',
+    img: '/images/displays/led-light-banner-stand.jpg',
+    copy: 'Clip-on LED spotlight to illuminate your banner graphic at shows, lobbies and events.',
+    to: '/quote',
+    cta: 'Request a quote'
+  },
+  {
+    title: 'Replacement Printed Graphic',
+    icon: '🖼️',
+    copy: 'Reprint your banner with new artwork and reuse the existing hardware.',
+    to: '/quote',
+    cta: 'Request a quote'
+  },
+  {
+    title: 'Padded Carry Bag',
+    icon: '🎒',
+    copy: 'Protective travel bag to transport your banner stand safely between shows.',
+    to: '/quote',
+    cta: 'Request a quote'
+  }
+];
+
+export default function AccessoriesSection({
+  items = TENT_ITEMS,
+  title = 'Tent Accessories',
+  subtitle = 'Weights, flags and hardware to complete your booth.'
+}) {
   return (
     <section className="acc-section">
       <div className="section-head">
-        <h2>Tent Accessories</h2>
-        <p>Weights, flags and hardware to complete your booth.</p>
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
       </div>
       <div className="acc-grid">
         {TENT_ITEMS.map((it) => (
