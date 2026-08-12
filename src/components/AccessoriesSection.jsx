@@ -36,7 +36,7 @@ export default function AccessoriesSection() {
         <p>Weights, flags and hardware to complete your booth.</p>
       </div>
       <div className="acc-grid">
-        {ITEMS.map((it) => (
+        {TENT_ITEMS.map((it) => (
           <Link className="acc-card" to={it.to} key={it.title}>
             <div className="acc-media">
               {it.img ? (
