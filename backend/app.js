@@ -21,6 +21,13 @@ import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from 
 
 dotenv.config();
 
+// Who receives quote/order notifications — kept separate from ADMIN_EMAILS so
+// adding a notification inbox never grants admin-dashboard access. Defaults to
+// the brand inbox plus the team Gmail; override with QUOTE_NOTIFY_EMAILS (CSV).
+const notifyEmails = (process.env.QUOTE_NOTIFY_EMAILS ||
+  [brand.email, 'apextradeshow@gmail.com'].join(','))
+  .split(',').map((s) => s.trim()).filter(Boolean);
+
 const app = express();
 app.set('trust proxy', 1); // behind Vercel's proxy — needed for correct client IPs
 
@@ -148,9 +155,8 @@ app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => 
     description: b.description,
     fileName: req.file ? req.file.originalname : null
   };
-  // Official inbox: ADMIN_EMAILS if set, else the brand contact address, so a
-  // quote never silently goes nowhere.
-  const staffTo = adminEmails.length ? adminEmails : [brand.email];
+  // Notification inbox(es) — info@ + team Gmail by default (see notifyEmails).
+  const staffTo = notifyEmails;
   const attachment = req.file ? { filename: req.file.originalname, buffer: req.file.buffer } : null;
 
   let email;
@@ -324,7 +330,7 @@ app.post('/api/orders/:id/notify', writeLimiter, async (req, res) => {
     appUrl,
     invoiceUrl: invoice.invoiceUrl
   });
-  const alert = await sendNewOrderAlert({ to: adminEmails.length ? adminEmails : [brand.email], order, customerEmail: user.email, appUrl });
+  const alert = await sendNewOrderAlert({ to: notifyEmails, order, customerEmail: user.email, appUrl });
   res.json({ confirmation, alert, invoice });
 });
 
