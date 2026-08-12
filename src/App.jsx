@@ -26,6 +26,7 @@ const BoothPackagesPage = lazy(() => import('./pages/BoothPackagesPage'));
 const CityCategoryPage = lazy(() => import('./pages/CityCategoryPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 import Logo from './components/Logo';
+import ChunkErrorBoundary from './components/ChunkErrorBoundary';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
 
@@ -321,6 +322,7 @@ function App() {
     <div className="app-shell">
       <ScrollToTop />
       <Header />
+      <ChunkErrorBoundary>
       <Suspense fallback={<main className="page"><p className="muted">Loading…</p></main>}>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -364,6 +366,7 @@ function App() {
         <Route path="/terms" element={<InfoPage slug="terms" />} />
       </Routes>
       </Suspense>
+      </ChunkErrorBoundary>
       <Footer />
     </div>
   );

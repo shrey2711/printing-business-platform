@@ -33,6 +33,7 @@ export default function QuotePage() {
   const canSubmit =
     formData.name.trim() &&
     formData.email.trim() &&
+    formData.phone.trim() &&
     formData.quantity.trim() &&
     formData.description.trim();
 
@@ -91,8 +92,8 @@ export default function QuotePage() {
 
           <div className="two-col">
             <div className="field">
-              <label htmlFor="phone">Phone (optional)</label>
-              <input id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+              <label htmlFor="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} required />
             </div>
             <div className="field">
               <label htmlFor="quantity">Quantity</label>
