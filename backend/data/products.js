@@ -222,6 +222,19 @@ const pleatedCovers = {
   category: 'table-covers',
   badge: 'Custom Printed',
   emoji: '🎪',
+  gallery: [
+    { src: '/images/table-covers/pleated.webp', alt: 'Apex custom pleated table cover — draped closed-back throw with a full-colour printed front' },
+    { src: '/images/table-covers/apex-table-cover-coverage.svg', alt: '3-sided open-back versus 4-sided closed-back table cover comparison' },
+    { src: '/images/table-covers/apex-table-cover-sizes.svg', alt: 'Table cover size comparison: 4 ft, 6 ft and 8 ft' },
+    { src: '/images/table-covers/apex-standard-vs-stretch.svg', alt: 'Standard draped versus fitted stretch table cover comparison' }
+  ],
+  faqs: [
+    { q: 'What is the difference between a 3-sided and a 4-sided table cover?', a: 'A 4-sided (closed-back) cover drapes over all four sides for full 360° coverage. A 3-sided (open-back) cover leaves the rear open so staff can sit behind the table or reach storage underneath. Apex pleated table covers are 4-sided closed-back.' },
+    { q: 'Which coverage should I choose — 3-sided or 4-sided?', a: 'Choose 4-sided closed-back when the back of the table is visible or you want a finished look from every angle. Choose 3-sided open-back when you sit behind the table or need under-table access. Apex currently ships 4-sided closed-back; contact us if you need an open-back version.' },
+    { q: 'What size table cover do I need?', a: 'Match the cover to your table: 4 ft (~48"), 6 ft (~72") or 8 ft (~96") folding table. The 6 ft is the most common trade-show size.' },
+    { q: 'What is the difference between a standard and a stretch table cover?', a: 'A standard cover is a draped throw with a relaxed, classic look (4, 6 and 8 ft). A stretch cover is a fitted, spandex-style fabric pulled tight to the table for a modern look (6 and 8 ft).' },
+    { q: 'Can the table covers be reused?', a: 'Yes. They are dye-sublimated on wrinkle-resistant polyester and are machine washable, so you can reuse them show after show.' }
+  ],
   tagline: 'Full-colour pleated table throws — draped fit, closed back.',
   description:
     'Custom printed pleated table covers (throws) for trade shows, markets and events. Dye-sublimated ' +
@@ -275,6 +288,16 @@ const stretchCovers = {
   category: 'table-covers',
   badge: 'Custom Printed',
   emoji: '🎪',
+  gallery: [
+    { src: '/images/table-covers/stretch.webp', alt: 'Apex custom stretch table cover — fitted tight to the table with a full-colour printed front' },
+    { src: '/images/table-covers/apex-standard-vs-stretch.svg', alt: 'Standard draped versus fitted stretch table cover comparison' }
+  ],
+  faqs: [
+    { q: 'How is a stretch table cover different from a standard cover?', a: 'A stretch cover is a fitted, spandex-style fabric that pulls tight to the table for a smooth, modern look. A standard cover is a draped throw with a relaxed, classic look. Stretch comes in 6 and 8 ft.' },
+    { q: 'Is the Apex stretch cover open or closed back?', a: 'Apex stretch table covers are closed-back (4-sided) — the fabric wraps and tensions around all four sides and the legs for a fully finished look.' },
+    { q: 'What size stretch table cover do I need?', a: 'Match it to your table: 6 ft (~72") or 8 ft (~96") folding table.' },
+    { q: 'Can I reuse a stretch table cover?', a: 'Yes — it is dye-sublimated on wrinkle-resistant, machine-washable stretch polyester, so it holds up show after show.' }
+  ],
   tagline: 'Full-colour fitted stretch covers — tight fit, closed back.',
   description:
     'Custom printed stretch table covers for trade shows and events. A fitted, spandex-style cover ' +

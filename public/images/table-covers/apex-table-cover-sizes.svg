@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 560" role="img" aria-label="Custom table cover size comparison: 4 ft, 6 ft and 8 ft">
+  <rect width="1120" height="560" fill="#ffffff"/>
+  <text x="560" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#0b1f4d">Table Cover Sizes — 4 ft, 6 ft &amp; 8 ft</text>
+  <text x="560" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#6b7480">Fits a standard 4-, 6- or 8-foot folding table (shown to relative width)</text>
+
+  <!-- baseline -->
+  <line x1="70" y1="430" x2="1050" y2="430" stroke="#c9d3e2" stroke-width="3"/>
+
+  <!-- 4 FT: width 180, x 110..290 -->
+  <path d="M110,200 H290 V415 Q290,430 275,430 H125 Q110,430 110,415 Z" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="110" y="200" width="180" height="46" fill="#0b1f4d"/>
+  <rect x="110" y="200" width="180" height="6" fill="#ED1C24"/>
+  <text x="200" y="231" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#ffffff" letter-spacing="1">APEX</text>
+  <text x="200" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#0b1f4d">4 FT</text>
+  <text x="200" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7480">~48&#8243; wide table</text>
+
+  <!-- 6 FT: width 270, x 425..695 -->
+  <path d="M425,200 H695 V415 Q695,430 680,430 H440 Q425,430 425,415 Z" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="425" y="200" width="270" height="46" fill="#0b1f4d"/>
+  <rect x="425" y="200" width="270" height="6" fill="#ED1C24"/>
+  <text x="560" y="231" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#ffffff" letter-spacing="1">APEX</text>
+  <text x="560" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#0b1f4d">6 FT</text>
+  <text x="560" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7480">~72&#8243; wide table</text>
+
+  <!-- 8 FT: width 310, x 700..1010 -->
+  <path d="M700,200 H1010 V415 Q1010,430 995,430 H715 Q700,430 700,415 Z" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="700" y="200" width="310" height="46" fill="#0b1f4d"/>
+  <rect x="700" y="200" width="310" height="6" fill="#ED1C24"/>
+  <text x="855" y="231" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#ffffff" letter-spacing="1">APEX</text>
+  <text x="855" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#0b1f4d">8 FT</text>
+  <text x="855" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7480">~96&#8243; wide table</text>
+</svg>

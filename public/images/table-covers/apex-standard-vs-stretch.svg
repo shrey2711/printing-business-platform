@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" role="img" aria-label="Standard draped table cover versus fitted stretch table cover comparison">
+  <rect width="1120" height="620" fill="#ffffff"/>
+  <text x="560" y="52" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#0b1f4d">Standard vs Stretch Table Covers</text>
+  <text x="560" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#6b7480">Relaxed drape or tight modern fit</text>
+  <line x1="560" y1="110" x2="560" y2="560" stroke="#e4e9f2" stroke-width="2"/>
+
+  <!-- LEFT: STANDARD DRAPED (loose, rounded drape to floor) -->
+  <path d="M180,190 H420 V400 Q420,440 380,440 H220 Q180,440 180,400 Z" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="180" y="190" width="240" height="58" fill="#0b1f4d"/>
+  <rect x="180" y="190" width="240" height="7" fill="#ED1C24"/>
+  <text x="300" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
+  <rect x="216" y="310" width="168" height="12" rx="6" fill="#c9d3e2"/>
+  <rect x="216" y="340" width="120" height="12" rx="6" fill="#dbe2ee"/>
+  <!-- soft drape folds -->
+  <path d="M210,248 Q206,340 214,440" stroke="#dbe2ee" stroke-width="3" fill="none"/>
+  <path d="M390,248 Q394,340 386,440" stroke="#dbe2ee" stroke-width="3" fill="none"/>
+  <line x1="150" y1="440" x2="450" y2="440" stroke="#c9d3e2" stroke-width="3"/>
+  <text x="300" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#0b1f4d">STANDARD (DRAPED)</text>
+  <text x="300" y="522" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#6b7480">Relaxed drape · 4, 6 &amp; 8 ft · easy classic look</text>
+
+  <!-- RIGHT: STRETCH (tight, table-leg shape visible) -->
+  <!-- tensioned around legs: sides pull in near the floor -->
+  <path d="M710,190 H950 V330 L924,440 H736 L710,330 Z" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="710" y="190" width="240" height="58" fill="#0b1f4d"/>
+  <rect x="710" y="190" width="240" height="7" fill="#ED1C24"/>
+  <text x="830" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
+  <rect x="746" y="310" width="168" height="12" rx="6" fill="#c9d3e2"/>
+  <rect x="746" y="340" width="120" height="12" rx="6" fill="#dbe2ee"/>
+  <!-- tension lines toward legs -->
+  <path d="M720,250 L740,440" stroke="#c9d3e2" stroke-width="2"/>
+  <path d="M940,250 L920,440" stroke="#c9d3e2" stroke-width="2"/>
+  <line x1="680" y1="440" x2="980" y2="440" stroke="#c9d3e2" stroke-width="3"/>
+  <text x="830" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#0b1f4d">STRETCH (FITTED)</text>
+  <text x="830" y="522" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#6b7480">Tight tensioned fit · 6 &amp; 8 ft · modern booth look</text>
+</svg>
