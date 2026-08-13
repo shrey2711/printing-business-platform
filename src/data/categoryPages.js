@@ -61,7 +61,7 @@ export const CATEGORY_PAGES = [
     h1: 'Retractable & X-Stand Banner Stands',
     title: 'Retractable & X-Stand Banner Stands',
     description:
-      'Custom printed banner stands from Apex — standard and deluxe retractable banners, X-stand and tabletop banners for trade shows, lobbies, counters and events. Priced on request.',
+      'Custom printed banner stands from Apex — standard and deluxe retractable banners, X-stand and tabletop banners for trade shows, lobbies, counters and events. Configure size and production speed for instant online pricing.',
     intro:
       'Portable printed banner stands for aisles, entrances, counters and events. Retractable stands roll the graphic into the base for travel; the X-stand uses a lightweight X-frame; the tabletop version sits on a counter. All use a replaceable printed graphic.',
     points: [
@@ -78,7 +78,7 @@ export const CATEGORY_PAGES = [
     h1: 'Custom Table Covers',
     title: 'Custom Table Covers — Pleated & Stretch',
     description:
-      'Custom printed table covers from Apex — pleated throws and fitted stretch covers, closed back, for trade show tables, registration desks and counters. Priced on request.',
+      'Custom printed table covers from Apex — pleated throws and fitted stretch covers, closed back, for trade show tables, registration desks and counters. Configure size and production speed for instant online pricing.',
     intro:
       'Custom printed table covers that turn a plain table into a branded surface. Choose a pleated throw that drapes with rounded corners, or a fitted stretch cover for a tight, modern look — both closed-back (4-sided) and printed in full colour.',
     points: [
@@ -95,7 +95,7 @@ export const CATEGORY_PAGES = [
     h1: 'Step & Repeat Backdrops',
     title: 'Step & Repeat Backdrops',
     description:
-      'Custom step & repeat backdrops from Apex — large-format fabric media walls with repeating logo branding for event and press photography, on a portable adjustable frame. Priced on request.',
+      'Custom step & repeat backdrops from Apex — large-format fabric media walls with repeating logo branding for event and press photography, on a portable adjustable frame. Configure size, kit and production speed for instant online pricing.',
     intro:
       'Step & repeat backdrops are the branded media wall behind press, red-carpet and event photos. Print repeating logos across a large-format fabric on an adjustable, portable frame so your branding reads in every shot.',
     points: [

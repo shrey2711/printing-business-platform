@@ -22,7 +22,7 @@ export const PAGES = [
       'Apex Trade Show is a complete trade show display and event branding supplier serving the US and Canada — custom canopy tents, banner stands, backdrops and table covers, printed in your brand with a free artwork proof.',
     blocks: [
       { p: 'Apex Trade Show is a complete trade show display and event branding supplier serving the United States and Canada. We print your brand across a full booth — custom canopy tents, retractable and X-stand banner stands, step & repeat backdrops and table covers — with a free artwork proof on every order.' },
-      { h: 'What we do', p: 'We help businesses, vendors, teams and event organisers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Custom canopies are priced instantly online; banner stands, backdrops and table covers are quoted per order.' },
+      { h: 'What we do', p: 'We help businesses, vendors, teams and event organisers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops and table covers all configure for instant online pricing; newer display types (SEG, tension fabric, pop-up and flags) are quoted per order.' },
       { links: [
         { label: 'Trade Show Displays', to: '/trade-show-displays' },
         { label: 'Custom Canopies', to: '/custom-canopies' },
@@ -39,7 +39,7 @@ export const PAGES = [
         { label: 'Table Covers', to: '/table-covers' }
       ] },
       { h: 'How we work', list: [
-        'Configure a canopy for instant pricing, or request a quote for banners, backdrops and table covers.',
+        'Configure any canopy, banner stand, backdrop or table cover for instant online pricing — or request a quote for bulk and non-standard orders.',
         'Upload your artwork or logo, or add our design service.',
         'Approve the free visual proof we send — nothing prints until you say yes.',
         'We print with dye sublimation and ship across the US and Canada.'
@@ -64,7 +64,45 @@ export const PAGES = [
       { h: 'Colour', p: 'Printing is full-colour dye sublimation. Solid brand colours, gradients, photos and full-bleed backgrounds all print. If exact brand-colour matching matters, tell us in your order notes and we will confirm on the proof.' },
       { h: 'What you can print', p: 'The printable area depends on the product — a canopy tent prints on the top, valance and walls; banner stands, backdrops and table covers print across the full graphic. Each product page lists the print surfaces and finished sizes for that item.' },
       { h: 'No print-ready file?', p: 'Add our design service at checkout and we build the artwork for you from your logo and direction.' },
-      { h: 'The proof', p: 'Every order includes a free visual proof for your approval. Nothing goes to production until you say yes.' }
+      { h: 'The proof', p: 'Every order includes a free visual proof for your approval. Nothing goes to production until you say yes.' },
+      { links: [{ label: 'How the free artwork proof works', to: '/free-artwork-proof' }] }
+    ]
+  },
+  {
+    slug: 'free-artwork-proof',
+    nav: 'Free Artwork Proof',
+    title: 'Free Artwork Proof — How Approval Works Before Printing',
+    description:
+      'Every Apex Trade Show order includes a free artwork proof. See exactly how the proof-and-approval process works — configure, upload artwork, we prepare a digital proof, you review and approve in writing, then production begins. Nothing prints until you approve.',
+    blocks: [
+      { p: 'Every Apex Trade Show order — canopy tent, banner stand, backdrop or table cover — includes a free digital artwork proof. It is your chance to see exactly how your artwork will print before anything goes to production. Nothing is printed until you approve the proof in writing, at no extra charge.' },
+      { h: 'How the free proof process works', list: [
+        'Configure your product (size, options and quantity) and place your order or request a quote.',
+        'Upload your print-ready artwork or logo — or add our design service and we build the artwork for you.',
+        'Our team prepares and checks your artwork and lays it out on the product.',
+        'We email you a digital proof showing how it will print.',
+        'You review the proof carefully and reply with any changes.',
+        'You give written approval — we only take written approval as final, never verbal.',
+        'Production begins, and your standard production time starts from that approval.'
+      ] },
+      { h: 'What to check on your proof', p: 'Look over the proof closely before approving. On the proof, check:' },
+      { h: '', list: [
+        'Logo — the correct, current version, sharp and not stretched.',
+        'Spelling — company name, taglines, phone numbers, web and email addresses.',
+        'Colours — brand colours look right (tell us in notes if you need close matching).',
+        'Positioning — logos and text sit where you expect on each surface.',
+        'Seams — how artwork crosses panel seams on canopies and backdrops.',
+        'Orientation — nothing is upside-down or mirrored.',
+        'Wall placement — for canopies, artwork on the correct full or half walls.'
+      ] },
+      { h: 'Why approval is in writing', p: 'Written approval protects you: it confirms the exact file that goes to print, so what you receive matches what you signed off. Reprint turnaround, when needed, is measured from your written proof approval.' },
+      { h: 'Production time', p: 'Standard production is 6–8 business days after you approve your proof; a 2–3 day rush is available. Shipping/transit time is additional and depends on your destination.' },
+      { h: 'Ready to start?', p: 'Configure a product for instant pricing, upload your artwork, and we will send your free proof.' },
+      { links: [
+        { label: 'Shop all products', to: '/products' },
+        { label: 'Artwork Guidelines', to: '/artwork-guidelines' },
+        { label: 'Request a quote', to: '/quote' }
+      ] }
     ]
   },
   {

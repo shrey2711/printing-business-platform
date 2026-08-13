@@ -286,6 +286,7 @@ function Footer() {
           <div className="ft-links">
             <Link to="/about">About Apex Trade Show</Link>
             <Link to="/artwork-guidelines">Artwork Guidelines</Link>
+            <Link to="/free-artwork-proof">Free Artwork Proof</Link>
             <Link to="/shipping">Shipping</Link>
             <Link to="/returns">Returns</Link>
             <Link to="/warranty">Warranty</Link>
@@ -359,6 +360,7 @@ function App() {
         <Route path="/banner-stands/:city" element={<CityCategoryPage categoryKey="banner-stands" />} />
         <Route path="/about" element={<InfoPage slug="about" />} />
         <Route path="/artwork-guidelines" element={<InfoPage slug="artwork-guidelines" />} />
+        <Route path="/free-artwork-proof" element={<InfoPage slug="free-artwork-proof" />} />
         <Route path="/shipping" element={<InfoPage slug="shipping" />} />
         <Route path="/returns" element={<InfoPage slug="returns" />} />
         <Route path="/warranty" element={<InfoPage slug="warranty" />} />
