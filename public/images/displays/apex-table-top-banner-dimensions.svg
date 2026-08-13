@@ -1,38 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 620" role="img" aria-label="Apex table top banner stand dimension diagram: 11.5 by 17.5 inch printed graphic">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 680" role="img" aria-label="Apex table top banner stand dimension diagram: 11.5 by 17.5 inch printed graphic">
   <defs>
     <marker id="aht" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0,0 L8,4 L0,8 Z" fill="#0b1f4d"/>
     </marker>
   </defs>
-  <rect width="760" height="620" fill="#ffffff"/>
+  <rect width="760" height="680" fill="#ffffff"/>
   <text x="380" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#0b1f4d">Table Top Banner Stand — Graphic Size</text>
   <text x="380" y="77" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6b7480">Compact 11.5&#8243; &#215; 17.5&#8243; tabletop retractable — for counters and desks</text>
 
-  <!-- banner x 261.5..498.5 (w237 ≈ 11.5in), y 120..480 (h360 ≈ 17.5in) -->
-  <rect x="261.5" y="120" width="237" height="360" rx="3" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
-  <rect x="261.5" y="120" width="237" height="70" rx="3" fill="#0b1f4d"/>
-  <rect x="261.5" y="120" width="237" height="8" fill="#ED1C24"/>
-  <text x="380" y="167" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
-  <rect x="295" y="260" width="170" height="12" rx="6" fill="#c9d3e2"/>
-  <rect x="295" y="290" width="128" height="12" rx="6" fill="#dbe2ee"/>
-  <rect x="295" y="400" width="170" height="34" rx="6" fill="#ED1C24"/>
+  <!-- banner x 261.5..498.5 (w237 ≈ 11.5in), y 175..535 (h360 ≈ 17.5in) -->
+  <rect x="261.5" y="175" width="237" height="360" rx="3" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="261.5" y="175" width="237" height="70" rx="3" fill="#0b1f4d"/>
+  <rect x="261.5" y="175" width="237" height="8" fill="#ED1C24"/>
+  <text x="380" y="222" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
+  <rect x="295" y="315" width="170" height="12" rx="6" fill="#c9d3e2"/>
+  <rect x="295" y="345" width="128" height="12" rx="6" fill="#dbe2ee"/>
+  <rect x="295" y="455" width="170" height="34" rx="6" fill="#ED1C24"/>
   <!-- small tabletop base -->
-  <rect x="250" y="480" width="259" height="22" rx="7" fill="#b9c2cf"/>
-  <rect x="250" y="502" width="259" height="8" rx="4" fill="#8a94a3"/>
+  <rect x="250" y="535" width="259" height="22" rx="7" fill="#b9c2cf"/>
+  <rect x="250" y="557" width="259" height="8" rx="4" fill="#8a94a3"/>
   <!-- table surface line -->
-  <line x1="150" y1="514" x2="610" y2="514" stroke="#c9d3e2" stroke-width="3"/>
+  <line x1="150" y1="569" x2="610" y2="569" stroke="#c9d3e2" stroke-width="3"/>
 
-  <!-- width arrow -->
-  <line x1="261.5" y1="98" x2="498.5" y2="98" stroke="#0b1f4d" stroke-width="2" marker-start="url(#aht)" marker-end="url(#aht)"/>
-  <line x1="261.5" y1="90" x2="261.5" y2="120" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="498.5" y1="90" x2="498.5" y2="120" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
-  <text x="380" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">11.5&#8243;</text>
+  <!-- width arrow (clear of the subtitle) -->
+  <line x1="261.5" y1="150" x2="498.5" y2="150" stroke="#0b1f4d" stroke-width="2" marker-start="url(#aht)" marker-end="url(#aht)"/>
+  <line x1="261.5" y1="150" x2="261.5" y2="175" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="498.5" y1="150" x2="498.5" y2="175" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="380" y="139" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">11.5&#8243;</text>
 
   <!-- height arrow -->
-  <line x1="231" y1="120" x2="231" y2="480" stroke="#0b1f4d" stroke-width="2" marker-start="url(#aht)" marker-end="url(#aht)"/>
-  <line x1="223" y1="120" x2="261.5" y2="120" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="223" y1="480" x2="261.5" y2="480" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
-  <text x="215" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d" transform="rotate(-90 215 300)">17.5&#8243;</text>
+  <line x1="231" y1="175" x2="231" y2="535" stroke="#0b1f4d" stroke-width="2" marker-start="url(#aht)" marker-end="url(#aht)"/>
+  <line x1="223" y1="175" x2="261.5" y2="175" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="223" y1="535" x2="261.5" y2="535" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="215" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d" transform="rotate(-90 215 355)">17.5&#8243;</text>
 
-  <text x="380" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">11.5&#8243; &#215; 17.5&#8243; graphic</text>
+  <text x="380" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">11.5&#8243; &#215; 17.5&#8243; graphic</text>
 </svg>
