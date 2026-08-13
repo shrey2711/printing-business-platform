@@ -12,6 +12,17 @@
 // `html` is trusted, hand-authored HTML (no user input) rendered as-is.
 // Only cite specs/prices that exist in backend/data/products.js — never invent.
 
+import { listProducts } from './products.js';
+
+// Live starting prices derived from the product catalog, so price references in
+// articles never drift out of sync with the store. `startFrom(slug)` returns
+// "from $X" for priced products or "Request a quote" for quote-only ones.
+const _PRODUCTS = Object.fromEntries(listProducts().map((p) => [p.slug, p]));
+const startFrom = (slug) => {
+  const p = _PRODUCTS[slug];
+  return p && p.startingPrice != null ? `from $${Number(p.startingPrice).toLocaleString('en-US')}` : 'Request a quote';
+};
+
 export const STATIC_ARTICLES = [
   {
     slug: 'standard-vs-deluxe-retractable-banner',
@@ -393,36 +404,39 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'How Much Does a Trade Show Display Cost?',
       description:
-        'Trade show display pricing from Apex — custom canopy tents from $510, table covers from $199, plus banner stands and backdrops priced on request. How to budget a full booth.'
+        'Trade show display pricing from Apex — real starting prices for custom canopy tents, table covers, banner stands and step & repeat backdrops, with instant online pricing on most products. How to budget a full booth.'
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-17T00:00:00.000Z',
     updatedAt: '2026-08-17T00:00:00.000Z',
     html: `
-<p>"How much is a trade show display?" depends on which pieces you need. Here are Apex's real starting prices so you can budget honestly — no bundle gimmicks, no invented numbers. Custom canopies are priced instantly online; banner stands and backdrops are quoted per order.</p>
+<p>"How much is a trade show display?" depends on which pieces you need. Here are Apex's real starting prices so you can budget honestly — no bundle gimmicks, no invented numbers. Most products configure for an instant price online; a few (like the tabletop banner) are quoted per order.</p>
 
 <h2>Starting prices</h2>
 <table>
   <thead><tr><th>Product</th><th>Starting price (USD)</th></tr></thead>
   <tbody>
-    <tr><td><a href="/products/canopy-tent-10x10">10×10 canopy tent</a></td><td>$510 printed top only · $835 complete set (top + frame + bag)</td></tr>
-    <tr><td><a href="/products/canopy-tent-10x15">10×15 canopy tent</a></td><td>$545 printed top only · $1,375 complete set</td></tr>
-    <tr><td><a href="/products/canopy-tent-10x20">10×20 canopy tent</a></td><td>$915 printed top only · $1,635 complete set</td></tr>
-    <tr><td><a href="/products/pleated-table-covers">Pleated table cover</a></td><td>From $199 (4 ft) · $215 (6 ft) · $255 (8 ft)</td></tr>
-    <tr><td><a href="/products/stretch-table-covers">Stretch table cover</a></td><td>From $285 (6 ft) · $345 (8 ft)</td></tr>
-    <tr><td><a href="/banner-stands">Banner stands</a> (retractable, X-stand, tabletop)</td><td>Priced on request</td></tr>
-    <tr><td><a href="/backdrops">Step &amp; repeat backdrop</a></td><td>Priced on request</td></tr>
+    <tr><td><a href="/products/canopy-tent-10x10">10×10 canopy tent</a></td><td>${startFrom('canopy-tent-10x10')} (printed top only) — complete set with frame + bag on the product page</td></tr>
+    <tr><td><a href="/products/canopy-tent-10x15">10×15 canopy tent</a></td><td>${startFrom('canopy-tent-10x15')} (printed top only)</td></tr>
+    <tr><td><a href="/products/canopy-tent-10x20">10×20 canopy tent</a></td><td>${startFrom('canopy-tent-10x20')} (printed top only)</td></tr>
+    <tr><td><a href="/products/pleated-table-covers">Pleated table cover</a> (4/6/8 ft)</td><td>${startFrom('pleated-table-covers')}</td></tr>
+    <tr><td><a href="/products/stretch-table-covers">Stretch table cover</a> (6/8 ft)</td><td>${startFrom('stretch-table-covers')}</td></tr>
+    <tr><td><a href="/products/standard-retractable-banner">Standard retractable banner</a></td><td>${startFrom('standard-retractable-banner')}</td></tr>
+    <tr><td><a href="/products/deluxe-retractable-banner">Deluxe retractable banner</a></td><td>${startFrom('deluxe-retractable-banner')}</td></tr>
+    <tr><td><a href="/products/x-stand-banner">X-stand banner</a></td><td>${startFrom('x-stand-banner')}</td></tr>
+    <tr><td><a href="/products/step-and-repeat-backdrop">Step &amp; repeat backdrop</a></td><td>${startFrom('step-and-repeat-backdrop')}</td></tr>
+    <tr><td><a href="/products/table-top-banner-stand">Table top banner stand</a></td><td>${startFrom('table-top-banner-stand')}</td></tr>
   </tbody>
 </table>
-<p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" is the custom-printed fabric top on its own (for customers who already have a compatible frame); the "Complete Canopy Set" adds the aluminium frame and carry bag — the difference is explained on each product page.</p>
+<p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" is the custom-printed fabric top on its own (for customers who already have a compatible frame); the "Complete Canopy Set" adds the aluminium frame and carry bag — the difference is explained on each product page. Prices above are the starting (from) price for each product; the final price depends on the size, options and production speed you choose.</p>
 
 <figure class="blog-fig">
-  <img src="/images/displays/standard-retractable-banner.webp" alt="Apex retractable banner stand, one piece of a trade show booth budget" loading="lazy" decoding="async" width="900" height="700">
-  <figcaption>Banner stands are quoted per order — send artwork and quantity for pricing.</figcaption>
+  <img src="/images/displays/standard-retractable-banner.webp" alt="Apex standard retractable banner stand, one piece of a trade show booth budget" loading="lazy" decoding="async" width="900" height="700">
+  <figcaption>Banner stands configure for an instant price — pick your size and production speed on the product page.</figcaption>
 </figure>
 
-<h2>Why some products are "priced on request"</h2>
-<p>Banner stands and backdrops are quoted per order rather than sold at a fixed online price. Request a quote with your artwork and quantity and we'll send pricing and a free proof before anything prints — no obligation.</p>
+<h2>Instant pricing vs quote-only</h2>
+<p>Canopy tents, banner stands (standard, deluxe and X-stand), step &amp; repeat backdrops and table covers all configure for an instant online price — choose your options and the price updates live. A few items, such as the tabletop banner stand and large or non-standard bulk orders, are quoted per order: <a href="/quote">request a quote</a> with your artwork and quantity and we'll send pricing and a free proof before anything prints.</p>
 
 <h2>Budgeting a complete booth</h2>
 <p>A full booth is the sum of its pieces, not a discounted bundle — each product keeps its own price and configuration. A simple outdoor setup might be a 10×10 canopy plus a table cover; a larger booth adds banner stands and a backdrop. See how the pieces fit together in the <a href="/blog/trade-show-booth-checklist">booth checklist</a>, or browse recommended combinations on the <a href="/trade-show-booth-packages">booth packages</a> page. For a full-booth total, <a href="/quote">request a quote</a> listing everything you need.</p>
