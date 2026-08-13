@@ -8,23 +8,29 @@ export default function ProductGallery({ images = [], label }) {
 
   if (!images.length) return null;
 
+  // Accept plain strings or { src, alt } objects. Per-image alt text (when
+  // supplied) describes each specific view for accessibility + image SEO.
+  const items = images.map((it) =>
+    typeof it === 'string' ? { src: it, alt: label } : { src: it.src, alt: it.alt || label }
+  );
+
   return (
     <div className="pgallery">
       <div className="pgallery-main">
-        <img src={images[active]} alt={label || 'Product photo'} decoding="async" />
+        <img src={items[active].src} alt={items[active].alt || 'Product photo'} decoding="async" />
       </div>
-      {images.length > 1 && (
+      {items.length > 1 && (
         <div className="pgallery-thumbs">
-          {images.map((src, i) => (
+          {items.map((it, i) => (
             <button
               type="button"
-              key={src}
+              key={it.src}
               className={`pgallery-thumb ${i === active ? 'is-active' : ''}`}
-              aria-label={`View photo ${i + 1}`}
+              aria-label={it.alt || `View photo ${i + 1}`}
               aria-pressed={i === active}
               onClick={() => setActive(i)}
             >
-              <img src={src} alt="" loading="lazy" decoding="async" />
+              <img src={it.src} alt="" loading="lazy" decoding="async" />
             </button>
           ))}
         </div>

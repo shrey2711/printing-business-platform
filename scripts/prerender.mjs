@@ -575,7 +575,15 @@ for (const summary of productList) {
     // Product schema. Derived from the size in the slug.
     const sizeM = product.slug.match(/(\d+x\d+)/);
     let productImages = [];
-    if (sizeM) {
+    // Prefer the product's real photo gallery so schema image[] matches the
+    // gallery shown on the page (raster only — SVG diagrams are excluded here).
+    const galleryImgs = Array.isArray(product.gallery)
+      ? product.gallery.map((g) => (typeof g === 'string' ? g : g && g.src)).filter(Boolean)
+      : [];
+    const rasterGallery = galleryImgs.filter((s) => !/\.svg$/i.test(s));
+    if (rasterGallery.length) {
+      productImages = rasterGallery.map((s) => (/^https?:/.test(s) ? s : ORIGIN + s));
+    } else if (sizeM) {
       productImages = [1, 2, 3].map((n) => `${ORIGIN}/images/tents/${sizeM[1]}-${n}wall.webp`);
     } else if (product.category === 'table-covers') {
       const k = product.slug.includes('stretch') ? 'stretch' : 'pleated';

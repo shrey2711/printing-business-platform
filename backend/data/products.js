@@ -335,10 +335,11 @@ const tradeShowDisplays = [
     badge: 'Retractable',
     emoji: '📐',
     gallery: [
-      '/images/displays/standard-retractable-front-back.png',
-      '/images/displays/standard-retractable-kit.png',
-      '/images/displays/standard-retractable-detail.png',
-      '/images/displays/standard-retractable-banner.webp'
+      { src: '/images/displays/standard-retractable-front-back.png', alt: 'Apex standard retractable banner stand, front and back view, assembled with a printed graphic' },
+      { src: '/images/displays/standard-retractable-detail.png', alt: 'Apex standard retractable banner stand aluminium base and support-pole hardware close-up' },
+      { src: '/images/displays/standard-retractable-kit.png', alt: "What's included with the Apex standard retractable banner stand: aluminium base, support poles and padded carry bag" },
+      { src: '/images/displays/apex-standard-retractable-dimensions.svg', alt: 'Dimension diagram for the Apex standard retractable banner: 33 by 81 inch and 47 by 81 inch printed graphic sizes' },
+      { src: '/images/displays/standard-retractable-banner.webp', alt: 'Apex standard retractable banner stand with a full-colour printed graphic' }
     ],
     tagline: 'Compact retractable banner stand with a replaceable printed graphic.',
     description:
