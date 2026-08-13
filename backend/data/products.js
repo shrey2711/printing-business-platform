@@ -334,10 +334,7 @@ const tradeShowDisplays = [
     category: 'banner-stands',
     badge: 'Retractable',
     emoji: '📐',
-    gallery: [
-      '/images/displays/standard-retractable-banner.webp',
-      '/images/displays/standard-retractable-hardware.jpg'
-    ],
+    gallery: ['/images/displays/standard-retractable-banner.webp'],
     tagline: 'Compact retractable banner stand with a replaceable printed graphic.',
     description:
       'A portable retractable banner stand with a compact aluminium base and two stabilising feet. ' +
@@ -464,7 +461,7 @@ const tradeShowDisplays = [
     emoji: '✖️',
     gallery: [
       '/images/displays/x-stand-banner.webp',
-      '/images/displays/x-stand-hardware.jpg'
+      '/images/displays/x-stand-front-back.jpg'
     ],
     tagline: 'Lightweight X-frame banner stand — an economical, portable display.',
     description:
