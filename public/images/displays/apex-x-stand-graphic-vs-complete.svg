@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" role="img" aria-label="Apex X-stand banner options: graphic only versus complete set with the X-frame stand">
+  <rect width="1120" height="620" fill="#ffffff"/>
+  <text x="560" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#0b1f4d">X-Stand Banner — Two Ways to Buy</text>
+  <line x1="560" y1="90" x2="560" y2="560" stroke="#e4e9f2" stroke-width="2"/>
+
+  <!-- LEFT: GRAPHIC ONLY -->
+  <!-- banner x 215..385 (w170), y 120..480 (h360) -->
+  <rect x="215" y="120" width="170" height="360" rx="3" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="215" y="120" width="170" height="56" rx="3" fill="#0b1f4d"/>
+  <rect x="215" y="120" width="170" height="7" fill="#ED1C24"/>
+  <text x="300" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
+  <rect x="243" y="250" width="114" height="10" rx="5" fill="#c9d3e2"/>
+  <rect x="243" y="274" width="84" height="10" rx="5" fill="#dbe2ee"/>
+  <rect x="243" y="380" width="114" height="28" rx="6" fill="#ED1C24"/>
+  <!-- corner eyelets (grommets) -->
+  <circle cx="227" cy="132" r="5" fill="#ffffff" stroke="#8a94a3" stroke-width="2.5"/>
+  <circle cx="373" cy="132" r="5" fill="#ffffff" stroke="#8a94a3" stroke-width="2.5"/>
+  <circle cx="227" cy="468" r="5" fill="#ffffff" stroke="#8a94a3" stroke-width="2.5"/>
+  <circle cx="373" cy="468" r="5" fill="#ffffff" stroke="#8a94a3" stroke-width="2.5"/>
+  <text x="300" y="528" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#0b1f4d">GRAPHIC ONLY</text>
+  <text x="300" y="554" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6b7480">Replacement printed graphic — reuse your stand</text>
+
+  <!-- RIGHT: COMPLETE SET (banner + X-frame) -->
+  <!-- X-frame poles behind, extending beyond the banner -->
+  <path d="M700,150 L900,470" stroke="#9aa3b2" stroke-width="7" stroke-linecap="round"/>
+  <path d="M900,150 L700,470" stroke="#c2cad6" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="800" cy="310" r="11" fill="#8a94a3"/>
+  <!-- feet -->
+  <path d="M690,478 L724,478" stroke="#8a94a3" stroke-width="7" stroke-linecap="round"/>
+  <path d="M876,478 L910,478" stroke="#8a94a3" stroke-width="7" stroke-linecap="round"/>
+  <!-- banner x 715..885 (w170), y 120..480 -->
+  <rect x="715" y="120" width="170" height="360" rx="3" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="715" y="120" width="170" height="56" rx="3" fill="#0b1f4d"/>
+  <rect x="715" y="120" width="170" height="7" fill="#ED1C24"/>
+  <text x="800" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
+  <rect x="743" y="250" width="114" height="10" rx="5" fill="#c9d3e2"/>
+  <rect x="743" y="274" width="84" height="10" rx="5" fill="#dbe2ee"/>
+  <rect x="743" y="380" width="114" height="28" rx="6" fill="#ED1C24"/>
+  <text x="800" y="528" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#0b1f4d">COMPLETE SET</text>
+  <text x="800" y="554" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6b7480">X-frame stand + printed graphic</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 700" role="img" aria-label="Apex X-stand banner dimension diagram: 24 by 63 inch and 32 by 71 inch printed graphic sizes">
+  <defs>
+    <marker id="ahx" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0b1f4d"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="700" fill="#ffffff"/>
+  <text x="560" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#0b1f4d">X-Stand Banner — Graphic Sizes</text>
+  <text x="560" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#6b7480">Two graphic sizes on a lightweight X-frame</text>
+
+  <!-- LEFT 24x63: banner x 235.5..384.5 (w149), bottom 590, top 199 (h391) -->
+  <rect x="235.5" y="199" width="149" height="391" rx="3" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="235.5" y="199" width="149" height="58" rx="3" fill="#0b1f4d"/>
+  <rect x="235.5" y="199" width="149" height="7" fill="#ED1C24"/>
+  <text x="310" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
+  <rect x="262" y="330" width="96" height="10" rx="5" fill="#c9d3e2"/>
+  <rect x="262" y="356" width="72" height="10" rx="5" fill="#dbe2ee"/>
+  <rect x="262" y="470" width="96" height="28" rx="6" fill="#ED1C24"/>
+  <!-- x-foot hint -->
+  <path d="M280,590 L340,616 M340,590 L280,616" stroke="#8a94a3" stroke-width="4" stroke-linecap="round"/>
+  <!-- width arrow -->
+  <line x1="235.5" y1="177" x2="384.5" y2="177" stroke="#0b1f4d" stroke-width="2" marker-start="url(#ahx)" marker-end="url(#ahx)"/>
+  <line x1="235.5" y1="169" x2="235.5" y2="199" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="384.5" y1="169" x2="384.5" y2="199" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="310" y="167" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">24&#8243;</text>
+  <!-- height arrow -->
+  <line x1="205" y1="199" x2="205" y2="590" stroke="#0b1f4d" stroke-width="2" marker-start="url(#ahx)" marker-end="url(#ahx)"/>
+  <line x1="197" y1="199" x2="235.5" y2="199" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="197" y1="590" x2="235.5" y2="590" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="189" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d" transform="rotate(-90 189 395)">63&#8243;</text>
+  <text x="310" y="662" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">24&#8243; &#215; 63&#8243; graphic</text>
+
+  <!-- RIGHT 32x71: banner x 691..889 (w198), bottom 590, top 150 (h440) -->
+  <rect x="691" y="150" width="198" height="440" rx="3" fill="#eef2f8" stroke="#c9d3e2" stroke-width="1.5"/>
+  <rect x="691" y="150" width="198" height="64" rx="3" fill="#0b1f4d"/>
+  <rect x="691" y="150" width="198" height="7" fill="#ED1C24"/>
+  <text x="790" y="194" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="800" fill="#ffffff" letter-spacing="2">APEX</text>
+  <rect x="722" y="300" width="136" height="11" rx="5" fill="#c9d3e2"/>
+  <rect x="722" y="328" width="102" height="11" rx="5" fill="#dbe2ee"/>
+  <rect x="722" y="460" width="136" height="30" rx="6" fill="#ED1C24"/>
+  <path d="M756,590 L824,618 M824,590 L756,618" stroke="#8a94a3" stroke-width="4" stroke-linecap="round"/>
+  <!-- width arrow -->
+  <line x1="691" y1="128" x2="889" y2="128" stroke="#0b1f4d" stroke-width="2" marker-start="url(#ahx)" marker-end="url(#ahx)"/>
+  <line x1="691" y1="120" x2="691" y2="150" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="889" y1="120" x2="889" y2="150" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="790" y="118" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">32&#8243;</text>
+  <!-- height arrow -->
+  <line x1="661" y1="150" x2="661" y2="590" stroke="#0b1f4d" stroke-width="2" marker-start="url(#ahx)" marker-end="url(#ahx)"/>
+  <line x1="653" y1="150" x2="691" y2="150" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="653" y1="590" x2="691" y2="590" stroke="#0b1f4d" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="645" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d" transform="rotate(-90 645 370)">71&#8243;</text>
+  <text x="790" y="662" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0b1f4d">32&#8243; &#215; 71&#8243; graphic</text>
+</svg>

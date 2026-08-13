@@ -405,9 +405,10 @@ const tradeShowDisplays = [
     badge: 'Premium',
     emoji: '🏆',
     gallery: [
-      '/images/displays/deluxe-retractable-banner.webp',
-      '/images/displays/deluxe-retractable-hardware.jpg',
-      '/images/displays/deluxe-retractable-base.jpg'
+      { src: '/images/displays/deluxe-retractable-banner.webp', alt: 'Apex deluxe retractable banner stand with a full-colour printed graphic' },
+      { src: '/images/displays/deluxe-retractable-hardware.jpg', alt: 'Apex deluxe retractable banner stand aluminium base with chrome-style end caps, close-up' },
+      { src: '/images/displays/deluxe-retractable-base.jpg', alt: 'Apex deluxe retractable banner stand base detail with chrome finish' },
+      { src: '/images/displays/apex-deluxe-retractable-dimensions.svg', alt: 'Dimension diagram for the Apex deluxe retractable banner: 33 by 81 inch printed graphic size' }
     ],
     tagline: 'Premium retractable banner stand with chrome-style end caps and an adjustable pole.',
     description:
@@ -466,8 +467,10 @@ const tradeShowDisplays = [
     badge: 'Economical',
     emoji: '✖️',
     gallery: [
-      '/images/displays/x-stand-banner.webp',
-      '/images/displays/x-stand-front-back.jpg'
+      { src: '/images/displays/x-stand-front-back.jpg', alt: 'Apex X-stand banner, front and back view, assembled on the X-frame with a printed graphic' },
+      { src: '/images/displays/x-stand-banner.webp', alt: 'Apex X-stand banner with a full-colour printed graphic' },
+      { src: '/images/displays/apex-x-stand-graphic-vs-complete.svg', alt: 'Apex X-stand options: graphic only versus complete set with the X-frame stand' },
+      { src: '/images/displays/apex-x-stand-dimensions.svg', alt: 'Dimension diagram for the Apex X-stand banner: 24 by 63 inch and 32 by 71 inch printed graphic sizes' }
     ],
     tagline: 'Lightweight X-frame banner stand — an economical, portable display.',
     description:
@@ -544,7 +547,6 @@ const tradeShowDisplays = [
       '/images/displays/step-repeat-front-back.jpeg',
       '/images/displays/step-repeat-graphic-detail.jpeg',
       '/images/displays/step-repeat-frame.jpeg',
-      '/images/displays/step-repeat-frame-black.jpg',
       '/images/displays/step-repeat-kit.jpeg',
       '/images/displays/step-repeat-detail.jpeg'
     ],
@@ -618,6 +620,10 @@ const tradeShowDisplays = [
     category: 'banner-stands',
     badge: 'Tabletop',
     emoji: '🪧',
+    gallery: [
+      { src: '/images/displays/table-top-banner-stand.webp', alt: 'Apex table top retractable banner stand with a full-colour printed graphic' },
+      { src: '/images/displays/apex-table-top-banner-dimensions.svg', alt: 'Dimension diagram for the Apex table top banner stand: 11.5 by 17.5 inch printed graphic' }
+    ],
     tagline: 'Compact tabletop retractable banner for counters and registration desks.',
     description:
       'A compact retractable banner that sits on a table or counter — a mini version of a full-height ' +
