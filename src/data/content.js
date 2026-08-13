@@ -29,7 +29,7 @@ export const CONTENT_FIELDS = [
   {
     key: 'home.cta.main',
     label: 'Home — closing headline',
-    default: 'Most canopies ship in 6–8 business days after proof approval'
+    default: 'Most canopies are produced in 6–8 business days after proof approval'
   },
   {
     key: 'home.cta.sub',
