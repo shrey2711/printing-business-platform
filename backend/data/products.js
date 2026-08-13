@@ -406,6 +406,7 @@ const tradeShowDisplays = [
     emoji: '🏆',
     gallery: [
       { src: '/images/displays/deluxe-retractable-banner.webp', alt: 'Apex deluxe retractable banner stand with a full-colour printed graphic' },
+      { src: '/images/displays/deluxe-retractable-led.jpg', alt: 'Apex deluxe retractable banner stand with a clip-on LED banner light illuminating the printed graphic' },
       { src: '/images/displays/deluxe-retractable-hardware.jpg', alt: 'Apex deluxe retractable banner stand aluminium base with chrome-style end caps, close-up' },
       { src: '/images/displays/deluxe-retractable-base.jpg', alt: 'Apex deluxe retractable banner stand base detail with chrome finish' },
       { src: '/images/displays/apex-deluxe-retractable-dimensions.svg', alt: 'Dimension diagram for the Apex deluxe retractable banner: 33 by 81 inch printed graphic size' }
