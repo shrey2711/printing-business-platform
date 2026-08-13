@@ -624,7 +624,6 @@ const tradeShowDisplays = [
     emoji: '🪧',
     gallery: [
       { src: '/images/displays/table-top-example.png', alt: 'Apex table top banner stand, front and back, with a full-colour printed sample graphic' },
-      { src: '/images/displays/table-top-front-back.jpg', alt: 'Apex table top banner stand, front and back view — printed graphic with the retractable base and support pole' },
       { src: '/images/displays/table-top-banner-stand.webp', alt: 'Apex table top retractable banner stand with a full-colour printed graphic' },
       { src: '/images/displays/apex-table-top-banner-dimensions.svg', alt: 'Dimension diagram for the Apex table top banner stand: 11.5 by 17.5 inch printed graphic' }
     ],
