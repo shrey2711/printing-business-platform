@@ -165,6 +165,14 @@ function HeaderNav() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState(null);
+  // The desktop Shop menu opens on hover/focus (CSS). After an SPA click the
+  // cursor/focus stays over it, so it would stay open — this flag force-closes
+  // it on click and resets when the pointer leaves so hover works again.
+  const [shopClosed, setShopClosed] = useState(false);
+  const closeShop = () => {
+    setShopClosed(true);
+    if (typeof document !== 'undefined' && document.activeElement?.blur) document.activeElement.blur();
+  };
 
   // Close the mobile menu whenever the route changes.
   useEffect(() => { setMobileOpen(false); }, [location]);
@@ -173,20 +181,23 @@ function HeaderNav() {
     <>
       {/* Desktop navigation */}
       <nav className="header-nav" aria-label="Primary">
-        <div className="shop-dd">
-          <Link className="shop-dd-trigger" to="/products">
+        <div
+          className={`shop-dd ${shopClosed ? 'shop-dd-collapsed' : ''}`}
+          onMouseLeave={() => setShopClosed(false)}
+        >
+          <Link className="shop-dd-trigger" to="/products" onClick={closeShop}>
             Shop <span aria-hidden="true">▾</span>
           </Link>
           <div className="shop-menu">
             {shopMenu.map((g) => (
               <div className="shop-col" key={g.label}>
-                <Link className="shop-col-head" to={g.to}>{g.label}</Link>
+                <Link className="shop-col-head" to={g.to} onClick={closeShop}>{g.label}</Link>
                 {g.items.map((it) => (
-                  <Link key={it.to} to={it.to}>{it.label}</Link>
+                  <Link key={it.to} to={it.to} onClick={closeShop}>{it.label}</Link>
                 ))}
               </div>
             ))}
-            <Link className="shop-all" to="/products">Shop all products →</Link>
+            <Link className="shop-all" to="/products" onClick={closeShop}>Shop all products →</Link>
           </div>
         </div>
         <Link to="/trade-show-displays">Displays</Link>

@@ -115,6 +115,9 @@ h1, h2, h3, h4 { color: var(--navy); }
   box-shadow: 0 14px 34px rgba(16, 35, 59, 0.16); padding: 1.1rem 1.3rem; z-index: 40; min-width: 660px;
 }
 .shop-dd:hover .shop-menu, .shop-dd:focus-within .shop-menu { display: grid; }
+/* After a menu item is clicked, force the dropdown closed even though the
+   cursor/focus is still over it; the flag resets on pointer-leave. */
+.shop-dd.shop-dd-collapsed .shop-menu { display: none; }
 .shop-col { display: flex; flex-direction: column; }
 .shop-col-head {
   font-weight: 700; color: var(--navy); padding: 0 0 0.35rem; margin-bottom: 0.25rem;
