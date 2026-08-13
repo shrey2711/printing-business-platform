@@ -334,7 +334,12 @@ const tradeShowDisplays = [
     category: 'banner-stands',
     badge: 'Retractable',
     emoji: '📐',
-    gallery: ['/images/displays/standard-retractable-banner.webp'],
+    gallery: [
+      '/images/displays/standard-retractable-front-back.png',
+      '/images/displays/standard-retractable-kit.png',
+      '/images/displays/standard-retractable-detail.png',
+      '/images/displays/standard-retractable-banner.webp'
+    ],
     tagline: 'Compact retractable banner stand with a replaceable printed graphic.',
     description:
       'A portable retractable banner stand with a compact aluminium base and two stabilising feet. ' +
