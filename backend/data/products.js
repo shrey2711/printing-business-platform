@@ -468,6 +468,7 @@ const tradeShowDisplays = [
     emoji: '✖️',
     gallery: [
       { src: '/images/displays/x-stand-front-back.jpg', alt: 'Apex X-stand banner, front and back view, assembled on the X-frame with a printed graphic' },
+      { src: '/images/displays/x-stand-hardware.jpg', alt: 'Apex X-stand banner X-frame hardware — folded poles, hub and hanging hooks' },
       { src: '/images/displays/x-stand-banner.webp', alt: 'Apex X-stand banner with a full-colour printed graphic' },
       { src: '/images/displays/apex-x-stand-graphic-vs-complete.svg', alt: 'Apex X-stand options: graphic only versus complete set with the X-frame stand' },
       { src: '/images/displays/apex-x-stand-dimensions.svg', alt: 'Dimension diagram for the Apex X-stand banner: 24 by 63 inch and 32 by 71 inch printed graphic sizes' }
