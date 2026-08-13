@@ -61,6 +61,12 @@ export default function LandingPage({ slug }) {
         </div>
       </section>
 
+      {page.image && (
+        <section className="landing-photo">
+          <img src={page.image} alt={page.imageAlt || page.h1} loading="lazy" decoding="async" />
+        </section>
+      )}
+
       {page.sections?.map((s, i) => (
         <section className="section-block card" key={i}>
           <h2>{s.h2}</h2>

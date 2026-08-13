@@ -47,6 +47,8 @@ export const LANDING_PAGES = [
     nav: 'Tension Fabric Displays',
     title: 'Tension Fabric Displays | Portable Custom Fabric Booths',
     h1: 'Tension Fabric Displays',
+    image: '/images/displays/tension-fabric-stand.jpg',
+    imageAlt: 'Tension fabric display stand — tubular frame with and without the stretch fabric graphic',
     description:
       'Custom tension fabric displays — stretch dye-sublimated graphics over a lightweight tubular aluminium frame. Straight or curved, packs small, fast tool-free setup. Request a quote from Apex.',
     intro:
