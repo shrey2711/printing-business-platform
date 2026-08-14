@@ -36,7 +36,7 @@ const categoryCards = [
   { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/showcase/canopy-nova-tech.webp' },
   { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', img: '/images/displays/standard-retractable-front-back.png' },
   { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/showcase/tablecover-brightpath-dental.webp' },
-  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', img: '/images/showcase/backdrop-greenleaf.webp' },
+  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', img: '/images/showcase/backdrop-oakwood.jpeg' },
   { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/showcase/canopy-harbor-realty.webp' },
   { title: 'Accessories', copy: 'Weights, sandbags & hardware', to: '/products', img: '/images/tents/sandbags.webp' }
 ];
