@@ -13,7 +13,7 @@ export const PRODUCT_CARD_IMAGE = {
   'deluxe-retractable-banner': '/images/displays/deluxe-retractable-banner.webp',
   'x-stand-banner': '/images/displays/x-stand-front-back.jpg',
   'table-top-banner-stand': '/images/displays/table-top-example.png',
-  'step-and-repeat-backdrop': '/images/showcase/backdrop-greenleaf.webp'
+  'step-and-repeat-backdrop': '/images/displays/step-repeat-angled.jpeg'
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;
