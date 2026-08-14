@@ -119,6 +119,20 @@ export default function HomePage() {
     };
   }, []);
 
+  const loading = products.length === 0;
+  // Skeleton cards reserve the exact grid space while products load, so the
+  // async fetch doesn't shift the layout (fixes CLS).
+  const skeletons = (n) =>
+    Array.from({ length: n }).map((_, i) => (
+      <div className="pcard pcard-skel" key={`sk-${i}`} aria-hidden="true">
+        <div className="pcard-media" />
+        <div className="pcard-body">
+          <div className="skel-line" />
+          <div className="skel-line short" />
+        </div>
+      </div>
+    ));
+
   const bySlug = new Map(products.map((p) => [p.slug, p]));
   const featured = featuredSlugs.map((s) => bySlug.get(s)).filter(Boolean);
   const canopyProducts = products.filter((p) => p.slug.startsWith('canopy-tent-'));
@@ -250,29 +264,29 @@ export default function HomePage() {
       </section>
 
       {/* Product discovery — a mix across categories */}
-      {featured.length > 0 && (
-        <section className="size-section">
-          <div className="section-head">
-            <h2>Featured across the range</h2>
-            <p>A mix of what Apex prints for your booth.</p>
-          </div>
-          <div className="pcard-grid">
-            {featured.map((p) => {
-              const isTent = p.slug.startsWith('canopy-tent-');
-              const cfg = cardPreview[p.slug] || {};
-              return (
-                <ProductCard
-                  key={p.slug}
-                  product={p}
-                  previewSize={isTent ? sizeKey(p.slug) : undefined}
-                  previewFull={cfg.full}
-                  previewHalf={cfg.half}
-                />
-              );
-            })}
-          </div>
-        </section>
-      )}
+      <section className="size-section">
+        <div className="section-head">
+          <h2>Featured across the range</h2>
+          <p>A mix of what Apex prints for your booth.</p>
+        </div>
+        <div className="pcard-grid">
+          {loading
+            ? skeletons(featuredSlugs.length)
+            : featured.map((p) => {
+                const isTent = p.slug.startsWith('canopy-tent-');
+                const cfg = cardPreview[p.slug] || {};
+                return (
+                  <ProductCard
+                    key={p.slug}
+                    product={p}
+                    previewSize={isTent ? sizeKey(p.slug) : undefined}
+                    previewFull={cfg.full}
+                    previewHalf={cfg.half}
+                  />
+                );
+              })}
+        </div>
+      </section>
 
       {/* Custom canopies — still an important, dedicated category */}
       <section className="size-section">
@@ -280,24 +294,22 @@ export default function HomePage() {
           <h2>{c('home.sizes.title')}</h2>
           <p>{c('home.sizes.subtitle')}</p>
         </div>
-        {canopyProducts.length === 0 ? (
-          <p className="muted">Loading…</p>
-        ) : (
-          <div className="pcard-grid">
-            {canopyProducts.map((p) => {
-              const cfg = cardPreview[p.slug] || {};
-              return (
-                <ProductCard
-                  key={p.slug}
-                  product={p}
-                  previewSize={sizeKey(p.slug)}
-                  previewFull={cfg.full}
-                  previewHalf={cfg.half}
-                />
-              );
-            })}
-          </div>
-        )}
+        <div className="pcard-grid">
+          {loading
+            ? skeletons(3)
+            : canopyProducts.map((p) => {
+                const cfg = cardPreview[p.slug] || {};
+                return (
+                  <ProductCard
+                    key={p.slug}
+                    product={p}
+                    previewSize={sizeKey(p.slug)}
+                    previewFull={cfg.full}
+                    previewHalf={cfg.half}
+                  />
+                );
+              })}
+        </div>
         <div className="section-more">
           <Link className="btn btn-outline" to="/products?category=tents">All canopy sizes &amp; walls</Link>
         </div>

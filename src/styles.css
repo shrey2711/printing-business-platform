@@ -477,6 +477,14 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 }
 .pcard-brand-img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #fff; }
 
+/* Loading skeletons — reserve the exact card footprint so the async product
+   fetch doesn't shift the layout (keeps CLS low). */
+.pcard-skel { pointer-events: none; }
+.pcard-skel .pcard-media { aspect-ratio: 4 / 3; background: #eef1f5; }
+.pcard-skel .pcard-body { min-height: 132px; display: grid; gap: 0.55rem; align-content: start; }
+.skel-line { height: 0.95rem; border-radius: 4px; background: linear-gradient(90deg, #eef1f5, #e4e9f0, #eef1f5); }
+.skel-line.short { width: 60%; }
+
 /* Location page: centrally-aligned state content (lists stay left-readable) */
 .loc-content { text-align: center; }
 .loc-content .feature-list { display: inline-block; text-align: left; margin: 0 auto 1.1rem; }
