@@ -330,11 +330,12 @@ function ScrollToTop() {
 }
 
 function App() {
+  const { pathname } = useLocation();
   return (
     <div className="app-shell">
       <ScrollToTop />
       <Header />
-      <ChunkErrorBoundary>
+      <ChunkErrorBoundary resetKey={pathname}>
       <Suspense fallback={<main className="page"><p className="muted">Loading…</p></main>}>
       <Routes>
         <Route path="/" element={<HomePage />} />

@@ -41,6 +41,16 @@ export default class ChunkErrorBoundary extends Component {
     if (typeof sessionStorage !== 'undefined') sessionStorage.removeItem('chunk-reload-attempt');
   }
 
+  componentDidUpdate(prevProps) {
+    // Error boundaries do NOT reset on their own. Without this, a single caught
+    // error would keep showing the fallback on every later navigation (incl.
+    // back/forward), leaving the app "stuck". Clear the failed state whenever the
+    // route changes so navigating away recovers.
+    if (this.state.failed && prevProps.resetKey !== this.props.resetKey) {
+      this.setState({ failed: false });
+    }
+  }
+
   render() {
     if (this.state.failed) {
       return (
