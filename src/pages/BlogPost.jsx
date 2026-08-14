@@ -29,7 +29,9 @@ export default function BlogPost() {
           image: post.coverUrl || undefined,
           articleBody: undefined
         }
-      : undefined
+      : undefined,
+    undefined,
+    post?.canonical
   );
 
   if (post === undefined) return <main className="page"><p className="muted">Loading…</p></main>;

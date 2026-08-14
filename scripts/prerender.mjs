@@ -72,7 +72,7 @@ const FOOTER = `<nav aria-label="Company">
 let seoMap = {};
 let contentMap = {};
 
-function render({ path, title, description, body, jsonLd, robots }) {
+function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
   const o = seoMap[path];
   if (o) {
@@ -81,7 +81,9 @@ function render({ path, title, description, body, jsonLd, robots }) {
     if (o.robots) robots = o.robots;
     if (o.jsonld) jsonLd = o.jsonld;
   }
-  const canonical = o?.canonical || ORIGIN + path;
+  // Priority: dashboard override > per-route canonicalArg (e.g. a blog post that
+  // canonicalises to another article) > the page itself.
+  const canonical = o?.canonical || canonicalArg || ORIGIN + path;
   const url = ORIGIN + path;
   let html = template;
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`);
@@ -963,6 +965,8 @@ for (const p of posts) {
       path: `/blog/${p.slug}`,
       title: `${p.seo?.title || p.title} | ${BRAND}`,
       description: p.seo?.description || p.excerpt,
+      // A post may canonicalise to another article (duplicate-topic consolidation).
+      canonical: p.canonical ? (/^https?:/.test(p.canonical) ? p.canonical : ORIGIN + p.canonical) : undefined,
       body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / <span>${esc(p.title)}</span></nav>
         <article><h1>${esc(p.title)}</h1>${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}</article>`,
       jsonLd: {
@@ -1041,7 +1045,9 @@ const smCategories = [
   ...LANDING_PAGES.map((lp) => smUrl(`/${lp.slug}`, '0.7', 'weekly'))
 ];
 const smProducts = productList.map((p) => smUrl(`/products/${p.slug}`, '0.8'));
-const smBlog = [smUrl('/blog', '0.6', 'weekly'), ...posts.map((p) => smUrl(`/blog/${p.slug}`, '0.6'))];
+// Exclude posts canonicalised to another article — a canonicalised-away URL
+// should not appear in the sitemap.
+const smBlog = [smUrl('/blog', '0.6', 'weekly'), ...posts.filter((p) => !p.canonical).map((p) => smUrl(`/blog/${p.slug}`, '0.6'))];
 
 // Locations. City pages that 301 to /trade-show-canopies/[city] must NOT appear
 // (a sitemap URL must be 200, not a redirect).

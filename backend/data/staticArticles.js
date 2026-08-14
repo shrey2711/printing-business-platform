@@ -492,6 +492,9 @@ export const STATIC_ARTICLES = [
   {
     slug: 'how-much-does-a-custom-printed-canopy-tent-cost',
     title: 'How Much Does a Custom Printed Canopy Tent Cost?',
+    // Canonicalised to the broader cost guide — Google treats these as the same
+    // topic and picked a different canonical, so we consolidate signals there.
+    canonical: '/blog/trade-show-display-cost',
     excerpt:
       'Transparent pricing for custom printed canopy tents — complete-set vs printed-top-only prices, wall costs, rush fees and volume discounts.',
     tags: ['buying guide', 'pricing'],
@@ -534,6 +537,9 @@ export const STATIC_ARTICLES = [
   {
     slug: 'what-size-canopy-tent-should-i-buy',
     title: 'What Size Canopy Tent Should I Buy?',
+    // Canonicalised to the side-by-side size comparison — same intent; Google
+    // deduped them, so consolidate ranking signals into that stronger article.
+    canonical: '/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents',
     excerpt:
       'A practical way to choose between a 10x10, 10x15 and 10x20 custom canopy tent — by booth space, table count, staff and what you sell.',
     tags: ['Buying Guide', 'Sizing'],
