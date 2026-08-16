@@ -14,7 +14,8 @@ export const categories = [
   { id: 'banner-stands', name: 'Banner Stands' },
   { id: 'backdrops', name: 'Backdrops' },
   { id: 'table-covers', name: 'Table Covers' },
-  { id: 'flags', name: 'Flags' }
+  { id: 'flags', name: 'Flags' },
+  { id: 'seg-kits', name: 'SEG Modular Kits' }
 ];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
@@ -67,6 +68,14 @@ export const navGroups = [
       { name: 'Feather Angled Flag', slug: 'feather-angled-flag' },
       { name: 'Feather Convex Flag', slug: 'feather-convex-flag' },
       { name: 'Teardrop Flag', slug: 'teardrop-flag' }
+    ]
+  },
+  {
+    name: 'SEG Modular Kits',
+    items: [
+      { name: 'SEG Modular Kit A', slug: 'seg-modular-trade-show-kit-a' },
+      { name: 'SEG Modular Kit B', slug: 'seg-modular-trade-show-kit-b' },
+      { name: 'SEG Modular Kit C', slug: 'seg-modular-trade-show-kit-c' }
     ]
   }
 ];
@@ -706,6 +715,13 @@ const flagBaseGroup = {
   ]
 };
 
+// Shared hardware/portability figures appended to every flag gallery.
+const FLAG_SHARED_FIGURES = [
+  { src: '/images/flags/flag-base-options.png', alt: 'Flag base options — ground stake, cross base, cross base with water bag, and square base' },
+  { src: '/images/flags/flag-pole-set-carry-bag.png', alt: 'Flag pole set with carry bag' },
+  { src: '/images/flags/flag-kit-in-bag-portable.png', alt: 'Flag kit packed in its carry bag — portable, easy to transport' }
+];
+
 const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro, active = false, gallery }) => ({
   slug,
   active,
@@ -713,7 +729,7 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   category: 'flags',
   badge: 'Custom Printed',
   emoji: '🚩',
-  ...(gallery ? { gallery } : {}),
+  ...(gallery ? { gallery: [...gallery, ...FLAG_SHARED_FIGURES] } : {}),
   tagline: `Custom printed ${shape} advertising flag — full-colour dye sublimation, pole + base or graphic only.`,
   description: intro,
   features: [
@@ -1023,17 +1039,17 @@ const segMockupGroup = {
   ]
 };
 
-const segKit = ({ slug, name, letter, heights, image, whatsIncluded, intro, config, seoTitle, seoDescription }) => ({
+const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, config, counter, weight, bag, seoTitle, seoDescription }) => ({
   slug,
-  active: false,
+  active: true,
   name,
-  category: 'displays',
+  category: 'seg-kits',
   badge: 'Custom Quote',
   emoji: '🏙️',
   quoteOnly: true,
   tagline: `Premium illuminated SEG modular trade show booth kit — backlit fabric graphics on a modular lightbox frame. ${config}`,
   description: intro,
-  gallery: [{ src: image, alt: `Apex ${name} — illuminated SEG modular trade show booth with backlit fabric graphics` }],
+  gallery,
   features: [
     'Illuminated SEG (silicone-edge) backlit graphics',
     'Modular, reconfigurable lightbox display system',
@@ -1050,7 +1066,11 @@ const segKit = ({ slug, name, letter, heights, image, whatsIncluded, intro, conf
     ['Printing', 'Full-colour dye sublimation'],
     ['Graphic install', 'Silicone Edge Graphics (SEG) — sewn silicone edge, near-frameless finish'],
     ['Frame material', 'Modular PVC lightbox frame'],
-    ['Lighting', 'Integrated LED illumination'],
+    ['Assembly', 'Modular, tool-free snap-fit construction'],
+    ['Lighting', 'Integrated internal LED illumination'],
+    ['Display counter', counter],
+    ['Approx. weight (with graphics)', weight],
+    ['Carry bag', bag],
     ['Plug options', 'US / EU / AU / none'],
     ['Configuration', config]
   ],
@@ -1084,28 +1104,50 @@ const segKit = ({ slug, name, letter, heights, image, whatsIncluded, intro, conf
 const segKits = [
   segKit({
     slug: 'seg-modular-trade-show-kit-a', name: 'Trade Show SEG Modular Kit A', letter: 'A', heights: SEG_H3,
-    image: '/images/displays/apex-seg-modular-kit-a-backlit-booth.jpeg',
-    config: 'Illuminated backdrop + overhead archway + reception counter',
-    intro: 'Kit A is a premium illuminated SEG modular booth built around a large backlit backdrop wall, an overhead archway that frames the space, and a matching reception counter — an open, welcoming layout that draws attention across the show floor with glowing edge-to-edge graphics.',
-    whatsIncluded: ['Main illuminated SEG backdrop wall', 'Overhead illuminated archway', 'Reception / display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware'],
+    gallery: [
+      { src: '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit A — illuminated backlit booth with backdrop, archway return and counter' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-a-structure.png', alt: 'Kit A structure — backdrop, single archway/return and display counter' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-a-included.png', alt: "Kit A included components" },
+      { src: '/images/seg-kits/apex-seg-modular-kit-a-sizes.png', alt: 'Kit A size matrix and component measurements' }
+    ],
+    config: 'Backdrop + single illuminated archway/return + illuminated counter',
+    counter: '10/13 ft: 2.8 ft W × 3.3 ft H · 16.4/20 ft: 3.3 ft W × 3.3 ft H',
+    weight: '72–80 lb with graphics',
+    bag: '≈ 43" L × 14" W × 8" H (varies by size)',
+    intro: 'Kit A is a premium illuminated SEG modular booth built around a large backlit backdrop wall, a single illuminated archway/return that frames the space, and a matching illuminated counter — an open, welcoming layout that draws attention across the show floor with glowing edge-to-edge graphics.',
+    whatsIncluded: ['Main illuminated SEG backdrop wall', 'Single illuminated archway / return section', 'Illuminated display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware', 'Soft canvas carry bag'],
     seoTitle: 'SEG Modular Trade Show Kit A | Custom Lightbox Booth',
     seoDescription: 'Trade Show SEG Modular Kit A — a custom illuminated SEG lightbox booth with backlit backdrop, overhead archway and reception counter. 10–20 ft widths. Request a custom quote from Apex.'
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-b', name: 'Trade Show SEG Modular Kit B', letter: 'B', heights: SEG_H3,
-    image: '/images/displays/apex-seg-modular-kit-b-trade-show-booth.jpeg',
-    config: 'Illuminated backdrop + archway + side/privacy wall + display counter',
-    intro: 'Kit B is a more enclosed illuminated SEG modular booth: a backlit backdrop and overhead archway are joined by a side privacy wall that defines the space and adds branded surface area, plus a display counter — ideal when you want a semi-private, fully-branded environment for meetings and demos.',
-    whatsIncluded: ['Illuminated SEG backdrop wall', 'Overhead illuminated archway', 'Side / privacy illuminated wall', 'Display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware'],
+    gallery: [
+      { src: '/images/seg-kits/apex-seg-modular-kit-b-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit B — illuminated booth with backdrop, side panel, overhead arch and counter' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-b-structure.png', alt: 'Kit B structure — backdrop, side panel/arch front, overhead arch section and counter' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-b-sizes.png', alt: 'Kit B size matrix and component measurements' }
+    ],
+    config: 'Backdrop + side panel/arch front + illuminated overhead/arch section + illuminated counter',
+    counter: '10/13 ft: 2.8 ft W × 3.3 ft H · 16.4/20 ft: 3.3 ft W × 3.3 ft H',
+    weight: '68–110 lb with graphics',
+    bag: '≈ 46" L × 16" W × 10" H (varies by size)',
+    intro: 'Kit B is a more enclosed illuminated SEG modular booth: a backlit backdrop, a side panel/arch front and an illuminated overhead/arch section are joined by an illuminated counter — ideal when you want a semi-private, fully-branded environment with more surface area for meetings and demos.',
+    whatsIncluded: ['Illuminated SEG backdrop wall', 'Side panel / arch front', 'Illuminated overhead / arch section', 'Illuminated display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware', 'Soft canvas carry bag'],
     seoTitle: 'SEG Modular Trade Show Kit B | Illuminated Booth with Side Wall',
     seoDescription: 'Trade Show SEG Modular Kit B — a custom illuminated SEG lightbox booth with backdrop, overhead archway, side privacy wall and display counter. 10–20 ft widths. Request a custom quote from Apex.'
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-c', name: 'Trade Show SEG Modular Kit C', letter: 'C', heights: SEG_H2,
-    image: '/images/displays/apex-seg-modular-kit-c-lightbox-display.jpeg',
-    config: 'Two angled illuminated SEG walls + display counter',
-    intro: 'Kit C is a distinct illuminated SEG modular layout: two tall backlit SEG walls meet at an angle to form a bold, open corner backdrop, paired with a matching display counter. Without an overhead archway, it reads as a clean, wall-forward branded statement — strong from multiple aisle directions.',
-    whatsIncluded: ['Two illuminated SEG backdrop walls (angled layout)', 'Display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware'],
+    gallery: [
+      { src: '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit C — illuminated booth with backdrop, left and right side panels and counter' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-c-structure.png', alt: 'Kit C structure — backdrop with left and right illuminated side panels and a counter, no overhead arch' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-c-sizes.png', alt: 'Kit C size matrix and component measurements' }
+    ],
+    config: 'Backdrop + left & right illuminated side panels + illuminated counter (no overhead arch)',
+    counter: '3.3 ft W × 3.3 ft H',
+    weight: '60–165 lb with graphics',
+    bag: '≈ 46" L × 17" W × 13" H (varies by size)',
+    intro: 'Kit C is a distinct illuminated SEG modular layout: a backlit backdrop is flanked by a left and a right illuminated side panel to form a bold, three-sided branded environment, paired with an illuminated counter. With no overhead arch, it reads as a clean, wall-forward statement that stays strong from multiple aisle directions.',
+    whatsIncluded: ['Illuminated SEG backdrop wall', 'Left illuminated side panel', 'Right illuminated side panel', 'Illuminated display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware', 'Soft canvas carry bag'],
     seoTitle: 'SEG Modular Trade Show Kit C | Angled Illuminated Booth',
     seoDescription: 'Trade Show SEG Modular Kit C — a custom illuminated SEG lightbox booth with two angled backlit walls and a display counter. 10–20 ft widths. Request a custom quote from Apex.'
   })
