@@ -808,7 +808,6 @@ const flagProducts = [
     gallery: [
       { src: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png', alt: 'Apex angled feather flag with a custom printed graphic on a cross base' },
       { src: '/images/flags/feather_angled_flag_nova_dental_large_ground_stake.png', alt: 'Apex angled feather flag on a ground spike, custom printed' },
-      { src: '/images/flags/feather_angled_flag_shinepro_auto_spa_large_square_base.png', alt: 'Apex angled feather flag on a square steel base, custom printed' },
       { src: '/images/flags/feather_angled_size_measurements_all_sizes.jpg', alt: 'Apex angled feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
       { src: '/images/flags/feather_angled_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
       { src: '/images/flags/feather_angled_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag — sliding the printed flag onto the pole' }
