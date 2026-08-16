@@ -97,7 +97,11 @@ export default function ProductConfigurator() {
   const model = product?.pricing?.model;
   const isArea = model === 'area';
   const isConfigured = model === 'configured';
-  const isQuoteModel = model === 'quote' || model === 'competitive';
+  // quoteOnly = a CONFIGURED product (size/plug/mockup selectors) sold by custom
+  // quote — the selectors render but no price is shown; the CTA is "Request a
+  // Custom Quote" and the selection is sent to the quote form.
+  const isQuoteOnly = !!product?.pricing?.quoteOnly;
+  const isQuoteModel = model === 'quote' || model === 'competitive' || isQuoteOnly;
 
   const toggleOption = (id) => {
     setConfig((prev) => {
@@ -136,7 +140,9 @@ export default function ProductConfigurator() {
     navigate('/quote', {
       state: {
         product: product.name,
-        specs: product.sizeLabel || product.size || '',
+        // Quote-only configured products (SEG kits) carry the full selection —
+        // size, plug, mockup, quantity — into the quote form.
+        specs: isConfigured ? describeConfig(product, config) : (product.sizeLabel || product.size || ''),
         quantity: config?.quantity || 1
       }
     });
@@ -344,6 +350,7 @@ export default function ProductConfigurator() {
                           onClick={() => !disabled && setSelect(group.id, choice.id)}
                         >
                           <span className="choice-label">{shortChoiceLabel(group.id, choice)}</span>
+                          {!isQuoteOnly && (
                           <span className="choice-meta">
                             {group.pricing === 'baseKit'
                               ? ''
@@ -359,6 +366,7 @@ export default function ProductConfigurator() {
                                         : multiplierHint(choice.mult))
                                   : multiplierHint(choice.mult)}
                           </span>
+                          )}
                         </button>
                       );
                     })}
@@ -463,16 +471,18 @@ export default function ProductConfigurator() {
         <aside className="price-panel card">
           {isQuoteModel && !price ? (
             <>
-              <h3>Pricing</h3>
+              <span className="eyebrow">{isQuoteOnly ? 'Custom quote' : 'Pricing'}</span>
+              <div className="price-big price-quote">Custom Quote</div>
               <p className="price-sub">
-                This product is quoted per order. Tell us your size, quantity and artwork and we'll
-                send pricing and a free proof.
+                {isQuoteOnly
+                  ? "Pricing is customised to your kit, size, quantity and project. Send your configuration and our team will prepare pricing and details — production and delivery timing are confirmed with your quote."
+                  : "This product is quoted per order. Tell us your size, quantity and artwork and we'll send pricing and a free proof."}
               </p>
               <button className="btn btn-red btn-block" onClick={requestQuote}>
-                Request a Quote
+                {isQuoteOnly ? 'Request a Custom Quote' : 'Request a Quote'}
               </button>
               <p className="panel-foot">
-                Upload your artwork on the quote form — we send a free proof before production.
+                Upload your artwork on the quote form, or send it later — no finished artwork needed to get pricing.
               </p>
             </>
           ) : (

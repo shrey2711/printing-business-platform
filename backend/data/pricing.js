@@ -17,8 +17,10 @@ export function computePrice(input, opts = {}) {
   const pricing = opts.pricing || product.pricing;
 
   // Quote-only products have no computed price — surfaced as "Request a Quote".
-  if (pricing.model === 'quote') {
-    return { ok: false, quote: true, error: 'Quote required' };
+  // `quoteOnly` lets a CONFIGURED product (with size/plug/mockup selectors) stay
+  // quote-only: the selectors render for the quote, but no price is computed.
+  if (pricing.model === 'quote' || pricing.quoteOnly) {
+    return { ok: false, quote: true, error: 'Custom quote' };
   }
   const selectedOptions = Array.isArray(options) ? options : [];
 

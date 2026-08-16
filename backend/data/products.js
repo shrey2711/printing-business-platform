@@ -940,6 +940,140 @@ const hardCasePodium = {
   }
 };
 
+// ─── SEG Modular Illuminated Trade Show Kits (CUSTOM QUOTE only). No price is
+// computed or shown (pricing.quoteOnly) — the size/plug/mockup selectors render
+// and feed the quote form. NO supplier price or lead time anywhere. Staged
+// active:false until Apex-approved imagery is in place. Frame is PVC and fabric
+// is FR 200g backlit per the source spec (do not silently change to aluminium).
+const SEG_H3 = [
+  { id: 'h66', label: "6.6' H", h: '6.6' },
+  { id: 'h74', label: "7.4' H", h: '7.4' },
+  { id: 'h82', label: "8.2' H", h: '8.2' }
+];
+const SEG_H2 = [
+  { id: 'h74', label: "7.4' H", h: '7.4' },
+  { id: 'h82', label: "8.2' H", h: '8.2' }
+];
+const SEG_WIDTHS = [
+  { id: 'w10', label: "10' W", w: '10' },
+  { id: 'w13', label: "13' W", w: '13' },
+  { id: 'w164', label: "16.4' W", w: '16.4' },
+  { id: 'w20', label: "20' W", w: '20' }
+];
+const segSizeChoices = (heights) => {
+  const out = [];
+  for (const w of SEG_WIDTHS) for (const h of heights) {
+    out.push({ id: `${w.id}-${h.id}`, label: `${w.w}' W × ${h.h}' H`, default: out.length === 0 });
+  }
+  return out;
+};
+const segPlugGroup = {
+  id: 'plug', label: 'Plug type', type: 'select',
+  help: 'Choose the power plug for your region. US plug is standard for North American shows.',
+  choices: [
+    { id: 'us', label: 'US plug', default: true },
+    { id: 'eu', label: 'EU plug' },
+    { id: 'au', label: 'AU plug' },
+    { id: 'none', label: 'No plug' }
+  ]
+};
+const segMockupGroup = {
+  id: 'mockup', label: 'Need a pre-production mockup?', type: 'select',
+  help: 'A digital mockup shows your artwork on the booth before production.',
+  choices: [
+    { id: 'no', label: 'No', default: true },
+    { id: 'yes', label: 'Yes, provide a digital mockup' }
+  ]
+};
+
+const segKit = ({ slug, name, letter, heights, image, whatsIncluded, intro, config, seoTitle, seoDescription }) => ({
+  slug,
+  active: false,
+  name,
+  category: 'displays',
+  badge: 'Custom Quote',
+  emoji: '🏙️',
+  quoteOnly: true,
+  tagline: `Premium illuminated SEG modular trade show booth kit — backlit fabric graphics on a modular lightbox frame. ${config}`,
+  description: intro,
+  gallery: [{ src: image, alt: `Apex ${name} — illuminated SEG modular trade show booth with backlit fabric graphics` }],
+  features: [
+    'Illuminated SEG (silicone-edge) backlit graphics',
+    'Modular, reconfigurable lightbox display system',
+    'Custom dye-sublimated graphics on flame-retardant 200g backlit fabric',
+    'Integrated LED illumination',
+    'Reusable frame — update graphics for future events',
+    'Display counter integration'
+  ],
+  applications: ['Trade shows and exhibitions', 'Conventions and conferences', 'Corporate events and product launches', 'Retail activations and branded environments'],
+  specs: [
+    ['Model', name],
+    ['Available overall sizes', `${SEG_WIDTHS.map((w) => w.w + "' W").join(', ')} × ${heights.map((h) => h.h + "' H").join(' / ')}`],
+    ['Graphic material', 'Flame-retardant 200g backlit fabric'],
+    ['Printing', 'Full-colour dye sublimation'],
+    ['Graphic install', 'Silicone Edge Graphics (SEG) — sewn silicone edge, near-frameless finish'],
+    ['Frame material', 'Modular PVC lightbox frame'],
+    ['Lighting', 'Integrated LED illumination'],
+    ['Plug options', 'US / EU / AU / none'],
+    ['Configuration', config]
+  ],
+  turnaround: 'Production and delivery timing are confirmed with your custom quote.',
+  related: ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'custom-canopies', 'standard-retractable-banner', 'hard-case-podium'],
+  seoTitle,
+  seoDescription,
+  whatsIncluded,
+  faqs: [
+    { q: 'What is an SEG trade show display?', a: 'SEG stands for Silicone Edge Graphics — a sewn silicone strip on the edge of the fabric presses into a channel on the frame, so the graphic sits smooth, tensioned and nearly frameless. These kits add integrated LED backlighting for illuminated graphics.' },
+    { q: 'Are the graphics illuminated?', a: 'Yes — the frame is a lightbox with integrated LED illumination, so the backlit fabric graphics glow evenly for strong trade-show visibility.' },
+    { q: 'Can the graphics be replaced later?', a: 'Yes. The frame is reusable — you can print new SEG fabric graphics for future events and reuse the same modular hardware.' },
+    { q: 'Can I submit my own artwork, or can Apex help design it?', a: 'Both. Upload your own print-ready artwork, or ask our team for design help. Because a modular booth has several panels, you can supply artwork for each panel or send your logo and brand direction.' },
+    { q: 'Which size should I choose?', a: `${name} comes in ${SEG_WIDTHS.length} widths (10, 13, 16.4 and 20 ft) and ${heights.length} heights. Match the width to your booth space and the height to the venue; not sure? Request a quote and we'll advise.` },
+    { q: 'Can I request modifications to the standard configuration?', a: 'Yes — tell us your requirements (extra counters, shelving, TV mounting, custom sizes) in the quote and our team will confirm what we can supply.' },
+    { q: 'Which plug type should I choose?', a: 'US plug is standard for North American events. EU, AU or no-plug options are available if you need them.' },
+    { q: 'How do I get pricing?', a: 'Pricing is customised based on the selected kit, size, quantity and project requirements. Submit a quote request and our team will prepare pricing for your configuration. Production and delivery timing are confirmed with your quote.' }
+  ],
+  pricing: {
+    model: 'configured',
+    quoteOnly: true,
+    baseLabel: name,
+    optionGroups: [
+      { id: 'size', label: 'Size', type: 'select', choices: segSizeChoices(heights) },
+      segPlugGroup,
+      segMockupGroup
+    ]
+  }
+});
+
+const segKits = [
+  segKit({
+    slug: 'seg-modular-trade-show-kit-a', name: 'Trade Show SEG Modular Kit A', letter: 'A', heights: SEG_H3,
+    image: '/images/displays/apex-seg-modular-kit-a-backlit-booth.jpeg',
+    config: 'Illuminated backdrop + overhead archway + reception counter',
+    intro: 'Kit A is a premium illuminated SEG modular booth built around a large backlit backdrop wall, an overhead archway that frames the space, and a matching reception counter — an open, welcoming layout that draws attention across the show floor with glowing edge-to-edge graphics.',
+    whatsIncluded: ['Main illuminated SEG backdrop wall', 'Overhead illuminated archway', 'Reception / display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware'],
+    seoTitle: 'SEG Modular Trade Show Kit A | Custom Lightbox Booth',
+    seoDescription: 'Trade Show SEG Modular Kit A — a custom illuminated SEG lightbox booth with backlit backdrop, overhead archway and reception counter. 10–20 ft widths. Request a custom quote from Apex.'
+  }),
+  segKit({
+    slug: 'seg-modular-trade-show-kit-b', name: 'Trade Show SEG Modular Kit B', letter: 'B', heights: SEG_H3,
+    image: '/images/displays/apex-seg-modular-kit-b-trade-show-booth.jpeg',
+    config: 'Illuminated backdrop + archway + side/privacy wall + display counter',
+    intro: 'Kit B is a more enclosed illuminated SEG modular booth: a backlit backdrop and overhead archway are joined by a side privacy wall that defines the space and adds branded surface area, plus a display counter — ideal when you want a semi-private, fully-branded environment for meetings and demos.',
+    whatsIncluded: ['Illuminated SEG backdrop wall', 'Overhead illuminated archway', 'Side / privacy illuminated wall', 'Display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware'],
+    seoTitle: 'SEG Modular Trade Show Kit B | Illuminated Booth with Side Wall',
+    seoDescription: 'Trade Show SEG Modular Kit B — a custom illuminated SEG lightbox booth with backdrop, overhead archway, side privacy wall and display counter. 10–20 ft widths. Request a custom quote from Apex.'
+  }),
+  segKit({
+    slug: 'seg-modular-trade-show-kit-c', name: 'Trade Show SEG Modular Kit C', letter: 'C', heights: SEG_H2,
+    image: '/images/displays/apex-seg-modular-kit-c-lightbox-display.jpeg',
+    config: 'Two angled illuminated SEG walls + display counter',
+    intro: 'Kit C is a distinct illuminated SEG modular layout: two tall backlit SEG walls meet at an angle to form a bold, open corner backdrop, paired with a matching display counter. Without an overhead archway, it reads as a clean, wall-forward branded statement — strong from multiple aisle directions.',
+    whatsIncluded: ['Two illuminated SEG backdrop walls (angled layout)', 'Display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware'],
+    seoTitle: 'SEG Modular Trade Show Kit C | Angled Illuminated Booth',
+    seoDescription: 'Trade Show SEG Modular Kit C — a custom illuminated SEG lightbox booth with two angled backlit walls and a display counter. 10–20 ft widths. Request a custom quote from Apex.'
+  })
+];
+
 const products = [
   ...canopyTents,
   pleatedCovers,
@@ -948,6 +1082,7 @@ const products = [
   ...flagProducts,
   tensionDisplay,
   hardCasePodium,
+  ...segKits,
   {
     slug: 'vinyl-banners',
     active: false,
@@ -2449,7 +2584,7 @@ export function priceDisplayFor(pricing) {
 
 function estimateStartingPrice(pricing) {
   // Quote-only products carry no price; the card/pages show "Request a Quote".
-  if (pricing.model === 'quote') return null;
+  if (pricing.model === 'quote' || pricing.quoteOnly) return null;
   // Competitive products: cheapest variant priced from its competitorPrice.
   // If none are filled in yet, null → "Request a Quote".
   if (pricing.model === 'competitive') {
