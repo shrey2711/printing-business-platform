@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Apex Trade Show — Trade Show Displays & Event Branding">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1f4d"/>
+      <stop offset="1" stop-color="#16233b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- top accent -->
+  <rect x="0" y="0" width="1200" height="10" fill="#ED1C24"/>
+  <!-- subtle geometric accents -->
+  <path d="M1200,0 L1200,260 L940,0 Z" fill="#ffffff" opacity="0.03"/>
+  <path d="M0,630 L0,420 L240,630 Z" fill="#ED1C24" opacity="0.10"/>
+
+  <!-- wordmark -->
+  <text x="600" y="300" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="120" font-weight="800" letter-spacing="4" fill="#ffffff">APEX<tspan fill="#ED1C24">.</tspan></text>
+  <text x="600" y="355" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" letter-spacing="14" fill="#9fb0cc">TRADE SHOW</text>
+
+  <!-- divider -->
+  <rect x="470" y="392" width="260" height="4" rx="2" fill="#ED1C24"/>
+
+  <!-- tagline -->
+  <text x="600" y="452" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="600" fill="#e8ecf3">Trade Show Displays &amp; Event Branding</text>
+  <text x="600" y="500" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#8ea0bd">Canopy tents · Banner stands · Backdrops · Table covers · Flags · SEG kits</text>
+
+  <text x="600" y="580" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="2" fill="#ffffff">apextradeshow.com</text>
+</svg>
