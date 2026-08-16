@@ -697,13 +697,14 @@ const flagBaseGroup = {
   ]
 };
 
-const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro }) => ({
+const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro, active = false, gallery }) => ({
   slug,
-  active: false,
+  active,
   name,
   category: 'flags',
   badge: 'Custom Printed',
   emoji: '🚩',
+  ...(gallery ? { gallery } : {}),
   tagline: `Custom printed ${shape} advertising flag — full-colour dye sublimation, pole + base or graphic only.`,
   description: intro,
   features: [
@@ -778,6 +779,15 @@ const teardropSizes = [
 const flagProducts = [
   flagProduct({
     slug: 'feather-angled-flag', name: 'Feather Angled Flag', shape: 'angled feather', sizes: featherSizes,
+    active: true,
+    gallery: [
+      { src: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png', alt: 'Apex angled feather flag with a custom printed graphic on a cross base' },
+      { src: '/images/flags/feather_angled_flag_nova_dental_large_ground_stake.png', alt: 'Apex angled feather flag on a ground spike, custom printed' },
+      { src: '/images/flags/feather_angled_flag_shinepro_auto_spa_large_square_base.png', alt: 'Apex angled feather flag on a square steel base, custom printed' },
+      { src: '/images/flags/feather_angled_size_measurements_all_sizes.jpg', alt: 'Apex angled feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
+      { src: '/images/flags/feather_angled_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
+      { src: '/images/flags/feather_angled_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag — sliding the printed flag onto the pole' }
+    ],
     seoTitle: 'Custom Feather Angled Flags | Printed Advertising Flags',
     seoDescription: 'Custom printed angled feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
     intro: 'A custom printed angled feather flag — the tall, curved-top advertising flag whose canopy angles forward over the pole so your branding stays visible even in light wind. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
@@ -790,12 +800,30 @@ const flagProducts = [
   }),
   flagProduct({
     slug: 'feather-convex-flag', name: 'Feather Convex Flag', shape: 'convex feather', sizes: featherSizes,
+    active: true,
+    gallery: [
+      { src: '/images/flags/feather_convex_flag_solis_spa_large_cross_base.png', alt: 'Apex convex feather flag with a custom printed graphic on a cross base' },
+      { src: '/images/flags/feather_convex_flag_pixelhub_expo_large_ground_stake.png', alt: 'Apex convex feather flag on a ground spike, custom printed' },
+      { src: '/images/flags/feather_convex_flag_greenleaf_market_large_square_base.png', alt: 'Apex convex feather flag on a square steel base, custom printed' },
+      { src: '/images/flags/feather_convex_size_measurements_all_sizes.jpg', alt: 'Apex convex feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
+      { src: '/images/flags/feather_convex_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
+      { src: '/images/flags/feather_convex_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag onto the pole' }
+    ],
     seoTitle: 'Custom Convex Feather Flags | Printed Advertising Flags',
     seoDescription: 'Custom printed convex feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
     intro: 'A custom printed convex feather flag — a tall flag with a gently curved (convex) top edge for a soft, rounded branded silhouette. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
   flagProduct({
     slug: 'teardrop-flag', name: 'Teardrop Flag', shape: 'teardrop', sizes: teardropSizes,
+    active: true,
+    gallery: [
+      { src: '/images/flags/teardrop_flag_summit_coffee_large_cross_base.png', alt: 'Apex teardrop flag with a custom printed graphic on a cross base' },
+      { src: '/images/flags/teardrop_flag_bluesky_realty_large_ground_stake.png', alt: 'Apex teardrop flag on a ground spike, custom printed' },
+      { src: '/images/flags/teardrop_flag_peakfit_gym_large_square_base.png', alt: 'Apex teardrop flag on a square steel base, custom printed' },
+      { src: '/images/flags/teardrop_size_measurements_all_sizes.jpg', alt: 'Apex teardrop flag size chart — small 7 ft, medium 9 ft, large 11.2 ft' },
+      { src: '/images/flags/teardrop_hardware_cross_base.jpg', alt: 'Apex teardrop flag cross-base hardware' },
+      { src: '/images/flags/teardrop_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex teardrop flag onto the pole' }
+    ],
     seoTitle: 'Custom Teardrop Flags | Printed Advertising Banners',
     seoDescription: 'Custom printed teardrop flags in 7, 9 and 11.2 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
     intro: 'A custom printed teardrop flag — a compact, rounded teardrop profile that holds its shape well in wind and reads clearly from a distance. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'

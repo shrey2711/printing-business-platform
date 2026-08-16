@@ -13,7 +13,10 @@ export const PRODUCT_CARD_IMAGE = {
   'deluxe-retractable-banner': '/images/displays/deluxe-retractable-banner.webp',
   'x-stand-banner': '/images/displays/x-stand-front-back.jpg',
   'table-top-banner-stand': '/images/displays/table-top-example.png',
-  'step-and-repeat-backdrop': '/images/displays/step-repeat-angled.jpeg'
+  'step-and-repeat-backdrop': '/images/displays/step-repeat-angled.jpeg',
+  'feather-angled-flag': '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png',
+  'feather-convex-flag': '/images/flags/feather_convex_flag_solis_spa_large_cross_base.png',
+  'teardrop-flag': '/images/flags/teardrop_flag_summit_coffee_large_cross_base.png'
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;
