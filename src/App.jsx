@@ -220,6 +220,8 @@ function HeaderNav() {
         </div>
         <Link to="/trade-show-displays">Displays</Link>
         <Link to="/custom-canopies">Canopies</Link>
+        <Link to="/products?category=flags">Flags</Link>
+        <Link to="/products?category=seg-kits">SEG Kits</Link>
         <Link to="/trade-show-booth-packages">Booth Packages</Link>
         <Link to="/blog">Blog</Link>
         <span className="nav-spacer" />
