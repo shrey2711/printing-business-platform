@@ -802,12 +802,152 @@ const flagProducts = [
   })
 ];
 
+// ─── Straight Tension Fabric Display (staged; active:false until real imagery).
+// Explicit price LOOKUP MATRIX from the supplied sheet — NO formulas. Key:
+// package | size | sides | production. The three "graphic only / double-sided /
+// rush" cells held a placeholder (-400) with no real price, so they are OMITTED
+// from the matrix — the engine guard makes them a quote (never $0, never -400).
+const TENSION_MATRIX = {
+  'hw|8ft|single|rush': 774, 'hw|8ft|single|std': 645, 'hw|8ft|double|rush': 889, 'hw|8ft|double|std': 699,
+  'go|8ft|single|rush': 374, 'go|8ft|single|std': 245, /* go|8ft|double|rush omitted */ 'go|8ft|double|std': 489,
+  'hw|10ft|single|rush': 894, 'hw|10ft|single|std': 745, 'hw|10ft|double|rush': 1009, 'hw|10ft|double|std': 799,
+  'go|10ft|single|rush': 494, 'go|10ft|single|std': 345, /* go|10ft|double|rush omitted */ 'go|10ft|double|std': 609,
+  'hw|20ft|single|rush': 1734, 'hw|20ft|single|std': 1445, 'hw|20ft|double|rush': 1849, 'hw|20ft|double|std': 1499,
+  'go|20ft|single|rush': 1334, 'go|20ft|single|std': 1045, /* go|20ft|double|rush omitted */ 'go|20ft|double|std': 1449
+};
+
+const tensionDisplay = {
+  slug: 'straight-tension-fabric-display',
+  active: false,
+  name: 'Straight Tension Fabric Display',
+  category: 'backdrops',
+  badge: 'Custom Printed',
+  emoji: '🖼️',
+  tagline: 'Floor-standing straight tension fabric backdrop — pillowcase graphic over a lightweight aluminium frame.',
+  description:
+    'A straight tension fabric display — a floor-standing trade-show backdrop where a dye-sublimated "pillowcase" fabric graphic zips over a lightweight aluminium tube frame for a smooth, seamless, frameless wall. Packs into a carry bag and sets up tool-free with stabilising feet.',
+  size: '8–20 ft wide × ~8 ft tall',
+  features: [
+    'Lightweight aluminium tube frame',
+    'Pillowcase-style tension fabric graphic with zipper closure',
+    'Smooth, seamless, frameless finish',
+    'Stabilising feet; tool-free setup',
+    'Single- or double-sided graphics',
+    'Replaceable graphic; packs into a carry bag'
+  ],
+  applications: ['Trade show and expo backwalls', 'Conference and event backdrops', 'Retail and lobby branding', 'Press and photo walls'],
+  specs: [
+    ['Type', 'Straight tension fabric display (floor-standing)'],
+    ['Sizes', '8 ft, 10 ft and 20 ft wide, approx. 8 ft tall'],
+    ['Frame', 'Lightweight aluminium tube'],
+    ['Graphic', 'Dye-sublimated tension fabric, single- or double-sided, replaceable'],
+    ['Setup', 'Tool-free; stabilising feet; carry bag'],
+    ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
+  ],
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping additional.',
+  related: ['step-and-repeat-backdrop', 'standard-retractable-banner', 'pleated-table-covers', 'hard-case-podium'],
+  seoTitle: 'Straight Tension Fabric Display | Custom Trade Show Backdrop',
+  seoDescription:
+    'Custom straight tension fabric display — 8, 10 and 20 ft wide pillowcase fabric backdrops on a lightweight aluminium frame. Single or double sided, graphic + frame or graphic only.',
+  faqs: [
+    { q: 'What is a tension fabric display?', a: 'A floor-standing backdrop where a stretch dye-sublimated fabric graphic zips over a lightweight aluminium tube frame — like a pillowcase — for a smooth, seamless, frameless wall.' },
+    { q: 'What does "graphic + frame" vs "graphic only" mean?', a: '"Graphic + frame" includes the aluminium frame and the printed fabric, ready to set up. "Graphic only" is a replacement fabric graphic for a frame you already own.' },
+    { q: 'Single- or double-sided?', a: 'Both are available. Single-sided prints one face; double-sided prints two separate faces. Some rush double-sided sizes are quoted per order — the configurator will say so and route you to a quote.' },
+    { q: 'How long does production take?', a: 'Standard production is 6–8 business days after proof approval; rush is 2–3 business days. This is production time — shipping is additional.' }
+  ],
+  pricing: {
+    model: 'configured',
+    baseLabel: 'Tension fabric display',
+    matrixGroups: ['pkg', 'size', 'sides', 'days'],
+    priceMatrix: TENSION_MATRIX,
+    optionGroups: [
+      { id: 'pkg', label: 'What you get', type: 'select', pricing: 'matrix',
+        help: 'Graphic + frame includes the aluminium frame and printed fabric. Graphic only is a replacement fabric for a frame you own.',
+        choices: [
+          { id: 'hw', label: 'Graphic + frame', default: true },
+          { id: 'go', label: 'Graphic only' }
+        ] },
+      { id: 'size', label: 'Size', type: 'select', pricing: 'matrix',
+        choices: [
+          { id: '8ft', label: '8 ft wide × ~8 ft tall', default: true },
+          { id: '10ft', label: '10 ft wide × ~8 ft tall' },
+          { id: '20ft', label: '20 ft wide × ~8 ft tall' }
+        ] },
+      { id: 'sides', label: 'Printing', type: 'select', pricing: 'matrix',
+        help: 'Some rush double-sided graphic-only configurations are quoted per order.',
+        choices: [
+          { id: 'single', label: 'Single-sided', default: true },
+          { id: 'double', label: 'Double-sided' }
+        ] },
+      { id: 'days', label: 'Production', type: 'select', pricing: 'matrix',
+        help: 'Production time after proof approval — not delivery. Rush is 2–3 business days.',
+        choices: [
+          { id: 'std', label: '6–8 business days', default: true },
+          { id: 'rush', label: '2–3 business days (rush)' }
+        ] },
+      designGroup
+    ]
+  }
+};
+
+// ─── Hard Case Podium (staged; active:false). Two explicit prices: the hard
+// case with a printed graphic, or the printed graphic only.
+const hardCasePodium = {
+  slug: 'hard-case-podium',
+  active: false,
+  name: 'Hard Case Podium',
+  category: 'displays',
+  badge: 'Custom Printed',
+  emoji: '🎙️',
+  tagline: 'Wheeled hard shipping case that converts into a branded presentation podium.',
+  description:
+    'A wheeled hard case that doubles as a branded podium — ship your display gear inside, then wrap the case with a printed graphic to create a professional lectern at your booth. Order the complete printed hard-case podium, or just the printed graphic if you already own the case.',
+  size: 'Standard hard-case podium',
+  features: [
+    'Wheeled hard travel case that converts to a podium',
+    'Custom printed wrap graphic',
+    'Doubles as shipping/storage for booth gear',
+    'Professional presentation surface'
+  ],
+  applications: ['Trade show presentations', 'Registration and welcome desks', 'Product demos', 'Events and conferences'],
+  specs: [
+    ['Type', 'Hard case podium (case + printed graphic)'],
+    ['Options', 'Complete hard-case podium with print, or podium print only'],
+    ['Graphic', 'Custom printed wrap'],
+    ['Production', '6–8 business days standard (production time, not delivery)']
+  ],
+  turnaround: 'Production: 6–8 business days. Shipping additional.',
+  related: ['straight-tension-fabric-display', 'step-and-repeat-backdrop', 'standard-retractable-banner'],
+  seoTitle: 'Hard Case Podium | Printed Trade Show Podium & Case',
+  seoDescription:
+    'Custom hard case podium — a wheeled travel case that converts into a branded presentation podium with a printed wrap. Order the complete podium or the print only.',
+  faqs: [
+    { q: 'What is the difference between the two options?', a: 'The hard case podium with print includes the wheeled hard case and the printed graphic wrap. Podium print only is the printed graphic on its own — for customers who already own the case.' },
+    { q: 'Does "print only" include the case?', a: 'No. Podium print only is the printed graphic wrap only; it does not include the hard case.' }
+  ],
+  pricing: {
+    model: 'configured',
+    baseLabel: 'Hard case podium',
+    optionGroups: [
+      { id: 'kit', label: 'What you get', type: 'select', pricing: 'base',
+        help: 'The complete hard-case podium with print, or the printed graphic only (no case).',
+        choices: [
+          { id: 'case', label: 'Hard case podium with print', price: 650, default: true },
+          { id: 'print', label: 'Podium print only (no case)', price: 135 }
+        ] },
+      designGroup
+    ]
+  }
+};
+
 const products = [
   ...canopyTents,
   pleatedCovers,
   stretchCovers,
   ...tradeShowDisplays,
   ...flagProducts,
+  tensionDisplay,
+  hardCasePodium,
   {
     slug: 'vinyl-banners',
     active: false,
