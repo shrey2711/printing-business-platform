@@ -13,7 +13,8 @@ export const categories = [
   { id: 'tents', name: 'Canopy Tents' },
   { id: 'banner-stands', name: 'Banner Stands' },
   { id: 'backdrops', name: 'Backdrops' },
-  { id: 'table-covers', name: 'Table Covers' }
+  { id: 'table-covers', name: 'Table Covers' },
+  { id: 'flags', name: 'Flags' }
 ];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
@@ -59,6 +60,14 @@ export const navGroups = [
   {
     name: 'Backdrops',
     items: [{ name: 'Step and Repeat Backdrop', slug: 'step-and-repeat-backdrop' }]
+  },
+  {
+    name: 'Flags',
+    items: [
+      { name: 'Feather Angled Flag', slug: 'feather-angled-flag' },
+      { name: 'Feather Convex Flag', slug: 'feather-convex-flag' },
+      { name: 'Teardrop Flag', slug: 'teardrop-flag' }
+    ]
   }
 ];
 
