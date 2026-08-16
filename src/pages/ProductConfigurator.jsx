@@ -190,6 +190,33 @@ export default function ProductConfigurator() {
   // card can show its exact $ value without dividing a lagging total (no flicker).
   const preMultTotal = price?.preMultipliedSubtotal || 0;
 
+  // For priceMatrix products, an option dimension (size/package/sides/production)
+  // has no standalone price — its cost is baked into the combined lookup. Show
+  // each choice's price DELTA vs that group's default, given the current other
+  // selections (e.g. "2–3 days rush → +$50"), so buyers see what an option adds.
+  const matrixMeta = (group, choice) => {
+    const pm = p?.priceMatrix;
+    const groups = p?.matrixGroups;
+    if (!pm || !Array.isArray(groups) || !groups.includes(group.id)) return 'Included';
+    const idOf = (gid, override) => {
+      if (gid === group.id) return override;
+      const v = sel[gid];
+      if (v != null) return v;
+      const g = (p.optionGroups || []).find((x) => x.id === gid);
+      const d = (g?.choices || []).find((c) => c.default) || (g?.choices || [])[0];
+      return d?.id;
+    };
+    const keyFor = (override) => groups.map((gid) => idOf(gid, override)).join('|');
+    const def = (group.choices.find((c) => c.default) || group.choices[0])?.id;
+    const a = Number(pm[keyFor(choice.id)]);
+    const b = Number(pm[keyFor(def)]);
+    if (!Number.isFinite(a) || !Number.isFinite(b)) return '';
+    const d = a - b;
+    if (d > 0) return `+${money(d)}`;
+    if (d < 0) return `−${money(-d)}`;
+    return 'Included';
+  };
+
   // Quantity field — reused in the configured grid (next to Artwork) and below
   // the size/material controls for the other pricing models.
   const qtyField = (
@@ -364,7 +391,9 @@ export default function ProductConfigurator() {
                                       : preMultTotal
                                         ? `+${money(preMultTotal * (Number(choice.mult) - 1))}`
                                         : multiplierHint(choice.mult))
-                                  : multiplierHint(choice.mult)}
+                                  : group.pricing === 'matrix'
+                                    ? matrixMeta(group, choice)
+                                    : multiplierHint(choice.mult)}
                           </span>
                           )}
                         </button>
