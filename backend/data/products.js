@@ -670,11 +670,144 @@ const tradeShowDisplays = [
   }
 ];
 
+// ─── Advertising Flags (staged; active:false until real Apex product imagery
+// is supplied — never ship a wrong/placeholder product photo). Explicit price
+// LOOKUP MATRIX from the supplied rate card — NO formulas. Key order:
+// package | size | sides | production. Same matrix for all four flag shapes;
+// only the size LABELS differ (teardrop uses different heights).
+const FLAG_MATRIX = {
+  'hw|sm|single|rush': 215, 'hw|sm|single|std': 165, 'hw|sm|double|rush': 260, 'hw|sm|double|std': 210,
+  'go|sm|single|rush': 190, 'go|sm|single|std': 140, 'go|sm|double|rush': 235, 'go|sm|double|std': 185,
+  'hw|md|single|rush': 225, 'hw|md|single|std': 175, 'hw|md|double|rush': 278, 'hw|md|double|std': 228,
+  'go|md|single|rush': 200, 'go|md|single|std': 150, 'go|md|double|rush': 245, 'go|md|double|std': 195,
+  'hw|lg|single|rush': 245, 'hw|lg|single|std': 215, 'hw|lg|double|rush': 305, 'hw|lg|double|std': 275,
+  'go|lg|single|rush': 210, 'go|lg|single|std': 180, 'go|lg|double|rush': 270, 'go|lg|double|std': 240
+};
+
+// Base is an add-on that applies with the hardware package. Spike included ($0),
+// cross +$31, metal plate +$35 — added once. (Graphic-only orders ship without
+// hardware or a base; a future configurator pass will hide this group for them.)
+const flagBaseGroup = {
+  id: 'base', label: 'Base', type: 'select', pricing: 'add',
+  help: 'Choose a base for the hardware package. Spike base is included; cross base +$31; metal plate base +$35. Graphic-only orders do not include a pole or base.',
+  choices: [
+    { id: 'spike', label: 'Spike base — included', price: 0, default: true },
+    { id: 'cross', label: 'Cross base (+$31)', price: 31 },
+    { id: 'plate', label: 'Metal plate base (+$35)', price: 35 }
+  ]
+};
+
+const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro }) => ({
+  slug,
+  active: false,
+  name,
+  category: 'flags',
+  badge: 'Custom Printed',
+  emoji: '🚩',
+  tagline: `Custom printed ${shape} advertising flag — full-colour dye sublimation, pole + base or graphic only.`,
+  description: intro,
+  features: [
+    'Full-colour dye-sublimated print',
+    'Single- or double-sided printing',
+    'Lightweight portable pole hardware, tool-free assembly',
+    'Choice of spike, cross or metal-plate base',
+    'Replaceable graphic — reuse the hardware',
+    'Indoor or outdoor advertising'
+  ],
+  applications: ['Storefronts and grand openings', 'Trade shows and events', 'Roadside and parking-lot promotion', 'Marking a booth alongside a canopy'],
+  specs: [
+    ['Shape', `${shape} flag`],
+    ['Sizes', sizes.map((s) => s.label).join(', ')],
+    ['Print', 'Full-colour dye sublimation, single- or double-sided'],
+    ['Hardware', 'Flexible pole kit + base (spike / cross / metal plate)'],
+    ['Graphic', 'Replaceable'],
+    ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
+  ],
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping additional.',
+  related: ['custom-canopies', 'standard-retractable-banner', 'x-stand-banner'],
+  seoTitle,
+  seoDescription,
+  faqs: [
+    { q: 'What is the difference between "with hardware" and "graphic only"?', a: 'With hardware includes the flexible pole kit and a base so the flag is ready to fly. Graphic only is the printed flag on its own — for customers who already own compatible hardware.' },
+    { q: 'Single-sided or double-sided?', a: 'Single-sided prints the front in full colour; the reverse shows a mirrored print-through. Double-sided prints two separate faces with a blockout layer between them so each side reads correctly.' },
+    { q: 'Which base should I choose?', a: 'A spike base (included) pushes into grass for outdoor use. A cross base or metal plate base (small upcharge) weighs the flag down on hard floors indoors.' },
+    { q: 'How long does production take?', a: 'Standard production is 6–8 business days after proof approval; rush is 2–3 business days. This is production time — shipping/transit is additional.' }
+  ],
+  pricing: {
+    model: 'configured',
+    baseLabel: name,
+    matrixGroups: ['pkg', 'size', 'sides', 'days'],
+    priceMatrix: FLAG_MATRIX,
+    optionGroups: [
+      { id: 'pkg', label: 'What you get', type: 'select', pricing: 'matrix',
+        help: 'With hardware = printed flag + pole kit + base. Graphic only = the printed flag on its own.',
+        choices: [
+          { id: 'hw', label: 'With hardware (pole + base)', default: true },
+          { id: 'go', label: 'Graphic only' }
+        ] },
+      { id: 'size', label: 'Size', type: 'select', pricing: 'matrix', choices: sizes },
+      { id: 'sides', label: 'Printing', type: 'select', pricing: 'matrix',
+        help: 'Single-sided: full-colour front, mirrored print-through on the reverse. Double-sided: two separate printed faces with a blockout layer.',
+        choices: [
+          { id: 'single', label: 'Single-sided', default: true },
+          { id: 'double', label: 'Double-sided' }
+        ] },
+      { id: 'days', label: 'Production', type: 'select', pricing: 'matrix',
+        help: 'Production time after proof approval — not delivery time. Rush is 2–3 business days.',
+        choices: [
+          { id: 'std', label: '6–8 business days', default: true },
+          { id: 'rush', label: '2–3 business days (rush)' }
+        ] },
+      flagBaseGroup,
+      designGroup
+    ]
+  }
+});
+
+const featherSizes = [
+  { id: 'sm', label: 'Small — 9 ft', default: true },
+  { id: 'md', label: 'Medium — 10.5 ft' },
+  { id: 'lg', label: 'Large — 14 ft' }
+];
+const teardropSizes = [
+  { id: 'sm', label: 'Small — 7 ft', default: true },
+  { id: 'md', label: 'Medium — 9 ft' },
+  { id: 'lg', label: 'Large — 11.2 ft' }
+];
+
+const flagProducts = [
+  flagProduct({
+    slug: 'feather-angled-flag', name: 'Feather Angled Flag', shape: 'angled feather', sizes: featherSizes,
+    seoTitle: 'Custom Feather Angled Flags | Printed Advertising Flags',
+    seoDescription: 'Custom printed angled feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed angled feather flag — the tall, curved-top advertising flag whose canopy angles forward over the pole so your branding stays visible even in light wind. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+  }),
+  flagProduct({
+    slug: 'feather-straight-flag', name: 'Feather Straight Flag', shape: 'straight feather', sizes: featherSizes,
+    seoTitle: 'Custom Feather Straight Flags | Printed Advertising Flags',
+    seoDescription: 'Custom printed straight feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed straight feather flag — a tall vertical advertising flag with a straight top edge for a clean, upright branded profile. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+  }),
+  flagProduct({
+    slug: 'feather-convex-flag', name: 'Feather Convex Flag', shape: 'convex feather', sizes: featherSizes,
+    seoTitle: 'Custom Convex Feather Flags | Printed Advertising Flags',
+    seoDescription: 'Custom printed convex feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed convex feather flag — a tall flag with a gently curved (convex) top edge for a soft, rounded branded silhouette. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+  }),
+  flagProduct({
+    slug: 'teardrop-flag', name: 'Teardrop Flag', shape: 'teardrop', sizes: teardropSizes,
+    seoTitle: 'Custom Teardrop Flags | Printed Advertising Banners',
+    seoDescription: 'Custom printed teardrop flags in 7, 9 and 11.2 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed teardrop flag — a compact, rounded teardrop profile that holds its shape well in wind and reads clearly from a distance. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+  })
+];
+
 const products = [
   ...canopyTents,
   pleatedCovers,
   stretchCovers,
   ...tradeShowDisplays,
+  ...flagProducts,
   {
     slug: 'vinyl-banners',
     active: false,

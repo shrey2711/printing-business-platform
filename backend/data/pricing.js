@@ -82,6 +82,12 @@ export function computePrice(input, opts = {}) {
         return d?.id;
       };
       const key = pricing.matrixGroups.map(idFor).join('|');
+      // A combination absent from the matrix is intentionally NOT sold online
+      // (e.g. a rush double-sided cell with no supplied price) — surface it as a
+      // quote rather than silently charging $0.
+      if (!(key in pricing.priceMatrix)) {
+        return { ok: false, quote: true, error: 'This configuration is quoted — contact us for pricing.' };
+      }
       running = Number(pricing.priceMatrix[key]) || 0;
       for (const gid of pricing.matrixGroups) {
         const g = groups.find((x) => x.id === gid);
