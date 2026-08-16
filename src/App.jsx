@@ -66,6 +66,24 @@ const shopMenu = [
       { label: 'Pleated Table Covers', to: '/products/pleated-table-covers' },
       { label: 'Stretch Table Covers', to: '/products/stretch-table-covers' }
     ]
+  },
+  {
+    label: 'Flags',
+    to: '/products?category=flags',
+    items: [
+      { label: 'Feather Angled Flag', to: '/products/feather-angled-flag' },
+      { label: 'Feather Convex Flag', to: '/products/feather-convex-flag' },
+      { label: 'Teardrop Flag', to: '/products/teardrop-flag' }
+    ]
+  },
+  {
+    label: 'SEG Modular Kits',
+    to: '/products?category=seg-kits',
+    items: [
+      { label: 'SEG Modular Kit A', to: '/products/seg-modular-trade-show-kit-a' },
+      { label: 'SEG Modular Kit B', to: '/products/seg-modular-trade-show-kit-b' },
+      { label: 'SEG Modular Kit C', to: '/products/seg-modular-trade-show-kit-c' }
+    ]
   }
 ];
 
