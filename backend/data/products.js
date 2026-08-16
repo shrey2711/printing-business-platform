@@ -826,6 +826,7 @@ const flagProducts = [
     slug: 'feather-convex-flag', name: 'Feather Convex Flag', shape: 'convex feather', sizes: featherSizes,
     active: true,
     gallery: [
+      { src: '/images/flags/feather_convex_flag_solis_spa_large_cross_base.png', alt: 'Apex convex feather flag with a rounded convex top edge, custom printed on a cross base' },
       { src: '/images/flags/feather_convex_size_measurements_all_sizes.jpg', alt: 'Apex convex feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
       { src: '/images/flags/feather_convex_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
       { src: '/images/flags/feather_convex_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag onto the pole' }
