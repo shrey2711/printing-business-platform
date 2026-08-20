@@ -14,6 +14,8 @@ export const PRODUCT_CARD_IMAGE = {
   'x-stand-banner': '/images/displays/x-stand-front-back.jpg',
   'table-top-banner-stand': '/images/displays/table-top-example.png',
   'step-and-repeat-backdrop': '/images/displays/step-repeat-angled.jpeg',
+  '13oz-vinyl-banner': '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg',
+  '18oz-blockout-banner': '/images/banners/18oz-blockout-banner-urban-apparel-roll.jpeg',
   'feather-angled-flag': '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png',
   'feather-convex-flag': '/images/flags/feather_convex_flag_solis_spa_large_cross_base.png',
   'teardrop-flag': '/images/flags/teardrop_flag_summit_coffee_large_cross_base.png',

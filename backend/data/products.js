@@ -1176,8 +1176,10 @@ const products = [
   // the configurator. Finishing is the free welded hem + grommets only — paid
   // add-ons (pole pockets, wind slits, double-sided) are intentionally omitted
   // pending owner-confirmed rates, so nothing is invented.
-  // TODO: replace with licensed / own product photography. No gallery is wired,
-  // so cards and pages render the neutral ProductArt placeholder for now.
+  // Imagery: 13oz vinyl and 18oz blockout now carry owner-supplied galleries +
+  // card thumbnails (public/images/banners/). Mesh and fabric still have no
+  // gallery — their cards/pages render the neutral ProductArt placeholder until
+  // photos are supplied.
   {
     slug: '13oz-vinyl-banner',
     active: true,
@@ -1199,6 +1201,11 @@ const products = [
     seoTitle: '13oz Vinyl Banner | Custom Full-Colour Vinyl Banners',
     seoDescription:
       'Custom 13oz scrim vinyl banners printed to any size for indoor or outdoor use — welded hem and grommets included, UV-stable full-colour print. From $45, shipped across the US & Canada.',
+    gallery: [
+      { src: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg', alt: 'Custom printed 13oz vinyl landscape banner with grommets' },
+      { src: '/images/banners/13oz-vinyl-banner-cafe-portrait.jpeg', alt: 'Custom printed 13oz vinyl portrait banner with grommets' },
+      { src: '/images/banners/13oz-vinyl-banner-edge-finishing-options.jpeg', alt: '13oz vinyl banner edge finishing options — velcro, paper edge, webbing & D-ring, screen mesh, grommet, ivory corner and hemmed edge' }
+    ],
     pricing: {
       model: 'area',
       pricePerSqFt: 2.75,
@@ -1235,6 +1242,10 @@ const products = [
     seoTitle: '18oz Blockout Banner | Double-Sided Vinyl Banners',
     seoDescription:
       'Custom 18oz blockout vinyl banners with an opaque core for true double-sided printing — heavy-duty, UV-stable, welded hem and grommets included. From $45, shipped across the US & Canada.',
+    gallery: [
+      { src: '/images/banners/18oz-blockout-banner-urban-apparel-roll.jpeg', alt: 'Custom printed 18oz blockout vinyl banner rolled, showing the opaque white core and grommets' },
+      { src: '/images/banners/18oz-blockout-banner-edge-finishing-options.jpeg', alt: '18oz blockout banner finishing options — velcro, webbing & D-ring, reinforced corner, hem & grommet, windslit, rope sewn and pole pocket & rope' }
+    ],
     pricing: {
       model: 'area',
       pricePerSqFt: 4.0,
