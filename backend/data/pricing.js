@@ -7,7 +7,7 @@ import { calculateCompetitivePrice, competitorCurrentPrice } from './competitive
 // apply a dashboard pricing override at request time (display AND checkout), so
 // the quoted price and the charged price always agree.
 export function computePrice(input, opts = {}) {
-  const { slug, quantity = 1, width, height, materialId, variantId, options = [] } = input;
+  const { slug, quantity = 1, width, height, materialId, variantId, options = [], finishing = {} } = input;
   const product = getProduct(slug);
   if (!product) {
     return { ok: false, error: 'Unknown product' };
@@ -76,6 +76,24 @@ export function computePrice(input, opts = {}) {
       perPieceGoods = pricing.minChargeUsd;
       breakdown.push({ label: 'Minimum order charge', amount: round2(bump) });
       minChargeApplied = true;
+    }
+
+    // Production-speed multiplier from a finishing group whose choices carry a
+    // `mult` (banner "Delivery": standard 1× included, rush 1.55×). Snapshot the
+    // pre-rush price so the UI shows the exact rush surcharge in DOLLARS, never a
+    // percentage. Applied to the per-piece price after the minimum charge.
+    preMultUnit = perPieceGoods;
+    for (const g of pricing.finishingGroups || []) {
+      if (!(g.choices || []).some((c) => Number(c.mult) && Number(c.mult) !== 1)) continue;
+      const def = g.choices.find((c) => c.default) || g.choices[0];
+      const chosen = g.choices.find((c) => c.id === finishing[g.id]) || def;
+      const mult = Number(chosen?.mult) || 1;
+      dims[g.id] = chosen?.name;
+      if (mult !== 1) {
+        const before = perPieceGoods;
+        perPieceGoods = round2(perPieceGoods * mult);
+        breakdown.push({ label: `${g.label} — ${chosen.name}`, amount: round2(perPieceGoods - before) });
+      }
     }
   } else if (pricing.model === 'configured') {
     // Multi-axis configuration (canopy tents): one base group sets the starting

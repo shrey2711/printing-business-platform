@@ -1167,6 +1167,13 @@ const segKits = [
 // until double-sided pricing is confirmed by the owner.
 const BANNER_FINISHING_GROUPS = [
   { id: 'sides', label: '# of Sides', choices: [{ id: '1', name: '1 Side' }] },
+  // Production speed. Standard is included; 2–3 day rush multiplies the banner
+  // price by 1.55 (customer sees the dollar surcharge in the breakdown, never the
+  // percentage). Priced in pricing.js via the choice `mult`.
+  { id: 'days', label: 'Delivery', choices: [
+    { id: 'standard', name: '6–8 business days', mult: 1 },
+    { id: 'rush', name: '2–3 business days (rush)', mult: 1.55 }
+  ] },
   { id: 'pole', label: 'Pole Pocket', choices: [
     { id: 'none', name: 'No Pole Pockets' },
     { id: 'top', name: 'Top' },

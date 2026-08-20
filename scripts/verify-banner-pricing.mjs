@@ -73,6 +73,14 @@ eq('fabric 36x35 floor flag', below.minChargeApplied, true);
 // 13oz 96.5 × 48 = 32.1666.. sq ft × 2.75 = 88.4583.. → round2 88.46.
 eq('13oz 96.5x48 decimal', unit('13oz-vinyl-banner', 96.5, 48).unitPrice, 88.46);
 
+// ---- Rush / Delivery multiplier (2–3 day = 1.55×; standard = included) -------
+const rush = computePrice({ slug: '13oz-vinyl-banner', width: 96, height: 48, quantity: 1, finishing: { days: 'rush' } });
+eq('13oz 96x48 rush = 88 × 1.55', rush.unitPrice, 136.4);
+eq('standard (no finishing) unchanged', unit('13oz-vinyl-banner', 96, 48).unitPrice, 88.0);
+eq('explicit standard unchanged', computePrice({ slug: '13oz-vinyl-banner', width: 96, height: 48, quantity: 1, finishing: { days: 'standard' } }).unitPrice, 88.0);
+// Rush stacks on the per-banner minimum: 45 × 1.55 = 69.75.
+eq('13oz 24x24 rush over min = 69.75', computePrice({ slug: '13oz-vinyl-banner', width: 24, height: 24, quantity: 1, finishing: { days: 'rush' } }).unitPrice, 69.75);
+
 // ---- Size validation (sorted caps, orientation independent) -----------------
 const vinyl = getProduct('13oz-vinyl-banner').pricing; // 600 × 1800
 const fabric = getProduct('fabric-banner-9oz-wrinkle-free').pricing; // 96 × 1200
