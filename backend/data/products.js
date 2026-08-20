@@ -270,7 +270,7 @@ const pleatedCovers = {
     ['Turnaround', '6–8 business days production (2–3 day rush); shipping additional']
   ],
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
-  seoTitle: 'Custom Pleated Table Covers | Printed 4, 6 & 8 ft Throws',
+  seoTitle: 'Custom Pleated Table Covers | 4, 6 & 8 ft',
   seoDescription:
     'Custom printed pleated table covers (throws) in 4, 6 and 8 ft — draped closed-back fit, full-colour dye sublimation, free artwork proof. From $199.',
   related: ['stretch-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
@@ -323,7 +323,7 @@ const stretchCovers = {
     ['Turnaround', '6–8 business days production (2–3 day rush); shipping additional']
   ],
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
-  seoTitle: 'Custom Stretch Table Covers | Fitted 6 & 8 ft Tablecloths',
+  seoTitle: 'Custom Stretch Table Covers | 6 & 8 ft',
   seoDescription:
     'Custom printed fitted stretch table covers in 6 and 8 ft — tight closed-back fit, full-colour dye sublimation, free artwork proof. From $285.',
   related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
@@ -394,7 +394,7 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['deluxe-retractable-banner', 'x-stand-banner'],
-    seoTitle: 'Standard Retractable Banner Stand | Custom Printed Roll-Up',
+    seoTitle: 'Standard Retractable Banner Stand',
     seoDescription:
       'Custom Apex retractable banner stand, 33×81 in. Compact aluminium base, quick tool-free setup and a replaceable printed graphic for trade shows and events.',
     pricing: {
@@ -464,7 +464,7 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['standard-retractable-banner', 'x-stand-banner'],
-    seoTitle: 'Deluxe Retractable Banner Stand | Premium Printed Roll-Up',
+    seoTitle: 'Deluxe Retractable Banner Stand',
     seoDescription:
       'Premium Apex retractable banner stand, 33×81 in, with chrome-style end caps and an adjustable pole. Replaceable graphic for a polished trade-show display.',
     pricing: {
@@ -527,7 +527,7 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['standard-retractable-banner', 'deluxe-retractable-banner'],
-    seoTitle: 'Custom X-Stand Banner | Portable Printed Display',
+    seoTitle: 'X-Stand Banner Stand | Portable Display',
     seoDescription:
       'Apex X-Stand banner, 24×63 in — a lightweight X-frame display with a grommet-mounted, easy-to-swap graphic. Economical, portable signage for events.',
     pricing: {
@@ -607,7 +607,7 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
     related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
-    seoTitle: 'Step & Repeat Backdrop | Custom Printed Media Wall',
+    seoTitle: 'Step & Repeat Backdrop | Media Wall',
     seoDescription:
       'Apex 10×8 ft step and repeat backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
     pricing: {
@@ -680,7 +680,7 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Ships in 2–4 business days',
     related: ['standard-retractable-banner', 'pleated-table-covers'],
-    seoTitle: 'Tabletop Retractable Banner | Custom Printed Counter Display',
+    seoTitle: 'Tabletop Retractable Banner Stand',
     seoDescription:
       'Compact Apex tabletop retractable banner, 11.5×17.5 in. Small aluminium base and replaceable graphic for counters, registration desks and trade-show tables.',
     pricing: {
@@ -822,13 +822,13 @@ const flagProducts = [
       { src: '/images/flags/feather_angled_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
       { src: '/images/flags/feather_angled_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag — sliding the printed flag onto the pole' }
     ],
-    seoTitle: 'Custom Feather Angled Flags | Printed Advertising Flags',
+    seoTitle: 'Custom Feather Angled Flags',
     seoDescription: 'Custom printed angled feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
     intro: 'A custom printed angled feather flag — the tall, curved-top advertising flag whose canopy angles forward over the pole so your branding stays visible even in light wind. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
   flagProduct({
     slug: 'feather-straight-flag', name: 'Feather Straight Flag', shape: 'straight feather', sizes: featherSizes,
-    seoTitle: 'Custom Feather Straight Flags | Printed Advertising Flags',
+    seoTitle: 'Custom Feather Straight Flags',
     seoDescription: 'Custom printed straight feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
     intro: 'A custom printed straight feather flag — a tall vertical advertising flag with a straight top edge for a clean, upright branded profile. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
@@ -841,7 +841,7 @@ const flagProducts = [
       { src: '/images/flags/feather_convex_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
       { src: '/images/flags/feather_convex_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag onto the pole' }
     ],
-    seoTitle: 'Custom Convex Feather Flags | Printed Advertising Flags',
+    seoTitle: 'Custom Convex Feather Flags',
     seoDescription: 'Custom printed convex feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
     intro: 'A custom printed convex feather flag — a tall flag with a gently curved (convex) top edge for a soft, rounded branded silhouette. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
@@ -856,7 +856,7 @@ const flagProducts = [
       { src: '/images/flags/teardrop_hardware_cross_base.jpg', alt: 'Apex teardrop flag cross-base hardware' },
       { src: '/images/flags/teardrop_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex teardrop flag onto the pole' }
     ],
-    seoTitle: 'Custom Teardrop Flags | Printed Advertising Banners',
+    seoTitle: 'Custom Teardrop Advertising Flags',
     seoDescription: 'Custom printed teardrop flags in 7, 9 and 11.2 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
     intro: 'A custom printed teardrop flag — a compact, rounded teardrop profile that holds its shape well in wind and reads clearly from a distance. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   })
@@ -906,7 +906,7 @@ const tensionDisplay = {
   ],
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping additional.',
   related: ['step-and-repeat-backdrop', 'standard-retractable-banner', 'pleated-table-covers', 'hard-case-podium'],
-  seoTitle: 'Straight Tension Fabric Display | Custom Trade Show Backdrop',
+  seoTitle: 'Straight Tension Fabric Display',
   seoDescription:
     'Custom straight tension fabric display — 8, 10 and 20 ft wide pillowcase fabric backdrops on a lightweight aluminium frame. Single or double sided, graphic + frame or graphic only.',
   faqs: [
@@ -978,7 +978,7 @@ const hardCasePodium = {
   ],
   turnaround: 'Production: 6–8 business days. Shipping additional.',
   related: ['straight-tension-fabric-display', 'step-and-repeat-backdrop', 'standard-retractable-banner'],
-  seoTitle: 'Hard Case Podium | Printed Trade Show Podium & Case',
+  seoTitle: 'Hard Case Trade Show Podium',
   seoDescription:
     'Custom hard case podium — a wheeled travel case that converts into a branded presentation podium with a printed wrap. Order the complete podium or the print only.',
   faqs: [
@@ -1123,8 +1123,8 @@ const segKits = [
     bag: '≈ 43" L × 14" W × 8" H (varies by size)',
     intro: 'Kit A is a premium illuminated SEG modular booth built around a large backlit backdrop wall, a single illuminated archway/return that frames the space, and a matching illuminated counter — an open, welcoming layout that draws attention across the show floor with glowing edge-to-edge graphics.',
     whatsIncluded: ['Main illuminated SEG backdrop wall', 'Single illuminated archway / return section', 'Illuminated display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware', 'Soft canvas carry bag'],
-    seoTitle: 'SEG Modular Trade Show Kit A | Custom Lightbox Booth',
-    seoDescription: 'Trade Show SEG Modular Kit A — a custom illuminated SEG lightbox booth with backlit backdrop, overhead archway and reception counter. 10–20 ft widths. Request a custom quote from Apex.'
+    seoTitle: 'SEG Modular Kit A | Lightbox Booth',
+    seoDescription: 'Trade Show SEG Modular Kit A — illuminated SEG lightbox booth with backlit backdrop, overhead archway and reception counter, 10–20 ft. Quoted per order.'
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-b', name: 'Trade Show SEG Modular Kit B', letter: 'B', heights: SEG_H3,
@@ -1139,8 +1139,8 @@ const segKits = [
     bag: '≈ 46" L × 16" W × 10" H (varies by size)',
     intro: 'Kit B is a more enclosed illuminated SEG modular booth: a backlit backdrop, a side panel/arch front and an illuminated overhead/arch section are joined by an illuminated counter — ideal when you want a semi-private, fully-branded environment with more surface area for meetings and demos.',
     whatsIncluded: ['Illuminated SEG backdrop wall', 'Side panel / arch front', 'Illuminated overhead / arch section', 'Illuminated display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware', 'Soft canvas carry bag'],
-    seoTitle: 'SEG Modular Trade Show Kit B | Illuminated Booth with Side Wall',
-    seoDescription: 'Trade Show SEG Modular Kit B — a custom illuminated SEG lightbox booth with backdrop, overhead archway, side privacy wall and display counter. 10–20 ft widths. Request a custom quote from Apex.'
+    seoTitle: 'SEG Modular Kit B | Illuminated Booth',
+    seoDescription: 'Trade Show SEG Modular Kit B — illuminated SEG booth with backdrop, overhead archway, side privacy wall and counter, 10–20 ft. Quoted per order.'
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-c', name: 'Trade Show SEG Modular Kit C', letter: 'C', heights: SEG_H2,
@@ -1155,8 +1155,8 @@ const segKits = [
     bag: '≈ 46" L × 17" W × 13" H (varies by size)',
     intro: 'Kit C is a distinct illuminated SEG modular layout: a backlit backdrop is flanked by a left and a right illuminated side panel to form a bold, three-sided branded environment, paired with an illuminated counter. With no overhead arch, it reads as a clean, wall-forward statement that stays strong from multiple aisle directions.',
     whatsIncluded: ['Illuminated SEG backdrop wall', 'Left illuminated side panel', 'Right illuminated side panel', 'Illuminated display counter', 'Custom backlit SEG fabric graphics for each panel', 'Modular PVC lightbox frame components', 'Integrated LED system and power hardware', 'Soft canvas carry bag'],
-    seoTitle: 'SEG Modular Trade Show Kit C | Angled Illuminated Booth',
-    seoDescription: 'Trade Show SEG Modular Kit C — a custom illuminated SEG lightbox booth with two angled backlit walls and a display counter. 10–20 ft widths. Request a custom quote from Apex.'
+    seoTitle: 'SEG Modular Kit C | Angled Booth',
+    seoDescription: 'Trade Show SEG Modular Kit C — illuminated SEG booth with two angled backlit walls and a display counter, 10–20 ft. Quoted per order.'
   })
 ];
 
@@ -1196,9 +1196,9 @@ const products = [
       'Made to any size — up to 50 ft on one side'
     ],
     turnaround: 'Ships in 2–4 business days',
-    seoTitle: '13oz Vinyl Banner | Custom Full-Colour Vinyl Banners',
+    seoTitle: '13oz Vinyl Banner | Full-Colour Print',
     seoDescription:
-      'Custom 13oz scrim vinyl banners printed to any size for indoor or outdoor use — welded hem and grommets included, UV-stable full-colour print. From $45, shipped across the US & Canada.',
+      'Custom 13oz scrim vinyl banners made to any size, indoor or outdoor — welded hem and grommets included, UV-stable print. From $45, US & Canada.',
     gallery: [
       { src: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg', alt: 'Custom printed 13oz vinyl landscape banner with grommets' },
       { src: '/images/banners/13oz-vinyl-banner-cafe-portrait.jpeg', alt: 'Custom printed 13oz vinyl portrait banner with grommets' },
@@ -1237,9 +1237,9 @@ const products = [
       'Made to any size — up to 50 ft on one side'
     ],
     turnaround: 'Ships in 2–4 business days',
-    seoTitle: '18oz Blockout Banner | Double-Sided Vinyl Banners',
+    seoTitle: '18oz Blockout Banner | Double-Sided',
     seoDescription:
-      'Custom 18oz blockout vinyl banners with an opaque core for true double-sided printing — heavy-duty, UV-stable, welded hem and grommets included. From $45, shipped across the US & Canada.',
+      'Custom 18oz blockout vinyl banners with an opaque core for true double-sided prints — heavy-duty, hem and grommets included. From $45, US & Canada.',
     gallery: [
       { src: '/images/banners/18oz-blockout-banner-urban-apparel-roll.jpeg', alt: 'Custom printed 18oz blockout vinyl banner rolled, showing the opaque white core and grommets' },
       { src: '/images/banners/18oz-blockout-banner-edge-finishing-options.jpeg', alt: '18oz blockout banner finishing options — velcro, webbing & D-ring, reinforced corner, hem & grommet, windslit, rope sewn and pole pocket & rope' }
@@ -1277,9 +1277,9 @@ const products = [
       'Made to any size — up to 50 ft on one side'
     ],
     turnaround: 'Ships in 2–4 business days',
-    seoTitle: 'Mesh Banner | Perforated Wind-Resistant Vinyl Banners',
+    seoTitle: 'Mesh Banner | Perforated Wind-Resistant',
     seoDescription:
-      'Custom perforated mesh banners that let wind pass through — ideal for fences, scaffolding and building wraps. UV-stable colour, welded hem and grommets included. From $45, US & Canada.',
+      'Custom perforated mesh banners that let wind through — ideal for fences and building wraps. Hem and grommets included. From $45, US & Canada.',
     gallery: [
       { src: '/images/banners/mesh-banner-gift-pass-fence-lifestyle.jpeg', alt: 'Custom printed perforated mesh banner mounted on a fence, showing the mesh weave' },
       { src: '/images/banners/mesh-banner-edge-finishing-options.jpeg', alt: 'Mesh banner finishing options — premium edging, corner reinforcement, hardware attachment, velcro fastening, rope finish and pole sleeve' }
@@ -1317,9 +1317,9 @@ const products = [
       'Made to any size — up to 8 ft on one side'
     ],
     turnaround: 'Ships in 3–5 business days',
-    seoTitle: '9oz Wrinkle-Free Fabric Banner | Dye-Sublimated Fabric Banners',
+    seoTitle: '9oz Wrinkle-Free Fabric Banner',
     seoDescription:
-      'Custom 9oz wrinkle-free fabric banners, dye-sublimated for a rich no-glare matte finish — packs without creasing, sewn hem edges. From $45, shipped across the US & Canada.',
+      'Custom 9oz wrinkle-free fabric banners, dye-sublimated for a no-glare matte finish — packs without creasing, sewn hem. From $45, US & Canada.',
     gallery: [
       { src: '/images/banners/fabric-banner-9oz-aroma-blend-folded.jpeg', alt: 'Custom dye-sublimated 9oz fabric banner folded, showing the matte fabric drape and sewn hem' },
       { src: '/images/banners/fabric-banner-9oz-edge-finishing-options.jpeg', alt: '9oz fabric banner finishing options — velcro, pole pocket and hem & grommet' }

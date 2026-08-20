@@ -17,9 +17,9 @@ export const PAGES = [
   {
     slug: 'about',
     nav: 'About',
-    title: 'About Apex — Trade Show Displays & Event Branding',
+    title: 'About Apex — Trade Show Displays',
     description:
-      'Apex Trade Show is a complete trade show display and event branding supplier serving the US and Canada — custom canopy tents, banner stands, backdrops and table covers, printed in your brand with a free artwork proof.',
+      'Apex Trade Show is a complete trade show display supplier serving the US and Canada — custom canopy tents, banner stands, backdrops, table covers and flags.',
     blocks: [
       { p: 'Apex Trade Show is a complete trade show display and event branding supplier serving the United States and Canada. We print your brand across a full booth — custom canopy tents, retractable and X-stand banner stands, step & repeat backdrops and table covers — with a free artwork proof on every order.' },
       { h: 'What we do', p: 'We help businesses, vendors, teams and event organisers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops, table covers and flags all configure for instant online pricing; larger custom display types (SEG modular kits, tension fabric and pop-up displays) are quoted per order.' },
@@ -53,7 +53,7 @@ export const PAGES = [
     nav: 'Artwork Guidelines',
     title: 'Artwork Guidelines for Trade Show Displays',
     description:
-      'How to prepare artwork for custom printed trade show displays — canopy tents, banner stands, backdrops and table covers. Accepted file types, resolution, colour and the free proof process.',
+      'How to prepare artwork for custom printed trade show displays — accepted file types, resolution, colour and the free proof process.',
     blocks: [
       { p: 'Good print starts with good artwork. These guidelines cover the files we accept and how to prepare them so your canopy tent, banner, backdrop or table cover prints crisp and on-colour. Not sure about your file? Send it anyway — we check every file at no charge and send a free proof before printing.' },
       { h: 'Accepted file formats', list: [
@@ -71,9 +71,9 @@ export const PAGES = [
   {
     slug: 'free-artwork-proof',
     nav: 'Free Artwork Proof',
-    title: 'Free Artwork Proof — How Approval Works Before Printing',
+    title: 'Free Artwork Proof — How It Works',
     description:
-      'Every Apex Trade Show order includes a free artwork proof. See exactly how the proof-and-approval process works — configure, upload artwork, we prepare a digital proof, you review and approve in writing, then production begins. Nothing prints until you approve.',
+      'Every Apex order includes a free artwork proof — see how proof-and-approval works: upload artwork, review the digital proof, approve in writing, then we print.',
     blocks: [
       { p: 'Every Apex Trade Show order — canopy tent, banner stand, backdrop or table cover — includes a free digital artwork proof. It is your chance to see exactly how your artwork will print before anything goes to production. Nothing is printed until you approve the proof in writing, at no extra charge.' },
       { h: 'How the free proof process works', list: [

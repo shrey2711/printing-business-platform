@@ -12,10 +12,10 @@ export const LANDING_PAGES = [
   {
     slug: 'seg-displays',
     nav: 'SEG Displays',
-    title: 'SEG Displays | Silicone Edge Graphic Fabric Displays',
+    title: 'SEG Displays | Silicone Edge Graphics',
     h1: 'SEG Displays (Silicone Edge Graphics)',
     description:
-      'Custom SEG displays — silicone edge graphic fabric on a rigid aluminium frame for a seamless, frameless, edge-to-edge finish. Backlit options, replaceable graphics. Request a quote from Apex.',
+      'Custom SEG displays — silicone-edge-graphic fabric on a rigid aluminium frame for a seamless, frameless finish. Backlit options, quoted per order.',
     intro:
       'SEG displays — short for Silicone Edge Graphics — are dye-sublimated fabric prints with a thin silicone strip sewn around the edge. The strip presses into a groove on a slim aluminium frame, so the graphic sits perfectly flat, edge to edge, with no visible frame. The result is the clean, seamless, premium look you see on modern trade show backwalls, light boxes and retail displays.',
     sections: [
@@ -50,12 +50,12 @@ export const LANDING_PAGES = [
   {
     slug: 'tension-fabric-displays',
     nav: 'Tension Fabric Displays',
-    title: 'Tension Fabric Displays | Portable Custom Fabric Booths',
+    title: 'Tension Fabric Displays | Portable Booths',
     h1: 'Tension Fabric Displays',
     image: '/images/displays/tension-fabric-stand.jpg',
     imageAlt: 'Tension fabric display stand — tubular frame with and without the stretch fabric graphic',
     description:
-      'Custom tension fabric displays — stretch dye-sublimated graphics over a lightweight tubular aluminium frame. Straight or curved, packs small, fast tool-free setup. Request a quote from Apex.',
+      'Custom tension fabric displays — stretch dye-sub graphics over a lightweight tubular frame. Straight or curved, packs small, quoted per order.',
     intro:
       'A tension fabric display stretches a dye-sublimated fabric graphic — like a pillowcase — over a lightweight tubular aluminium frame. It is the most portable way to put up a full-size branded backwall: the frame snaps together in minutes with no tools, the fabric zips or slides on, and the whole thing packs into a compact bag.',
     sections: [
@@ -85,10 +85,10 @@ export const LANDING_PAGES = [
   {
     slug: 'pop-up-displays',
     nav: 'Pop-Up Displays',
-    title: 'Pop-Up Displays | Portable Trade Show Backwall Displays',
+    title: 'Pop-Up Displays | Trade Show Backwalls',
     h1: 'Pop-Up Displays',
     description:
-      'Custom pop-up displays — accordion-frame portable trade show backwalls with fabric or graphic panels. Fast tool-free setup, packs into a case. Request a quote from Apex.',
+      'Custom pop-up displays — accordion-frame portable trade show backwalls with fabric or graphic panels. Fast setup, quoted per order.',
     intro:
       'A pop-up display is the classic portable backwall: an accordion-style frame that expands in seconds into a straight or curved wall, with fabric or printed graphic panels that attach across the front. It is one of the fastest displays to set up and packs down into a wheeled case, which is why it remains a trade show staple.',
     sections: [
@@ -118,10 +118,10 @@ export const LANDING_PAGES = [
   {
     slug: 'flags',
     nav: 'Flags',
-    title: 'Custom Flags | Feather & Teardrop Advertising Flags',
+    title: 'Custom Flags | Feather & Teardrop',
     h1: 'Custom Flags',
     description:
-      'Custom printed feather and teardrop advertising flags — tall outdoor displays on a flexible pole with a ground stake or cross base. Configure size, sides and base for instant online pricing from $140.',
+      'Custom feather and teardrop advertising flags on a flexible pole with ground stake or cross base. Configure for instant pricing from $140.',
     intro:
       'Custom flags are the tall, eye-catching outdoor displays you see lining event entrances, storefronts and roadsides. A dye-sublimated graphic on a flexible pole sways and flutters to catch attention from a distance, and mounts on a ground stake for grass or a cross base for hard surfaces. Configure shape, size, sides and base for an instant price and order online — no quote form needed. They pair perfectly with a canopy tent to mark your booth.',
     sections: [

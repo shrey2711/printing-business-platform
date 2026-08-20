@@ -31,7 +31,7 @@ export const STATIC_ARTICLES = [
       'Same 33″ × 81″ graphic, different hardware. How to choose between the Apex Standard and Deluxe retractable banner stands for your booth.',
     tags: ['Buying Guide', 'Banner Stands'],
     seo: {
-      title: 'Standard vs Deluxe Retractable Banner: Which to Choose?',
+      title: 'Standard vs Deluxe Retractable Banner',
       description:
         'Compare the Apex Standard and Deluxe retractable banner stands — hardware, finish, portability and which fits your trade show needs. Both 33×81 in with replaceable graphics.'
     },
@@ -101,7 +101,7 @@ export const STATIC_ARTICLES = [
       'The X-stand is lighter and more economical; a retractable protects the graphic and looks more finished. How to choose for your booth.',
     tags: ['Buying Guide', 'Banner Stands'],
     seo: {
-      title: 'X-Stand vs Retractable Banner: Which to Choose?',
+      title: 'X-Stand vs Retractable Banner',
       description:
         'Compare the Apex X-Stand banner (24×63 in) and retractable banner stands (33×81 in) — mechanism, durability, portability and cost — to pick the right display for your booth.'
     },
@@ -254,7 +254,7 @@ export const STATIC_ARTICLES = [
       'A draped pleated throw or a tight fitted stretch cover? Compare the two Apex table-cover styles — fit, look and use — to choose.',
     tags: ['Buying Guide', 'Table Covers'],
     seo: {
-      title: 'Pleated vs Stretch Table Covers: Which to Choose?',
+      title: 'Pleated vs Stretch Table Covers',
       description:
         'Compare Apex pleated (draped throw) and stretch (fitted) table covers — fit, look and best use. Both closed-back, full-colour, wrinkle-resistant and machine washable.'
     },
@@ -307,7 +307,7 @@ export const STATIC_ARTICLES = [
       'How big should your backdrop be, and how do you space the logos? A practical guide to the Apex step & repeat media wall.',
     tags: ['Buying Guide', 'Backdrops'],
     seo: {
-      title: 'Trade Show Backdrop Size Guide (Step & Repeat)',
+      title: 'Trade Show Backdrop Size Guide',
       description:
         'How to size a step & repeat backdrop — the Apex 10×8 ft media wall, how much it covers, and how to space repeating logos so your branding reads in every photo.'
     },
@@ -599,7 +599,7 @@ export const STATIC_ARTICLES = [
       'A side-by-side comparison of the three custom canopy tent sizes — footprint, price, wall count and when each one makes sense.',
     tags: ['Buying Guide', 'Comparison'],
     seo: {
-      title: '10x10 vs 10x15 vs 10x20 Custom Canopy Tents Compared',
+      title: '10x10 vs 10x15 vs 10x20 Canopy Tents',
       description:
         'Compare 10x10, 10x15 and 10x20 custom canopy tents — footprint, price (top only vs complete set), walls and best use. Apex dye-sublimation, US & Canada.'
     },
@@ -657,7 +657,7 @@ export const STATIC_ARTICLES = [
       'Full walls, half walls, back and side walls — what each does, what they cost, and the one rule that governs how many you can add.',
     tags: ['Guide', 'Walls'],
     seo: {
-      title: 'Canopy Tent Wall Options Explained (Full vs Half, How Many)',
+      title: 'Canopy Tent Wall Options Explained',
       description:
         'Full walls vs half walls, back and side walls for a custom canopy tent — what each does, per-size pricing, popular setups, and the 3-walls-total rule.'
     },
@@ -708,12 +708,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'how-to-prepare-artwork-for-a-custom-canopy-tent',
-    title: 'How to Prepare Artwork for a Custom Canopy Tent',
+    title: 'How to Prepare Canopy Tent Artwork',
     excerpt:
       'File types, resolution, colour and layout tips so your custom canopy tent prints sharp — plus what to do if your artwork is not ready.',
     tags: ['Guide', 'Artwork'],
     seo: {
-      title: 'How to Prepare Artwork for a Custom Canopy Tent',
+      title: 'How to Prepare Canopy Tent Artwork',
       description:
         'Prepare print-ready artwork for a custom canopy tent — file formats, resolution/DPI, CMYK colour, bleed and safe zones, plus the free proof and design service.'
     },
@@ -775,7 +775,7 @@ export const STATIC_ARTICLES = [
       'What "print coverage" means on a custom canopy — the top, valance, walls and inside — and what to print where for the most impact.',
     tags: ['Guide', 'Printing'],
     seo: {
-      title: 'Canopy Print Coverage Explained (Top, Valance, Walls, Inside)',
+      title: 'Canopy Print Coverage Explained',
       description:
         'Understand canopy print coverage — the top, valance, walls and inside underside — and what to print on each surface for maximum branding, full-bleed dye sublimation.'
     },

@@ -23,6 +23,11 @@ const fail = (page, msg) => crit.push(`${page}  ✗ ${msg}`);
 const warning = (page, msg) => warn.push(`${page}  ⚠ ${msg}`);
 
 const fileFor = (path) => (path === '/' ? join(DIST, 'index.html') : join(DIST, path, 'index.html'));
+// Decoded length — search engines count the rendered characters, so &amp; is one
+// char, not five. Measuring the raw HTML would over-count titles/descriptions.
+const decodeEntities = (s) =>
+  String(s).replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+const dlen = (s) => decodeEntities(s).length;
 const count = (html, re) => (html.match(re) || []).length;
 const attr = (html, re) => { const m = html.match(re); return m ? m[1] : null; };
 
@@ -110,12 +115,12 @@ for (const { path, hasLastmod } of sitemapPaths) {
   const desc = attr(html, /<meta name="description" content="([^"]*)"/);
   if (!title) fail(path, 'empty <title>');
   else {
-    if (title.length > 62) warning(path, `title ${title.length} chars (>60): ${title.slice(0, 70)}…`);
+    if (dlen(title) > 62) warning(path, `title ${dlen(title)} chars (>60): ${title.slice(0, 70)}…`);
     if (titles.has(title)) warning(path, `duplicate title (also ${titles.get(title)})`); else titles.set(title, path);
   }
   if (!desc) fail(path, 'empty meta description');
   else {
-    if (desc.length > 165) warning(path, `description ${desc.length} chars (>160)`);
+    if (dlen(desc) > 165) warning(path, `description ${dlen(desc)} chars (>160)`);
     if (descs.has(desc)) warning(path, `duplicate description (also ${descs.get(desc)})`); else descs.set(desc, path);
   }
 

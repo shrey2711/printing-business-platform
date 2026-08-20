@@ -14,7 +14,7 @@ export const SIZES = [
     product: 'canopy-tent-10x10',
     blurb: 'The standard vendor booth, and the size most event organisers allocate by default.',
     guide: {
-      title: '10x10 Canopy Tent Size Guide: Dimensions, Layout & Uses',
+      title: '10x10 Canopy Tent Size Guide',
       metaDescription:
         '10x10 canopy tent size guide — 100 sq ft footprint, how many tables and people it fits, booth layout ideas, wall options, and how it compares to a 10x15 or 10x20.',
       footprint: '100 sq ft — 10 ft wide × 10 ft deep, roughly 6.5–7 ft of clearance under the valance.',
@@ -44,7 +44,7 @@ export const SIZES = [
     product: 'canopy-tent-10x15',
     blurb: 'Half again the width, for when one table is not enough.',
     guide: {
-      title: '10x15 Canopy Tent Size Guide: Dimensions, Layout & Uses',
+      title: '10x15 Canopy Tent Size Guide',
       metaDescription:
         '10x15 canopy tent size guide — 150 sq ft footprint, tables and staff it fits, booth layout ideas, wall options, and how it compares to a 10x10 or 10x20.',
       footprint: '150 sq ft — 10 ft deep × 15 ft wide, about 50% more covered space than a 10×10.',
@@ -74,7 +74,7 @@ export const SIZES = [
     product: 'canopy-tent-10x20',
     blurb: 'A double booth under one roof — the widest single-canopy span most shows allow.',
     guide: {
-      title: '10x20 Canopy Tent Size Guide: Dimensions, Layout & Uses',
+      title: '10x20 Canopy Tent Size Guide',
       metaDescription:
         '10x20 canopy tent size guide — 200 sq ft footprint, tables and staff it fits, double-booth layout ideas, wall options, and how it compares to a 10x10 or 10x15.',
       footprint: '200 sq ft — 10 ft deep × 20 ft wide, the footprint of two 10×10 booths side by side.',
