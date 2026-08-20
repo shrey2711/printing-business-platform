@@ -510,6 +510,22 @@ export default function ProductConfigurator() {
             </div>
           )}
 
+          {/* Made-to-size banner finishing selectors (dropdowns). All included at
+              no extra charge; "# of Sides" is 1-side only for now. */}
+          {!isConfigured && Array.isArray(p.finishingGroups) && p.finishingGroups.map((g) => (
+            <div className="field" key={g.id}>
+              <label>{g.label}</label>
+              <select
+                value={config.finishing?.[g.id] ?? g.choices[0]?.id}
+                onChange={(e) => setConfig({ ...config, finishing: { ...config.finishing, [g.id]: e.target.value } })}
+              >
+                {g.choices.map((c) => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            </div>
+          ))}
+
           {!isConfigured && p.finishing?.length > 0 && (
             <div className="field">
               <label>Finishing options</label>
@@ -737,7 +753,9 @@ function buildDefaultConfig(product) {
       height: p.defaultHeightIn,
       materialId: p.materials?.[0]?.id,
       quantity: 1,
-      options: defaultOptions
+      options: defaultOptions,
+      // Default each finishing dropdown (sides/pole/hem/grommets) to its first choice.
+      finishing: Object.fromEntries((p.finishingGroups || []).map((g) => [g.id, g.choices[0]?.id]))
     };
   }
   return {
@@ -781,6 +799,13 @@ function describeConfig(product, config) {
   }
   const m = p.materials?.find((x) => x.id === config.materialId);
   if (m) parts.push(m.name);
+  // Banner finishing dropdowns (sides/pole/hem/grommets) so the order records them.
+  if (Array.isArray(p.finishingGroups) && config.finishing) {
+    for (const g of p.finishingGroups) {
+      const c = g.choices.find((x) => x.id === config.finishing[g.id]) || g.choices[0];
+      if (c) parts.push(`${g.label}: ${c.name}`);
+    }
+  }
   const opts = (p.finishing || []).filter((o) => config.options.includes(o.id)).map((o) => o.name);
   if (opts.length) parts.push(opts.join(', '));
   parts.push(`Qty ${config.quantity}`);

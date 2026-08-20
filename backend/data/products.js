@@ -1160,6 +1160,32 @@ const segKits = [
   })
 ];
 
+// Finishing selectors shown on made-to-size banners (rendered as dropdowns). All
+// choices are INCLUDED at no extra charge — no competitor pricing is copied and
+// none is invented. To charge for an upgrade later, give that choice a numeric
+// `priceAdd` (per banner) and wire it in pricing.js. "# of Sides" is 1-side only
+// until double-sided pricing is confirmed by the owner.
+const BANNER_FINISHING_GROUPS = [
+  { id: 'sides', label: '# of Sides', choices: [{ id: '1', name: '1 Side' }] },
+  { id: 'pole', label: 'Pole Pocket', choices: [
+    { id: 'none', name: 'No Pole Pockets' },
+    { id: 'top', name: 'Top' },
+    { id: 'bottom', name: 'Bottom' },
+    { id: 'top-bottom', name: 'Top & Bottom' },
+    { id: 'left-right', name: 'Left & Right' }
+  ] },
+  { id: 'hem', label: 'Hem', choices: [
+    { id: 'all', name: 'All Sides' },
+    { id: 'none', name: 'No Hem' }
+  ] },
+  { id: 'grommets', label: 'Grommets', choices: [
+    { id: 'every-2ft', name: "Every 2' All Sides" },
+    { id: 'top-corners', name: 'Top Corners Only' },
+    { id: 'corners', name: 'All Corners Only' },
+    { id: 'none', name: 'No Grommets' }
+  ] }
+];
+
 const products = [
   ...canopyTents,
   pleatedCovers,
@@ -1214,9 +1240,7 @@ const products = [
       defaultWidthIn: 72,
       defaultHeightIn: 36,
       materials: [{ id: '13oz-scrim', name: '13oz Scrim Vinyl', multiplier: 1 }],
-      finishing: [
-        { id: 'hem-grommets', name: 'Welded hem + grommets every 2 ft', type: 'flat', rate: 0, default: true }
-      ]
+      finishingGroups: BANNER_FINISHING_GROUPS
     }
   },
   {
@@ -1254,9 +1278,7 @@ const products = [
       defaultWidthIn: 72,
       defaultHeightIn: 36,
       materials: [{ id: '18oz-blockout', name: '18oz Blockout Vinyl', multiplier: 1 }],
-      finishing: [
-        { id: 'hem-grommets', name: 'Welded hem + grommets every 2 ft', type: 'flat', rate: 0, default: true }
-      ]
+      finishingGroups: BANNER_FINISHING_GROUPS
     }
   },
   {
@@ -1294,9 +1316,7 @@ const products = [
       defaultWidthIn: 96,
       defaultHeightIn: 48,
       materials: [{ id: 'mesh-vinyl', name: 'Perforated Mesh Vinyl', multiplier: 1 }],
-      finishing: [
-        { id: 'hem-grommets', name: 'Welded hem + grommets every 2 ft', type: 'flat', rate: 0, default: true }
-      ]
+      finishingGroups: BANNER_FINISHING_GROUPS
     }
   },
   {
@@ -1334,9 +1354,7 @@ const products = [
       defaultWidthIn: 96,
       defaultHeightIn: 48,
       materials: [{ id: '9oz-poly', name: '9oz Wrinkle-Free Polyester', multiplier: 1 }],
-      finishing: [
-        { id: 'sewn-hem', name: 'Sewn hem edges', type: 'flat', rate: 0, default: true }
-      ]
+      finishingGroups: BANNER_FINISHING_GROUPS
     }
   },
   {
