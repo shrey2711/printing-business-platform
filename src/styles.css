@@ -49,6 +49,11 @@ button, input, select, textarea { font: inherit; }
 /* Consistent heading rhythm (pages may still set their own sizes). */
 h1, h2, h3, h4 { color: var(--navy); line-height: 1.22; font-weight: 700; text-wrap: balance; }
 p { text-wrap: pretty; }
+/* Content/prose links read as links (accent + underline); nav/cards keep plain. */
+.lead a:not(.btn), article a:not(.btn), .blog-article a:not(.btn) {
+  color: var(--blue); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px;
+}
+.lead a:not(.btn):hover, article a:not(.btn):hover, .blog-article a:not(.btn):hover { color: var(--blue-dark); }
 
 /* Accessible keyboard focus ring — was missing site-wide. */
 a:focus-visible, button:focus-visible, .btn:focus-visible, [role="button"]:focus-visible,
@@ -127,8 +132,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
 .header-nav > a:not(.btn) {
   padding: 0.7rem 0.9rem; font-weight: 600; font-size: 0.9rem; color: var(--ink);
   border-bottom: 3px solid transparent; white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
-.header-nav > a:not(.btn):hover { color: var(--red); }
+.header-nav > a:not(.btn):hover { color: var(--red); border-bottom-color: rgba(200, 16, 46, 0.35); }
 .header-nav > a:not(.btn).active { color: var(--red); border-bottom-color: var(--red); }
 .nav-spacer { flex: 1; }
 .header-nav .btn-sm { margin-left: 0.4rem; }
@@ -281,9 +287,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
 .booth-note { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 1.2rem; }
 
 /* ---------- Shared section furniture ---------- */
-.section-head { text-align: center; max-width: 640px; margin: 0 auto 1.6rem; }
-.section-head h2 { font-size: 1.6rem; font-weight: 700; margin: 0 0 0.35rem; }
-.section-head p { color: var(--muted); margin: 0; }
+.section-head { text-align: center; max-width: 660px; margin: 0 auto 2rem; }
+.section-head h2 { font-size: 1.7rem; font-weight: 800; margin: 0 0 0.4rem; letter-spacing: -0.01em; }
+.section-head p { color: var(--muted); margin: 0; font-size: 1.02rem; }
 .section-foot { text-align: center; margin-top: 1.6rem; }
 
 /* ---------- Size picker ---------- */
