@@ -22,7 +22,7 @@ export const PAGES = [
       'Apex Trade Show is a complete trade show display and event branding supplier serving the US and Canada — custom canopy tents, banner stands, backdrops and table covers, printed in your brand with a free artwork proof.',
     blocks: [
       { p: 'Apex Trade Show is a complete trade show display and event branding supplier serving the United States and Canada. We print your brand across a full booth — custom canopy tents, retractable and X-stand banner stands, step & repeat backdrops and table covers — with a free artwork proof on every order.' },
-      { h: 'What we do', p: 'We help businesses, vendors, teams and event organisers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops and table covers all configure for instant online pricing; newer display types (SEG, tension fabric, pop-up and flags) are quoted per order.' },
+      { h: 'What we do', p: 'We help businesses, vendors, teams and event organisers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops, table covers and flags all configure for instant online pricing; larger custom display types (SEG modular kits, tension fabric and pop-up displays) are quoted per order.' },
       { links: [
         { label: 'Trade Show Displays', to: '/trade-show-displays' },
         { label: 'Custom Canopies', to: '/custom-canopies' },

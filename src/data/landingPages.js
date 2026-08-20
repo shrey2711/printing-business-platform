@@ -36,6 +36,11 @@ export const LANDING_PAGES = [
       { q: 'Can SEG displays be backlit?', a: 'Yes — SEG frames are available in backlit (light-box) versions for illuminated displays. Ask about backlit options when you request a quote.' },
       { q: 'How do I get pricing for an SEG display?', a: 'SEG displays are quoted per order by size and configuration. Request a quote with your size and artwork and we will send pricing and a free proof.' }
     ],
+    products: [
+      { slug: 'seg-modular-trade-show-kit-a', name: 'SEG Modular Kit A' },
+      { slug: 'seg-modular-trade-show-kit-b', name: 'SEG Modular Kit B' },
+      { slug: 'seg-modular-trade-show-kit-c', name: 'SEG Modular Kit C' }
+    ],
     related: [
       { label: 'Tension Fabric Displays', to: '/tension-fabric-displays' },
       { label: 'Step & Repeat Backdrops', to: '/backdrops' },
@@ -116,9 +121,9 @@ export const LANDING_PAGES = [
     title: 'Custom Flags | Feather & Teardrop Advertising Flags',
     h1: 'Custom Flags',
     description:
-      'Custom printed feather and teardrop advertising flags — tall, eye-catching outdoor displays on a flexible pole with a ground stake or cross base. Request a quote from Apex.',
+      'Custom printed feather and teardrop advertising flags — tall outdoor displays on a flexible pole with a ground stake or cross base. Configure size, sides and base for instant online pricing from $140.',
     intro:
-      'Custom flags are the tall, eye-catching outdoor displays you see lining event entrances, storefronts and roadsides. A dye-sublimated graphic on a flexible pole sways and flutters to catch attention from a distance, and mounts on a ground stake for grass or a cross base for hard surfaces. They pair perfectly with a canopy tent to mark your booth.',
+      'Custom flags are the tall, eye-catching outdoor displays you see lining event entrances, storefronts and roadsides. A dye-sublimated graphic on a flexible pole sways and flutters to catch attention from a distance, and mounts on a ground stake for grass or a cross base for hard surfaces. Configure shape, size, sides and base for an instant price and order online — no quote form needed. They pair perfectly with a canopy tent to mark your booth.',
     sections: [
       { h2: 'Flag shapes', list: [
         'Feather flags — tall, curved-top "feather" shape; the most popular for events.',
@@ -135,10 +140,15 @@ export const LANDING_PAGES = [
       { h2: 'Common uses', list: ['Event and festival entrances', 'Storefronts and grand openings', 'Roadside and parking-lot promotion', 'Marking a booth alongside a canopy tent'] }
     ],
     faqs: [
-      { q: 'What flag shapes are available?', a: 'Feather, teardrop and straight (rectangular) flags. Feather flags are the most popular for events; teardrops hold their shape well in wind.' },
+      { q: 'What flag shapes are available?', a: 'Feather flags in an angled or convex top, and teardrop flags. Feather flags are the most popular for events; teardrops hold their shape well in wind.' },
       { q: 'Indoor or outdoor?', a: 'Flags are built for outdoor use with a ground stake for grass or a cross base for hard surfaces; they also work indoors with a base.' },
       { q: 'Will the print fade outdoors?', a: 'The graphic is dye-sublimated — the ink is bonded into the fabric, so it holds up to sun and repeated outdoor use.' },
-      { q: 'How do I order custom flags?', a: 'Flags are quoted per order by size, shape and base. Request a quote with your artwork for pricing and a free proof.' }
+      { q: 'How do I order custom flags?', a: 'Choose a shape, then configure size, single or double sided, and base for an instant price — flags start at $140. Upload your artwork and we send a free proof before printing.' }
+    ],
+    products: [
+      { slug: 'feather-angled-flag', name: 'Feather Angled Flag' },
+      { slug: 'feather-convex-flag', name: 'Feather Convex Flag' },
+      { slug: 'teardrop-flag', name: 'Teardrop Flag' }
     ],
     related: [
       { label: 'Custom Canopy Tents', to: '/custom-canopies' },
