@@ -74,7 +74,7 @@ const FOOTER = `<nav aria-label="Company">
 let seoMap = {};
 let contentMap = {};
 
-function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg }) {
+function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
   const o = seoMap[path];
   if (o) {
@@ -82,6 +82,7 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
     if (o.description) description = o.description;
     if (o.robots) robots = o.robots;
     if (o.jsonld) jsonLd = o.jsonld;
+    if (o.og_image_path) image = o.og_image_path;
   }
   // Priority: dashboard override > per-route canonicalArg (e.g. a blog post that
   // canonicalises to another article) > the page itself.
@@ -90,6 +91,17 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   // Function-replacer based tag rewriting (see scripts/lib/seo-meta.mjs) — never
   // `$1…$2` strings, so a "$140" in a value can't be read as a capture-group ref.
   let html = applyMeta(template, { title, description, canonical, url });
+  // Route-specific raster OG image (reuse real product/gallery photos). The
+  // template ships a generic 1200×630 SVG as the fallback; when a page supplies
+  // its own raster we swap og:image + twitter:image and drop the hardcoded
+  // 1200×630 dimensions (the real photo may be a different size).
+  if (image) {
+    const absImg = /^https?:/.test(image) ? image : ORIGIN + image;
+    html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, (_m, a, b) => a + esc(absImg) + b);
+    html = html.replace(/(<meta name="twitter:image" content=")[^"]*(")/, (_m, a, b) => a + esc(absImg) + b);
+    if (imageAlt) html = html.replace(/(<meta property="og:image:alt" content=")[^"]*(")/, (_m, a, b) => a + esc(imageAlt) + b);
+    html = html.replace(/\s*<meta property="og:image:width"[^>]*>/, '').replace(/\s*<meta property="og:image:height"[^>]*>/, '');
+  }
   if (robots) {
     html = html.replace('</head>', `<meta name="robots" content="${robots}">\n</head>`);
   }
@@ -113,6 +125,26 @@ function write(path, html) {
 const productList = listProducts();
 // "from $X" for priced products, "Request a quote" for quote/competitive ones.
 const priceFrom = (p) => (p.startingPrice != null ? `from $${p.startingPrice}` : 'Request a quote');
+// Absolute URL of a product's representative RASTER photo, for og:image (and
+// reused by Product schema). Prefers the real gallery hero (guaranteed to exist
+// by verify-media), then the size/category fallbacks that the schema also uses.
+function productPhoto(product) {
+  const gallery = (Array.isArray(product.gallery) ? product.gallery : [])
+    .map((g) => (typeof g === 'string' ? g : g && g.src))
+    .filter(Boolean)
+    .filter((s) => !/\.svg$/i.test(s));
+  const first = (s) => (/^https?:/.test(s) ? s : ORIGIN + s);
+  if (gallery.length) return first(gallery[0]);
+  const sizeM = product.slug.match(/(\d+x\d+)/);
+  if (sizeM) return `${ORIGIN}/images/tents/${sizeM[1]}-1wall.webp`;
+  if (product.category === 'table-covers') return `${ORIGIN}/images/table-covers/${product.slug.includes('stretch') ? 'stretch' : 'pleated'}.webp`;
+  if (['standard-', 'deluxe-'].some((x) => product.slug.startsWith(x)) || ['x-stand-banner', 'step-and-repeat-backdrop', 'table-top-banner-stand'].includes(product.slug)) {
+    return `${ORIGIN}/images/displays/${product.slug}.webp`;
+  }
+  return null;
+}
+// Canopy photo reused as the OG image for canopy-topic pages (locations, solutions).
+const CANOPY_OG = `${ORIGIN}/images/tents/10x10-1wall.webp`;
 // Canopy-focused pages (home, locations) list only the core retail products.
 const coreProducts = productList.filter((p) => p.category === 'tents' || p.category === 'table-covers');
 const displayProducts = productList.filter((p) => p.category === 'banner-stands' || p.category === 'backdrops');
@@ -237,10 +269,15 @@ for (const cp of CATEGORY_PAGES) {
       ${included}
       ${cities}
       ${guides}`;
+    // Representative raster OG: a real photo of a product in this category (the
+    // hub falls back to a canopy). Never a misleading render.
+    const catPhoto = (catProducts.map(productPhoto).find(Boolean)) || productPhoto(coreProducts[0]);
     return render({
       path: `/${cp.slug}`,
       title: `${cp.title} | ${BRAND}`,
       description: cp.description,
+      image: catPhoto,
+      imageAlt: `${cp.h1} — ${BRAND}`,
       body,
       jsonLd: [
         {
@@ -377,6 +414,8 @@ for (const lc of LOCAL_CATEGORIES) {
         path: `/${lc.slug}/${city.slug}`,
         title: `${lc.label} in ${cityWithAbbr(city)} | ${BRAND}`,
         description: `Custom ${lc.label.toLowerCase()} printed and shipped to ${city.city}, ${city.stateName} — instant online pricing and a free artwork proof.`,
+        image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
+        imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,
         robots: city.tier > 2 ? 'noindex, follow' : undefined,
         body,
         jsonLd: {
@@ -422,10 +461,13 @@ for (const lp of LANDING_PAGES) {
       ${lpProducts.some((p) => p.startingPrice != null)
         ? `<p><a href="/products/${lpProducts[0].slug}">Configure ${esc(lp.nav.toLowerCase())} for an instant price →</a></p>`
         : `<p><a href="/quote">Request a quote for ${esc(lp.nav.toLowerCase())} →</a></p>`}`;
+    // OG: the landing's own image if set, else a real photo of a linked product.
+    const lpPhoto = lp.image ? ORIGIN + lp.image : (lpProducts.map(productPhoto).find(Boolean) || null);
     return render({
       path: `/${lp.slug}`,
       title: `${lp.title} | ${BRAND}`,
       description: lp.description,
+      ...(lpPhoto ? { image: lpPhoto, imageAlt: `${lp.h1} — ${BRAND}` } : {}),
       body,
       jsonLd: [
         {
@@ -487,6 +529,8 @@ for (const size of SIZES) {
       path: `/sizes/${size.slug}`,
       title: `${g.title} | ${BRAND}`,
       description: g.metaDescription,
+      image: `${ORIGIN}/images/tents/${size.slug}-1wall.webp`,
+      imageAlt: `${size.label} custom printed canopy tent — ${BRAND}`,
       body,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -526,6 +570,8 @@ for (const sol of SOLUTIONS) {
       path: `/solutions/${sol.slug}`,
       title: `${sol.title} — Custom Printed | ${BRAND}`,
       description: g.metaDescription,
+      image: CANOPY_OG,
+      imageAlt: `${sol.title} — custom printed canopy tents by ${BRAND}`,
       body,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -662,6 +708,8 @@ for (const summary of productList) {
       path: `/products/${product.slug}`,
       title: `${seoTitle.title} | ${BRAND}`,
       description: seoTitle.description(startingPrice, product),
+      image: productImages[0] || productPhoto(product),
+      imageAlt: `${product.name} — custom printed by ${BRAND}`,
       body,
       jsonLd: [
         {
@@ -746,6 +794,8 @@ routes.push(() => {
     path: '/locations',
     title: `Custom Canopy Tents Across the US & Canada | ${BRAND}`,
     description: 'Custom printed canopy tents shipped to every US state and Canadian province, with instant online pricing in USD or CAD.',
+    image: CANOPY_OG,
+    imageAlt: `Custom printed canopy tents shipped across the US & Canada — ${BRAND}`,
     body
   });
 });
@@ -801,6 +851,8 @@ for (const s of territories) {
       path: `/locations/${s.slug}`,
       title: `Custom Canopy Tents in ${s.name} | ${BRAND}`,
       description: `Custom printed canopy tents in ${s.name}. Instant online pricing and shipping to ${s.cities.slice(0, 3).join(', ')} and ${areaWord}.`,
+      image: CANOPY_OG,
+      imageAlt: `Custom printed canopy tents in ${s.name} — ${BRAND}`,
       // Long-tail state/province pages are templated — noindex until they earn
       // unique content, so they don't dilute the priority markets.
       robots: isPriority ? undefined : 'noindex, follow',
