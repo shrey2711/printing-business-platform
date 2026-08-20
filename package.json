@@ -6,6 +6,7 @@
     "dev": "concurrently \"vite\" \"npm run dev:api\"",
     "dev:api": "nodemon backend/server.js",
     "build": "node scripts/verify-media.mjs && node scripts/verify-banner-pricing.mjs && node scripts/verify-prerender-meta.mjs && vite build && node scripts/prerender.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs",
     "preview": "vite preview",
     "start": "node backend/server.js"
   },
