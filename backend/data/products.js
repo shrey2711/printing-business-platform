@@ -1176,10 +1176,8 @@ const products = [
   // the configurator. Finishing is the free welded hem + grommets only — paid
   // add-ons (pole pockets, wind slits, double-sided) are intentionally omitted
   // pending owner-confirmed rates, so nothing is invented.
-  // Imagery: 13oz vinyl, 18oz blockout and mesh now carry owner-supplied
-  // galleries + card thumbnails (public/images/banners/). Fabric still has no
-  // gallery — its card/page renders the neutral ProductArt placeholder until a
-  // photo is supplied.
+  // Imagery: all four banners carry owner-supplied galleries + card thumbnails
+  // (public/images/banners/).
   {
     slug: '13oz-vinyl-banner',
     active: true,
@@ -1322,6 +1320,10 @@ const products = [
     seoTitle: '9oz Wrinkle-Free Fabric Banner | Dye-Sublimated Fabric Banners',
     seoDescription:
       'Custom 9oz wrinkle-free fabric banners, dye-sublimated for a rich no-glare matte finish — packs without creasing, sewn hem edges. From $45, shipped across the US & Canada.',
+    gallery: [
+      { src: '/images/banners/fabric-banner-9oz-aroma-blend-folded.jpeg', alt: 'Custom dye-sublimated 9oz fabric banner folded, showing the matte fabric drape and sewn hem' },
+      { src: '/images/banners/fabric-banner-9oz-edge-finishing-options.jpeg', alt: '9oz fabric banner finishing options — velcro, pole pocket and hem & grommet' }
+    ],
     pricing: {
       model: 'area',
       pricePerSqFt: 5.0,
