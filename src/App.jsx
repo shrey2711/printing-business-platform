@@ -1,5 +1,6 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage'; // eager — the landing page / LCP route
 // Route-level code-splitting: every other page loads as its own chunk on demand,
