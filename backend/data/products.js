@@ -1166,29 +1166,31 @@ const segKits = [
 // `priceAdd` (per banner) and wire it in pricing.js. "# of Sides" is 1-side only
 // until double-sided pricing is confirmed by the owner.
 const BANNER_FINISHING_GROUPS = [
-  { id: 'sides', label: '# of Sides', choices: [{ id: '1', name: '1 Side' }] },
+  // `ui: 'pills'` renders as segmented choice cards (like flags), not a dropdown.
+  { id: 'sides', label: '# of Sides', ui: 'pills', choices: [{ id: '1', name: '1 Side' }] },
   // Production speed. Standard is included; 2–3 day rush multiplies the banner
-  // price by 1.55 (customer sees the dollar surcharge in the breakdown, never the
-  // percentage). Priced in pricing.js via the choice `mult`.
-  { id: 'days', label: 'Delivery', choices: [
+  // price by 1.55 (customer sees the dollar surcharge, never the percentage).
+  // Priced in pricing.js via the choice `mult`.
+  { id: 'days', label: 'Production', ui: 'pills', choices: [
     { id: 'standard', name: '6–8 business days', mult: 1 },
-    { id: 'rush', name: '2–3 business days (rush)', mult: 1.55 }
+    { id: 'rush', name: '2–3 days rush', mult: 1.55 }
   ] },
   { id: 'pole', label: 'Pole Pocket', choices: [
     { id: 'none', name: 'No Pole Pockets' },
-    { id: 'top', name: 'Top' },
-    { id: 'bottom', name: 'Bottom' },
-    { id: 'top-bottom', name: 'Top & Bottom' },
-    { id: 'left-right', name: 'Left & Right' }
+    { id: 'top', name: 'Top — 2" pocket' },
+    { id: 'bottom', name: 'Bottom — 2" pocket' },
+    { id: 'top-bottom', name: 'Top & Bottom — 2" pockets' },
+    { id: 'left-right', name: 'Left & Right — 2" pockets' }
   ] },
   { id: 'hem', label: 'Hem', choices: [
     { id: 'all', name: 'All Sides' },
     { id: 'none', name: 'No Hem' }
   ] },
   { id: 'grommets', label: 'Grommets', choices: [
-    { id: 'every-2ft', name: "Every 2' All Sides" },
-    { id: 'top-corners', name: 'Top Corners Only' },
-    { id: 'corners', name: 'All Corners Only' },
+    { id: 'every-2ft-all', name: "Every 2' All Sides" },
+    { id: 'every-2ft-tb', name: "Every 2' Top & Bottom" },
+    { id: 'every-2ft-rl', name: "Every 2' Right & Left" },
+    { id: 'corners', name: '4 Corners Only' },
     { id: 'none', name: 'No Grommets' }
   ] }
 ];
@@ -1235,7 +1237,7 @@ const products = [
     gallery: [
       { src: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg', alt: 'Custom printed 13oz vinyl landscape banner with grommets' },
       { src: '/images/banners/13oz-vinyl-banner-cafe-portrait.jpeg', alt: 'Custom printed 13oz vinyl portrait banner with grommets' },
-      { src: '/images/banners/13oz-vinyl-banner-edge-finishing-options.jpeg', alt: '13oz vinyl banner edge finishing options — velcro, paper edge, webbing & D-ring, screen mesh, grommet, ivory corner and hemmed edge' }
+      { src: '/images/banners/13oz-vinyl-banner-hem-grommets-pole-pockets.png', alt: '13oz vinyl banner finishing — hem & grommets and pole pockets' }
     ],
     pricing: {
       model: 'area',

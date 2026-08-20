@@ -219,6 +219,14 @@ export default function ProductConfigurator() {
   // card can show its exact $ value without dividing a lagging total (no flicker).
   const preMultTotal = price?.preMultipliedSubtotal || 0;
 
+  // Meta on banner pill choices: "Included", or the DOLLAR rush surcharge for a
+  // production-speed multiplier choice (never a percentage).
+  const bannerFinishMeta = (choice) => {
+    const mult = Number(choice.mult);
+    if (!mult || mult === 1) return 'Included';
+    return preMultTotal ? `+${money(preMultTotal * (mult - 1))}` : '';
+  };
+
   // For priceMatrix products, an option dimension (size/package/sides/production)
   // has no standalone price — its cost is baked into the combined lookup. Show
   // each choice's price DELTA vs that group's default, given the current other
@@ -510,21 +518,51 @@ export default function ProductConfigurator() {
             </div>
           )}
 
-          {/* Made-to-size banner finishing selectors (dropdowns). All included at
-              no extra charge; "# of Sides" is 1-side only for now. */}
-          {!isConfigured && Array.isArray(p.finishingGroups) && p.finishingGroups.map((g) => (
-            <div className="field" key={g.id}>
-              <label>{g.label}</label>
-              <select
-                value={config.finishing?.[g.id] ?? g.choices[0]?.id}
-                onChange={(e) => setConfig({ ...config, finishing: { ...config.finishing, [g.id]: e.target.value } })}
-              >
-                {g.choices.map((c) => (
-                  <option key={c.id} value={c.id}>{c.name}</option>
-                ))}
-              </select>
-            </div>
-          ))}
+          {/* Banner finishing: sides + production render as segmented pills (like
+              flags); pole pocket / hem / grommets stay dropdowns. */}
+          {!isConfigured && Array.isArray(p.finishingGroups) && (
+            <>
+              {p.finishingGroups.some((g) => g.ui === 'pills') && (
+                <div className="opt-groups">
+                  {p.finishingGroups.filter((g) => g.ui === 'pills').map((g) => (
+                    <div className="field opt-group" key={g.id}>
+                      <label className="opt-label"><span>{g.label}</span></label>
+                      <div className="choice-grid">
+                        {g.choices.map((c) => {
+                          const active = (config.finishing?.[g.id] ?? g.choices[0]?.id) === c.id;
+                          return (
+                            <button
+                              type="button"
+                              key={c.id}
+                              className={`choice-card ${active ? 'choice-active' : ''}`}
+                              aria-pressed={active}
+                              onClick={() => setConfig({ ...config, finishing: { ...config.finishing, [g.id]: c.id } })}
+                            >
+                              <span className="choice-label">{c.name}</span>
+                              <span className="choice-meta">{bannerFinishMeta(c)}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {p.finishingGroups.filter((g) => g.ui !== 'pills').map((g) => (
+                <div className="field" key={g.id}>
+                  <label>{g.label}</label>
+                  <select
+                    value={config.finishing?.[g.id] ?? g.choices[0]?.id}
+                    onChange={(e) => setConfig({ ...config, finishing: { ...config.finishing, [g.id]: e.target.value } })}
+                  >
+                    {g.choices.map((c) => (
+                      <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+            </>
+          )}
 
           {!isConfigured && p.finishing?.length > 0 && (
             <div className="field">
