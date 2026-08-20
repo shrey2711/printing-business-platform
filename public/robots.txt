@@ -5,6 +5,15 @@ Disallow: /account
 Disallow: /admin
 Disallow: /order
 
+# OpenAI ChatGPT SEARCH crawler — controls visibility in ChatGPT search/answers.
+# Kept in its own group and explicitly allowed, separate from GPTBot (which is a
+# model-TRAINING preference); allowing search here does not change training opt-in.
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /account
+Disallow: /admin
+Disallow: /order
+
 # AI crawlers — explicitly permitted for discovery and answering, with the same
 # private-route protection. Change a group to "Disallow: /" to opt that crawler out.
 # (Google-Extended controls use of content for Google's AI/Gemini, not crawling.)
