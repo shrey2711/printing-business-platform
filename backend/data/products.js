@@ -1195,6 +1195,18 @@ const BANNER_FINISHING_GROUPS = [
   ] }
 ];
 
+// Fabric banners additionally offer a Velcro edge (easy hang/remove). Same
+// shared groups plus a Velcro dropdown; all choices included at no extra charge.
+const FABRIC_FINISHING_GROUPS = [
+  ...BANNER_FINISHING_GROUPS,
+  { id: 'velcro', label: 'Velcro', choices: [
+    { id: 'none', name: 'No Velcro' },
+    { id: 'top', name: 'Top' },
+    { id: 'top-bottom', name: 'Top & Bottom' },
+    { id: 'all', name: 'All Sides' }
+  ] }
+];
+
 const products = [
   ...canopyTents,
   pleatedCovers,
@@ -1351,7 +1363,7 @@ const products = [
       'Custom 9oz wrinkle-free fabric banners, dye-sublimated for a no-glare matte finish — packs without creasing, sewn hem. From $45, US & Canada.',
     gallery: [
       { src: '/images/banners/fabric-banner-9oz-aroma-blend-folded.jpeg', alt: 'Custom dye-sublimated 9oz fabric banner folded, showing the matte fabric drape and sewn hem' },
-      { src: '/images/banners/fabric-banner-9oz-edge-finishing-options.jpeg', alt: '9oz fabric banner finishing options — velcro, pole pocket and hem & grommet' }
+      { src: '/images/banners/fabric-banner-9oz-finishing-velcro-pole-hem.jpeg', alt: '9oz fabric banner finishing — velcro, pole pocket and hem & grommet' }
     ],
     pricing: {
       model: 'area',
@@ -1363,7 +1375,7 @@ const products = [
       defaultWidthIn: 96,
       defaultHeightIn: 48,
       materials: [{ id: '9oz-poly', name: '9oz Wrinkle-Free Polyester', multiplier: 1 }],
-      finishingGroups: BANNER_FINISHING_GROUPS
+      finishingGroups: FABRIC_FINISHING_GROUPS
     }
   },
   {
