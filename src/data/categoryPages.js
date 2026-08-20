@@ -72,6 +72,23 @@ export const CATEGORY_PAGES = [
     ]
   },
   {
+    slug: 'banners',
+    category: 'banners',
+    nav: 'Banners',
+    h1: 'Custom Vinyl, Mesh & Fabric Banners',
+    title: 'Custom Banners — Vinyl, Mesh & Fabric',
+    description:
+      'Made-to-size custom banners from Apex — 13oz vinyl, 18oz blockout, perforated mesh and 9oz wrinkle-free fabric. Enter your width and height for instant per-square-foot pricing, welded hem and grommets included.',
+    intro:
+      'Full-colour banners printed to any size you enter, priced by the square foot. Choose economical 13oz scrim vinyl, opaque 18oz blockout for double-sided prints, wind-friendly perforated mesh, or premium wrinkle-free fabric — each finished ready to hang.',
+    points: [
+      '13oz vinyl — the economical indoor/outdoor workhorse.',
+      '18oz blockout — opaque core for true double-sided banners.',
+      'Mesh — perforated for reduced wind load on fences & wraps.',
+      '9oz fabric — dye-sublimated, no-glare matte finish.'
+    ]
+  },
+  {
     slug: 'table-covers',
     category: 'table-covers',
     nav: 'Table Covers',

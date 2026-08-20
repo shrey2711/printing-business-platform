@@ -26,6 +26,7 @@ export default function ProductConfigurator() {
   const [config, setConfig] = useState(null);
   const [price, setPrice] = useState(null);
   const [pricing, setPricing] = useState(false);
+  const [sizeTouched, setSizeTouched] = useState(false); // show size error on blur/submit
   const debounceRef = useRef(null);
 
   // Commercial-intent title for canopy sizes (matches the prerendered title).
@@ -103,6 +104,27 @@ export default function ProductConfigurator() {
   const isQuoteOnly = !!product?.pricing?.quoteOnly;
   const isQuoteModel = model === 'quote' || model === 'competitive' || isQuoteOnly;
 
+  // Made-to-size validation (banners): sorted, orientation-independent caps,
+  // mirrored from the server. The numbers come from the same product config so
+  // the message can't drift from the rule; the server re-validates and rejects
+  // independently — this only gives instant feedback and blocks the CTA.
+  const sizeCaps =
+    isArea && product?.pricing?.sizeSmallCapIn != null
+      ? { small: product.pricing.sizeSmallCapIn, large: product.pricing.sizeLargeCapIn }
+      : null;
+  const sizeError = (() => {
+    if (!sizeCaps || !config) return null;
+    const w = Number(config.width);
+    const h = Number(config.height);
+    if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0)
+      return 'Enter a width and height greater than 0.';
+    const small = Math.min(w, h);
+    const large = Math.max(w, h);
+    if (small > sizeCaps.small || large > sizeCaps.large)
+      return `Size not available. This banner can be up to ${sizeCaps.small}" on one side and ${sizeCaps.large}" on the other. Please adjust your dimensions or contact us for oversized orders.`;
+    return null;
+  })();
+
   const toggleOption = (id) => {
     setConfig((prev) => {
       const has = prev.options.includes(id);
@@ -133,7 +155,14 @@ export default function ProductConfigurator() {
     config: { slug, ...config }
   });
 
-  const requestOrder = () => navigate('/order', { state: orderState() });
+  const requestOrder = () => {
+    // Never let an out-of-range made-to-size order through (server rejects it too).
+    if (sizeError) {
+      setSizeTouched(true);
+      return;
+    }
+    navigate('/order', { state: orderState() });
+  };
 
   // Quote-only / unpriced products route to the existing quote + artwork flow.
   const requestQuote = () =>
@@ -406,30 +435,46 @@ export default function ProductConfigurator() {
             {qtyField}
             </div>
           ) : isArea ? (
-            <div className="size-row">
-              <div className="field">
-                <label>Width (inches)</label>
-                <input
-                  type="number"
-                  min={p.minWidthIn}
-                  max={p.maxWidthIn}
-                  value={config.width}
-                  onChange={(e) => setConfig({ ...config, width: numberOr(e.target.value, config.width) })}
-                />
-                <small>{p.minWidthIn}"–{p.maxWidthIn}"</small>
+            <div className="field size-field">
+              <div className={`size-row ${sizeTouched && sizeError ? 'has-error' : ''}`}>
+                <div className="field">
+                  <label>Width (inches)</label>
+                  <input
+                    type="number"
+                    min={sizeCaps ? 1 : p.minWidthIn}
+                    max={sizeCaps ? sizeCaps.large : p.maxWidthIn}
+                    step="any"
+                    value={config.width}
+                    aria-invalid={!!(sizeTouched && sizeError)}
+                    onChange={(e) => setConfig({ ...config, width: numberOr(e.target.value, config.width) })}
+                    onBlur={() => setSizeTouched(true)}
+                  />
+                  <small>{sizeCaps ? `up to ${sizeCaps.large}"` : `${p.minWidthIn}"–${p.maxWidthIn}"`}</small>
+                </div>
+                <span className="times">×</span>
+                <div className="field">
+                  <label>Height (inches)</label>
+                  <input
+                    type="number"
+                    min={sizeCaps ? 1 : p.minHeightIn}
+                    max={sizeCaps ? sizeCaps.large : p.maxHeightIn}
+                    step="any"
+                    value={config.height}
+                    aria-invalid={!!(sizeTouched && sizeError)}
+                    onChange={(e) => setConfig({ ...config, height: numberOr(e.target.value, config.height) })}
+                    onBlur={() => setSizeTouched(true)}
+                  />
+                  <small>{sizeCaps ? `up to ${sizeCaps.large}"` : `${p.minHeightIn}"–${p.maxHeightIn}"`}</small>
+                </div>
               </div>
-              <span className="times">×</span>
-              <div className="field">
-                <label>Height (inches)</label>
-                <input
-                  type="number"
-                  min={p.minHeightIn}
-                  max={p.maxHeightIn}
-                  value={config.height}
-                  onChange={(e) => setConfig({ ...config, height: numberOr(e.target.value, config.height) })}
-                />
-                <small>{p.minHeightIn}"–{p.maxHeightIn}"</small>
-              </div>
+              {sizeCaps && (
+                <p className="size-caps-note">
+                  Any size up to {sizeCaps.small}" on one side and {sizeCaps.large}" on the other. Orientation doesn't matter.
+                </p>
+              )}
+              {sizeTouched && sizeError && (
+                <p className="size-error" role="alert">{sizeError}</p>
+              )}
             </div>
           ) : p.variants?.length ? (
             <div className="field">
@@ -552,6 +597,12 @@ export default function ProductConfigurator() {
                 ))}
               </div>
 
+              {price.minChargeApplied && (
+                <p className="price-note">
+                  Minimum order charge applied: {money(price.minChargeUsd)} each
+                </p>
+              )}
+
               <div className="price-total-row">
                 <span>Total</span>
                 <span>{money(price.total)}</span>
@@ -564,7 +615,10 @@ export default function ProductConfigurator() {
             </>
           )}
 
-          <button className="btn btn-red btn-block" onClick={requestOrder} disabled={!price}>
+          {sizeError && (
+            <p className="price-note is-error" role="alert">{sizeError}</p>
+          )}
+          <button className="btn btn-red btn-block" onClick={requestOrder} disabled={!price || !!sizeError}>
             Order &amp; upload artwork
           </button>
           <p className="panel-foot">

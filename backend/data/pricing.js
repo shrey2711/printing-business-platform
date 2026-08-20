@@ -26,15 +26,28 @@ export function computePrice(input, opts = {}) {
 
   let perPieceGoods = 0;
   let preMultUnit = null; // per-piece price before whole-order multipliers (rush)
+  let minChargeApplied = false; // per-banner dollar floor kicked in (area model)
   const breakdown = [];
   const flatAddons = []; // one-time order charges (e.g. design service), not x qty
   const dims = {};
 
   if (pricing.model === 'area') {
-    const w = clampNum(width ?? pricing.defaultWidthIn, pricing.minWidthIn, pricing.maxWidthIn);
-    const h = clampNum(height ?? pricing.defaultHeightIn, pricing.minHeightIn, pricing.maxHeightIn);
+    let w, h;
+    if (isCappedSize(pricing)) {
+      // Made-to-size banners use sorted, orientation-independent size caps and
+      // REJECT out-of-range dimensions (never silently clamp). This server check
+      // is authoritative — the client mirrors it for instant feedback, but a
+      // crafted request with an out-of-range size is rejected, not priced.
+      w = Number(width ?? pricing.defaultWidthIn);
+      h = Number(height ?? pricing.defaultHeightIn);
+      const sizeErr = bannerSizeError(w, h, pricing);
+      if (sizeErr) return { ok: false, sizeError: true, error: sizeErr };
+    } else {
+      w = clampNum(width ?? pricing.defaultWidthIn, pricing.minWidthIn, pricing.maxWidthIn);
+      h = clampNum(height ?? pricing.defaultHeightIn, pricing.minHeightIn, pricing.maxHeightIn);
+    }
     const rawArea = (w * h) / 144;
-    const area = Math.max(rawArea, pricing.minAreaSqFt);
+    const area = Math.max(rawArea, pricing.minAreaSqFt || 0);
     dims.widthIn = w;
     dims.heightIn = h;
     dims.areaSqFt = round2(area);
@@ -55,6 +68,15 @@ export function computePrice(input, opts = {}) {
 
     // Some finishing (e.g. double sided) multiplies the whole area cost.
     perPieceGoods = applyAreaMultipliers(pricing.finishing, selectedOptions, base, perPieceGoods, breakdown);
+
+    // Per-banner dollar minimum, applied to the UNIT price before quantity, so
+    // e.g. 5 tiny banners = 5 × $45, not one $45 charge for the whole order.
+    if (pricing.minChargeUsd && perPieceGoods < pricing.minChargeUsd) {
+      const bump = pricing.minChargeUsd - perPieceGoods;
+      perPieceGoods = pricing.minChargeUsd;
+      breakdown.push({ label: 'Minimum order charge', amount: round2(bump) });
+      minChargeApplied = true;
+    }
   } else if (pricing.model === 'configured') {
     // Multi-axis configuration (canopy tents): one base group sets the starting
     // price, any number of multiplier groups scale it, and additive groups bolt
@@ -252,8 +274,41 @@ export function computePrice(input, opts = {}) {
     subtotal: round2(goodsSubtotal),
     total: round2(total),
     perPieceAfterDiscount: round2(total / qty),
+    // Per-banner dollar-minimum flag, so the UI can show "Minimum order charge
+    // applied: $XX.00 each" (area model only; null on every other product).
+    minChargeApplied,
+    minChargeUsd: pricing.minChargeUsd || null,
     turnaround: product.turnaround
   };
+}
+
+// True when a product uses sorted, orientation-independent made-to-size caps
+// (vs the legacy per-axis min/max clamp). Only these products reject out-of-range
+// sizes; everything else keeps the existing clamp behaviour untouched.
+function isCappedSize(pricing) {
+  return pricing.sizeSmallCapIn != null && pricing.sizeLargeCapIn != null;
+}
+
+// Sorted, orientation-independent size validation for made-to-size products.
+// Returns an error message string, or null when the size is valid. All numbers
+// come from the product's own pricing config so the message can never drift from
+// the rule it enforces. Shared by computePrice and the pricing verify script.
+export function bannerSizeError(width, height, pricing) {
+  const w = Number(width);
+  const h = Number(height);
+  if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) {
+    return 'Enter a width and height greater than 0.';
+  }
+  const small = Math.min(w, h);
+  const large = Math.max(w, h);
+  if (small > pricing.sizeSmallCapIn || large > pricing.sizeLargeCapIn) {
+    return bannerSizeCapMessage(pricing);
+  }
+  return null;
+}
+
+export function bannerSizeCapMessage(pricing) {
+  return `Size not available. This banner can be up to ${pricing.sizeSmallCapIn}" on one side and ${pricing.sizeLargeCapIn}" on the other. Please adjust your dimensions or contact us for oversized orders.`;
 }
 
 function applyFinishing(finishing = [], selected, ctx) {

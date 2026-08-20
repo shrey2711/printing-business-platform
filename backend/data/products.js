@@ -12,6 +12,7 @@ import { calculateCompetitivePrice, competitorCurrentPrice } from './competitive
 export const categories = [
   { id: 'tents', name: 'Canopy Tents' },
   { id: 'banner-stands', name: 'Banner Stands' },
+  { id: 'banners', name: 'Banners' },
   { id: 'backdrops', name: 'Backdrops' },
   { id: 'table-covers', name: 'Table Covers' },
   { id: 'flags', name: 'Flags' },
@@ -56,6 +57,15 @@ export const navGroups = [
       { name: 'Deluxe Retractable Banner Stand', slug: 'deluxe-retractable-banner' },
       { name: 'X-Stand Banner', slug: 'x-stand-banner' },
       { name: 'Table Top Banner Stand', slug: 'table-top-banner-stand' }
+    ]
+  },
+  {
+    name: 'Banners',
+    items: [
+      { name: '13oz Vinyl Banner', slug: '13oz-vinyl-banner' },
+      { name: '18oz Blockout Banner', slug: '18oz-blockout-banner' },
+      { name: 'Mesh Banner', slug: 'mesh-banner' },
+      { name: '9oz Wrinkle-Free Fabric Banner', slug: 'fabric-banner-9oz-wrinkle-free' }
     ]
   },
   {
@@ -1159,6 +1169,159 @@ const products = [
   tensionDisplay,
   hardCasePodium,
   ...segKits,
+  // ---- Made-to-size banners (area model, per square foot) --------------------
+  // Priced per sq ft from the customer's width × height with a $45 minimum charge
+  // PER banner (applied before quantity). Size validation uses sorted caps
+  // (orientation-independent) enforced server-side in pricing.js and mirrored in
+  // the configurator. Finishing is the free welded hem + grommets only — paid
+  // add-ons (pole pockets, wind slits, double-sided) are intentionally omitted
+  // pending owner-confirmed rates, so nothing is invented.
+  // TODO: replace with licensed / own product photography. No gallery is wired,
+  // so cards and pages render the neutral ProductArt placeholder for now.
+  {
+    slug: '13oz-vinyl-banner',
+    active: true,
+    name: '13oz Vinyl Banner',
+    category: 'banners',
+    badge: 'Best Seller',
+    emoji: '🎯',
+    tagline: 'Full-colour 13oz scrim vinyl banners, made to any size for indoor or outdoor use.',
+    description:
+      'Our most popular banner: durable 13oz scrim vinyl printed edge to edge in vivid, UV-stable colour. Rated for indoor and outdoor use — storefronts, events, trade shows and promotions — and finished with a welded hem and grommets every 2 ft so it is ready to hang out of the box. Made to size to the inch.',
+    features: [
+      '13oz matte scrim vinyl',
+      'Indoor & outdoor rated, UV-stable ink',
+      'Welded hem + grommets every 2 ft included',
+      'Single-sided full-colour print',
+      'Made to any size — up to 50 ft on one side'
+    ],
+    turnaround: 'Ships in 2–4 business days',
+    seoTitle: '13oz Vinyl Banner | Custom Full-Colour Vinyl Banners',
+    seoDescription:
+      'Custom 13oz scrim vinyl banners printed to any size for indoor or outdoor use — welded hem and grommets included, UV-stable full-colour print. From $45, shipped across the US & Canada.',
+    pricing: {
+      model: 'area',
+      pricePerSqFt: 2.75,
+      minChargeUsd: 45,
+      minAreaSqFt: 0,
+      sizeSmallCapIn: 600,
+      sizeLargeCapIn: 1800,
+      defaultWidthIn: 72,
+      defaultHeightIn: 36,
+      materials: [{ id: '13oz-scrim', name: '13oz Scrim Vinyl', multiplier: 1 }],
+      finishing: [
+        { id: 'hem-grommets', name: 'Welded hem + grommets every 2 ft', type: 'flat', rate: 0, default: true }
+      ]
+    }
+  },
+  {
+    slug: '18oz-blockout-banner',
+    active: true,
+    name: '18oz Blockout Banner',
+    category: 'banners',
+    badge: 'Double-Sided Ready',
+    emoji: '🌓',
+    tagline: 'Heavy 18oz blockout vinyl with an opaque core — the choice for double-sided banners.',
+    description:
+      'An 18oz heavy-duty scrim with an opaque grey centre layer that blocks light from passing through, so two different prints never bleed into each other — the right pick for true double-sided banners and bright, high-traffic locations. Heavier and more tear-resistant than 13oz for long outdoor runs, street banners and building drapes. Finished with a welded hem and grommets every 2 ft.',
+    features: [
+      '18oz blockout scrim vinyl',
+      'Opaque centre blocks light — true double-sided ready',
+      'Heavy-duty for wind & long outdoor use',
+      'Welded hem + grommets every 2 ft included',
+      'Made to any size — up to 50 ft on one side'
+    ],
+    turnaround: 'Ships in 2–4 business days',
+    seoTitle: '18oz Blockout Banner | Double-Sided Vinyl Banners',
+    seoDescription:
+      'Custom 18oz blockout vinyl banners with an opaque core for true double-sided printing — heavy-duty, UV-stable, welded hem and grommets included. From $45, shipped across the US & Canada.',
+    pricing: {
+      model: 'area',
+      pricePerSqFt: 4.0,
+      minChargeUsd: 45,
+      minAreaSqFt: 0,
+      sizeSmallCapIn: 600,
+      sizeLargeCapIn: 1800,
+      defaultWidthIn: 72,
+      defaultHeightIn: 36,
+      materials: [{ id: '18oz-blockout', name: '18oz Blockout Vinyl', multiplier: 1 }],
+      finishing: [
+        { id: 'hem-grommets', name: 'Welded hem + grommets every 2 ft', type: 'flat', rate: 0, default: true }
+      ]
+    }
+  },
+  {
+    slug: 'mesh-banner',
+    active: true,
+    name: 'Mesh Banner',
+    category: 'banners',
+    badge: 'Wind Friendly',
+    emoji: '🌬️',
+    tagline: 'Perforated mesh vinyl that lets wind pass through — ideal for fences and building wraps.',
+    description:
+      'Printed on perforated mesh vinyl that lets roughly 30% of the wind pass straight through, cutting the wind load that makes solid banners flap and tear. Built for fence lines, scaffolding, stadium rails and building wraps where airflow matters, while still holding bold outdoor colour. Finished with a welded hem and grommets every 2 ft.',
+    features: [
+      'Perforated mesh vinyl (~30% airflow)',
+      'Reduced wind load for fences & wraps',
+      'Outdoor rated, UV-stable ink',
+      'Welded hem + grommets every 2 ft included',
+      'Made to any size — up to 50 ft on one side'
+    ],
+    turnaround: 'Ships in 2–4 business days',
+    seoTitle: 'Mesh Banner | Perforated Wind-Resistant Vinyl Banners',
+    seoDescription:
+      'Custom perforated mesh banners that let wind pass through — ideal for fences, scaffolding and building wraps. UV-stable colour, welded hem and grommets included. From $45, US & Canada.',
+    pricing: {
+      model: 'area',
+      pricePerSqFt: 3.1,
+      minChargeUsd: 45,
+      minAreaSqFt: 0,
+      sizeSmallCapIn: 600,
+      sizeLargeCapIn: 1800,
+      defaultWidthIn: 96,
+      defaultHeightIn: 48,
+      materials: [{ id: 'mesh-vinyl', name: 'Perforated Mesh Vinyl', multiplier: 1 }],
+      finishing: [
+        { id: 'hem-grommets', name: 'Welded hem + grommets every 2 ft', type: 'flat', rate: 0, default: true }
+      ]
+    }
+  },
+  {
+    slug: 'fabric-banner-9oz-wrinkle-free',
+    active: true,
+    name: '9oz Wrinkle-Free Fabric Banner',
+    category: 'banners',
+    badge: 'Premium',
+    emoji: '🧵',
+    tagline: 'Dye-sublimated 9oz wrinkle-free polyester with a premium, no-glare matte finish.',
+    description:
+      'A premium 9oz polyester fabric banner, dye-sublimated so the colour is bonded into the fibre for a rich, no-glare matte finish that photographs cleanly under lights. The wrinkle-free weave packs down and travels without creasing, making it ideal for indoor branding, backdrops and photo walls. Finished with sewn hem edges.',
+    features: [
+      '9oz wrinkle-free polyester fabric',
+      'Dye-sublimated — vivid, no-glare matte',
+      'Packs & travels without creasing',
+      'Sewn hem finished edges',
+      'Made to any size — up to 8 ft on one side'
+    ],
+    turnaround: 'Ships in 3–5 business days',
+    seoTitle: '9oz Wrinkle-Free Fabric Banner | Dye-Sublimated Fabric Banners',
+    seoDescription:
+      'Custom 9oz wrinkle-free fabric banners, dye-sublimated for a rich no-glare matte finish — packs without creasing, sewn hem edges. From $45, shipped across the US & Canada.',
+    pricing: {
+      model: 'area',
+      pricePerSqFt: 5.0,
+      minChargeUsd: 45,
+      minAreaSqFt: 0,
+      sizeSmallCapIn: 96,
+      sizeLargeCapIn: 1200,
+      defaultWidthIn: 96,
+      defaultHeightIn: 48,
+      materials: [{ id: '9oz-poly', name: '9oz Wrinkle-Free Polyester', multiplier: 1 }],
+      finishing: [
+        { id: 'sewn-hem', name: 'Sewn hem edges', type: 'flat', rate: 0, default: true }
+      ]
+    }
+  },
   {
     slug: 'vinyl-banners',
     active: false,
@@ -2701,8 +2864,11 @@ function estimateStartingPrice(pricing) {
     const cheapest = Math.min(...pricing.variants.map((v) => v.unitPrice));
     return Math.round(cheapest);
   }
+  // A per-banner dollar minimum is the true floor ("from $X") — a small banner
+  // always prices at the minimum charge regardless of the default size.
+  if (pricing.minChargeUsd) return Math.round(pricing.minChargeUsd);
   const area = Math.max(
-    pricing.minAreaSqFt,
+    pricing.minAreaSqFt || 0,
     (pricing.defaultWidthIn * pricing.defaultHeightIn) / 144
   );
   return Math.round(area * pricing.pricePerSqFt);

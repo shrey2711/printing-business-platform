@@ -55,6 +55,16 @@ const shopMenu = [
     ]
   },
   {
+    label: 'Banners',
+    to: '/banners',
+    items: [
+      { label: '13oz Vinyl Banner', to: '/products/13oz-vinyl-banner' },
+      { label: '18oz Blockout Banner', to: '/products/18oz-blockout-banner' },
+      { label: 'Mesh Banner', to: '/products/mesh-banner' },
+      { label: '9oz Fabric Banner', to: '/products/fabric-banner-9oz-wrinkle-free' }
+    ]
+  },
+  {
     label: 'Backdrops',
     to: '/backdrops',
     items: [{ label: 'Step & Repeat Backdrop', to: '/products/step-and-repeat-backdrop' }]
@@ -291,6 +301,7 @@ function Footer() {
             <Link to="/trade-show-displays">Trade Show Displays</Link>
             <Link to="/custom-canopies">Canopy Tents</Link>
             <Link to="/banner-stands">Banner Stands</Link>
+            <Link to="/banners">Banners</Link>
             <Link to="/backdrops">Backdrops</Link>
             <Link to="/table-covers">Table Covers</Link>
             <Link to="/seg-displays">SEG Displays</Link>
@@ -378,6 +389,7 @@ function App() {
         <Route path="/trade-show-displays" element={<CategoryPage slug="trade-show-displays" />} />
         <Route path="/custom-canopies" element={<CategoryPage slug="custom-canopies" />} />
         <Route path="/banner-stands" element={<CategoryPage slug="banner-stands" />} />
+        <Route path="/banners" element={<CategoryPage slug="banners" />} />
         <Route path="/table-covers" element={<CategoryPage slug="table-covers" />} />
         <Route path="/backdrops" element={<CategoryPage slug="backdrops" />} />
         <Route path="/trade-show-booth-packages" element={<BoothPackagesPage />} />
