@@ -470,7 +470,7 @@ export const STATIC_ARTICLES = [
     html: `
 <p>Everything to decide before ordering a custom printed canopy tent — size, what you get, walls, print, delivery speed and artwork.</p>
 <h2>1. Size</h2>
-<p>Pick by table count and booth space — 10×10 (standard), 10×15 (more room), 10×20 (double booth). See <a href="/blog/what-size-canopy-tent-should-i-buy">what size to buy</a>.</p>
+<p>Pick by table count and booth space — 10×10 (standard), 10×15 (more room), 10×20 (double booth). See <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">what size to buy</a>.</p>
 <h2>2. What you get</h2>
 <ul>
   <li><strong>Complete Canopy Set</strong> — the printed canopy top + aluminium hex frame + carry bag.</li>
@@ -587,7 +587,7 @@ export const STATIC_ARTICLES = [
 <h3>Frequently asked questions</h3>
 <p><strong>Which size is most common?</strong> The 10×10 — it's what most events allocate by default and fits a single vendor table.</p>
 <p><strong>Can I fit two tables under a 10×10?</strong> It's tight. For two tables plus staff, choose a 10×15 or 10×20.</p>
-<p><strong>Do bigger tents cost more per unit?</strong> Yes, and walls are priced per wall — but ordering 3 or more of any size drops the per-tent price. See <a href="/blog/how-much-does-a-custom-printed-canopy-tent-cost">canopy pricing</a>.</p>
+<p><strong>Do bigger tents cost more per unit?</strong> Yes, and walls are priced per wall — but ordering 3 or more of any size drops the per-tent price. See <a href="/blog/trade-show-display-cost">canopy pricing</a>.</p>
 
 <p>Compare sizes and price yours: <a href="/products/canopy-tent-10x10">10×10</a>, <a href="/products/canopy-tent-10x15">10×15</a> or <a href="/products/canopy-tent-10x20">10×20</a>, or read the full <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">size comparison</a>.</p>
 `
@@ -644,10 +644,10 @@ export const STATIC_ARTICLES = [
 
 <h3>Frequently asked questions</h3>
 <p><strong>Is the 10×15 worth it over a 10×10?</strong> If you run two tables or two staff, yes — the extra 50 sq ft removes the crowding without jumping to a full double booth.</p>
-<p><strong>Can I buy just the printed top?</strong> Yes, on any size, if you already own a compatible frame. See <a href="/blog/how-much-does-a-custom-printed-canopy-tent-cost">pricing</a>.</p>
+<p><strong>Can I buy just the printed top?</strong> Yes, on any size, if you already own a compatible frame. See <a href="/blog/trade-show-display-cost">pricing</a>.</p>
 <p><strong>Are all three the same fabric and frame?</strong> Yes — dye-sublimated 600D polyester on a heavy-duty aluminium hex frame; only the size changes.</p>
 
-<p>Build yours: <a href="/products/canopy-tent-10x10">10×10</a>, <a href="/products/canopy-tent-10x15">10×15</a> or <a href="/products/canopy-tent-10x20">10×20</a>. Not sure? <a href="/blog/what-size-canopy-tent-should-i-buy">What size should I buy?</a></p>
+<p>Build yours: <a href="/products/canopy-tent-10x10">10×10</a>, <a href="/products/canopy-tent-10x15">10×15</a> or <a href="/products/canopy-tent-10x20">10×20</a>. Not sure? <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">What size should I buy?</a></p>
 `
   },
   {
@@ -703,7 +703,7 @@ export const STATIC_ARTICLES = [
 <p><strong>Do full and half walls cost the same?</strong> Yes, per wall, so pick by function.</p>
 <p><strong>Can I add walls later?</strong> It's easiest to order them with the tent so the print matches, but walls attach with hook-and-loop to a standard frame.</p>
 
-<p>Add walls when you <a href="/products/canopy-tent-10x10">build your canopy</a>, or see <a href="/blog/what-size-canopy-tent-should-i-buy">what size to buy</a>.</p>
+<p>Add walls when you <a href="/products/canopy-tent-10x10">build your canopy</a>, or see <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">what size to buy</a>.</p>
 `
   },
   {
@@ -824,6 +824,125 @@ export const STATIC_ARTICLES = [
 
 <p>Choose your coverage when you <a href="/products/canopy-tent-10x10">build your canopy</a>, and see <a href="/blog/how-to-prepare-artwork-for-a-custom-canopy-tent">how to prepare artwork</a>.</p>
 `
+  },
+  {
+    slug: 'feather-angled-vs-convex-vs-teardrop-flags',
+    title: 'Feather Angled vs Convex vs Teardrop Flags',
+    excerpt:
+      'Compare the three Apex flag shapes — top profile, heights, wind behaviour, base options and price — to pick the right advertising flag.',
+    tags: ['Buying Guide', 'Comparison', 'Flags'],
+    seo: {
+      title: 'Feather Angled vs Convex vs Teardrop Flags',
+      description:
+        'Compare Apex feather angled, feather convex and teardrop flags — shape, heights (7–14 ft), wind behaviour, bases and instant pricing from $140.'
+    },
+    coverUrl: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png',
+    publishedAt: '2026-08-20T00:00:00.000Z',
+    updatedAt: '2026-08-20T00:00:00.000Z',
+    html: `
+<p><strong>Short answer:</strong> pick a <strong>feather angled</strong> flag for maximum height and motion, a <strong>feather convex</strong> flag for the same feather look with a smoother curved top, and a <strong>teardrop</strong> flag when you want the shape that holds tightest in wind. All three are custom printed by dye sublimation, single or double sided, and start at <strong>$140</strong> with instant online pricing.</p>
+
+<h2>At a glance</h2>
+<table>
+  <thead><tr><th>&nbsp;</th><th>Feather Angled</th><th>Feather Convex</th><th>Teardrop</th></tr></thead>
+  <tbody>
+    <tr><td>Top profile</td><td>Angled, pointed tip</td><td>Curved convex top</td><td>Rounded teardrop</td></tr>
+    <tr><td>Heights</td><td>9, 10.5, 14 ft</td><td>9, 10.5, 14 ft</td><td>7, 9, 11.2 ft</td></tr>
+    <tr><td>Wind behaviour</td><td>Tall, flies and flutters</td><td>Flies, cleaner top edge</td><td>Holds its shape best</td></tr>
+    <tr><td>Print</td><td>Dye-sub, 1 or 2 sided</td><td>Dye-sub, 1 or 2 sided</td><td>Dye-sub, 1 or 2 sided</td></tr>
+    <tr><td>Base</td><td colspan="3">Ground spike included · cross base +$31 · metal plate base +$35</td></tr>
+    <tr><td>From</td><td>$140</td><td>$140</td><td>$140</td></tr>
+  </tbody>
+</table>
+<p>Every flag includes a flexible pole and a carry bag; choose the base for your surface — spike for grass, cross or plate for hard floors.</p>
+
+<h2>Feather Angled — height and motion</h2>
+<p>The classic feather with an angled, pointed tip. It reads as the tallest profile and moves the most in a breeze, so it catches attention from across a lot — the popular pick for event entrances and roadside promotion.</p>
+
+<h2>Feather Convex — a smoother curved top</h2>
+<p>The same feather family, but the top edge curves over in a smooth convex arc instead of tapering to a point. It keeps the height and flutter of a feather flag with a slightly more contained, premium-looking outline.</p>
+
+<h2>Teardrop — the most stable in wind</h2>
+<p>A rounded teardrop profile bowed tight onto its pole. Because the fabric is held on more sides, it keeps its shape and flaps less in wind — the pick for exposed, windy spots. Teardrops come in 7, 9 and 11.2 ft.</p>
+
+<h2>Which should you pick?</h2>
+<ul>
+  <li>Maximum height and eye-catching motion → <strong>Feather Angled</strong>.</li>
+  <li>The feather look with a smoother, curved top → <strong>Feather Convex</strong>.</li>
+  <li>Windy or exposed location, or you want the shape to stay readable → <strong>Teardrop</strong>.</li>
+</ul>
+
+<h2>What's included and how it's priced</h2>
+<p>All flag shapes are instant-priced online: choose height, single or double sided, and base, upload your artwork (or add our design service), and the price updates live from $140. Every order includes a free artwork proof before printing.</p>
+
+<p>Build yours: <a href="/products/feather-angled-flag">Feather Angled Flag</a>, <a href="/products/feather-convex-flag">Feather Convex Flag</a> or <a href="/products/teardrop-flag">Teardrop Flag</a>. See the whole range on the <a href="/flags">flags page</a>.</p>
+`,
+    faqs: [
+      { q: 'Which flag is best for windy locations?', a: 'The teardrop. Its fabric is held on more sides, so it keeps its shape and flaps less than a feather flag in wind.' },
+      { q: "What's the difference between angled and convex feather flags?", a: 'The angled flag tapers to a pointed tip at the top; the convex flag has a smooth curved top edge. Both are the same feather family and the same heights (9, 10.5 and 14 ft).' },
+      { q: 'Can any flag be printed on both sides?', a: 'Yes — every shape is available single or double sided in full-colour dye sublimation.' },
+      { q: 'What base do I need?', a: 'A ground spike is included for grass. For hard surfaces choose a cross base (+$31) or a metal plate base (+$35).' },
+      { q: 'How much do custom flags cost?', a: 'Flags start at $140 with instant online pricing; the price updates as you choose height, sides and base.' }
+    ]
+  },
+  {
+    slug: 'seg-modular-kit-a-vs-b-vs-c',
+    title: 'SEG Modular Kit A vs B vs C',
+    excerpt:
+      'Compare the three Apex SEG modular lightbox booth kits — layout, structure, widths, counter and what each is best for.',
+    tags: ['Buying Guide', 'Comparison', 'SEG'],
+    seo: {
+      title: 'SEG Modular Kit A vs B vs C',
+      description:
+        'Compare Apex SEG modular lightbox booth kits A, B and C — layout, backlit structure, 10–20 ft widths, counter and best use. Quoted per order.'
+    },
+    coverUrl: '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg',
+    publishedAt: '2026-08-20T00:00:00.000Z',
+    updatedAt: '2026-08-20T00:00:00.000Z',
+    html: `
+<p><strong>Short answer:</strong> <strong>Kit A</strong> is a straight backlit backwall with an overhead archway and a reception counter; <strong>Kit B</strong> adds a side privacy wall for a semi-enclosed space; <strong>Kit C</strong> uses two angled backlit walls for a more dynamic, open layout. All three are illuminated SEG (silicone-edge graphic) lightbox kits with replaceable graphics and a counter, and are <strong>quoted per order</strong>.</p>
+
+<h2>At a glance</h2>
+<table>
+  <thead><tr><th>&nbsp;</th><th>Kit A</th><th>Kit B</th><th>Kit C</th></tr></thead>
+  <tbody>
+    <tr><td>Layout</td><td>Straight backwall</td><td>Backwall + side wall</td><td>Two angled walls</td></tr>
+    <tr><td>Overhead archway</td><td>Yes</td><td>Yes</td><td>—</td></tr>
+    <tr><td>Side privacy wall</td><td>—</td><td>Yes</td><td>Angled walls</td></tr>
+    <tr><td>Counter</td><td>Reception counter</td><td>Display counter</td><td>Display counter</td></tr>
+    <tr><td>Lighting</td><td colspan="3">Backlit SEG (silicone-edge) fabric graphics, replaceable</td></tr>
+    <tr><td>Widths</td><td>10–20 ft</td><td>10–20 ft</td><td>10–20 ft (fewer size options)</td></tr>
+    <tr><td>Pricing</td><td colspan="3">Quoted per order</td></tr>
+  </tbody>
+</table>
+
+<h2>Kit A — classic backlit backwall</h2>
+<p>A straight illuminated SEG backwall with an overhead archway and a reception counter. The clean, symmetrical layout that suits most booths and puts your brand on a large backlit surface.</p>
+
+<h2>Kit B — add a semi-private corner</h2>
+<p>The straight-backwall layout plus a side privacy wall, which closes off one side for a semi-private space to talk, demo or store gear. Includes a display counter.</p>
+
+<h2>Kit C — angled, open presence</h2>
+<p>Two angled backlit walls in place of a single straight backwall, for a more dynamic footprint that reads from multiple aisles. Includes a display counter. Kit C is offered in fewer size options than A and B.</p>
+
+<h2>Which should you pick?</h2>
+<ul>
+  <li>A straightforward, large backlit backwall → <strong>Kit A</strong>.</li>
+  <li>You want a semi-private meeting or demo corner → <strong>Kit B</strong>.</li>
+  <li>You want an angled, open layout that catches multiple aisles → <strong>Kit C</strong>.</li>
+</ul>
+
+<h2>What's included and how it's priced</h2>
+<p>Each kit is a snap-fit aluminium SEG frame with backlit fabric graphics, a counter and a transport bag; the graphics push into the frame and are replaceable, so you can reprint without rebuying the frame. Because size, backlighting and configuration vary, the kits are <strong>quoted per order</strong> rather than instant-priced — send your size and artwork for pricing and a free proof.</p>
+
+<p>See each kit: <a href="/products/seg-modular-trade-show-kit-a">SEG Modular Kit A</a>, <a href="/products/seg-modular-trade-show-kit-b">SEG Modular Kit B</a> or <a href="/products/seg-modular-trade-show-kit-c">SEG Modular Kit C</a>, or read more about <a href="/seg-displays">SEG displays</a>.</p>
+`,
+    faqs: [
+      { q: 'Are all three SEG kits backlit?', a: 'Yes. All three use backlit SEG (silicone-edge graphic) fabric panels for an illuminated lightbox finish.' },
+      { q: "What's the main difference between the kits?", a: 'Kit A is a straight backwall with an overhead archway and a reception counter; Kit B adds a side privacy wall; Kit C uses two angled backlit walls. All three include a counter.' },
+      { q: 'Can the graphics be replaced?', a: 'Yes — the SEG fabric graphics push into the frame and are replaceable, so you keep the frame and reprint the graphic when your branding changes.' },
+      { q: 'How are the kits priced?', a: 'The SEG modular kits are quoted per order by size and configuration. Request a quote with your size and artwork for pricing and a free proof.' }
+    ]
   }
 ];
 

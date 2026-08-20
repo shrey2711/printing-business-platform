@@ -1017,6 +1017,20 @@ seoMap = await loadSeoMap();
 contentMap = await loadContentMap();
 const redirectRules = await loadRedirects();
 
+// Consolidate duplicate-topic articles: any post that canonicalises to another
+// article becomes a REAL 301 to that target (not a separate HTTP-200 duplicate).
+// These posts are skipped in the blog render loop below, so the only response for
+// their URL is the edge 301. (e.g. what-size-canopy-tent-should-i-buy and
+// how-much-does-a-custom-printed-canopy-tent-cost.)
+for (const p of posts) {
+  if (!p.canonical) continue;
+  const dest = /^https?:/.test(p.canonical) ? new URL(p.canonical).pathname : p.canonical;
+  if (dest === `/blog/${p.slug}`) continue; // self — nothing to redirect
+  if (!redirectRules.some((r) => r.source === `/blog/${p.slug}`)) {
+    redirectRules.push({ source: `/blog/${p.slug}`, destination: dest, code: 301 });
+  }
+}
+
 // Reflect pricing overrides in the prerendered "from $X" listing badges.
 const pricingOverrides = await loadPricingOverrides();
 for (const p of productList) {
@@ -1026,6 +1040,7 @@ for (const p of productList) {
 // Blog index
 routes.push(() => {
   const items = posts
+    .filter((p) => !p.canonical) // don't link to canonicalised-away (301'd) posts
     .map(
       (p) =>
         `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` — ${esc(p.excerpt)}` : ''}</li>`
@@ -1057,29 +1072,56 @@ routes.push(() => {
 
 // Each published post — full rendered HTML + BlogPosting JSON-LD.
 for (const p of posts) {
-  routes.push(() =>
-    render({
-      path: `/blog/${p.slug}`,
-      title: `${p.seo?.title || p.title} | ${BRAND}`,
-      description: p.seo?.description || p.excerpt,
-      // A post may canonicalise to another article (duplicate-topic consolidation).
-      canonical: p.canonical ? (/^https?:/.test(p.canonical) ? p.canonical : ORIGIN + p.canonical) : undefined,
-      body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / <span>${esc(p.title)}</span></nav>
-        <article><h1>${esc(p.title)}</h1>${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}</article>`,
-      jsonLd: {
+  // Canonicalised-away duplicates are 301'd at the edge (see redirectRules above)
+  // — do not also emit a 200 page for them.
+  if (p.canonical) continue;
+  routes.push(() => {
+    const img = p.coverUrl ? (/^https?:\/\//.test(p.coverUrl) ? p.coverUrl : ORIGIN + p.coverUrl) : undefined;
+    // Data-driven FAQ (optional): render the questions visibly AND emit FAQPage
+    // from the SAME source, so the schema always matches what's on the page.
+    const faqHtml = Array.isArray(p.faqs) && p.faqs.length
+      ? `<h2>Frequently asked questions</h2>${p.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
+      : '';
+    const jsonLd = [
+      {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: p.title,
         description: p.seo?.description || p.excerpt,
-        image: p.coverUrl ? (/^https?:\/\//.test(p.coverUrl) ? p.coverUrl : ORIGIN + p.coverUrl) : undefined,
+        ...(img ? { image: img } : {}),
         datePublished: p.publishedAt || undefined,
-        dateModified: p.updatedAt || undefined,
+        dateModified: p.updatedAt || p.publishedAt || undefined,
         author: { '@type': 'Organization', name: BRAND },
         publisher: { '@type': 'Organization', name: BRAND },
         mainEntityOfPage: `${ORIGIN}/blog/${p.slug}`
-      }
-    })
-  );
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${ORIGIN}/blog` },
+          { '@type': 'ListItem', position: 3, name: p.title, item: `${ORIGIN}/blog/${p.slug}` }
+        ]
+      },
+      ...(p.faqs && p.faqs.length
+        ? [{
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: p.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+          }]
+        : [])
+    ];
+    return render({
+      path: `/blog/${p.slug}`,
+      title: `${p.seo?.title || p.title} | ${BRAND}`,
+      description: p.seo?.description || p.excerpt,
+      ...(img ? { image: img, imageAlt: p.title } : {}),
+      body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / <span>${esc(p.title)}</span></nav>
+        <article><h1>${esc(p.title)}</h1>${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}${faqHtml}</article>`,
+      jsonLd
+    });
+  });
 }
 
 // Collect every real page path so the edge middleware can return a genuine 404
