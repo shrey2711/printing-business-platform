@@ -14,6 +14,7 @@ import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
 // x location) — head terms belong to 15-20 year old domains.
 import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
+import { applyMeta } from './lib/seo-meta.mjs';
 import { PAGES } from '../src/data/pages.js';
 import { CATEGORY_PAGES, SUBCATEGORIES } from '../src/data/categoryPages.js';
 import {
@@ -85,13 +86,9 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   // canonicalises to another article) > the page itself.
   const canonical = o?.canonical || canonicalArg || ORIGIN + path;
   const url = ORIGIN + path;
-  let html = template;
-  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`);
-  html = html.replace(/(<meta name="description" content=")[\s\S]*?(")/, `$1${esc(description)}$2`);
-  html = html.replace(/(<link rel="canonical" href=")[\s\S]*?(")/, `$1${canonical}$2`);
-  html = html.replace(/(<meta property="og:title" content=")[\s\S]*?(")/, `$1${esc(title)}$2`);
-  html = html.replace(/(<meta property="og:url" content=")[\s\S]*?(")/, `$1${url}$2`);
-  html = html.replace(/(<meta property="og:description" content=")[\s\S]*?(")/, `$1${esc(description)}$2`);
+  // Function-replacer based tag rewriting (see scripts/lib/seo-meta.mjs) — never
+  // `$1…$2` strings, so a "$140" in a value can't be read as a capture-group ref.
+  let html = applyMeta(template, { title, description, canonical, url });
   if (robots) {
     html = html.replace('</head>', `<meta name="robots" content="${robots}">\n</head>`);
   }
@@ -118,6 +115,16 @@ const priceFrom = (p) => (p.startingPrice != null ? `from $${p.startingPrice}` :
 // Canopy-focused pages (home, locations) list only the core retail products.
 const coreProducts = productList.filter((p) => p.category === 'tents' || p.category === 'table-covers');
 const displayProducts = productList.filter((p) => p.category === 'banner-stands' || p.category === 'backdrops');
+const bannerProducts = productList.filter((p) => p.category === 'banners');
+const flagProductsList = productList.filter((p) => p.category === 'flags');
+const segProductsList = productList.filter((p) => p.category === 'seg-kits');
+// Render a heading + crawlable product link list (used across hub pages).
+const productSection = (heading, list) =>
+  list.length
+    ? `<h2>${esc(heading)}</h2><ul>${list
+        .map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`)
+        .join('')}</ul>`
+    : '';
 // Product category id -> its category landing page (for breadcrumb up-links).
 const CAT_BY_PRODUCT = Object.fromEntries(CATEGORY_PAGES.filter((c) => c.category).map((c) => [c.category, c]));
 let count = 0;
@@ -176,8 +183,10 @@ routes.push(() => {
     <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
     <p>Not sure which size? Read the <a href="/sizes/10x10">10x10</a>, <a href="/sizes/10x15">10x15</a>
     and <a href="/sizes/10x20">10x20</a> size guides.</p>
-    ${displayProducts.length ? `<h2>Banner stands &amp; backdrops</h2>
-    <ul>${displayProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>` : ''}`;
+    ${productSection('Banner stands & backdrops', displayProducts)}
+    ${productSection('Banners', bannerProducts)}
+    ${productSection('Flags', flagProductsList)}
+    ${productSection('SEG modular kits', segProductsList)}`;
   return render({
     path: '/products',
     title: `Shop All Products | ${BRAND}`,
@@ -369,14 +378,26 @@ for (const lp of LANDING_PAGES) {
       .join('');
     const faqsHtml = lp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('');
     const relatedHtml = lp.related.map((r) => `<a href="${r.to}">${esc(r.label)}</a>`).join(' · ');
+    // Direct product links in the prerendered HTML (crawlable, not client-only).
+    const lpProducts = lp.products
+      ? productList.filter((p) => lp.products.some((x) => x.slug === p.slug))
+      : [];
+    const productsHtml = lpProducts.length
+      ? `<h2>Shop ${esc(lp.nav.toLowerCase())}</h2><ul>${lpProducts
+          .map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`)
+          .join('')}</ul>`
+      : '';
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/trade-show-displays">Trade Show Displays</a> / <span>${esc(lp.nav)}</span></nav>
       <h1>${esc(lp.h1)}</h1>
       <p>${esc(lp.intro)}</p>
       ${sections}
+      ${productsHtml}
       <h2>Frequently asked questions</h2>${faqsHtml}
       <h2>Related displays</h2><p>${relatedHtml}</p>
-      <p><a href="/quote">Request a quote for ${esc(lp.nav.toLowerCase())} →</a></p>`;
+      ${lpProducts.some((p) => p.startingPrice != null)
+        ? `<p><a href="/products/${lpProducts[0].slug}">Configure ${esc(lp.nav.toLowerCase())} for an instant price →</a></p>`
+        : `<p><a href="/quote">Request a quote for ${esc(lp.nav.toLowerCase())} →</a></p>`}`;
     return render({
       path: `/${lp.slug}`,
       title: `${lp.title} | ${BRAND}`,
@@ -944,7 +965,7 @@ routes.push(() => {
   ].map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('');
   return render({
     path: '/blog',
-    title: `Trade Show Resources & Buying Guides | ${BRAND}`,
+    title: `Trade Show Display Guides & Buying Resources | ${BRAND}`,
     description:
       'Buying guides, size charts and setup tips for trade show displays — custom canopy tents, retractable and X-stand banner stands, table covers, backdrops, booth planning and artwork preparation.',
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Resources</span></nav>
