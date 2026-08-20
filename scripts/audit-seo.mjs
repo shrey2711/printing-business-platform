@@ -90,9 +90,35 @@ for (const { path, hasLastmod } of sitemapPaths) {
   // Malformed / nested meta (a tag opening inside an attribute value).
   if (/content="[^"]*<(meta|title|link|script|\/)/i.test(html)) fail(path, 'malformed/nested tag inside a content="" attribute');
 
-  // JSON-LD parses.
+  // JSON-LD: parse, then verify it matches visible content and carries no fake
+  // properties (P6). Collect @id to catch duplicates within the page.
+  const ldBlocks = [];
+  const ids = new Set();
+  const bodyText = html.replace(/<script[\s\S]*?<\/script>/g, ' ');
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
-    try { JSON.parse(m[1]); } catch { fail(path, 'invalid JSON-LD block'); }
+    let obj;
+    try { obj = JSON.parse(m[1]); } catch { fail(path, 'invalid JSON-LD block'); continue; }
+    ldBlocks.push(obj);
+    for (const node of Array.isArray(obj) ? obj : [obj]) {
+      if (node && node['@id']) { if (ids.has(node['@id'])) fail(path, `duplicate JSON-LD @id: ${node['@id']}`); else ids.add(node['@id']); }
+    }
+  }
+  const ldStr = JSON.stringify(ldBlocks);
+  // No fabricated trust signals.
+  if (/"(AggregateRating|Review)"/.test(ldStr)) fail(path, 'JSON-LD contains Review/AggregateRating (no verified reviews exist)');
+  // Availability must not fake stock for made-to-order goods.
+  if (/schema\.org\/InStock/.test(ldStr)) fail(path, 'JSON-LD availability InStock (should be MadeToOrder)');
+  // Product Offer price must be visible on the page.
+  for (const node of ldBlocks.flat()) {
+    if (!node || node['@type'] !== 'Product' || !node.offers) continue;
+    const prices = [node.offers.price, node.offers.lowPrice, node.offers.highPrice].filter(Boolean).map(String);
+    for (const pr of prices) {
+      const money = `$${Number(pr).toLocaleString('en-US')}`;
+      if (!bodyText.includes(`$${pr}`) && !bodyText.includes(money)) {
+        fail(path, `Product Offer price ${pr} not shown in visible content`);
+      }
+    }
+    if (node.offers.priceCurrency && node.offers.priceCurrency !== 'USD') warning(path, `unexpected priceCurrency ${node.offers.priceCurrency}`);
   }
 
   // Placeholder brand / stale strings (ignore HTML comments — the template has a

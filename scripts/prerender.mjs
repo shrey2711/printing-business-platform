@@ -194,7 +194,19 @@ routes.push(() => {
     path: '/products',
     title: `Shop All Products | ${BRAND}`,
     description: 'Browse all Apex trade show display and event-branding products — custom canopy tents, banner stands, step & repeat backdrops and table covers. Free artwork proof, US & Canada.',
-    body
+    body,
+    // ItemList of the catalog — every entry links a real, crawlable product page.
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Apex Trade Show products',
+      itemListElement: productList.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${ORIGIN}/products/${p.slug}`,
+        name: p.name
+      }))
+    }
   });
 });
 
