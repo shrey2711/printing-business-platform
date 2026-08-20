@@ -120,11 +120,11 @@ h1, h2, h3, h4 { color: var(--navy); }
 .shop-dd.shop-dd-collapsed .shop-menu { display: none; }
 .shop-col { display: flex; flex-direction: column; }
 .shop-col-head {
-  font-weight: 700; color: var(--navy); padding: 0 0 0.35rem; margin-bottom: 0.25rem;
+  font-weight: 800; font-size: 0.95rem; color: var(--navy); padding: 0 0 0.35rem; margin-bottom: 0.25rem;
   border-bottom: 1px solid var(--line-soft);
 }
 .shop-col-head:hover { color: var(--red); }
-.shop-col a { padding: 0.3rem 0; font-size: 0.86rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.shop-col a { padding: 0.3rem 0; font-size: 0.86rem; font-weight: 400; color: var(--ink); white-space: nowrap; }
 .shop-col a:hover { color: var(--red); }
 .shop-all {
   grid-column: 1 / -1; margin-top: 0.4rem; padding-top: 0.7rem;
