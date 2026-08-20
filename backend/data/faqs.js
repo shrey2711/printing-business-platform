@@ -33,7 +33,7 @@ export function getProductFaqs(product) {
   // Turnaround + shipping
   faqs.push({
     q: `How fast is production and shipping?`,
-    a: `${product.turnaround}. We ship across the United States and Canada — see our Shipping page for delivery details.`
+    a: `${product.turnaround} We ship across the United States and Canada — see our Shipping page for delivery details.`
   });
 
   // Finishing / double-sided

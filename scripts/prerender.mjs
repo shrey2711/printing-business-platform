@@ -162,8 +162,10 @@ routes.push(() => {
     <li>We print and ship it.</li></ol>`;
   return render({
     path: '/',
-    title: `Trade Show Displays, Canopies, Banners & Backdrops | ${BRAND}`,
-    description: brand.description,
+    title: `Trade Show Displays, Canopies & Banners | ${BRAND}`,
+    // Concise <meta> description (the long brand.description still feeds schema).
+    description:
+      'Custom trade show displays from one supplier: canopy tents, banner stands, backdrops, table covers, flags. Instant pricing, free artwork proof, US & Canada.',
     body
   });
 });
@@ -322,6 +324,15 @@ routes.push(() => {
 // are indexed with unique local content; Tier 2/3 are noindex,follow until they
 // earn depth (anti-thin-page gate). These are the canonical local pages — old
 // /locations/[state]/[city] canopy pages 301 into /trade-show-canopies/[city].
+//
+// "City, ABBR" but never redundant/double-punctuated — e.g. Washington, D.C.
+// already carries its region and ends in a period, so we don't append ", DC" or
+// a second period (avoids "Washington, D.C., DC" and "Washington, D.C..").
+const cityWithAbbr = (c) => (/[.]$/.test(c.city) || c.city.includes(c.abbr) ? c.city : `${c.city}, ${c.abbr}`);
+const endSentence = (s) => (/[.!?]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
+// Collapse a run of periods to one — a city like "Washington, D.C." dropped into
+// a "…in {city}." template would otherwise read "…in Washington, D.C..".
+const dedupePeriods = (s) => s.replace(/\.{2,}/g, '.');
 for (const lc of LOCAL_CATEGORIES) {
   for (const city of SEO_CITIES) {
     routes.push(() => {
@@ -339,8 +350,8 @@ for (const lc of LOCAL_CATEGORIES) {
         .join('');
       const body = `
         <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="${lc.hub}">${esc(lc.hubLabel)}</a> / <span>${esc(city.city)}</span></nav>
-        <h1>${esc(lc.label)} in ${esc(city.city)}, ${esc(city.abbr)}</h1>
-        <p>${esc(lc.lead(city))}</p>
+        <h1>${esc(lc.label)} in ${esc(cityWithAbbr(city))}</h1>
+        <p>${esc(dedupePeriods(lc.lead(city)))}</p>
         <h2>${esc(lc.label)} for ${esc(city.city)} events</h2>
         <ul>${productLis}</ul>
         <h2>Trade shows in ${esc(city.city)}</h2>
@@ -352,8 +363,8 @@ for (const lc of LOCAL_CATEGORIES) {
         <ul>${otherLis}</ul>`;
       return render({
         path: `/${lc.slug}/${city.slug}`,
-        title: `${lc.label} in ${city.city}, ${city.abbr} | ${BRAND}`,
-        description: `${lc.label} in ${city.city}, ${city.stateName}. ${lc.lead(city)}`.slice(0, 300),
+        title: `${lc.label} in ${cityWithAbbr(city)} | ${BRAND}`,
+        description: `Custom ${lc.label.toLowerCase()} printed and shipped to ${city.city}, ${city.stateName} — instant online pricing and a free artwork proof.`,
         robots: city.tier > 2 ? 'noindex, follow' : undefined,
         body,
         jsonLd: {
@@ -541,7 +552,7 @@ function productSeoTitle(product) {
   return {
     title: `${product.name} | Instant Pricing`,
     h1: `${product.name} — Custom Printing & Instant Pricing`,
-    description: (price, prod) => `${prod.tagline} Order online with instant pricing from $${price}. ${prod.turnaround}.`
+    description: (price, prod) => `${prod.tagline} Order online with instant pricing from $${price}. ${prod.turnaround}`
   };
 }
 
@@ -625,7 +636,7 @@ for (const summary of productList) {
       <p>${esc(product.description)}</p>
       <p>${startingPrice != null
         ? `<strong>Starting at $${startingPrice}${priceDisp.startingNote ? ` — ${esc(priceDisp.startingNote.toLowerCase())}` : ''}.</strong>${priceDisp.full ? ` ${esc(priceDisp.full.label)}: $${priceDisp.full.price}.` : ''}`
-        : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}.</p>
+        : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}</p>
       <h2>Features</h2><ul>${product.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
       ${Array.isArray(product.applications) && product.applications.length ? `<h2>Applications</h2><ul>${product.applications.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
       <h2>Specifications</h2>
