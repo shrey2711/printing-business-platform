@@ -173,10 +173,13 @@ routes.push(() => {
     order. ${esc(brand.shippingBlurb)}.</p>
     <h2>Shop by category</h2>
     <ul>
-      <li><a href="/products?category=tents">Custom Canopy Tents</a> — printed pop-up tents &amp; walls</li>
-      <li><a href="/products?category=banner-stands">Banner Stands</a> — retractable &amp; X-stand banners</li>
-      <li><a href="/products?category=backdrops">Backdrops</a> — step &amp; repeat media walls</li>
-      <li><a href="/products?category=table-covers">Table Covers</a> — pleated &amp; stretch throws</li>
+      <li><a href="/custom-canopies">Custom Canopy Tents</a> — printed pop-up tents &amp; walls</li>
+      <li><a href="/banner-stands">Banner Stands</a> — retractable &amp; X-stand banners</li>
+      <li><a href="/banners">Banners</a> — vinyl, mesh &amp; fabric banners</li>
+      <li><a href="/backdrops">Backdrops</a> — step &amp; repeat media walls</li>
+      <li><a href="/table-covers">Table Covers</a> — pleated &amp; stretch throws</li>
+      <li><a href="/flags">Flags</a> — feather &amp; teardrop flags</li>
+      <li><a href="/seg-displays">SEG Modular Kits</a> — illuminated modular booths</li>
       <li><a href="/products">All products</a> — the complete range</li>
     </ul>
     <h2>Custom canopy tents</h2>
