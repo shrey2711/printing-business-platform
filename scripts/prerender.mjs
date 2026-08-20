@@ -3,6 +3,7 @@
 // JSON-LD in the initial HTML — without a full SSR framework. React still
 // hydrates on top for the interactive app.
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -1037,11 +1038,37 @@ console.log(`Known routes manifest: ${knownRoutes.size} paths.`);
 // ---- Sitemap: INDEXABLE pages only (city pages are noindex, so excluded) ----
 // A dashboard SEO override can force a route out (robots: noindex) or reset its
 // priority; both are honoured here.
-const smUrl = (loc, priority, changefreq) => {
+// Real content-modification date per source file (git committer date, YYYY-MM-DD)
+// — NOT the build time. Cached per file; null (omit lastmod) if git is unavailable.
+const _lmodCache = new Map();
+const gitLastMod = (file) => {
+  if (_lmodCache.has(file)) return _lmodCache.get(file);
+  let d = null;
+  try {
+    // execFileSync (no shell) — file names are constants, args passed directly.
+    d = execFileSync('git', ['log', '-1', '--format=%cs', '--', file], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || null;
+    if (d && !/^\d{4}-\d{2}-\d{2}$/.test(d)) d = null;
+  } catch { d = null; }
+  _lmodCache.set(file, d);
+  return d;
+};
+// Content-group lastmods (the file that governs each page group).
+const LMOD = {
+  products: gitLastMod('backend/data/products.js'),
+  categories: gitLastMod('src/data/categoryPages.js'),
+  landing: gitLastMod('src/data/landingPages.js'),
+  pages: gitLastMod('src/data/pages.js'),
+  canopy: gitLastMod('src/data/canopy.js'),
+  booth: gitLastMod('src/data/boothPackages.js'),
+  city: gitLastMod('src/data/citySeo.js'),
+  home: gitLastMod('scripts/prerender.mjs')
+};
+const smUrl = (loc, priority, changefreq, lastmod) => {
   const o = seoMap[loc];
   if (o?.robots && /noindex/i.test(o.robots)) return null; // dropped from sitemap
   const p = o?.sitemap_priority != null ? String(o.sitemap_priority) : priority;
-  return `  <url><loc>${ORIGIN}${loc}</loc>${changefreq ? `<changefreq>${changefreq}</changefreq>` : ''}<priority>${p}</priority></url>`;
+  const lm = lastmod && /^\d{4}-\d{2}-\d{2}/.test(String(lastmod)) ? String(lastmod).slice(0, 10) : null;
+  return `  <url><loc>${ORIGIN}${loc}</loc>${lm ? `<lastmod>${lm}</lastmod>` : ''}${changefreq ? `<changefreq>${changefreq}</changefreq>` : ''}<priority>${p}</priority></url>`;
 };
 // Split sitemaps by type (products / categories / pages / blog / locations),
 // tied together by a sitemap index at /sitemap.xml. Each publish/rebuild
@@ -1051,41 +1078,47 @@ const buildUrlset = (rows) =>
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.filter(Boolean).join('\n')}\n</urlset>\n`;
 
 const smPages = [
-  smUrl('/', '1.0', 'weekly'),
-  smUrl('/quote', '0.4'),
-  smUrl('/contact', '0.4'),
-  ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7')),
-  ...SOLUTIONS.map((s) => smUrl(`/solutions/${s.slug}`, '0.6')),
+  smUrl('/', '1.0', 'weekly', LMOD.home),
+  smUrl('/quote', '0.4', undefined, LMOD.pages),
+  smUrl('/contact', '0.4', undefined, LMOD.pages),
+  ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7', undefined, LMOD.canopy)),
+  ...SOLUTIONS.map((s) => smUrl(`/solutions/${s.slug}`, '0.6', undefined, LMOD.canopy)),
   // Indexable trust pages (stub policy pages are noindex and excluded).
-  ...PAGES.filter((p) => !p.stub).map((p) => smUrl(`/${p.slug}`, '0.4'))
+  ...PAGES.filter((p) => !p.stub).map((p) => smUrl(`/${p.slug}`, '0.4', undefined, LMOD.pages))
 ];
 const smCategories = [
-  smUrl('/products', '0.9', 'weekly'),
-  ...CATEGORY_PAGES.map((cp) => smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly')),
-  smUrl('/trade-show-booth-packages', '0.8', 'weekly'),
-  ...LANDING_PAGES.map((lp) => smUrl(`/${lp.slug}`, '0.7', 'weekly'))
+  smUrl('/products', '0.9', 'weekly', LMOD.products),
+  ...CATEGORY_PAGES.map((cp) => smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly', LMOD.categories)),
+  smUrl('/trade-show-booth-packages', '0.8', 'weekly', LMOD.booth),
+  ...LANDING_PAGES.map((lp) => smUrl(`/${lp.slug}`, '0.7', 'weekly', LMOD.landing))
 ];
-const smProducts = productList.map((p) => smUrl(`/products/${p.slug}`, '0.8'));
+const smProducts = productList.map((p) => smUrl(`/products/${p.slug}`, '0.8', undefined, LMOD.products));
 // Exclude posts canonicalised to another article — a canonicalised-away URL
-// should not appear in the sitemap.
-const smBlog = [smUrl('/blog', '0.6', 'weekly'), ...posts.filter((p) => !p.canonical).map((p) => smUrl(`/blog/${p.slug}`, '0.6'))];
+// should not appear in the sitemap. Blog lastmod uses each post's real
+// updated/published date (per-post), the most accurate signal available.
+const postLmod = (p) => (p.updatedAt || p.publishedAt || '').slice(0, 10) || null;
+const newestPost = posts.map(postLmod).filter(Boolean).sort().pop() || null;
+const smBlog = [
+  smUrl('/blog', '0.6', 'weekly', newestPost),
+  ...posts.filter((p) => !p.canonical).map((p) => smUrl(`/blog/${p.slug}`, '0.6', undefined, postLmod(p)))
+];
 
 // Locations. City pages that 301 to /trade-show-canopies/[city] must NOT appear
 // (a sitemap URL must be 200, not a redirect).
 const redirectedLoc = new Set(SEO_CITIES.filter((c) => c.stateSlug).map((c) => `/locations/${c.stateSlug}/${c.slug}`));
 const smLocations = [
-  smUrl('/locations', '0.6', 'monthly'),
-  ...territories.filter((s) => PRIORITY_STATES.has(s.slug)).map((s) => smUrl(`/locations/${s.slug}`, '0.5'))
+  smUrl('/locations', '0.6', 'monthly', LMOD.city),
+  ...territories.filter((s) => PRIORITY_STATES.has(s.slug)).map((s) => smUrl(`/locations/${s.slug}`, '0.5', undefined, LMOD.city))
 ];
 territories.forEach((s) =>
   s.cities.forEach((c) => {
     const path = `/locations/${s.slug}/${slugify(c)}`;
-    if (PRIORITY_CITIES.has(slugify(c)) && !redirectedLoc.has(path)) smLocations.push(smUrl(path, '0.4'));
+    if (PRIORITY_CITIES.has(slugify(c)) && !redirectedLoc.has(path)) smLocations.push(smUrl(path, '0.4', undefined, LMOD.city));
   })
 );
 for (const lc of LOCAL_CATEGORIES) {
   for (const city of SEO_CITIES) {
-    if (city.tier <= 2) smLocations.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly'));
+    if (city.tier <= 2) smLocations.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly', LMOD.city));
   }
 }
 
