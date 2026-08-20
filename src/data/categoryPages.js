@@ -21,9 +21,9 @@ export const CATEGORY_PAGES = [
     h1: 'Trade Show Displays & Event Branding',
     title: 'Trade Show Displays & Event Branding',
     description:
-      'Shop the complete trade show booth from Apex — custom canopy tents, retractable banner stands, step & repeat backdrops and table covers, printed in your brand. Free artwork proof, US & Canada.',
+      'Shop the complete trade show booth — canopy tents, banner stands, backdrops, table covers and flags, printed in your brand. Instant pricing, free proof.',
     intro:
-      'Apex supplies every branded piece of a professional trade show booth from one place — canopy tents, banner stands, backdrops, table covers and accessories, all printed in your brand so the whole booth matches. Custom canopies are priced instantly online; banner stands, backdrops and table covers are quoted per order.',
+      'Apex supplies every branded piece of a professional trade show booth from one place — canopy tents, banner stands, backdrops, table covers, flags and accessories, all printed in your brand so the whole booth matches. Canopy tents, banner stands, backdrops, table covers and flags are priced instantly online; larger custom displays (SEG modular kits, tension fabric and pop-up) are quoted per order.',
     points: [
       'Custom canopy tents with instant online pricing and up to 3 printed walls.',
       'Retractable and X-stand banner stands for aisles, lobbies and counters.',
@@ -39,7 +39,7 @@ export const CATEGORY_PAGES = [
     h1: 'Custom Canopy Tents',
     title: 'Custom Canopy Tents — 10x10, 10x15 & 10x20',
     description:
-      'Custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with up to 3 printed walls and instant online pricing. Dye-sublimation print, free artwork proof, US & Canada.',
+      'Custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with up to 3 printed walls. Instant online pricing, free artwork proof, US & Canada.',
     intro:
       'Custom printed pop-up canopy tents — the branded roof over your booth. Choose 10x10, 10x15 or 10x20, add full or half printed walls, and see the price update live. Dye sublimation bonds the ink into 600D polyester over a heavy-duty aluminium hex frame, so colours will not crack, peel or fade.',
     points: [
@@ -61,7 +61,7 @@ export const CATEGORY_PAGES = [
     h1: 'Retractable & X-Stand Banner Stands',
     title: 'Retractable & X-Stand Banner Stands',
     description:
-      'Custom printed banner stands from Apex — standard and deluxe retractable banners, X-stand and tabletop banners for trade shows, lobbies, counters and events. Configure size and production speed for instant online pricing.',
+      'Custom printed banner stands — standard & deluxe retractable, X-stand and tabletop — for trade shows, lobbies and counters. Instant online pricing, free proof.',
     intro:
       'Portable printed banner stands for aisles, entrances, counters and events. Retractable stands roll the graphic into the base for travel; the X-stand uses a lightweight X-frame; the tabletop version sits on a counter. All use a replaceable printed graphic.',
     points: [
@@ -78,7 +78,7 @@ export const CATEGORY_PAGES = [
     h1: 'Custom Vinyl, Mesh & Fabric Banners',
     title: 'Custom Banners — Vinyl, Mesh & Fabric',
     description:
-      'Made-to-size custom banners from Apex — 13oz vinyl, 18oz blockout, perforated mesh and 9oz wrinkle-free fabric. Enter your width and height for instant per-square-foot pricing, welded hem and grommets included.',
+      'Made-to-size 13oz vinyl, 18oz blockout, mesh and 9oz fabric banners — enter width and height for instant per-square-foot pricing. Hem and grommets included.',
     intro:
       'Full-colour banners printed to any size you enter, priced by the square foot. Choose economical 13oz scrim vinyl, opaque 18oz blockout for double-sided prints, wind-friendly perforated mesh, or premium wrinkle-free fabric — each finished ready to hang.',
     points: [
@@ -95,7 +95,7 @@ export const CATEGORY_PAGES = [
     h1: 'Custom Table Covers',
     title: 'Custom Table Covers — Pleated & Stretch',
     description:
-      'Custom printed table covers from Apex — pleated throws and fitted stretch covers, closed back, for trade show tables, registration desks and counters. Configure size and production speed for instant online pricing.',
+      'Custom printed table covers — pleated throws and fitted stretch covers, closed back, for trade show tables and counters. Instant online pricing, free proof.',
     intro:
       'Custom printed table covers that turn a plain table into a branded surface. Choose a pleated throw that drapes with rounded corners, or a fitted stretch cover for a tight, modern look — both closed-back (4-sided) and printed in full colour.',
     points: [
@@ -112,7 +112,7 @@ export const CATEGORY_PAGES = [
     h1: 'Step & Repeat Backdrops',
     title: 'Step & Repeat Backdrops',
     description:
-      'Custom step & repeat backdrops from Apex — large-format fabric media walls with repeating logo branding for event and press photography, on a portable adjustable frame. Configure size, kit and production speed for instant online pricing.',
+      'Custom step & repeat backdrops — large-format fabric media walls with repeating logo branding on a portable adjustable frame. Instant online pricing, free proof.',
     intro:
       'Step & repeat backdrops are the branded media wall behind press, red-carpet and event photos. Print repeating logos across a large-format fabric on an adjustable, portable frame so your branding reads in every shot.',
     points: [
