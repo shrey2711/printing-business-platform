@@ -1176,10 +1176,10 @@ const products = [
   // the configurator. Finishing is the free welded hem + grommets only — paid
   // add-ons (pole pockets, wind slits, double-sided) are intentionally omitted
   // pending owner-confirmed rates, so nothing is invented.
-  // Imagery: 13oz vinyl and 18oz blockout now carry owner-supplied galleries +
-  // card thumbnails (public/images/banners/). Mesh and fabric still have no
-  // gallery — their cards/pages render the neutral ProductArt placeholder until
-  // photos are supplied.
+  // Imagery: 13oz vinyl, 18oz blockout and mesh now carry owner-supplied
+  // galleries + card thumbnails (public/images/banners/). Fabric still has no
+  // gallery — its card/page renders the neutral ProductArt placeholder until a
+  // photo is supplied.
   {
     slug: '13oz-vinyl-banner',
     active: true,
@@ -1282,6 +1282,10 @@ const products = [
     seoTitle: 'Mesh Banner | Perforated Wind-Resistant Vinyl Banners',
     seoDescription:
       'Custom perforated mesh banners that let wind pass through — ideal for fences, scaffolding and building wraps. UV-stable colour, welded hem and grommets included. From $45, US & Canada.',
+    gallery: [
+      { src: '/images/banners/mesh-banner-gift-pass-fence-lifestyle.jpeg', alt: 'Custom printed perforated mesh banner mounted on a fence, showing the mesh weave' },
+      { src: '/images/banners/mesh-banner-edge-finishing-options.jpeg', alt: 'Mesh banner finishing options — premium edging, corner reinforcement, hardware attachment, velcro fastening, rope finish and pole sleeve' }
+    ],
     pricing: {
       model: 'area',
       pricePerSqFt: 3.1,
