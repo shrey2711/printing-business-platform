@@ -44,6 +44,8 @@
 
 * { box-sizing: border-box; }
 body { margin: 0; background: #fff; }
+/* Lock page scroll while the mobile menu overlay is open. */
+body.menu-open { overflow: hidden; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; }
 /* Consistent heading rhythm (pages may still set their own sizes). */
@@ -183,7 +185,13 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
     border: 1px solid var(--line); border-radius: 7px; padding: 0.65rem 1rem;
     font-weight: 700; font-size: 0.95rem; color: var(--navy); min-height: 44px; cursor: pointer;
   }
-  .m-menu { display: block; border-top: 1px solid var(--line-soft); background: #fff; max-height: 76vh; overflow-y: auto; }
+  /* Full overlay from just below the header to the bottom, so page content can't
+     show or scroll behind the open menu. */
+  .m-menu {
+    display: block; border-top: 1px solid var(--line-soft); background: #fff;
+    position: fixed; left: 0; right: 0; top: var(--m-menu-top, 120px); bottom: 0;
+    max-height: none; overflow-y: auto; z-index: 29; -webkit-overflow-scrolling: touch;
+  }
   .m-all { display: block; padding: 0.95rem 1.5rem; font-weight: 700; color: var(--red-dark); border-bottom: 1px solid var(--line-soft); }
   .m-group-head {
     width: 100%; display: flex; justify-content: space-between; align-items: center;

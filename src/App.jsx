@@ -206,6 +206,17 @@ function HeaderNav() {
   // Close the mobile menu whenever the route changes.
   useEffect(() => { setMobileOpen(false); }, [location]);
 
+  // When the mobile menu is open, lock body scroll and pin the menu overlay to
+  // start just below the header, so page content can't show/scroll behind it.
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', mobileOpen);
+    if (mobileOpen) {
+      const h = document.querySelector('.site-header')?.getBoundingClientRect().bottom || 120;
+      document.documentElement.style.setProperty('--m-menu-top', `${Math.max(0, Math.round(h))}px`);
+    }
+    return () => document.body.classList.remove('menu-open');
+  }, [mobileOpen]);
+
   return (
     <>
       {/* Desktop navigation */}
