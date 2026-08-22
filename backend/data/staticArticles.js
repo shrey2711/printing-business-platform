@@ -1003,6 +1003,25 @@ export const STATIC_ARTICLES = [
 <h2>When to replace a graphic vs the whole display</h2>
 <p>If the frame is sound but the print is dated, damaged or off-brand, replace the graphic only — retractable cassettes, SEG fabrics, canopy tops and table covers are all replaceable while you keep the hardware. Replace the frame itself only if joints are bent or broken. This graphic-first approach keeps costs down and waste low across the life of the booth.</p>
 
+<h2>Common setup mistakes to avoid</h2>
+<p>A handful of avoidable errors account for most damaged displays and stressful move-ins. Watch for these:</p>
+<ul>
+  <li><strong>Skipping weights outdoors.</strong> An unweighted canopy is one gust away from damage or injury. Weight every leg, every time, on every outdoor setup.</li>
+  <li><strong>Letting a retractable snap shut.</strong> Guide the graphic down by hand; a fast retract creases the print and can jam the mechanism.</li>
+  <li><strong>Packing away damp.</strong> Trapped moisture causes mildew and odour. Dry fabric and canopy tops fully before they go in the case.</li>
+  <li><strong>Folding vinyl graphics.</strong> Roll where you can — sharp folds leave visible creases that are hard to remove.</li>
+  <li><strong>Fitting the graphic before the frame is fully built.</strong> On backdrops, build and lock the frame first so the fabric ends up evenly tensioned and wrinkle-free.</li>
+  <li><strong>No dry run.</strong> First-time assembly on the show floor wastes move-in time; practise once beforehand.</li>
+  <li><strong>Forgetting the repair kit.</strong> Spare zip ties, gaffer tape and a multi-tool solve most on-site surprises.</li>
+</ul>
+
+<h2>Matching your setup to the venue and weather</h2>
+<p>The same display asks for different handling depending on where you set it up. A few situational adjustments keep it looking sharp and protect the hardware.</p>
+<p><strong>Indoor convention halls.</strong> Large venues often use union labor and an official freight contractor, and shipping to the advance warehouse before move-in is usually smoother than delivering to the floor on setup morning. Portable displays — retractable banners, fabric backdrops and table covers — can travel as a case or tube and set up without a crew, which saves both time and material-handling cost.</p>
+<p><strong>Hot, high-UV climates.</strong> In cities like Las Vegas, Phoenix and Miami, a printed canopy earns its keep as shade, dye-sublimated graphics resist fading under strong sun, and weights are non-negotiable on hot, hard surfaces. Give fabric a moment to relax and re-tension after it comes out of a hot vehicle.</p>
+<p><strong>Windy or coastal venues.</strong> Bump up the weight on every canopy leg, keep side walls ready to cut wind load, and check tension on fabric graphics through the day as gusts work them loose.</p>
+<p><strong>Cold-weather and winter shows.</strong> Protect graphics from snow, road salt and damp in transit, and let anything cold and slightly damp reach room temperature and dry before you seal it away. Dye-sublimated fabric re-hangs crisp once it warms up indoors.</p>
+
 <h2>Recommended products</h2>
 <ul>
   <li><a href="/custom-canopies">Custom canopy tents</a> — with weight bags for any outdoor setup.</li>
@@ -1019,6 +1038,171 @@ export const STATIC_ARTICLES = [
       { q: 'Should I fold or roll my graphics for storage?', a: 'Roll large graphics where possible rather than folding them, since folds can leave creases (especially in vinyl). Retractable graphics stay rolled inside their base.' },
       { q: 'How do I stop my display smelling musty?', a: 'Never pack it away damp. If it got wet, air-dry the fabric or canopy top completely before sealing it in its case — trapped moisture causes mildew and odour.' },
       { q: 'Do I have to replace the whole display when my branding changes?', a: 'Usually no. Most systems — retractable stands, SEG backdrops, canopy tops, table covers — let you reprint just the graphic and reuse the frame, which is the most economical way to refresh a booth.' }
+    ]
+  },
+  {
+    slug: 'trade-show-booth-design-guide',
+    title: 'Trade Show Booth Design: Layout & Branding',
+    excerpt:
+      'How to design a trade show booth that stops traffic — focal point, layout and flow, branding hierarchy, height, lighting and colour, for both 10×10 and larger spaces.',
+    tags: ['Booth Design', 'Guide'],
+    seo: {
+      title: 'Trade Show Booth Design: Layout & Branding',
+      description:
+        'Design a booth that gets noticed: build a clear focal point, plan traffic flow, use a branding hierarchy, and get height, lighting and colour right — for 10×10 and larger.'
+    },
+    coverUrl: '/images/showcase/backdrop-oakwood.jpeg',
+    publishedAt: '2026-08-21T00:00:00.000Z',
+    updatedAt: '2026-08-21T00:00:00.000Z',
+    html: `
+<p><strong>Short answer:</strong> a booth that gets noticed does three things well — it reads in three seconds from across the aisle, it pulls people in with an open, easy-to-enter layout, and it uses a clear branding hierarchy so the eye lands on your message first. Get those right and even a 10×10 space can out-perform a larger, cluttered neighbour.</p>
+
+<h2>Why booth design decides your show</h2>
+<p>On a busy floor, attendees walk fast and scan constantly. Most decide whether to slow down at your booth in a couple of seconds, from ten or more feet away, before they read a single word of detail. That means design is not decoration — it is the difference between a booth people walk past and one they walk into. The goal of every design decision below is to win that first glance and then make it easy to engage.</p>
+
+<h2>Start with one focal point (the three-second rule)</h2>
+<p>The most common booth mistake is competing messages: a logo here, a tagline there, product shots everywhere, and nothing the eye can lock onto. Instead, choose <strong>one</strong> dominant element — usually a large backdrop with your name and a single clear value proposition — and let everything else support it. Ask a colleague to glance at a mock-up for three seconds and tell you what you do. If they can, your focal point works; if they hesitate, simplify.</p>
+<p>A <a href="/backdrops">step &amp; repeat or fabric backdrop</a> is the natural home for this focal message because it sits at head height behind the booth and fills the sightline from the aisle. Keep the headline short, high-contrast and large enough to read from across the walkway.</p>
+
+<h2>Plan layout and traffic flow</h2>
+<p>People avoid booths that feel like a trap. An open, welcoming footprint — with a clear way in and room to stand without blocking the aisle — consistently outdraws a booth walled off behind a table. A few layout principles:</p>
+<ul>
+  <li><strong>Open the front.</strong> Pull tables to the side or back rather than barricading the entrance; leave an obvious entry point.</li>
+  <li><strong>Create an aisle magnet.</strong> Put something eye-catching at the edge — a feather flag, a bright banner, or a demo — to stop traffic before it passes.</li>
+  <li><strong>Give staff a place to stand that invites approach,</strong> not a barrier to stand behind.</li>
+  <li><strong>Leave breathing room.</strong> Empty floor space reads as premium and lets people step in without feeling crowded.</li>
+</ul>
+<p>Corner and end-cap positions get traffic from more directions — design so your message reads from each open side, not just the back wall.</p>
+
+<h2>Use a branding hierarchy</h2>
+<p>Think of your booth in three layers, each with a job:</p>
+<ul>
+  <li><strong>The big message (backdrop):</strong> who you are and why to stop — read from the aisle.</li>
+  <li><strong>Supporting messages (<a href="/banner-stands">banner stands</a>):</strong> two or three specifics — a product, an offer, a proof point — read as people approach.</li>
+  <li><strong>Interaction layer (<a href="/table-covers">table cover</a>, demos, collateral):</strong> where conversations and hand-offs happen, read up close.</li>
+</ul>
+<p>When each layer carries the right amount of information for its viewing distance, the booth guides the eye naturally from "what is this?" to "tell me more" to "let's talk."</p>
+
+<h2>Height, lighting and sightlines</h2>
+<p>Height buys visibility. Tall elements — a backdrop, a feather flag, or a canopy for outdoor and sponsor space — lift your brand above the crowd so it is seen from farther away. Wherever rules allow, use vertical space rather than spreading everything at table height.</p>
+<p>Lighting makes graphics pop and signals investment. Backlit SEG displays or simple spotlights on your backdrop lift colour and draw the eye, especially in convention halls with flat overhead lighting. Even inexpensive clip lights on a banner or backdrop noticeably improve how a booth photographs and reads.</p>
+
+<h2>Colour and contrast</h2>
+<p>Use your brand colours, but prioritise contrast for legibility: dark text on a light panel or light text on a dark panel reads far better at distance than mid-tone on mid-tone. Limit the palette — two or three colours plus a neutral usually beats a rainbow — and keep the headline text high-contrast. Dye-sublimated printing reproduces solid brand colours, gradients and photos cleanly, so you have room to be bold without losing sharpness.</p>
+
+<h2>Designing a 10×10 booth</h2>
+<p>A 10×10 rewards restraint. Anchor the back wall with a single-message backdrop, add one or two retractable banners for support, brand the table with a fitted cover, and keep the front open. Resist the urge to fill every inch — negative space and one strong focal point will out-perform a crowded stand every time. If you exhibit outdoors, a printed canopy extends the same branding to entrances and sponsor areas.</p>
+
+<h2>Designing larger and double booths</h2>
+<p>With a 10×20 or island space, use the extra room for flow and function, not just more graphics: create distinct zones (greeting, demo, meeting), keep clear pathways through the booth, and repeat your core message on multiple sides so it reads from every aisle. A larger footprint is a chance to let people spend time with you — design for dwell, not just impressions.</p>
+
+<h2>Common booth-design mistakes</h2>
+<ul>
+  <li>Too many competing messages and no clear focal point.</li>
+  <li>Tables barricading the front so the booth feels closed.</li>
+  <li>Text too small or too low-contrast to read from the aisle.</li>
+  <li>Everything at table height, with nothing using vertical space.</li>
+  <li>No aisle magnet, so fast-moving traffic passes before noticing you.</li>
+  <li>Cluttered floor with no room to step in and talk.</li>
+</ul>
+
+<h2>Design for your budget</h2>
+<p>Good design is not the same as expensive design. If budget is tight, spend it where the eye lands first: a strong, well-designed backdrop does more than several smaller pieces, so prioritise that focal element and add supporting banners over time. Portable, reusable displays also stretch a budget across many shows — a fabric backdrop and retractable banners fold into a case, travel as luggage, and set up without paid labour, which keeps per-show costs low. And because most systems let you reprint just the graphic and reuse the frame, you can refresh the look for a new campaign without rebuying hardware. Investing in one high-impact, reusable set almost always beats spending the same money on a booth that only works once.</p>
+
+<h2>Test your design before you print</h2>
+<p>The cheapest way to fix a booth is on screen, before anything is produced. Lay your design out at scale, step back, and run the three-second test: can someone tell what you do and why to stop, from across the room, in a glance? Check that headline text is large and high-contrast, that the focal message isn’t competing with clutter, and that logos and key words aren’t placed where a table or a person will block them. Every Apex order includes a free artwork proof, so you can confirm size, colour, placement and spelling before it goes to production — use it. It’s far better to catch a too-small tagline or a low-contrast colour on the proof than to discover it on the show floor.</p>
+
+<h2>Bring your booth together</h2>
+<p>Design the layers, then order them to match: a <a href="/backdrops">backdrop</a> for the big message, <a href="/banner-stands">banner stands</a> for support, a <a href="/table-covers">table cover</a> for the interaction zone, and a <a href="/custom-canopies">canopy</a> or <a href="/flags">flags</a> for outdoor visibility. Printing the whole set from one supplier keeps colours and branding consistent across every piece. See the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> to plan the rest, and the <a href="/blog/print-coverage-explained">print coverage guide</a> to get your artwork right.</p>
+`,
+    faqs: [
+      { q: 'What makes a trade show booth stand out?', a: 'One clear focal point that reads in about three seconds from the aisle, an open and welcoming layout, height for visibility, good contrast and lighting, and a branding hierarchy that guides the eye from your headline to the details.' },
+      { q: 'How do I design a 10×10 booth on a budget?', a: 'Keep it simple: a single-message backdrop, one or two retractable banners, a branded table cover, and an open front. Negative space plus one strong focal point beats a crowded booth.' },
+      { q: 'Where should I put my main message?', a: 'On the backdrop at head height behind the booth, since that fills the sightline from the aisle. Keep the headline short, large and high-contrast.' },
+      { q: 'Should I use lighting in my booth?', a: 'Yes where you can. Backlit displays or simple spotlights lift colour and draw the eye under flat convention-hall lighting, and they make the booth photograph better.' },
+      { q: 'How do I stop traffic that walks by quickly?', a: 'Add an aisle magnet at the edge of your space — a feather flag, a bright banner, or a live demo — so people notice and slow down before they pass.' },
+      { q: 'How many colours should a booth use?', a: 'Usually two or three brand colours plus a neutral, prioritising contrast so text reads at distance. A limited palette looks more professional than a busy, multi-colour design.' }
+    ]
+  },
+  {
+    slug: 'banner-materials-explained',
+    title: 'Banner Materials: Vinyl, Blockout, Mesh & Fabric',
+    excerpt:
+      'A plain-English guide to banner materials — 13oz vinyl, 18oz blockout, perforated mesh and 9oz fabric — with when to use each, plus hems, grommets and pole pockets.',
+    tags: ['Printing Knowledge', 'Buying Guide'],
+    seo: {
+      title: 'Banner Materials: Vinyl, Blockout, Mesh & Fabric',
+      description:
+        'Compare banner materials — 13oz vinyl, 18oz blockout, mesh and 9oz fabric — indoor vs outdoor, single vs double sided, wind, finish, and hem/grommet/pole-pocket options.'
+    },
+    coverUrl: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg',
+    publishedAt: '2026-08-21T00:00:00.000Z',
+    updatedAt: '2026-08-21T00:00:00.000Z',
+    html: `
+<p><strong>Short answer:</strong> pick <strong>13oz vinyl</strong> for everyday indoor/outdoor banners, <strong>18oz blockout</strong> when you need a true double-sided banner or maximum durability, <strong>mesh</strong> for fences and windy outdoor spots, and <strong>9oz wrinkle-free fabric</strong> for a premium, no-glare indoor look. This guide explains why, and how the finishing options change how you hang each one.</p>
+
+<h2>What "oz" means on a banner</h2>
+<p>Banner materials are described by weight per square yard — 13oz, 18oz, and so on. Heavier generally means thicker, tougher and more opaque, but also stiffer and pricier. The right weight is about the job, not just "more is better": a lightweight indoor banner and a heavy street banner have different needs. Below is how the common Apex banner materials compare and when each one is the right call.</p>
+
+<h2>13oz scrim vinyl — the everyday workhorse</h2>
+<p>Scrim vinyl is the most popular banner material for good reason: it is durable, weather-resistant, economical, and prints in vivid full colour. A polyester scrim mesh sandwiched between vinyl layers gives it tear resistance, so it holds up to repeated indoor and outdoor use — storefronts, events, trade shows, promotions and step-and-repeat backdrops. For the majority of banners, <a href="/products/13oz-vinyl-banner">13oz vinyl</a> is the default choice.</p>
+<p>Because standard vinyl is somewhat translucent, a single-sided 13oz banner can show a faint ghost of the print from behind. That is fine for a banner hung against a wall, but if it will be seen from both sides, look at blockout.</p>
+
+<h2>18oz blockout — for double-sided and heavy duty</h2>
+<p>Blockout vinyl has an <strong>opaque grey core</strong> layer that blocks light from passing through, so two different prints on opposite faces never bleed into each other. That makes <a href="/products/18oz-blockout-banner">18oz blockout</a> the right pick for true double-sided banners — hanging banners seen from both directions, street-pole banners, and any high-visibility spot where you want a crisp image on each side. It is also heavier and more tear-resistant than 13oz, so it suits long outdoor runs and demanding environments where durability matters most.</p>
+
+<h2>Mesh — for wind and fences</h2>
+<p>Perforated <a href="/products/mesh-banner">mesh vinyl</a> is riddled with tiny holes that let roughly a third of the wind pass straight through. That dramatically cuts the wind load that makes solid banners flap, strain their grommets and tear — which is exactly what you want on a fence line, scaffolding, a stadium rail or a building wrap. You trade a little colour density for that airflow, but modern mesh still prints bold, readable graphics. If your banner lives outdoors in an exposed, windy location, mesh is usually the safest choice.</p>
+
+<h2>9oz wrinkle-free fabric — the premium indoor look</h2>
+<p>Fabric banners are dye-sublimated: the ink is bonded into a polyester fabric rather than sitting on a vinyl surface. The result is a rich, <strong>no-glare matte finish</strong> that photographs beautifully under lights — ideal for indoor branding, backdrops and photo walls where a vinyl sheen would reflect. <a href="/products/fabric-banner-9oz-wrinkle-free">9oz wrinkle-free fabric</a> also packs down and travels without creasing, and many fabric pieces are machine washable, so they stay presentable show after show. The trade-off is that fabric is less suited to harsh, wet outdoor use than vinyl.</p>
+
+<h2>At a glance</h2>
+<table>
+  <thead><tr><th>Material</th><th>Best for</th><th>Indoor / outdoor</th><th>Double-sided</th><th>Finish</th></tr></thead>
+  <tbody>
+    <tr><td>13oz vinyl</td><td>Everyday banners</td><td>Both</td><td>Ghosting possible</td><td>Satin vinyl</td></tr>
+    <tr><td>18oz blockout</td><td>Double-sided, heavy duty</td><td>Both</td><td>Yes (opaque core)</td><td>Matte vinyl</td></tr>
+    <tr><td>Mesh</td><td>Fences &amp; wind</td><td>Outdoor</td><td>Single</td><td>Perforated</td></tr>
+    <tr><td>9oz fabric</td><td>Premium indoor</td><td>Indoor</td><td>Single</td><td>No-glare matte</td></tr>
+  </tbody>
+</table>
+
+<h2>Finishing: how you'll hang it</h2>
+<p>Material is only half the decision — finishing determines how the banner mounts. Choose to match where it will hang:</p>
+<ul>
+  <li><strong>Hem:</strong> a folded, reinforced edge that keeps the banner from fraying and gives grommets something strong to bite into. Standard on most banners.</li>
+  <li><strong>Grommets:</strong> metal eyelets for rope, zip ties or hooks. Common patterns are every two feet around all sides, top and bottom only, left and right only, or just the four corners.</li>
+  <li><strong>Pole pockets:</strong> sewn sleeves (typically 2") along the top and/or bottom so a pole or rod slides through — the clean look for hanging and street-pole banners.</li>
+  <li><strong>Velcro and rope</strong> options suit specific framing systems and heavy outdoor rigging.</li>
+</ul>
+<p>As a rule of thumb: grommets for tying to a fence or frame, pole pockets for a polished hanging banner, and mesh plus reinforced edges for windy outdoor sites.</p>
+
+<h2>Sizing and artwork basics</h2>
+<p>Banners are made to size to the inch, so measure the space first and order to fit rather than trimming later. For artwork, supply the highest-resolution file you have — vector for logos and text is ideal — and remember that a banner viewed from across a parking lot needs far larger type than one read at arm's length. Every Apex order includes a free proof so you can confirm size, colour and layout before it prints.</p>
+
+<h2>How long do banners last?</h2>
+<p>Lifespan depends on the material and the environment more than any single number. Indoors, a vinyl or fabric banner can look new for years with light handling. Outdoors, expect UV, wind and weather to shorten that — but the right material stacks the odds in your favour: dye-sublimated graphics resist fading, blockout vinyl’s extra weight resists tearing on long runs, and mesh survives wind that would destroy a solid banner on a fence. Two habits extend any banner’s life: store it dry and rolled rather than folded, and don’t leave it exposed to sun and weather when it isn’t in use. When the message changes but the banner is still sound, you simply reprint — banners are made to order, so updating artwork is straightforward.</p>
+
+<h2>Indoor vs outdoor: a quick decision guide</h2>
+<p>If the banner lives <strong>indoors</strong> — trade show booths, lobbies, retail, photo walls — favour finish and look: 13oz vinyl for everyday signage, or 9oz fabric for a premium, no-glare surface that photographs cleanly under lights. If it lives <strong>outdoors</strong>, favour durability and wind behaviour: 13oz vinyl for general use, 18oz blockout for heavy-duty or double-sided street banners, and mesh anywhere wind is a factor, such as fences, scaffolding and building wraps. When in doubt for a mixed-use banner, 13oz vinyl is the safe, economical default; step up to blockout or mesh only when double-sided visibility or wind specifically calls for it.</p>
+
+<h2>Which banner should you choose?</h2>
+<ul>
+  <li>General indoor/outdoor use → <a href="/products/13oz-vinyl-banner">13oz vinyl</a>.</li>
+  <li>Seen from both sides, or built to last → <a href="/products/18oz-blockout-banner">18oz blockout</a>.</li>
+  <li>Fences, wraps or windy spots → <a href="/products/mesh-banner">mesh</a>.</li>
+  <li>Premium indoor branding and backdrops → <a href="/products/fabric-banner-9oz-wrinkle-free">9oz fabric</a>.</li>
+</ul>
+<p>All four are priced by the square foot with instant online pricing. See the whole range on the <a href="/banners">banners page</a>, or read the <a href="/blog/print-coverage-explained">print coverage guide</a> for artwork tips.</p>
+`,
+    faqs: [
+      { q: 'What is the most popular banner material?', a: '13oz scrim vinyl. It is durable, weather-resistant, economical and prints in vivid colour, which makes it the default for most indoor and outdoor banners.' },
+      { q: 'Which banner material is best for double-sided printing?', a: '18oz blockout vinyl. Its opaque grey core blocks light so two different prints on opposite faces don’t bleed together, giving a crisp image on each side.' },
+      { q: 'What banner should I use on a fence or in wind?', a: 'Perforated mesh. The tiny holes let about a third of the wind through, cutting the wind load that tears solid banners — ideal for fences, scaffolding and building wraps.' },
+      { q: 'When should I choose a fabric banner over vinyl?', a: 'For premium indoor branding, backdrops and photo walls. Dye-sublimated fabric has a no-glare matte finish that photographs well under lights and packs without creasing; vinyl is better for harsh outdoor use.' },
+      { q: 'What’s the difference between grommets and pole pockets?', a: 'Grommets are metal eyelets you tie or hook through; pole pockets are sewn sleeves (usually 2") that a pole slides into for a clean hanging look. Choose based on how you’ll mount the banner.' },
+      { q: 'Are banners printed to a custom size?', a: 'Yes — banners are made to size to the inch and priced by the square foot, so measure your space and order to fit rather than trimming later.' }
     ]
   }
 ];

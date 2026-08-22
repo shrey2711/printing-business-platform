@@ -35,13 +35,14 @@ export const RESOURCE_CATEGORIES = [
     key: 'booth-design',
     title: 'Booth Design',
     blurb: 'Plan a coordinated booth that gets noticed on the floor.',
-    slugs: ['trade-show-booth-checklist']
+    slugs: ['trade-show-booth-design-guide', 'trade-show-booth-checklist']
   },
   {
     key: 'printing-knowledge',
     title: 'Printing Knowledge',
     blurb: 'Prepare print-ready artwork and understand what prints where.',
     slugs: [
+      'banner-materials-explained',
       'how-to-prepare-artwork-for-a-custom-canopy-tent',
       'print-coverage-explained',
       'custom-canopy-tent-wall-options-explained'
