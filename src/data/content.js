@@ -9,14 +9,14 @@
 export const CONTENT_FIELDS = [
   // Home hero
   { key: 'home.hero.eyebrow', label: 'Home — hero eyebrow', default: 'Complete trade show solutions' },
-  { key: 'home.hero.title', label: 'Home — hero title', default: 'Build a trade show booth that gets noticed.' },
+  { key: 'home.hero.title', label: 'Home — hero title', default: 'Custom Trade Show Displays, Banner Stands & Canopy Tents Across the USA' },
   {
     key: 'home.hero.subtitle',
     label: 'Home — hero subtitle',
     multiline: true,
     default:
-      'Custom trade show displays, canopies, banners, backdrops, table covers and event branding — ' +
-      'all from one supplier. Instant online pricing on canopies and a free artwork proof on every order.'
+      'Design, print and order premium exhibition displays with instant online pricing, a free artwork ' +
+      'proof and fast nationwide shipping — professional trade show solutions for businesses across the United States.'
   },
   // Home size section
   { key: 'home.sizes.title', label: 'Home — sizes heading', default: 'Custom canopy tents' },

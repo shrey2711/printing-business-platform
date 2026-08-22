@@ -164,10 +164,35 @@ const CAT_BY_PRODUCT = Object.fromEntries(CATEGORY_PAGES.filter((c) => c.categor
 let count = 0;
 const routes = [];
 
+// Homepage buying guides, popular cities and FAQ — mirrored in HomePage.jsx so
+// the crawlable SSR content matches the hydrated page (and the FAQPage schema).
+const HOME_GUIDES = [
+  { title: 'What a custom trade show display costs', to: '/blog/trade-show-display-cost' },
+  { title: '10x10 vs 10x15 vs 10x20 canopy tents', to: '/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents' },
+  { title: 'Feather angled vs convex vs teardrop flags', to: '/blog/feather-angled-vs-convex-vs-teardrop-flags' },
+  { title: 'SEG modular kit A vs B vs C', to: '/blog/seg-modular-kit-a-vs-b-vs-c' },
+  { title: 'Standard vs deluxe retractable banner', to: '/blog/standard-vs-deluxe-retractable-banner' },
+  { title: 'Pleated vs stretch table covers', to: '/blog/pleated-vs-stretch-table-cover' }
+];
+const HOME_CITIES = [
+  ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
+  ['Atlanta', 'atlanta'], ['Dallas', 'dallas'], ['New York', 'new-york'],
+  ['Houston', 'houston'], ['Los Angeles', 'los-angeles'], ['Miami', 'miami'],
+  ['San Diego', 'san-diego'], ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
+];
+const HOME_FAQS = [
+  { q: 'What does Apex Trade Show print?', a: 'Custom trade show displays and event branding — canopy tents, retractable and X-stand banner stands, step & repeat backdrops, table covers, vinyl/mesh/fabric banners and feather flags — all printed to order in your brand.' },
+  { q: 'How does pricing work?', a: 'Canopy tents, banner stands, backdrops, table covers, banners and flags configure for instant online pricing. Larger custom displays — SEG modular kits, tension-fabric and pop-up displays — are quoted per order.' },
+  { q: 'How fast can I get my order?', a: 'Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush. Shipping and transit time are added and vary by destination.' },
+  { q: 'Do you ship nationwide?', a: 'Yes. Apex is an online supplier and ships custom displays across the United States and Canada.' },
+  { q: 'Do I see my artwork before it prints?', a: 'Yes — every order includes a free digital artwork proof, and nothing goes to production until you approve it in writing.' },
+  { q: 'Can I order a whole booth from one place?', a: 'Yes. You can order every branded piece of your booth from Apex so it all matches — request a quote and we coordinate the set.' }
+];
+
 // ---- Home ----
 routes.push(() => {
   const body = `
-    <h1>Complete Trade Show Displays &amp; Event Branding</h1>
+    <h1>Custom Trade Show Displays, Banner Stands &amp; Canopy Tents Across the USA</h1>
     <p>${esc(BRAND)} is your one supplier for a professional trade show booth — custom canopy tents,
     retractable banner stands, step &amp; repeat backdrops, table covers and event branding
     accessories, all in your brand. Instant online pricing on canopies, a free artwork proof on every
@@ -195,14 +220,25 @@ routes.push(() => {
     <ol><li>Configure size, frame, print coverage and walls — the price updates as you go.</li>
     <li>Upload your artwork or logo — we send a free proof for your approval before production.</li>
     <li>Approve the artwork proof we send you.</li>
-    <li>We print and ship it.</li></ol>`;
+    <li>We print and ship it.</li></ol>
+    <h2>Trade show buying guides</h2>
+    <ul>${HOME_GUIDES.map((g) => `<li><a href="${g.to}">${esc(g.title)}</a></li>`).join('')}</ul>
+    <h2>Trade show displays by city</h2>
+    <ul>${HOME_CITIES.map(([l, s]) => `<li><a href="/trade-show-displays/${s}">Trade show displays in ${esc(l)}</a></li>`).join('')}</ul>
+    <h2>Frequently asked questions</h2>
+    ${HOME_FAQS.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
   return render({
     path: '/',
     title: `Trade Show Displays, Canopies & Banners | ${BRAND}`,
     // Concise <meta> description (the long brand.description still feeds schema).
     description:
       'Custom trade show displays from one supplier: canopy tents, banner stands, backdrops, table covers, flags. Instant pricing, free artwork proof, US & Canada.',
-    body
+    body,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: HOME_FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+    }
   });
 });
 

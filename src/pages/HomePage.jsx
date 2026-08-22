@@ -92,6 +92,51 @@ const boothSetups = [
   }
 ];
 
+// Shop-by-industry browse aid. Industries link to the full trade show display
+// range (no per-industry pages are invented).
+const industries = [
+  'Technology', 'Healthcare', 'Construction', 'Food & Beverage',
+  'Manufacturing', 'Beauty & Wellness', 'Automotive', 'Education'
+];
+
+// Shop-by-event-type — maps an event to the most relevant category.
+const eventTypes = [
+  { label: 'Trade Shows & Expos', to: '/trade-show-displays' },
+  { label: 'Conventions', to: '/backdrops' },
+  { label: 'Outdoor Events & Markets', to: '/custom-canopies' },
+  { label: 'Grand Openings', to: '/flags' },
+  { label: 'Conferences', to: '/banner-stands' },
+  { label: 'Festivals & Fairs', to: '/custom-canopies' }
+];
+
+// Popular cities — links to the enriched local landing pages.
+const popularCities = [
+  ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
+  ['Atlanta', 'atlanta'], ['Dallas', 'dallas'], ['New York', 'new-york'],
+  ['Houston', 'houston'], ['Los Angeles', 'los-angeles'], ['Miami', 'miami'],
+  ['San Diego', 'san-diego'], ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
+];
+
+// Buying guides — real published articles.
+const buyingGuides = [
+  { title: 'What a custom trade show display costs', to: '/blog/trade-show-display-cost' },
+  { title: '10×10 vs 10×15 vs 10×20 canopy tents', to: '/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents' },
+  { title: 'Feather angled vs convex vs teardrop flags', to: '/blog/feather-angled-vs-convex-vs-teardrop-flags' },
+  { title: 'SEG modular kit A vs B vs C', to: '/blog/seg-modular-kit-a-vs-b-vs-c' },
+  { title: 'Standard vs deluxe retractable banner', to: '/blog/standard-vs-deluxe-retractable-banner' },
+  { title: 'Pleated vs stretch table covers', to: '/blog/pleated-vs-stretch-table-cover' }
+];
+
+// Homepage FAQ (real answers; FAQPage schema is emitted by the prerenderer).
+const homeFaqs = [
+  { q: 'What does Apex Trade Show print?', a: 'Custom trade show displays and event branding — canopy tents, retractable and X-stand banner stands, step & repeat backdrops, table covers, vinyl/mesh/fabric banners and feather flags — all printed to order in your brand.' },
+  { q: 'How does pricing work?', a: 'Canopy tents, banner stands, backdrops, table covers, banners and flags configure for instant online pricing. Larger custom displays — SEG modular kits, tension-fabric and pop-up displays — are quoted per order.' },
+  { q: 'How fast can I get my order?', a: 'Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush. Shipping and transit time are added and vary by destination.' },
+  { q: 'Do you ship nationwide?', a: 'Yes. Apex is an online supplier and ships custom displays across the United States and Canada.' },
+  { q: 'Do I see my artwork before it prints?', a: 'Yes — every order includes a free digital artwork proof, and nothing goes to production until you approve it in writing.' },
+  { q: 'Can I order a whole booth from one place?', a: 'Yes. You can order every branded piece of your booth from Apex so it all matches — request a quote and we coordinate the set.' }
+];
+
 // A mix across categories for product discovery (all real, in-database products).
 const featuredSlugs = [
   'canopy-tent-10x10',
@@ -196,6 +241,27 @@ export default function HomePage() {
           <span className="dt-label">Shop by display type:</span>
           {displayTypes.map((d) => (
             <Link className="dt-chip" to={d.to} key={d.label}>{d.label}</Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Shop by industry / event type */}
+      <section className="browse-band">
+        <div className="section-head">
+          <h2>Shop by industry</h2>
+          <p>Custom booth displays for every kind of exhibitor.</p>
+        </div>
+        <div className="chip-row">
+          {industries.map((i) => (
+            <Link className="browse-chip" to="/trade-show-displays" key={i}>{i}</Link>
+          ))}
+        </div>
+        <div className="section-head browse-subhead">
+          <h2>Shop by event type</h2>
+        </div>
+        <div className="chip-row">
+          {eventTypes.map((e) => (
+            <Link className="browse-chip" to={e.to} key={e.label}>{e.label}</Link>
           ))}
         </div>
       </section>
@@ -343,6 +409,53 @@ export default function HomePage() {
               <strong>{s.title}</strong>
               <p>{s.copy}</p>
             </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Trade show buying guides */}
+      <section className="guides-section">
+        <div className="section-head">
+          <h2>Trade show buying guides</h2>
+          <p>Practical, no-jargon guides to help you choose and print your booth.</p>
+        </div>
+        <div className="guides-grid">
+          {buyingGuides.map((g) => (
+            <Link className="guide-card" to={g.to} key={g.to}>
+              <span>{g.title}</span>
+              <span className="guide-arrow" aria-hidden="true">→</span>
+            </Link>
+          ))}
+        </div>
+        <div className="section-more">
+          <Link className="btn btn-outline" to="/blog">All guides &amp; resources</Link>
+        </div>
+      </section>
+
+      {/* Popular cities */}
+      <section className="cities-section">
+        <div className="section-head">
+          <h2>Trade show displays by city</h2>
+          <p>Printed to order and shipped across the US &amp; Canada.</p>
+        </div>
+        <div className="chip-row">
+          {popularCities.map(([label, slug]) => (
+            <Link className="browse-chip" to={`/trade-show-displays/${slug}`} key={slug}>{label}</Link>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="faq-section">
+        <div className="section-head">
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div className="faq-list">
+          {homeFaqs.map((f) => (
+            <details className="faq-item" key={f.q}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
           ))}
         </div>
       </section>
