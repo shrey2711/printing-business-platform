@@ -1199,3 +1199,45 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
   .og-kit .choice-grid { grid-template-columns: 1fr; }
   .header-top .currency-switch { order: 3; }
 }
+
+/* ============================================================
+   Mobile hardening — prevent horizontal overflow + broken layout
+   on small screens (applies site-wide, incl. the newer sections).
+   ============================================================ */
+img { max-width: 100%; }
+
+/* Any content table scrolls inside its own box instead of pushing the page wide. */
+.page table, article table, .section-block table, .blog-article-body table {
+  display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 900px) {
+  /* The desktop mega-menu is hidden on mobile, but never let its min-width leak. */
+  .shop-menu { min-width: 0; }
+}
+
+@media (max-width: 640px) {
+  .page { padding: 1rem; }
+  h1 { font-size: 1.6rem; }
+  .hero-copy h1 { font-size: 1.7rem; }
+  .section-head h2 { font-size: 1.35rem; }
+
+  /* Newer homepage / resources / city sections: tighten padding + single column. */
+  .browse-band, .cities-section, .guides-section, .faq-section,
+  .resource-cat, .cat-cards-section, .booth-builder, .showcase-section, .size-section {
+    padding-left: 1rem; padding-right: 1rem;
+  }
+  .guides-grid, .resource-grid, .cat-cards, .showcase-grid, .booth-tiers { grid-template-columns: 1fr; }
+
+  /* Stack primary/secondary CTAs full-width so they don't overflow. */
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; }
+
+  /* Banner size inputs + configurator wrap cleanly. */
+  .size-row { flex-wrap: wrap; }
+  .size-row .field { flex: 1 1 40%; }
+  .config-form, .price-panel, .card { padding: 1.1rem; }
+
+  /* Long anchor lists / breadcrumbs wrap rather than overflow. */
+  .info-links, .crumbs, .display-types { word-break: break-word; }
+}
