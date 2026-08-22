@@ -5,8 +5,11 @@ import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory } from '../data/citySeo';
+import { cityDetailFor } from '../data/cityDetail';
 
 const sizeKey = (s) => s.replace('canopy-tent-', '');
+// "City, ABBR" without redundancy/double punctuation (mirrors the prerenderer).
+const cityWithAbbr = (c) => (/[.]$/.test(c.city) || c.city.includes(c.abbr) ? c.city : `${c.city}, ${c.abbr}`);
 
 // One template for every /trade-show-canopies|trade-show-displays|banner-stands/[city]
 // page. categoryKey identifies which local category; :city comes from the route.
@@ -14,6 +17,7 @@ export default function CityCategoryPage({ categoryKey }) {
   const cat = getLocalCategory(categoryKey);
   const { city: citySlug } = useParams();
   const city = getSeoCity(citySlug);
+  const detail = cityDetailFor(citySlug);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -26,8 +30,8 @@ export default function CityCategoryPage({ categoryKey }) {
   // noindex until it earns depth.
   const indexed = city && city.tier <= 2;
   useDocumentMeta(
-    city ? `${cat.label} in ${city.city}, ${city.abbr}` : cat?.label || 'Location',
-    city ? `${cat.label} in ${city.city}, ${city.stateName}. ${cat.lead(city)}`.slice(0, 300) : undefined,
+    city ? `${cat.label} in ${cityWithAbbr(city)}` : cat?.label || 'Location',
+    city ? `Custom ${cat.label.toLowerCase()} printed and shipped to ${city.city}, ${city.stateName} — instant online pricing and a free artwork proof.` : undefined,
     city
       ? [
           {
@@ -67,8 +71,8 @@ export default function CityCategoryPage({ categoryKey }) {
       </nav>
 
       <section className="loc-hero">
-        <span className="eyebrow">Serving {city.city}, {city.abbr}</span>
-        <h1>{cat.label} in {city.city}, {city.abbr}</h1>
+        <span className="eyebrow">Ships to {cityWithAbbr(city)}</span>
+        <h1>{cat.label} in {cityWithAbbr(city)}</h1>
         <p className="lead">{cat.lead(city)}</p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
           <Link className="btn btn-red" to={cat.hub}>Shop {cat.label.toLowerCase()}</Link>
@@ -81,6 +85,39 @@ export default function CityCategoryPage({ categoryKey }) {
         <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Colour bonded in — it won't peel or fade.</p></div></div>
         <div className="badge"><span className="badge-icon">📐</span><div><strong>Free artwork proof</strong><p>You approve it before anything prints.</p></div></div>
       </section>
+
+      {detail && (
+        <>
+          <p className="answer-block">{detail.answer}</p>
+          <section className="section-block">
+            <h2>Why exhibit in {city.city}?</h2>
+            {detail.overview.map((t, i) => (<p key={i}>{t}</p>))}
+            <p>{detail.whyExhibit}</p>
+          </section>
+          <section className="section-block">
+            <h2>Top convention centers in {city.city}</h2>
+            <ul>{detail.conventionCenters.map((v) => (<li key={v.name}><strong>{v.name}</strong> — {v.desc}</li>))}</ul>
+          </section>
+          <section className="section-block">
+            <h2>Popular trade show industries in {city.city}</h2>
+            <ul>{detail.industries.map(([n, d]) => (<li key={n}><strong>{n}</strong> — {d}</li>))}</ul>
+          </section>
+          <section className="section-block">
+            <h2>Shipping to {city.city}</h2>
+            <p>Apex prints to order and ships to {city.city}, {city.stateName}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address.</p>
+          </section>
+          <section className="section-block">
+            <h2>Outdoor &amp; climate tips for {city.city}</h2>
+            <p>{detail.climate}</p>
+          </section>
+          {detail.bestDisplays && (
+            <section className="section-block"><h2>Best displays for {city.city} trade shows</h2><p>{detail.bestDisplays}</p></section>
+          )}
+          {detail.planning && (
+            <section className="section-block"><h2>Planning your {city.city} booth</h2><p>{detail.planning}</p></section>
+          )}
+        </>
+      )}
 
       <section className="size-section">
         <div className="section-head"><h2>{cat.label} for {city.city} events</h2></div>
@@ -113,6 +150,23 @@ export default function CityCategoryPage({ categoryKey }) {
           ))}
         </p>
       </section>
+
+      <section className="section-block">
+        <p className="info-links">
+          Complete your {city.city} booth: <Link to="/custom-canopies">canopy tents</Link> · <Link to="/banner-stands">banner stands</Link> · <Link to="/backdrops">backdrops</Link> · <Link to="/table-covers">table covers</Link> · <Link to="/trade-show-displays">all trade show displays</Link>.
+        </p>
+      </section>
+
+      {detail && detail.faqs && (
+        <section className="faq-section">
+          <div className="section-head"><h2>{city.city} FAQ</h2></div>
+          <div className="faq-list">
+            {detail.faqs.map((f) => (
+              <details className="faq-item" key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="section-block-bare">
         <h2 className="section-title">{cat.label} in other cities</h2>
