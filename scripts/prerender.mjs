@@ -29,6 +29,7 @@ import {
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../src/data/stateContent.js';
 import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
+import { cityDetailFor } from '../src/data/cityDetail.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
 
@@ -400,17 +401,45 @@ for (const lc of LOCAL_CATEGORIES) {
       const otherLis = others
         .map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}</a></li>`)
         .join('');
+      // Rich, per-city editorial (real facts only) when the city has a detail
+      // entry; otherwise the standard template. Keeps rollout incremental with no
+      // thin/empty sections.
+      const detail = cityDetailFor(city.slug);
+      const richHtml = detail
+        ? `
+        <p class="answer-block">${esc(detail.answer)}</p>
+        <h2>Why exhibit in ${esc(city.city)}?</h2>
+        ${detail.overview.map((t) => `<p>${esc(t)}</p>`).join('')}
+        <p>${esc(detail.whyExhibit)}</p>
+        <h2>Top convention centers in ${esc(city.city)}</h2>
+        <ul>${detail.conventionCenters.map((v) => `<li><strong>${esc(v.name)}</strong> — ${esc(v.desc)}</li>`).join('')}</ul>
+        <h2>Popular trade show industries in ${esc(city.city)}</h2>
+        <ul>${detail.industries.map(([n, d]) => `<li><strong>${esc(n)}</strong> — ${esc(d)}</li>`).join('')}</ul>
+        <h2>Shipping to ${esc(city.city)}</h2>
+        <p>${esc(BRAND)} prints to order and ships to ${esc(city.city)}, ${esc(city.stateName)}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address. Ship to your venue's receiving dock, an advance warehouse, or your business address.</p>
+        <h2>Outdoor &amp; climate tips for ${esc(city.city)}</h2>
+        <p>${esc(detail.climate)}</p>
+        ${detail.bestDisplays ? `<h2>Best displays for ${esc(city.city)} trade shows</h2><p>${esc(detail.bestDisplays)}</p>` : ''}
+        ${detail.planning ? `<h2>Planning your ${esc(city.city)} booth</h2><p>${esc(detail.planning)}</p>` : ''}`
+        : '';
+      const cityFaqHtml = detail
+        ? `<h2>${esc(city.city)} FAQ</h2>${detail.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
+        : '';
+      const boothLinks = `<p>Complete your ${esc(city.city)} booth: <a href="/custom-canopies">canopy tents</a> · <a href="/banner-stands">banner stands</a> · <a href="/backdrops">backdrops</a> · <a href="/table-covers">table covers</a> · <a href="/trade-show-displays">all trade show displays</a>.</p>`;
       const body = `
         <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="${lc.hub}">${esc(lc.hubLabel)}</a> / <span>${esc(city.city)}</span></nav>
         <h1>${esc(lc.label)} in ${esc(cityWithAbbr(city))}</h1>
         <p>${esc(dedupePeriods(lc.lead(city)))}</p>
+        ${richHtml}
         <h2>${esc(lc.label)} for ${esc(city.city)} events</h2>
         <ul>${productLis}</ul>
+        ${boothLinks}
         <h2>Trade shows in ${esc(city.city)}</h2>
         <p>${esc(city.city)} hosts ${esc(city.scene)}. Whether you're exhibiting at ${esc(city.venue)} or
         running an outdoor activation nearby, ${esc(BRAND)} prints your ${esc(lc.label.toLowerCase())} in your
         brand and ships them to ${esc(city.city)}, ${esc(city.stateName)}.</p>
         <p>Building a full booth in ${esc(city.city)}? ${siblingLinks}</p>
+        ${cityFaqHtml}
         <h2>${esc(lc.label)} in other cities</h2>
         <ul>${otherLis}</ul>`;
       return render({
@@ -421,15 +450,24 @@ for (const lc of LOCAL_CATEGORIES) {
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,
         robots: city.tier > 2 ? 'noindex, follow' : undefined,
         body,
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-            { '@type': 'ListItem', position: 2, name: lc.hubLabel, item: `${ORIGIN}${lc.hub}` },
-            { '@type': 'ListItem', position: 3, name: `${lc.label} in ${city.city}`, item: `${ORIGIN}/${lc.slug}/${city.slug}` }
-          ]
-        }
+        jsonLd: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+              { '@type': 'ListItem', position: 2, name: lc.hubLabel, item: `${ORIGIN}${lc.hub}` },
+              { '@type': 'ListItem', position: 3, name: `${lc.label} in ${city.city}`, item: `${ORIGIN}/${lc.slug}/${city.slug}` }
+            ]
+          },
+          ...(detail
+            ? [{
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: detail.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+              }]
+            : [])
+        ]
       });
     });
   }
