@@ -236,6 +236,191 @@ export const CITY_DETAIL = {
       { q: 'Do you deliver to Manhattan venues and hotels?', a: 'Yes — to any NYC address you provide. Confirm the venue’s labelling and delivery-window rules, which are often strict in Manhattan.' },
       { q: 'Is rush production available for New York exhibitors?', a: 'Yes, a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address.' }
     ]
+  },
+
+  'houston': {
+    answer:
+      'Houston is a major energy and medical convention city, anchored by the George R. Brown Convention Center and NRG Park, host of the Offshore Technology Conference. Apex prints custom trade show displays and ships them to Houston.',
+    overview: [
+      'Houston’s convention scene is built on the industries that power the region: energy, petrochemicals, healthcare and aerospace. The George R. Brown Convention Center runs large downtown shows beside Discovery Green and the convention hotels, while NRG Park handles the biggest exhibitions and equipment-heavy events, including the Offshore Technology Conference.',
+      'For exhibitors, that means technical, high-value audiences and displays that need to look sharp in cavernous halls. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Houston venue, an advance warehouse or your business address, ready for setup.'
+    ],
+    whyExhibit:
+      'Houston concentrates decision-makers in energy and life sciences like few other cities. OTC alone brings tens of thousands of upstream and services professionals to NRG Park, and the Texas Medical Center — the largest medical complex in the world — anchors a deep healthcare and device audience nearby. Add a broad manufacturing and logistics base and central-US shipping access, and a coordinated display kit becomes an efficient way to stand out to buyers who travelled specifically to source.',
+    conventionCenters: [
+      { name: 'George R. Brown Convention Center (GRB)', desc: 'Downtown Houston’s primary convention hall with roughly 1.9 million square feet, beside Discovery Green and the Toyota Center.' },
+      { name: 'NRG Center / NRG Park', desc: 'A very large exhibition complex hosting the Offshore Technology Conference, the Houston Livestock Show & Rodeo and other big equipment-heavy events.' },
+      { name: 'Marriott Marquis & convention hotels', desc: 'Connected downtown hotels provide additional ballroom and meeting space for association programming around GRB shows.' }
+    ],
+    industries: [
+      ['Energy & oil and gas', 'OTC and a dense energy corporate base make Houston the US capital for upstream, midstream and services exhibitions.'],
+      ['Petrochemical & industrial', 'The Gulf Coast petrochemical cluster supports specialized industrial and safety trade shows.'],
+      ['Healthcare & medical devices', 'The Texas Medical Center anchors major medical, device and life-science conventions.'],
+      ['Aerospace & space', 'With NASA’s Johnson Space Center nearby, aerospace and space-technology events have a natural home.'],
+      ['Manufacturing & logistics', 'Port Houston and a large manufacturing sector drive supply-chain and industrial gatherings.']
+    ],
+    climate:
+      'Houston is hot and very humid, with heavy summer downpours, a real flood risk, and an Atlantic hurricane season from June to November. For outdoor or entrance activations, a canopy provides shade and quick rain cover — weight every leg, since storms arrive fast and the ground is usually paved. Dye-sublimated graphics resist UV and humidity, and wrinkle-resistant fabric displays stay crisp in the moist Gulf air.',
+    planning:
+      'Large Houston shows route freight through the official contractor, generally with an advance warehouse before move-in and material handling to budget; NRG Park’s biggest events use union labor for installation. Portable displays — retractable banners, fabric backdrops, table covers — pack into a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 with rush) before transit, and OTC week is one of the busiest of the year.',
+    bestDisplays:
+      'For a GRB booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For NRG Park’s large or outdoor footprints, a weighted canopy adds shade and shelter. For hotel meetings and hospitality suites, lightweight X-stand and tabletop banners set up in seconds.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Houston?', a: 'Yes. Apex ships custom-printed displays to Houston and across Texas — to the George R. Brown Convention Center, NRG Park, or your business address.' },
+      { q: 'How early should I order for OTC or a Houston show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. OTC week is extremely busy — order well ahead.' },
+      { q: 'Do canopies handle Houston heat and storms?', a: 'Yes — canopies give real shade in the Gulf heat and quick rain cover; the graphics are UV-stable, and you should weight every leg for sudden storm gusts.' },
+      { q: 'Can you deliver to NRG Park or the GRB?', a: 'Yes, we deliver to any Houston address you provide, including convention receiving. Confirm the venue’s labelling and delivery-window rules.' },
+      { q: 'Which displays suit Houston’s large halls?', a: 'A fabric backdrop or step & repeat that reads at distance, retractable banners at the aisle, and a printed table cover — a portable, high-impact kit.' },
+      { q: 'Is rush production available for Houston exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'los-angeles': {
+    answer:
+      'Los Angeles is a top West Coast convention market, anchored by the LA Convention Center and shaped by entertainment, apparel and technology. Apex prints custom trade show displays and ships them to Los Angeles.',
+    overview: [
+      'Los Angeles blends a large downtown convention hall with the industries that define Southern California — entertainment and media, apparel, technology and wellness. The Los Angeles Convention Center hosts the LA Auto Show and major consumer and B2B events downtown, while nearby Long Beach and Anaheim add substantial exhibition capacity across the metro.',
+      'Exhibiting here rewards displays that look modern under bright lighting and hold up outdoors in the SoCal sun. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your LA venue, hotel or business address, ready to set up.'
+    ],
+    whyExhibit:
+      'LA offers scale and a media-savvy audience. The region’s entertainment, apparel and tech sectors mean buyers expect a polished brand presence, and the year-round mild weather makes outdoor and pop-up activations genuinely practical. Between the convention center, studio and venue events, and the apparel and design districts, a cohesive display kit — backdrop, banners, table cover, and a canopy for outdoor space — helps you present at the level LA audiences expect.',
+    conventionCenters: [
+      { name: 'Los Angeles Convention Center (LACC)', desc: 'Downtown LA’s main hall at roughly 720,000 square feet, hosting the LA Auto Show and major consumer, gaming and technology events beside Crypto.com Arena.' },
+      { name: 'Long Beach Convention & Entertainment Center', desc: 'A waterfront venue south of downtown popular for mid-size trade shows, conferences and consumer expos.' },
+      { name: 'Pasadena Convention Center', desc: 'A mid-size venue in the San Gabriel Valley used for regional shows and specialty conventions.' }
+    ],
+    industries: [
+      ['Entertainment & media', 'Film, TV, gaming and streaming drive a deep calendar of media and content-technology events.'],
+      ['Apparel & fashion', 'LA’s garment and design districts anchor apparel, textile and accessory trade shows.'],
+      ['Technology & adtech', 'A growing “Silicon Beach” sector fuels technology, adtech and startup conferences.'],
+      ['Health, wellness & beauty', 'Fitness, wellness and beauty brands gather for consumer and B2B shows.'],
+      ['Automotive', 'The LA Auto Show is a flagship global vehicle-launch platform.']
+    ],
+    climate:
+      'Los Angeles has a mild Mediterranean climate — abundant sun, low rainfall, and occasional dry Santa Ana winds. That makes outdoor and pop-up activations practical much of the year, but the strong UV calls for fade-resistant graphics and the wind events mean weighting canopy legs on hard surfaces. Dye-sublimated printing holds colour under the bright sun, and a printed canopy provides welcome shade at outdoor venues.',
+    planning:
+      'The LA Convention Center and larger venues use an official freight contractor, usually with an advance warehouse and union labor at the biggest shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, which suits multi-venue LA activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and flagship weeks like the Auto Show book up fast.',
+    bestDisplays:
+      'For an LACC booth, a tension-fabric backdrop or step & repeat builds the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For studio lots, rooftop and outdoor activations, a weighted canopy adds shade and branding. For showrooms and pop-ups around the city, lightweight X-stand and tabletop banners move easily between locations.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Los Angeles?', a: 'Yes. Apex ships custom-printed displays across the LA metro — to the LA Convention Center, Long Beach, a studio or hotel venue, or your business address.' },
+      { q: 'How early should I order for an LA show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. For the LA Auto Show and other flagships, order a few weeks ahead.' },
+      { q: 'Are outdoor canopies practical in LA?', a: 'Very — the mild, dry climate makes outdoor activations common year-round. Use UV-stable graphics and weight every canopy leg, especially during Santa Ana wind events.' },
+      { q: 'Can you deliver to the LA Convention Center or a studio venue?', a: 'Yes, we deliver to any LA-area address you provide, including convention and studio receiving. Confirm labelling and delivery-window rules with your venue.' },
+      { q: 'Which displays suit LA’s media-savvy audiences?', a: 'Clean, modern kits — a seamless fabric backdrop or step & repeat, retractable banners, and a crisp table cover — plus a canopy for outdoor and pop-up activations.' },
+      { q: 'Is rush production available for LA exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address.' }
+    ]
+  },
+
+  'miami': {
+    answer:
+      'Miami is the US gateway to Latin America and host of Art Basel, eMerge Americas and the Miami International Boat Show at the Miami Beach Convention Center. Apex prints custom trade show displays and ships them to Miami.',
+    overview: [
+      'Miami’s convention calendar reflects its role as an international crossroads — art and design, technology, marine, and Latin American trade all converge here. The renovated Miami Beach Convention Center anchors marquee events like Art Basel Miami Beach, while venues across the metro host boat, beauty and hospitality shows.',
+      'The tropical setting rewards displays built for sun, humidity and coastal breeze. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Miami venue, hotel or business address, ready for the show.'
+    ],
+    whyExhibit:
+      'Miami puts you in front of an international audience, especially buyers connecting the US with Latin America and the Caribbean. Its art, technology and marine sectors draw affluent, design-conscious attendees who expect a premium presentation, and the beach-and-resort setting makes outdoor and waterfront activations common. A coordinated, well-finished display kit — a clean backdrop, banners, a table cover, and a weighted canopy for outdoor space — helps a brand look the part in a style-driven market.',
+    conventionCenters: [
+      { name: 'Miami Beach Convention Center (MBCC)', desc: 'A fully renovated venue with about 500,000 square feet of exhibit space, home to Art Basel Miami Beach and major consumer and trade shows.' },
+      { name: 'Miami Airport Convention Center', desc: 'A mainland venue near the airport used for regional trade shows and international buyer events.' },
+      { name: 'Resort & hotel ballrooms', desc: 'Large beachfront resorts provide ballroom and outdoor space for conferences and brand activations across Miami Beach.' }
+    ],
+    industries: [
+      ['Art & design', 'Art Basel and its satellite fairs make Miami a global art-market and design destination each December.'],
+      ['Technology & Latin America trade', 'eMerge Americas and Miami’s gateway role drive technology and cross-border business events.'],
+      ['Marine & yachting', 'The Miami International Boat Show anchors a strong marine and yachting industry.'],
+      ['Hospitality & tourism', 'A world tourism hub, Miami hosts hospitality, travel and cruise-industry shows.'],
+      ['Health, beauty & wellness', 'Beauty, aesthetics and wellness brands gather for consumer and B2B expos.']
+    ],
+    climate:
+      'Miami’s tropical climate brings hot, humid weather, frequent rain, strong sun, a steady sea breeze, and an Atlantic hurricane season from June to November. For any outdoor or beachfront activation, a canopy is valuable for shade and rain cover — but weight every leg heavily, as coastal wind is persistent and stakes usually aren’t an option on paved or beach surfaces. Dye-sublimated graphics resist the intense UV and humidity, and wrinkle-resistant fabric travels well.',
+    planning:
+      'Large Miami shows route freight through the official contractor, generally with an advance warehouse before move-in and material handling to budget. Beach and resort venues have specific delivery access and receiving windows — confirm them early. Portable displays pack small and avoid much drayage. Approve your proof ahead of time: production is 6–8 business days (2–3 rush) before transit, and Art Basel week is the busiest of the Miami calendar.',
+    bestDisplays:
+      'For an MBCC booth, a tension-fabric backdrop or step & repeat sets a clean brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For beachfront, poolside and resort activations, a heavily weighted canopy provides shade and shelter. For hotel suites and pop-ups, lightweight X-stand and tabletop banners set up fast and travel easily.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Miami?', a: 'Yes. Apex ships custom-printed displays to Miami and across South Florida — to the Miami Beach Convention Center, a resort venue, or your business address.' },
+      { q: 'How early should I order for Art Basel or a Miami show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. Art Basel week is extremely busy — order well ahead.' },
+      { q: 'Do canopies work on Miami Beach and waterfront venues?', a: 'Yes, for shade and rain cover — but weight every leg heavily, since coastal wind is constant and stakes usually can’t be used on paved or beach surfaces.' },
+      { q: 'Will graphics survive Miami sun and humidity?', a: 'Yes — dye-sublimated printing resists UV and humidity, and wrinkle-resistant fabric displays stay crisp in the tropical air.' },
+      { q: 'Can you deliver to a Miami Beach resort or the MBCC?', a: 'Yes, to any Miami address you provide, including convention and resort receiving. Confirm labelling and delivery windows, which are often strict on the beach.' },
+      { q: 'Is rush production available for Miami exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'boston': {
+    answer:
+      'Boston is New England’s convention hub and a global life-sciences centre, host to major biotech, medical and seafood shows at the Boston Convention & Exhibition Center. Apex prints custom trade show displays and ships them to Boston.',
+    overview: [
+      'Boston’s exhibition scene is powered by life sciences, healthcare, technology and education. The Boston Convention & Exhibition Center in the Seaport is the largest hall in New England, and the Hynes Convention Center in Back Bay adds a central, transit-friendly venue for mid-size shows.',
+      'Exhibitors here reach highly technical, research-driven audiences, so clear, credible branding matters. Apex prints banner stands, backdrops, table covers and canopies to order and ships them to your Boston venue, an advance warehouse or your business address, ready for move-in.'
+    ],
+    whyExhibit:
+      'Few metros match Boston’s concentration of life-science, medical and academic buyers — Kendall Square and the surrounding cluster make it a magnet for biotech and pharma events, while the universities anchor education and research gatherings. A cohesive, professional display kit helps you earn credibility with a discerning audience and stand out in the BCEC’s large Seaport halls.',
+    conventionCenters: [
+      { name: 'Boston Convention & Exhibition Center (BCEC)', desc: 'The largest exhibition venue in New England, in the Seaport district, hosting biotech, medical, seafood and technology shows.' },
+      { name: 'Hynes Convention Center', desc: 'A centrally located Back Bay venue connected to hotels and the Prudential Center, popular for mid-size conferences.' },
+      { name: 'Seaport hotels & ballrooms', desc: 'Waterfront hotels near the BCEC provide additional meeting and ballroom space for association programming.' }
+    ],
+    industries: [
+      ['Biotech & life sciences', 'The Cambridge/Kendall Square cluster makes Boston a world capital for biotech and pharma events.'],
+      ['Healthcare & medical', 'Leading hospitals and device makers support major medical conventions.'],
+      ['Technology & robotics', 'A deep tech and robotics sector fuels B2B and research-driven shows.'],
+      ['Higher education & research', 'Dozens of universities anchor education, academic and research gatherings.'],
+      ['Seafood & food', 'Seafood Expo North America is a long-standing BCEC flagship.']
+    ],
+    climate:
+      'Boston has cold, snowy winters with nor’easters and warm, humid summers, plus steady wind off the harbor in the Seaport. Most exhibiting is indoors, but for any outdoor or plaza activation, weight canopy legs well for coastal gusts. In winter, protect graphics from snow and road salt in transit — dye-sublimated fabric packs down and re-hangs crisp once inside.',
+    planning:
+      'The BCEC and larger venues use an official freight contractor with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel as a case or tube and set up without a crew, which is handy given Seaport traffic and winter weather. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and life-science show seasons are busy.',
+    bestDisplays:
+      'For a BCEC booth, a tension-fabric backdrop or step & repeat anchors the wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For campus and outdoor activations, a weighted canopy adds shelter. For Hynes and hotel meetings, lightweight X-stand and tabletop banners set up quickly.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Boston?', a: 'Yes. Apex ships custom-printed displays to Boston and across New England — to the BCEC, the Hynes, or your business address.' },
+      { q: 'How early should I order for a Boston life-science show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. Boston’s biotech and medical seasons are busy — order a few weeks ahead.' },
+      { q: 'How does freight reach the BCEC?', a: 'Large shows use an official contractor and often an advance warehouse; shipping there before move-in is smoother than to the floor. Portable displays can also ship directly to your hotel.' },
+      { q: 'Do outdoor canopies work in the Seaport?', a: 'Yes, with weights on every leg — harbor wind is steady, so water or sand bags are essential for any outdoor activation.' },
+      { q: 'Which displays suit a technical Boston audience?', a: 'Clean, credible kits — a fabric backdrop or step & repeat, retractable banners, and a printed table cover — that present your brand professionally in large halls.' },
+      { q: 'Is rush production available for Boston exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'philadelphia': {
+    answer:
+      'Philadelphia is a major Northeast Corridor convention city, home to the Pennsylvania Convention Center and shows spanning medical, pharma and the famous Philadelphia Flower Show. Apex prints custom trade show displays and ships them to Philadelphia.',
+    overview: [
+      'Philadelphia combines a large Center City convention hall with a strong healthcare, pharma and education base and easy Northeast Corridor access between New York and Washington. The Pennsylvania Convention Center hosts major medical, consumer and trade events, including the renowned Philadelphia Flower Show.',
+      'Exhibitors reach professional, research-oriented audiences and need branding that reads clearly in large halls. Apex prints banner stands, backdrops, table covers and canopies to order and ships them to your Philadelphia venue or business address, ready for setup.'
+    ],
+    whyExhibit:
+      'Philadelphia’s appeal is reach and depth: it sits on the Northeast Corridor with fast rail to NYC and DC, and its healthcare, pharma (“Cellicon Valley”) and university sectors draw specialized buyers. The Pennsylvania Convention Center’s central location keeps hotels and transit within walking distance, supporting strong attendance. A coordinated display kit lets a compact booth present professionally against the hall’s scale.',
+    conventionCenters: [
+      { name: 'Pennsylvania Convention Center (PCC)', desc: 'A roughly one-million-square-foot venue in Center City Philadelphia, walkable to hotels and transit, hosting medical, consumer and specialty shows.' },
+      { name: 'Greater Philadelphia Expo Center', desc: 'A large suburban venue in Oaks used for consumer expos, regional trade shows and equipment-heavy events.' },
+      { name: 'Center City hotels & ballrooms', desc: 'Downtown hotels near the PCC provide additional meeting and ballroom space for conferences.' }
+    ],
+    industries: [
+      ['Healthcare & pharma', 'A dense pharma and life-science cluster supports major medical and drug-development events.'],
+      ['Higher education & research', 'The region’s universities anchor education and academic conventions.'],
+      ['Food & hospitality', 'Food, restaurant and hospitality shows draw regional and national buyers.'],
+      ['Manufacturing & industrial', 'A long industrial heritage supports manufacturing and B2B trade shows.'],
+      ['Professional & financial services', 'Legal, financial and professional associations meet in Center City.']
+    ],
+    climate:
+      'Philadelphia has four distinct seasons — cold, sometimes snowy winters and hot, humid summers. Most exhibiting is indoors, but spring and summer outdoor activations are common; weight canopy legs for gusts on paved surfaces, and in winter protect graphics from snow and salt in transit. Dye-sublimated fabric packs down and re-hangs crisp regardless of season.',
+    planning:
+      'The Pennsylvania Convention Center uses an official freight contractor and union labor, typically with an advance warehouse before move-in — budget for material handling and confirm receiving windows. Portable displays travel as a case or tube and set up without a crew, which suits Center City access. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and major medical shows cluster in busy seasons.',
+    bestDisplays:
+      'For a PCC booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For outdoor and campus activations, a weighted canopy adds shelter. For hotel meetings and suburban expos, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Philadelphia?', a: 'Yes. Apex ships custom-printed displays to Philadelphia and across the region — to the Pennsylvania Convention Center, the Expo Center in Oaks, or your business address.' },
+      { q: 'How early should I order for a Philadelphia show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. For big medical shows and the Flower Show, order a few weeks ahead.' },
+      { q: 'How does freight reach the Pennsylvania Convention Center?', a: 'The PCC uses an official contractor and union labor, often with an advance warehouse; shipping there before move-in is smoother than to the floor. Portable displays can ship directly to your hotel.' },
+      { q: 'Do outdoor canopies work in Philadelphia?', a: 'Yes in spring and summer — weight every leg for gusts on paved surfaces. The printed tops provide shade and quick rain cover.' },
+      { q: 'Which displays suit the PCC’s large halls?', a: 'A fabric backdrop or step & repeat, retractable banners at the aisle, and a printed table cover — a portable kit that reads well across a big room.' },
+      { q: 'Is rush production available for Philadelphia exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
   }
 };
 
