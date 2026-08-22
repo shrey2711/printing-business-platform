@@ -601,6 +601,18 @@ for (const lp of LANDING_PAGES) {
             '@type': 'Question', name: f.q,
             acceptedAnswer: { '@type': 'Answer', text: f.a }
           }))
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: lp.h1,
+          serviceType: lp.nav,
+          description: lp.description,
+          provider: { '@type': 'Organization', name: BRAND, url: `${ORIGIN}/` },
+          areaServed: [
+            { '@type': 'Country', name: 'United States' },
+            { '@type': 'Country', name: 'Canada' }
+          ]
         }
       ]
     });
@@ -1218,6 +1230,11 @@ for (const p of posts) {
     const relArticlesHtml = relArticles.length
       ? `<h2>Related articles</h2><ul>${relArticles.map((o) => `<li><a href="/blog/${o.slug}">${esc(o.title)}</a></li>`).join('')}</ul>`
       : '';
+    // EEAT byline: author + last-updated + reading time (all real/computed).
+    const articleWords = String(p.html || '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+    const readMin = Math.max(1, Math.round(articleWords / 200));
+    const updatedStr = (p.updatedAt || p.publishedAt || '').slice(0, 10);
+    const byline = `<p class="article-meta">By Apex Trade Show Production Team${updatedStr ? ` · Updated ${updatedStr}` : ''} · ${readMin} min read</p>`;
     const jsonLd = [
       {
         '@context': 'https://schema.org',
@@ -1227,8 +1244,8 @@ for (const p of posts) {
         ...(img ? { image: img } : {}),
         datePublished: p.publishedAt || undefined,
         dateModified: p.updatedAt || p.publishedAt || undefined,
-        author: { '@type': 'Organization', name: BRAND },
-        publisher: { '@type': 'Organization', name: BRAND },
+        author: { '@type': 'Organization', name: 'Apex Trade Show Production Team' },
+        publisher: { '@type': 'Organization', name: BRAND, logo: { '@type': 'ImageObject', url: `${ORIGIN}/images/logo.png` } },
         mainEntityOfPage: `${ORIGIN}/blog/${p.slug}`
       },
       {
@@ -1254,7 +1271,7 @@ for (const p of posts) {
       description: p.seo?.description || p.excerpt,
       ...(img ? { image: img, imageAlt: p.title } : {}),
       body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / <span>${esc(p.title)}</span></nav>
-        <article><h1>${esc(p.title)}</h1>${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}${faqHtml}${relProductsHtml}${relArticlesHtml}</article>`,
+        <article><h1>${esc(p.title)}</h1>${byline}${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}${faqHtml}${relProductsHtml}${relArticlesHtml}</article>`,
       jsonLd
     });
   });
