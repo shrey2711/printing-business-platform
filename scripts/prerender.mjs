@@ -920,6 +920,9 @@ routes.push(() => {
     <h1>Custom Canopy Tents Across the US and Canada</h1>
     <p>${esc(BRAND)} ships custom printed pop-up canopy tents, with up to 3 printed walls, to every
     US state and Canadian province, priced in USD or CAD.</p>
+    <h2>Popular cities</h2>
+    <p>Trade show displays printed and shipped to major convention cities, with local venue, industry and shipping details.</p>
+    <ul>${SEO_CITIES.map((c) => `<li><a href="/trade-show-displays/${c.slug}">Trade show displays in ${esc(cityWithAbbr(c))}</a></li>`).join('')}</ul>
     <h2>United States</h2>
     <ul>${us.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
     <h2>Canada</h2>

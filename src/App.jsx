@@ -355,11 +355,17 @@ function Footer() {
   );
 }
 
-// On every route change, jump back to the top — otherwise a link clicked from
-// the footer leaves the new page scrolled to the bottom.
+// On every route change — including browser back/forward — jump to the top.
+// The browser's default scroll restoration ('auto') otherwise re-applies the old
+// position on back/forward and fights the reset, leaving the new page mid-scroll.
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+  }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return null;
 }
 
