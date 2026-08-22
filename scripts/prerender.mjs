@@ -30,6 +30,7 @@ import {
 } from '../src/data/stateContent.js';
 import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
+import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
 
@@ -238,6 +239,42 @@ routes.push(() => {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: HOME_FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+    }
+  });
+});
+
+// ---- Learning Center hub (/resources) ----
+routes.push(() => {
+  const bySlug = new Map(posts.map((p) => [p.slug, p]));
+  const cats = RESOURCE_CATEGORIES.map((cat) => `
+    <h2>${esc(cat.title)}</h2>
+    <p>${esc(cat.blurb)}</p>
+    <ul>${cat.slugs
+      .map((slug) => {
+        const p = bySlug.get(slug);
+        const title = p ? p.title : slug.replace(/-/g, ' ');
+        const ex = p && p.excerpt ? ` — ${esc(p.excerpt)}` : '';
+        return `<li><a href="/blog/${slug}">${esc(title)}</a>${ex}</li>`;
+      })
+      .join('')}</ul>`).join('');
+  return render({
+    path: '/resources',
+    title: `${RESOURCES_META.title} | ${BRAND}`,
+    description: RESOURCES_META.description,
+    image: CANOPY_OG,
+    imageAlt: `${RESOURCES_META.h1} — ${BRAND}`,
+    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Learning Center</span></nav>
+      <h1>${esc(RESOURCES_META.h1)}</h1>
+      <p>${esc(RESOURCES_META.intro)}</p>
+      ${cats}
+      <p><a href="/products">Shop all trade show displays</a> · <a href="/quote">Request a quote</a></p>`,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+        { '@type': 'ListItem', position: 2, name: 'Learning Center', item: `${ORIGIN}/resources` }
+      ]
     }
   });
 });
@@ -1273,6 +1310,7 @@ const buildUrlset = (rows) =>
 
 const smPages = [
   smUrl('/', '1.0', 'weekly', LMOD.home),
+  smUrl('/resources', '0.7', 'weekly', gitLastMod('src/data/resources.js')),
   smUrl('/quote', '0.4', undefined, LMOD.pages),
   smUrl('/contact', '0.4', undefined, LMOD.pages),
   ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7', undefined, LMOD.canopy)),

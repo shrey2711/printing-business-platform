@@ -943,6 +943,83 @@ export const STATIC_ARTICLES = [
       { q: 'Can the graphics be replaced?', a: 'Yes — the SEG fabric graphics push into the frame and are replaceable, so you keep the frame and reprint the graphic when your branding changes.' },
       { q: 'How are the kits priced?', a: 'The SEG modular kits are quoted per order by size and configuration. Request a quote with your size and artwork for pricing and a free proof.' }
     ]
+  },
+  {
+    slug: 'trade-show-display-setup-and-care-guide',
+    title: 'Trade Show Display Setup & Care Guide',
+    excerpt:
+      'How to set up, pack down, clean and store trade show displays — canopies, banner stands, backdrops and table covers — so they look sharp show after show.',
+    tags: ['Setup & Care', 'Guide'],
+    seo: {
+      title: 'Trade Show Display Setup & Care Guide',
+      description:
+        'Step-by-step setup, teardown, cleaning and storage for canopies, banner stands, backdrops and table covers — keep your trade show displays looking new for years.'
+    },
+    coverUrl: '/images/showcase/canopy-harbor-realty.webp',
+    publishedAt: '2026-08-21T00:00:00.000Z',
+    updatedAt: '2026-08-21T00:00:00.000Z',
+    html: `
+<p><strong>Short answer:</strong> most trade show displays set up tool-free in minutes, but they last far longer when you weight them properly, pack them down clean and dry, and store graphics rolled rather than folded. This guide walks through setup, teardown, cleaning and storage for each display type so your booth looks sharp show after show.</p>
+
+<h2>Before you leave for the show</h2>
+<p>A little preparation prevents most on-site problems. When your order arrives, open every box and check the contents against the packing list while there is still time to fix anything. If you have never assembled the display, do a full dry run at the office or at home — it is far easier to learn the frame in a quiet room than on a crowded show floor during move-in.</p>
+<ul>
+  <li>Confirm you received the frame, graphic, and any bases, feet, weights or carry bags.</li>
+  <li>Do a practice setup and teardown so the real thing takes minutes, not stress.</li>
+  <li>Note which case or bag each part lives in, so repacking is obvious.</li>
+  <li>Charge or pack any lighting and bring spare zip ties and gaffer tape — the universal booth repair kit.</li>
+</ul>
+<p>Because every Apex order prints only after you approve a free artwork proof, what arrives is what you signed off — so pre-show checking is about hardware and logistics, not surprises in the print.</p>
+
+<h2>Setting up a canopy tent</h2>
+<p>Pop-up canopies use an accordion frame that expands in minutes. Spread the frame partway, seat the printed top over it before locking it fully open, then extend the legs to height. Work with a second person where you can — it is quicker and easier on the fabric.</p>
+<p>The single most important step outdoors is weight. On the hard surfaces typical of parking lots, plazas and convention aprons you cannot use ground stakes, so add a weight bag to every leg. Wind is the number-one cause of canopy damage, and a gust under an unweighted top can lift the whole frame. If you have printed walls, a back wall plus side walls also cut the wind load while adding branding.</p>
+<p>To pack down, reverse the process: collapse the legs, lift the top off (don’t drag it), fold the frame, and return the graphic to its bag. Never pack a wet top — see storage below.</p>
+
+<h2>Setting up banner stands</h2>
+<p>Retractable banner stands are the fastest display to deploy: unfold the base foot, pull the graphic up by the top rail, and slot in the support pole. The critical habit is on teardown — <strong>retract the graphic slowly and under control</strong>. Letting it snap back into the base is the most common way retractable banners get creased or jammed. Guide it down with one hand.</p>
+<p>X-stand banners hook a grommeted graphic onto a lightweight X-frame; check the tension is even on all four corners so the print sits flat. Tabletop banners work the same way at a smaller scale for counters and reception desks.</p>
+
+<h2>Setting up backdrops and table covers</h2>
+<p>Step & repeat and tension-fabric backdrops assemble from a tube or extrusion frame that snaps together, then the fabric graphic slips or zips over it. Build the frame fully before fitting the graphic so the fabric ends up evenly tensioned and wrinkle-free. Adjustable frames let you dial the exact width — set it before you stretch the graphic on.</p>
+<p>Table covers simply drape (pleated) or stretch (fitted) over a standard table; smooth the top and align the front panel so your logo sits centred and straight. Fitted stretch covers should be pulled down evenly on all sides for a tight, modern look.</p>
+
+<h2>During the show</h2>
+<p>Keep weight bags on outdoor canopy legs for the whole event, not just setup — afternoon wind can arrive fast. Do a quick daily walk-around: straighten table covers, re-tension any fabric that has relaxed, and wipe down surfaces at eye level where visitors notice smudges. Small touch-ups keep the booth looking intentional through a multi-day show.</p>
+
+<h2>Packing down and cleaning</h2>
+<p>The golden rule is simple: <strong>pack down clean and dry</strong>. Sealing a damp canopy top or fabric graphic in its bag is how mildew and musty smells start. If it rained, or the fabric is even slightly damp, let it air-dry fully before it goes back in the case — at the venue if you can, or spread out at home that evening.</p>
+<ul>
+  <li><strong>Fabric graphics (dye-sublimated):</strong> spot-clean with a damp cloth and mild soap; let dry fully before storing. Many fabric table covers are machine washable on a gentle cycle — check the product page for the specific item.</li>
+  <li><strong>Vinyl banners and canopy tops:</strong> wipe with a damp cloth; avoid harsh solvents that can dull the print.</li>
+  <li><strong>Frames and hardware:</strong> wipe off dust and grit so joints keep moving smoothly; check for loose fittings.</li>
+  <li><strong>Graphics storage:</strong> roll large graphics rather than folding them where possible — folds can leave creases, especially in vinyl. Retractable graphics stay rolled inside their base.</li>
+</ul>
+
+<h2>Storing displays between shows</h2>
+<p>Store everything dry, out of direct sun, and away from extreme heat. Long spells in a hot car or attic can soften some materials over time, and constant UV will eventually fade any print left exposed — so keep displays in their cases when they are not in use. Stand retractable banners upright, lay backdrop frames flat, and keep weight bags empty and dry (fill them with water or sand on site, then empty and dry them before storage).</p>
+<p>Because Apex graphics are dye-sublimated — the ink is bonded into the fabric rather than sitting on top — colours hold up well to repeated handling and outdoor use. And when your message or branding changes, most systems let you reprint just the graphic and reuse the frame, which is the most economical way to keep a booth current.</p>
+
+<h2>When to replace a graphic vs the whole display</h2>
+<p>If the frame is sound but the print is dated, damaged or off-brand, replace the graphic only — retractable cassettes, SEG fabrics, canopy tops and table covers are all replaceable while you keep the hardware. Replace the frame itself only if joints are bent or broken. This graphic-first approach keeps costs down and waste low across the life of the booth.</p>
+
+<h2>Recommended products</h2>
+<ul>
+  <li><a href="/custom-canopies">Custom canopy tents</a> — with weight bags for any outdoor setup.</li>
+  <li><a href="/banner-stands">Retractable &amp; X-stand banner stands</a> — replaceable graphics, tool-free setup.</li>
+  <li><a href="/backdrops">Step &amp; repeat backdrops</a> — adjustable frames with re-tensionable fabric.</li>
+  <li><a href="/table-covers">Table covers</a> — machine-washable fitted and pleated options.</li>
+</ul>
+<p>New to buying? Start with <a href="/blog/trade-show-display-cost">what a display costs</a> and the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a>.</p>
+`,
+    faqs: [
+      { q: 'How do I keep a canopy tent from blowing away?', a: 'Always put a weight bag on every leg for outdoor use — on hard surfaces you can’t use stakes, and wind is the main cause of canopy damage. Adding printed walls also reduces wind load.' },
+      { q: 'What’s the most common way banner stands get damaged?', a: 'Letting a retractable graphic snap back into the base. Always retract it slowly and under control with one hand to avoid creases and jams.' },
+      { q: 'Can I machine wash a fabric table cover?', a: 'Many fitted fabric table covers are machine washable on a gentle cycle — check the specific product page. Dye-sublimated fabric handles washing well; let it dry fully before storing.' },
+      { q: 'Should I fold or roll my graphics for storage?', a: 'Roll large graphics where possible rather than folding them, since folds can leave creases (especially in vinyl). Retractable graphics stay rolled inside their base.' },
+      { q: 'How do I stop my display smelling musty?', a: 'Never pack it away damp. If it got wet, air-dry the fabric or canopy top completely before sealing it in its case — trapped moisture causes mildew and odour.' },
+      { q: 'Do I have to replace the whole display when my branding changes?', a: 'Usually no. Most systems — retractable stands, SEG backdrops, canopy tops, table covers — let you reprint just the graphic and reuse the frame, which is the most economical way to refresh a booth.' }
+    ]
   }
 ];
 

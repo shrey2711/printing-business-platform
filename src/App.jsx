@@ -19,6 +19,7 @@ const CityPage = lazy(() => import('./pages/CityPage'));
 const SizePage = lazy(() => import('./pages/SizePage'));
 const SolutionPage = lazy(() => import('./pages/SolutionPage'));
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
+const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const InfoPage = lazy(() => import('./pages/InfoPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
@@ -310,6 +311,7 @@ function Footer() {
             <Link to="/pop-up-displays">Pop-Up Displays</Link>
             <Link to="/flags">Flags</Link>
             <Link to="/trade-show-booth-packages">Booth Packages</Link>
+            <Link to="/resources">Learning Center</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/locations">Locations</Link>
           </div>
@@ -375,6 +377,7 @@ function App() {
         <Route path="/products/:slug" element={<ProductConfigurator />} />
         <Route path="/sizes/:size" element={<SizePage />} />
         <Route path="/solutions/:useCase" element={<SolutionPage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/order" element={<PlaceOrderPage />} />
