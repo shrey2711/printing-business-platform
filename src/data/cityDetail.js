@@ -421,6 +421,302 @@ export const CITY_DETAIL = {
       { q: 'Which displays suit the PCC’s large halls?', a: 'A fabric backdrop or step & repeat, retractable banners at the aisle, and a printed table cover — a portable kit that reads well across a big room.' },
       { q: 'Is rush production available for Philadelphia exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
     ]
+  },
+
+  'anaheim': {
+    answer:
+      'Anaheim hosts one of the West Coast’s largest convention centres and marquee shows like NAMM and Natural Products Expo West. Apex prints custom trade show displays and ships them to Anaheim.',
+    overview: [
+      'Anaheim’s convention business is anchored by the Anaheim Convention Center — the largest on the West Coast — set beside the Disneyland Resort. The mix of a huge exhibit hall and a family-destination setting draws consumer, music and natural-products shows that fill the halls and surrounding hotels.',
+      'The mild Southern California climate makes outdoor and entrance activations practical, so branding needs to look good both indoors and in the sun. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Anaheim venue, hotel or business address.'
+    ],
+    whyExhibit:
+      'Anaheim pairs scale with a consumer-friendly audience. NAMM brings the global music-products industry together, Natural Products Expo West packs the halls with natural-food and wellness brands, and the resort setting keeps attendees close and engaged. A cohesive display kit — a backdrop, banners, a table cover, and a canopy for outdoor space — helps a compact booth stand out in the Anaheim Convention Center’s large halls.',
+    conventionCenters: [
+      { name: 'Anaheim Convention Center (ACC)', desc: 'The largest exhibition venue on the West Coast at roughly 1.8 million square feet, beside the Disneyland Resort, hosting NAMM, Natural Products Expo West and major consumer shows.' },
+      { name: 'Anaheim resort hotels', desc: 'Large convention hotels around the ACC provide additional ballroom and meeting space for association programming.' },
+      { name: 'Honda Center & nearby venues', desc: 'Arena and event spaces in the Platinum Triangle host consumer expos and brand activations.' }
+    ],
+    industries: [
+      ['Music & audio', 'The NAMM Show makes Anaheim the global stage for musical-instrument and pro-audio brands.'],
+      ['Natural products & wellness', 'Natural Products Expo West draws natural-food, supplement and wellness exhibitors from around the world.'],
+      ['Consumer & pop culture', 'WonderCon and consumer expos bring large, engaged general audiences.'],
+      ['Healthcare & technology', 'Medical and technology conventions use the large exhibit halls.'],
+      ['Tourism & hospitality', 'The resort setting supports travel, attractions and hospitality events.']
+    ],
+    climate:
+      'Anaheim enjoys a mild Mediterranean climate with plenty of sun and little rain, which makes outdoor and entrance activations practical for much of the year. The strong UV calls for fade-resistant graphics, and any canopy on hard surfaces should have weighted legs, since afternoon breezes and occasional Santa Ana winds can gust. A printed canopy also provides welcome shade near the resort.',
+    planning:
+      'The Anaheim Convention Center uses an official freight contractor, usually with an advance warehouse and union labor at the biggest shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, handy for multi-venue resort activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and NAMM and Expo West weeks are the busiest of the year.',
+    bestDisplays:
+      'For an ACC booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For resort and outdoor activations, a weighted canopy adds shade and branding. For hotel suites and pop-ups, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Anaheim?', a: 'Yes. Apex ships custom-printed displays to Anaheim and across Southern California — to the Anaheim Convention Center, a resort hotel, or your business address.' },
+      { q: 'How early should I order for NAMM or Expo West?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. Those shows are extremely busy — order well ahead.' },
+      { q: 'Are outdoor canopies practical in Anaheim?', a: 'Yes — the mild, sunny climate makes them useful much of the year. Use UV-stable graphics and weight every leg for afternoon and Santa Ana gusts.' },
+      { q: 'Can you deliver to the Anaheim Convention Center?', a: 'Yes, to any Anaheim address you provide, including convention receiving. Confirm labelling and delivery-window rules with your venue.' },
+      { q: 'Which displays suit the ACC’s large halls?', a: 'A fabric backdrop or step & repeat, retractable banners at the aisle, and a printed table cover — a portable, high-impact kit.' },
+      { q: 'Is rush production available for Anaheim exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'baltimore': {
+    answer:
+      'Baltimore’s Inner Harbor convention district hosts medical, education and pop-culture shows at the Baltimore Convention Center. Apex prints custom trade show displays and ships them to Baltimore.',
+    overview: [
+      'Baltimore offers a walkable Inner Harbor convention district and easy access to the Washington–Baltimore corridor. The Baltimore Convention Center runs medical, education and consumer shows downtown, steps from harbor hotels and attractions.',
+      'Proximity to major research institutions and the federal corridor draws technical and professional audiences. Apex prints banner stands, backdrops, table covers and canopies to order and ships them to your Baltimore venue or business address, ready for setup.'
+    ],
+    whyExhibit:
+      'Baltimore combines a healthcare and research base — led by Johns Hopkins — with easy reach to Washington, D.C., making it a magnet for medical, education, cybersecurity and defense audiences. The compact harbor layout supports strong attendance, and the corridor location means buyers travel in easily. A coordinated display kit helps a small booth look professional in the convention center’s halls.',
+    conventionCenters: [
+      { name: 'Baltimore Convention Center', desc: 'A downtown venue at the Inner Harbor with about 1.2 million square feet total, hosting medical, education and pop-culture shows.' },
+      { name: 'Inner Harbor hotels & ballrooms', desc: 'Harbor-side hotels provide additional meeting and ballroom space for conferences.' },
+      { name: 'Regional expo venues', desc: 'Suburban expo and fairground venues host consumer shows and equipment-heavy events around the metro.' }
+    ],
+    industries: [
+      ['Healthcare & biosciences', 'Johns Hopkins and a strong life-science base anchor major medical and research events.'],
+      ['Education & research', 'Universities and associations drive education and academic conventions.'],
+      ['Cybersecurity & defense', 'Proximity to Fort Meade and the D.C. corridor supports cyber and defense gatherings.'],
+      ['Maritime & logistics', 'The Port of Baltimore underpins maritime and supply-chain events.'],
+      ['Consumer & pop culture', 'Comic and fan conventions bring large general audiences downtown.']
+    ],
+    climate:
+      'Baltimore has a humid subtropical climate with hot, humid summers and cold winters that can bring snow. Most exhibiting is indoors, but harbor-side outdoor activations are common in the warmer months; weight canopy legs for gusts off the water, and protect graphics from winter snow and salt in transit. Dye-sublimated fabric re-hangs crisp in any season.',
+    planning:
+      'The Baltimore Convention Center uses an official freight contractor, typically with an advance warehouse before move-in and material handling to budget. Portable displays travel as a case or tube and set up without a crew. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and medical and education seasons are busy.',
+    bestDisplays:
+      'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For harbor-side and outdoor activations, a weighted canopy adds shelter. For hotel meetings, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Baltimore?', a: 'Yes. Apex ships custom-printed displays to Baltimore and across Maryland — to the Baltimore Convention Center or your business address.' },
+      { q: 'How early should I order for a Baltimore show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Order a couple of weeks ahead for major shows.' },
+      { q: 'Do outdoor canopies work at the Inner Harbor?', a: 'Yes in the warmer months — weight every leg for gusts off the water. The printed tops provide shade and quick rain cover.' },
+      { q: 'Can you deliver to the Baltimore Convention Center?', a: 'Yes, to any Baltimore address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
+      { q: 'Which displays suit the convention center’s halls?', a: 'A fabric backdrop or step & repeat, retractable banners, and a printed table cover — a portable kit that reads well in large rooms.' },
+      { q: 'Is rush production available for Baltimore exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'denver': {
+    answer:
+      'Denver’s Colorado Convention Center hosts outdoor-industry, aerospace, energy and natural-products shows a mile above sea level. Apex prints custom trade show displays and ships them to Denver.',
+    overview: [
+      'Denver’s downtown Colorado Convention Center — marked by the landmark “Big Blue Bear” — anchors a convention scene built on outdoor recreation, aerospace, energy and natural products. The city’s central-Rockies location and growing tech base make it a natural meeting point for the Mountain West.',
+      'The high-altitude, high-UV environment makes fade-resistant graphics especially important, and big daily temperature swings reward displays that travel and set up easily. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Denver venue or business address.'
+    ],
+    whyExhibit:
+      'Denver draws a distinctive mix of outdoor-industry, aerospace, energy and natural-products buyers, plus a fast-growing technology sector. The walkable downtown around the convention center keeps hotels and restaurants close, supporting strong attendance. A cohesive display kit — backdrop, banners, table cover, and a canopy for outdoor and mountain-event activations — helps you present professionally to an active, brand-aware audience.',
+    conventionCenters: [
+      { name: 'Colorado Convention Center', desc: 'Downtown Denver’s main hall at roughly 584,000 square feet of exhibit space (expanding), host to outdoor-industry, natural-products and technology shows.' },
+      { name: 'Gaylord Rockies Resort & Convention Center', desc: 'A large resort convention venue near Denver International Airport used for association conferences and big meetings.' },
+      { name: 'National Western Complex', desc: 'A major event and expo complex hosting the National Western Stock Show and equipment-heavy events.' }
+    ],
+    industries: [
+      ['Outdoor recreation', 'Denver is a hub for outdoor, sports and recreation brands and their trade events.'],
+      ['Aerospace & defense', 'A strong aerospace corridor supports space and defense conventions.'],
+      ['Energy & natural resources', 'Oil, gas and renewable-energy shows draw Mountain-West industry.'],
+      ['Technology', 'A growing tech and startup base fuels B2B and consumer technology events.'],
+      ['Natural products & cannabis', 'Natural-products and cannabis-industry expos are a regional specialty.']
+    ],
+    climate:
+      'Denver sits a mile above sea level, with intense high-altitude UV, low humidity, abundant sun and large temperature swings — plus the chance of sudden snow even in shoulder seasons. Fade-resistant, dye-sublimated graphics are especially important under the strong mountain sun. For outdoor activations, weight canopy legs for gusty winds and be ready for fast weather changes; a printed canopy provides valuable shade and shelter at altitude.',
+    planning:
+      'The Colorado Convention Center uses an official freight contractor, usually with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel as a case or tube and set up without a crew, handy for mountain-town satellite events. Approve artwork early: production is 6–8 business days (2–3 rush) before transit.',
+    bestDisplays:
+      'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For outdoor and mountain-event activations, a weighted canopy adds shade and shelter. For hotel and resort meetings, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Denver?', a: 'Yes. Apex ships custom-printed displays to Denver and across Colorado — to the Colorado Convention Center, Gaylord Rockies, or your business address.' },
+      { q: 'Do graphics fade faster at Denver’s altitude?', a: 'UV is stronger a mile up, which is why we print with dye sublimation for strong fade resistance — a good match for the high-altitude sun.' },
+      { q: 'How early should I order for a Denver show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Order a couple of weeks ahead for major shows.' },
+      { q: 'Do outdoor canopies work in Denver weather?', a: 'Yes — weight every leg for gusty winds and be ready for quick weather changes. A canopy gives shade at altitude and shelter from sudden showers or snow.' },
+      { q: 'Can you deliver to the Colorado Convention Center?', a: 'Yes, to any Denver address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
+      { q: 'Is rush production available for Denver exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'new-orleans': {
+    answer:
+      'New Orleans hosts a heavy calendar of medical, energy and food shows at the Ernest N. Morial Convention Center beside the French Quarter. Apex prints custom trade show displays and ships them to New Orleans.',
+    overview: [
+      'New Orleans pairs one of the country’s largest contiguous exhibit halls with a walkable entertainment district, a combination that draws major medical, energy and food conventions. The Ernest N. Morial Convention Center runs enormous shows along the riverfront, minutes from the French Quarter’s hotels and restaurants.',
+      'The hot, humid Gulf climate makes durable, moisture-tolerant displays important. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your New Orleans venue or business address, ready for the show.'
+    ],
+    whyExhibit:
+      'New Orleans is a favourite for large national conventions — especially medical and healthcare, where its walkability and hospitality keep attendees engaged from session to show floor. Energy and maritime industries add a strong regional base, and the food scene makes it a memorable host city. A coordinated display kit helps a compact booth stand out across the Morial Center’s vast halls.',
+    conventionCenters: [
+      { name: 'Ernest N. Morial Convention Center', desc: 'One of the largest convention facilities in the US at roughly 1.1 million square feet of contiguous exhibit space, along the Mississippi riverfront near the French Quarter.' },
+      { name: 'Caesars Superdome & Smoothie King Center', desc: 'Major arena and stadium venues downtown that host large consumer expos and events.' },
+      { name: 'French Quarter & downtown hotels', desc: 'Large hotels near the convention center provide ballroom and meeting space for association programming.' }
+    ],
+    industries: [
+      ['Healthcare & medical', 'New Orleans is a top host for large national medical and healthcare conventions.'],
+      ['Energy & oil and gas', 'Gulf Coast energy and services industries support specialized trade shows.'],
+      ['Maritime & logistics', 'The Port of New Orleans underpins maritime, shipping and supply-chain events.'],
+      ['Food & hospitality', 'A world-famous food culture anchors culinary and hospitality gatherings.'],
+      ['Gaming & entertainment', 'Gaming and entertainment shows use the downtown arena and convention venues.']
+    ],
+    climate:
+      'New Orleans is hot and very humid, with heavy rain, a high water table, and an Atlantic hurricane season from June to November. For outdoor or entrance activations, a canopy provides shade and quick rain cover — weight every leg, since sudden storms and gusts are common and the ground is usually paved. Dye-sublimated graphics resist UV and humidity, and wrinkle-resistant fabric displays stay crisp in the moist Gulf air.',
+    planning:
+      'The Morial Convention Center uses an official freight contractor with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel as a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and the busy medical-convention season books up quickly.',
+    bestDisplays:
+      'For a Morial Center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For outdoor and riverfront activations, a weighted canopy adds shade and shelter. For French Quarter hotel events, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to New Orleans?', a: 'Yes. Apex ships custom-printed displays to New Orleans and across Louisiana — to the Ernest N. Morial Convention Center or your business address.' },
+      { q: 'How early should I order for a New Orleans convention?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. The city’s big medical conventions are busy — order well ahead.' },
+      { q: 'Do canopies handle New Orleans heat and rain?', a: 'Yes — canopies give real shade and quick rain cover; the graphics are UV-stable, and you should weight every leg for sudden storm gusts.' },
+      { q: 'Can you deliver to the Morial Convention Center?', a: 'Yes, to any New Orleans address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
+      { q: 'Which displays suit the Morial Center’s huge halls?', a: 'A fabric backdrop or step & repeat that reads at distance, retractable banners, and a printed table cover — a portable, high-impact kit.' },
+      { q: 'Is rush production available for New Orleans exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'phoenix': {
+    answer:
+      'Phoenix’s downtown convention centre hosts technology, healthcare and a fast-growing semiconductor industry. Apex prints custom trade show displays and ships them to Phoenix.',
+    overview: [
+      'Phoenix has become a major Southwest convention market, powered by technology, healthcare, semiconductor manufacturing and a booming population. The downtown Phoenix Convention Center runs national shows within a walkable core of hotels, restaurants and light rail.',
+      'The extreme desert heat and intense UV make durable, fade-resistant displays essential, and monsoon-season storms add a wind-and-dust factor for outdoor activations. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Phoenix venue or business address.'
+    ],
+    whyExhibit:
+      'Phoenix offers a fast-growing, business-friendly market with expanding technology and semiconductor investment and a strong healthcare sector. The compact downtown keeps attendees close, and the region’s growth means rising local turnout on top of national travellers. A cohesive display kit — backdrop, banners, table cover, and a weighted canopy for shade — helps you make a strong impression in the convention center’s halls.',
+    conventionCenters: [
+      { name: 'Phoenix Convention Center', desc: 'A downtown venue with roughly 900,000 square feet of exhibit space across connected buildings, served by light rail and surrounded by hotels.' },
+      { name: 'Arizona Grand & resort venues', desc: 'Large resorts around the Valley provide convention and outdoor event space for association meetings.' },
+      { name: 'State Farm Stadium & regional venues', desc: 'Arena and stadium venues in the metro host major consumer expos and events.' }
+    ],
+    industries: [
+      ['Semiconductor & electronics', 'Major semiconductor investment (Intel, TSMC) is fueling electronics and advanced-manufacturing events.'],
+      ['Healthcare & bioscience', 'A growing healthcare and bioscience sector supports medical conventions.'],
+      ['Technology', 'An expanding tech base drives B2B and consumer technology shows.'],
+      ['Real estate & construction', 'Rapid growth underpins building, real-estate and construction expos.'],
+      ['Aerospace & defense', 'A strong aerospace and defense presence supports specialized trade shows.']
+    ],
+    climate:
+      'Phoenix has an extreme desert climate — summer highs frequently above 110°F (43°C), very low humidity, and intense UV year-round, plus a July–September monsoon season that brings sudden storms, dust and strong wind. Shade is a genuine draw: a printed canopy makes outdoor activations viable, but weight every leg heavily for monsoon gusts. Dye-sublimated graphics are essential to resist the harsh desert sun.',
+    planning:
+      'The Phoenix Convention Center uses an official freight contractor, usually with an advance warehouse before move-in and material handling to budget. Portable displays travel as a case or tube and set up without a crew, which suits the walkable downtown. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and cooler-season months are the busiest for conventions.',
+    bestDisplays:
+      'For a Phoenix Convention Center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For outdoor and resort activations, a heavily weighted canopy provides essential shade. For hotel meetings, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Phoenix?', a: 'Yes. Apex ships custom-printed displays to Phoenix and across Arizona — to the Phoenix Convention Center, a Valley resort, or your business address.' },
+      { q: 'Will graphics survive the Phoenix heat and sun?', a: 'Yes — dye-sublimated printing resists the intense desert UV, making it well suited to Phoenix’s year-round strong sun.' },
+      { q: 'Do canopies work in Phoenix, including monsoon season?', a: 'Yes — a canopy provides essential shade, but weight every leg heavily, especially July–September when monsoon storms bring sudden dust and wind.' },
+      { q: 'How early should I order for a Phoenix show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. The cooler-season convention months are busy — order ahead.' },
+      { q: 'Can you deliver to the Phoenix Convention Center?', a: 'Yes, to any Phoenix address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
+      { q: 'Is rush production available for Phoenix exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'san-antonio': {
+    answer:
+      'San Antonio’s River Walk convention district hosts military, healthcare and cybersecurity shows at the Henry B. González Convention Center. Apex prints custom trade show displays and ships them to San Antonio.',
+    overview: [
+      'San Antonio combines a large River Walk convention center with a strong military, healthcare and cybersecurity base. The Henry B. González Convention Center runs national shows downtown, connected to the River Walk’s hotels, dining and attractions.',
+      'The hot Texas climate and bright halls call for durable, high-contrast branding. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your San Antonio venue or business address, ready for setup.'
+    ],
+    whyExhibit:
+      'San Antonio’s military presence (Joint Base San Antonio) and growing cybersecurity and bioscience sectors draw specialized, high-value audiences, while the River Walk setting keeps attendees engaged. Its central-Texas location and hospitality make it an easy, memorable host. A coordinated display kit helps a compact booth present professionally in the convention center’s large halls.',
+    conventionCenters: [
+      { name: 'Henry B. González Convention Center', desc: 'Downtown San Antonio’s main hall with roughly 1.6 million square feet total, connected to the River Walk and convention hotels.' },
+      { name: 'Freeman Coliseum & Expo Halls', desc: 'A large event and expo complex hosting consumer shows, rodeo and equipment-heavy events.' },
+      { name: 'River Walk hotels & ballrooms', desc: 'Downtown hotels along the River Walk provide additional meeting and ballroom space.' }
+    ],
+    industries: [
+      ['Military & defense', 'Joint Base San Antonio anchors a strong defense, cyber and veteran-services event base.'],
+      ['Healthcare & bioscience', 'A large medical and bioscience sector supports healthcare conventions.'],
+      ['Cybersecurity', 'San Antonio’s cyber cluster drives security and technology gatherings.'],
+      ['Tourism & hospitality', 'The River Walk and Alamo City draw hospitality and tourism events.'],
+      ['Energy & manufacturing', 'Regional energy and manufacturing industries support B2B trade shows.']
+    ],
+    climate:
+      'San Antonio has hot, humid summers, mild winters, and the occasional strong storm. For outdoor or River Walk activations, a canopy provides shade and quick rain cover — weight every leg for gusts on paved surfaces. Dye-sublimated graphics resist the Texas UV, and wrinkle-resistant fabric displays stay crisp in the humidity.',
+    planning:
+      'The convention center uses an official freight contractor, usually with an advance warehouse before move-in and material handling to budget. Portable displays travel as a case or tube and set up without a crew. Approve your proof early: production is 6–8 business days (2–3 rush) before transit.',
+    bestDisplays:
+      'For a González Convention Center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For River Walk and outdoor activations, a weighted canopy adds shade and shelter. For hotel meetings, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to San Antonio?', a: 'Yes. Apex ships custom-printed displays to San Antonio and across Texas — to the Henry B. González Convention Center or your business address.' },
+      { q: 'How early should I order for a San Antonio show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Order a couple of weeks ahead for major shows.' },
+      { q: 'Do canopies handle San Antonio heat and storms?', a: 'Yes — canopies give real shade and quick rain cover; the graphics are UV-stable, and you should weight every leg for storm gusts.' },
+      { q: 'Can you deliver to the González Convention Center?', a: 'Yes, to any San Antonio address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
+      { q: 'Which displays suit the convention center’s halls?', a: 'A fabric backdrop or step & repeat, retractable banners, and a printed table cover — a portable, high-impact kit.' },
+      { q: 'Is rush production available for San Antonio exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'san-diego': {
+    answer:
+      'San Diego’s waterfront convention centre hosts Comic-Con International plus major biotech and defense shows. Apex prints custom trade show displays and ships them to San Diego.',
+    overview: [
+      'San Diego’s bayfront San Diego Convention Center is world-famous as the home of Comic-Con International, but its calendar runs deep in biotech, healthcare and defense as well. The walkable Gaslamp Quarter surrounds the hall with hotels, dining and nightlife.',
+      'The mild coastal climate makes outdoor and waterfront activations practical much of the year, so branding needs to look good in the sun and hold up to a steady sea breeze. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your San Diego venue or business address.'
+    ],
+    whyExhibit:
+      'San Diego pairs marquee reach — Comic-Con draws global attention — with a serious professional base in life sciences, defense (a major Navy presence) and telecom. The bayfront setting and Gaslamp hotels keep attendees close and engaged. A cohesive display kit — backdrop, banners, table cover, and a weighted canopy for outdoor space — helps a compact booth stand out in the convention center’s large halls.',
+    conventionCenters: [
+      { name: 'San Diego Convention Center', desc: 'A bayfront venue with about 2.6 million square feet total, home to Comic-Con International and major biotech, medical and technology shows, beside the Gaslamp Quarter.' },
+      { name: 'Town & Country / Mission Valley venues', desc: 'Large hotel convention venues in Mission Valley host mid-size trade shows and conferences.' },
+      { name: 'Gaslamp Quarter hotels', desc: 'Downtown hotels near the convention center provide ballroom and meeting space for association programming.' }
+    ],
+    industries: [
+      ['Biotech & life sciences', 'A leading life-science cluster anchors major biotech and medical conventions.'],
+      ['Defense & maritime', 'A major Navy and defense presence supports defense and maritime events.'],
+      ['Technology & telecom', 'A strong tech and wireless sector (home to Qualcomm) drives technology shows.'],
+      ['Pop culture & entertainment', 'Comic-Con International brings enormous global consumer attention.'],
+      ['Tourism & craft beverage', 'Tourism and a famous craft-beverage scene support hospitality events.']
+    ],
+    climate:
+      'San Diego has one of the mildest climates in the country — sunny, dry, and comfortable most of the year, with a steady coastal breeze and little rain. That makes outdoor and waterfront activations very practical, but weight canopy legs for the sea breeze, and use fade-resistant graphics against the reliable sun. A printed canopy adds shade for bayfront events.',
+    planning:
+      'The San Diego Convention Center uses an official freight contractor, usually with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, handy for Gaslamp and bayfront activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and Comic-Con week is the busiest of the year.',
+    bestDisplays:
+      'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For bayfront and outdoor activations, a weighted canopy adds shade and branding. For hotel suites and pop-ups, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to San Diego?', a: 'Yes. Apex ships custom-printed displays to San Diego and across Southern California — to the San Diego Convention Center, a Mission Valley venue, or your business address.' },
+      { q: 'How early should I order for Comic-Con or a San Diego show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. Comic-Con week is extremely busy — order well ahead.' },
+      { q: 'Are outdoor canopies practical in San Diego?', a: 'Very — the mild, sunny climate makes them useful most of the year. Use UV-stable graphics and weight every leg for the coastal breeze.' },
+      { q: 'Can you deliver to the San Diego Convention Center?', a: 'Yes, to any San Diego address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
+      { q: 'Which displays suit the convention center’s large halls?', a: 'A fabric backdrop or step & repeat, retractable banners, and a printed table cover — a portable, high-impact kit.' },
+      { q: 'Is rush production available for San Diego exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'washington-dc': {
+    answer:
+      'Washington, D.C. is the association and government capital, host to major policy, defense and education shows at the Walter E. Washington Convention Center. Apex prints custom trade show displays and ships them to Washington.',
+    overview: [
+      'As the nation’s capital, Washington, D.C. is the centre of associations, government contracting and policy — which makes it one of the busiest cities for conventions and expos. The Walter E. Washington Convention Center runs large downtown shows near hotels and Metro, drawing national associations and their members.',
+      'Exhibitors reach influential, credential-conscious audiences, so polished, credible branding matters. Apex prints banner stands, backdrops, table covers and canopies to order and ships them to your Washington venue or business address, ready for move-in.'
+    ],
+    whyExhibit:
+      'D.C. concentrates decision-makers like nowhere else — trade associations, federal agencies, contractors, universities and NGOs all headquarter or gather here. The convention center’s central location and Metro access support strong attendance, and the association calendar is packed year-round. A coordinated, professional display kit helps you earn credibility with a policy-savvy audience and stand out in the hall.',
+    conventionCenters: [
+      { name: 'Walter E. Washington Convention Center', desc: 'Downtown D.C.’s main hall with roughly 2.3 million square feet total, near hotels and Metro, hosting national association, policy and consumer shows.' },
+      { name: 'Gaylord National (National Harbor)', desc: 'A large resort convention venue just outside the city on the Potomac, popular for association conferences and big meetings.' },
+      { name: 'Downtown hotels & ballrooms', desc: 'Major downtown hotels provide additional meeting and ballroom space for association programming.' }
+    ],
+    industries: [
+      ['Associations & nonprofits', 'D.C. is the US capital for trade associations and nonprofits and their annual meetings.'],
+      ['Government & defense', 'Federal agencies and contractors drive defense, security and govtech events.'],
+      ['Education & policy', 'Universities and policy organizations anchor education and research conventions.'],
+      ['Healthcare & policy', 'Health-policy and medical-association events are a year-round fixture.'],
+      ['Technology & govtech', 'A growing govtech and cybersecurity sector supports B2B technology shows.']
+    ],
+    climate:
+      'Washington has a humid subtropical climate — hot, humid summers, cold winters that can bring snow, and a famous cherry-blossom spring. Most exhibiting is indoors, but spring and fall outdoor activations are common; weight canopy legs for gusts on paved surfaces, and protect graphics from winter snow and salt in transit. Dye-sublimated fabric re-hangs crisp in any season.',
+    planning:
+      'The Walter E. Washington Convention Center uses an official freight contractor and union labor, typically with an advance warehouse before move-in — budget for material handling and confirm receiving windows. Portable displays travel as a case or tube and set up without a crew, which suits Metro-accessible downtown venues. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and the association season is busy.',
+    bestDisplays:
+      'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For outdoor and campus activations, a weighted canopy adds shelter. For hotel meetings and association events, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Washington, D.C.?', a: 'Yes. Apex ships custom-printed displays to Washington and the D.C. area — to the Walter E. Washington Convention Center, Gaylord National, or your business address.' },
+      { q: 'How early should I order for a D.C. association show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. The association season is busy — order a few weeks ahead.' },
+      { q: 'How does freight reach the convention center?', a: 'The venue uses an official contractor and union labor, often with an advance warehouse; shipping there before move-in is smoother than to the floor. Portable displays can also ship directly to your hotel.' },
+      { q: 'Do outdoor canopies work in Washington?', a: 'Yes in spring and fall — weight every leg for gusts on paved surfaces. The printed tops provide shade and quick rain cover.' },
+      { q: 'Which displays suit a credential-conscious D.C. audience?', a: 'Clean, credible kits — a fabric backdrop or step & repeat, retractable banners, and a printed table cover — that present your brand professionally.' },
+      { q: 'Is rush production available for D.C. exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
   }
 };
 
