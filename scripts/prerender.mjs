@@ -31,6 +31,7 @@ import {
 import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
+import { guidesForCategory, productsForGuide } from '../src/data/internalLinks.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
 
@@ -817,7 +818,14 @@ for (const summary of productList) {
       <h2>Frequently asked questions</h2>
       ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
       <h2>Related products</h2>
-      <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>`;
+      <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>
+      <h2>Guides for your booth</h2>
+      <ul>${guidesForCategory(product.category)
+        .map((slug) => {
+          const g = posts.find((pp) => pp.slug === slug);
+          return g ? `<li><a href="/blog/${slug}">${esc(g.title)}</a></li>` : '';
+        })
+        .join('')}</ul>`;
     return render({
       path: `/products/${product.slug}`,
       title: `${seoTitle.title} | ${BRAND}`,
@@ -1196,6 +1204,20 @@ for (const p of posts) {
     const faqHtml = Array.isArray(p.faqs) && p.faqs.length
       ? `<h2>Frequently asked questions</h2>${p.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
       : '';
+    // Phase 4 internal linking: 4 related products + up to 3 related articles
+    // (by shared tag), with descriptive anchor text.
+    const relProducts = productsForGuide(p.slug)
+      .map((slug) => productList.find((x) => x.slug === slug))
+      .filter(Boolean);
+    const relProductsHtml = relProducts.length
+      ? `<h2>Related products</h2><ul>${relProducts.map((x) => `<li><a href="/products/${x.slug}">${esc(x.name)}</a></li>`).join('')}</ul>`
+      : '';
+    const relArticles = posts
+      .filter((o) => o.slug !== p.slug && !o.canonical && Array.isArray(o.tags) && Array.isArray(p.tags) && o.tags.some((t) => p.tags.includes(t)))
+      .slice(0, 3);
+    const relArticlesHtml = relArticles.length
+      ? `<h2>Related articles</h2><ul>${relArticles.map((o) => `<li><a href="/blog/${o.slug}">${esc(o.title)}</a></li>`).join('')}</ul>`
+      : '';
     const jsonLd = [
       {
         '@context': 'https://schema.org',
@@ -1232,7 +1254,7 @@ for (const p of posts) {
       description: p.seo?.description || p.excerpt,
       ...(img ? { image: img, imageAlt: p.title } : {}),
       body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / <span>${esc(p.title)}</span></nav>
-        <article><h1>${esc(p.title)}</h1>${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}${faqHtml}</article>`,
+        <article><h1>${esc(p.title)}</h1>${p.coverUrl ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.title)}" width="1200" height="800" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:10px;margin:1rem 0">` : ''}${p.html}${faqHtml}${relProductsHtml}${relArticlesHtml}</article>`,
       jsonLd
     });
   });
