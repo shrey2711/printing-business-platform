@@ -426,6 +426,9 @@ export const STATIC_ARTICLES = [
     <tr><td><a href="/products/x-stand-banner">X-stand banner</a></td><td>${startFrom('x-stand-banner')}</td></tr>
     <tr><td><a href="/products/step-and-repeat-backdrop">Step &amp; repeat backdrop</a></td><td>${startFrom('step-and-repeat-backdrop')}</td></tr>
     <tr><td><a href="/products/table-top-banner-stand">Table top banner stand</a></td><td>${startFrom('table-top-banner-stand')}</td></tr>
+    <tr><td><a href="/products/13oz-vinyl-banner">Vinyl / mesh / fabric banners</a> (made to size)</td><td>${startFrom('13oz-vinyl-banner')} ($45 minimum per banner, then by the square foot)</td></tr>
+    <tr><td><a href="/products/feather-angled-flag">Feather &amp; teardrop flags</a></td><td>${startFrom('feather-angled-flag')}</td></tr>
+    <tr><td><a href="/seg-displays">SEG modular kits &amp; large custom displays</a></td><td>Quoted per order</td></tr>
   </tbody>
 </table>
 <p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" is the custom-printed fabric top on its own (for customers who already have a compatible frame); the "Complete Canopy Set" adds the aluminium frame and carry bag — the difference is explained on each product page. Prices above are the starting (from) price for each product; the final price depends on the size, options and production speed you choose.</p>
@@ -441,13 +444,38 @@ export const STATIC_ARTICLES = [
 <h2>Budgeting a complete booth</h2>
 <p>A full booth is the sum of its pieces, not a discounted bundle — each product keeps its own price and configuration. A simple outdoor setup might be a 10×10 canopy plus a table cover; a larger booth adds banner stands and a backdrop. See how the pieces fit together in the <a href="/blog/trade-show-booth-checklist">booth checklist</a>, or browse recommended combinations on the <a href="/trade-show-booth-packages">booth packages</a> page. For a full-booth total, <a href="/quote">request a quote</a> listing everything you need.</p>
 
-<h3>Frequently asked questions</h3>
-<p><strong>What's the cheapest way to start?</strong> A printed canopy top only or a pleated table cover are the lowest entry points; add pieces as your booth grows.</p>
-<p><strong>Do canopies get cheaper in bulk?</strong> Yes — the per-unit canopy price drops at three or more.</p>
-<p><strong>Are there package discounts?</strong> No hidden bundle price — packages are priced as their individual products. Ask for a quote on large or multi-item orders.</p>
+<h2>What affects your price</h2>
+<p>Within each product, a few choices move the final number:</p>
+<ul>
+  <li><strong>Size.</strong> Canopies step up by footprint (10×10 → 10×15 → 10×20); banners are priced by the square foot, so bigger costs more.</li>
+  <li><strong>Options and add-ons.</strong> Canopy walls (up to three, full or half), banner-stand tier (standard vs deluxe), table-cover fit (pleated vs stretch), and finishing like pole pockets all change the price.</li>
+  <li><strong>Sides.</strong> Some products offer single- or double-sided printing; double-sided uses more material.</li>
+  <li><strong>Production speed.</strong> Standard is included; a rush shortens the timeline for a surcharge (below).</li>
+  <li><strong>Quantity.</strong> Canopies and many products drop in per-unit price at higher volumes.</li>
+</ul>
 
-<p>Price a <a href="/custom-canopies">canopy</a> or <a href="/table-covers">table cover</a> instantly, or <a href="/quote">request a quote</a> for banner stands, backdrops or a full booth.</p>
-`
+<h2>Production time, rush and shipping</h2>
+<p>Standard production is <strong>6–8 business days</strong> after you approve your free artwork proof. Need it faster? A <strong>2–3 business day rush</strong> is available on most instant-priced products — it adds roughly 50% on canopies and 55% on made-to-size banners (shown as a dollar amount when you select it). Two things to remember: the rush is on <em>production</em>, not delivery, and <strong>shipping/transit is separate and depends on your address</strong> — a large canopy order ships differently than a single banner. Order early for a fixed event date so production plus transit both land in time.</p>
+
+<h2>How to keep your booth budget down</h2>
+<ul>
+  <li><strong>Buy the top only</strong> if you already own a compatible canopy frame.</li>
+  <li><strong>Order canopies in threes</strong> to hit the volume price.</li>
+  <li><strong>Choose standard production</strong> and order early instead of paying rush.</li>
+  <li><strong>Supply print-ready artwork</strong> to skip the one-time design fee.</li>
+  <li><strong>Start small and grow</strong> — a canopy plus a table cover is a strong, affordable first booth; add banner stands and a backdrop later.</li>
+</ul>
+
+<p>Price a <a href="/custom-canopies">canopy</a>, <a href="/table-covers">table cover</a> or <a href="/banners">banner</a> instantly, or <a href="/quote">request a quote</a> for banner stands, backdrops, SEG kits or a full booth.</p>
+`,
+    faqs: [
+      { q: 'How much does a trade show display cost?', a: 'It depends on the piece. Made-to-size banners start at $45, feather flags at $140, table covers and banner stands in the low hundreds, and complete custom canopy sets in the several-hundreds to low-thousands. Most products show an instant online price as you configure.' },
+      { q: "What's the cheapest way to start a booth?", a: 'A made-to-size banner, a pleated table cover, or a printed canopy top only (if you already own a frame) are the lowest entry points. Add banner stands and a backdrop as your booth grows.' },
+      { q: 'Do canopies get cheaper if I buy several?', a: 'Yes — the per-unit canopy price drops at three or more units, shown live on the product page.' },
+      { q: 'Are there package or bundle discounts?', a: 'There is no hidden bundle price — a booth is priced as its individual products. For large or multi-item orders, request a quote and we will coordinate the set.' },
+      { q: 'How much does rush production add?', a: 'A 2–3 business day rush adds roughly 50% on canopies and 55% on made-to-size banners, shown as a dollar amount when you select it. It speeds production only; shipping/transit is separate.' },
+      { q: 'Is shipping included in the price?', a: 'No. Prices are for the product; shipping/transit is added at checkout or on your quote and depends on the item and destination.' }
+    ]
   },
   // ── Overrides for the obsolete Supabase canopy posts (static wins on slug) ──
   // These drop the retired top-only-discount claim and the old per-wall-limit
