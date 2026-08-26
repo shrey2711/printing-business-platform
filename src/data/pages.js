@@ -23,6 +23,14 @@ export const PAGES = [
     blocks: [
       { p: 'Apex Trade Show is a complete trade show display and event branding supplier serving the United States and Canada. We print your brand across a full booth — custom canopy tents, retractable and X-stand banner stands, step & repeat backdrops and table covers — with a free artwork proof on every order.' },
       { h: 'What we do', p: 'We help businesses, vendors, teams and event organisers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops, table covers and flags all configure for instant online pricing; larger custom display types (SEG modular kits, tension fabric and pop-up displays) are quoted per order.' },
+      { h: 'Why order from Apex', list: [
+        'One supplier for the whole booth — canopy, banners, backdrop, table cover and flags, all printed to match from a single logo file.',
+        'Instant online pricing on most products, so you see the cost as you configure size, walls and finishing — no waiting on a quote for standard items.',
+        'A free artwork proof on every order — nothing prints until you approve it in writing, which protects you from surprises.',
+        'Dye-sublimation printing that bonds ink into the fabric, so colours stay sharp and won’t crack, peel or fade with repeated event use.',
+        'Made to order and shipped across the US and Canada, priced in USD or CAD.',
+        'An in-house design service if you don’t have a print-ready file — send your logo and direction and we build the artwork.'
+      ] },
       { links: [
         { label: 'Trade Show Displays', to: '/trade-show-displays' },
         { label: 'Custom Canopies', to: '/custom-canopies' },
@@ -108,14 +116,29 @@ export const PAGES = [
   {
     slug: 'shipping',
     nav: 'Shipping',
-    title: 'Shipping',
-    stub: true,
+    title: 'Shipping & Delivery Times',
     description:
-      'Apex Trade Show ships custom printed trade show displays — canopy tents, banner stands, backdrops and table covers — across the US and Canada after proof approval. Full shipping details are being finalised — contact us for a delivery estimate.',
+      'How Apex ships trade show displays across the US and Canada — production vs transit time, how your delivery date is calculated, and how rush really works.',
     blocks: [
-      { p: 'We ship custom printed trade show displays — canopy tents, banner stands, backdrops and table covers — across the United States and Canada. Production starts after you approve your free proof.' },
-      { h: 'Production time', p: 'Production time depends on the product, and each product page shows its turnaround. Canopy tents and table covers are 6–8 business days standard, with a 2–3 business day rush option at checkout. Banner stands, backdrops and other displays show their own lead time on the product page.' },
-      { h: 'Delivery', p: 'Full shipping details — carriers, transit times and costs by destination — are being finalised. For a delivery estimate to your city before you order, please contact us and we will confirm.' }
+      { p: 'We ship custom printed trade show displays — canopy tents, retractable and X-stand banner stands, step & repeat backdrops, table covers, banners and flags — across the United States and Canada. Everything is made to order: nothing is printed or shipped until you approve your free artwork proof.' },
+      { h: 'Your delivery date has two parts', p: 'Because each item is printed for you, the day it arrives is made up of two separate stages — production time (printing and finishing your order) and transit time (the courier moving it from our facility to your address). Your total time to delivery is production time plus transit time. The two are separate, so it helps to plan around both.' },
+      { h: 'How to estimate your arrival date', list: [
+        'Start from the day you approve your proof in writing — production time is measured from approval, not from when you place the order.',
+        'Add the production time shown on the product page (see below).',
+        'Add transit time for the courier to reach your destination.',
+        'That gives your estimated arrival. Ordering early and approving your proof quickly is the surest way to hit an event date.'
+      ] },
+      { h: 'Production time', p: 'Production time depends on the product, and each product page shows its own turnaround. Canopy tents and table covers are 6–8 business days standard, with a 2–3 business day rush option at checkout. Banners, banner stands, backdrops, flags and other displays show their individual lead time on the product page. Production time is counted in business days and starts when you approve your proof.' },
+      { h: 'Transit time', p: 'Transit time is added after production and depends on where your order ships — a nearby destination arrives sooner than a cross-country or cross-border one. Transit time is not the same as production time: it is the courier’s delivery window once your finished order leaves our facility. When your order ships, you’ll receive tracking so you can follow it to your door.' },
+      { h: 'Rush is faster production — not faster shipping', p: 'A rush option speeds up production (for example, 2–3 business days instead of 6–8 on canopy tents and table covers). It does not shorten courier transit time. If your event is close, rush production gets your order printed sooner, but you still need to allow for the courier to deliver — so factor transit into a tight deadline as well.' },
+      { h: 'Where we ship', p: 'We ship across the United States and Canada, to your business, venue or hotel address. Apex is online-only — there is no storefront or will-call pickup — so every order is shipped to the address you provide at checkout. Canopy pricing is available in USD or CAD.' },
+      { h: 'Shipping cost and a delivery estimate', p: 'Shipping cost depends on the destination, size and weight of your order. If you’d like a delivery estimate — production plus transit — to a specific city or by a specific event date before you order, contact us with your address and in-hands date and we’ll confirm what’s achievable.' },
+      { h: 'When your order arrives', p: 'Check your order on delivery. If anything is damaged in transit or not right, tell us within five (5) business days so we can help — see our Returns, Refunds & Reprints page for how that works.' },
+      { links: [
+        { label: 'Returns, Refunds & Reprints', to: '/returns' },
+        { label: 'How the free artwork proof works', to: '/free-artwork-proof' },
+        { label: 'Request a delivery estimate', to: '/quote' }
+      ] }
     ]
   },
   {

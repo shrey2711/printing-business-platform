@@ -10,7 +10,7 @@ FLAGGED for owner review._
 - Location pages total: **340**
 - Indexable: **124**  ·  noindex (already gated): **216**
 - In a sitemap: **117**
-- Flagged for review (indexed + highly templated): **44**
+- Flagged for review (indexed + highly templated): **60**
 - Duplication% = share of 6-word shingles that also appear on another location page.
 
 ## How the sitemap already gates thin pages
@@ -21,21 +21,25 @@ which of the **indexed** pages still read as templated so the owner can either a
 genuinely city-specific value (real venues, freight notes, local projects — never
 invented) or downgrade them to noindex.
 
-## Flagged for review (44)
+## Flagged for review (60)
 
 | Path | Words | Dup% | Unique H | Index | Sitemap | Links | Flag |
 |---|---|---|---|---|---|---|---|
-| /banner-stands/anaheim | 237 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/chicago | 232 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/dallas | 242 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/houston | 239 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/las-vegas | 268 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/los-angeles | 246 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/miami | 236 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/new-york | 245 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/orlando | 241 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/san-diego | 247 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/washington-dc | 261 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
+| /banner-stands/anaheim | 1046 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/atlanta | 1071 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/baltimore | 969 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/boston | 1029 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/chicago | 1110 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/dallas | 1064 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/houston | 1114 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/las-vegas | 1482 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/los-angeles | 1120 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/miami | 1098 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/new-york | 1142 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/orlando | 1202 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/philadelphia | 1033 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/san-diego | 1055 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/washington-dc | 1092 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
 | /locations/georgia | 591 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
 | /locations/kansas | 590 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
 | /locations/maine | 586 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
@@ -51,36 +55,55 @@ invented) or downgrade them to noindex.
 | /locations/saskatchewan | 576 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
 | /locations/south-dakota | 589 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
 | /locations/yukon | 567 | 86% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/anaheim | 257 | 85% | 1 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/new-york | 265 | 86% | 1 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/san-diego | 267 | 86% | 1 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /trade-show-displays/anaheim | 304 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/atlanta | 304 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/baltimore | 299 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/boston | 303 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/chicago | 299 | 86% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/dallas | 309 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/houston | 306 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/las-vegas | 335 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/los-angeles | 313 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/miami | 303 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/new-york | 312 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/orlando | 308 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/philadelphia | 299 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/san-diego | 314 | 89% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/washington-dc | 328 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/anaheim | 1066 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/atlanta | 1091 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/baltimore | 989 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/boston | 1049 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/chicago | 1130 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/dallas | 1084 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/houston | 1134 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/las-vegas | 1502 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/los-angeles | 1140 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/miami | 1118 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/new-york | 1162 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/orlando | 1222 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/philadelphia | 1053 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/san-diego | 1075 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/washington-dc | 1112 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-displays/anaheim | 1113 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/atlanta | 1138 | 96% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/baltimore | 1036 | 96% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/boston | 1096 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/chicago | 1177 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/dallas | 1131 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/houston | 1181 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/las-vegas | 1549 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/los-angeles | 1187 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/miami | 1165 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/new-york | 1209 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/orlando | 1269 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/philadelphia | 1100 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/san-diego | 1122 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/washington-dc | 1159 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
 
 ## All location pages (worst duplication first)
 
 | Path | Words | Dup% | Unique H | Index | Sitemap | Links | Flag |
 |---|---|---|---|---|---|---|---|
-| /trade-show-displays/san-antonio | 317 | 89% | 1 | noindex | no | 41 | noindex (already gated) |
-| /trade-show-displays/new-orleans | 320 | 88% | 1 | noindex | no | 41 | noindex (already gated) |
+| /trade-show-displays/denver | 1095 | 97% | 1 | noindex | no | 46 | noindex (already gated) |
+| /trade-show-displays/new-orleans | 1129 | 97% | 1 | noindex | no | 46 | noindex (already gated) |
+| /trade-show-displays/san-antonio | 1064 | 97% | 1 | noindex | no | 46 | noindex (already gated) |
+| /banner-stands/denver | 1028 | 96% | 1 | noindex | no | 43 | noindex (already gated) |
+| /banner-stands/new-orleans | 1062 | 96% | 1 | noindex | no | 43 | noindex (already gated) |
+| /banner-stands/phoenix | 993 | 96% | 1 | noindex | no | 43 | noindex (already gated) |
+| /banner-stands/san-antonio | 997 | 96% | 1 | noindex | no | 43 | noindex (already gated) |
+| /trade-show-canopies/denver | 1048 | 96% | 1 | noindex | no | 42 | noindex (already gated) |
+| /trade-show-canopies/new-orleans | 1082 | 96% | 1 | noindex | no | 42 | noindex (already gated) |
+| /trade-show-canopies/san-antonio | 1017 | 96% | 1 | noindex | no | 42 | noindex (already gated) |
+| /trade-show-displays/phoenix | 1060 | 96% | 1 | noindex | no | 46 | noindex (already gated) |
+| /trade-show-canopies/phoenix | 1013 | 95% | 1 | noindex | no | 42 | noindex (already gated) |
 | /locations/kansas/kansas-city | 102 | 87% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/missouri/kansas-city | 102 | 87% | 0 | noindex | no | 30 | noindex (already gated) |
-| /trade-show-displays/denver | 302 | 87% | 1 | noindex | no | 41 | noindex (already gated) |
-| /trade-show-displays/phoenix | 300 | 87% | 1 | noindex | no | 41 | noindex (already gated) |
-| /banner-stands/san-antonio | 250 | 86% | 1 | noindex | no | 38 | noindex (already gated) |
 | /locations/colorado/aurora | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/delaware/newark | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/georgia/columbus | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
@@ -95,18 +118,11 @@ invented) or downgrade them to noindex.
 | /locations/ohio/columbus | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/oregon/portland | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/washington/bellevue | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /trade-show-canopies/new-orleans | 273 | 86% | 1 | noindex | no | 37 | noindex (already gated) |
-| /trade-show-canopies/san-antonio | 270 | 86% | 1 | noindex | no | 37 | noindex (already gated) |
-| /banner-stands/new-orleans | 253 | 85% | 1 | noindex | no | 38 | noindex (already gated) |
 | /locations/new-jersey/newark | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/new-york/rochester | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/south-carolina/charleston | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/south-carolina/columbia | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
 | /locations/west-virginia/charleston | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
-| /banner-stands/denver | 235 | 84% | 1 | noindex | no | 38 | noindex (already gated) |
-| /banner-stands/phoenix | 233 | 84% | 1 | noindex | no | 38 | noindex (already gated) |
-| /trade-show-canopies/denver | 255 | 84% | 1 | noindex | no | 37 | noindex (already gated) |
-| /trade-show-canopies/phoenix | 253 | 84% | 1 | noindex | no | 37 | noindex (already gated) |
 | /locations/michigan/grand-rapids | 102 | 78% | 1 | noindex | no | 30 | noindex (already gated) |
 | /locations/new-jersey/atlantic-city | 105 | 77% | 1 | noindex | no | 30 | noindex (already gated) |
 | /locations/new-jersey/jersey-city | 105 | 77% | 1 | noindex | no | 30 | noindex (already gated) |
@@ -287,44 +303,61 @@ invented) or downgrade them to noindex.
 | /locations/newfoundland-and-labrador/corner-brook | 108 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
 | /locations/newfoundland-and-labrador/mount-pearl | 108 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
 | /locations/south-dakota/sioux-falls | 105 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
+| /locations/washington-dc/washington | 104 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
 | /locations/wisconsin/green-bay | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
 | /locations/northwest-territories/yellowknife | 101 | 72% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/washington-dc/washington | 104 | 72% | 1 | noindex | no | 30 | noindex (already gated) |
-| /trade-show-displays/san-diego | 314 | 89% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/anaheim | 304 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/los-angeles | 313 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/miami | 303 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/new-york | 312 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/washington-dc | 328 | 88% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
+| /banner-stands/chicago | 1110 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/houston | 1114 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/las-vegas | 1482 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/new-york | 1142 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/orlando | 1202 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/san-diego | 1055 | 97% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /trade-show-displays/anaheim | 1113 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/boston | 1096 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/chicago | 1177 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/dallas | 1131 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/houston | 1181 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/las-vegas | 1549 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/los-angeles | 1187 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/miami | 1165 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/new-york | 1209 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/orlando | 1269 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/philadelphia | 1100 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/san-diego | 1122 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/washington-dc | 1159 | 97% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /banner-stands/anaheim | 1046 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/atlanta | 1071 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/baltimore | 969 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/boston | 1029 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/dallas | 1064 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/los-angeles | 1120 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/miami | 1098 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/philadelphia | 1033 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /banner-stands/washington-dc | 1092 | 96% | 1 | index | yes | 43 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/anaheim | 1066 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/chicago | 1130 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/dallas | 1084 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/houston | 1134 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/las-vegas | 1502 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/los-angeles | 1140 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/miami | 1118 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/new-york | 1162 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/orlando | 1222 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/philadelphia | 1053 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/san-diego | 1075 | 96% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-displays/atlanta | 1138 | 96% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-displays/baltimore | 1036 | 96% | 1 | index | yes | 46 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/atlanta | 1091 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/baltimore | 989 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/boston | 1049 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
+| /trade-show-canopies/washington-dc | 1112 | 95% | 1 | index | yes | 42 | REVIEW: indexed, highly templated |
 | /locations/nunavut | 562 | 87% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /trade-show-displays/atlanta | 304 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/baltimore | 299 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/boston | 303 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/dallas | 309 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/houston | 306 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/las-vegas | 335 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/orlando | 308 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /trade-show-displays/philadelphia | 299 | 87% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
 | /locations/north-dakota | 585 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
 | /locations/northwest-territories | 573 | 86% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
 | /locations/nova-scotia | 583 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
 | /locations/ontario | 590 | 86% | 4 | index | yes | 37 | REVIEW: indexed, highly templated |
 | /locations/saskatchewan | 576 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
 | /locations/yukon | 567 | 86% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/new-york | 265 | 86% | 1 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/san-diego | 267 | 86% | 1 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /trade-show-displays/chicago | 299 | 86% | 1 | index | yes | 41 | REVIEW: indexed, highly templated |
-| /banner-stands/anaheim | 237 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/chicago | 232 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/dallas | 242 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/houston | 239 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/las-vegas | 268 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/los-angeles | 246 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/miami | 236 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/new-york | 245 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/orlando | 241 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/san-diego | 247 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
-| /banner-stands/washington-dc | 261 | 85% | 1 | index | yes | 38 | REVIEW: indexed, highly templated |
 | /locations/georgia | 591 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
 | /locations/kansas | 590 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
 | /locations/maine | 586 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
@@ -333,11 +366,6 @@ invented) or downgrade them to noindex.
 | /locations/new-brunswick | 584 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
 | /locations/prince-edward-island | 585 | 85% | 4 | index | yes | 34 | REVIEW: indexed, highly templated |
 | /locations/south-dakota | 589 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/anaheim | 257 | 85% | 1 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /banner-stands/atlanta | 237 | 84% | 1 | index | yes | 38 | keep: has distinct content |
-| /banner-stands/baltimore | 232 | 84% | 1 | index | yes | 38 | keep: has distinct content |
-| /banner-stands/boston | 236 | 84% | 1 | index | yes | 38 | keep: has distinct content |
-| /banner-stands/philadelphia | 232 | 84% | 1 | index | yes | 38 | keep: has distinct content |
 | /locations/alaska | 586 | 84% | 4 | index | yes | 35 | keep: has distinct content |
 | /locations/florida/orlando | 361 | 84% | 3 | index | no | 34 | keep: has distinct content |
 | /locations/hawaii | 584 | 84% | 4 | index | yes | 35 | keep: has distinct content |
@@ -356,17 +384,6 @@ invented) or downgrade them to noindex.
 | /locations/west-virginia | 588 | 84% | 4 | index | yes | 35 | keep: has distinct content |
 | /locations/wisconsin | 583 | 84% | 4 | index | yes | 35 | keep: has distinct content |
 | /locations/wyoming | 591 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /trade-show-canopies/baltimore | 252 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/boston | 256 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/chicago | 252 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/dallas | 262 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/houston | 259 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/las-vegas | 288 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/los-angeles | 266 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/miami | 256 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/orlando | 261 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/philadelphia | 252 | 84% | 1 | index | yes | 37 | keep: has distinct content |
-| /trade-show-canopies/washington-dc | 281 | 84% | 1 | index | yes | 37 | keep: has distinct content |
 | /locations/alabama | 589 | 83% | 4 | index | yes | 36 | keep: has distinct content |
 | /locations/alberta | 590 | 83% | 4 | index | yes | 36 | keep: has distinct content |
 | /locations/arizona | 600 | 83% | 4 | index | yes | 36 | keep: has distinct content |
@@ -391,7 +408,6 @@ invented) or downgrade them to noindex.
 | /locations/virginia | 591 | 83% | 4 | index | yes | 36 | keep: has distinct content |
 | /locations/washington | 596 | 83% | 4 | index | yes | 36 | keep: has distinct content |
 | /locations/washington-dc | 588 | 83% | 4 | index | yes | 33 | keep: has distinct content |
-| /trade-show-canopies/atlanta | 257 | 83% | 1 | index | yes | 37 | keep: has distinct content |
 | /locations/california/san-diego | 373 | 82% | 3 | index | no | 34 | keep: has distinct content |
 | /locations/california/san-francisco | 378 | 82% | 3 | index | yes | 34 | keep: has distinct content |
 | /locations/colorado | 598 | 82% | 4 | index | yes | 36 | keep: has distinct content |

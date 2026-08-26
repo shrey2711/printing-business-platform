@@ -198,6 +198,12 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
     'Heavy-duty aluminium hex frame',
     'Free artwork proof before production'
   ],
+  // Config-aware: the kit choice (full set vs graphic-only) changes what ships.
+  whatsIncluded: [
+    'Complete set (frame + graphic): your custom-printed canopy top, a heavy-duty aluminium hex frame with telescopic legs, and a carry bag.',
+    'Graphic-only option: the custom-printed canopy top on its own, to fit a compatible frame you already have.',
+    'Any printed full or half walls you add (up to 3 total, in any mix of full and half height).'
+  ],
   // Production time (after proof approval) — shipping/transit is additional.
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+50%). Shipping additional.',
   // Cross-sell the rest of the booth (complete-solution internal linking).
@@ -1242,6 +1248,11 @@ const products = [
       'Single-sided full-colour print',
       'Made to any size — up to 50 ft on one side'
     ],
+    whatsIncluded: [
+      'One custom-printed 13oz scrim vinyl banner, made to your exact size.',
+      'Edge finishing as configured — a welded hem with grommets every 2 ft is included; pole pockets and other edge options apply where you select them.',
+      'No pole, stand or hardware — the banner ships ready to hang by its grommets or pocket.'
+    ],
     turnaround: 'Ships in 2–4 business days',
     seoTitle: '13oz Vinyl Banner | Full-Colour Print',
     seoDescription:
@@ -1281,6 +1292,11 @@ const products = [
       'Welded hem + grommets every 2 ft included',
       'Made to any size — up to 50 ft on one side'
     ],
+    whatsIncluded: [
+      'One custom-printed 18oz blockout vinyl banner, made to your exact size — single- or double-sided as configured.',
+      'Edge finishing as configured — a welded hem with grommets every 2 ft is included; pole pockets and other edge options apply where you select them.',
+      'No pole, stand or hardware — the banner ships ready to hang by its grommets or pocket.'
+    ],
     turnaround: 'Ships in 2–4 business days',
     seoTitle: '18oz Blockout Banner | Double-Sided',
     seoDescription:
@@ -1319,6 +1335,11 @@ const products = [
       'Welded hem + grommets every 2 ft included',
       'Made to any size — up to 50 ft on one side'
     ],
+    whatsIncluded: [
+      'One custom-printed perforated mesh vinyl banner, made to your exact size.',
+      'Edge finishing as configured — a welded hem with grommets every 2 ft is included; pole pockets and other edge options apply where you select them.',
+      'No pole, stand or hardware — the banner ships ready to zip-tie or hang to a fence, rail or frame by its grommets.'
+    ],
     turnaround: 'Ships in 2–4 business days',
     seoTitle: 'Mesh Banner | Perforated Wind-Resistant',
     seoDescription:
@@ -1356,6 +1377,11 @@ const products = [
       'Packs & travels without creasing',
       'Sewn hem finished edges',
       'Made to any size — up to 8 ft on one side'
+    ],
+    whatsIncluded: [
+      'One custom dye-sublimated 9oz wrinkle-free fabric banner, made to your exact size.',
+      'Edge finishing as configured — sewn hem edges included; a sewn Velcro edge or pole pocket where you select it.',
+      'No pole, stand or hardware — the banner ships ready to hang, Velcro to a frame, or slide onto a pole per your finishing choice.'
     ],
     turnaround: 'Ships in 3–5 business days',
     seoTitle: '9oz Wrinkle-Free Fabric Banner',

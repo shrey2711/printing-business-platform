@@ -44,6 +44,14 @@ export default function ProductTabs({ product }) {
             <ul className="ptab-list">
               {(product.features || []).map((f) => <li key={f}>{f}</li>)}
             </ul>
+            {Array.isArray(product.whatsIncluded) && product.whatsIncluded.length > 0 && (
+              <>
+                <h3>What&apos;s in the box</h3>
+                <ul className="ptab-list">
+                  {product.whatsIncluded.map((w) => <li key={w}>{w}</li>)}
+                </ul>
+              </>
+            )}
             {Array.isArray(product.applications) && product.applications.length > 0 && (
               <>
                 <h3>Applications &amp; best uses</h3>

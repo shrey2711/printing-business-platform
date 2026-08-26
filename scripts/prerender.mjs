@@ -688,6 +688,7 @@ for (const sol of SOLUTIONS) {
       <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a></li>`).join('')}</ul>
       <h2>Wall &amp; print setup</h2>
       <p>${esc(g.walls)}</p>
+      ${g.care ? `<h2>Setup, care &amp; durability</h2>\n      <p>${esc(g.care)}</p>` : ''}
       <h2>Order your ${esc(sol.title.toLowerCase().replace(/ tents$/, ' tent'))}</h2>
       <p>Pick a size and configure walls, print and delivery for an instant price:</p>
       <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>
@@ -823,6 +824,7 @@ for (const summary of productList) {
         ? `<strong>Starting at $${startingPrice}${priceDisp.startingNote ? ` — ${esc(priceDisp.startingNote.toLowerCase())}` : ''}.</strong>${priceDisp.full ? ` ${esc(priceDisp.full.label)}: $${priceDisp.full.price}.` : ''}`
         : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}</p>
       <h2>Features</h2><ul>${product.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+      ${Array.isArray(product.whatsIncluded) && product.whatsIncluded.length ? `<h2>What's in the box</h2><ul>${product.whatsIncluded.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>` : ''}
       ${Array.isArray(product.applications) && product.applications.length ? `<h2>Applications</h2><ul>${product.applications.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
       <h2>Specifications</h2>
       ${specs.map(([k, v]) => `<p><strong>${esc(k)}:</strong> ${esc(v)}</p>`).join('')}

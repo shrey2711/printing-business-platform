@@ -121,7 +121,9 @@ export const SOLUTIONS = [
       sizing:
         'Most single-stall market vendors do well with a 10×10. If you carry a lot of product or need two tables across the front, size up to a 10×15.',
       walls:
-        'A back wall plus one half-height side wall is the popular market setup — product display and wind protection while the front and one side stay open to browsers.'
+        'A back wall plus one half-height side wall is the popular market setup — product display and wind protection while the front and one side stay open to browsers.',
+      care:
+        'The pop-up frame is aluminium and opens accordion-style — two people set it up in a few minutes with no tools, and it packs back into a wheeled carry bag between market days. The graphics are dye-sublimated into 600D polyester, so the ink is bonded into the fabric rather than sitting on top: colours stay bright and will not crack, peel or fade over a season of Saturdays. Spot-clean the top and walls with mild soap and water and let it dry fully before packing so it stays fresh. On an open lot, always add weights on each leg to hold it against a gust.'
     }
   },
   {
@@ -142,7 +144,9 @@ export const SOLUTIONS = [
       sizing:
         'A 10×10 covers a single expo booth; step up to a 10×20 for a double-booth space or a walk-through layout with displays down both sides.',
       walls:
-        'A full printed back wall is the key trade-show piece — it becomes your backdrop in every photo. Add half side walls to frame the booth without closing it off.'
+        'A full printed back wall is the key trade-show piece — it becomes your backdrop in every photo. Add half side walls to frame the booth without closing it off.',
+      care:
+        'The frame is heavy-duty aluminium with a pop-up hex design, so it stands square for a multi-day show and travels between events in a wheeled bag. Because the top and walls are dye-sublimated into 600D polyester, the print holds the same brand colours as your indoor graphics and will not crack, peel or fade under sun across a show season. Between shows, spot-clean any marks with mild soap and water and let the fabric dry fully before it goes back in the bag. Outdoors on pavement, anchor every leg with weights — an exhibitor tent catches wind like a sail.'
     }
   },
   {
@@ -163,7 +167,9 @@ export const SOLUTIONS = [
       sizing:
         'A 10×10 suits a single team bench or tailgate spot; a 10×15 or 10×20 covers a larger squad, spectators or a hospitality area.',
       walls:
-        'Sports setups usually stay open for airflow and access. Add a single back wall in team colours as a backdrop, or half walls to block low sun and wind.'
+        'Sports setups usually stay open for airflow and access. Add a single back wall in team colours as a backdrop, or half walls to block low sun and wind.',
+      care:
+        'The aluminium pop-up frame goes up and comes down fast so a couple of parents or players can handle it before and after a game, and it packs into a wheeled bag for the trip home. Team colours and the logo are dye-sublimated into 600D polyester, so they take repeated sun and travel without cracking, peeling or fading through the season. Wipe down mud or drink spills with mild soap and water and let it dry before packing so it does not sit damp. In an open field or tailgate lot, always weight or stake each leg — exposed ground is where tents blow over.'
     }
   },
   {
@@ -184,7 +190,9 @@ export const SOLUTIONS = [
       sizing:
         'A 10×10 covers a single service point; a 10×15 or 10×20 adds room for prep, a second server or a covered queue and seating.',
       walls:
-        'A back wall keeps prep and supplies out of sight; add one side wall for wind while the service front stays open.'
+        'A back wall keeps prep and supplies out of sight; add one side wall for wind while the service front stays open.',
+      care:
+        'The pop-up aluminium frame sets up and breaks down quickly between events, which matters when you are working a run of markets and festivals, and it packs into a wheeled bag. The valance and walls are dye-sublimated into 600D polyester, so a printed menu stays sharp and colour-true and will not crack, peel or fade over a busy season. The fabric wipes down: clean grease or food splashes with mild soap and water and let it dry fully before packing so it does not develop odour or mildew. Anchor every leg with weights outdoors so the tent stays put over a hot service line.'
     }
   },
   {
@@ -205,7 +213,9 @@ export const SOLUTIONS = [
       sizing:
         'A 10×10 works for a welcome or registration desk; a 10×15 or 10×20 suits fundraisers, bake sales or multi-table setups.',
       walls:
-        'Add a back wall for a backdrop and shade, and half side walls to block wind at outdoor open days — front open so people can walk up.'
+        'Add a back wall for a backdrop and shade, and half side walls to block wind at outdoor open days — front open so people can walk up.',
+      care:
+        'The aluminium pop-up frame is designed for a rotating group of volunteers — it opens accordion-style in a few minutes with no tools and packs into a wheeled bag for storage between events. The organisation name and logo are dye-sublimated into 600D polyester, so one tent looks the same at every fundraiser and open day through the year without cracking, peeling or fading. Spot-clean with mild soap and water and let the fabric dry fully before it goes back in the bag so it stores clean. At outdoor events, weight or stake each leg so it stays safe around families and children.'
     }
   },
   {
@@ -226,7 +236,9 @@ export const SOLUTIONS = [
       sizing:
         'A 10×10 covers a sign-in or break point; a 10×15 or 10×20 shades a larger crew, a briefing area or equipment.',
       walls:
-        'Add a back and side wall for wind and sun protection; keep the working front open for access. Always anchor with weights or stakes on site.'
+        'Add a back and side wall for wind and sun protection; keep the working front open for access. Always anchor with weights or stakes on site.',
+      care:
+        'The frame is heavy-duty aluminium built for daily setup and teardown on rough ground, and it folds into a wheeled bag to move between sites. The company name and logo are dye-sublimated into 600D polyester, so the branding survives sun, dust and repeated handling without cracking, peeling or fading. Hose off or wipe down site dirt with mild soap and water and let it dry fully before packing so it does not sit damp in the bag. On exposed or windy ground, always anchor every leg with weights or stakes — on an active site an unsecured tent is a hazard.'
     }
   }
 ];

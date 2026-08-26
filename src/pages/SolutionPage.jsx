@@ -92,6 +92,15 @@ export default function SolutionPage() {
         <p className="muted">{g.walls}</p>
       </section>
 
+      {g.care && (
+        <section className="steps-section">
+          <div className="section-head">
+            <h2>Setup, care &amp; durability</h2>
+          </div>
+          <p className="muted">{g.care}</p>
+        </section>
+      )}
+
       <section className="size-section">
         <div className="section-head">
           <h2>Order your canopy tent</h2>
