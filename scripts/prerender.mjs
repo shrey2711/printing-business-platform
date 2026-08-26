@@ -926,7 +926,12 @@ routes.push(() => {
     <h2>United States</h2>
     <ul>${us.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
     <h2>Canada</h2>
-    <ul>${ca.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>`;
+    <ul>${ca.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
+    <h2>Order for your city</h2>
+    <p>Apex prints to order and ships across the US and Canada — there's no local storefront to visit. Configure a
+    <a href="/custom-canopies">canopy</a>, <a href="/banner-stands">banner stand</a>, <a href="/backdrops">backdrop</a>
+    or <a href="/table-covers">table cover</a> for an instant online price and ship it to your venue, hotel or business
+    address, or <a href="/quote">request a quote</a> for a full booth. Every order includes a free artwork proof before printing.</p>`;
   return render({
     path: '/locations',
     title: `Custom Canopy Tents Across the US & Canada | ${BRAND}`,

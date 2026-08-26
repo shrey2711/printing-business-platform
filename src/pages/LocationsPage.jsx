@@ -52,6 +52,15 @@ export default function LocationsPage() {
           </section>
         );
       })}
+
+      <section className="cta-banner">
+        <h2>Order for your city</h2>
+        <p>Apex prints to order and ships across the US &amp; Canada — no local storefront to visit. Get an instant price or a fast quote and we'll ship to your venue, hotel or business address, with a free artwork proof on every order.</p>
+        <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link className="btn btn-light" to="/products">Shop all displays</Link>
+          <Link className="btn btn-outline" to="/quote">Request a quote</Link>
+        </div>
+      </section>
     </main>
   );
 }
