@@ -7,9 +7,11 @@
     "dev:api": "nodemon backend/server.js",
     "build": "node scripts/verify-media.mjs && node scripts/verify-banner-pricing.mjs && node scripts/verify-prerender-meta.mjs && vite build && node scripts/prerender.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
+    "audit:locations": "node scripts/audit-locations.mjs",
+    "test:seo": "node scripts/test-seo-invariants.mjs",
+    "test": "npm run build && node scripts/verify-tension-podium-pricing.mjs && npm run audit:seo && npm run audit:locations && npm run test:seo",
     "preview": "vite preview",
-    "start": "node backend/server.js",
-    "audit:locations": "node scripts/audit-locations.mjs"
+    "start": "node backend/server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

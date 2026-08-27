@@ -81,13 +81,13 @@ canonical, `lang` set, correct index/noindex, valid JSON-LD (parses), no nested
 meta, no placeholder brand, **no broken or redirected internal links**, no
 private route in any sitemap.
 
-**43 non-critical warnings (Phase 2 / 11 backlog):**
+**Warnings: 43 at baseline → 20 after Phase 2** (all remaining are the generic-OG item):
 
-| Warning | Count | Meaning | Fix phase |
-|---|---|---|---|
-| `og:image is generic SVG` | 20 | page falls back to generic OG art, no route-specific raster | 11 (image) / 2 |
-| `description too long (>160)` | 19 | over the 140–160 target | 2 |
-| `title too long (>60)` | 4 | over the 50–60 target | 2 |
+| Warning | Baseline | Now | Meaning | Fix phase |
+|---|---|---|---|---|
+| `og:image is generic SVG` | 20 | 20 | page falls back to generic OG art, no route-specific raster | 11 (image) |
+| `description too long (>160)` | 19 | 0 | trimmed to target in Phase 2 | 2 ✅ |
+| `title too long (>60)` | 4 | 0 | trimmed / `fitTitle()` guard in Phase 2 | 2 ✅ |
 
 ### Structured data currently emitted (per page type)
 - **Home:** `OnlineStore` (+ `ContactPoint`, `areaServed` US/CA, logo, email, tel) + `WebSite`. FAQPage on visible home FAQ. *No `SearchAction`* (no public site search — correct).
@@ -118,7 +118,7 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 | Phase | Status | Evidence / gap |
 |---|---|---|
 | 1 Baseline inventory | ✅ | this document |
-| 2 Central SEO helper | 🟡 | `seo-meta.mjs` + prerender centralize meta/canonical/OG/Twitter/robots. Gaps: 19 long descriptions, 4 long titles, 20 generic-OG pages; **no automated meta test** (Phase 15) |
+| 2 Central SEO helper | ✅ | `seo-meta.mjs` + prerender centralize meta/canonical/OG/Twitter/robots. **Done (commit after baseline):** all 4 long titles + 20 long descriptions trimmed; added `fitTitle()` length-guard for template titles. Remaining: 20 generic-OG pages (Phase 11, needs raster art) |
 | 3 Structured data | ✅ | all page types emit valid JSON-LD (see §4); connect via `@id`; no fake review schema |
 | 4 Content contradictions | 🟡 | shipping model, "what's in the box", production-vs-transit already fixed this session. **Open sweep:** Standard Retractable size spec-vs-FAQ, US/CA spelling consistency, "Shipping additional." wording |
 | 5 PDP IA & conversion | 🟡 | tabs (desc/specs/template/FAQ) + gallery + what's-in-the-box exist. Open: structured verified-field block (packed dims, weight, setup people) with config placeholders |
@@ -131,7 +131,7 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 | 12 Accessibility/perf | ⬜ | mobile hardening done; open: img width/height + LCP preload + alt coverage test |
 | 13 Trust components | 🟡 | free-proof / ordering / production-vs-shipping sections exist. 🔒 real reviews/case studies/UGC (placeholders only) |
 | 14 Sitemaps & robots | ✅ | 5 sitemaps valid, escaped, no private/redirect URLs; **verify `robots.txt` rules (Phase 14 open item)** |
-| 15 Automated testing | 🟡 | build verifiers + 2 audits. ⬜ **no metadata/schema/broken-link unit-test suite** |
+| 15 Automated testing | ✅ | **Done:** `scripts/test-seo-invariants.mjs` + `npm test` gate (build verifiers → tension/podium → audit:seo → audit:locations → test:seo). Asserts H1 count, canonical, index, unique+length-bounded title/desc, JSON-LD parse, img alt, blog dates/author/publisher, product currency + breadcrumb hierarchy, no private route in sitemap |
 | 16 Final QA & docs | ⬜ | pending completion of open phases |
 
 ---
