@@ -899,7 +899,8 @@ const tensionDisplay = {
     { src: '/images/displays/straight-tension-fabric-display-single-sided.webp', alt: 'Single-sided straight tension fabric display with a printed front and plain back' },
     { src: '/images/displays/straight-tension-fabric-display-frame.webp', alt: 'Lightweight aluminum tube frame of a straight tension fabric display' },
     { src: '/images/displays/straight-tension-fabric-display-frame-connector.webp', alt: 'Push-button aluminum pole connection detail of the tension fabric display frame' },
-    { src: '/images/displays/straight-tension-fabric-display-packaging.webp', alt: 'Straight tension fabric display packaging — soft canvas carry bag and hard case that converts to a podium' }
+    { src: '/images/displays/straight-tension-fabric-display-packaging.webp', alt: 'Straight tension fabric display packaging — soft canvas carry bag and hard case that converts to a podium' },
+    { src: '/images/displays/straight-tension-fabric-display-lifestyle-food.webp', alt: 'Straight tension fabric display with a full-color food-brand graphic at an exhibition booth' }
   ],
   features: [
     'Lightweight aluminum tube frame',
