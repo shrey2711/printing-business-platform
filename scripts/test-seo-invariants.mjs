@@ -127,6 +127,10 @@ if (!existsSync(feedPath)) {
     const id = (item.match(/<g:id>([^<]*)<\/g:id>/) || [])[1] || '(no id)';
     const price = (item.match(/<g:price>([^<]*)<\/g:price>/) || [])[1] || '';
     const link = (item.match(/<link>([^<]*)<\/link>/) || [])[1] || '';
+    // Required Merchant Center fields present on every item.
+    for (const [tag, re] of [['title', /<title>[^<]+<\/title>/], ['description', /<description>[^<]+<\/description>/], ['g:image_link', /<g:image_link>https?:[^<]+<\/g:image_link>/], ['g:availability', /<g:availability>(in_stock|out_of_stock|preorder|backorder)<\/g:availability>/], ['g:condition', /<g:condition>new<\/g:condition>/], ['g:brand', /<g:brand>[^<]+<\/g:brand>/], ['g:identifier_exists', /<g:identifier_exists>(no|yes)<\/g:identifier_exists>/]]) {
+      if (!re.test(item)) failures.push(`feed ${id} — missing/invalid ${tag}`);
+    }
     if (!/^\d+\.\d{2} USD$/.test(price)) failures.push(`feed ${id} — bad price format "${price}"`);
     const path = link.replace(ORIGIN, '').replace(/\/$/, '');
     const file = `${DIST}${path}/index.html`;

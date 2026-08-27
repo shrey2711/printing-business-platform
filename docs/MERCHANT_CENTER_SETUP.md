@@ -56,3 +56,47 @@ Per item: `g:id` (slug), `title`, `description`, `link` (canonical product URL),
 
 Do **not** claim Merchant Center approval anywhere on the site until Google has
 actually approved the account and items.
+
+---
+
+## Operations
+
+### How to generate the feed
+The feed is generated at build time — no separate command:
+```
+npm run build          # writes dist/feed.xml from listProducts()
+```
+Feed URL (after deploy): `https://www.apextradeshow.com/feed.xml`.
+
+### Currency handling (USD now; CAD is owner/future)
+- The current feed is **USD** for the **US** target. Every `g:price` matches the
+  USD "Starting at $X" on the product page (asserted by `npm test`).
+- The site can display **CAD** via a live FX conversion. A CAD feed must show a
+  price that matches what the CA-market landing page charges — but a live-FX
+  number is not stable enough to submit as a fixed feed price. **To ship a CAD
+  feed, the owner must provide either a fixed CAD price list or authorize a
+  build-time FX snapshot**; then add a second `dist/feed-ca.xml` targeted at
+  Canada. Do not mix currencies in one feed.
+
+### Update cadence
+The feed regenerates on every deploy. In Merchant Center use **Scheduled fetch,
+daily**, so approvals track the live catalog automatically.
+
+### Validation procedure
+1. `npm test` — asserts feed is well-formed, every item has the required fields
+   (id/title/description/image_link/availability/condition/brand/identifier_exists),
+   price format is `N.NN USD`, links resolve, and **feed price == landing price**.
+2. After deploy, run Merchant Center **Diagnostics** and Google's
+   **Rich Results Test** on a product URL.
+
+### Troubleshooting price mismatches
+- `npm test` fails with `feed {id} — price … not shown on landing page` →
+  the engine `startingPrice` changed but the page cache/prerender is stale;
+  rebuild. Feed, schema, card and page all derive from `listProducts()`, so a
+  mismatch means a stale artifact, never divergent data.
+- Merchant Center "price mismatch" disapproval → confirm the deployed
+  `/feed.xml` is the latest build (scheduled fetch may be a day behind a hotfix;
+  trigger a manual fetch).
+- Quote-only SKU rejected for "missing price" → it should be **excluded** from
+  the feed; if it appears, its `startingPrice` became non-null unexpectedly —
+  check the pricing model.
