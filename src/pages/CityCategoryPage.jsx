@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription } from '../data/citySeo';
+import { CITY_BOOTH_GUIDES } from '../data/internalLinks';
 import { cityDetailFor } from '../data/cityDetail';
 
 const sizeKey = (s) => s.replace('canopy-tent-', '');
@@ -157,6 +158,15 @@ export default function CityCategoryPage({ categoryKey }) {
         <p className="info-links">
           Complete your {city.city} booth: <Link to="/custom-canopies">canopy tents</Link> · <Link to="/banner-stands">banner stands</Link> · <Link to="/backdrops">backdrops</Link> · <Link to="/table-covers">table covers</Link> · <Link to="/trade-show-displays">all trade show displays</Link>.
         </p>
+      </section>
+
+      <section className="section-block-bare">
+        <h2 className="section-title">Guides for your {city.city} booth</h2>
+        <div className="loc-grid">
+          {CITY_BOOTH_GUIDES.map((g) => (
+            <Link className="loc-chip" to={`/blog/${g.slug}`} key={g.slug}><span>{g.label}</span></Link>
+          ))}
+        </div>
       </section>
 
       {detail && detail.faqs && (

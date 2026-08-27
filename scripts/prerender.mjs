@@ -31,7 +31,7 @@ import {
 import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
-import { guidesForCategory, productsForGuide } from '../src/data/internalLinks.js';
+import { guidesForCategory, productsForGuide, CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
 import { resolveContent } from '../src/data/content.js';
 
@@ -559,6 +559,8 @@ for (const lc of LOCAL_CATEGORIES) {
         running an outdoor activation nearby, ${esc(BRAND)} prints your ${esc(lc.label.toLowerCase())} in your
         brand and ships them to ${esc(city.city)}, ${esc(city.stateName)}.</p>
         <p>Building a full booth in ${esc(city.city)}? ${siblingLinks}</p>
+        <h2>Guides for your ${esc(city.city)} booth</h2>
+        <ul>${CITY_BOOTH_GUIDES.map((g) => `<li><a href="/blog/${g.slug}">${esc(g.label)}</a></li>`).join('')}</ul>
         ${cityFaqHtml}
         <h2>${esc(lc.label)} in other cities</h2>
         <ul>${otherLis}</ul>`;

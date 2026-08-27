@@ -41,3 +41,12 @@ export const DEFAULT_PRODUCTS = ['canopy-tent-10x10', 'standard-retractable-bann
 
 export const guidesForCategory = (cat) => (CATEGORY_GUIDES[cat] || DEFAULT_GUIDES).slice(0, 3);
 export const productsForGuide = (slug) => (GUIDE_PRODUCTS[slug] || DEFAULT_PRODUCTS).slice(0, 4);
+
+// Learning Center guides linked from every city page (§17 item 7) — descriptive,
+// non-city-qualified anchors for anchor diversity. Slugs verified in staticArticles.
+export const CITY_BOOTH_GUIDES = [
+  { slug: 'trade-show-booth-checklist', label: 'Trade Show Booth Checklist' },
+  { slug: 'custom-canopy-tent-buying-guide', label: 'Custom Canopy Tent Buying Guide' },
+  { slug: 'trade-show-display-cost', label: 'Trade Show Display Cost Guide' },
+  { slug: 'trade-show-backdrop-size-guide', label: 'Trade Show Backdrop Size Guide' }
+];
