@@ -1,7 +1,8 @@
 # Google Merchant Center — Readiness & Setup
 
-Status: **not yet connected.** This documents the human/account steps (which
-Claude cannot perform) and the data readiness on the site side.
+Status: **feed live at `/feed.xml`; account not yet connected.** The product
+feed is implemented and price-parity-tested; the remaining steps are the
+human/account actions below (which Claude cannot perform).
 
 ## Data readiness (site side)
 Product data has a single source of truth in `backend/data/products.js`
@@ -9,20 +10,30 @@ Product data has a single source of truth in `backend/data/products.js`
 `Product` + `AggregateOffer` with `availability: MadeToOrder` and USD pricing
 (see `scripts/prerender.mjs`). Product pages carry real photo galleries.
 
-**Feed:** a Google Shopping product feed is the next technical task. It should be
-generated at build from `listProducts()` so it never contradicts the site:
-- Include only **active, publicly-listed, priced** products (canopies, table
-  covers, retractable/X-stand banner stands, step & repeat backdrop).
-- Fields: `id` (slug), `title`, `description`, `link` (canonical product URL),
-  `image_link` (real product photo), `additional_image_link` (gallery), `price`
-  + `USD`, `availability` (`in_stock` / made-to-order equivalent), `condition`
-  (`new`), `brand` (Apex Trade Show).
-- **No GTIN/MPN:** these are custom-made, so set `identifier_exists = no`.
-- For "starting at" prices, the feed price must match the visible starting price
-  and its meaning (e.g. canopy "complete set" vs "top only") — do not advertise a
-  top-only price as the full product.
-- Quote-only display types (SEG, tension fabric, pop-up, flags) are **excluded**
-  from the feed until they have real prices.
+**Feed: IMPLEMENTED** — live at **`https://www.apextradeshow.com/feed.xml`**
+(RSS 2.0 + `g:` namespace, Google Shopping format). Generated at build from
+`listProducts()` in `scripts/prerender.mjs`, so it never contradicts the site.
+`scripts/test-seo-invariants.mjs` asserts every feed price matches the product's
+landing page (price parity is gated by `npm test`).
+
+Per item: `g:id` (slug), `title`, `description`, `link` (canonical product URL),
+`g:image_link` (real product photo) + `g:additional_image_link` (gallery),
+`g:price` in **USD** (the real "starting at" / lowest purchasable config),
+`g:availability` `in_stock`, `g:condition` `new`, `g:brand` Apex Trade Show,
+`g:identifier_exists` `no` (custom-made — no GTIN/MPN), `g:google_product_category`
+"Business & Industrial > Advertising & Marketing > Trade Show Displays",
+`g:product_type` + `g:custom_label_0` = category, `g:custom_label_1` =
+`starting-price` (segment configurable SKUs).
+
+- **17 products** currently listed; **4 excluded** (quote-only / no advertisable
+  price: SEG kits, tension-fabric quote SKUs, podium, etc.). Quote-only SKUs stay
+  out until they have real prices.
+- **"Starting at" honesty:** the feed price is the lowest *purchasable* config
+  (e.g. canopy `510.00 USD` = printed top only, matching the landing page). It
+  never advertises a price the customer cannot actually buy at.
+- **CAD:** the current feed is USD for the US target. A CAD feed for a Canada
+  target can be added later by emitting a second file with converted prices — do
+  not mix currencies in one feed.
 
 ## Human/account steps (owner — Claude cannot do these)
 1. Create/verify a **Google Merchant Center** account for the business.
@@ -31,7 +42,10 @@ generated at build from `listProducts()` so it never contradicts the site:
 3. Set up **business information**, **shipping** settings (real carriers, rates,
    transit times — currently a stub on-site; Merchant Center requires real values),
    and **return policy** (real terms — currently owner-pending).
-4. Submit the product feed (scheduled fetch of the generated feed URL, or Content API).
+4. Submit the product feed: in Merchant Center → **Products → Feeds → Add feed**,
+   choose **Scheduled fetch**, and enter the feed URL
+   `https://www.apextradeshow.com/feed.xml` (set a daily fetch). The feed
+   regenerates on every deploy, so scheduled fetch keeps it current.
 5. Resolve any disapprovals (usually price/availability/policy mismatches).
 6. Only after Google approves items are they eligible for Shopping surfaces.
 

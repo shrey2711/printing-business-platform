@@ -114,6 +114,32 @@ for (const loc of urls) {
   }
 }
 
+// ---- Merchant feed (/feed.xml): well-formed + price parity with landing pages ----
+const feedPath = `${DIST}/feed.xml`;
+if (!existsSync(feedPath)) {
+  failures.push('feed.xml missing');
+} else {
+  const feed = readFileSync(feedPath, 'utf8');
+  const opens = (feed.match(/<item>/g) || []).length;
+  const closes = (feed.match(/<\/item>/g) || []).length;
+  if (opens !== closes) failures.push(`feed.xml unbalanced <item> tags (${opens}/${closes})`);
+  for (const item of feed.match(/<item>[\s\S]*?<\/item>/g) || []) {
+    const id = (item.match(/<g:id>([^<]*)<\/g:id>/) || [])[1] || '(no id)';
+    const price = (item.match(/<g:price>([^<]*)<\/g:price>/) || [])[1] || '';
+    const link = (item.match(/<link>([^<]*)<\/link>/) || [])[1] || '';
+    if (!/^\d+\.\d{2} USD$/.test(price)) failures.push(`feed ${id} — bad price format "${price}"`);
+    const path = link.replace(ORIGIN, '').replace(/\/$/, '');
+    const file = `${DIST}${path}/index.html`;
+    if (!existsSync(file)) { failures.push(`feed ${id} — link has no page: ${link}`); continue; }
+    // Price parity: the feed's integer price must appear as "$X" on the landing page.
+    const intPrice = price.split('.')[0];
+    const html = readFileSync(file, 'utf8');
+    if (!html.includes(`$${Number(intPrice).toLocaleString('en-US')}`) && !html.includes(`$${intPrice}`)) {
+      failures.push(`feed ${id} — price ${price} not shown on landing page ${link}`);
+    }
+  }
+}
+
 // ---- Report ----
 if (failures.length) {
   console.error(`\n✗ SEO INVARIANTS FAILED — ${failures.length} issue(s):`);
@@ -121,4 +147,4 @@ if (failures.length) {
   if (failures.length > 60) console.error(`  … and ${failures.length - 60} more`);
   process.exit(1);
 }
-console.log(`✓ SEO INVARIANTS OK — ${urls.length} indexed URLs checked (H1, canonical, index, unique+bounded title/desc, JSON-LD, img alt, blog dates, product currency/breadcrumb, no private in sitemap).`);
+console.log(`✓ SEO INVARIANTS OK — ${urls.length} indexed URLs checked (H1, canonical, index, unique+bounded title/desc, JSON-LD, img alt, blog dates, product currency/breadcrumb, no private in sitemap) + Merchant feed price parity.`);

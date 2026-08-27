@@ -126,7 +126,7 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 | 7 Location QC | ✅ | tiered model + `audit-locations.mjs` scorer + `LOCATION_AUDIT.md`; brief §7 "do not expand" honored |
 | 8 AEO | 🟡 | answer-blocks on city pages + PDP/blog FAQs. Open: answer-first blocks on category pages |
 | 9 GEO / entity | 🟡 | stable Org `@id`, logo, email, tel, area served, About page. 🔒 legal name, founding year, `sameAs` socials, team |
-| 10 Merchant feed | 🟡 | `docs/MERCHANT_CENTER_SETUP.md` exists. ⬜ **no live feed route yet** (`/feed.xml` or `.tsv`) |
+| 10 Merchant feed | ✅ | **Done:** live `/feed.xml` (RSS 2.0 + g:), 17 priced products, 4 quote-only excluded, USD, generated at build from `listProducts()`, price parity gated by `npm test`. Account connection is owner's step (`MERCHANT_CENTER_SETUP.md`). CAD feed = later |
 | 11 Internal linking | ✅ | `internalLinks.js` clusters, guide↔product↔city links, hub "by city". Backlog doc: `SEO_CONTENT_CLUSTER_PLAN.md` |
 | 12 Accessibility/perf | ⬜ | mobile hardening done; open: img width/height + LCP preload + alt coverage test |
 | 13 Trust components | 🟡 | free-proof / ordering / production-vs-shipping sections exist. 🔒 real reviews/case studies/UGC (placeholders only) |
