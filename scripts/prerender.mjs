@@ -66,6 +66,8 @@ const NAV = `<nav aria-label="Primary">
   <a href="/table-covers">Table Covers</a>
   <a href="/trade-show-booth-packages">Booth Packages</a>
   <a href="/locations">Locations</a>
+  <a href="/resources">Learning Center</a>
+  <a href="/blog">Blog</a>
   <a href="/quote">Get a Quote</a>
   <a href="/contact">Contact</a>
 </nav>`;
