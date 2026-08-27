@@ -199,21 +199,173 @@ export const PAGES = [
   {
     slug: 'terms',
     nav: 'Terms',
-    title: 'Terms and Conditions',
+    title: 'Terms & Conditions',
     description:
-      'The terms for using apextradeshow.com and ordering custom printed displays — your artwork and rights, proof approval, cancellation, and how we handle problems.',
+      'Apex Trade Show Terms & Conditions — orders, quotations, payment, artwork and proof approval, cancellation, returns, shipping, liability and more.',
     blocks: [
-      { p: 'These terms cover using apextradeshow.com and ordering custom printed canopy tents from Apex Trade Show. By using the site or placing an order, you agree to them. We may update the site and these terms from time to time; the version posted here is the one that applies, and continuing to use the site means you accept it.' },
-      { h: 'Your artwork and your rights', p: 'You are responsible for the artwork you send us. By placing an order you confirm that you own it or have permission to print it — including logos, images, fonts and any other third-party material — and you authorise us to print it on your tent. Please don’t send anything unlawful or offensive, or anything that infringes someone else’s trademark, copyright, privacy or publicity rights. We may decline or stop an order that breaks this.' },
-      { h: 'Approving your proof', p: 'Every order includes a free proof, and nothing is printed until you approve it. We only accept written approval — never verbal. Approving your proof means you have checked the spelling, layout, artwork and colors; we are not responsible for mistakes that were present in artwork you approved, so please review it carefully.' },
-      { h: 'Cancellation', p: 'Because your tent is made to order, production begins as soon as you approve your proof. After approval an order cannot be canceled and is not refundable.' },
-      { h: 'If something goes wrong', p: 'If there is a problem with your order, we will make it right. See the Returns page for how to report an issue (within five business days of delivery), how defect claims work, and how refunds and reprints are handled.' },
-      { h: 'A note on color', p: 'A proof is produced differently from the final press print, so screen and printed colors can vary slightly and a proof will not match the finished tent exactly.' },
-      { h: 'Pricing and payment', p: 'Prices show on the product pages and update live as you configure your tent. You can view pricing in USD or CAD, and payment is handled securely by Stripe. Prices and product details can change without notice.' },
-      { h: 'Our site content', p: 'The text, images, layouts and designs on apextradeshow.com belong to Apex Trade Show or its licensors and are provided for browsing the site and placing orders — not for copying, redistribution or any other use.' },
-      { h: 'Responsibility', p: 'You agree to cover Apex Trade Show against any claim, loss or cost that arises from the artwork you supplied or from your misuse of the site — for example, a third-party claim over material you asked us to print.' },
-      { h: 'Right to refuse', p: 'We may decline service or an order at our discretion.' },
-      { h: 'Contact', p: `Questions about these terms? Email ${brand.email} or call ${brand.phone}.` }
+      { p: 'Welcome to Apex Trade Show (“Apex Trade Show,” “Apex,” “we,” “us,” or “our”). These Terms & Conditions (“Terms”) govern your access to and use of the Apex Trade Show website, as well as your purchase of products and services through our website, quotations, proposals, email, telephone, or other sales channels.' },
+      { p: 'Apex Trade Show provides trade-show, event, display, printing, fabrication, rental, installation, shipping, and related products and services.' },
+      { p: 'By accessing our website, creating an account, requesting a quotation, placing an order, making a payment, approving artwork or a design, or otherwise engaging our services, you acknowledge that you have read, understood, and agreed to these Terms.' },
+      { p: 'Apex Trade Show may update or modify these Terms from time to time by posting revised Terms on this website. Updated Terms will apply to transactions entered into after the revised Terms are posted, unless otherwise required by applicable law.' },
+
+      { h: '1. Scope of Products & Services', p: 'Apex Trade Show may provide, without limitation:' },
+      { list: [
+        'Trade-show booths and exhibits', 'Custom booth design and fabrication', 'Modular and portable displays',
+        'Backdrops and step-and-repeat displays', 'Custom canopies and tents', 'Banners and signage', 'Printed graphics',
+        'Event displays and accessories', 'Tables, counters and furniture', 'Rental displays and equipment', 'Printing services',
+        'Installation and dismantling', 'Shipping and delivery coordination', 'Trade-show logistics', 'Event and convention services',
+        'Other custom products and services described in an applicable quotation or order'
+      ] },
+      { p: 'The specific products, quantities, specifications, materials, services, pricing and delivery requirements applicable to an order will be stated in the applicable product page, quotation, proposal, invoice, order confirmation, statement of work, or other written agreement.' },
+
+      { h: '2. Website Use & Eligibility', p: 'You may use the Apex Trade Show website only for lawful purposes and in accordance with these Terms. You agree not to use the website or our services to:' },
+      { list: [
+        'Violate any applicable law or regulation', 'Infringe another person’s intellectual-property rights',
+        'Upload malicious software or code', 'Interfere with website functionality or security',
+        'Attempt unauthorized access to our systems', 'Collect or misuse another customer’s information',
+        'Impersonate another person or business', 'Submit fraudulent or misleading information',
+        'Use the website for unlawful, defamatory, threatening, obscene or otherwise prohibited activities'
+      ] },
+      { p: 'Apex Trade Show reserves the right to suspend or terminate access to the website or services where we reasonably believe these Terms have been violated.' },
+
+      { h: '3. Customer Information & Accounts', p: 'Where an account is required or offered, customers agree to provide accurate, current and complete information. Customers are responsible for maintaining the confidentiality of their login credentials and for activity conducted through their account. Customers should promptly notify Apex Trade Show if they believe their account or credentials have been compromised. Apex Trade Show is not responsible for losses arising from unauthorized use of an account where such unauthorized use results from the customer’s failure to protect their credentials, except where otherwise required by applicable law.' },
+
+      { h: '4. Electronic Communications', p: 'By communicating with Apex Trade Show electronically, including by email, website forms, online ordering systems or other electronic methods, you consent to receiving electronic communications relating to your orders, quotations, proofs, invoices, payments, shipping, installation, customer service and other transactions. Electronic communications may satisfy applicable requirements for communications to be provided in writing, except where applicable law requires another form. Customers are responsible for ensuring that their contact information remains accurate and current. Marketing communications will be handled in accordance with applicable privacy and electronic-marketing laws.' },
+
+      { h: '5. Quotations & Pricing', p: 'Quotations are based on the information, specifications and requirements available to Apex Trade Show at the time the quotation is prepared. Unless otherwise stated:' },
+      { list: [
+        'Quotations are valid only for the period specified in the quotation.',
+        'Prices may change if specifications, quantities, materials, artwork, design, shipping, installation or other requirements change.',
+        'Additional work requested after quotation or approval may result in additional charges.',
+        'Taxes and applicable government charges are additional unless specifically included.',
+        'Trade-show venue, show-management, union, drayage, material-handling, electrical, internet, rigging, cleaning, security, storage, overtime, marshaling, permits and other third-party charges are excluded unless specifically stated in writing.'
+      ] },
+      { p: 'Apex Trade Show reserves the right to correct typographical, pricing, product-description or other errors. Where an error materially affects an order, Apex Trade Show may contact the customer to correct the order or cancel the affected order and refund amounts paid for the cancelled portion.' },
+
+      { h: '6. Order Acceptance', p: 'An order becomes binding when: (1) Apex Trade Show accepts the order; and/or (2) the required deposit or payment has been received; and/or (3) the customer provides written authorization to proceed. Apex Trade Show reserves the right to require a deposit, partial payment or payment in full before production, procurement or service commencement. For custom projects, the applicable quotation, proposal, invoice and approved scope will form part of the agreement between the customer and Apex Trade Show.' },
+
+      { h: '7. Payment Policy', p: 'Customers agree to pay all amounts according to the payment terms stated in the applicable quotation, invoice or order. For online orders, payment must be made using an available payment method accepted by Apex Trade Show or its payment processor. Payment processing may be performed by third-party payment providers. Apex Trade Show is not responsible for delays, errors, outages or unauthorized activity caused solely by third-party payment processors, financial institutions or payment networks. Apex Trade Show reserves the right to suspend production, shipment, installation or other services where payment is overdue. Unless otherwise agreed in writing, Apex Trade Show may require payment in full before shipment, delivery or installation.' },
+
+      { h: '8. Payment Disputes & Chargebacks', p: 'Customers agree to contact Apex Trade Show promptly regarding legitimate billing or payment concerns and provide an opportunity to investigate and resolve the issue. Customers shall not initiate an improper, fraudulent or unauthorized chargeback for products or services that were properly ordered, approved, produced, delivered or performed. In the event of a payment dispute or chargeback, Apex Trade Show may provide relevant order records, invoices, approvals, communications, production records, delivery records and other documentation to the applicable payment processor or financial institution. Nothing in this section limits a customer’s rights under applicable consumer-protection or other applicable law.' },
+
+      { h: '9. Standard E-Commerce Products', p: 'Standard e-commerce products are products offered through the website with predefined specifications, options or configurations. The applicable product page and order confirmation will govern the specifications of the purchased product. Product images shown on the website are intended for illustration. Minor differences in color, texture, finish, scale or appearance may occur due to manufacturing processes, materials, lighting and screen settings. Where a product is customized with customer artwork, text, dimensions or specifications, it may be treated as a Custom Product for purposes of cancellation and returns.' },
+
+      { h: '10. Custom Products & Custom Quotations', p: 'Custom products and services include products or services specifically designed, configured, printed, fabricated, purchased, modified or produced for a customer. Examples include:' },
+      { list: [
+        'Custom trade-show booths', 'Custom exhibits', 'Custom canopies', 'Custom backdrops', 'Custom graphics',
+        'Custom signage', 'Custom printing', 'Custom fabrication', 'Custom furniture or structures',
+        'Custom rental configurations', 'Custom installation services'
+      ] },
+      { p: 'Because custom products may involve advance procurement of materials, design, fabrication, printing, labour and subcontractor commitments, they may not be eligible for cancellation or return once work has commenced.' },
+
+      { h: '11. Design, Artwork & Proof Approval', p: 'Where Apex Trade Show provides designs, renderings, layouts, drawings, artwork or proofs, the customer is responsible for reviewing all details before approval. Customers must carefully verify dimensions, quantities, spelling, text, logos, images, colors, fonts, product specifications, graphic placement, booth configuration, structural details, delivery information and installation requirements. Written approval may be required before production begins. Once the customer approves a design, proof or specification in writing, Apex Trade Show may proceed with production based on the approved version. Apex Trade Show is not responsible for errors contained in customer-approved artwork, designs, proofs or specifications.' },
+
+      { h: '12. Customer-Supplied Artwork', p: 'Customers retain ownership of artwork, logos, photographs, trademarks and other intellectual property they provide to Apex Trade Show. By submitting such materials, the customer represents and warrants that they have all necessary rights, licenses and permissions to reproduce and use the materials. The customer grants Apex Trade Show a non-exclusive, worldwide, royalty-free license to copy, reproduce, modify as reasonably necessary, print, manufacture, display and distribute the submitted materials solely as necessary to fulfill the customer’s order and provide the requested services. The customer remains solely responsible for obtaining permissions relating to third-party content.' },
+
+      { h: '13. Intellectual Property', p: 'All original designs, concepts, layouts, renderings, templates, graphics, photographs, written materials, production methods and other intellectual property created by Apex Trade Show remain the property of Apex Trade Show unless otherwise agreed in writing. Payment for a finished product does not automatically transfer ownership of Apex Trade Show’s underlying design concepts, templates, production files or proprietary processes. Customer-owned trademarks, logos and other intellectual property remain the property of the customer or their respective owners.' },
+
+      { h: '14. Design Proofing & Customer Errors', p: 'Apex Trade Show does not automatically proofread customer-supplied artwork for spelling, grammar, factual accuracy or other content errors. Customers are responsible for reviewing their artwork before submitting or approving it. If the customer elects to proceed without proof approval, Apex Trade Show will produce the order based on the files and specifications provided by the customer. Apex Trade Show is not responsible for errors that were present in customer-supplied or customer-approved materials.' },
+
+      { h: '15. Color Matching', p: 'Customers acknowledge that colors displayed on computer monitors, phones, tablets and other devices may differ from the final printed product. Digital screens generally use RGB color systems, while printing processes use different color systems, inks and production methods. Accordingly, exact color matching between a screen, digital proof and final printed product cannot always be guaranteed. Minor color variations that result from normal production processes will not normally be considered manufacturing defects. Where exact color matching is critical, customers should discuss available color-matching options with Apex Trade Show before placing the order.' },
+
+      { h: '16. Materials & Product Specifications', p: 'Apex Trade Show may use a variety of materials depending on the product, including fabrics, vinyl, PVC, mesh, plastics, aluminum, wood-based materials, acrylics, cardboard, hardware and other substrates. Customers are responsible for reviewing the product specifications and material information provided with the product or quotation. Unless otherwise stated in writing, Apex Trade Show guarantees that the product will be manufactured using the material or specification represented in the applicable product description or quotation. Minor variations in texture, finish, grain, thickness or appearance may occur between production batches.' },
+
+      { h: '17. Production', p: 'Apex Trade Show may use its own production facilities, contractors, suppliers, manufacturers or specialized production partners to fulfill an order. The location or specific facility where an individual product is manufactured may vary depending on product requirements, availability, capacity and logistics. Apex Trade Show remains responsible for coordinating the products and services that it has agreed to provide to the customer.' },
+
+      { h: '18. Production & Delivery Times', p: 'Any production or delivery dates provided by Apex Trade Show are estimates unless expressly guaranteed in writing. Production time generally begins after all required information, artwork, payment and final approvals have been received. Estimated delivery dates may be affected by:' },
+      { list: [
+        'Customer delays', 'Design revisions', 'Late approvals', 'Shipping delays', 'Carrier performance', 'Weather',
+        'Customs', 'Supply-chain disruptions', 'Material availability', 'Venue restrictions', 'Show-management requirements',
+        'Labour availability', 'Other circumstances outside Apex Trade Show’s reasonable control'
+      ] },
+      { p: 'For trade-show orders, customers are responsible for providing the event name, venue, booth number, move-in/move-out information and other relevant deadlines accurately and in a timely manner.' },
+
+      { h: '19. Rush Orders', p: 'Rush or expedited orders may be accepted subject to production capacity. Additional rush production, expedited shipping, overtime, special handling or other charges may apply. Apex Trade Show will make reasonable efforts to accommodate urgent requirements but does not guarantee a requested deadline unless the deadline has been expressly confirmed in writing.' },
+
+      { h: '20. Shipping & Delivery', p: 'Shipping charges are separate unless specifically included in the applicable quotation or product price. Where Apex Trade Show arranges shipping through a third-party carrier, delivery times are subject to carrier performance. Apex Trade Show is not responsible for carrier delays, missed delivery windows, lost shipments or damage caused by a carrier, except to the extent required by applicable law or where otherwise expressly agreed. Customers must provide accurate shipping information and promptly notify Apex Trade Show of any delivery issues. Customers should inspect shipments promptly upon receipt and document visible damage.' },
+
+      { h: '21. Trade-Show & Venue Charges', p: 'Unless specifically included in writing, the customer is responsible for charges imposed by trade-show organizers, convention centres, venues, unions, general contractors or other third parties. Such charges may include:' },
+      { list: [
+        'Drayage', 'Material handling', 'Advance warehouse fees', 'Direct-to-show fees', 'Marshaling', 'Forklift services',
+        'Electrical services', 'Internet', 'Rigging', 'Cleaning', 'Security', 'Storage', 'Overtime', 'Union labour',
+        'Permits', 'Fire-retardant certification', 'Other venue or show-management services'
+      ] },
+      { p: 'Apex Trade Show is not responsible for charges that were not included in the agreed quotation.' },
+
+      { h: '22. Installation & Dismantling', p: 'Installation and dismantling services are included only when expressly stated in the applicable quotation or agreement. Customers must provide accurate information regarding show dates, venue, booth number, booth size, move-in schedule, move-out schedule, venue requirements and show-management requirements. Customer-requested changes at the show site may result in additional charges. Installation schedules may be affected by venue access, union rules, material handling, labour availability and show-management requirements.' },
+
+      { h: '23. Cancellation Policy', p: 'Cancellation rights depend on the nature and stage of the order.' },
+      { p: 'Standard E-Commerce Products: Cancellation requests for standard products will be considered only if the order has not entered production or fulfillment. Once production, printing, customization or fulfillment has commenced, cancellation may not be possible.' },
+      { p: 'Custom Products & Services: Custom orders may not be cancelled once design approval, production authorization, procurement, fabrication, printing, labour booking or other project work has commenced. If Apex Trade Show agrees to a cancellation after work has commenced, the customer may be responsible for all costs incurred up to the cancellation date, including:' },
+      { list: [
+        'Design fees', 'Materials', 'Labour', 'Printing', 'Fabrication', 'Subcontractor charges', 'Rental commitments',
+        'Shipping', 'Storage', 'Installation costs', 'Other non-recoverable expenses'
+      ] },
+      { p: 'Deposits and payments may be non-refundable to the extent they relate to work already performed or costs already incurred.' },
+
+      { h: '24. Returns & Refunds', p: 'Apex Trade Show aims to provide products free from manufacturing defects. Customers must report any apparent defect, damage or material production error within five (5) business days of delivery, unless a different period is expressly provided in writing. Customers may be required to provide photographs, videos or other information to assist with evaluation. Apex Trade Show may require defective products to be returned for inspection. Where Apex Trade Show determines that a product contains a manufacturing defect attributable to Apex Trade Show, we may, at our discretion:' },
+      { list: [
+        'Repair the product', 'Replace the product', 'Reprint the affected product', 'Provide store credit', 'Refund the affected product amount'
+      ] },
+      { p: 'Refunds, where approved, will generally be made using the original payment method unless otherwise agreed. Shipping charges are generally non-refundable unless the issue is determined to be attributable to Apex Trade Show or otherwise required by applicable law. Custom products are generally not returnable solely because the customer changes their mind, changes their requirements or is dissatisfied with customer-approved artwork or specifications.' },
+
+      { h: '25. Manufacturing Defects', p: 'A manufacturing defect does not include:' },
+      { list: [
+        'Normal wear and tear', 'Improper use', 'Accidental damage', 'Damage caused after delivery', 'Customer modifications',
+        'Failure to follow care instructions', 'Customer-supplied artwork errors', 'Customer-approved design errors',
+        'Normal colour variation', 'Variations inherent to the selected material', 'Damage caused by improper installation by others',
+        'Damage caused by venue personnel or third parties'
+      ] },
+      { p: 'The determination of whether an issue constitutes a manufacturing defect will be made by Apex Trade Show based on reasonable inspection and available evidence, subject to applicable law.' },
+
+      { h: '26. Product Suitability', p: 'Customers are responsible for determining whether a product is suitable for their intended application, environment, venue and use. Unless expressly stated in writing, Apex Trade Show does not guarantee that a product will satisfy a particular application, venue requirement, structural requirement or regulatory requirement. Customers should verify applicable venue, building, fire, electrical, safety, signage and other requirements before ordering.' },
+
+      { h: '27. Safety & Regulatory Requirements', p: 'Customers are responsible for identifying and complying with applicable laws, regulations, venue requirements and safety standards relating to the intended use of products. Where a product is used as a safety sign, warning sign, regulatory sign or other compliance-related product, the customer is responsible for determining the appropriate wording, design, material, placement and applicable regulatory requirements. Apex Trade Show does not provide legal or regulatory advice unless expressly agreed in writing.' },
+
+      { h: '28. Storage', p: 'Where Apex Trade Show agrees to store customer products, displays, graphics or other property, storage fees may apply. Customers are responsible for providing timely instructions for shipment, pickup, delivery or future use. Long-term storage may be subject to separate terms and charges.' },
+
+      { h: '29. Customer Property', p: 'Where customers provide physical products, samples, equipment, artwork or other property to Apex Trade Show, customers remain responsible for maintaining appropriate insurance coverage unless otherwise agreed. Apex Trade Show will exercise reasonable care while such property is in our possession, subject to applicable law.' },
+
+      { h: '30. Website Content & Copyright', p: 'The Apex Trade Show website contains content including photographs, graphics, designs, text, layouts, illustrations, logos, trademarks, software and other materials. Unless otherwise stated, such content is owned by or licensed to Apex Trade Show. Website content may not be copied, reproduced, distributed, modified, published or commercially exploited without prior written permission. Limited access to the website is provided solely for evaluating and purchasing Apex Trade Show products and services.' },
+
+      { h: '31. Third-Party Services', p: 'Apex Trade Show may use third-party suppliers, carriers, payment processors, manufacturers, installers, venues and other service providers. Third-party services may be subject to their own terms and conditions. Apex Trade Show will make reasonable efforts to coordinate third-party services that are part of an order but is not responsible for failures caused solely by third parties beyond our reasonable control, except where otherwise required by applicable law.' },
+
+      { h: '32. Disclaimer', p: 'To the maximum extent permitted by applicable law, the Apex Trade Show website and its content are provided on an “as available” basis. Apex Trade Show does not guarantee that the website will always be uninterrupted, error-free, secure or available. Information, images, product representations and estimated delivery dates on the website are provided for general information and may be updated or corrected from time to time. Product-specific commitments are governed by the applicable quotation, order confirmation or agreement.' },
+
+      { h: '33. Limitation of Liability', p: 'To the maximum extent permitted by applicable law, Apex Trade Show shall not be liable for indirect, incidental, special, consequential or punitive damages, including loss of profits, loss of business, loss of opportunity, loss of goodwill or similar losses arising from the use of the website, products or services. Except where liability cannot legally be limited, Apex Trade Show’s total liability arising from a particular order or service shall not exceed the amount actually paid by the customer for the specific product or service giving rise to the claim. Nothing in these Terms is intended to exclude or limit liability that cannot legally be excluded or limited.' },
+
+      { h: '34. Indemnification', p: 'The customer agrees to indemnify, defend and hold harmless Apex Trade Show, its owners, employees, contractors, affiliates, suppliers and service providers from claims, losses, liabilities, damages, costs and reasonable expenses arising from:' },
+      { list: [
+        'The customer’s breach of these Terms', 'Customer-supplied artwork or content', 'Unauthorized use of third-party intellectual property',
+        'Customer’s products or promotional claims', 'Customer’s misuse of products', 'Customer’s violation of applicable laws or regulations',
+        'Customer’s violation of venue or event requirements', 'Claims arising from materials or instructions supplied by the customer'
+      ] },
+      { p: 'This provision applies to the extent permitted by applicable law.' },
+
+      { h: '35. Force Majeure', p: 'Apex Trade Show shall not be responsible for delay, failure or inability to perform caused by circumstances beyond our reasonable control, including acts of God, severe weather, fire, flood, natural disasters, epidemics or pandemics, war, terrorism, government actions, labour disputes, labour shortages, supply-chain disruptions, material shortages, transportation disruptions, customs delays, carrier delays, venue closures, show cancellation or postponement, power or internet failures, equipment failures, and other circumstances beyond our reasonable control. Apex Trade Show will make reasonable efforts to minimize the effects of such events.' },
+
+      { h: '36. Suspension & Termination', p: 'Apex Trade Show may suspend or terminate access to its website or services where a customer violates these Terms, fails to make required payments, provides fraudulent information, uses the website unlawfully, attempts to interfere with our systems, engages in abusive or threatening conduct, or otherwise creates a material risk to Apex Trade Show or third parties. Termination does not affect rights or obligations that arose before termination.' },
+
+      { h: '37. Taxes', p: 'Customers are responsible for applicable sales taxes, use taxes, duties, customs charges and other governmental fees unless expressly included in the applicable price or quotation. Where required by law, Apex Trade Show may collect applicable taxes at checkout or invoice.' },
+
+      { h: '38. Privacy', p: 'Apex Trade Show’s collection and use of personal information is governed by our Privacy Policy. Customers should review the Privacy Policy for information regarding how personal information is collected, used, stored and protected.' },
+      { links: [{ label: 'Privacy Policy', to: '/privacy' }] },
+
+      { h: '39. Governing Law', p: 'These Terms shall be governed by the laws applicable to the Apex Trade Show contracting entity and the jurisdiction specified in the applicable quotation, invoice or written agreement. Where no separate jurisdiction is specified, the applicable governing law and venue shall be determined based on the legal entity contracting with the customer and applicable law.' },
+
+      { h: '40. Dispute Resolution', p: 'Apex Trade Show encourages customers to first contact us directly to resolve any dispute or concern. If a dispute cannot be resolved informally, the parties may pursue the remedies available under applicable law. Nothing in these Terms prevents a customer from exercising rights that cannot lawfully be waived or restricted.' },
+
+      { h: '41. Severability', p: 'If any provision of these Terms is determined to be invalid, void or unenforceable, that provision shall be interpreted or limited to the minimum extent necessary, and the remaining provisions shall continue in full force and effect to the extent permitted by law.' },
+
+      { h: '42. Waiver', p: 'A failure or delay by Apex Trade Show to enforce any provision of these Terms shall not constitute a waiver of our right to enforce that provision or any other provision in the future.' },
+
+      { h: '43. Entire Agreement', p: 'These Terms, together with the applicable quotation, proposal, invoice, order confirmation, statement of work and other written agreements expressly incorporated into the transaction, constitute the agreement between Apex Trade Show and the customer regarding the applicable products and services. If a separately signed written agreement conflicts with these Terms, the signed agreement will govern to the extent of the conflict.' },
+
+      { h: '44. Survival', p: 'Any provisions that by their nature are intended to survive termination or completion of an order shall remain in effect, including provisions relating to payment obligations, intellectual property, customer representations, indemnification, limitation of liability, dispute resolution and other applicable obligations.' },
+
+      { h: '45. Changes to These Terms', p: 'Apex Trade Show may update these Terms from time to time by posting an updated version on its website. Changes will generally apply to orders placed after the revised Terms become effective. The Terms applicable to an existing order will generally be those in effect when the order was accepted, unless otherwise required by law or agreed in writing.' },
+
+      { h: '46. Contact Information', p: `Apex Trade Show — Website: apextradeshow.com · Email: ${brand.email} · Phone: ${brand.phone}.` }
     ]
   }
 ];
