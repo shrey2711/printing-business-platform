@@ -893,6 +893,15 @@ const tensionDisplay = {
   description:
     'A straight tension fabric display — a floor-standing trade-show backdrop where a dye-sublimated "pillowcase" fabric graphic zips over a lightweight aluminium tube frame for a smooth, seamless, frameless wall. Packs into a carry bag and sets up tool-free with stabilising feet.',
   size: '8–20 ft wide × ~8 ft tall',
+  gallery: [
+    { src: '/images/displays/straight-tension-fabric-display-main.png', alt: 'Custom-printed Apex straight tension fabric display, angled front view' },
+    { src: '/images/displays/straight-tension-fabric-display-lifestyle-podium.png', alt: 'Straight tension fabric display with a matching printed podium and booth spotlights' },
+    { src: '/images/displays/straight-tension-fabric-display-double-sided.png', alt: 'Double-sided straight tension fabric display showing different printed front and back graphics' },
+    { src: '/images/displays/straight-tension-fabric-display-single-sided.png', alt: 'Single-sided straight tension fabric display with a printed front and plain back' },
+    { src: '/images/displays/straight-tension-fabric-display-frame.png', alt: 'Lightweight aluminium tube frame of a straight tension fabric display' },
+    { src: '/images/displays/straight-tension-fabric-display-frame-connector.png', alt: 'Push-button aluminium pole connection detail of the tension fabric display frame' },
+    { src: '/images/displays/straight-tension-fabric-display-packaging.png', alt: 'Straight tension fabric display packaging — soft canvas carry bag and hard case that converts to a podium' }
+  ],
   features: [
     'Lightweight aluminium tube frame',
     'Pillowcase-style tension fabric graphic with zipper closure',

@@ -14,6 +14,7 @@ export const PRODUCT_CARD_IMAGE = {
   'x-stand-banner': '/images/displays/x-stand-front-back.jpg',
   'table-top-banner-stand': '/images/displays/table-top-example.png',
   'step-and-repeat-backdrop': '/images/displays/step-repeat-angled.jpeg',
+  'straight-tension-fabric-display': '/images/displays/straight-tension-fabric-display-main.png',
   '13oz-vinyl-banner': '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg',
   '18oz-blockout-banner': '/images/banners/18oz-blockout-banner-urban-apparel-roll.jpeg',
   'mesh-banner': '/images/banners/mesh-banner-gift-pass-fence-lifestyle.jpeg',
