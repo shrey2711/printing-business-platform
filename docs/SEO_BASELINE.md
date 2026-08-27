@@ -130,7 +130,7 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 | 11 Internal linking | ✅ | `internalLinks.js` clusters, guide↔product↔city links, hub "by city". Backlog doc: `SEO_CONTENT_CLUSTER_PLAN.md` |
 | 12 Accessibility/perf | ⬜ | mobile hardening done; open: img width/height + LCP preload + alt coverage test |
 | 13 Trust components | 🟡 | free-proof / ordering / production-vs-shipping sections exist. 🔒 real reviews/case studies/UGC (placeholders only) |
-| 14 Sitemaps & robots | ✅ | 5 sitemaps valid, escaped, no private/redirect URLs; **verify `robots.txt` rules (Phase 14 open item)** |
+| 14 Sitemaps & robots | ✅ | 5 sitemaps valid, escaped, no private/redirect URLs. **Done:** robots.txt now Disallows cart/checkout/login/register/password + `/api/` (was only account/admin/order) across all crawler groups; assets not blocked; AI crawlers preserved; asserted in `npm test` |
 | 15 Automated testing | ✅ | **Done:** `scripts/test-seo-invariants.mjs` + `npm test` gate (build verifiers → tension/podium → audit:seo → audit:locations → test:seo). Asserts H1 count, canonical, index, unique+length-bounded title/desc, JSON-LD parse, img alt, blog dates/author/publisher, product currency + breadcrumb hierarchy, no private route in sitemap |
 | 16 Final QA & docs | ⬜ | pending completion of open phases |
 

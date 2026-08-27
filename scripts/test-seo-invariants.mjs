@@ -140,6 +140,19 @@ if (!existsSync(feedPath)) {
   }
 }
 
+// ---- robots.txt: private routes blocked, sitemap referenced, assets not blocked ----
+const robotsPath = `${DIST}/robots.txt`;
+if (!existsSync(robotsPath)) {
+  failures.push('robots.txt missing from build');
+} else {
+  const robots = readFileSync(robotsPath, 'utf8');
+  for (const r of ['/account', '/admin', '/cart', '/checkout', '/order', '/login', '/api/']) {
+    if (!robots.includes(`Disallow: ${r}`)) failures.push(`robots.txt does not Disallow ${r}`);
+  }
+  if (!/Sitemap:\s*https:\/\/www\.apextradeshow\.com\/sitemap\.xml/.test(robots)) failures.push('robots.txt missing Sitemap reference');
+  if (/Disallow:\s*\/\s*$/m.test(robots)) failures.push('robots.txt blocks the whole site (Disallow: /)');
+}
+
 // ---- Report ----
 if (failures.length) {
   console.error(`\n✗ SEO INVARIANTS FAILED — ${failures.length} issue(s):`);

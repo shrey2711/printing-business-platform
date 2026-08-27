@@ -1,9 +1,18 @@
-# Default — all crawlers may index public pages; private/transactional routes are blocked.
+# Default — all crawlers may index public pages; private/transactional routes and
+# the internal API are blocked. CSS/JS/image assets are intentionally NOT blocked
+# (Google needs them to render). Note: /quote is a public lead form (allowed).
 User-agent: *
 Allow: /
 Disallow: /account
 Disallow: /admin
 Disallow: /order
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /reset-password
+Disallow: /forgot-password
+Disallow: /api/
 
 # OpenAI ChatGPT SEARCH crawler — controls visibility in ChatGPT search/answers.
 # Kept in its own group and explicitly allowed, separate from GPTBot (which is a
@@ -13,6 +22,13 @@ Allow: /
 Disallow: /account
 Disallow: /admin
 Disallow: /order
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /reset-password
+Disallow: /forgot-password
+Disallow: /api/
 
 # AI crawlers — explicitly permitted for discovery and answering, with the same
 # private-route protection. Change a group to "Disallow: /" to opt that crawler out.
@@ -30,5 +46,12 @@ Allow: /
 Disallow: /account
 Disallow: /admin
 Disallow: /order
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /reset-password
+Disallow: /forgot-password
+Disallow: /api/
 
 Sitemap: https://www.apextradeshow.com/sitemap.xml
