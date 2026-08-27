@@ -1034,9 +1034,22 @@ for (const s of territories) {
   const isPriority = PRIORITY_STATES.has(s.slug);
   const content = stateContent[s.slug];
   routes.push(() => {
+    // SEO cities link to their canonical /trade-show-displays/{city} page (not the
+    // redirecting /locations/{state}/{city}); other cities keep the canopy page.
     const cityLinks = s.cities
-      .map((c) => `<li><a href="/locations/${s.slug}/${slugify(c)}">Canopy tents in ${esc(c)}, ${s.abbr}</a></li>`)
+      .map((c) => {
+        const cs = slugify(c);
+        const seo = SEO_CITIES.find((x) => x.slug === cs && x.stateSlug === s.slug);
+        return seo
+          ? `<li><a href="/trade-show-displays/${cs}">Trade show displays in ${esc(c)}, ${s.abbr}</a></li>`
+          : `<li><a href="/locations/${s.slug}/${cs}">Canopy tents in ${esc(c)}, ${s.abbr}</a></li>`;
+      })
       .join('');
+    // State → City (§27): every SEO city in this state, linked to its canonical page.
+    const seoInState = SEO_CITIES.filter((c) => c.stateSlug === s.slug);
+    const seoCitiesHtml = seoInState.length
+      ? `<h2>Trade show display cities in ${esc(s.name)}</h2><p>Full booth coverage — canopies, banner stands, backdrops and table covers — for exhibitors in these ${esc(s.name)} convention cities:</p><ul>${seoInState.map((c) => `<li><a href="/trade-show-displays/${c.slug}">Trade show displays in ${esc(cityWithAbbr(c))}</a></li>`).join('')}</ul>`
+      : '';
     const products6 = `<ul>${coreProducts.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>`;
     const sizesList = `<ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>`;
     const sizePhotos = SIZES
@@ -1074,6 +1087,7 @@ for (const s of territories) {
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <span>${esc(s.name)}</span></nav>
       <h1>Custom Printed Canopy Tents in ${esc(s.name)}</h1>
       ${richBody}
+      ${seoCitiesHtml}
       <h2>Cities we serve in ${esc(s.name)}</h2><ul>${cityLinks}</ul>`;
     return render({
       path: `/locations/${s.slug}`,

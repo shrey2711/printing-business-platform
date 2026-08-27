@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import { getState, slugify } from '../data/states';
+import { SEO_CITIES } from '../data/citySeo';
 import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
@@ -15,6 +16,8 @@ export default function LocationPage() {
   const [products, setProducts] = useState([]);
   const priority = state && PRIORITY_STATES.has(state.slug);
   const content = state && stateContent[state.slug];
+  // SEO cities in this state → their canonical /trade-show-displays/{city} pages (§27 State→City).
+  const seoInState = state ? SEO_CITIES.filter((c) => c.stateSlug === state.slug) : [];
 
   useDocumentMeta(
     state ? `Custom Printed Canopy Tents in ${state.name}` : 'Location',
@@ -116,14 +119,31 @@ export default function LocationPage() {
         )}
       </section>
 
+      {seoInState.length > 0 && (
+        <section className="section-block-bare">
+          <h2 className="section-title">Trade show display cities in {state.name}</h2>
+          <div className="loc-grid">
+            {seoInState.map((c) => (
+              <Link className="loc-chip" to={`/trade-show-displays/${c.slug}`} key={c.slug}>
+                <span className="loc-abbr">{c.abbr}</span><span>{c.city}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="section-block-bare">
         <h2 className="section-title">Cities we serve in {state.name}</h2>
         <div className="loc-grid">
-          {state.cities.map((c) => (
-            <Link className="loc-chip" to={`/locations/${state.slug}/${slugify(c)}`} key={c}>
-              <span className="loc-abbr">{state.abbr}</span><span>{c}</span>
-            </Link>
-          ))}
+          {state.cities.map((c) => {
+            const cs = slugify(c);
+            const seo = seoInState.find((x) => x.slug === cs);
+            return (
+              <Link className="loc-chip" to={seo ? `/trade-show-displays/${cs}` : `/locations/${state.slug}/${cs}`} key={c}>
+                <span className="loc-abbr">{state.abbr}</span><span>{c}</span>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
