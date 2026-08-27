@@ -66,7 +66,7 @@ export default function ContentTab({ onError, onFlash }) {
             <div className="cms-field card" key={field.key}>
               <div className="cms-field-head">
                 <label>{field.label}</label>
-                {overridden && <span className="cms-tag-custom">customised</span>}
+                {overridden && <span className="cms-tag-custom">customized</span>}
               </div>
               {field.multiline ? (
                 <textarea

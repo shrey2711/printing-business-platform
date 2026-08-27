@@ -4,7 +4,7 @@ import { getBlogPosts } from '../services/blog';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../data/resources';
 
-// Learning Center hub — organises the guide articles into topic categories.
+// Learning Center hub — organizes the guide articles into topic categories.
 // Article titles/excerpts come from the live blog list so they never drift.
 export default function ResourcesPage() {
   useDocumentMeta(RESOURCES_META.title, RESOURCES_META.description);

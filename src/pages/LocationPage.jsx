@@ -63,7 +63,7 @@ export default function LocationPage() {
 
       <section className="badge-row">
         <div className="badge"><span className="badge-icon">🚚</span><div><strong>Shipping to {state.abbr}</strong><p>Delivered to {state.cities[0]} and beyond.</p></div></div>
-        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Colour bonded into the fabric — no peeling.</p></div></div>
+        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Color bonded into the fabric — no peeling.</p></div></div>
         <div className="badge"><span className="badge-icon">💲</span><div><strong>Instant pricing</strong><p>See your price online — no sales rep needed.</p></div></div>
         <div className="badge"><span className="badge-icon">📐</span><div><strong>Free artwork proof</strong><p>You approve it before anything prints.</p></div></div>
       </section>

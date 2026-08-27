@@ -99,7 +99,7 @@ export default function PricingTab({ onError, onFlash }) {
           <div className="cms-row blog-row" key={p.slug}>
             <span className="wrap"><strong>{p.name}</strong>{!p.active && <small className="muted"> (hidden)</small>}</span>
             <span className="muted">{p.pricing.model}</span>
-            <span>{p.overridden ? <em className="cms-tag-custom">customised</em> : <span className="muted">default</span>}</span>
+            <span>{p.overridden ? <em className="cms-tag-custom">customized</em> : <span className="muted">default</span>}</span>
             <span style={{ display: 'flex', gap: '0.4rem' }}>
               <button className="btn btn-outline btn-sm" onClick={() => open(p)}>Edit</button>
               {p.overridden && <button className="btn btn-ghost-danger btn-sm" onClick={() => revert(p)}>Reset</button>}

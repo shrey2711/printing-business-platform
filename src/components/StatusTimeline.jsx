@@ -9,8 +9,8 @@ const STEPS = [
 ];
 
 export default function StatusTimeline({ status }) {
-  if (status === 'cancelled') {
-    return <div className="timeline-cancelled">This order was cancelled.</div>;
+  if (status === 'canceled') {
+    return <div className="timeline-canceled">This order was canceled.</div>;
   }
   const current = Math.max(0, STEPS.findIndex((s) => s.key === status));
   return (

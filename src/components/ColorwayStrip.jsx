@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getColorways } from '../data/colorways';
 
-// Shows alternate-colour product mockups when their image files exist in
+// Shows alternate-color product mockups when their image files exist in
 // public/images/colorways/. Each thumbnail starts hidden and only reveals once
 // its image actually loads (onLoad), so a not-yet-uploaded colorway simply never
 // appears — no broken images, no code change to activate one. The whole strip
@@ -24,7 +24,7 @@ export default function ColorwayStrip({ slug }) {
           >
             <img
               src={`/images/colorways/${i.file}`}
-              alt={`${i.label} colourway`}
+              alt={`${i.label} colorway`}
               loading="lazy"
               decoding="async"
               onLoad={() => setLoaded((s) => ({ ...s, [i.file]: true }))}

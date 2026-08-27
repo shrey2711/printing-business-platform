@@ -22,12 +22,12 @@ export const PAGES = [
       'Apex Trade Show is a complete trade show display supplier serving the US and Canada — custom canopy tents, banner stands, backdrops, table covers and flags.',
     blocks: [
       { p: 'Apex Trade Show is a complete trade show display and event branding supplier serving the United States and Canada. We print your brand across a full booth — custom canopy tents, retractable and X-stand banner stands, step & repeat backdrops and table covers — with a free artwork proof on every order.' },
-      { h: 'What we do', p: 'We help businesses, vendors, teams and event organisers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops, table covers and flags all configure for instant online pricing; larger custom display types (SEG modular kits, tension fabric and pop-up displays) are quoted per order.' },
+      { h: 'What we do', p: 'We help businesses, vendors, teams and event organizers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops, table covers and flags all configure for instant online pricing; larger custom display types (SEG modular kits, tension fabric and pop-up displays) are quoted per order.' },
       { h: 'Why order from Apex', list: [
         'One supplier for the whole booth — canopy, banners, backdrop, table cover and flags, all printed to match from a single logo file.',
         'Instant online pricing on most products, so you see the cost as you configure size, walls and finishing — no waiting on a quote for standard items.',
         'A free artwork proof on every order — nothing prints until you approve it in writing, which protects you from surprises.',
-        'Dye-sublimation printing that bonds ink into the fabric, so colours stay sharp and won’t crack, peel or fade with repeated event use.',
+        'Dye-sublimation printing that bonds ink into the fabric, so colors stay sharp and won’t crack, peel or fade with repeated event use.',
         'Made to order and shipped across the US and Canada, priced in USD or CAD.',
         'An in-house design service if you don’t have a print-ready file — send your logo and direction and we build the artwork.'
       ] },
@@ -38,7 +38,7 @@ export const PAGES = [
         { label: 'Backdrops', to: '/backdrops' },
         { label: 'Table Covers', to: '/table-covers' }
       ] },
-      { h: 'Custom canopy tents — where we built our name', p: 'Canopies remain our most popular category and where Apex started. We print pop-up tents in 10×10, 10×15 and 10×20 with full or half printed walls and instant online pricing. Dye sublimation bonds the ink into 600D polyester over a heavy-duty aluminium hex frame, so colours stay sharp and will not crack, peel or fade with repeated outdoor use.' },
+      { h: 'Custom canopy tents — where we built our name', p: 'Canopies remain our most popular category and where Apex started. We print pop-up tents in 10×10, 10×15 and 10×20 with full or half printed walls and instant online pricing. Dye sublimation bonds the ink into 600D polyester over a heavy-duty aluminum hex frame, so colors stay sharp and will not crack, peel or fade with repeated outdoor use.' },
       { links: [{ label: 'Shop custom canopy tents', to: '/custom-canopies' }] },
       { h: 'The rest of your booth', p: 'Alongside canopies we print the displays that finish a professional booth: standard and deluxe retractable banner stands and lightweight X-stands for aisles and counters, large-format step & repeat backdrops for event photography, and pleated or stretch table covers. Send your logo once and we coordinate the whole set on-brand.' },
       { links: [
@@ -61,15 +61,15 @@ export const PAGES = [
     nav: 'Artwork Guidelines',
     title: 'Artwork Guidelines for Trade Show Displays',
     description:
-      'How to prepare artwork for custom printed trade show displays — accepted file types, resolution, colour and the free proof process.',
+      'How to prepare artwork for custom printed trade show displays — accepted file types, resolution, color and the free proof process.',
     blocks: [
-      { p: 'Good print starts with good artwork. These guidelines cover the files we accept and how to prepare them so your canopy tent, banner, backdrop or table cover prints crisp and on-colour. Not sure about your file? Send it anyway — we check every file at no charge and send a free proof before printing.' },
+      { p: 'Good print starts with good artwork. These guidelines cover the files we accept and how to prepare them so your canopy tent, banner, backdrop or table cover prints crisp and on-color. Not sure about your file? Send it anyway — we check every file at no charge and send a free proof before printing.' },
       { h: 'Accepted file formats', list: [
         'Vector (preferred): print-ready PDF, AI or EPS — these scale to any display size with no loss of quality.',
         'Raster: high-resolution PNG or JPG. Supply the largest, highest-resolution version you have.'
       ] },
       { h: 'Resolution & scale', p: 'Trade show graphics print large, so low-resolution images can look soft when scaled up. Vector artwork is best for logos and text. For photos or raster art, provide the highest resolution available. Our team flags anything that may not hold up before it prints.' },
-      { h: 'Colour', p: 'Printing is full-colour dye sublimation. Solid brand colours, gradients, photos and full-bleed backgrounds all print. If exact brand-colour matching matters, tell us in your order notes and we will confirm on the proof.' },
+      { h: 'Color', p: 'Printing is full-color dye sublimation. Solid brand colors, gradients, photos and full-bleed backgrounds all print. If exact brand-color matching matters, tell us in your order notes and we will confirm on the proof.' },
       { h: 'What you can print', p: 'The printable area depends on the product — a canopy tent prints on the top, valance and walls; banner stands, backdrops and table covers print across the full graphic. Each product page lists the print surfaces and finished sizes for that item.' },
       { h: 'No print-ready file?', p: 'Add our design service at checkout and we build the artwork for you from your logo and direction.' },
       { h: 'The proof', p: 'Every order includes a free visual proof for your approval. Nothing goes to production until you say yes.' },
@@ -97,7 +97,7 @@ export const PAGES = [
       { h: '', list: [
         'Logo — the correct, current version, sharp and not stretched.',
         'Spelling — company name, taglines, phone numbers, web and email addresses.',
-        'Colours — brand colours look right (tell us in notes if you need close matching).',
+        'Colors — brand colors look right (tell us in notes if you need close matching).',
         'Positioning — logos and text sit where you expect on each surface.',
         'Seams — how artwork crosses panel seams on canopies and backdrops.',
         'Orientation — nothing is upside-down or mirrored.',
@@ -149,7 +149,7 @@ export const PAGES = [
       'How Apex Trade Show handles problems with a custom printed order — report within 5 business days, how defect claims work, rush charges, and how reprints are handled.',
     blocks: [
       { p: 'We want your order to arrive right. Because every item is custom printed to order from a proof you approve, returns work differently than they would for a stock item — there is nothing generic to resend. If something is wrong with your order, tell us within five (5) business days of delivery and we will sort it out.' },
-      { h: 'After you approve your proof', p: 'Your order goes into production the moment you approve your proof. From that point the order cannot be cancelled, and it is not refundable — production has already started on a one-off, made-for-you item.' },
+      { h: 'After you approve your proof', p: 'Your order goes into production the moment you approve your proof. From that point the order cannot be canceled, and it is not refundable — production has already started on a one-off, made-for-you item.' },
       { h: 'If something is wrong with your order', list: [
         `Contact us within five (5) business days of delivery — email ${brand.email} or call ${brand.phone}.`,
         'We log your issue and open a claim for your reference while we work out the best fix.',
@@ -158,7 +158,7 @@ export const PAGES = [
       ] },
       { h: 'Rush charges', p: 'Rush printing and rush shipping fees are not refundable unless the item is defective or the courier could not deliver it.' },
       { h: 'Reprints', p: 'When a reprint is the right fix, we decide between a refund or a rework and set the turnaround and shipping based on current production capacity. Reprint turnaround starts from your written proof approval — we only take written approval as final, never verbal.' },
-      { h: 'A note on colour', p: 'Screen and printed colours can vary slightly. A proof is produced differently from the final press print, so it will not match the finished item exactly — if precise colour matters, tell us in your order notes and we will confirm on the proof.' },
+      { h: 'A note on color', p: 'Screen and printed colors can vary slightly. A proof is produced differently from the final press print, so it will not match the finished item exactly — if precise color matters, tell us in your order notes and we will confirm on the proof.' },
       { h: 'Questions', p: `Reach us any time at ${brand.email} or ${brand.phone}.` }
     ]
   },
@@ -168,9 +168,9 @@ export const PAGES = [
     title: 'Warranty',
     stub: true,
     description:
-      'Apex Trade Show displays are built for repeated event use — aluminium hardware and dye-sublimated graphics. Full warranty terms are being finalised — contact us with any concern.',
+      'Apex Trade Show displays are built for repeated event use — aluminum hardware and dye-sublimated graphics. Full warranty terms are being finalised — contact us with any concern.',
     blocks: [
-      { p: 'Our displays are built for repeated event use. Canopy tents use heavy-duty aluminium hex frames and dye-sublimated 600D polyester tops; banner stands and backdrops use aluminium hardware with replaceable dye-sublimated printed graphics.' },
+      { p: 'Our displays are built for repeated event use. Canopy tents use heavy-duty aluminum hex frames and dye-sublimated 600D polyester tops; banner stands and backdrops use aluminum hardware with replaceable dye-sublimated printed graphics.' },
       { h: 'Our full warranty terms are being finalised', p: 'The written warranty terms for this store are still being finalised. If you have a concern about a frame, hardware or print defect, contact us and we will help.' }
     ]
   },
@@ -205,10 +205,10 @@ export const PAGES = [
     blocks: [
       { p: 'These terms cover using apextradeshow.com and ordering custom printed canopy tents from Apex Trade Show. By using the site or placing an order, you agree to them. We may update the site and these terms from time to time; the version posted here is the one that applies, and continuing to use the site means you accept it.' },
       { h: 'Your artwork and your rights', p: 'You are responsible for the artwork you send us. By placing an order you confirm that you own it or have permission to print it — including logos, images, fonts and any other third-party material — and you authorise us to print it on your tent. Please don’t send anything unlawful or offensive, or anything that infringes someone else’s trademark, copyright, privacy or publicity rights. We may decline or stop an order that breaks this.' },
-      { h: 'Approving your proof', p: 'Every order includes a free proof, and nothing is printed until you approve it. We only accept written approval — never verbal. Approving your proof means you have checked the spelling, layout, artwork and colours; we are not responsible for mistakes that were present in artwork you approved, so please review it carefully.' },
-      { h: 'Cancellation', p: 'Because your tent is made to order, production begins as soon as you approve your proof. After approval an order cannot be cancelled and is not refundable.' },
+      { h: 'Approving your proof', p: 'Every order includes a free proof, and nothing is printed until you approve it. We only accept written approval — never verbal. Approving your proof means you have checked the spelling, layout, artwork and colors; we are not responsible for mistakes that were present in artwork you approved, so please review it carefully.' },
+      { h: 'Cancellation', p: 'Because your tent is made to order, production begins as soon as you approve your proof. After approval an order cannot be canceled and is not refundable.' },
       { h: 'If something goes wrong', p: 'If there is a problem with your order, we will make it right. See the Returns page for how to report an issue (within five business days of delivery), how defect claims work, and how refunds and reprints are handled.' },
-      { h: 'A note on colour', p: 'A proof is produced differently from the final press print, so screen and printed colours can vary slightly and a proof will not match the finished tent exactly.' },
+      { h: 'A note on color', p: 'A proof is produced differently from the final press print, so screen and printed colors can vary slightly and a proof will not match the finished tent exactly.' },
       { h: 'Pricing and payment', p: 'Prices show on the product pages and update live as you configure your tent. You can view pricing in USD or CAD, and payment is handled securely by Stripe. Prices and product details can change without notice.' },
       { h: 'Our site content', p: 'The text, images, layouts and designs on apextradeshow.com belong to Apex Trade Show or its licensors and are provided for browsing the site and placing orders — not for copying, redistribution or any other use.' },
       { h: 'Responsibility', p: 'You agree to cover Apex Trade Show against any claim, loss or cost that arises from the artwork you supplied or from your misuse of the site — for example, a third-party claim over material you asked us to print.' },

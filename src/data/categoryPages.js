@@ -43,7 +43,7 @@ export const CATEGORY_PAGES = [
       { name: 'SEG & Tension Displays', to: '/seg-displays', cells: ['Large modular booths', 'Quote'] }
     ],
     faqs: [
-      { q: 'What displays make a complete trade show booth?', a: 'A typical booth combines a printed backdrop or canopy, a table cover, and one or two banner stands, plus flags or accessories. Ordering them together from one supplier keeps every piece on-brand and colour-matched.' },
+      { q: 'What displays make a complete trade show booth?', a: 'A typical booth combines a printed backdrop or canopy, a table cover, and one or two banner stands, plus flags or accessories. Ordering them together from one supplier keeps every piece on-brand and color-matched.' },
       { q: 'Which products have instant pricing?', a: 'Canopy tents, banner stands, banners, table covers, backdrops and flags are priced instantly online. Larger custom displays — SEG modular kits, tension fabric and pop-up displays — are quoted per order.' },
       { q: 'How long does production take?', a: 'Standard production is 6–8 business days after you approve your free proof, with a 2–3 day rush on most instant-priced products. Shipping and transit time is added on top and depends on your address.' }
     ]
@@ -57,7 +57,7 @@ export const CATEGORY_PAGES = [
     description:
       'Custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with up to 3 printed walls. Instant online pricing, free artwork proof, US & Canada.',
     intro:
-      'Custom printed pop-up canopy tents — the branded roof over your booth. Choose 10x10, 10x15 or 10x20, add full or half printed walls, and see the price update live. Dye sublimation bonds the ink into 600D polyester over a heavy-duty aluminium hex frame, so colours will not crack, peel or fade.',
+      'Custom printed pop-up canopy tents — the branded roof over your booth. Choose 10x10, 10x15 or 10x20, add full or half printed walls, and see the price update live. Dye sublimation bonds the ink into 600D polyester over a heavy-duty aluminum hex frame, so colors will not crack, peel or fade.',
     points: [
       'Three sizes: 10x10, 10x15 and 10x20.',
       'Up to 3 printed walls, full or half height.',
@@ -65,7 +65,7 @@ export const CATEGORY_PAGES = [
       'Free artwork proof before production.'
     ],
     answer:
-      'Custom canopy tents are the branded roof of an outdoor or expo booth. Apex prints 10×10, 10×15 and 10×20 pop-ups in full colour over an aluminium hex frame, with up to three printed walls, instant online pricing and a free proof before anything prints.',
+      'Custom canopy tents are the branded roof of an outdoor or expo booth. Apex prints 10×10, 10×15 and 10×20 pop-ups in full color over an aluminum hex frame, with up to three printed walls, instant online pricing and a free proof before anything prints.',
     compareCols: ['Footprint', 'Best for', 'From'],
     compare: [
       { slug: 'canopy-tent-10x10', name: "10' × 10' Canopy", to: '/products/canopy-tent-10x10', cells: ['100 sq ft — single booth', 'Markets, a single expo space'] },
@@ -73,10 +73,10 @@ export const CATEGORY_PAGES = [
       { slug: 'canopy-tent-10x20', name: "10' × 20' Canopy", to: '/products/canopy-tent-10x20', cells: ['200 sq ft — double booth', 'Double-booth or walk-through'] }
     ],
     faqs: [
-      { q: 'Which canopy size should I choose?', a: 'A 10×10 covers a single booth or market stall; a 10×15 adds room for more product or a wider front; a 10×20 fills a double-booth space. All three use the same aluminium hex frame and dye-sublimated printing.' },
-      { q: 'What does the starting price include?', a: 'The "from" price is the printed canopy top only. The complete set — printed top, aluminium frame and carry bag — is priced separately on each product page, and any printed walls you add update the price live.' },
+      { q: 'Which canopy size should I choose?', a: 'A 10×10 covers a single booth or market stall; a 10×15 adds room for more product or a wider front; a 10×20 fills a double-booth space. All three use the same aluminum hex frame and dye-sublimated printing.' },
+      { q: 'What does the starting price include?', a: 'The "from" price is the printed canopy top only. The complete set — printed top, aluminum frame and carry bag — is priced separately on each product page, and any printed walls you add update the price live.' },
       { q: 'How many walls can I add?', a: 'Up to three printed walls total, in any mix of full and half height, so you can enclose the back and sides while leaving the front open to visitors.' },
-      { q: 'Will the print fade outdoors?', a: 'No — the graphics are dye-sublimated into 600D polyester, bonding the ink into the fabric so colours resist UV and will not crack, peel or fade with repeated outdoor use.' }
+      { q: 'Will the print fade outdoors?', a: 'No — the graphics are dye-sublimated into 600D polyester, bonding the ink into the fabric so colors resist UV and will not crack, peel or fade with repeated outdoor use.' }
     ],
     guideLinks: [
       { label: '10x10 size guide', to: '/sizes/10x10' },
@@ -124,7 +124,7 @@ export const CATEGORY_PAGES = [
     description:
       'Made-to-size 13oz vinyl, 18oz blockout, mesh and 9oz fabric banners — enter width and height for instant per-square-foot pricing. Hem and grommets included.',
     intro:
-      'Full-colour banners printed to any size you enter, priced by the square foot. Choose economical 13oz scrim vinyl, opaque 18oz blockout for double-sided prints, wind-friendly perforated mesh, or premium wrinkle-free fabric — each finished ready to hang.',
+      'Full-color banners printed to any size you enter, priced by the square foot. Choose economical 13oz scrim vinyl, opaque 18oz blockout for double-sided prints, wind-friendly perforated mesh, or premium wrinkle-free fabric — each finished ready to hang.',
     points: [
       '13oz vinyl — the economical indoor/outdoor workhorse.',
       '18oz blockout — opaque core for true double-sided banners.',
@@ -142,7 +142,7 @@ export const CATEGORY_PAGES = [
     ],
     faqs: [
       { q: 'How is banner pricing calculated?', a: 'Banners are priced by the square foot — enter your width and height and the price updates live, with a minimum charge per banner. A welded hem and grommets are included on the vinyl and mesh options.' },
-      { q: 'Which banner is best for double-sided?', a: 'The 18oz blockout banner has an opaque grey core that stops light and the back image from bleeding through, so two different prints stay crisp — the right pick for any true double-sided banner.' },
+      { q: 'Which banner is best for double-sided?', a: 'The 18oz blockout banner has an opaque gray core that stops light and the back image from bleeding through, so two different prints stay crisp — the right pick for any true double-sided banner.' },
       { q: 'Which banner handles wind best?', a: 'Mesh. Its perforations let roughly 30% of the wind pass through, cutting the load that makes solid banners flap and tear — ideal for fences, scaffolding and building wraps.' }
     ]
   },
@@ -155,7 +155,7 @@ export const CATEGORY_PAGES = [
     description:
       'Custom printed table covers — pleated throws and fitted stretch covers, closed back, for trade show tables and counters. Instant online pricing, free proof.',
     intro:
-      'Custom printed table covers that turn a plain table into a branded surface. Choose a pleated throw that drapes with rounded corners, or a fitted stretch cover for a tight, modern look — both closed-back (4-sided) and printed in full colour.',
+      'Custom printed table covers that turn a plain table into a branded surface. Choose a pleated throw that drapes with rounded corners, or a fitted stretch cover for a tight, modern look — both closed-back (4-sided) and printed in full color.',
     points: [
       'Pleated throws in 4, 6 and 8 ft.',
       'Fitted stretch covers in 6 and 8 ft.',
@@ -163,14 +163,14 @@ export const CATEGORY_PAGES = [
       'Wrinkle-resistant, machine washable.'
     ],
     answer:
-      'Custom table covers turn a plain trade-show table into branded space. Apex prints pleated throws that drape with rounded corners and fitted stretch covers for a tight modern look — both closed-back on all four sides, full-colour, wrinkle-resistant and machine washable.',
+      'Custom table covers turn a plain trade-show table into branded space. Apex prints pleated throws that drape with rounded corners and fitted stretch covers for a tight modern look — both closed-back on all four sides, full-color, wrinkle-resistant and machine washable.',
     compareCols: ['Fit', 'Sizes', 'From'],
     compare: [
       { slug: 'pleated-table-covers', name: 'Pleated Table Cover', to: '/products/pleated-table-covers', cells: ['Draped throw, rounded corners', '4, 6 and 8 ft'] },
       { slug: 'stretch-table-covers', name: 'Stretch Table Cover', to: '/products/stretch-table-covers', cells: ['Fitted, tight modern look', '6 and 8 ft'] }
     ],
     faqs: [
-      { q: 'Pleated or stretch — which should I choose?', a: 'A pleated cover is a classic draped throw with rounded corners and a relaxed look; a stretch cover is a fitted, wrinkle-free skin for a sleek modern booth. Both are closed-back (all four sides) and printed full-colour.' },
+      { q: 'Pleated or stretch — which should I choose?', a: 'A pleated cover is a classic draped throw with rounded corners and a relaxed look; a stretch cover is a fitted, wrinkle-free skin for a sleek modern booth. Both are closed-back (all four sides) and printed full-color.' },
       { q: 'Do the covers fit standard tables?', a: 'Yes — pleated covers come in 4, 6 and 8 ft and stretch covers in 6 and 8 ft to fit standard folding trade-show tables. Each product page shows the exact fit.' },
       { q: 'Are they washable?', a: 'Yes — the dye-sublimated polyester is wrinkle-resistant and machine washable, so a cover reuses show after show.' }
     ]
@@ -199,7 +199,7 @@ export const CATEGORY_PAGES = [
       { slug: 'straight-tension-fabric-display', name: 'Straight Tension Fabric Display', to: '/products/straight-tension-fabric-display', cells: ['Frameless pillowcase wall', 'A clean booth backwall'] }
     ],
     faqs: [
-      { q: 'Step & repeat or tension fabric?', a: 'A step & repeat backdrop repeats your logo across the wall for branded photos and press; a straight tension-fabric display is a smooth, seamless single graphic that zips over an aluminium frame for a clean booth backwall. Both are portable and reprintable.' },
+      { q: 'Step & repeat or tension fabric?', a: 'A step & repeat backdrop repeats your logo across the wall for branded photos and press; a straight tension-fabric display is a smooth, seamless single graphic that zips over an aluminum frame for a clean booth backwall. Both are portable and reprintable.' },
       { q: 'How big is the step & repeat backdrop?', a: 'The standard media wall is 10 ft × 8 ft (120" × 96"). Ask about other sizes when you request a quote for a non-standard wall.' },
       { q: 'Can I replace the graphic later?', a: 'Yes — both backdrops use a replaceable printed graphic, so you can reuse the frame and reprint when your branding or sponsors change.' }
     ]

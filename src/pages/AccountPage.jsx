@@ -15,7 +15,7 @@ const statusColor = {
   proof_approved: 'st-blue',
   in_production: 'st-amber',
   shipped: 'st-green',
-  cancelled: 'st-red'
+  canceled: 'st-red'
 };
 
 // An order counts as paid once it's paid or moved further along.
@@ -53,8 +53,8 @@ export default function AccountPage() {
       if (params.get('checkout') === 'success' && params.get('order')) {
         const { paid } = await confirmCheckout(params.get('order')).catch(() => ({ paid: false }));
         setPayMsg(paid ? 'Payment received — thank you! Your order is now paid.' : '');
-      } else if (params.get('checkout') === 'cancelled') {
-        setPayMsg('Checkout cancelled. Your order was saved — you can pay any time below.');
+      } else if (params.get('checkout') === 'canceled') {
+        setPayMsg('Checkout canceled. Your order was saved — you can pay any time below.');
       }
       if (params.get('checkout')) setParams({}, { replace: true });
       await loadOrders().catch(() => {});
@@ -181,7 +181,7 @@ export default function AccountPage() {
                 <div className="proof-panel">
                   <strong>Your artwork proof is ready</strong>
                   <p>
-                    Check the proof carefully — spelling, colours and logo placement. Nothing goes to
+                    Check the proof carefully — spelling, colors and logo placement. Nothing goes to
                     production until you approve it.
                   </p>
                   {designUrls[o.id] && (

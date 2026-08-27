@@ -89,7 +89,7 @@ export default function SeoTab({ onError, onFlash }) {
                   </option>
                 ))}
               </select>
-              <small>Routes with a customised SEO entry are marked •. Changes rebuild the site.</small>
+              <small>Routes with a customized SEO entry are marked •. Changes rebuild the site.</small>
             </div>
             <div className="field">
               <label>Title tag</label>

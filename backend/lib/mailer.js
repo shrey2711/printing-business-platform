@@ -19,7 +19,7 @@ const CONTACT_PHONE = process.env.CONTACT_PHONE || '+1 672-514-7587';
 const CONTACT_PHONE_HREF = `tel:${(process.env.CONTACT_PHONE_HREF || CONTACT_PHONE).replace(/[^+\d]/g, '')}`;
 const CONTACT_HOURS = process.env.CONTACT_HOURS || 'Mon–Fri, 8am–6pm ET';
 
-// --- Brand palette (official brand colours) -------------------------------
+// --- Brand palette (official brand colors) -------------------------------
 const C = {
   navy: '#0b1f4d',   // deep brand navy for headings
   red: '#ED1C24',    // brand red  (C0 M100 Y100 K0)
@@ -60,7 +60,7 @@ const STATUS_META = {
     subject: '— your artwork proof is ready 📐',
     heading: 'Your artwork proof is ready to review',
     body:
-      'We have prepared a visual proof of your canopy. Please check the spelling, colours and logo ' +
+      'We have prepared a visual proof of your canopy. Please check the spelling, colors and logo ' +
       'placement carefully, then approve it in your account. Nothing goes to production until you do.'
   },
   proof_approved: {
@@ -81,11 +81,11 @@ const STATUS_META = {
     heading: 'Your order is on its way! 🚚',
     body: 'Your order has shipped and is heading to you. Thanks for choosing us!'
   },
-  cancelled: {
+  canceled: {
     color: C.red,
-    subject: 'has been cancelled',
-    heading: 'Your order has been cancelled',
-    body: 'Your order has been cancelled. If this was unexpected or you have questions, just reply to this email.'
+    subject: 'has been canceled',
+    heading: 'Your order has been canceled',
+    body: 'Your order has been canceled. If this was unexpected or you have questions, just reply to this email.'
   }
 };
 
@@ -148,9 +148,9 @@ function button(url, label, color = C.red) {
 
 // Horizontal 4-step progress tracker.
 function progress(status) {
-  if (status === 'cancelled') {
+  if (status === 'canceled') {
     return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;"><tr>
-      <td style="background:#fdeef0;color:${C.red};font-family:Arial,sans-serif;font-size:13px;font-weight:700;padding:12px 14px;border-radius:8px;">This order was cancelled.</td></tr></table>`;
+      <td style="background:#fdeef0;color:${C.red};font-family:Arial,sans-serif;font-size:13px;font-weight:700;padding:12px 14px;border-radius:8px;">This order was canceled.</td></tr></table>`;
   }
   const current = Math.max(0, STEPS.indexOf(status));
   const cells = STEPS.map((step, i) => {

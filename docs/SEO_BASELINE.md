@@ -136,15 +136,14 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 
 ---
 
-## 6b. Owner decision needed — spelling house style (Phase 4)
-The catalog has two internally-consistent halves: the **core trade-show
-products + trust pages use British spelling** (`colour` ×15 files, `aluminium`
-×9), while the **extended catalog** (banners, signs, wall-art — `products.js`
-~L1400–2750) uses **North-American spelling** (`color`, `aluminum`). Both are
-coherent within themselves, so unifying is a brand-voice call, not a bug fix.
-Apex serves US + Canada (where `aluminum` is standard but `colour`/`color`
-varies). **Not mass-edited** — tell me which house style to normalize to and
-I'll apply it in one pass. (No customer-facing contradiction; purely style.)
+## 6b. Spelling house style — RESOLVED (North-American)
+The site previously mixed British spelling (core products/trust pages) with
+North-American (extended catalog). **Owner chose North-American**, normalized
+site-wide in one pass: `colour→color`, `aluminium→aluminum`, `centre→center`,
+`fibre→fiber`, `organis*→organiz*`, `customis*→customiz*`, `prioritis*→prioritiz*`,
+`neighbour*→neighbor*`, `favourite→favorite`, `labour→labor`, `grey→gray`,
+`cancelled→canceled`. Two official venue proper nouns preserved: **Cobb Galleria
+Centre**, **Rosen Centre**. Code identifiers/CSS untouched.
 
 ## 7. Owner-blocked (do NOT invent — brief §4)
 

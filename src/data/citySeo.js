@@ -5,7 +5,7 @@
 // /locations/[state]/[city] canopy pages 301 into /trade-show-canopies/[city].
 //
 // Anti-thin-page discipline: Tier 1 cities are indexed and carry unique local
-// content (real convention-centre + local-scene facts, public information — no
+// content (real convention-center + local-scene facts, public information — no
 // invented Apex specifics). Tier 2/3 are built but noindex,follow until they
 // earn deeper content, the same gate used for the existing location pages.
 
@@ -59,7 +59,7 @@ export const LOCAL_CATEGORIES = [
     hubLabel: 'Table Covers',
     productCats: ['table-covers'],
     lead: (c) =>
-      `Fitted and pleated table covers printed in your brand colours for ${c.city} booths and events. Turn a rented table at ${c.venue} into finished brand space — made to order and shipped to your ${c.city} address.`
+      `Fitted and pleated table covers printed in your brand colors for ${c.city} booths and events. Turn a rented table at ${c.venue} into finished brand space — made to order and shipped to your ${c.city} address.`
   }
 ];
 

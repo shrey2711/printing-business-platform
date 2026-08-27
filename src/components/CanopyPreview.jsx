@@ -3,7 +3,7 @@
 // before uploading artwork. Flat SVG — no photography or 3D dependency.
 
 const BG = '#eef1f5';
-const FRAME = { steel: '#8b95a6', aluminium: '#aeb7c4', hex: '#c3cbd6' };
+const FRAME = { steel: '#8b95a6', aluminum: '#aeb7c4', hex: '#c3cbd6' };
 
 // Printed surfaces use the brand palette; blank surfaces stay neutral canvas.
 const PRINT = '#1f5fe0';
@@ -16,7 +16,7 @@ const SPAN = { '8x8': 0.84, '10x10': 1, '10x15': 1.24, '10x20': 1.46, '13x13': 1
 
 export default function CanopyPreview({
   size = '10x10',
-  frame = 'aluminium',
+  frame = 'aluminum',
   print = 'top',
   walls = 0,
   label
@@ -34,7 +34,7 @@ export default function CanopyPreview({
   const canopyFill = topPrinted ? PRINT : BLANK;
   const canopyShade = topPrinted ? PRINT_DARK : BLANK_SHADE;
   const valanceFill = valancePrinted ? PRINT_DARK : BLANK_SHADE;
-  const legColor = FRAME[frame] || FRAME.aluminium;
+  const legColor = FRAME[frame] || FRAME.aluminum;
 
   const peakY = 30;
   const eaveY = 84;

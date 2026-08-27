@@ -3,11 +3,11 @@ import { getAllOrders, updateOrder, deleteOrder, sendInvoice } from '../../servi
 import { formatCharged } from '../../lib/money';
 
 const STATUSES = [
-  'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'cancelled'
+  'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
 ];
 const statusColor = {
   submitted: 'st-blue', paid: 'st-green', proof_ready: 'st-amber', proof_approved: 'st-blue',
-  in_production: 'st-amber', shipped: 'st-green', cancelled: 'st-red'
+  in_production: 'st-amber', shipped: 'st-green', canceled: 'st-red'
 };
 
 // Orders management — the original admin surface, now a dashboard tab.

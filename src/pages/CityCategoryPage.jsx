@@ -82,7 +82,7 @@ export default function CityCategoryPage({ categoryKey }) {
 
       <section className="badge-row">
         <div className="badge"><span className="badge-icon">🚚</span><div><strong>Ships to {city.city}</strong><p>Tracked delivery across {city.abbr}.</p></div></div>
-        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Colour bonded in — it won't peel or fade.</p></div></div>
+        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Color bonded in — it won't peel or fade.</p></div></div>
         <div className="badge"><span className="badge-icon">📐</span><div><strong>Free artwork proof</strong><p>You approve it before anything prints.</p></div></div>
       </section>
 

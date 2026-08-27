@@ -8,7 +8,7 @@ export default function ContactPage() {
         <h1>Let's talk about your trade show display order</h1>
         <p>
           We print branded trade show displays — canopy tents, banner stands, backdrops and table
-          covers — for market vendors, teams, event organisers and brands across the US and Canada,
+          covers — for market vendors, teams, event organizers and brands across the US and Canada,
           with instant online pricing, a free artwork proof, and no sales rep standing between you and
           a price.
         </p>

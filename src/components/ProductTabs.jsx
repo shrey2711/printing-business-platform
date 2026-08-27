@@ -126,9 +126,9 @@ function specsFor(product, sizeKey) {
   if (!sizeKey) return [];
   return [
     ['Size', sizeKey.replace('x', "' × ") + "'"],
-    ['Frame', 'Heavy-duty aluminium hex, telescopic legs'],
+    ['Frame', 'Heavy-duty aluminum hex, telescopic legs'],
     ['Fabric', '600D polyester, dye-sublimated full-bleed'],
-    ['Print', 'Full colour, edge to edge — does not crack, peel or fade'],
+    ['Print', 'Full color, edge to edge — does not crack, peel or fade'],
     ['Walls', 'Full and half printed walls (up to 3 combined)'],
     ['Included', 'Printed canopy + frame + carry bag'],
     ['Turnaround', product.turnaround || '6-8 business days']

@@ -19,7 +19,7 @@ const trustBadges = [
 const solutions = [
   { icon: '🧺', title: 'Vendor & market booths', copy: 'Weekend markets and craft fairs where the booth is the storefront.' },
   { icon: '🎪', title: 'Trade shows', copy: 'Expo space that needs canopy, banners and backdrop all on-brand.' },
-  { icon: '🏟️', title: 'Sports & tailgates', copy: 'Team colours, shade for the bench, and something to find in a crowded lot.' },
+  { icon: '🏟️', title: 'Sports & tailgates', copy: 'Team colors, shade for the bench, and something to find in a crowded lot.' },
   { icon: '🌮', title: 'Food trucks & concessions', copy: 'Menu on the wall, shade over the queue.' },
   { icon: '⛪', title: 'Churches & schools', copy: 'Registration desks, fundraisers and open days.' },
   { icon: '🏗️', title: 'Job sites & safety', copy: 'Shade and a visible company mark on active sites.' }
@@ -27,9 +27,9 @@ const solutions = [
 
 // Visually strong category cards, using real product images where we have them
 // (banner stands / backdrops fall back to the ProductArt illustration).
-// Each card uses a DIFFERENT product colourway so the range reads varied, not
+// Each card uses a DIFFERENT product colorway so the range reads varied, not
 // all-navy (the hero collage carries the red banner + red backdrop, so these
-// deliberately use other colours/products).
+// deliberately use other colors/products).
 // Each card uses a DIFFERENT customer brand (from the showcase set) so the
 // range reads as "we print any brand", not all-Apex.
 const categoryCards = [

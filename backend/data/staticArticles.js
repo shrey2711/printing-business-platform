@@ -39,7 +39,7 @@ export const STATIC_ARTICLES = [
     publishedAt: '2026-08-10T00:00:00.000Z',
     updatedAt: '2026-08-10T00:00:00.000Z',
     html: `
-<p>Both of Apex's roll-up banner stands print the same size graphic — <strong>33″ wide × 81″ tall</strong> — and both roll that graphic into an aluminium base that pops up in seconds with no tools. So the choice between the <a href="/products/standard-retractable-banner">Standard Retractable Banner Stand</a> and the <a href="/products/deluxe-retractable-banner">Deluxe Retractable Banner Stand</a> is not about size or print. It's about the <em>hardware</em> underneath the graphic: how it looks up close, how well it travels, and how many shows it will live through.</p>
+<p>Both of Apex's roll-up banner stands print the same size graphic — <strong>33″ wide × 81″ tall</strong> — and both roll that graphic into an aluminum base that pops up in seconds with no tools. So the choice between the <a href="/products/standard-retractable-banner">Standard Retractable Banner Stand</a> and the <a href="/products/deluxe-retractable-banner">Deluxe Retractable Banner Stand</a> is not about size or print. It's about the <em>hardware</em> underneath the graphic: how it looks up close, how well it travels, and how many shows it will live through.</p>
 
 <p>Here is how the two actually differ, and who each one is for.</p>
 
@@ -50,7 +50,7 @@ export const STATIC_ARTICLES = [
   </thead>
   <tbody>
     <tr><td>Graphic size</td><td>33″ × 81″</td><td>33″ × 81″</td></tr>
-    <tr><td>Base</td><td>Compact aluminium with two stabilising feet</td><td>Heavier aluminium with chrome-style end caps</td></tr>
+    <tr><td>Base</td><td>Compact aluminum with two stabilising feet</td><td>Heavier aluminum with chrome-style end caps</td></tr>
     <tr><td>Support pole</td><td>Fixed</td><td>Adjustable support pole</td></tr>
     <tr><td>Carry bag</td><td>Carry bag included</td><td>Padded bag included</td></tr>
     <tr><td>Setup</td><td>Tool-free — pops up in seconds</td><td>Tool-free — pops up in seconds</td></tr>
@@ -61,11 +61,11 @@ export const STATIC_ARTICLES = [
 </table>
 
 <h2>Construction and hardware</h2>
-<p>The Standard stand uses a compact aluminium base with two stabilising feet that fold out to keep it upright. It is light, simple and does exactly what a retractable stand needs to do.</p>
-<p>The Deluxe steps up the hardware: heavier aluminium, chrome-style end caps that finish the base cleanly, and an adjustable support pole instead of a fixed one. The extra material and the end caps are what you are paying for — a base built to be handled, packed and re-packed many times.</p>
+<p>The Standard stand uses a compact aluminum base with two stabilising feet that fold out to keep it upright. It is light, simple and does exactly what a retractable stand needs to do.</p>
+<p>The Deluxe steps up the hardware: heavier aluminum, chrome-style end caps that finish the base cleanly, and an adjustable support pole instead of a fixed one. The extra material and the end caps are what you are paying for — a base built to be handled, packed and re-packed many times.</p>
 
 <figure class="blog-fig">
-  <img src="/images/displays/deluxe-retractable-banner.webp" alt="Apex Deluxe retractable banner stand with a full-colour printed graphic, chrome-style end caps and an adjustable pole" loading="lazy" decoding="async" width="900" height="700">
+  <img src="/images/displays/deluxe-retractable-banner.webp" alt="Apex Deluxe retractable banner stand with a full-color printed graphic, chrome-style end caps and an adjustable pole" loading="lazy" decoding="async" width="900" height="700">
   <figcaption>The Deluxe stand — heavier base and chrome-style end caps for a finished look up close.</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ export const STATIC_ARTICLES = [
 <h3>Frequently asked questions</h3>
 <p><strong>Are the two stands the same size?</strong> Yes — both print a 33″ × 81″ graphic. The difference is the base hardware, not the display size.</p>
 <p><strong>Can I replace the graphic later?</strong> Yes, on both. The banner is replaceable, so you keep the hardware and only reprint when your message changes.</p>
-<p><strong>Which one is more durable?</strong> The Deluxe — heavier aluminium, chrome-style end caps and a padded bag make it the better choice for frequent travel and repeated setup.</p>
+<p><strong>Which one is more durable?</strong> The Deluxe — heavier aluminum, chrome-style end caps and a padded bag make it the better choice for frequent travel and repeated setup.</p>
 <p><strong>How do I get pricing?</strong> Request a quote with your artwork and quantity and we'll send pricing and a free proof before production.</p>
 
 <p>Ready to pick one? Compare them directly — the <a href="/products/standard-retractable-banner">Standard Retractable Banner Stand</a> and the <a href="/products/deluxe-retractable-banner">Deluxe Retractable Banner Stand</a> — or see the full <a href="/banner-stands">banner stands range</a> and the rest of our <a href="/trade-show-displays">trade show displays</a>.</p>
@@ -116,7 +116,7 @@ export const STATIC_ARTICLES = [
   <thead><tr><th>&nbsp;</th><th>X-Stand Banner</th><th>Retractable Banner</th></tr></thead>
   <tbody>
     <tr><td>Graphic size</td><td>24″ × 63″</td><td>33″ × 81″</td></tr>
-    <tr><td>Mechanism</td><td>Collapsible X-frame, grommets at four corners</td><td>Graphic rolls into an aluminium base</td></tr>
+    <tr><td>Mechanism</td><td>Collapsible X-frame, grommets at four corners</td><td>Graphic rolls into an aluminum base</td></tr>
     <tr><td>Graphic when packed</td><td>Rolled loose or folded</td><td>Protected inside the base</td></tr>
     <tr><td>Weight / setup</td><td>Very light, folds flat</td><td>Light, tool-free pop-up</td></tr>
     <tr><td>Cost</td><td>One of the most economical displays</td><td>Higher — you're paying for the base</td></tr>
@@ -126,10 +126,10 @@ export const STATIC_ARTICLES = [
 </table>
 
 <h2>How they hold the graphic</h2>
-<p>The X-Stand is <strong>not</strong> a retractable. The banner has grommets at its four corners that hook onto a collapsible, lightweight X-shaped frame. It folds flat, weighs almost nothing and is fast to swap. A retractable stand works differently: the printed banner rolls into a weighted aluminium base and pulls up against a support pole, so the graphic is tensioned flat and tucked away when packed.</p>
+<p>The X-Stand is <strong>not</strong> a retractable. The banner has grommets at its four corners that hook onto a collapsible, lightweight X-shaped frame. It folds flat, weighs almost nothing and is fast to swap. A retractable stand works differently: the printed banner rolls into a weighted aluminum base and pulls up against a support pole, so the graphic is tensioned flat and tucked away when packed.</p>
 
 <figure class="blog-fig">
-  <img src="/images/displays/standard-retractable-banner.webp" alt="Apex standard retractable banner stand with the graphic rolled into an aluminium base" loading="lazy" decoding="async" width="900" height="700">
+  <img src="/images/displays/standard-retractable-banner.webp" alt="Apex standard retractable banner stand with the graphic rolled into an aluminum base" loading="lazy" decoding="async" width="900" height="700">
   <figcaption>A retractable stand rolls the graphic into its base — more protection, a more finished look.</figcaption>
 </figure>
 
@@ -195,7 +195,7 @@ export const STATIC_ARTICLES = [
 
 <h3>Frequently asked questions</h3>
 <p><strong>Can I get a size between the two?</strong> Ask about other sizes when you request a quote and we'll tell you what's available for your artwork.</p>
-<p><strong>Is the tabletop a retractable too?</strong> Yes — it's a compact retractable with a small aluminium base and a replaceable graphic.</p>
+<p><strong>Is the tabletop a retractable too?</strong> Yes — it's a compact retractable with a small aluminum base and a replaceable graphic.</p>
 <p><strong>How do I get pricing?</strong> Request a quote with your size, artwork and quantity and we'll send pricing and a free proof.</p>
 
 <p>See the <a href="/products/table-top-banner-stand">Table Top</a>, <a href="/products/standard-retractable-banner">Standard</a> and <a href="/products/deluxe-retractable-banner">Deluxe</a> stands, or browse all <a href="/banner-stands">banner stands</a>.</p>
@@ -210,7 +210,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: '6 ft vs 8 ft Table Cover: Which Size?',
       description:
-        'Choosing between a 6 ft and 8 ft custom table cover — how to match the size to your folding table, in pleated or stretch, closed-back and full-colour from Apex.'
+        'Choosing between a 6 ft and 8 ft custom table cover — how to match the size to your folding table, in pleated or stretch, closed-back and full-color from Apex.'
     },
     coverUrl: '/images/showcase/tablecover-brightpath-dental.webp',
     publishedAt: '2026-08-13T00:00:00.000Z',
@@ -226,7 +226,7 @@ export const STATIC_ARTICLES = [
     <tr><td>8 ft folding table</td><td>8 ft cover</td><td>Wider counters, product displays, larger booths</td></tr>
   </tbody>
 </table>
-<p>Our <a href="/products/pleated-table-covers">pleated table covers</a> come in 4 ft, 6 ft and 8 ft; our <a href="/products/stretch-table-covers">stretch covers</a> come in 6 ft and 8 ft. Both are closed-back (4-sided) and printed full-colour.</p>
+<p>Our <a href="/products/pleated-table-covers">pleated table covers</a> come in 4 ft, 6 ft and 8 ft; our <a href="/products/stretch-table-covers">stretch covers</a> come in 6 ft and 8 ft. Both are closed-back (4-sided) and printed full-color.</p>
 
 <h2>How to choose</h2>
 <p>Measure the table, or check the label — folding tables are almost always sold as 6 ft or 8 ft. Order the cover that matches. A 6 ft cover on an 8 ft table won't reach; an 8 ft cover on a 6 ft table will pool at the ends. If you run both table sizes across events, it's common to own one of each.</p>
@@ -262,7 +262,7 @@ export const STATIC_ARTICLES = [
     publishedAt: '2026-08-14T00:00:00.000Z',
     updatedAt: '2026-08-14T00:00:00.000Z',
     html: `
-<p>Apex prints table covers in two styles — a <a href="/products/pleated-table-covers">pleated throw</a> and a <a href="/products/stretch-table-covers">fitted stretch cover</a>. Both are closed-back (all four sides), full-colour dye-sublimated, wrinkle-resistant and machine washable. The difference is fit and look.</p>
+<p>Apex prints table covers in two styles — a <a href="/products/pleated-table-covers">pleated throw</a> and a <a href="/products/stretch-table-covers">fitted stretch cover</a>. Both are closed-back (all four sides), full-color dye-sublimated, wrinkle-resistant and machine washable. The difference is fit and look.</p>
 
 <h2>At a glance</h2>
 <table>
@@ -289,7 +289,7 @@ export const STATIC_ARTICLES = [
 
 <h2>Which should you choose?</h2>
 <p><strong>Choose pleated</strong> for a classic, forgiving drape, the widest size range (including 4 ft), and easy storage underneath.</p>
-<p><strong>Choose stretch</strong> for a tight, modern, tailored look at a booth where presentation is front and centre.</p>
+<p><strong>Choose stretch</strong> for a tight, modern, tailored look at a booth where presentation is front and center.</p>
 <p>Not sure about size? See <a href="/blog/6ft-vs-8ft-table-cover">6 ft vs 8 ft table covers</a>.</p>
 
 <h3>Frequently asked questions</h3>
@@ -431,7 +431,7 @@ export const STATIC_ARTICLES = [
     <tr><td><a href="/seg-displays">SEG modular kits &amp; large custom displays</a></td><td>Quoted per order</td></tr>
   </tbody>
 </table>
-<p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" is the custom-printed fabric top on its own (for customers who already have a compatible frame); the "Complete Canopy Set" adds the aluminium frame and carry bag — the difference is explained on each product page. Prices above are the starting (from) price for each product; the final price depends on the size, options and production speed you choose.</p>
+<p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" is the custom-printed fabric top on its own (for customers who already have a compatible frame); the "Complete Canopy Set" adds the aluminum frame and carry bag — the difference is explained on each product page. Prices above are the starting (from) price for each product; the final price depends on the size, options and production speed you choose.</p>
 
 <figure class="blog-fig">
   <img src="/images/displays/standard-retractable-banner.webp" alt="Apex standard retractable banner stand, one piece of a trade show booth budget" loading="lazy" decoding="async" width="900" height="700">
@@ -501,7 +501,7 @@ export const STATIC_ARTICLES = [
 <p>Pick by table count and booth space — 10×10 (standard), 10×15 (more room), 10×20 (double booth). See <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">what size to buy</a>.</p>
 <h2>2. What you get</h2>
 <ul>
-  <li><strong>Complete Canopy Set</strong> — the printed canopy top + aluminium hex frame + carry bag.</li>
+  <li><strong>Complete Canopy Set</strong> — the printed canopy top + aluminum hex frame + carry bag.</li>
   <li><strong>Printed Canopy Top Only</strong> — the custom-printed fabric top on its own (no frame, no carry bag), for customers who already have a compatible frame. Pricing varies by canopy size; see the relevant product page for current pricing.</li>
 </ul>
 <h2>3. Walls</h2>
@@ -537,7 +537,7 @@ export const STATIC_ARTICLES = [
     html: `
 <p>Transparent pricing for custom printed canopy tents — what each option includes, wall costs, rush fees and volume discounts. Prices update live as you configure on the product page.</p>
 <h2>Complete Canopy Set — base price by size</h2>
-<p>The complete set is the printed canopy top + aluminium hex frame + carry bag.</p>
+<p>The complete set is the printed canopy top + aluminum hex frame + carry bag.</p>
 <table>
   <thead><tr><th>Size</th><th>1–2 units</th><th>3+ units (each)</th></tr></thead>
   <tbody>
@@ -635,7 +635,7 @@ export const STATIC_ARTICLES = [
     publishedAt: '2026-08-02T00:00:00.000Z',
     updatedAt: '2026-08-11T00:00:00.000Z',
     html: `
-<p>All three Apex canopies are the same commercial-grade, dye-sublimated tent on a heavy-duty aluminium hex frame. They differ in <strong>footprint, price and how much branding surface</strong> you get. Here's the side-by-side.</p>
+<p>All three Apex canopies are the same commercial-grade, dye-sublimated tent on a heavy-duty aluminum hex frame. They differ in <strong>footprint, price and how much branding surface</strong> you get. Here's the side-by-side.</p>
 
 <h2>At a glance</h2>
 <table>
@@ -648,7 +648,7 @@ export const STATIC_ARTICLES = [
     <tr><td>Best for</td><td>Single vendor booth</td><td>More room to work</td><td>Double booth</td></tr>
   </tbody>
 </table>
-<p>Prices are per unit and drop at 3+. "Complete set" = printed top + aluminium frame + carry bag; "printed top only" is the fabric top for a frame you already own.</p>
+<p>Prices are per unit and drop at 3+. "Complete set" = printed top + aluminum frame + carry bag; "printed top only" is the fabric top for a frame you already own.</p>
 
 <h2>10×10 — the standard booth</h2>
 <p>The size most events allocate by default. Fits one 6 ft table and two people, sets up in minutes, and packs down small. If you're new or unsure, this is the one.</p>
@@ -673,7 +673,7 @@ export const STATIC_ARTICLES = [
 <h3>Frequently asked questions</h3>
 <p><strong>Is the 10×15 worth it over a 10×10?</strong> If you run two tables or two staff, yes — the extra 50 sq ft removes the crowding without jumping to a full double booth.</p>
 <p><strong>Can I buy just the printed top?</strong> Yes, on any size, if you already own a compatible frame. See <a href="/blog/trade-show-display-cost">pricing</a>.</p>
-<p><strong>Are all three the same fabric and frame?</strong> Yes — dye-sublimated 600D polyester on a heavy-duty aluminium hex frame; only the size changes.</p>
+<p><strong>Are all three the same fabric and frame?</strong> Yes — dye-sublimated 600D polyester on a heavy-duty aluminum hex frame; only the size changes.</p>
 
 <p>Build yours: <a href="/products/canopy-tent-10x10">10×10</a>, <a href="/products/canopy-tent-10x15">10×15</a> or <a href="/products/canopy-tent-10x20">10×20</a>. Not sure? <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">What size should I buy?</a></p>
 `
@@ -738,18 +738,18 @@ export const STATIC_ARTICLES = [
     slug: 'how-to-prepare-artwork-for-a-custom-canopy-tent',
     title: 'How to Prepare Canopy Tent Artwork',
     excerpt:
-      'File types, resolution, colour and layout tips so your custom canopy tent prints sharp — plus what to do if your artwork is not ready.',
+      'File types, resolution, color and layout tips so your custom canopy tent prints sharp — plus what to do if your artwork is not ready.',
     tags: ['Guide', 'Artwork'],
     seo: {
       title: 'How to Prepare Canopy Tent Artwork',
       description:
-        'Prepare print-ready artwork for a custom canopy tent — file formats, resolution/DPI, CMYK colour, bleed and safe zones, plus the free proof and design service.'
+        'Prepare print-ready artwork for a custom canopy tent — file formats, resolution/DPI, CMYK color, bleed and safe zones, plus the free proof and design service.'
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-04T00:00:00.000Z',
     updatedAt: '2026-08-11T00:00:00.000Z',
     html: `
-<p>Dye sublimation prints edge to edge in full colour, so a canopy is only as sharp as the file you send. A few minutes getting the artwork right saves a reprint — here's what matters.</p>
+<p>Dye sublimation prints edge to edge in full color, so a canopy is only as sharp as the file you send. A few minutes getting the artwork right saves a reprint — here's what matters.</p>
 
 <h2>Get the file format right</h2>
 <ul>
@@ -760,13 +760,13 @@ export const STATIC_ARTICLES = [
 <h2>Resolution and scale</h2>
 <p>Because a canopy is large, low-resolution images look soft when blown up. Aim for at least <strong>150 DPI at full size</strong> for raster art. If you only have a small logo, send the vector — never upscale a tiny JPG and hope.</p>
 
-<h2>Colour</h2>
-<p>Design in <strong>CMYK</strong> where you can, so on-screen colour matches the print. Dye sublimation reproduces solid brand colours, gradients, photos and full-bleed backgrounds well. If exact brand-colour matching matters, tell us in your order notes and we'll confirm it on the proof.</p>
+<h2>Color</h2>
+<p>Design in <strong>CMYK</strong> where you can, so on-screen color matches the print. Dye sublimation reproduces solid brand colors, gradients, photos and full-bleed backgrounds well. If exact brand-color matching matters, tell us in your order notes and we'll confirm it on the proof.</p>
 
 <h2>Bleed, safe zones and seams</h2>
 <ul>
   <li>Extend backgrounds to <strong>full bleed</strong> — past the trim edge — so there are no white slivers.</li>
-  <li>Keep logos and key text <strong>centred and away from edges and seams</strong>.</li>
+  <li>Keep logos and key text <strong>centerd and away from edges and seams</strong>.</li>
   <li>Remember the <strong>valance</strong> (the hanging skirt) is prime eye-level space — put your business name or tagline there.</li>
 </ul>
 
@@ -777,7 +777,7 @@ export const STATIC_ARTICLES = [
 <ul>
   <li>Low-resolution logos pulled from a website.</li>
   <li>Text too close to seams or the valance fold.</li>
-  <li>RGB files with neon colours that can't be printed exactly.</li>
+  <li>RGB files with neon colors that can't be printed exactly.</li>
   <li>Busy backgrounds that bury the logo from a distance — high contrast reads across a lot.</li>
 </ul>
 
@@ -790,7 +790,7 @@ export const STATIC_ARTICLES = [
 
 <h3>Frequently asked questions</h3>
 <p><strong>What file format is best?</strong> Vector (PDF/AI/EPS). High-resolution PNG/TIFF also works.</p>
-<p><strong>Will my colours print exactly?</strong> Close — design in CMYK and flag critical brand colours in your notes; we confirm on the proof.</p>
+<p><strong>Will my colors print exactly?</strong> Close — design in CMYK and flag critical brand colors in your notes; we confirm on the proof.</p>
 <p><strong>What if I don't have a designer?</strong> Add the $35 design service and we'll create the artwork for you.</p>
 
 <p><a href="/products/canopy-tent-10x10">Configure your canopy and upload artwork →</a> or read <a href="/blog/print-coverage-explained">print coverage explained</a>.</p>
@@ -818,7 +818,7 @@ export const STATIC_ARTICLES = [
   <li><strong>Canopy top (peak panels)</strong> — the roof. Seen from a distance and in overhead photos. Great for a logo or a bold pattern.</li>
   <li><strong>Valance</strong> — the hanging skirt around the roof edge, right at eye level as people walk by. The single most valuable spot for your <strong>business name or tagline</strong>.</li>
   <li><strong>Walls (full or half)</strong> — the biggest continuous surfaces. Ideal for large graphics, product shots, QR codes and calls to action.</li>
-  <li><strong>Inside / underside</strong> — the ceiling seen by anyone standing under the tent. A "wow" surface for a pattern, brand colour or message that surrounds the customer.</li>
+  <li><strong>Inside / underside</strong> — the ceiling seen by anyone standing under the tent. A "wow" surface for a pattern, brand color or message that surrounds the customer.</li>
 </ul>
 
 <h2>What to print where</h2>
@@ -828,12 +828,12 @@ export const STATIC_ARTICLES = [
     <tr><td>Valance</td><td>Business name + tagline (eye-level, read first)</td></tr>
     <tr><td>Top</td><td>Logo or pattern (distance + overhead photos)</td></tr>
     <tr><td>Walls</td><td>Big graphics, product imagery, offers, QR codes</td></tr>
-    <tr><td>Inside</td><td>Immersive brand colour or pattern overhead</td></tr>
+    <tr><td>Inside</td><td>Immersive brand color or pattern overhead</td></tr>
   </tbody>
 </table>
 
 <h2>It's all full-bleed dye sublimation</h2>
-<p>Every surface prints edge to edge in full colour, with the ink bonded into the fabric — so it won't crack, peel or fade in the sun. There's no upcharge for "more colours"; coverage is about how many <em>surfaces</em> you print, not how complex the art is.</p>
+<p>Every surface prints edge to edge in full color, with the ink bonded into the fabric — so it won't crack, peel or fade in the sun. There's no upcharge for "more colors"; coverage is about how many <em>surfaces</em> you print, not how complex the art is.</p>
 
 <h2>How much coverage do you need?</h2>
 <ul>
@@ -846,9 +846,9 @@ export const STATIC_ARTICLES = [
 <p>A realtor kept the top and valance to their logo and name, printed a full back wall with listings and a QR code, and left the inside a clean brand navy. From the aisle you read the name; at the table you scan the code; in photos the whole booth is on-brand.</p>
 
 <h3>Frequently asked questions</h3>
-<p><strong>Do more colours cost more?</strong> No — dye sublimation is full colour by default. Cost scales with size and the number of surfaces/walls, not colour count.</p>
+<p><strong>Do more colors cost more?</strong> No — dye sublimation is full color by default. Cost scales with size and the number of surfaces/walls, not color count.</p>
 <p><strong>What's the most important surface?</strong> The valance — it sits at eye level and is read first. Put your name there.</p>
-<p><strong>Can I print the inside of the roof?</strong> Yes — the underside is a great surface for an immersive pattern or brand colour.</p>
+<p><strong>Can I print the inside of the roof?</strong> Yes — the underside is a great surface for an immersive pattern or brand color.</p>
 
 <p>Choose your coverage when you <a href="/products/canopy-tent-10x10">build your canopy</a>, and see <a href="/blog/how-to-prepare-artwork-for-a-custom-canopy-tent">how to prepare artwork</a>.</p>
 `
@@ -908,7 +908,7 @@ export const STATIC_ARTICLES = [
     faqs: [
       { q: 'Which flag is best for windy locations?', a: 'The teardrop. Its fabric is held on more sides, so it keeps its shape and flaps less than a feather flag in wind.' },
       { q: "What's the difference between angled and convex feather flags?", a: 'The angled flag tapers to a pointed tip at the top; the convex flag has a smooth curved top edge. Both are the same feather family and the same heights (9, 10.5 and 14 ft).' },
-      { q: 'Can any flag be printed on both sides?', a: 'Yes — every shape is available single or double sided in full-colour dye sublimation.' },
+      { q: 'Can any flag be printed on both sides?', a: 'Yes — every shape is available single or double sided in full-color dye sublimation.' },
       { q: 'What base do I need?', a: 'A ground spike is included for grass. For hard surfaces choose a cross base (+$31) or a metal plate base (+$35).' },
       { q: 'How much do custom flags cost?', a: 'Flags start at $140 with instant online pricing; the price updates as you choose height, sides and base.' }
     ]
@@ -961,7 +961,7 @@ export const STATIC_ARTICLES = [
 </ul>
 
 <h2>What's included and how it's priced</h2>
-<p>Each kit is a snap-fit aluminium SEG frame with backlit fabric graphics, a counter and a transport bag; the graphics push into the frame and are replaceable, so you can reprint without rebuying the frame. Because size, backlighting and configuration vary, the kits are <strong>quoted per order</strong> rather than instant-priced — send your size and artwork for pricing and a free proof.</p>
+<p>Each kit is a snap-fit aluminum SEG frame with backlit fabric graphics, a counter and a transport bag; the graphics push into the frame and are replaceable, so you can reprint without rebuying the frame. Because size, backlighting and configuration vary, the kits are <strong>quoted per order</strong> rather than instant-priced — send your size and artwork for pricing and a free proof.</p>
 
 <p>See each kit: <a href="/products/seg-modular-trade-show-kit-a">SEG Modular Kit A</a>, <a href="/products/seg-modular-trade-show-kit-b">SEG Modular Kit B</a> or <a href="/products/seg-modular-trade-show-kit-c">SEG Modular Kit C</a>, or read more about <a href="/seg-displays">SEG displays</a>.</p>
 `,
@@ -1010,7 +1010,7 @@ export const STATIC_ARTICLES = [
 
 <h2>Setting up backdrops and table covers</h2>
 <p>Step & repeat and tension-fabric backdrops assemble from a tube or extrusion frame that snaps together, then the fabric graphic slips or zips over it. Build the frame fully before fitting the graphic so the fabric ends up evenly tensioned and wrinkle-free. Adjustable frames let you dial the exact width — set it before you stretch the graphic on.</p>
-<p>Table covers simply drape (pleated) or stretch (fitted) over a standard table; smooth the top and align the front panel so your logo sits centred and straight. Fitted stretch covers should be pulled down evenly on all sides for a tight, modern look.</p>
+<p>Table covers simply drape (pleated) or stretch (fitted) over a standard table; smooth the top and align the front panel so your logo sits centerd and straight. Fitted stretch covers should be pulled down evenly on all sides for a tight, modern look.</p>
 
 <h2>During the show</h2>
 <p>Keep weight bags on outdoor canopy legs for the whole event, not just setup — afternoon wind can arrive fast. Do a quick daily walk-around: straighten table covers, re-tension any fabric that has relaxed, and wipe down surfaces at eye level where visitors notice smudges. Small touch-ups keep the booth looking intentional through a multi-day show.</p>
@@ -1026,7 +1026,7 @@ export const STATIC_ARTICLES = [
 
 <h2>Storing displays between shows</h2>
 <p>Store everything dry, out of direct sun, and away from extreme heat. Long spells in a hot car or attic can soften some materials over time, and constant UV will eventually fade any print left exposed — so keep displays in their cases when they are not in use. Stand retractable banners upright, lay backdrop frames flat, and keep weight bags empty and dry (fill them with water or sand on site, then empty and dry them before storage).</p>
-<p>Because Apex graphics are dye-sublimated — the ink is bonded into the fabric rather than sitting on top — colours hold up well to repeated handling and outdoor use. And when your message or branding changes, most systems let you reprint just the graphic and reuse the frame, which is the most economical way to keep a booth current.</p>
+<p>Because Apex graphics are dye-sublimated — the ink is bonded into the fabric rather than sitting on top — colors hold up well to repeated handling and outdoor use. And when your message or branding changes, most systems let you reprint just the graphic and reuse the frame, which is the most economical way to keep a booth current.</p>
 
 <h2>When to replace a graphic vs the whole display</h2>
 <p>If the frame is sound but the print is dated, damaged or off-brand, replace the graphic only — retractable cassettes, SEG fabrics, canopy tops and table covers are all replaceable while you keep the hardware. Replace the frame itself only if joints are bent or broken. This graphic-first approach keeps costs down and waste low across the life of the booth.</p>
@@ -1072,18 +1072,18 @@ export const STATIC_ARTICLES = [
     slug: 'trade-show-booth-design-guide',
     title: 'Trade Show Booth Design: Layout & Branding',
     excerpt:
-      'How to design a trade show booth that stops traffic — focal point, layout and flow, branding hierarchy, height, lighting and colour, for both 10×10 and larger spaces.',
+      'How to design a trade show booth that stops traffic — focal point, layout and flow, branding hierarchy, height, lighting and color, for both 10×10 and larger spaces.',
     tags: ['Booth Design', 'Guide'],
     seo: {
       title: 'Trade Show Booth Design: Layout & Branding',
       description:
-        'Design a booth that gets noticed: build a focal point, plan traffic flow, use a branding hierarchy, and get height, lighting and colour right.'
+        'Design a booth that gets noticed: build a focal point, plan traffic flow, use a branding hierarchy, and get height, lighting and color right.'
     },
     coverUrl: '/images/showcase/backdrop-oakwood.jpeg',
     publishedAt: '2026-08-21T00:00:00.000Z',
     updatedAt: '2026-08-21T00:00:00.000Z',
     html: `
-<p><strong>Short answer:</strong> a booth that gets noticed does three things well — it reads in three seconds from across the aisle, it pulls people in with an open, easy-to-enter layout, and it uses a clear branding hierarchy so the eye lands on your message first. Get those right and even a 10×10 space can out-perform a larger, cluttered neighbour.</p>
+<p><strong>Short answer:</strong> a booth that gets noticed does three things well — it reads in three seconds from across the aisle, it pulls people in with an open, easy-to-enter layout, and it uses a clear branding hierarchy so the eye lands on your message first. Get those right and even a 10×10 space can out-perform a larger, cluttered neighbor.</p>
 
 <h2>Why booth design decides your show</h2>
 <p>On a busy floor, attendees walk fast and scan constantly. Most decide whether to slow down at your booth in a couple of seconds, from ten or more feet away, before they read a single word of detail. That means design is not decoration — it is the difference between a booth people walk past and one they walk into. The goal of every design decision below is to win that first glance and then make it easy to engage.</p>
@@ -1113,10 +1113,10 @@ export const STATIC_ARTICLES = [
 
 <h2>Height, lighting and sightlines</h2>
 <p>Height buys visibility. Tall elements — a backdrop, a feather flag, or a canopy for outdoor and sponsor space — lift your brand above the crowd so it is seen from farther away. Wherever rules allow, use vertical space rather than spreading everything at table height.</p>
-<p>Lighting makes graphics pop and signals investment. Backlit SEG displays or simple spotlights on your backdrop lift colour and draw the eye, especially in convention halls with flat overhead lighting. Even inexpensive clip lights on a banner or backdrop noticeably improve how a booth photographs and reads.</p>
+<p>Lighting makes graphics pop and signals investment. Backlit SEG displays or simple spotlights on your backdrop lift color and draw the eye, especially in convention halls with flat overhead lighting. Even inexpensive clip lights on a banner or backdrop noticeably improve how a booth photographs and reads.</p>
 
-<h2>Colour and contrast</h2>
-<p>Use your brand colours, but prioritise contrast for legibility: dark text on a light panel or light text on a dark panel reads far better at distance than mid-tone on mid-tone. Limit the palette — two or three colours plus a neutral usually beats a rainbow — and keep the headline text high-contrast. Dye-sublimated printing reproduces solid brand colours, gradients and photos cleanly, so you have room to be bold without losing sharpness.</p>
+<h2>Color and contrast</h2>
+<p>Use your brand colors, but prioritize contrast for legibility: dark text on a light panel or light text on a dark panel reads far better at distance than mid-tone on mid-tone. Limit the palette — two or three colors plus a neutral usually beats a rainbow — and keep the headline text high-contrast. Dye-sublimated printing reproduces solid brand colors, gradients and photos cleanly, so you have room to be bold without losing sharpness.</p>
 
 <h2>Designing a 10×10 booth</h2>
 <p>A 10×10 rewards restraint. Anchor the back wall with a single-message backdrop, add one or two retractable banners for support, brand the table with a fitted cover, and keep the front open. Resist the urge to fill every inch — negative space and one strong focal point will out-perform a crowded stand every time. If you exhibit outdoors, a printed canopy extends the same branding to entrances and sponsor areas.</p>
@@ -1135,21 +1135,21 @@ export const STATIC_ARTICLES = [
 </ul>
 
 <h2>Design for your budget</h2>
-<p>Good design is not the same as expensive design. If budget is tight, spend it where the eye lands first: a strong, well-designed backdrop does more than several smaller pieces, so prioritise that focal element and add supporting banners over time. Portable, reusable displays also stretch a budget across many shows — a fabric backdrop and retractable banners fold into a case, travel as luggage, and set up without paid labour, which keeps per-show costs low. And because most systems let you reprint just the graphic and reuse the frame, you can refresh the look for a new campaign without rebuying hardware. Investing in one high-impact, reusable set almost always beats spending the same money on a booth that only works once.</p>
+<p>Good design is not the same as expensive design. If budget is tight, spend it where the eye lands first: a strong, well-designed backdrop does more than several smaller pieces, so prioritize that focal element and add supporting banners over time. Portable, reusable displays also stretch a budget across many shows — a fabric backdrop and retractable banners fold into a case, travel as luggage, and set up without paid labor, which keeps per-show costs low. And because most systems let you reprint just the graphic and reuse the frame, you can refresh the look for a new campaign without rebuying hardware. Investing in one high-impact, reusable set almost always beats spending the same money on a booth that only works once.</p>
 
 <h2>Test your design before you print</h2>
-<p>The cheapest way to fix a booth is on screen, before anything is produced. Lay your design out at scale, step back, and run the three-second test: can someone tell what you do and why to stop, from across the room, in a glance? Check that headline text is large and high-contrast, that the focal message isn’t competing with clutter, and that logos and key words aren’t placed where a table or a person will block them. Every Apex order includes a free artwork proof, so you can confirm size, colour, placement and spelling before it goes to production — use it. It’s far better to catch a too-small tagline or a low-contrast colour on the proof than to discover it on the show floor.</p>
+<p>The cheapest way to fix a booth is on screen, before anything is produced. Lay your design out at scale, step back, and run the three-second test: can someone tell what you do and why to stop, from across the room, in a glance? Check that headline text is large and high-contrast, that the focal message isn’t competing with clutter, and that logos and key words aren’t placed where a table or a person will block them. Every Apex order includes a free artwork proof, so you can confirm size, color, placement and spelling before it goes to production — use it. It’s far better to catch a too-small tagline or a low-contrast color on the proof than to discover it on the show floor.</p>
 
 <h2>Bring your booth together</h2>
-<p>Design the layers, then order them to match: a <a href="/backdrops">backdrop</a> for the big message, <a href="/banner-stands">banner stands</a> for support, a <a href="/table-covers">table cover</a> for the interaction zone, and a <a href="/custom-canopies">canopy</a> or <a href="/flags">flags</a> for outdoor visibility. Printing the whole set from one supplier keeps colours and branding consistent across every piece. See the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> to plan the rest, and the <a href="/blog/print-coverage-explained">print coverage guide</a> to get your artwork right.</p>
+<p>Design the layers, then order them to match: a <a href="/backdrops">backdrop</a> for the big message, <a href="/banner-stands">banner stands</a> for support, a <a href="/table-covers">table cover</a> for the interaction zone, and a <a href="/custom-canopies">canopy</a> or <a href="/flags">flags</a> for outdoor visibility. Printing the whole set from one supplier keeps colors and branding consistent across every piece. See the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> to plan the rest, and the <a href="/blog/print-coverage-explained">print coverage guide</a> to get your artwork right.</p>
 `,
     faqs: [
       { q: 'What makes a trade show booth stand out?', a: 'One clear focal point that reads in about three seconds from the aisle, an open and welcoming layout, height for visibility, good contrast and lighting, and a branding hierarchy that guides the eye from your headline to the details.' },
       { q: 'How do I design a 10×10 booth on a budget?', a: 'Keep it simple: a single-message backdrop, one or two retractable banners, a branded table cover, and an open front. Negative space plus one strong focal point beats a crowded booth.' },
       { q: 'Where should I put my main message?', a: 'On the backdrop at head height behind the booth, since that fills the sightline from the aisle. Keep the headline short, large and high-contrast.' },
-      { q: 'Should I use lighting in my booth?', a: 'Yes where you can. Backlit displays or simple spotlights lift colour and draw the eye under flat convention-hall lighting, and they make the booth photograph better.' },
+      { q: 'Should I use lighting in my booth?', a: 'Yes where you can. Backlit displays or simple spotlights lift color and draw the eye under flat convention-hall lighting, and they make the booth photograph better.' },
       { q: 'How do I stop traffic that walks by quickly?', a: 'Add an aisle magnet at the edge of your space — a feather flag, a bright banner, or a live demo — so people notice and slow down before they pass.' },
-      { q: 'How many colours should a booth use?', a: 'Usually two or three brand colours plus a neutral, prioritising contrast so text reads at distance. A limited palette looks more professional than a busy, multi-colour design.' }
+      { q: 'How many colors should a booth use?', a: 'Usually two or three brand colors plus a neutral, prioritizing contrast so text reads at distance. A limited palette looks more professional than a busy, multi-color design.' }
     ]
   },
   {
@@ -1173,14 +1173,14 @@ export const STATIC_ARTICLES = [
 <p>Banner materials are described by weight per square yard — 13oz, 18oz, and so on. Heavier generally means thicker, tougher and more opaque, but also stiffer and pricier. The right weight is about the job, not just "more is better": a lightweight indoor banner and a heavy street banner have different needs. Below is how the common Apex banner materials compare and when each one is the right call.</p>
 
 <h2>13oz scrim vinyl — the everyday workhorse</h2>
-<p>Scrim vinyl is the most popular banner material for good reason: it is durable, weather-resistant, economical, and prints in vivid full colour. A polyester scrim mesh sandwiched between vinyl layers gives it tear resistance, so it holds up to repeated indoor and outdoor use — storefronts, events, trade shows, promotions and step-and-repeat backdrops. For the majority of banners, <a href="/products/13oz-vinyl-banner">13oz vinyl</a> is the default choice.</p>
+<p>Scrim vinyl is the most popular banner material for good reason: it is durable, weather-resistant, economical, and prints in vivid full color. A polyester scrim mesh sandwiched between vinyl layers gives it tear resistance, so it holds up to repeated indoor and outdoor use — storefronts, events, trade shows, promotions and step-and-repeat backdrops. For the majority of banners, <a href="/products/13oz-vinyl-banner">13oz vinyl</a> is the default choice.</p>
 <p>Because standard vinyl is somewhat translucent, a single-sided 13oz banner can show a faint ghost of the print from behind. That is fine for a banner hung against a wall, but if it will be seen from both sides, look at blockout.</p>
 
 <h2>18oz blockout — for double-sided and heavy duty</h2>
-<p>Blockout vinyl has an <strong>opaque grey core</strong> layer that blocks light from passing through, so two different prints on opposite faces never bleed into each other. That makes <a href="/products/18oz-blockout-banner">18oz blockout</a> the right pick for true double-sided banners — hanging banners seen from both directions, street-pole banners, and any high-visibility spot where you want a crisp image on each side. It is also heavier and more tear-resistant than 13oz, so it suits long outdoor runs and demanding environments where durability matters most.</p>
+<p>Blockout vinyl has an <strong>opaque gray core</strong> layer that blocks light from passing through, so two different prints on opposite faces never bleed into each other. That makes <a href="/products/18oz-blockout-banner">18oz blockout</a> the right pick for true double-sided banners — hanging banners seen from both directions, street-pole banners, and any high-visibility spot where you want a crisp image on each side. It is also heavier and more tear-resistant than 13oz, so it suits long outdoor runs and demanding environments where durability matters most.</p>
 
 <h2>Mesh — for wind and fences</h2>
-<p>Perforated <a href="/products/mesh-banner">mesh vinyl</a> is riddled with tiny holes that let roughly a third of the wind pass straight through. That dramatically cuts the wind load that makes solid banners flap, strain their grommets and tear — which is exactly what you want on a fence line, scaffolding, a stadium rail or a building wrap. You trade a little colour density for that airflow, but modern mesh still prints bold, readable graphics. If your banner lives outdoors in an exposed, windy location, mesh is usually the safest choice.</p>
+<p>Perforated <a href="/products/mesh-banner">mesh vinyl</a> is riddled with tiny holes that let roughly a third of the wind pass straight through. That dramatically cuts the wind load that makes solid banners flap, strain their grommets and tear — which is exactly what you want on a fence line, scaffolding, a stadium rail or a building wrap. You trade a little color density for that airflow, but modern mesh still prints bold, readable graphics. If your banner lives outdoors in an exposed, windy location, mesh is usually the safest choice.</p>
 
 <h2>9oz wrinkle-free fabric — the premium indoor look</h2>
 <p>Fabric banners are dye-sublimated: the ink is bonded into a polyester fabric rather than sitting on a vinyl surface. The result is a rich, <strong>no-glare matte finish</strong> that photographs beautifully under lights — ideal for indoor branding, backdrops and photo walls where a vinyl sheen would reflect. <a href="/products/fabric-banner-9oz-wrinkle-free">9oz wrinkle-free fabric</a> also packs down and travels without creasing, and many fabric pieces are machine washable, so they stay presentable show after show. The trade-off is that fabric is less suited to harsh, wet outdoor use than vinyl.</p>
@@ -1207,7 +1207,7 @@ export const STATIC_ARTICLES = [
 <p>As a rule of thumb: grommets for tying to a fence or frame, pole pockets for a polished hanging banner, and mesh plus reinforced edges for windy outdoor sites.</p>
 
 <h2>Sizing and artwork basics</h2>
-<p>Banners are made to size to the inch, so measure the space first and order to fit rather than trimming later. For artwork, supply the highest-resolution file you have — vector for logos and text is ideal — and remember that a banner viewed from across a parking lot needs far larger type than one read at arm's length. Every Apex order includes a free proof so you can confirm size, colour and layout before it prints.</p>
+<p>Banners are made to size to the inch, so measure the space first and order to fit rather than trimming later. For artwork, supply the highest-resolution file you have — vector for logos and text is ideal — and remember that a banner viewed from across a parking lot needs far larger type than one read at arm's length. Every Apex order includes a free proof so you can confirm size, color and layout before it prints.</p>
 
 <h2>How long do banners last?</h2>
 <p>Lifespan depends on the material and the environment more than any single number. Indoors, a vinyl or fabric banner can look new for years with light handling. Outdoors, expect UV, wind and weather to shorten that — but the right material stacks the odds in your favour: dye-sublimated graphics resist fading, blockout vinyl’s extra weight resists tearing on long runs, and mesh survives wind that would destroy a solid banner on a fence. Two habits extend any banner’s life: store it dry and rolled rather than folded, and don’t leave it exposed to sun and weather when it isn’t in use. When the message changes but the banner is still sound, you simply reprint — banners are made to order, so updating artwork is straightforward.</p>
@@ -1225,8 +1225,8 @@ export const STATIC_ARTICLES = [
 <p>All four are priced by the square foot with instant online pricing. See the whole range on the <a href="/banners">banners page</a>, or read the <a href="/blog/print-coverage-explained">print coverage guide</a> for artwork tips.</p>
 `,
     faqs: [
-      { q: 'What is the most popular banner material?', a: '13oz scrim vinyl. It is durable, weather-resistant, economical and prints in vivid colour, which makes it the default for most indoor and outdoor banners.' },
-      { q: 'Which banner material is best for double-sided printing?', a: '18oz blockout vinyl. Its opaque grey core blocks light so two different prints on opposite faces don’t bleed together, giving a crisp image on each side.' },
+      { q: 'What is the most popular banner material?', a: '13oz scrim vinyl. It is durable, weather-resistant, economical and prints in vivid color, which makes it the default for most indoor and outdoor banners.' },
+      { q: 'Which banner material is best for double-sided printing?', a: '18oz blockout vinyl. Its opaque gray core blocks light so two different prints on opposite faces don’t bleed together, giving a crisp image on each side.' },
       { q: 'What banner should I use on a fence or in wind?', a: 'Perforated mesh. The tiny holes let about a third of the wind through, cutting the wind load that tears solid banners — ideal for fences, scaffolding and building wraps.' },
       { q: 'When should I choose a fabric banner over vinyl?', a: 'For premium indoor branding, backdrops and photo walls. Dye-sublimated fabric has a no-glare matte finish that photographs well under lights and packs without creasing; vinyl is better for harsh outdoor use.' },
       { q: 'What’s the difference between grommets and pole pockets?', a: 'Grommets are metal eyelets you tie or hook through; pole pockets are sewn sleeves (usually 2") that a pole slides into for a clean hanging look. Choose based on how you’ll mount the banner.' },

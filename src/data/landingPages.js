@@ -15,11 +15,11 @@ export const LANDING_PAGES = [
     title: 'SEG Displays | Silicone Edge Graphics',
     h1: 'SEG Displays (Silicone Edge Graphics)',
     description:
-      'Custom SEG displays — silicone-edge-graphic fabric on a rigid aluminium frame for a seamless, frameless finish. Backlit options, quoted per order.',
+      'Custom SEG displays — silicone-edge-graphic fabric on a rigid aluminum frame for a seamless, frameless finish. Backlit options, quoted per order.',
     intro:
-      'SEG displays — short for Silicone Edge Graphics — are dye-sublimated fabric prints with a thin silicone strip sewn around the edge. The strip presses into a groove on a slim aluminium frame, so the graphic sits perfectly flat, edge to edge, with no visible frame. The result is the clean, seamless, premium look you see on modern trade show backwalls, light boxes and retail displays.',
+      'SEG displays — short for Silicone Edge Graphics — are dye-sublimated fabric prints with a thin silicone strip sewn around the edge. The strip presses into a groove on a slim aluminum frame, so the graphic sits perfectly flat, edge to edge, with no visible frame. The result is the clean, seamless, premium look you see on modern trade show backwalls, light boxes and retail displays.',
     sections: [
-      { h2: 'What is an SEG display?', p: 'A tensioned fabric graphic held in an aluminium extrusion frame by a silicone edge (the "SEG"). Because the fabric pulls tight into the frame channel, the surface is flat and frameless — a cleaner finish than snap frames or banner stands.' },
+      { h2: 'What is an SEG display?', p: 'A tensioned fabric graphic held in an aluminum extrusion frame by a silicone edge (the "SEG"). Because the fabric pulls tight into the frame channel, the surface is flat and frameless — a cleaner finish than snap frames or banner stands.' },
       { h2: 'Why choose SEG?', list: [
         'Seamless, edge-to-edge graphics with no visible hardware.',
         'Replaceable fabric — reuse the frame and reprint the graphic when your message changes.',
@@ -31,7 +31,7 @@ export const LANDING_PAGES = [
       { h2: 'Common uses', list: ['Trade show and exhibition backwalls', 'Backlit light boxes', 'Retail and showroom displays', 'Reception and lobby branding'] }
     ],
     faqs: [
-      { q: 'What does SEG stand for?', a: 'Silicone Edge Graphic — a fabric print with a silicone strip on the edge that pushes into a groove on an aluminium frame for a flat, frameless look.' },
+      { q: 'What does SEG stand for?', a: 'Silicone Edge Graphic — a fabric print with a silicone strip on the edge that pushes into a groove on an aluminum frame for a flat, frameless look.' },
       { q: 'Can the SEG graphic be replaced?', a: 'Yes. The fabric graphic is replaceable, so you keep the frame and simply reprint the graphic when your branding changes.' },
       { q: 'Can SEG displays be backlit?', a: 'Yes — SEG frames are available in backlit (light-box) versions for illuminated displays. Ask about backlit options when you request a quote.' },
       { q: 'How do I get pricing for an SEG display?', a: 'SEG displays are quoted per order by size and configuration. Request a quote with your size and artwork and we will send pricing and a free proof.' }
@@ -57,9 +57,9 @@ export const LANDING_PAGES = [
     description:
       'Custom tension fabric displays — stretch dye-sub graphics over a lightweight tubular frame. Straight or curved, packs small, quoted per order.',
     intro:
-      'A tension fabric display stretches a dye-sublimated fabric graphic — like a pillowcase — over a lightweight tubular aluminium frame. It is the most portable way to put up a full-size branded backwall: the frame snaps together in minutes with no tools, the fabric zips or slides on, and the whole thing packs into a compact bag.',
+      'A tension fabric display stretches a dye-sublimated fabric graphic — like a pillowcase — over a lightweight tubular aluminum frame. It is the most portable way to put up a full-size branded backwall: the frame snaps together in minutes with no tools, the fabric zips or slides on, and the whole thing packs into a compact bag.',
     sections: [
-      { h2: 'What is a tension fabric display?', p: 'A stretch fabric graphic pulled taut over a collapsible tubular frame. The fabric is dye-sublimated for full-colour, wrinkle-resistant print and is machine washable, so the display stays crisp show after show.' },
+      { h2: 'What is a tension fabric display?', p: 'A stretch fabric graphic pulled taut over a collapsible tubular frame. The fabric is dye-sublimated for full-color, wrinkle-resistant print and is machine washable, so the display stays crisp show after show.' },
       { h2: 'Why choose tension fabric?', list: [
         'Lightweight and packs into a compact carry bag.',
         'Fast, tool-free frame assembly.',
@@ -71,7 +71,7 @@ export const LANDING_PAGES = [
       { h2: 'Common uses', list: ['Portable trade show backwalls', '10x10 and 10x20 booth backdrops', 'Events and conferences', 'Retail and pop-up shops'] }
     ],
     faqs: [
-      { q: 'What is a tension fabric display?', a: 'A stretch, dye-sublimated fabric graphic pulled over a lightweight tubular aluminium frame — a portable, seamless branded backwall.' },
+      { q: 'What is a tension fabric display?', a: 'A stretch, dye-sublimated fabric graphic pulled over a lightweight tubular aluminum frame — a portable, seamless branded backwall.' },
       { q: 'Is the fabric washable?', a: 'Yes — the dye-sublimated fabric is wrinkle-resistant and machine washable, so it stays presentable across many shows.' },
       { q: 'Straight or curved?', a: 'Both are available. Straight walls maximise flat graphic space; curved walls give a softer, more dimensional booth look.' },
       { q: 'How is a tension fabric display priced?', a: 'It is quoted per order by size and shape. Request a quote with your size and artwork for pricing and a free proof.' }
@@ -132,7 +132,7 @@ export const LANDING_PAGES = [
       ] },
       { h2: 'Why choose custom flags?', list: [
         'Height and motion grab attention from across a lot.',
-        'Dye-sublimated full-colour print that will not crack or fade.',
+        'Dye-sublimated full-color print that will not crack or fade.',
         'Ground stake for grass or a cross base with weight for hard surfaces.',
         'Lightweight and packs into a carry bag.',
         'A natural companion to a branded canopy tent.'

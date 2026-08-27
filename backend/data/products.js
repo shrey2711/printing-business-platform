@@ -133,7 +133,7 @@ const daysGroup15 = {
   ]
 };
 
-// Complete Canopy Set (printed top + aluminium frame + carry bag) vs Printed
+// Complete Canopy Set (printed top + aluminum frame + carry bag) vs Printed
 // Canopy Top Only (the printed fabric top on its own, for a frame the customer
 // already owns). Each kit is a SEPARATE, explicitly-configured price column per
 // size/tier (see quantityTiers.prices) — it is NOT a percentage discount off the
@@ -144,7 +144,7 @@ const kitGroup = {
   label: 'What you get',
   type: 'select',
   pricing: 'baseKit',
-  help: 'Complete Canopy Set = printed canopy top + aluminium frame + carry bag. Printed Canopy Top Only = the custom-printed fabric top on its own (no frame, no carry bag) — for customers who already have a compatible frame.',
+  help: 'Complete Canopy Set = printed canopy top + aluminum frame + carry bag. Printed Canopy Top Only = the custom-printed fabric top on its own (no frame, no carry bag) — for customers who already have a compatible frame.',
   choices: [
     { id: 'full', label: 'Complete Canopy Set — top + frame + bag', default: true },
     { id: 'canopy', label: 'Printed Canopy Top Only — no frame' }
@@ -187,20 +187,20 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
   category: 'tents',
   badge: 'Custom Printed',
   emoji: '⛺',
-  tagline: `Custom printed ${size} pop-up canopy tent, full-colour dye sublimation.`,
+  tagline: `Custom printed ${size} pop-up canopy tent, full-color dye sublimation.`,
   description:
-    `A commercial-grade ${size} pop-up canopy printed edge to edge in full colour. Add printed full ` +
+    `A commercial-grade ${size} pop-up canopy printed edge to edge in full color. Add printed full ` +
     `or half walls. Dye sublimation bonds the ink into the fabric, so graphics will not crack, peel ` +
     `or fade. Order 3 or more and the per-tent price drops.`,
   features: [
     'Dye-sublimated full-bleed printing',
     'Add up to 3 printed walls total — any mix of full and half height',
-    'Heavy-duty aluminium hex frame',
+    'Heavy-duty aluminum hex frame',
     'Free artwork proof before production'
   ],
   // Config-aware: the kit choice (full set vs graphic-only) changes what ships.
   whatsIncluded: [
-    'Complete set (frame + graphic): your custom-printed canopy top, a heavy-duty aluminium hex frame with telescopic legs, and a carry bag.',
+    'Complete set (frame + graphic): your custom-printed canopy top, a heavy-duty aluminum hex frame with telescopic legs, and a carry bag.',
     'Graphic-only option: the custom-printed canopy top on its own, to fit a compatible frame you already have.',
     'Any printed full or half walls you add (up to 3 total, in any mix of full and half height).'
   ],
@@ -210,8 +210,8 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
   related: ['pleated-table-covers', 'standard-retractable-banner', 'step-and-repeat-backdrop'],
   // AEO/GEO: concise factual answers, using this product's own explicit prices.
   faqs: [
-    { q: `What does the $${canopy1.toLocaleString('en-US')} ${size} canopy price include?`, a: `The $${canopy1.toLocaleString('en-US')} starting price is for the custom-printed ${size} canopy top only. It does not include the aluminium frame or carry bag.` },
-    { q: `How much is the complete ${size} custom canopy set?`, a: `The complete ${size} set is $${full1.toLocaleString('en-US')} and includes the custom-printed canopy top, the aluminium frame and a carry bag.` },
+    { q: `What does the $${canopy1.toLocaleString('en-US')} ${size} canopy price include?`, a: `The $${canopy1.toLocaleString('en-US')} starting price is for the custom-printed ${size} canopy top only. It does not include the aluminum frame or carry bag.` },
+    { q: `How much is the complete ${size} custom canopy set?`, a: `The complete ${size} set is $${full1.toLocaleString('en-US')} and includes the custom-printed canopy top, the aluminum frame and a carry bag.` },
     { q: 'Can I purchase only the printed canopy top?', a: 'Yes. Customers who already have a compatible frame can order the printed canopy top on its own — choose "Printed Canopy Top Only" on the product page.' },
     { q: 'How long does production take?', a: 'Standard production is 6–8 business days after you approve your free proof; rush production is 2–3 business days. Shipping/transit time is additional and depends on your destination.' },
     { q: 'How many walls can I add?', a: 'Up to 3 printed walls total, in any combination of full-height and half-height walls.' },
@@ -256,15 +256,15 @@ const pleatedCovers = {
   category: 'table-covers',
   badge: 'Custom Printed',
   emoji: '🎪',
-  tagline: 'Full-colour pleated table throws — draped fit, closed back.',
+  tagline: 'Full-color pleated table throws — draped fit, closed back.',
   description:
     'Custom printed pleated table covers (throws) for trade shows, markets and events. Dye-sublimated ' +
-    'full-colour print on wrinkle-resistant polyester with a draped, rounded-corner fit and a closed ' +
+    'full-color print on wrinkle-resistant polyester with a draped, rounded-corner fit and a closed ' +
     'back (4-sided). Choose 4, 6 or 8 ft, standard 6-8 day or rush 2-3 day.',
   features: [
     'Draped pleated throw with rounded corners',
     'Closed back — covers all four sides',
-    'Dye-sublimated full-colour print',
+    'Dye-sublimated full-color print',
     'Wrinkle-resistant, machine washable'
   ],
   applications: ['Trade show and market tables', 'Registration and welcome desks', 'Retail and event counters', 'Fundraisers and open days'],
@@ -278,7 +278,7 @@ const pleatedCovers = {
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
   seoTitle: 'Custom Pleated Table Covers | 4, 6 & 8 ft',
   seoDescription:
-    'Custom printed pleated table covers (throws) in 4, 6 and 8 ft — draped closed-back fit, full-colour dye sublimation, free artwork proof. From $199.',
+    'Custom printed pleated table covers (throws) in 4, 6 and 8 ft — draped closed-back fit, full-color dye sublimation, free artwork proof. From $199.',
   related: ['stretch-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
   pricing: {
     model: 'configured',
@@ -309,15 +309,15 @@ const stretchCovers = {
   category: 'table-covers',
   badge: 'Custom Printed',
   emoji: '🎪',
-  tagline: 'Full-colour fitted stretch covers — tight fit, closed back.',
+  tagline: 'Full-color fitted stretch covers — tight fit, closed back.',
   description:
     'Custom printed stretch table covers for trade shows and events. A fitted, spandex-style cover ' +
     'that pulls tight to the table for a clean, modern look, closed back (4-sided) and dye-sublimated ' +
-    'in full colour. Choose 6 or 8 ft, standard 6-8 day or rush 2-3 day.',
+    'in full color. Choose 6 or 8 ft, standard 6-8 day or rush 2-3 day.',
   features: [
     'Fitted stretch cover — tight, modern fit',
     'Closed back — covers all four sides',
-    'Dye-sublimated full-colour print',
+    'Dye-sublimated full-color print',
     'Wrinkle-resistant, machine washable'
   ],
   applications: ['Trade show and expo tables', 'Modern booth and counter looks', 'Product demo tables', 'Corporate and event branding'],
@@ -331,7 +331,7 @@ const stretchCovers = {
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
   seoTitle: 'Custom Stretch Table Covers | 6 & 8 ft',
   seoDescription:
-    'Custom printed fitted stretch table covers in 6 and 8 ft — tight closed-back fit, full-colour dye sublimation, free artwork proof. From $285.',
+    'Custom printed fitted stretch table covers in 6 and 8 ft — tight closed-back fit, full-color dye sublimation, free artwork proof. From $285.',
   related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
   pricing: {
     model: 'configured',
@@ -369,19 +369,19 @@ const tradeShowDisplays = [
     emoji: '📐',
     gallery: [
       { src: '/images/displays/standard-retractable-front-back.png', alt: 'Apex standard retractable banner stand, front and back view, assembled with a printed graphic' },
-      { src: '/images/displays/standard-retractable-detail.png', alt: 'Apex standard retractable banner stand aluminium base and support-pole hardware close-up' },
-      { src: '/images/displays/standard-retractable-kit.png', alt: "What's included with the Apex standard retractable banner stand: aluminium base, support poles and padded carry bag" },
+      { src: '/images/displays/standard-retractable-detail.png', alt: 'Apex standard retractable banner stand aluminum base and support-pole hardware close-up' },
+      { src: '/images/displays/standard-retractable-kit.png', alt: "What's included with the Apex standard retractable banner stand: aluminum base, support poles and padded carry bag" },
       { src: '/images/displays/apex-standard-retractable-dimensions.svg', alt: 'Dimension diagram for the Apex standard retractable banner: 33 by 81 inch and 47 by 81 inch printed graphic sizes' },
-      { src: '/images/displays/standard-retractable-banner.webp', alt: 'Apex standard retractable banner stand with a full-colour printed graphic' }
+      { src: '/images/displays/standard-retractable-banner.webp', alt: 'Apex standard retractable banner stand with a full-color printed graphic' }
     ],
     tagline: 'Compact retractable banner stand with a replaceable printed graphic.',
     description:
-      'A portable retractable banner stand with a compact aluminium base and two stabilising feet. ' +
+      'A portable retractable banner stand with a compact aluminum base and two stabilising feet. ' +
       'The printed graphic rolls into the base for travel and pops up in seconds — ideal for trade ' +
       'shows, lobbies and events. The graphic is replaceable, so you can reuse the hardware.',
     size: '33" × 81" or 47" × 81"',
     features: [
-      'Compact aluminium retractable base',
+      'Compact aluminum retractable base',
       'Two stabilising feet',
       'Quick tool-free setup',
       'Portable trade-show display',
@@ -392,7 +392,7 @@ const tradeShowDisplays = [
     specs: [
       ['Display size', '33" × 81" or 47" × 81"'],
       ['Type', 'Retractable banner stand'],
-      ['Base', 'Compact aluminium with two stabilising feet'],
+      ['Base', 'Compact aluminum with two stabilising feet'],
       ['Graphic', 'Replaceable printed banner'],
       ['Setup', 'Tool-free — pops up in seconds'],
       ['Included', 'Stand + printed graphic + carry bag']
@@ -401,7 +401,7 @@ const tradeShowDisplays = [
     related: ['deluxe-retractable-banner', 'x-stand-banner'],
     seoTitle: 'Standard Retractable Banner Stand',
     seoDescription:
-      'Custom Apex retractable banner stand, 33 or 47 in wide × 81 in tall. Compact aluminium base, tool-free setup and a replaceable printed graphic for events.',
+      'Custom Apex retractable banner stand, 33 or 47 in wide × 81 in tall. Compact aluminum base, tool-free setup and a replaceable printed graphic for events.',
     pricing: {
       model: 'configured',
       baseLabel: 'Retractable banner',
@@ -438,20 +438,20 @@ const tradeShowDisplays = [
     badge: 'Premium',
     emoji: '🏆',
     gallery: [
-      { src: '/images/displays/deluxe-retractable-banner.webp', alt: 'Apex deluxe retractable banner stand with a full-colour printed graphic' },
+      { src: '/images/displays/deluxe-retractable-banner.webp', alt: 'Apex deluxe retractable banner stand with a full-color printed graphic' },
       { src: '/images/displays/deluxe-retractable-led.jpg', alt: 'Apex deluxe retractable banner stand with a clip-on LED banner light illuminating the printed graphic' },
-      { src: '/images/displays/deluxe-retractable-hardware.jpg', alt: 'Apex deluxe retractable banner stand aluminium base with chrome-style end caps, close-up' },
+      { src: '/images/displays/deluxe-retractable-hardware.jpg', alt: 'Apex deluxe retractable banner stand aluminum base with chrome-style end caps, close-up' },
       { src: '/images/displays/deluxe-retractable-base.jpg', alt: 'Apex deluxe retractable banner stand base detail with chrome finish' },
       { src: '/images/displays/apex-deluxe-retractable-dimensions.svg', alt: 'Dimension diagram for the Apex deluxe retractable banner: 33 by 81 inch printed graphic size' }
     ],
     tagline: 'Premium retractable banner stand with chrome-style end caps and an adjustable pole.',
     description:
-      'A premium retractable banner stand with heavier aluminium hardware, chrome-style end caps and an ' +
+      'A premium retractable banner stand with heavier aluminum hardware, chrome-style end caps and an ' +
       'adjustable support pole for a polished, professional look. The printed graphic is replaceable and ' +
       'the stand packs into a padded bag for travel.',
     size: '33" × 81"',
     features: [
-      'Premium aluminium hardware',
+      'Premium aluminum hardware',
       'Chrome-style end caps',
       'Adjustable support pole',
       'Professional premium appearance',
@@ -462,7 +462,7 @@ const tradeShowDisplays = [
     specs: [
       ['Display size', '33" × 81"'],
       ['Type', 'Premium retractable banner stand'],
-      ['Base', 'Heavy aluminium with chrome-style end caps'],
+      ['Base', 'Heavy aluminum with chrome-style end caps'],
       ['Pole', 'Adjustable support pole'],
       ['Graphic', 'Replaceable printed banner'],
       ['Included', 'Stand + printed graphic + padded bag']
@@ -488,7 +488,7 @@ const tradeShowDisplays = [
       ]
     },
     faqs: [
-      { q: 'How is the Deluxe different from the Standard stand?', a: 'The Deluxe uses heavier aluminium hardware, chrome-style end caps and an adjustable pole for a more premium, professional look.' },
+      { q: 'How is the Deluxe different from the Standard stand?', a: 'The Deluxe uses heavier aluminum hardware, chrome-style end caps and an adjustable pole for a more premium, professional look.' },
       { q: 'Is the graphic replaceable?', a: 'Yes — reuse the premium hardware and reprint the banner whenever your message changes.' },
       { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size and production speed for an instant price. Upload artwork or add our design service, and every order includes a free proof before printing.' }
     ]
@@ -503,7 +503,7 @@ const tradeShowDisplays = [
     gallery: [
       { src: '/images/displays/x-stand-front-back.jpg', alt: 'Apex X-stand banner, front and back view, assembled on the X-frame with a printed graphic' },
       { src: '/images/displays/x-stand-hardware.jpg', alt: 'Apex X-stand banner X-frame hardware — folded poles, hub and hanging hooks' },
-      { src: '/images/displays/x-stand-banner.webp', alt: 'Apex X-stand banner with a full-colour printed graphic' },
+      { src: '/images/displays/x-stand-banner.webp', alt: 'Apex X-stand banner with a full-color printed graphic' },
       { src: '/images/displays/apex-x-stand-graphic-vs-complete.svg', alt: 'Apex X-stand options: graphic only versus complete set with the X-frame stand' },
       { src: '/images/displays/apex-x-stand-dimensions.svg', alt: 'Dimension diagram for the Apex X-stand banner: 24 by 63 inch and 32 by 71 inch printed graphic sizes' }
     ],
@@ -656,19 +656,19 @@ const tradeShowDisplays = [
     badge: 'Tabletop',
     emoji: '🪧',
     gallery: [
-      { src: '/images/displays/table-top-example.png', alt: 'Apex table top banner stand, front and back, with a full-colour printed sample graphic' },
-      { src: '/images/displays/table-top-banner-stand.webp', alt: 'Apex table top retractable banner stand with a full-colour printed graphic' },
+      { src: '/images/displays/table-top-example.png', alt: 'Apex table top banner stand, front and back, with a full-color printed sample graphic' },
+      { src: '/images/displays/table-top-banner-stand.webp', alt: 'Apex table top retractable banner stand with a full-color printed graphic' },
       { src: '/images/displays/apex-table-top-banner-dimensions.svg', alt: 'Dimension diagram for the Apex table top banner stand: 11.5 by 17.5 inch printed graphic' }
     ],
     tagline: 'Compact tabletop retractable banner for counters and registration desks.',
     description:
       'A compact retractable banner that sits on a table or counter — a mini version of a full-height ' +
-      'retractable. The small aluminium base holds a replaceable printed graphic and sets up in seconds. ' +
+      'retractable. The small aluminum base holds a replaceable printed graphic and sets up in seconds. ' +
       'Perfect for registration desks, retail counters, restaurants and trade-show tables.',
     size: '11.5" × 17.5"',
     features: [
       'Compact retractable tabletop banner',
-      'Small aluminium base',
+      'Small aluminum base',
       'Quick tool-free setup',
       'Lightweight and portable',
       'Replaceable printed graphic',
@@ -678,7 +678,7 @@ const tradeShowDisplays = [
     specs: [
       ['Display size', '11.5" × 17.5" (tabletop)'],
       ['Type', 'Tabletop retractable banner'],
-      ['Base', 'Compact aluminium tabletop base'],
+      ['Base', 'Compact aluminum tabletop base'],
       ['Graphic', 'Replaceable printed banner'],
       ['Setup', 'Tool-free — pops up in seconds'],
       ['Included', 'Tabletop stand + printed graphic']
@@ -687,7 +687,7 @@ const tradeShowDisplays = [
     related: ['standard-retractable-banner', 'pleated-table-covers'],
     seoTitle: 'Tabletop Retractable Banner Stand',
     seoDescription:
-      'Compact Apex tabletop retractable banner, 11.5×17.5 in. Small aluminium base and replaceable graphic for counters, registration desks and trade-show tables.',
+      'Compact Apex tabletop retractable banner, 11.5×17.5 in. Small aluminum base and replaceable graphic for counters, registration desks and trade-show tables.',
     pricing: {
       model: 'competitive',
       discountPercent: 5,
@@ -745,10 +745,10 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   badge: 'Custom Printed',
   emoji: '🚩',
   ...(gallery ? { gallery: [...gallery, ...FLAG_SHARED_FIGURES] } : {}),
-  tagline: `Custom printed ${shape} advertising flag — full-colour dye sublimation, pole + base or graphic only.`,
+  tagline: `Custom printed ${shape} advertising flag — full-color dye sublimation, pole + base or graphic only.`,
   description: intro,
   features: [
-    'Full-colour dye-sublimated print',
+    'Full-color dye-sublimated print',
     'Single- or double-sided printing',
     'Lightweight portable pole hardware, tool-free assembly',
     'Choice of spike, cross or metal-plate base',
@@ -759,7 +759,7 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   specs: [
     ['Shape', `${shape} flag`],
     ['Sizes', sizes.map((s) => s.label).join(', ')],
-    ['Print', 'Full-colour dye sublimation, single- or double-sided'],
+    ['Print', 'Full-color dye sublimation, single- or double-sided'],
     ['Hardware', 'Flexible pole kit + base (spike / cross / metal plate)'],
     ['Graphic', 'Replaceable'],
     ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
@@ -770,7 +770,7 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   seoDescription,
   faqs: [
     { q: 'What is the difference between "with hardware" and "graphic only"?', a: 'With hardware includes the flexible pole kit and a base so the flag is ready to fly. Graphic only is the printed flag on its own — for customers who already own compatible hardware.' },
-    { q: 'Single-sided or double-sided?', a: 'Single-sided prints the front in full colour; the reverse shows a mirrored print-through. Double-sided prints two separate faces with a blockout layer between them so each side reads correctly.' },
+    { q: 'Single-sided or double-sided?', a: 'Single-sided prints the front in full color; the reverse shows a mirrored print-through. Double-sided prints two separate faces with a blockout layer between them so each side reads correctly.' },
     { q: 'Which base should I choose?', a: 'A spike base (included) pushes into grass for outdoor use. A cross base or metal plate base (small upcharge) weighs the flag down on hard floors indoors.' },
     { q: 'How long does production take?', a: 'Standard production is 6–8 business days after proof approval; rush is 2–3 business days. This is production time — shipping/transit is additional.' }
   ],
@@ -788,7 +788,7 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
         ] },
       { id: 'size', label: 'Size', type: 'select', pricing: 'matrix', choices: sizes },
       { id: 'sides', label: 'Printing', type: 'select', pricing: 'matrix',
-        help: 'Single-sided: full-colour front, mirrored print-through on the reverse. Double-sided: two separate printed faces with a blockout layer.',
+        help: 'Single-sided: full-color front, mirrored print-through on the reverse. Double-sided: two separate printed faces with a blockout layer.',
         choices: [
           { id: 'single', label: 'Single-sided', default: true },
           { id: 'double', label: 'Double-sided' }
@@ -828,14 +828,14 @@ const flagProducts = [
       { src: '/images/flags/feather_angled_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag — sliding the printed flag onto the pole' }
     ],
     seoTitle: 'Custom Feather Angled Flags',
-    seoDescription: 'Custom printed angled feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
-    intro: 'A custom printed angled feather flag — the tall, curved-top advertising flag whose canopy angles forward over the pole so your branding stays visible even in light wind. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+    seoDescription: 'Custom printed angled feather flags in 9, 10.5 and 14 ft — full-color dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed angled feather flag — the tall, curved-top advertising flag whose canopy angles forward over the pole so your branding stays visible even in light wind. Full-color dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
   flagProduct({
     slug: 'feather-straight-flag', name: 'Feather Straight Flag', shape: 'straight feather', sizes: featherSizes,
     seoTitle: 'Custom Feather Straight Flags',
-    seoDescription: 'Custom printed straight feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
-    intro: 'A custom printed straight feather flag — a tall vertical advertising flag with a straight top edge for a clean, upright branded profile. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+    seoDescription: 'Custom printed straight feather flags in 9, 10.5 and 14 ft — full-color dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed straight feather flag — a tall vertical advertising flag with a straight top edge for a clean, upright branded profile. Full-color dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
   flagProduct({
     slug: 'feather-convex-flag', name: 'Feather Convex Flag', shape: 'convex feather', sizes: featherSizes,
@@ -847,8 +847,8 @@ const flagProducts = [
       { src: '/images/flags/feather_convex_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag onto the pole' }
     ],
     seoTitle: 'Custom Convex Feather Flags',
-    seoDescription: 'Custom printed convex feather flags in 9, 10.5 and 14 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
-    intro: 'A custom printed convex feather flag — a tall flag with a gently curved (convex) top edge for a soft, rounded branded silhouette. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+    seoDescription: 'Custom printed convex feather flags in 9, 10.5 and 14 ft — full-color dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed convex feather flag — a tall flag with a gently curved (convex) top edge for a soft, rounded branded silhouette. Full-color dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
   flagProduct({
     slug: 'teardrop-flag', name: 'Teardrop Flag', shape: 'teardrop', sizes: teardropSizes,
@@ -862,8 +862,8 @@ const flagProducts = [
       { src: '/images/flags/teardrop_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex teardrop flag onto the pole' }
     ],
     seoTitle: 'Custom Teardrop Advertising Flags',
-    seoDescription: 'Custom printed teardrop flags in 7, 9 and 11.2 ft — full-colour dye sublimation, single or double sided, pole + base or graphic only. From $140.',
-    intro: 'A custom printed teardrop flag — a compact, rounded teardrop profile that holds its shape well in wind and reads clearly from a distance. Full-colour dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
+    seoDescription: 'Custom printed teardrop flags in 7, 9 and 11.2 ft — full-color dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    intro: 'A custom printed teardrop flag — a compact, rounded teardrop profile that holds its shape well in wind and reads clearly from a distance. Full-color dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   })
 ];
 
@@ -888,21 +888,21 @@ const tensionDisplay = {
   category: 'backdrops',
   badge: 'Custom Printed',
   emoji: '🖼️',
-  tagline: 'Floor-standing straight tension fabric backdrop — pillowcase graphic over a lightweight aluminium frame.',
+  tagline: 'Floor-standing straight tension fabric backdrop — pillowcase graphic over a lightweight aluminum frame.',
   description:
-    'A straight tension fabric display — a floor-standing trade-show backdrop where a dye-sublimated "pillowcase" fabric graphic zips over a lightweight aluminium tube frame for a smooth, seamless, frameless wall. Packs into a carry bag and sets up tool-free with stabilising feet.',
+    'A straight tension fabric display — a floor-standing trade-show backdrop where a dye-sublimated "pillowcase" fabric graphic zips over a lightweight aluminum tube frame for a smooth, seamless, frameless wall. Packs into a carry bag and sets up tool-free with stabilising feet.',
   size: '8–20 ft wide × ~8 ft tall',
   gallery: [
     { src: '/images/displays/straight-tension-fabric-display-main.png', alt: 'Custom-printed Apex straight tension fabric display, angled front view' },
     { src: '/images/displays/straight-tension-fabric-display-lifestyle-podium.png', alt: 'Straight tension fabric display with a matching printed podium and booth spotlights' },
     { src: '/images/displays/straight-tension-fabric-display-double-sided.png', alt: 'Double-sided straight tension fabric display showing different printed front and back graphics' },
     { src: '/images/displays/straight-tension-fabric-display-single-sided.png', alt: 'Single-sided straight tension fabric display with a printed front and plain back' },
-    { src: '/images/displays/straight-tension-fabric-display-frame.png', alt: 'Lightweight aluminium tube frame of a straight tension fabric display' },
-    { src: '/images/displays/straight-tension-fabric-display-frame-connector.png', alt: 'Push-button aluminium pole connection detail of the tension fabric display frame' },
+    { src: '/images/displays/straight-tension-fabric-display-frame.png', alt: 'Lightweight aluminum tube frame of a straight tension fabric display' },
+    { src: '/images/displays/straight-tension-fabric-display-frame-connector.png', alt: 'Push-button aluminum pole connection detail of the tension fabric display frame' },
     { src: '/images/displays/straight-tension-fabric-display-packaging.png', alt: 'Straight tension fabric display packaging — soft canvas carry bag and hard case that converts to a podium' }
   ],
   features: [
-    'Lightweight aluminium tube frame',
+    'Lightweight aluminum tube frame',
     'Pillowcase-style tension fabric graphic with zipper closure',
     'Smooth, seamless, frameless finish',
     'Stabilising feet; tool-free setup',
@@ -913,7 +913,7 @@ const tensionDisplay = {
   specs: [
     ['Type', 'Straight tension fabric display (floor-standing)'],
     ['Sizes', '8 ft, 10 ft and 20 ft wide, approx. 8 ft tall'],
-    ['Frame', 'Lightweight aluminium tube'],
+    ['Frame', 'Lightweight aluminum tube'],
     ['Graphic', 'Dye-sublimated tension fabric, single- or double-sided, replaceable'],
     ['Setup', 'Tool-free; stabilising feet; carry bag'],
     ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
@@ -922,10 +922,10 @@ const tensionDisplay = {
   related: ['step-and-repeat-backdrop', 'standard-retractable-banner', 'pleated-table-covers', 'hard-case-podium'],
   seoTitle: 'Straight Tension Fabric Display',
   seoDescription:
-    'Custom straight tension fabric display — 8–20 ft pillowcase backdrops on a lightweight aluminium frame. Single or double sided, graphic + frame or graphic only.',
+    'Custom straight tension fabric display — 8–20 ft pillowcase backdrops on a lightweight aluminum frame. Single or double sided, graphic + frame or graphic only.',
   faqs: [
-    { q: 'What is a tension fabric display?', a: 'A floor-standing backdrop where a stretch dye-sublimated fabric graphic zips over a lightweight aluminium tube frame — like a pillowcase — for a smooth, seamless, frameless wall.' },
-    { q: 'What does "graphic + frame" vs "graphic only" mean?', a: '"Graphic + frame" includes the aluminium frame and the printed fabric, ready to set up. "Graphic only" is a replacement fabric graphic for a frame you already own.' },
+    { q: 'What is a tension fabric display?', a: 'A floor-standing backdrop where a stretch dye-sublimated fabric graphic zips over a lightweight aluminum tube frame — like a pillowcase — for a smooth, seamless, frameless wall.' },
+    { q: 'What does "graphic + frame" vs "graphic only" mean?', a: '"Graphic + frame" includes the aluminum frame and the printed fabric, ready to set up. "Graphic only" is a replacement fabric graphic for a frame you already own.' },
     { q: 'Single- or double-sided?', a: 'Both are available. Single-sided prints one face; double-sided prints two separate faces. Some rush double-sided sizes are quoted per order — the configurator will say so and route you to a quote.' },
     { q: 'How long does production take?', a: 'Standard production is 6–8 business days after proof approval; rush is 2–3 business days. This is production time — shipping is additional.' }
   ],
@@ -936,7 +936,7 @@ const tensionDisplay = {
     priceMatrix: TENSION_MATRIX,
     optionGroups: [
       { id: 'pkg', label: 'What you get', type: 'select', pricing: 'matrix',
-        help: 'Graphic + frame includes the aluminium frame and printed fabric. Graphic only is a replacement fabric for a frame you own.',
+        help: 'Graphic + frame includes the aluminum frame and printed fabric. Graphic only is a replacement fabric for a frame you own.',
         choices: [
           { id: 'hw', label: 'Graphic + frame', default: true },
           { id: 'go', label: 'Graphic only' }
@@ -1018,7 +1018,7 @@ const hardCasePodium = {
 // computed or shown (pricing.quoteOnly) — the size/plug/mockup selectors render
 // and feed the quote form. NO supplier price or lead time anywhere. Staged
 // active:false until Apex-approved imagery is in place. Frame is PVC and fabric
-// is FR 200g backlit per the source spec (do not silently change to aluminium).
+// is FR 200g backlit per the source spec (do not silently change to aluminum).
 const SEG_H3 = [
   { id: 'h66', label: "6.6' H", h: '6.6' },
   { id: 'h74', label: "7.4' H", h: '7.4' },
@@ -1084,7 +1084,7 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
     ['Model', name],
     ['Available overall sizes', `${SEG_WIDTHS.map((w) => w.w + "' W").join(', ')} × ${heights.map((h) => h.h + "' H").join(' / ')}`],
     ['Graphic material', 'Flame-retardant 200g backlit fabric'],
-    ['Printing', 'Full-colour dye sublimation'],
+    ['Printing', 'Full-color dye sublimation'],
     ['Graphic install', 'Silicone Edge Graphics (SEG) — sewn silicone edge, near-frameless finish'],
     ['Frame material', 'Modular PVC lightbox frame'],
     ['Assembly', 'Modular, tool-free snap-fit construction'],
@@ -1108,7 +1108,7 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
     { q: 'Which size should I choose?', a: `${name} comes in ${SEG_WIDTHS.length} widths (10, 13, 16.4 and 20 ft) and ${heights.length} heights. Match the width to your booth space and the height to the venue; not sure? Request a quote and we'll advise.` },
     { q: 'Can I request modifications to the standard configuration?', a: 'Yes — tell us your requirements (extra counters, shelving, TV mounting, custom sizes) in the quote and our team will confirm what we can supply.' },
     { q: 'Which plug type should I choose?', a: 'US plug is standard for North American events. EU, AU or no-plug options are available if you need them.' },
-    { q: 'How do I get pricing?', a: 'Pricing is customised based on the selected kit, size, quantity and project requirements. Submit a quote request and our team will prepare pricing for your configuration. Production and delivery timing are confirmed with your quote.' }
+    { q: 'How do I get pricing?', a: 'Pricing is customized based on the selected kit, size, quantity and project requirements. Submit a quote request and our team will prepare pricing for your configuration. Production and delivery timing are confirmed with your quote.' }
   ],
   pricing: {
     model: 'configured',
@@ -1246,14 +1246,14 @@ const products = [
     category: 'banners',
     badge: 'Best Seller',
     emoji: '🎯',
-    tagline: 'Full-colour 13oz scrim vinyl banners, made to any size for indoor or outdoor use.',
+    tagline: 'Full-color 13oz scrim vinyl banners, made to any size for indoor or outdoor use.',
     description:
-      'Our most popular banner: durable 13oz scrim vinyl printed edge to edge in vivid, UV-stable colour. Rated for indoor and outdoor use — storefronts, events, trade shows and promotions — and finished with a welded hem and grommets every 2 ft so it is ready to hang out of the box. Made to size to the inch.',
+      'Our most popular banner: durable 13oz scrim vinyl printed edge to edge in vivid, UV-stable color. Rated for indoor and outdoor use — storefronts, events, trade shows and promotions — and finished with a welded hem and grommets every 2 ft so it is ready to hang out of the box. Made to size to the inch.',
     features: [
       '13oz matte scrim vinyl',
       'Indoor & outdoor rated, UV-stable ink',
       'Welded hem + grommets every 2 ft included',
-      'Single-sided full-colour print',
+      'Single-sided full-color print',
       'Made to any size — up to 50 ft on one side'
     ],
     whatsIncluded: [
@@ -1262,7 +1262,7 @@ const products = [
       'No pole, stand or hardware — the banner ships ready to hang by its grommets or pocket.'
     ],
     turnaround: 'Ships in 2–4 business days',
-    seoTitle: '13oz Vinyl Banner | Full-Colour Print',
+    seoTitle: '13oz Vinyl Banner | Full-Color Print',
     seoDescription:
       'Custom 13oz scrim vinyl banners made to any size, indoor or outdoor — welded hem and grommets included, UV-stable print. From $45, US & Canada.',
     gallery: [
@@ -1292,10 +1292,10 @@ const products = [
     emoji: '🌓',
     tagline: 'Heavy 18oz blockout vinyl with an opaque core — the choice for double-sided banners.',
     description:
-      'An 18oz heavy-duty scrim with an opaque grey centre layer that blocks light from passing through, so two different prints never bleed into each other — the right pick for true double-sided banners and bright, high-traffic locations. Heavier and more tear-resistant than 13oz for long outdoor runs, street banners and building drapes. Finished with a welded hem and grommets every 2 ft.',
+      'An 18oz heavy-duty scrim with an opaque gray center layer that blocks light from passing through, so two different prints never bleed into each other — the right pick for true double-sided banners and bright, high-traffic locations. Heavier and more tear-resistant than 13oz for long outdoor runs, street banners and building drapes. Finished with a welded hem and grommets every 2 ft.',
     features: [
       '18oz blockout scrim vinyl',
-      'Opaque centre blocks light — true double-sided ready',
+      'Opaque center blocks light — true double-sided ready',
       'Heavy-duty for wind & long outdoor use',
       'Welded hem + grommets every 2 ft included',
       'Made to any size — up to 50 ft on one side'
@@ -1335,7 +1335,7 @@ const products = [
     emoji: '🌬️',
     tagline: 'Perforated mesh vinyl that lets wind pass through — ideal for fences and building wraps.',
     description:
-      'Printed on perforated mesh vinyl that lets roughly 30% of the wind pass straight through, cutting the wind load that makes solid banners flap and tear. Built for fence lines, scaffolding, stadium rails and building wraps where airflow matters, while still holding bold outdoor colour. Finished with a welded hem and grommets every 2 ft.',
+      'Printed on perforated mesh vinyl that lets roughly 30% of the wind pass straight through, cutting the wind load that makes solid banners flap and tear. Built for fence lines, scaffolding, stadium rails and building wraps where airflow matters, while still holding bold outdoor color. Finished with a welded hem and grommets every 2 ft.',
     features: [
       'Perforated mesh vinyl (~30% airflow)',
       'Reduced wind load for fences & wraps',
@@ -1378,7 +1378,7 @@ const products = [
     emoji: '🧵',
     tagline: 'Dye-sublimated 9oz wrinkle-free polyester with a premium, no-glare matte finish.',
     description:
-      'A premium 9oz polyester fabric banner, dye-sublimated so the colour is bonded into the fibre for a rich, no-glare matte finish that photographs cleanly under lights. The wrinkle-free weave packs down and travels without creasing, making it ideal for indoor branding, backdrops and photo walls. Finished with sewn hem edges.',
+      'A premium 9oz polyester fabric banner, dye-sublimated so the color is bonded into the fiber for a rich, no-glare matte finish that photographs cleanly under lights. The wrinkle-free weave packs down and travels without creasing, making it ideal for indoor branding, backdrops and photo walls. Finished with sewn hem edges.',
     features: [
       '9oz wrinkle-free polyester fabric',
       'Dye-sublimated — vivid, no-glare matte',
@@ -1700,7 +1700,7 @@ const products = [
   // CANOPY RANGE — the active catalog.
   // Prices are USD (the base currency, see src/config/brand.js) and are
   // benchmarked against the market: a 10x20 with a printed top on a commercial
-  // aluminium frame lands at $1,269 ≈ CA$1,751, and printing the inside adds
+  // aluminum frame lands at $1,269 ≈ CA$1,751, and printing the inside adds
   // 40%. These are still estimates — replace with real cost/margin data.
   // ───────────────────────────────────────────────────────────────────────────
   {
@@ -1712,9 +1712,9 @@ const products = [
     category: 'tents',
     badge: 'Best Seller',
     emoji: '⛺',
-    tagline: 'Full-colour dye-sublimated pop-up canopy — your size, frame and print coverage.',
+    tagline: 'Full-color dye-sublimated pop-up canopy — your size, frame and print coverage.',
     description:
-      'A commercial-grade pop-up canopy printed edge to edge in full colour. Choose the footprint, ' +
+      'A commercial-grade pop-up canopy printed edge to edge in full color. Choose the footprint, ' +
       'frame grade and exactly how much of the tent is printed — peak, valance, inside and walls. ' +
       'Dye sublimation bonds ink into the fabric, so graphics will not crack, peel or fade.',
     features: [
@@ -1750,8 +1750,8 @@ const products = [
           help: 'Heavier frames survive more setups and higher wind.',
           choices: [
             { id: 'steel', label: 'Steel — economy', mult: 0.85 },
-            { id: 'aluminium', label: 'Commercial aluminium', mult: 1, default: true },
-            { id: 'hex', label: 'Heavy-duty hex aluminium', mult: 1.22 }
+            { id: 'aluminum', label: 'Commercial aluminum', mult: 1, default: true },
+            { id: 'hex', label: 'Heavy-duty hex aluminum', mult: 1.22 }
           ]
         },
         {
@@ -1787,7 +1787,7 @@ const products = [
           label: 'Accessories',
           type: 'multi',
           pricing: 'add',
-          help: 'Weights are strongly recommended — most event organisers require them.',
+          help: 'Weights are strongly recommended — most event organizers require them.',
           choices: [
             { id: 'weight-bags', label: 'Weight bags (set of 4)', price: 89 },
             { id: 'sandbags', label: 'Sandbag set (set of 4)', price: 69 },
@@ -1853,8 +1853,8 @@ const products = [
           pricing: 'multiplier',
           choices: [
             { id: 'steel', label: 'Steel — economy', mult: 0.9 },
-            { id: 'aluminium', label: 'Commercial aluminium', mult: 1, default: true },
-            { id: 'hex', label: 'Heavy-duty hex aluminium', mult: 1.18 }
+            { id: 'aluminum', label: 'Commercial aluminum', mult: 1, default: true },
+            { id: 'hex', label: 'Heavy-duty hex aluminum', mult: 1.18 }
           ]
         },
         {
@@ -1886,7 +1886,7 @@ const products = [
     features: [
       'Fits standard pop-up frames',
       'No frame included',
-      'Dye-sublimated full colour',
+      'Dye-sublimated full color',
       'Fit checked at proof stage'
     ],
     turnaround: 'Ships in 5–7 business days',
@@ -2004,7 +2004,7 @@ const products = [
     tagline: 'Weights, stakes, bags and lighting for your canopy.',
     description:
       'The hardware that keeps a canopy anchored, lit and easy to transport. Most event and ' +
-      'market organisers require weights on every leg — check your venue rules before the day.',
+      'market organizers require weights on every leg — check your venue rules before the day.',
     features: [
       'Weights required by most venues',
       'Fits standard pop-up frames',
@@ -2039,7 +2039,7 @@ const products = [
     emoji: '🌓',
     tagline: 'Opaque 18oz vinyl with a blockout core — true double-sided printing.',
     description:
-      'Heavy 18oz vinyl with an opaque grey core that stops light and prevents show-through, so each side prints independently. The standard choice for hanging banners viewed from both directions.',
+      'Heavy 18oz vinyl with an opaque gray core that stops light and prevents show-through, so each side prints independently. The standard choice for hanging banners viewed from both directions.',
     features: ['Opaque blockout core', 'No show-through', 'Free hem & grommets', 'Indoor / outdoor rated'],
     turnaround: 'Ships in 2–3 business days',
     pricing: {

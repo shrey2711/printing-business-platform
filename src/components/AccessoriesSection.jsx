@@ -42,7 +42,7 @@ export const BANNER_ACCESSORIES = [
   {
     title: 'Replacement Support Pole',
     img: '/images/displays/banner-stand-pole.jpg',
-    copy: 'Telescopic aluminium support pole to replace a lost or damaged one on your retractable stand.',
+    copy: 'Telescopic aluminum support pole to replace a lost or damaged one on your retractable stand.',
     to: '/quote',
     cta: 'Request a quote'
   },

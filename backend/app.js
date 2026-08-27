@@ -236,7 +236,7 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
     customer_email: user.email,
     metadata: { orderId: order.id },
     success_url: `${baseUrl(req)}/account?checkout=success&order=${order.id}`,
-    cancel_url: `${baseUrl(req)}/account?checkout=cancelled`
+    cancel_url: `${baseUrl(req)}/account?checkout=canceled`
   });
 
   await supabaseAdmin
@@ -449,7 +449,7 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   const admin = await requireAdmin(req, res);
   if (!admin) return;
   const allowed = [
-    'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'cancelled'
+    'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
   ];
   const { status, tracking_number, carrier } = req.body || {};
 

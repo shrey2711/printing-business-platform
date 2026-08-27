@@ -19,20 +19,20 @@ export const CITY_DETAIL = {
       'Las Vegas is the busiest trade-show city in the United States, hosting CES, MAGIC, World of Concrete and SEMA across venues like the Las Vegas Convention Center and Caesars Forum. Apex prints custom displays and ships them to Las Vegas.',
     overview: [
       'No city runs more major trade shows than Las Vegas. Between the Las Vegas Convention Center, Caesars Forum, The Venetian Expo and the Mandalay Bay Convention Center, the city turns over enormous exhibitions almost every week of the year — CES alone draws well over 100,000 attendees. For an exhibitor that means fierce competition for attention on the floor, and a booth that has to read clearly from across a packed hall.',
-      'Because so many shows here are national and international, your display is often the first impression a buyer gets of your brand. Sharp, full-colour graphics on a canopy, banner stand or backdrop do more work in Las Vegas than almost anywhere else. Apex prints every piece to order and ships it to your Las Vegas hotel, venue or business address, so you can arrive to a booth that matches the scale of the room.'
+      'Because so many shows here are national and international, your display is often the first impression a buyer gets of your brand. Sharp, full-color graphics on a canopy, banner stand or backdrop do more work in Las Vegas than almost anywhere else. Apex prints every piece to order and ships it to your Las Vegas hotel, venue or business address, so you can arrive to a booth that matches the scale of the room.'
     ],
     whyExhibit:
       'Las Vegas concentrates more qualified buyers into a few days than months of outreach elsewhere. The convention corridor along Paradise Road and the Strip keeps attendees, hotels and show floors within a short ride of each other, so foot traffic stays high from open to close. Exhibiting here puts you in front of decision-makers who flew in specifically to source and compare — but only if your booth stands out. A cohesive set of branded displays (a printed backdrop behind the booth, retractable banners at the aisle, a table cover on the demo table, and a canopy for any outdoor or sponsor activation) gives a small footprint the presence of a much larger stand.',
     conventionCenters: [
       { name: 'Las Vegas Convention Center (LVCC)', desc: 'One of the largest convention facilities in North America at roughly 4.6 million square feet after the West Hall expansion. Home to CES, and connected by the underground Loop people-mover.' },
       { name: 'The Venetian Expo', desc: 'A large Strip-connected exhibition hall (formerly the Sands Expo) hosting MAGIC, apparel and consumer shows alongside the Venetian and Palazzo hotels.' },
-      { name: 'Caesars Forum', desc: 'A modern conference centre with two of the largest pillarless ballrooms in the world, linked to Caesars-group hotels in the centre of the Strip.' },
+      { name: 'Caesars Forum', desc: 'A modern conference center with two of the largest pillarless ballrooms in the world, linked to Caesars-group hotels in the center of the Strip.' },
       { name: 'Mandalay Bay Convention Center', desc: 'A premium south-Strip venue used for medical, technology and association meetings, attached directly to the Mandalay Bay resort.' }
     ],
     industries: [
       ['Technology & electronics', 'CES and dozens of spin-off tech events make Las Vegas the default US launch stage for consumer and B2B technology.'],
       ['Construction & industrial', 'World of Concrete and similar shows fill the outdoor lots and halls with heavy-equipment and building-product exhibitors.'],
-      ['Automotive & aftermarket', 'SEMA turns the city into the centre of the vehicle-modification and parts industry each autumn.'],
+      ['Automotive & aftermarket', 'SEMA turns the city into the center of the vehicle-modification and parts industry each autumn.'],
       ['Fashion & apparel', 'MAGIC and related markets bring apparel, footwear and accessory brands to the Strip several times a year.'],
       ['Hospitality & gaming', 'As the industry’s home city, hospitality, food-service and gaming-supply shows are a year-round fixture.']
     ],
@@ -63,7 +63,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'Orlando draws attendees who are already in a travel-and-spend mindset, and its convention calendar spans technology, healthcare, education, hospitality and homebuilding. The compact I-Drive layout means high, sustained booth traffic, and the city’s tourism infrastructure makes it easy for teams and clients to attend. A coordinated display set — a backdrop for the booth wall, banner stands at the aisle, a branded table cover, and a canopy for any outdoor or pool-deck activation — helps a modest space compete with far larger stands.',
     conventionCenters: [
-      { name: 'Orange County Convention Center (OCCC)', desc: 'One of the largest convention centres in the United States, split across the West and North/South buildings on International Drive, hosting major national technology, medical and consumer shows.' },
+      { name: 'Orange County Convention Center (OCCC)', desc: 'One of the largest convention centers in the United States, split across the West and North/South buildings on International Drive, hosting major national technology, medical and consumer shows.' },
       { name: 'Gaylord Palms Resort & Convention Center', desc: 'A large resort-based meeting venue near the theme parks, popular for association conferences and corporate events under its signature glass atrium.' },
       { name: 'Rosen Centre & Rosen Shingle Creek', desc: 'Two sizeable hotel convention venues on and near I-Drive frequently used for mid-size trade shows and breakout programming.' }
     ],
@@ -92,15 +92,15 @@ export const CITY_DETAIL = {
 
   'chicago': {
     answer:
-      'Chicago hosts North America’s largest convention centre, McCormick Place, and marquee shows like IMTS, RSNA and the National Restaurant Association Show. Apex prints custom displays and ships them to Chicago for exhibitors across the city.',
+      'Chicago hosts North America’s largest convention center, McCormick Place, and marquee shows like IMTS, RSNA and the National Restaurant Association Show. Apex prints custom displays and ships them to Chicago for exhibitors across the city.',
     overview: [
-      'Chicago is a heavyweight of the US trade-show calendar. McCormick Place is the largest convention centre on the continent, and the city’s central location and rail/air connections make it a natural meeting point for national manufacturing, medical and food-industry shows. Rosemont’s Donald E. Stephens Convention Center adds a busy secondary venue near O’Hare.',
+      'Chicago is a heavyweight of the US trade-show calendar. McCormick Place is the largest convention center on the continent, and the city’s central location and rail/air connections make it a natural meeting point for national manufacturing, medical and food-industry shows. Rosemont’s Donald E. Stephens Convention Center adds a busy secondary venue near O’Hare.',
       'Exhibitors here face big halls and sophisticated audiences, so crisp, well-lit branding matters. Apex prints banner stands, backdrops, table covers and canopies to order and ships them to your Chicago venue, an advance warehouse or your business address, ready for move-in.'
     ],
     whyExhibit:
       'Few cities concentrate industrial and professional buyers like Chicago. McCormick Place alone hosts shows that define their industries — manufacturing technology, radiology, restaurants and housewares — and the metro’s dense corporate base means strong local attendance on top of national travellers. A cohesive display kit lets a compact booth read clearly across a very large hall, where a bare table disappears.',
     conventionCenters: [
-      { name: 'McCormick Place', desc: 'The largest convention centre in North America, with around 2.6 million square feet of exhibit space across four connected buildings on the lakefront south of downtown.' },
+      { name: 'McCormick Place', desc: 'The largest convention center in North America, with around 2.6 million square feet of exhibit space across four connected buildings on the lakefront south of downtown.' },
       { name: 'Donald E. Stephens Convention Center', desc: 'A large venue in Rosemont next to O’Hare, convenient for shows that draw fly-in attendees and exhibitors.' },
       { name: 'Navy Pier — Festival Hall', desc: 'A lakefront exhibition space downtown used for consumer expos, art fairs and mid-size events.' }
     ],
@@ -131,13 +131,13 @@ export const CITY_DETAIL = {
     answer:
       'Atlanta is a major Southeast convention hub, home to the Georgia World Congress Center and AmericasMart. Apex prints custom trade show displays and ships them to Atlanta for exhibitors across logistics, film, foodservice and gift industries.',
     overview: [
-      'Atlanta combines one of the country’s largest convention centres with the enormous AmericasMart wholesale marts and the world’s busiest airport, making it a magnet for national buyers. The Georgia World Congress Center runs large-scale shows downtown, steps from hotels and the arena/stadium district.',
+      'Atlanta combines one of the country’s largest convention centers with the enormous AmericasMart wholesale marts and the world’s busiest airport, making it a magnet for national buyers. The Georgia World Congress Center runs large-scale shows downtown, steps from hotels and the arena/stadium district.',
       'For exhibitors, that means high-volume audiences and easy fly-in access — and displays that need to look sharp under bright hall lighting and through humid Georgia summers. Apex prints backdrops, banner stands, table covers and canopies to order and ships them to your Atlanta venue or business address.'
     ],
     whyExhibit:
       'Atlanta’s pull comes from logistics and reach: Hartsfield-Jackson connects buyers from everywhere, and the metro’s corporate base spans logistics, film and entertainment, fintech and foodservice. AmericasMart adds year-round wholesale traffic in gift, home and apparel. A branded display set helps you stand out in the GWCC’s large halls and turns a small booth into a professional, cohesive presence.',
     conventionCenters: [
-      { name: 'Georgia World Congress Center (GWCC)', desc: 'One of the largest convention centres in the US at roughly 1.5 million square feet of exhibit space, in downtown Atlanta beside Centennial Olympic Park.' },
+      { name: 'Georgia World Congress Center (GWCC)', desc: 'One of the largest convention centers in the US at roughly 1.5 million square feet of exhibit space, in downtown Atlanta beside Centennial Olympic Park.' },
       { name: 'AmericasMart Atlanta', desc: 'A massive year-round wholesale marketplace for gift, home, rug and apparel buyers, running major markets several times a year.' },
       { name: 'Cobb Galleria Centre', desc: 'A mid-size convention venue in the Galleria area north of downtown, used for regional trade shows and consumer expos.' }
     ],
@@ -297,7 +297,7 @@ export const CITY_DETAIL = {
       ['Automotive', 'The LA Auto Show is a flagship global vehicle-launch platform.']
     ],
     climate:
-      'Los Angeles has a mild Mediterranean climate — abundant sun, low rainfall, and occasional dry Santa Ana winds. That makes outdoor and pop-up activations practical much of the year, but the strong UV calls for fade-resistant graphics and the wind events mean weighting canopy legs on hard surfaces. Dye-sublimated printing holds colour under the bright sun, and a printed canopy provides welcome shade at outdoor venues.',
+      'Los Angeles has a mild Mediterranean climate — abundant sun, low rainfall, and occasional dry Santa Ana winds. That makes outdoor and pop-up activations practical much of the year, but the strong UV calls for fade-resistant graphics and the wind events mean weighting canopy legs on hard surfaces. Dye-sublimated printing holds color under the bright sun, and a printed canopy provides welcome shade at outdoor venues.',
     planning:
       'The LA Convention Center and larger venues use an official freight contractor, usually with an advance warehouse and union labor at the biggest shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, which suits multi-venue LA activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and flagship weeks like the Auto Show book up fast.',
     bestDisplays:
@@ -351,7 +351,7 @@ export const CITY_DETAIL = {
 
   'boston': {
     answer:
-      'Boston is New England’s convention hub and a global life-sciences centre, host to major biotech, medical and seafood shows at the Boston Convention & Exhibition Center. Apex prints custom trade show displays and ships them to Boston.',
+      'Boston is New England’s convention hub and a global life-sciences center, host to major biotech, medical and seafood shows at the Boston Convention & Exhibition Center. Apex prints custom trade show displays and ships them to Boston.',
     overview: [
       'Boston’s exhibition scene is powered by life sciences, healthcare, technology and education. The Boston Convention & Exhibition Center in the Seaport is the largest hall in New England, and the Hynes Convention Center in Back Bay adds a central, transit-friendly venue for mid-size shows.',
       'Exhibitors here reach highly technical, research-driven audiences, so clear, credible branding matters. Apex prints banner stands, backdrops, table covers and canopies to order and ships them to your Boston venue, an advance warehouse or your business address, ready for move-in.'
@@ -425,7 +425,7 @@ export const CITY_DETAIL = {
 
   'anaheim': {
     answer:
-      'Anaheim hosts one of the West Coast’s largest convention centres and marquee shows like NAMM and Natural Products Expo West. Apex prints custom trade show displays and ships them to Anaheim.',
+      'Anaheim hosts one of the West Coast’s largest convention centers and marquee shows like NAMM and Natural Products Expo West. Apex prints custom trade show displays and ships them to Anaheim.',
     overview: [
       'Anaheim’s convention business is anchored by the Anaheim Convention Center — the largest on the West Coast — set beside the Disneyland Resort. The mix of a huge exhibit hall and a family-destination setting draws consumer, music and natural-products shows that fill the halls and surrounding hotels.',
       'The mild Southern California climate makes outdoor and entrance activations practical, so branding needs to look good both indoors and in the sun. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Anaheim venue, hotel or business address.'
@@ -542,7 +542,7 @@ export const CITY_DETAIL = {
       'The hot, humid Gulf climate makes durable, moisture-tolerant displays important. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your New Orleans venue or business address, ready for the show.'
     ],
     whyExhibit:
-      'New Orleans is a favourite for large national conventions — especially medical and healthcare, where its walkability and hospitality keep attendees engaged from session to show floor. Energy and maritime industries add a strong regional base, and the food scene makes it a memorable host city. A coordinated display kit helps a compact booth stand out across the Morial Center’s vast halls.',
+      'New Orleans is a favorite for large national conventions — especially medical and healthcare, where its walkability and hospitality keep attendees engaged from session to show floor. Energy and maritime industries add a strong regional base, and the food scene makes it a memorable host city. A coordinated display kit helps a compact booth stand out across the Morial Center’s vast halls.',
     conventionCenters: [
       { name: 'Ernest N. Morial Convention Center', desc: 'One of the largest convention facilities in the US at roughly 1.1 million square feet of contiguous exhibit space, along the Mississippi riverfront near the French Quarter.' },
       { name: 'Caesars Superdome & Smoothie King Center', desc: 'Major arena and stadium venues downtown that host large consumer expos and events.' },
@@ -573,7 +573,7 @@ export const CITY_DETAIL = {
 
   'phoenix': {
     answer:
-      'Phoenix’s downtown convention centre hosts technology, healthcare and a fast-growing semiconductor industry. Apex prints custom trade show displays and ships them to Phoenix.',
+      'Phoenix’s downtown convention center hosts technology, healthcare and a fast-growing semiconductor industry. Apex prints custom trade show displays and ships them to Phoenix.',
     overview: [
       'Phoenix has become a major Southwest convention market, powered by technology, healthcare, semiconductor manufacturing and a booming population. The downtown Phoenix Convention Center runs national shows within a walkable core of hotels, restaurants and light rail.',
       'The extreme desert heat and intense UV make durable, fade-resistant displays essential, and monsoon-season storms add a wind-and-dust factor for outdoor activations. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Phoenix venue or business address.'
@@ -647,7 +647,7 @@ export const CITY_DETAIL = {
 
   'san-diego': {
     answer:
-      'San Diego’s waterfront convention centre hosts Comic-Con International plus major biotech and defense shows. Apex prints custom trade show displays and ships them to San Diego.',
+      'San Diego’s waterfront convention center hosts Comic-Con International plus major biotech and defense shows. Apex prints custom trade show displays and ships them to San Diego.',
     overview: [
       'San Diego’s bayfront San Diego Convention Center is world-famous as the home of Comic-Con International, but its calendar runs deep in biotech, healthcare and defense as well. The walkable Gaslamp Quarter surrounds the hall with hotels, dining and nightlife.',
       'The mild coastal climate makes outdoor and waterfront activations practical much of the year, so branding needs to look good in the sun and hold up to a steady sea breeze. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your San Diego venue or business address.'
@@ -686,7 +686,7 @@ export const CITY_DETAIL = {
     answer:
       'Washington, D.C. is the association and government capital, host to major policy, defense and education shows at the Walter E. Washington Convention Center. Apex prints custom trade show displays and ships them to Washington.',
     overview: [
-      'As the nation’s capital, Washington, D.C. is the centre of associations, government contracting and policy — which makes it one of the busiest cities for conventions and expos. The Walter E. Washington Convention Center runs large downtown shows near hotels and Metro, drawing national associations and their members.',
+      'As the nation’s capital, Washington, D.C. is the center of associations, government contracting and policy — which makes it one of the busiest cities for conventions and expos. The Walter E. Washington Convention Center runs large downtown shows near hotels and Metro, drawing national associations and their members.',
       'Exhibitors reach influential, credential-conscious audiences, so polished, credible branding matters. Apex prints banner stands, backdrops, table covers and canopies to order and ships them to your Washington venue or business address, ready for move-in.'
     ],
     whyExhibit:
@@ -724,7 +724,7 @@ export const CITY_DETAIL = {
       'San Francisco is a global technology and life-sciences convention hub, hosting Dreamforce, the Game Developers Conference and the RSA Conference at the Moscone Center in SoMa. Apex prints custom trade show displays and ships them to San Francisco.',
     overview: [
       'The Moscone Center in the South of Market district anchors one of the most valuable convention audiences in the world. San Francisco shows skew heavily toward software, cloud, AI, security and biotech — events like Dreamforce effectively take over downtown, filling Moscone North, South and West plus the surrounding hotels and streets. For an exhibitor that means a sophisticated, design-literate crowd that notices a well-made booth.',
-      'Because that audience judges brands on presentation, crisp full-colour graphics matter here. Apex prints backdrops, banner stands, table covers and canopies to order and ships them to your San Francisco hotel, the Moscone receiving dock or a business address, so your booth is ready when you arrive.'
+      'Because that audience judges brands on presentation, crisp full-color graphics matter here. Apex prints backdrops, banner stands, table covers and canopies to order and ships them to your San Francisco hotel, the Moscone receiving dock or a business address, so your booth is ready when you arrive.'
     ],
     whyExhibit:
       'San Francisco and the wider Bay Area concentrate the technology and venture ecosystem — founders, engineers, investors and enterprise buyers all gather here. Moscone’s central SoMa location keeps hotels, offices and show floors within walking distance, and the calendar runs strong from the JPMorgan Healthcare week in January through the fall conference season. A cohesive display kit — a tension-fabric backdrop for the booth wall, retractable banners at the aisle, a branded table cover, and a canopy for any outdoor or sponsor activation — helps a lean startup booth look as considered as an enterprise stand.',
@@ -734,7 +734,7 @@ export const CITY_DETAIL = {
       { name: 'Fort Mason Center', desc: 'A waterfront event venue used for consumer expos, art and design fairs away from the main convention district.' }
     ],
     industries: [
-      ['Software & cloud', 'The Bay Area is the centre of enterprise software and cloud, and Dreamforce and similar events fill the city each year.'],
+      ['Software & cloud', 'The Bay Area is the center of enterprise software and cloud, and Dreamforce and similar events fill the city each year.'],
       ['Biotech & life sciences', 'The JPMorgan Healthcare Conference and a dense biotech corridor drive major life-sciences gatherings.'],
       ['Cybersecurity', 'The RSA Conference makes San Francisco a global hub for security-industry exhibitors.'],
       ['Gaming & interactive', 'The Game Developers Conference brings the games industry to Moscone every spring.'],
@@ -771,7 +771,7 @@ export const CITY_DETAIL = {
       { name: 'Bell Harbor International Conference Center', desc: 'A waterfront venue on Elliott Bay used for mid-size conferences and corporate events.' }
     ],
     industries: [
-      ['Technology & cloud', 'Home to Amazon and Microsoft, Seattle is a centre of cloud, software and developer events.'],
+      ['Technology & cloud', 'Home to Amazon and Microsoft, Seattle is a center of cloud, software and developer events.'],
       ['Aerospace', 'A deep aerospace supply chain around Boeing supports aviation and manufacturing shows.'],
       ['Maritime & fishing', 'The Pacific Marine Expo and a working waterfront drive maritime-industry gatherings.'],
       ['Outdoor & recreation', 'Outdoor-gear and recreation brands headquartered in the region anchor related expos.'],
@@ -795,13 +795,13 @@ export const CITY_DETAIL = {
 
   'nashville': {
     answer:
-      'Nashville is a fast-growing convention city for healthcare, music and hospitality, centred on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
+      'Nashville is a fast-growing convention city for healthcare, music and hospitality, centerd on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
     overview: [
       'Nashville’s downtown Music City Center anchors one of the fastest-growing convention scenes in the country, backed by the city’s standing as a headquarters hub for healthcare management and, of course, the music industry. The nearby Gaylord Opryland resort adds one of the largest non-gaming convention venues in the United States, so the city hosts everything from medical meetings to Summer NAMM.',
       'Exhibitors reach a broad mix of healthcare, hospitality and entertainment buyers, and the walkable downtown keeps energy high. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Nashville hotel, the Music City Center dock or a business address.'
     ],
     whyExhibit:
-      'Nashville combines a deep healthcare-industry base — the city is a national centre for hospital and health-services companies — with music, hospitality and a booming tourism economy. The Music City Center sits in the heart of a walkable downtown full of hotels and entertainment, which sustains strong booth traffic, and Gaylord Opryland draws large association conferences. A cohesive display kit — backdrop, banners, table cover and a canopy for outdoor or Broadway-adjacent activations — helps you stand out to a lively, growing audience.',
+      'Nashville combines a deep healthcare-industry base — the city is a national center for hospital and health-services companies — with music, hospitality and a booming tourism economy. The Music City Center sits in the heart of a walkable downtown full of hotels and entertainment, which sustains strong booth traffic, and Gaylord Opryland draws large association conferences. A cohesive display kit — backdrop, banners, table cover and a canopy for outdoor or Broadway-adjacent activations — helps you stand out to a lively, growing audience.',
     conventionCenters: [
       { name: 'Music City Center', desc: 'Downtown Nashville’s main convention hall with roughly 2.1 million square feet total and about 350,000 square feet of exhibit space, host to healthcare, music and consumer shows.' },
       { name: 'Gaylord Opryland Resort & Convention Center', desc: 'One of the largest non-gaming resort convention venues in the US, with vast exhibit and meeting space under its signature glass atriums.' },
@@ -834,7 +834,7 @@ export const CITY_DETAIL = {
     answer:
       'Indianapolis is a top Midwest convention city, hosting Gen Con, the PRI Show and the FFA Convention at the skywalk-connected Indiana Convention Center. Apex prints custom trade show displays and ships them to Indianapolis.',
     overview: [
-      'The Indiana Convention Center sits at the heart of downtown Indianapolis, connected by climate-controlled skywalks to thousands of hotel rooms and Lucas Oil Stadium — one of the most walkable, connected convention campuses in the country. That layout, plus a central Midwest location, makes the city a favourite for huge annual events like Gen Con, the PRI Show and the FFA National Convention.',
+      'The Indiana Convention Center sits at the heart of downtown Indianapolis, connected by climate-controlled skywalks to thousands of hotel rooms and Lucas Oil Stadium — one of the most walkable, connected convention campuses in the country. That layout, plus a central Midwest location, makes the city a favorite for huge annual events like Gen Con, the PRI Show and the FFA National Convention.',
       'Exhibitors reach manufacturing, life-sciences, motorsports and sports-industry buyers in a compact, easy-to-navigate downtown. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Indianapolis hotel, the convention center dock or a business address.'
     ],
     whyExhibit:

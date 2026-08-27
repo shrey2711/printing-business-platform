@@ -1,4 +1,4 @@
-// Alternate-colour product mockups ("colorways") shown under "Also available in"
+// Alternate-color product mockups ("colorways") shown under "Also available in"
 // on the product page. Files live in public/images/colorways/. A thumbnail only
 // appears once its image actually loads, so listing a not-yet-uploaded file is
 // harmless. Only files that currently exist are listed here.

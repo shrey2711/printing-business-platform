@@ -588,7 +588,7 @@ export default function ProductConfigurator() {
             <label>Specific instructions (optional)</label>
             <textarea
               className="notes-input"
-              placeholder="Anything we should know? Colours to match, deadline, artwork notes…"
+              placeholder="Anything we should know? Colors to match, deadline, artwork notes…"
               value={config.notes || ''}
               onChange={(e) => setConfig({ ...config, notes: e.target.value })}
             />
@@ -603,7 +603,7 @@ export default function ProductConfigurator() {
               <div className="price-big price-quote">Custom Quote</div>
               <p className="price-sub">
                 {isQuoteOnly
-                  ? "Pricing is customised to your kit, size, quantity and project. Send your configuration and our team will prepare pricing and details — production and delivery timing are confirmed with your quote."
+                  ? "Pricing is customized to your kit, size, quantity and project. Send your configuration and our team will prepare pricing and details — production and delivery timing are confirmed with your quote."
                   : "This product is quoted per order. Tell us your size, quantity and artwork and we'll send pricing and a free proof."}
               </p>
               <button className="btn btn-red btn-block" onClick={requestQuote}>

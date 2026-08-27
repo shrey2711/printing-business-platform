@@ -1,4 +1,4 @@
-// Learning Center (/resources) — a topical-authority hub that organises the
+// Learning Center (/resources) — a topical-authority hub that organizes the
 // existing guide articles into four categories. Articles live in the blog system
 // (/blog/{slug}) and are surfaced here by slug, so there is no duplicate content.
 // Shared by the React ResourcesPage and scripts/prerender.mjs.

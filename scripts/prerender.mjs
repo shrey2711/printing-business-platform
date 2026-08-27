@@ -769,7 +769,7 @@ function productSeoTitle(product) {
       title: `${size} Custom Canopy Tent With Logo`,
       h1: `${product.name} — Custom Printed With Your Logo`,
       description: (price) =>
-        `Custom printed ${size} canopy tent with your logo — full-colour dye sublimation, full or half walls, from $${price}. Free artwork proof, ships across the US & Canada.`
+        `Custom printed ${size} canopy tent with your logo — full-color dye sublimation, full or half walls, from $${price}. Free artwork proof, ships across the US & Canada.`
     };
   }
   return {
@@ -805,8 +805,8 @@ for (const summary of productList) {
       const sizeMatch = product.slug.match(/(\d+x\d+)/);
       if (sizeMatch) {
         specs.push(['Size', sizeMatch[1].replace('x', "' × ") + "'"]);
-        specs.push(['Fabric', '600D polyester, dye-sublimated full-colour print']);
-        specs.push(['Frame', 'Heavy-duty aluminium hex, telescopic legs']);
+        specs.push(['Fabric', '600D polyester, dye-sublimated full-color print']);
+        specs.push(['Frame', 'Heavy-duty aluminum hex, telescopic legs']);
       }
       // Each configurable option group and its choices.
       for (const g of p.optionGroups || []) {

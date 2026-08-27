@@ -73,7 +73,7 @@ export default function CityPage() {
 
       <section className="badge-row">
         <div className="badge"><span className="badge-icon">🚚</span><div><strong>Ships to {city}</strong><p>Tracked delivery across {state.abbr}.</p></div></div>
-        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Colour bonded in — it won't peel or crack.</p></div></div>
+        <div className="badge"><span className="badge-icon">🖨️</span><div><strong>Dye-sublimated print</strong><p>Color bonded in — it won't peel or crack.</p></div></div>
         <div className="badge"><span className="badge-icon">💲</span><div><strong>Instant pricing</strong><p>See your {city} price online, 24/7.</p></div></div>
         <div className="badge"><span className="badge-icon">📐</span><div><strong>Free artwork proof</strong><p>You approve it before anything prints.</p></div></div>
       </section>
@@ -112,7 +112,7 @@ export default function CityPage() {
         ) : (
           <p className="muted">
             We're an online shop — there's no storefront in {city}, and you don't need one. Market
-            vendors, teams and event organisers in {city} configure a tent, upload artwork, approve the
+            vendors, teams and event organizers in {city} configure a tent, upload artwork, approve the
             proof we send back, and we print and ship it to {city}, {state.name}.
           </p>
         )}
