@@ -361,6 +361,7 @@ export const STATIC_ARTICLES = [
     publishedAt: '2026-08-16T00:00:00.000Z',
     updatedAt: '2026-08-16T00:00:00.000Z',
     html: `
+<p class="answer-block"><strong>Short answer:</strong> A complete trade show booth is a canopy or backdrop, a printed table cover, one or two banner stands, and your artwork ready to upload. Order the pieces together from one supplier so the colors match, and allow 6–8 business days production (2–3 with rush) plus transit before your event.</p>
 <p>A booth that looks professional is really just a few well-chosen pieces that match. Here's the checklist we walk exhibitors through, part by part, with the Apex product for each. You can buy any of these on its own — nothing here forces you into a bundle.</p>
 
 <h2>1. Shelter or backdrop</h2>
@@ -496,6 +497,7 @@ export const STATIC_ARTICLES = [
     publishedAt: '2026-08-05T00:00:00.000Z',
     updatedAt: '2026-08-11T00:00:00.000Z',
     html: `
+<p class="answer-block"><strong>Short answer:</strong> For most exhibitors, a 10×10 canopy with a printed top, a back wall and one side wall covers a single booth. Choose the complete set (printed top + aluminum frame + carry bag) unless you already own a compatible frame, allow 6–8 business days production (2–3 with rush) plus transit, and approve the free proof before anything prints.</p>
 <p>Everything to decide before ordering a custom printed canopy tent — size, what you get, walls, print, delivery speed and artwork.</p>
 <h2>1. Size</h2>
 <p>Pick by table count and booth space — 10×10 (standard), 10×15 (more room), 10×20 (double booth). See <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">what size to buy</a>.</p>
@@ -749,6 +751,7 @@ export const STATIC_ARTICLES = [
     publishedAt: '2026-08-04T00:00:00.000Z',
     updatedAt: '2026-08-11T00:00:00.000Z',
     html: `
+<p class="answer-block"><strong>Short answer:</strong> Send vector art (PDF, AI or EPS) or the highest-resolution PNG/JPG you have, in full color and sized to the product, keeping important text away from seams and edges. Not print-ready? Add Apex's design service — and always check the free proof carefully before you approve it.</p>
 <p>Dye sublimation prints edge to edge in full color, so a canopy is only as sharp as the file you send. A few minutes getting the artwork right saves a reprint — here's what matters.</p>
 
 <h2>Get the file format right</h2>
