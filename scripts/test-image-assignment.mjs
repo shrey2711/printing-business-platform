@@ -41,6 +41,17 @@ for (const [slug, img] of Object.entries(PRODUCT_CARD_IMAGE)) {
   else seen.set(img, slug);
 }
 
+// §24: no two DIFFERENT gallery images may share the same alt text.
+const altBy = new Map();
+for (const p of listProducts()) {
+  for (const g of (Array.isArray(p.gallery) ? p.gallery : [])) {
+    if (typeof g === 'string' || !g.alt) continue;
+    const key = g.alt.trim().toLowerCase();
+    if (altBy.has(key) && altBy.get(key) !== g.src) fails.push(`duplicate alt text: "${g.alt}" on ${altBy.get(key)} and ${g.src}`);
+    else altBy.set(key, g.src);
+  }
+}
+
 if (fails.length) {
   console.error(`\n✗ IMAGE ASSIGNMENT FAILED — ${fails.length} issue(s):`);
   fails.forEach((f) => console.error(`  ✗ ${f}`));

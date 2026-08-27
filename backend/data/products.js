@@ -824,7 +824,7 @@ const flagProducts = [
       { src: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.webp', alt: 'Apex angled feather flag with a custom printed graphic on a cross base' },
       { src: '/images/flags/feather_angled_flag_nova_dental_large_ground_stake.webp', alt: 'Apex angled feather flag on a ground spike, custom printed' },
       { src: '/images/flags/feather_angled_size_measurements_all_sizes.jpg', alt: 'Apex angled feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
-      { src: '/images/flags/feather_angled_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
+      { src: '/images/flags/feather_angled_hardware_cross_base.jpg', alt: 'Cross-base hardware for the Apex angled feather flag' },
       { src: '/images/flags/feather_angled_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag — sliding the printed flag onto the pole' }
     ],
     seoTitle: 'Custom Feather Angled Flags',
@@ -843,7 +843,7 @@ const flagProducts = [
     gallery: [
       { src: '/images/flags/feather_convex_flag_solis_spa_large_cross_base.webp', alt: 'Apex convex feather flag with a rounded convex top edge, custom printed on a cross base' },
       { src: '/images/flags/feather_convex_size_measurements_all_sizes.jpg', alt: 'Apex convex feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
-      { src: '/images/flags/feather_convex_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
+      { src: '/images/flags/feather_convex_hardware_cross_base.jpg', alt: 'Cross-base hardware for the Apex convex feather flag' },
       { src: '/images/flags/feather_convex_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag onto the pole' }
     ],
     seoTitle: 'Custom Convex Feather Flags',
