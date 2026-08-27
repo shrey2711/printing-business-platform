@@ -120,7 +120,7 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 | 1 Baseline inventory | ✅ | this document |
 | 2 Central SEO helper | ✅ | `seo-meta.mjs` + prerender centralize meta/canonical/OG/Twitter/robots. **Done (commit after baseline):** all 4 long titles + 20 long descriptions trimmed; added `fitTitle()` length-guard for template titles. Remaining: 20 generic-OG pages (Phase 11, needs raster art) |
 | 3 Structured data | ✅ | all page types emit valid JSON-LD (see §4); connect via `@id`; no fake review schema |
-| 4 Content contradictions | 🟡 | shipping model, "what's in the box", production-vs-transit already fixed this session. **Open sweep:** Standard Retractable size spec-vs-FAQ, US/CA spelling consistency, "Shipping additional." wording |
+| 4 Content contradictions | ✅ | **Done:** Standard Retractable size/FAQ contradiction fixed (was "33×81, ask for other sizes via quote" — actually sells 33×81 **and** 47×81 at instant price; corrected `size`, FAQ, seoDescription); stale "quote-only" header comment corrected (banner stands + step-repeat are instant-priced). Verified: "Shipping additional." has no double-period; production-vs-transit wording uniform. **Flagged for owner:** spelling house-style split (see §7) |
 | 5 PDP IA & conversion | 🟡 | tabs (desc/specs/template/FAQ) + gallery + what's-in-the-box exist. Open: structured verified-field block (packed dims, weight, setup people) with config placeholders |
 | 6 Category & comparison | 🟡 | category hubs exist w/ ItemList. Open: comparison tables + concise FAQs per hub |
 | 7 Location QC | ✅ | tiered model + `audit-locations.mjs` scorer + `LOCATION_AUDIT.md`; brief §7 "do not expand" honored |
@@ -135,6 +135,16 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 | 16 Final QA & docs | ⬜ | pending completion of open phases |
 
 ---
+
+## 6b. Owner decision needed — spelling house style (Phase 4)
+The catalog has two internally-consistent halves: the **core trade-show
+products + trust pages use British spelling** (`colour` ×15 files, `aluminium`
+×9), while the **extended catalog** (banners, signs, wall-art — `products.js`
+~L1400–2750) uses **North-American spelling** (`color`, `aluminum`). Both are
+coherent within themselves, so unifying is a brand-voice call, not a bug fix.
+Apex serves US + Canada (where `aluminum` is standard but `colour`/`color`
+varies). **Not mass-edited** — tell me which house style to normalize to and
+I'll apply it in one pass. (No customer-facing contradiction; purely style.)
 
 ## 7. Owner-blocked (do NOT invent — brief §4)
 

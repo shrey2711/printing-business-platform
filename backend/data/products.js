@@ -354,12 +354,11 @@ const stretchCovers = {
   }
 };
 
-// ─── Trade Show Displays (quote-only) ────────────────────────────────────────
-// Banner stands, backdrops and tabletop displays. No pricing was provided, so
-// these use the `quote` model: the card and product page show "Request a Quote"
-// and route to the existing /quote + artwork-upload flow. Replace with a real
-// pricing model once rates exist. `specs`/`applications`/`related`/`seo*` are
-// read by ProductTabs, the configurator and the prerenderer.
+// ─── Trade Show Displays ─────────────────────────────────────────────────────
+// Banner stands, backdrops and tabletop displays. These now carry real instant
+// pricing (model: 'configured'); genuinely quote-only SKUs set pricing.quoteOnly
+// and route to the /quote + artwork-upload flow. `specs`/`applications`/`related`/
+// `seo*` are read by ProductTabs, the configurator and the prerenderer.
 const tradeShowDisplays = [
   {
     slug: 'standard-retractable-banner',
@@ -380,7 +379,7 @@ const tradeShowDisplays = [
       'A portable retractable banner stand with a compact aluminium base and two stabilising feet. ' +
       'The printed graphic rolls into the base for travel and pops up in seconds — ideal for trade ' +
       'shows, lobbies and events. The graphic is replaceable, so you can reuse the hardware.',
-    size: '33" × 81"',
+    size: '33" × 81" or 47" × 81"',
     features: [
       'Compact aluminium retractable base',
       'Two stabilising feet',
@@ -402,7 +401,7 @@ const tradeShowDisplays = [
     related: ['deluxe-retractable-banner', 'x-stand-banner'],
     seoTitle: 'Standard Retractable Banner Stand',
     seoDescription:
-      'Custom Apex retractable banner stand, 33×81 in. Compact aluminium base, quick tool-free setup and a replaceable printed graphic for trade shows and events.',
+      'Custom Apex retractable banner stand, 33 or 47 in wide × 81 in tall. Compact aluminium base, tool-free setup and a replaceable printed graphic for events.',
     pricing: {
       model: 'configured',
       baseLabel: 'Retractable banner',
@@ -426,7 +425,7 @@ const tradeShowDisplays = [
       ]
     },
     faqs: [
-      { q: 'What size is the Standard Retractable Banner Stand?', a: 'The printed graphic is 33" wide × 81" tall. Ask us for other sizes when you request a quote.' },
+      { q: 'What size is the Standard Retractable Banner Stand?', a: 'It comes in two widths — 33" × 81" (standard) and a wider 47" × 81" — both 81" tall. Pick your size on this page for an instant price; ask us if you need a non-standard size.' },
       { q: 'Can I replace the graphic later?', a: 'Yes — the banner is replaceable, so you can reuse the stand and just reprint the graphic.' },
       { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size and production speed for an instant price. Upload artwork or add our design service, and every order includes a free proof before printing.' }
     ]
