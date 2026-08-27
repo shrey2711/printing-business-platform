@@ -9,6 +9,7 @@
 // any sitemap.
 
 import { readFileSync, existsSync } from 'fs';
+import { brand } from '../src/config/brand.js';
 
 const DIST = 'dist';
 const ORIGIN = 'https://www.apextradeshow.com';
@@ -169,6 +170,19 @@ if (!existsSync(robotsPath)) {
       if (!existsSync(assetPath)) failures.push(`home LCP preload points at a missing asset: ${m[1]}`);
       if (!/fetchpriority="high"/.test(m[0])) failures.push('home LCP preload lacks fetchpriority="high"');
     }
+  }
+}
+
+// ---- Contact info: home Organization schema must match the central brand config ----
+{
+  const home = `${DIST}/index.html`;
+  if (existsSync(home)) {
+    const h = readFileSync(home, 'utf8');
+    const email = (h.match(/"email":\s*"([^"]+)"/) || [])[1];
+    const tel = (h.match(/"telephone":\s*"([^"]+)"/) || [])[1];
+    const digits = (s) => (s || '').replace(/\D/g, '');
+    if (email && email !== brand.email) failures.push(`home Organization email "${email}" != brand.email "${brand.email}"`);
+    if (tel && digits(tel) !== digits(brand.phoneHref)) failures.push(`home Organization telephone "${tel}" != brand phone "${brand.phone}"`);
   }
 }
 
