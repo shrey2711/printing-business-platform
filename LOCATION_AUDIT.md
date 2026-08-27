@@ -8,9 +8,9 @@ FLAGGED for owner review._
 ## Summary
 
 - Location pages total: **355**
-- Indexable: **148**  ·  noindex (already gated): **207**
-- In a sitemap: **139**
-- Flagged for review (indexed + highly templated): **84**
+- Indexable: **151**  ·  noindex (already gated): **204**
+- In a sitemap: **142**
+- Flagged for review (indexed + highly templated): **0**
 - Duplication% = share of 6-word shingles that also appear on another location page.
 
 ## How the sitemap already gates thin pages
@@ -21,451 +21,368 @@ which of the **indexed** pages still read as templated so the owner can either a
 genuinely city-specific value (real venues, freight notes, local projects — never
 invented) or downgrade them to noindex.
 
-## Flagged for review (84)
+## Flagged for review (0)
 
 | Path | Words | Dup% | Unique H | Index | Sitemap | Links | Flag |
 |---|---|---|---|---|---|---|---|
-| /banner-stands/anaheim | 1057 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/atlanta | 1083 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/baltimore | 980 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/boston | 1040 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/charlotte | 1094 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/chicago | 1122 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/dallas | 1076 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/denver | 1039 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/houston | 1126 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/indianapolis | 1162 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/las-vegas | 1496 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/los-angeles | 1134 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/miami | 1109 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/nashville | 1135 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/new-orleans | 1075 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/new-york | 1156 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/orlando | 1214 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/philadelphia | 1044 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/phoenix | 1004 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/san-diego | 1068 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/san-francisco | 1271 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/seattle | 1126 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/washington-dc | 1107 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /locations/georgia | 591 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
-| /locations/kansas | 590 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
-| /locations/maine | 586 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/manitoba | 579 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/montana | 580 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/new-brunswick | 584 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/north-dakota | 585 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/northwest-territories | 573 | 86% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /locations/nova-scotia | 583 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/nunavut | 562 | 87% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /locations/ontario | 590 | 86% | 4 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /locations/prince-edward-island | 585 | 85% | 4 | index | yes | 34 | REVIEW: indexed, highly templated |
-| /locations/saskatchewan | 576 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/south-dakota | 589 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/yukon | 567 | 86% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/anaheim | 1077 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/atlanta | 1103 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/baltimore | 1000 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/boston | 1060 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/charlotte | 1114 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/chicago | 1142 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/dallas | 1096 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/denver | 1059 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/houston | 1146 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/indianapolis | 1182 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/las-vegas | 1516 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/los-angeles | 1154 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/miami | 1129 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/nashville | 1155 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/new-orleans | 1095 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/new-york | 1176 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/orlando | 1234 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/philadelphia | 1064 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/phoenix | 1024 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/san-diego | 1088 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/san-francisco | 1291 | 97% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/seattle | 1146 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/washington-dc | 1127 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-displays/anaheim | 1143 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/atlanta | 1169 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/baltimore | 1066 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/boston | 1126 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/charlotte | 1180 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/chicago | 1208 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/dallas | 1162 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/denver | 1125 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/houston | 1212 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/indianapolis | 1248 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/las-vegas | 1582 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/los-angeles | 1220 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/miami | 1195 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/nashville | 1221 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/new-orleans | 1161 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/new-york | 1242 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/orlando | 1300 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/philadelphia | 1130 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/phoenix | 1090 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/san-diego | 1154 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/san-francisco | 1357 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/seattle | 1212 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/washington-dc | 1193 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
+| — | | | | | | | none |
 
 ## All location pages (worst duplication first)
 
 | Path | Words | Dup% | Unique H | Index | Sitemap | Links | Flag |
 |---|---|---|---|---|---|---|---|
-| /trade-show-displays/san-antonio | 1096 | 97% | 1 | noindex | no | 49 | noindex (already gated) |
-| /banner-stands/san-antonio | 1010 | 96% | 1 | noindex | no | 45 | noindex (already gated) |
-| /trade-show-canopies/san-antonio | 1030 | 96% | 1 | noindex | no | 44 | noindex (already gated) |
-| /locations/kansas/kansas-city | 102 | 87% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/missouri/kansas-city | 102 | 87% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/colorado/aurora | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/delaware/newark | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/georgia/columbus | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/illinois/aurora | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/illinois/springfield | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/maine/portland | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/massachusetts/springfield | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/minnesota/rochester | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/missouri/columbia | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/missouri/springfield | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/nebraska/bellevue | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/ohio/columbus | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/oregon/portland | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/washington/bellevue | 98 | 86% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-jersey/newark | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-york/rochester | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/south-carolina/charleston | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/south-carolina/columbia | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/west-virginia/charleston | 101 | 85% | 0 | noindex | no | 30 | noindex (already gated) |
-| /locations/michigan/grand-rapids | 102 | 78% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-jersey/atlantic-city | 105 | 77% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-jersey/jersey-city | 105 | 77% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alabama/birmingham | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alabama/huntsville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alabama/mobile | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alabama/montgomery | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alaska/anchorage | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alaska/fairbanks | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alaska/juneau | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alberta/edmonton | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alberta/lethbridge | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/arizona/mesa | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/arizona/phoenix | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/arizona/scottsdale | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/arizona/tucson | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/arkansas/fayetteville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/arkansas/fort-smith | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/british-columbia/burnaby | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/british-columbia/kelowna | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/british-columbia/surrey | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/british-columbia/victoria | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/california/sacramento | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/california/san-jose | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/colorado/boulder | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/colorado/denver | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/connecticut/bridgeport | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/connecticut/hartford | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/connecticut/new-haven | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/connecticut/stamford | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/delaware/dover | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/delaware/wilmington | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/florida/fort-lauderdale | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/florida/jacksonville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/florida/tampa | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/georgia/atlanta | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/georgia/augusta | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/georgia/savannah | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/hawaii/hilo | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/hawaii/honolulu | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/hawaii/kailua | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/idaho/boise | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/idaho/meridian | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/idaho/nampa | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/illinois/chicago | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/illinois/naperville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/indiana/evansville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/indiana/fort-wayne | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/indiana/indianapolis | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/iowa/davenport | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/kansas/topeka | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/kansas/wichita | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/kentucky/lexington | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/kentucky/louisville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/louisiana/lafayette | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/louisiana/new-orleans | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/louisiana/shreveport | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/maine/bangor | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/maine/lewiston | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/manitoba/brandon | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/manitoba/steinbach | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/manitoba/winnipeg | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/maryland/annapolis | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/maryland/baltimore | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/maryland/frederick | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/maryland/rockville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/massachusetts/boston | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/massachusetts/cambridge | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/massachusetts/worcester | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/michigan/detroit | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/michigan/lansing | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/minnesota/duluth | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/minnesota/minneapolis | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/minnesota/saint-paul | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/mississippi/gulfport | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/mississippi/jackson | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/mississippi/southaven | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/missouri/st-louis | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/montana/billings | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/montana/bozeman | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/montana/missoula | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nebraska/lincoln | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nebraska/omaha | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nevada/henderson | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nevada/reno | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-brunswick/fredericton | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-brunswick/moncton | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-brunswick/saint-john | 105 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-hampshire/concord | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-hampshire/manchester | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-hampshire/nashua | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-jersey/trenton | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-mexico/albuquerque | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-york/albany | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-york/buffalo | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-york/syracuse | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/north-carolina/charlotte | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/north-carolina/durham | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/north-carolina/greensboro | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/north-carolina/raleigh | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/north-dakota/bismarck | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/north-dakota/fargo | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/north-dakota/grand-forks | 105 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nova-scotia/halifax | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nova-scotia/sydney | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nova-scotia/truro | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/ohio/cincinnati | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/ohio/cleveland | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/ohio/toledo | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/oklahoma/norman | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/oklahoma/oklahoma-city | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/oklahoma/tulsa | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/ontario/hamilton | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/ontario/london | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/ontario/mississauga | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/ontario/ottawa | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/oregon/bend | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/oregon/eugene | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/oregon/salem | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/pennsylvania/allentown | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/pennsylvania/harrisburg | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/pennsylvania/philadelphia | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/pennsylvania/pittsburgh | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/prince-edward-island/charlottetown | 104 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/prince-edward-island/summerside | 104 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/quebec/gatineau | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/quebec/laval | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/quebec/quebec-city | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/rhode-island/cranston | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/rhode-island/providence | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/rhode-island/warwick | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/saskatchewan/regina | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/saskatchewan/saskatoon | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/south-carolina/greenville | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/south-dakota/pierre | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/tennessee/chattanooga | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/tennessee/knoxville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/tennessee/memphis | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/tennessee/nashville | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/texas/fort-worth | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/texas/san-antonio | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/utah/provo | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/utah/west-valley-city | 106 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/vermont/burlington | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/vermont/montpelier | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/vermont/rutland | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/virginia/arlington | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/virginia/norfolk | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/virginia/richmond | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/virginia/virginia-beach | 102 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/washington/spokane | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/washington/tacoma | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/west-virginia/huntington | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/west-virginia/morgantown | 101 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/wisconsin/madison | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/wisconsin/milwaukee | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/wyoming/casper | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/wyoming/cheyenne | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/wyoming/laramie | 98 | 76% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/iowa/cedar-rapids | 102 | 75% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/newfoundland-and-labrador/st-johns | 112 | 75% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/south-carolina/myrtle-beach | 105 | 75% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/south-dakota/rapid-city | 105 | 75% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/utah/salt-lake-city | 106 | 75% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/colorado/colorado-springs | 102 | 74% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-mexico/las-cruces | 105 | 74% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/nunavut/iqaluit | 98 | 74% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/saskatchewan/prince-albert | 102 | 74% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/yukon/whitehorse | 98 | 74% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/alberta/red-deer | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/arkansas/little-rock | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/iowa/des-moines | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/kansas/overland-park | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/kentucky/bowling-green | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/louisiana/baton-rouge | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/michigan/ann-arbor | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/new-mexico/santa-fe | 105 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/newfoundland-and-labrador/corner-brook | 108 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/newfoundland-and-labrador/mount-pearl | 108 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/south-dakota/sioux-falls | 105 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/washington-dc/washington | 104 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/wisconsin/green-bay | 102 | 73% | 1 | noindex | no | 30 | noindex (already gated) |
-| /locations/northwest-territories/yellowknife | 101 | 72% | 1 | noindex | no | 30 | noindex (already gated) |
-| /banner-stands/chicago | 1122 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/houston | 1126 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/las-vegas | 1496 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/new-york | 1156 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/orlando | 1214 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/san-diego | 1068 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/san-francisco | 1271 | 97% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/san-francisco | 1291 | 97% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-displays/anaheim | 1143 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/chicago | 1208 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/dallas | 1162 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/houston | 1212 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/indianapolis | 1248 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/las-vegas | 1582 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/los-angeles | 1220 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/miami | 1195 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/nashville | 1221 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/new-orleans | 1161 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/new-york | 1242 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/orlando | 1300 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/philadelphia | 1130 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/san-diego | 1154 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/san-francisco | 1357 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/seattle | 1212 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/washington-dc | 1193 | 97% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /banner-stands/anaheim | 1057 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/atlanta | 1083 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/baltimore | 980 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/boston | 1040 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/charlotte | 1094 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/dallas | 1076 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/denver | 1039 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/indianapolis | 1162 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/los-angeles | 1134 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/miami | 1109 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/nashville | 1135 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/new-orleans | 1075 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/philadelphia | 1044 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/phoenix | 1004 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/seattle | 1126 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /banner-stands/washington-dc | 1107 | 96% | 1 | index | yes | 45 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/anaheim | 1077 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/charlotte | 1114 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/chicago | 1142 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/dallas | 1096 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/denver | 1059 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/houston | 1146 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/indianapolis | 1182 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/las-vegas | 1516 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/los-angeles | 1154 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/miami | 1129 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/nashville | 1155 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/new-orleans | 1095 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/new-york | 1176 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/orlando | 1234 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/philadelphia | 1064 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/san-diego | 1088 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/seattle | 1146 | 96% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-displays/atlanta | 1169 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/baltimore | 1066 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/boston | 1126 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/charlotte | 1180 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/denver | 1125 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-displays/phoenix | 1090 | 96% | 1 | index | yes | 49 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/atlanta | 1103 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/baltimore | 1000 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/boston | 1060 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/phoenix | 1024 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /trade-show-canopies/washington-dc | 1127 | 95% | 1 | index | yes | 44 | REVIEW: indexed, highly templated |
-| /locations/nunavut | 562 | 87% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /locations/north-dakota | 585 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/northwest-territories | 573 | 86% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /locations/nova-scotia | 583 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/ontario | 590 | 86% | 4 | index | yes | 37 | REVIEW: indexed, highly templated |
-| /locations/saskatchewan | 576 | 86% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/yukon | 567 | 86% | 4 | index | yes | 33 | REVIEW: indexed, highly templated |
-| /locations/georgia | 591 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
-| /locations/kansas | 590 | 85% | 4 | index | yes | 36 | REVIEW: indexed, highly templated |
-| /locations/maine | 586 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/manitoba | 579 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/montana | 580 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/new-brunswick | 584 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/prince-edward-island | 585 | 85% | 4 | index | yes | 34 | REVIEW: indexed, highly templated |
-| /locations/south-dakota | 589 | 85% | 4 | index | yes | 35 | REVIEW: indexed, highly templated |
-| /locations/alaska | 586 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/florida/orlando | 361 | 84% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/hawaii | 584 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/idaho | 583 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/indiana | 586 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/kentucky | 583 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/mississippi | 585 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/nebraska | 581 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/new-hampshire | 590 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/newfoundland-and-labrador | 593 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/north-carolina | 592 | 84% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/ohio | 588 | 84% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/oregon | 593 | 84% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/rhode-island | 586 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/vermont | 582 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/west-virginia | 588 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/wisconsin | 583 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/wyoming | 591 | 84% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/alabama | 589 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/alberta | 590 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/arizona | 600 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/arkansas | 588 | 83% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/british-columbia | 600 | 83% | 4 | index | yes | 37 | keep: has distinct content |
-| /locations/connecticut | 590 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/delaware | 588 | 83% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/florida/miami | 366 | 83% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/illinois | 587 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/iowa | 586 | 83% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/maryland | 590 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/massachusetts | 589 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/michigan | 591 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/minnesota | 591 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/missouri | 592 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/nevada | 593 | 83% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/new-mexico | 596 | 83% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/oklahoma | 589 | 83% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/pennsylvania | 589 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/south-carolina | 596 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/tennessee | 589 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/virginia | 591 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/washington | 596 | 83% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/washington-dc | 588 | 83% | 4 | index | yes | 33 | keep: has distinct content |
-| /locations/california/san-diego | 373 | 82% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/california/san-francisco | 378 | 82% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/colorado | 598 | 82% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/louisiana | 600 | 82% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/new-jersey | 598 | 82% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/quebec | 594 | 82% | 4 | index | yes | 36 | keep: has distinct content |
-| /locations/texas/houston | 367 | 82% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/utah | 595 | 82% | 4 | index | yes | 35 | keep: has distinct content |
-| /locations/washington/seattle | 369 | 82% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/florida | 609 | 81% | 4 | index | yes | 37 | keep: has distinct content |
-| /locations/new-york | 609 | 81% | 4 | index | yes | 37 | keep: has distinct content |
-| /locations/new-york/new-york-city | 379 | 81% | 3 | index | yes | 34 | keep: has distinct content |
-| /locations/quebec/montreal | 375 | 81% | 3 | index | yes | 34 | keep: has distinct content |
-| /locations/texas/austin | 372 | 81% | 3 | index | yes | 34 | keep: has distinct content |
-| /locations/texas/dallas | 371 | 81% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/texas | 605 | 81% | 4 | index | yes | 37 | keep: has distinct content |
-| /locations/british-columbia/vancouver | 382 | 80% | 3 | index | yes | 34 | keep: has distinct content |
-| /locations/nevada/las-vegas | 372 | 80% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/california/los-angeles | 384 | 79% | 3 | index | no | 34 | keep: has distinct content |
-| /locations/ontario/toronto | 379 | 79% | 3 | index | yes | 34 | keep: has distinct content |
-| /locations/alberta/calgary | 377 | 78% | 3 | index | yes | 34 | keep: has distinct content |
-| /locations/california | 622 | 78% | 4 | index | yes | 37 | keep: has distinct content |
+| /locations/kansas/kansas-city | 102 | 87% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/missouri/kansas-city | 102 | 87% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/colorado/aurora | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/delaware/newark | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/georgia/columbus | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/illinois/aurora | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/illinois/springfield | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/maine/portland | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/massachusetts/springfield | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/minnesota/rochester | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/missouri/columbia | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/missouri/springfield | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nebraska/bellevue | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ohio/columbus | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/oregon/portland | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/washington/bellevue | 98 | 86% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-jersey/newark | 101 | 85% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-york/rochester | 101 | 85% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/south-carolina/charleston | 101 | 85% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/south-carolina/columbia | 101 | 85% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/west-virginia/charleston | 101 | 85% | 0 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/michigan/grand-rapids | 102 | 78% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-jersey/atlantic-city | 105 | 77% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-jersey/jersey-city | 105 | 77% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alabama/birmingham | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alabama/huntsville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alabama/mobile | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alabama/montgomery | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alaska/anchorage | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alaska/fairbanks | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alaska/juneau | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alberta/edmonton | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alberta/lethbridge | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/arizona/mesa | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/arizona/phoenix | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/arizona/scottsdale | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/arizona/tucson | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/arkansas/fayetteville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/arkansas/fort-smith | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/british-columbia/burnaby | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/british-columbia/kelowna | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/british-columbia/surrey | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/british-columbia/victoria | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/california/sacramento | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/california/san-jose | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/colorado/boulder | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/colorado/denver | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/connecticut/bridgeport | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/connecticut/hartford | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/connecticut/new-haven | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/connecticut/stamford | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/delaware/dover | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/delaware/wilmington | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/florida/fort-lauderdale | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/florida/jacksonville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/florida/tampa | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/georgia/atlanta | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/georgia/augusta | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/georgia/savannah | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/hawaii/hilo | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/hawaii/honolulu | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/hawaii/kailua | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/idaho/boise | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/idaho/meridian | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/idaho/nampa | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/illinois/chicago | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/illinois/naperville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/indiana/evansville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/indiana/fort-wayne | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/indiana/indianapolis | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/iowa/davenport | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/kansas/topeka | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/kansas/wichita | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/kentucky/lexington | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/kentucky/louisville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/louisiana/lafayette | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/louisiana/new-orleans | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/louisiana/shreveport | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/maine/bangor | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/maine/lewiston | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/manitoba/brandon | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/manitoba/steinbach | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/manitoba/winnipeg | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/maryland/annapolis | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/maryland/baltimore | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/maryland/frederick | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/maryland/rockville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/massachusetts/boston | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/massachusetts/cambridge | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/massachusetts/worcester | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/michigan/detroit | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/michigan/lansing | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/minnesota/duluth | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/minnesota/minneapolis | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/minnesota/saint-paul | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/mississippi/gulfport | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/mississippi/jackson | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/mississippi/southaven | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/missouri/st-louis | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/montana/billings | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/montana/bozeman | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/montana/missoula | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nebraska/lincoln | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nebraska/omaha | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nevada/henderson | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nevada/reno | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-brunswick/fredericton | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-brunswick/moncton | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-brunswick/saint-john | 105 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-hampshire/concord | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-hampshire/manchester | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-hampshire/nashua | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-jersey/trenton | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-mexico/albuquerque | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-york/albany | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-york/buffalo | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-york/syracuse | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/north-carolina/charlotte | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/north-carolina/durham | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/north-carolina/greensboro | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/north-carolina/raleigh | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/north-dakota/bismarck | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/north-dakota/fargo | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/north-dakota/grand-forks | 105 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nova-scotia/halifax | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nova-scotia/sydney | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nova-scotia/truro | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ohio/cincinnati | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ohio/cleveland | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ohio/toledo | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/oklahoma/norman | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/oklahoma/oklahoma-city | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/oklahoma/tulsa | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ontario/hamilton | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ontario/london | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ontario/mississauga | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/ontario/ottawa | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/oregon/bend | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/oregon/eugene | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/oregon/salem | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/pennsylvania/allentown | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/pennsylvania/harrisburg | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/pennsylvania/philadelphia | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/pennsylvania/pittsburgh | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/prince-edward-island/charlottetown | 104 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/prince-edward-island/summerside | 104 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/quebec/gatineau | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/quebec/laval | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/quebec/quebec-city | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/rhode-island/cranston | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/rhode-island/providence | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/rhode-island/warwick | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/saskatchewan/regina | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/saskatchewan/saskatoon | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/south-carolina/greenville | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/south-dakota/pierre | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/tennessee/chattanooga | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/tennessee/knoxville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/tennessee/memphis | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/tennessee/nashville | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/texas/fort-worth | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/texas/san-antonio | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/utah/provo | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/utah/west-valley-city | 106 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/vermont/burlington | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/vermont/montpelier | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/vermont/rutland | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/virginia/arlington | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/virginia/norfolk | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/virginia/richmond | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/virginia/virginia-beach | 102 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/washington/spokane | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/washington/tacoma | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/west-virginia/huntington | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/west-virginia/morgantown | 101 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/wisconsin/madison | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/wisconsin/milwaukee | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/wyoming/casper | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/wyoming/cheyenne | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/wyoming/laramie | 98 | 76% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/iowa/cedar-rapids | 102 | 75% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/newfoundland-and-labrador/st-johns | 112 | 75% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/south-carolina/myrtle-beach | 105 | 75% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/south-dakota/rapid-city | 105 | 75% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/utah/salt-lake-city | 106 | 75% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/colorado/colorado-springs | 102 | 74% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-mexico/las-cruces | 105 | 74% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/nunavut/iqaluit | 98 | 74% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/saskatchewan/prince-albert | 102 | 74% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/yukon/whitehorse | 98 | 74% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/alberta/red-deer | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/arkansas/little-rock | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/iowa/des-moines | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/kansas/overland-park | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/kentucky/bowling-green | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/louisiana/baton-rouge | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/michigan/ann-arbor | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/new-mexico/santa-fe | 105 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/newfoundland-and-labrador/corner-brook | 108 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/newfoundland-and-labrador/mount-pearl | 108 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/south-dakota/sioux-falls | 105 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/washington-dc/washington | 104 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/wisconsin/green-bay | 102 | 73% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /locations/northwest-territories/yellowknife | 101 | 72% | 1 | noindex | no | 30 | Noindex temporarily (already gated) |
+| /banner-stands/chicago | 1122 | 97% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/houston | 1126 | 97% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/las-vegas | 1496 | 97% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/new-york | 1156 | 97% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/orlando | 1214 | 97% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/san-diego | 1068 | 97% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/san-francisco | 1271 | 97% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /trade-show-canopies/san-francisco | 1291 | 97% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-displays/anaheim | 1143 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/chicago | 1208 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/dallas | 1162 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/houston | 1212 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/indianapolis | 1248 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/las-vegas | 1582 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/los-angeles | 1220 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/miami | 1195 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/nashville | 1221 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/new-orleans | 1161 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/new-york | 1242 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/orlando | 1300 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/philadelphia | 1130 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/san-antonio | 1096 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/san-diego | 1154 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/san-francisco | 1357 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/seattle | 1212 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/washington-dc | 1193 | 97% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /banner-stands/anaheim | 1057 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/atlanta | 1083 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/baltimore | 980 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/boston | 1040 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/charlotte | 1094 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/dallas | 1076 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/denver | 1039 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/indianapolis | 1162 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/los-angeles | 1134 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/miami | 1109 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/nashville | 1135 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/new-orleans | 1075 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/philadelphia | 1044 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/phoenix | 1004 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/san-antonio | 1010 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/seattle | 1126 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /banner-stands/washington-dc | 1107 | 96% | 1 | index | yes | 45 | Improve (templated but has headings) |
+| /trade-show-canopies/anaheim | 1077 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/charlotte | 1114 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/chicago | 1142 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/dallas | 1096 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/denver | 1059 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/houston | 1146 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/indianapolis | 1182 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/las-vegas | 1516 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/los-angeles | 1154 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/miami | 1129 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/nashville | 1155 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/new-orleans | 1095 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/new-york | 1176 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/orlando | 1234 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/philadelphia | 1064 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/san-antonio | 1030 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/san-diego | 1088 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/seattle | 1146 | 96% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-displays/atlanta | 1169 | 96% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/baltimore | 1066 | 96% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/boston | 1126 | 96% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/charlotte | 1180 | 96% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/denver | 1125 | 96% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-displays/phoenix | 1090 | 96% | 1 | index | yes | 49 | Improve (templated but has headings) |
+| /trade-show-canopies/atlanta | 1103 | 95% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/baltimore | 1000 | 95% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/boston | 1060 | 95% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/phoenix | 1024 | 95% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /trade-show-canopies/washington-dc | 1127 | 95% | 1 | index | yes | 44 | Improve (templated but has headings) |
+| /locations/nunavut | 562 | 87% | 4 | index | yes | 33 | Improve (templated but has headings) |
+| /locations/north-dakota | 585 | 86% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/northwest-territories | 573 | 86% | 4 | index | yes | 33 | Improve (templated but has headings) |
+| /locations/nova-scotia | 583 | 86% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/ontario | 590 | 86% | 4 | index | yes | 37 | Improve (templated but has headings) |
+| /locations/saskatchewan | 576 | 86% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/yukon | 567 | 86% | 4 | index | yes | 33 | Improve (templated but has headings) |
+| /locations/georgia | 591 | 85% | 4 | index | yes | 36 | Improve (templated but has headings) |
+| /locations/kansas | 590 | 85% | 4 | index | yes | 36 | Improve (templated but has headings) |
+| /locations/maine | 586 | 85% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/manitoba | 579 | 85% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/montana | 580 | 85% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/new-brunswick | 584 | 85% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/prince-edward-island | 585 | 85% | 4 | index | yes | 34 | Improve (templated but has headings) |
+| /locations/south-dakota | 589 | 85% | 4 | index | yes | 35 | Improve (templated but has headings) |
+| /locations/alaska | 586 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/florida/orlando | 361 | 84% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/hawaii | 584 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/idaho | 583 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/indiana | 586 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/kentucky | 583 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/mississippi | 585 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/nebraska | 581 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/new-hampshire | 590 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/newfoundland-and-labrador | 593 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/north-carolina | 592 | 84% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/ohio | 588 | 84% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/oregon | 593 | 84% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/rhode-island | 586 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/vermont | 582 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/west-virginia | 588 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/wisconsin | 583 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/wyoming | 591 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/alabama | 589 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/alberta | 590 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/arizona | 600 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/arkansas | 588 | 83% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/british-columbia | 600 | 83% | 4 | index | yes | 37 | Keep/index (distinct content) |
+| /locations/connecticut | 590 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/delaware | 588 | 83% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/florida/miami | 366 | 83% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/illinois | 587 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/iowa | 586 | 83% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/maryland | 590 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/massachusetts | 589 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/michigan | 591 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/minnesota | 591 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/missouri | 592 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/nevada | 593 | 83% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/new-mexico | 596 | 83% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/oklahoma | 589 | 83% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/pennsylvania | 589 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/south-carolina | 596 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/tennessee | 589 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/virginia | 591 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/washington | 596 | 83% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/washington-dc | 588 | 83% | 4 | index | yes | 33 | Keep/index (distinct content) |
+| /locations/california/san-diego | 373 | 82% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/california/san-francisco | 378 | 82% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/colorado | 598 | 82% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/louisiana | 600 | 82% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/new-jersey | 598 | 82% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/quebec | 594 | 82% | 4 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/texas/houston | 367 | 82% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/utah | 595 | 82% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/washington/seattle | 369 | 82% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/florida | 609 | 81% | 4 | index | yes | 37 | Keep/index (distinct content) |
+| /locations/new-york | 609 | 81% | 4 | index | yes | 37 | Keep/index (distinct content) |
+| /locations/new-york/new-york-city | 379 | 81% | 3 | index | yes | 34 | Keep/index (distinct content) |
+| /locations/quebec/montreal | 375 | 81% | 3 | index | yes | 34 | Keep/index (distinct content) |
+| /locations/texas/austin | 372 | 81% | 3 | index | yes | 34 | Keep/index (distinct content) |
+| /locations/texas/dallas | 371 | 81% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/texas | 605 | 81% | 4 | index | yes | 37 | Keep/index (distinct content) |
+| /locations/british-columbia/vancouver | 382 | 80% | 3 | index | yes | 34 | Keep/index (distinct content) |
+| /locations/nevada/las-vegas | 372 | 80% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/california/los-angeles | 384 | 79% | 3 | index | no | 34 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/ontario/toronto | 379 | 79% | 3 | index | yes | 34 | Keep/index (distinct content) |
+| /locations/alberta/calgary | 377 | 78% | 3 | index | yes | 34 | Keep/index (distinct content) |
+| /locations/california | 622 | 78% | 4 | index | yes | 37 | Keep/index (distinct content) |

@@ -87,11 +87,14 @@ for (const r of recs) {
   for (const s of r.sh) if ((shingleFreq.get(s) || 0) > 1) shared++;
   r.dupPct = Math.round((shared / total) * 100);
   r.uniqueHeadings = r.hs.filter((h) => (headingFreq.get(h) || 0) === 1).length;
-  // Classification (advisory only).
-  if (r.noindex) r.flag = 'noindex (already gated)';
-  else if (r.dupPct >= 85 && r.uniqueHeadings === 0) r.flag = 'REVIEW: indexed, highly templated, no unique headings';
-  else if (r.dupPct >= 85) r.flag = 'REVIEW: indexed, highly templated';
-  else r.flag = 'keep: has distinct content';
+  // Recommended action (advisory) — explicit taxonomy:
+  // Keep/index · Improve · Noindex temporarily · Consolidate · Redirect · Remove from sitemap.
+  if (r.noindex && !r.inSitemap) r.flag = 'Noindex temporarily (already gated)';
+  else if (r.noindex && r.inSitemap) r.flag = 'Remove from sitemap (noindex must not be listed)';
+  else if (!r.inSitemap) r.flag = 'Consolidate / Redirect (indexed elsewhere)';
+  else if (r.dupPct >= 85 && r.uniqueHeadings === 0) r.flag = 'Noindex temporarily or Improve (templated, no unique headings)';
+  else if (r.dupPct >= 85) r.flag = 'Improve (templated but has headings)';
+  else r.flag = 'Keep/index (distinct content)';
 }
 
 const indexed = recs.filter((r) => !r.noindex);
