@@ -584,6 +584,30 @@ for (const lc of LOCAL_CATEGORIES) {
               { '@type': 'ListItem', position: 3, name: `${lc.label} in ${city.city}`, item: `${ORIGIN}/${lc.slug}/${city.slug}` }
             ]
           },
+          {
+            // Types the page + wires it to the central WebSite/Organization entity.
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            '@id': `${ORIGIN}/${lc.slug}/${city.slug}#webpage`,
+            url: `${ORIGIN}/${lc.slug}/${city.slug}`,
+            name: `${lc.label} in ${cityWithAbbr(city)}`,
+            description: cityCatDescription(lc.label, city),
+            isPartOf: { '@id': `${ORIGIN}/#website` },
+            about: { '@id': `${ORIGIN}/#organization` }
+          },
+          {
+            // Accurate location-service node: Apex serves (ships to) this city.
+            // areaServed = City, provider = the central org. NOT LocalBusiness —
+            // no address/physical presence is claimed.
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            '@id': `${ORIGIN}/${lc.slug}/${city.slug}#service`,
+            name: `${lc.label} in ${city.city}`,
+            serviceType: `Custom ${lc.label.toLowerCase()} printing`,
+            provider: { '@id': `${ORIGIN}/#organization` },
+            areaServed: { '@type': 'City', name: city.city },
+            description: cityCatDescription(lc.label, city)
+          },
           ...(detail
             ? [{
                 '@context': 'https://schema.org',

@@ -45,7 +45,34 @@ export default function CityCategoryPage({ categoryKey }) {
               { '@type': 'ListItem', position: 2, name: cat.hubLabel, item: `${brand.origin}${cat.hub}` },
               { '@type': 'ListItem', position: 3, name: `${cat.label} in ${city.city}`, item: `${brand.origin}/${cat.slug}/${city.slug}` }
             ]
-          }
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            '@id': `${brand.origin}/${cat.slug}/${city.slug}#webpage`,
+            url: `${brand.origin}/${cat.slug}/${city.slug}`,
+            name: `${cat.label} in ${cityWithAbbr(city)}`,
+            description: cityCatDescription(cat.label, city),
+            isPartOf: { '@id': `${brand.origin}/#website` },
+            about: { '@id': `${brand.origin}/#organization` }
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            '@id': `${brand.origin}/${cat.slug}/${city.slug}#service`,
+            name: `${cat.label} in ${city.city}`,
+            serviceType: `Custom ${cat.label.toLowerCase()} printing`,
+            provider: { '@id': `${brand.origin}/#organization` },
+            areaServed: { '@type': 'City', name: city.city },
+            description: cityCatDescription(cat.label, city)
+          },
+          ...(detail && detail.faqs
+            ? [{
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: detail.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+              }]
+            : [])
         ]
       : undefined,
     // Only Tier 1 cities are indexed; the rest stay noindex until they earn content.
