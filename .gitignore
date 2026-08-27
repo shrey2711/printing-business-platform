@@ -10,3 +10,8 @@ uploads/
 .vercel/
 .DS_Store
 npm-debug.log*
+
+# Playwright / Lighthouse
+test-results/
+playwright-report/
+.lighthouseci/

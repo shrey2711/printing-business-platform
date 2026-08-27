@@ -8,9 +8,13 @@
   --red-dark: #a50d25;
   --blue: #1f8fd6;
   --blue-dark: #1878b6;
+  /* AA-passing (>=4.5:1 on white) blue for TEXT links; --blue stays the brand
+     accent on buttons/icons where contrast is met against their own background. */
+  --link: #146c9c;
+  --link-hover: #0f567f;
   --navy: #16233b;
   --ink: #2b323c;
-  --muted: #6b7480;
+  --muted: #5f6773;
   --line: #dfe3e8;
   --line-soft: #eceef1;
   --bg: #ffffff;
@@ -53,9 +57,9 @@ h1, h2, h3, h4 { color: var(--navy); line-height: 1.22; font-weight: 700; text-w
 p { text-wrap: pretty; }
 /* Content/prose links read as links (accent + underline); nav/cards keep plain. */
 .lead a:not(.btn), article a:not(.btn), .blog-article a:not(.btn) {
-  color: var(--blue); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px;
+  color: var(--link); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px;
 }
-.lead a:not(.btn):hover, article a:not(.btn):hover, .blog-article a:not(.btn):hover { color: var(--blue-dark); }
+.lead a:not(.btn):hover, article a:not(.btn):hover, .blog-article a:not(.btn):hover { color: var(--link-hover); }
 
 /* Accessible keyboard focus ring — was missing site-wide. */
 a:focus-visible, button:focus-visible, .btn:focus-visible, [role="button"]:focus-visible,
@@ -925,17 +929,17 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .footer-grid h4 { color: #fff; margin: 0 0 0.8rem; font-size: 1rem; }
 .footer-grid p { margin: 0.15rem 0; font-size: 0.86rem; }
 .footer-grid a { color: #8fd0f0; }
-.ft-muted { color: #8a919b !important; margin-top: 0.6rem !important; }
+.ft-muted { color: #adb4bd !important; margin-top: 0.6rem !important; }
 .pickup { border-top: 1px dashed #555b63; padding: 0.6rem 0; font-size: 0.84rem; }
 .pickup:first-of-type { border-top: none; }
 .pickup strong { display: block; color: #fff; }
 .pickup span { display: block; color: #a7adb6; }
-.pickup-hrs { color: #8a919b !important; margin-top: 0.15rem; }
+.pickup-hrs { color: #adb4bd !important; margin-top: 0.15rem; }
 .ft-btns, .ft-links { display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-start; }
 .ft-btn { background: #4a5058; color: #e6e9ed !important; padding: 0.45rem 0.9rem; border-radius: 4px; font-size: 0.84rem; }
 .ft-btn:hover { background: #565d66; }
 .ft-links a { color: #b7bdc5 !important; font-size: 0.86rem; }
-.footer-legal { background: #2c3037; color: #8a919b; text-align: center; padding: 0.9rem; font-size: 0.8rem; }
+.footer-legal { background: #2c3037; color: #adb4bd; text-align: center; padding: 0.9rem; font-size: 0.8rem; }
 
 /* ---------- Header auth state ---------- */
 .header-account { display: flex; align-items: center; gap: 0.6rem; }

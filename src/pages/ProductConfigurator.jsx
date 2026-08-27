@@ -271,6 +271,7 @@ export default function ProductConfigurator() {
           <input
             type="number"
             min="1"
+            aria-label="Quantity"
             value={config.quantity}
             onChange={(e) => setConfig({ ...config, quantity: Math.max(1, numberOr(e.target.value, config.quantity)) })}
           />
