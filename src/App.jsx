@@ -68,7 +68,10 @@ const shopMenu = [
   {
     label: 'Backdrops',
     to: '/backdrops',
-    items: [{ label: 'Step & Repeat Backdrop', to: '/products/step-and-repeat-backdrop' }]
+    items: [
+      { label: 'Step & Repeat Backdrop', to: '/products/step-and-repeat-backdrop' },
+      { label: 'Straight Tension Fabric Display', to: '/products/straight-tension-fabric-display' }
+    ]
   },
   {
     label: 'Table Covers',
