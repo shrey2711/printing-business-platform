@@ -87,7 +87,7 @@ const FOOTER = `<nav aria-label="Company">
 let seoMap = {};
 let contentMap = {};
 
-function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt }) {
+function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt, preloadImage }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
   const o = seoMap[path];
   if (o) {
@@ -114,6 +114,11 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
     html = html.replace(/(<meta name="twitter:image" content=")[^"]*(")/, (_m, a, b) => a + esc(absImg) + b);
     if (imageAlt) html = html.replace(/(<meta property="og:image:alt" content=")[^"]*(")/, (_m, a, b) => a + esc(imageAlt) + b);
     html = html.replace(/\s*<meta property="og:image:width"[^>]*>/, '').replace(/\s*<meta property="og:image:height"[^>]*>/, '');
+  }
+  // LCP preload: start fetching the above-the-fold hero image before the JS
+  // bundle parses, so it isn't discovered late (only where a page sets it).
+  if (preloadImage) {
+    html = html.replace('</head>', `<link rel="preload" as="image" href="${esc(preloadImage)}" fetchpriority="high">\n</head>`);
   }
   if (robots) {
     html = html.replace('</head>', `<meta name="robots" content="${robots}">\n</head>`);
@@ -246,6 +251,8 @@ routes.push(() => {
     description:
       'Custom trade show displays from one supplier: canopy tents, banner stands, backdrops, table covers, flags. Instant pricing, free artwork proof, US & Canada.',
     body,
+    // Preload the home hero LCP image (matches the eager/fetchpriority tile in HomePage.jsx).
+    preloadImage: '/images/showcase/tablecover-corner-cafe.webp',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',

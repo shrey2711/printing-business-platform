@@ -153,6 +153,21 @@ if (!existsSync(robotsPath)) {
   if (/Disallow:\s*\/\s*$/m.test(robots)) failures.push('robots.txt blocks the whole site (Disallow: /)');
 }
 
+// ---- Home LCP preload: present + asset exists (Phase 12) ----
+{
+  const home = `${DIST}/index.html`;
+  if (existsSync(home)) {
+    const html = readFileSync(home, 'utf8');
+    const m = html.match(/<link rel="preload" as="image" href="([^"]+)"[^>]*>/);
+    if (!m) failures.push('home is missing the LCP <link rel="preload" as="image">');
+    else {
+      const assetPath = `${DIST}${m[1].replace(ORIGIN, '')}`;
+      if (!existsSync(assetPath)) failures.push(`home LCP preload points at a missing asset: ${m[1]}`);
+      if (!/fetchpriority="high"/.test(m[0])) failures.push('home LCP preload lacks fetchpriority="high"');
+    }
+  }
+}
+
 // ---- Report ----
 if (failures.length) {
   console.error(`\n✗ SEO INVARIANTS FAILED — ${failures.length} issue(s):`);
