@@ -205,7 +205,7 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
     'Any printed full or half walls you add (up to 3 total, in any mix of full and half height).'
   ],
   // Production time (after proof approval) — shipping/transit is additional.
-  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+50%). Shipping additional.',
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+50%). Shipping is calculated separately at checkout.',
   // Cross-sell the rest of the booth (complete-solution internal linking).
   related: ['pleated-table-covers', 'standard-retractable-banner', 'step-and-repeat-backdrop'],
   // AEO/GEO: concise factual answers, using this product's own explicit prices.
@@ -275,7 +275,7 @@ const pleatedCovers = {
     ['Fabric', 'Wrinkle-resistant polyester, dye-sublimated'],
     ['Turnaround', '6–8 business days production (2–3 day rush); shipping additional']
   ],
-  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping is calculated separately at checkout.',
   seoTitle: 'Custom Pleated Table Covers | 4, 6 & 8 ft',
   seoDescription:
     'Custom printed pleated table covers (throws) in 4, 6 and 8 ft — draped closed-back fit, full-color dye sublimation, free artwork proof. From $199.',
@@ -328,7 +328,7 @@ const stretchCovers = {
     ['Fabric', 'Stretch polyester, dye-sublimated'],
     ['Turnaround', '6–8 business days production (2–3 day rush); shipping additional']
   ],
-  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping additional.',
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+15%). Shipping is calculated separately at checkout.',
   seoTitle: 'Custom Stretch Table Covers | 6 & 8 ft',
   seoDescription:
     'Custom printed fitted stretch table covers in 6 and 8 ft — tight closed-back fit, full-color dye sublimation, free artwork proof. From $285.',
@@ -397,7 +397,7 @@ const tradeShowDisplays = [
       ['Setup', 'Tool-free — pops up in seconds'],
       ['Included', 'Stand + printed graphic + carry bag']
     ],
-    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['deluxe-retractable-banner', 'x-stand-banner'],
     seoTitle: 'Standard Retractable Banner Stand',
     seoDescription:
@@ -467,7 +467,7 @@ const tradeShowDisplays = [
       ['Graphic', 'Replaceable printed banner'],
       ['Included', 'Stand + printed graphic + padded bag']
     ],
-    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['standard-retractable-banner', 'x-stand-banner'],
     seoTitle: 'Deluxe Retractable Banner Stand',
     seoDescription:
@@ -530,7 +530,7 @@ const tradeShowDisplays = [
       ['Setup', 'Folds flat — sets up in seconds'],
       ['Included', 'X-frame + printed banner']
     ],
-    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['standard-retractable-banner', 'deluxe-retractable-banner'],
     seoTitle: 'X-Stand Banner Stand | Portable Display',
     seoDescription:
@@ -610,7 +610,7 @@ const tradeShowDisplays = [
       ['Best for', 'Repeating logos and photo backdrops'],
       ['Included', 'Frame + printed graphic + carry bag']
     ],
-    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping additional.',
+    turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
     seoTitle: 'Step & Repeat Backdrop | Media Wall',
     seoDescription:
@@ -764,7 +764,7 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
     ['Graphic', 'Replaceable'],
     ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
   ],
-  turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping additional.',
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping is calculated separately at checkout.',
   related: ['custom-canopies', 'standard-retractable-banner', 'x-stand-banner'],
   seoTitle,
   seoDescription,
@@ -918,7 +918,7 @@ const tensionDisplay = {
     ['Setup', 'Tool-free; stabilising feet; carry bag'],
     ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
   ],
-  turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping additional.',
+  turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping is calculated separately at checkout.',
   related: ['step-and-repeat-backdrop', 'standard-retractable-banner', 'pleated-table-covers', 'hard-case-podium'],
   seoTitle: 'Straight Tension Fabric Display',
   seoDescription:
@@ -990,7 +990,7 @@ const hardCasePodium = {
     ['Graphic', 'Custom printed wrap'],
     ['Production', '6–8 business days standard (production time, not delivery)']
   ],
-  turnaround: 'Production: 6–8 business days. Shipping additional.',
+  turnaround: 'Production: 6–8 business days. Shipping is calculated separately at checkout.',
   related: ['straight-tension-fabric-display', 'step-and-repeat-backdrop', 'standard-retractable-banner'],
   seoTitle: 'Hard Case Trade Show Podium',
   seoDescription:
