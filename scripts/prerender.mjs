@@ -895,10 +895,15 @@ for (const summary of productList) {
         {
           '@context': 'https://schema.org',
           '@type': 'Product',
+          // Stable @id so the node is addressable and de-duplicated.
+          '@id': `${ORIGIN}/products/${product.slug}#product`,
+          url: `${ORIGIN}/products/${product.slug}`,
           name: product.name,
           description: product.description,
           ...(productImages.length ? { image: productImages } : {}),
+          // sku = the real internal product code (the slug); no fabricated GTIN/MPN.
           sku: product.slug,
+          category: cat ? cat.nav : product.category,
           brand: { '@type': 'Brand', name: BRAND },
           // Offer only when there is a real price — no fake price on quote
           // products. When the "from" floor is a cheaper configuration than the
@@ -917,7 +922,9 @@ for (const summary of productList) {
                       // Every item is custom printed to order — not held in stock.
                       availability: 'https://schema.org/MadeToOrder',
                       itemCondition: 'https://schema.org/NewCondition',
-                      url: `${ORIGIN}/products/${product.slug}`
+                      url: `${ORIGIN}/products/${product.slug}`,
+                      // Connect the offer to the central OnlineStore/Organization.
+                      seller: { '@id': `${ORIGIN}/#organization` }
                     }
                   : {
                       '@type': 'Offer',
@@ -925,7 +932,8 @@ for (const summary of productList) {
                       price: String(startingPrice),
                       availability: 'https://schema.org/MadeToOrder',
                       itemCondition: 'https://schema.org/NewCondition',
-                      url: `${ORIGIN}/products/${product.slug}`
+                      url: `${ORIGIN}/products/${product.slug}`,
+                      seller: { '@id': `${ORIGIN}/#organization` }
                     }
               }
             : {})

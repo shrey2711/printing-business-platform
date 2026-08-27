@@ -8,6 +8,8 @@ import { readFileSync, existsSync } from 'fs';
 import { listProducts } from '../backend/data/products.js';
 
 const DIST = 'dist';
+const ORIGIN = 'https://www.apextradeshow.com';
+const BRAND = 'Apex Trade Show';
 const fails = [];
 const feed = existsSync(`${DIST}/feed.xml`) ? readFileSync(`${DIST}/feed.xml`, 'utf8') : '';
 const feedItems = feed.match(/<item>[\s\S]*?<\/item>/g) || [];
@@ -30,6 +32,23 @@ for (const p of listProducts()) {
   })();
   const schemaPrice = prod && prod.offers ? Number(prod.offers.lowPrice ?? prod.offers.price) : null;
   const fp = feedPrice(p.slug);
+
+  // Schema strength (all products with a Product node): stable @id, url, sku,
+  // brand, category, and — for priced — a seller linked to the central org.
+  if (prod) {
+    if (prod['@id'] !== `${ORIGIN}/products/${p.slug}#product`) fails.push(`${p.slug}: Product @id "${prod['@id']}" != canonical #product id`);
+    if (prod.url !== `${ORIGIN}/products/${p.slug}`) fails.push(`${p.slug}: Product url "${prod.url}" != canonical`);
+    if (prod.sku !== p.slug) fails.push(`${p.slug}: Product sku "${prod.sku}" != slug`);
+    if (!(prod.brand && prod.brand.name === BRAND)) fails.push(`${p.slug}: Product brand != ${BRAND}`);
+    if (!prod.category) fails.push(`${p.slug}: Product missing category`);
+    if (prod.offers) {
+      const o = prod.offers;
+      if (!(o.seller && o.seller['@id'] === `${ORIGIN}/#organization`)) fails.push(`${p.slug}: Offer seller not linked to central #organization`);
+      if (o.availability !== 'https://schema.org/MadeToOrder') fails.push(`${p.slug}: Offer availability "${o.availability}" != MadeToOrder`);
+      if (o.itemCondition !== 'https://schema.org/NewCondition') fails.push(`${p.slug}: Offer itemCondition != NewCondition`);
+      if (o['@type'] === 'AggregateOffer' && Number(o.lowPrice) > Number(o.highPrice)) fails.push(`${p.slug}: AggregateOffer lowPrice > highPrice`);
+    }
+  }
 
   if (p.startingPrice != null) {
     // Priced product: engine == schema == visible == feed.
