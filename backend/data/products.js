@@ -884,7 +884,7 @@ const TENSION_MATRIX = {
 
 const tensionDisplay = {
   slug: 'straight-tension-fabric-display',
-  active: false,
+  active: true,
   name: 'Straight Tension Fabric Display',
   category: 'backdrops',
   badge: 'Custom Printed',
