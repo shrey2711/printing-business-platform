@@ -40,6 +40,26 @@ export const LOCAL_CATEGORIES = [
     productCats: ['banner-stands'],
     lead: (c) =>
       `Custom retractable and X-stand banner stands in ${c.city} — portable, printed displays for aisles, entrances and counters at ${c.venue} and events across ${c.city}.`
+  },
+  {
+    key: 'backdrops',
+    slug: 'trade-show-backdrops',
+    label: 'Trade Show Backdrops',
+    hub: '/backdrops',
+    hubLabel: 'Backdrops',
+    productCats: ['backdrops'],
+    lead: (c) =>
+      `Step & repeat backdrops and tension-fabric display walls for ${c.city} exhibitors — a clean branded wall behind your booth at ${c.venue}, or a media wall for press and photos. Printed to order and shipped to ${c.city}.`
+  },
+  {
+    key: 'table-covers',
+    slug: 'table-covers',
+    label: 'Trade Show Table Covers',
+    hub: '/table-covers',
+    hubLabel: 'Table Covers',
+    productCats: ['table-covers'],
+    lead: (c) =>
+      `Fitted and pleated table covers printed in your brand colours for ${c.city} booths and events. Turn a rented table at ${c.venue} into finished brand space — made to order and shipped to your ${c.city} address.`
   }
 ];
 

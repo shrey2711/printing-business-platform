@@ -332,7 +332,7 @@ for (const cp of CATEGORY_PAGES) {
       : '';
     const included = `<h2>What's included</h2><ul>${cp.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>`;
     // Link the hub to its Tier-1 city landing pages so they sit in the crawl graph.
-    const localForHub = { 'custom-canopies': 'canopies', 'trade-show-displays': 'displays', 'banner-stands': 'banner-stands' }[cp.slug];
+    const localForHub = { 'custom-canopies': 'canopies', 'trade-show-displays': 'displays', 'banner-stands': 'banner-stands', 'backdrops': 'backdrops', 'table-covers': 'table-covers' }[cp.slug];
     const lc = localForHub && LOCAL_CATEGORIES.find((l) => l.key === localForHub);
     const cities = lc
       ? `<h2>${esc(lc.label)} by city</h2><ul>${SEO_CITIES.filter((c) => c.tier <= 2).map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}, ${esc(c.abbr)}</a></li>`).join('')}</ul>`

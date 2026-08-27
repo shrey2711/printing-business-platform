@@ -426,6 +426,8 @@ function App() {
         <Route path="/trade-show-canopies/:city" element={<CityCategoryPage categoryKey="canopies" />} />
         <Route path="/trade-show-displays/:city" element={<CityCategoryPage categoryKey="displays" />} />
         <Route path="/banner-stands/:city" element={<CityCategoryPage categoryKey="banner-stands" />} />
+        <Route path="/trade-show-backdrops/:city" element={<CityCategoryPage categoryKey="backdrops" />} />
+        <Route path="/table-covers/:city" element={<CityCategoryPage categoryKey="table-covers" />} />
         <Route path="/about" element={<InfoPage slug="about" />} />
         <Route path="/artwork-guidelines" element={<InfoPage slug="artwork-guidelines" />} />
         <Route path="/free-artwork-proof" element={<InfoPage slug="free-artwork-proof" />} />
