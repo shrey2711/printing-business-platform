@@ -54,6 +54,14 @@ export const SEO_CITIES = [
   { slug: 'dallas', city: 'Dallas', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 1, venue: 'the Kay Bailey Hutchison Convention Center', scene: 'the Dallas Market Center and year-round trade shows' },
   { slug: 'los-angeles', city: 'Los Angeles', abbr: 'CA', stateName: 'California', stateSlug: 'california', tier: 1, venue: 'the Los Angeles Convention Center', scene: 'entertainment, tech and lifestyle expos' },
   { slug: 'houston', city: 'Houston', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 1, venue: 'the George R. Brown Convention Center', scene: 'energy, medical and industrial trade shows' },
+  { slug: 'san-francisco', city: 'San Francisco', abbr: 'CA', stateName: 'California', stateSlug: 'california', tier: 1, venue: 'the Moscone Center', scene: 'Dreamforce, GDC and RSA Conference in SoMa' },
+  { slug: 'seattle', city: 'Seattle', abbr: 'WA', stateName: 'Washington', stateSlug: 'washington', tier: 1, venue: 'the Seattle Convention Center', scene: 'PAX West and Pacific Northwest technology shows' },
+  { slug: 'nashville', city: 'Nashville', abbr: 'TN', stateName: 'Tennessee', stateSlug: 'tennessee', tier: 1, venue: 'the Music City Center', scene: 'healthcare, music and hospitality conventions' },
+  { slug: 'indianapolis', city: 'Indianapolis', abbr: 'IN', stateName: 'Indiana', stateSlug: 'indiana', tier: 1, venue: 'the Indiana Convention Center', scene: 'Gen Con, the PRI Show and the FFA Convention' },
+  { slug: 'charlotte', city: 'Charlotte', abbr: 'NC', stateName: 'North Carolina', stateSlug: 'north-carolina', tier: 1, venue: 'the Charlotte Convention Center', scene: 'NASCAR, banking and energy-sector events' },
+  { slug: 'denver', city: 'Denver', abbr: 'CO', stateName: 'Colorado', stateSlug: 'colorado', tier: 1, venue: 'the Colorado Convention Center', scene: 'outdoor, aerospace and technology trade shows' },
+  { slug: 'phoenix', city: 'Phoenix', abbr: 'AZ', stateName: 'Arizona', stateSlug: 'arizona', tier: 1, venue: 'the Phoenix Convention Center', scene: 'Southwest expos and events' },
+  { slug: 'new-orleans', city: 'New Orleans', abbr: 'LA', stateName: 'Louisiana', stateSlug: 'louisiana', tier: 1, venue: 'the Ernest N. Morial Convention Center', scene: 'one of the largest convention centers in the country' },
 
   { slug: 'miami', city: 'Miami', abbr: 'FL', stateName: 'Florida', stateSlug: 'florida', tier: 2, venue: 'the Miami Beach Convention Center', scene: 'Art Basel and international expos' },
   { slug: 'baltimore', city: 'Baltimore', abbr: 'MD', stateName: 'Maryland', stateSlug: 'maryland', tier: 2, venue: 'the Baltimore Convention Center', scene: 'East Coast conventions' },
@@ -63,9 +71,6 @@ export const SEO_CITIES = [
   { slug: 'san-diego', city: 'San Diego', abbr: 'CA', stateName: 'California', stateSlug: 'california', tier: 2, venue: 'the San Diego Convention Center', scene: 'Comic-Con and biotech expos' },
   { slug: 'boston', city: 'Boston', abbr: 'MA', stateName: 'Massachusetts', stateSlug: 'massachusetts', tier: 2, venue: 'the Boston Convention & Exhibition Center', scene: 'biotech, medical and technology conferences' },
 
-  { slug: 'phoenix', city: 'Phoenix', abbr: 'AZ', stateName: 'Arizona', stateSlug: 'arizona', tier: 3, venue: 'the Phoenix Convention Center', scene: 'Southwest expos and events' },
-  { slug: 'denver', city: 'Denver', abbr: 'CO', stateName: 'Colorado', stateSlug: 'colorado', tier: 3, venue: 'the Colorado Convention Center', scene: 'outdoor, cannabis and technology trade shows' },
-  { slug: 'new-orleans', city: 'New Orleans', abbr: 'LA', stateName: 'Louisiana', stateSlug: 'louisiana', tier: 3, venue: 'the Ernest N. Morial Convention Center', scene: 'one of the largest convention centers in the country' },
   { slug: 'san-antonio', city: 'San Antonio', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 3, venue: 'the Henry B. González Convention Center', scene: 'Texas conventions and events' }
 ];
 

@@ -717,6 +717,191 @@ export const CITY_DETAIL = {
       { q: 'Which displays suit a credential-conscious D.C. audience?', a: 'Clean, credible kits — a fabric backdrop or step & repeat, retractable banners, and a printed table cover — that present your brand professionally.' },
       { q: 'Is rush production available for D.C. exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
     ]
+  },
+
+  'san-francisco': {
+    answer:
+      'San Francisco is a global technology and life-sciences convention hub, hosting Dreamforce, the Game Developers Conference and the RSA Conference at the Moscone Center in SoMa. Apex prints custom trade show displays and ships them to San Francisco.',
+    overview: [
+      'The Moscone Center in the South of Market district anchors one of the most valuable convention audiences in the world. San Francisco shows skew heavily toward software, cloud, AI, security and biotech — events like Dreamforce effectively take over downtown, filling Moscone North, South and West plus the surrounding hotels and streets. For an exhibitor that means a sophisticated, design-literate crowd that notices a well-made booth.',
+      'Because that audience judges brands on presentation, crisp full-colour graphics matter here. Apex prints backdrops, banner stands, table covers and canopies to order and ships them to your San Francisco hotel, the Moscone receiving dock or a business address, so your booth is ready when you arrive.'
+    ],
+    whyExhibit:
+      'San Francisco and the wider Bay Area concentrate the technology and venture ecosystem — founders, engineers, investors and enterprise buyers all gather here. Moscone’s central SoMa location keeps hotels, offices and show floors within walking distance, and the calendar runs strong from the JPMorgan Healthcare week in January through the fall conference season. A cohesive display kit — a tension-fabric backdrop for the booth wall, retractable banners at the aisle, a branded table cover, and a canopy for any outdoor or sponsor activation — helps a lean startup booth look as considered as an enterprise stand.',
+    conventionCenters: [
+      { name: 'Moscone Center', desc: 'San Francisco’s main convention complex in SoMa — Moscone North, South and West offer more than 500,000 square feet of contiguous exhibit space after its expansion, host to Dreamforce, GDC and the RSA Conference.' },
+      { name: 'Yerba Buena & SoMa hotels', desc: 'Large downtown hotels around Moscone add ballroom and meeting space that overflow events use during major conference weeks.' },
+      { name: 'Fort Mason Center', desc: 'A waterfront event venue used for consumer expos, art and design fairs away from the main convention district.' }
+    ],
+    industries: [
+      ['Software & cloud', 'The Bay Area is the centre of enterprise software and cloud, and Dreamforce and similar events fill the city each year.'],
+      ['Biotech & life sciences', 'The JPMorgan Healthcare Conference and a dense biotech corridor drive major life-sciences gatherings.'],
+      ['Cybersecurity', 'The RSA Conference makes San Francisco a global hub for security-industry exhibitors.'],
+      ['Gaming & interactive', 'The Game Developers Conference brings the games industry to Moscone every spring.'],
+      ['Fintech & AI', 'Financial-technology and artificial-intelligence companies anchor a growing slate of B2B events.']
+    ],
+    climate:
+      'San Francisco has a cool Mediterranean, marine climate: mild temperatures year-round, famous summer fog, and steady wind off the bay rather than heat. Rain concentrates in the winter months; summers are dry but breezy. For any outdoor or rooftop activation, wind is the main concern — weight every canopy leg, because gusts through the SoMa street grid can be strong even on a clear day. Graphics rarely face harsh UV, but the damp marine air rewards wrinkle-resistant fabric that re-hangs cleanly.',
+    planning:
+      'Moscone uses an official freight contractor and union labor, typically with an advance warehouse that receives shipments before move-in — sending there is smoother than delivering to the floor on setup morning, and you should budget for material handling (drayage). Portable displays like retractable banners, fabric backdrops and table covers pack into a case or tube, sidestep much of that cost and are easy to move around a walkable downtown. Approve your proof early: production runs 6–8 business days (2–3 with rush) before transit, and conference weeks like Dreamforce and RSA are the busiest of the year.',
+    bestDisplays:
+      'For an indoor Moscone booth, a tension-fabric backdrop or step & repeat gives a clean, modern brand wall that photographs well, retractable banner stands hold your message at the aisle, and a fitted table cover turns a rented table into brand space. For rooftop, courtyard and sponsor activations common during big conference weeks, a weighted canopy creates a branded footprint against the bay wind. Lightweight X-stand and tabletop banners suit registration desks and hotel side-events.',
+    faqs: [
+      { q: 'Do you ship trade show displays to San Francisco?', a: 'Yes. Apex is an online supplier and ships custom-printed displays to San Francisco and across the Bay Area — to your hotel, the Moscone Center receiving dock, or a business address.' },
+      { q: 'How early should I order for a Moscone show like Dreamforce or RSA?', a: 'Production is 6–8 business days after proof approval (2–3 with rush), plus transit that varies by address. Those conference weeks are the busiest of the year, so order two to three weeks ahead.' },
+      { q: 'Do canopies need weights in San Francisco?', a: 'Yes. Wind off the bay and through the SoMa streets can gust hard, and most activations are on pavement, so weight every leg — ground stakes usually aren’t an option.' },
+      { q: 'Which displays work best inside the Moscone Center?', a: 'A tension-fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor and rooftop activations.' },
+      { q: 'Can you deliver to a downtown San Francisco hotel?', a: 'Yes, to any San Francisco address you provide, including hotel and convention receiving. Confirm the venue’s labelling and delivery-window rules first.' },
+      { q: 'Is rush production available for Bay Area shows?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'seattle': {
+    answer:
+      'Seattle is a Pacific Northwest technology, aerospace and maritime hub, hosting PAX West and major trade shows at the expanded Seattle Convention Center. Apex prints custom trade show displays and ships them to Seattle.',
+    overview: [
+      'Seattle’s downtown Seattle Convention Center — expanded with its Summit building — anchors a convention scene built on cloud technology, aerospace, maritime industries and specialty food and coffee. Home to Amazon and Microsoft and a dense startup ecosystem, the city draws technical, detail-oriented audiences, and events like PAX West pack the halls each year.',
+      'That audience notices build quality, and the damp Northwest climate rewards displays that travel and re-hang well. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Seattle hotel, the convention center dock or a business address.'
+    ],
+    whyExhibit:
+      'Seattle pairs global technology names with strong aerospace, maritime and outdoor-industry sectors, so a single show can reach enterprise buyers, engineers and specialty-retail decision-makers. The compact downtown around the convention center keeps hotels and restaurants close, supporting steady attendance, and the calendar runs year-round despite the wet season. A coordinated display set — backdrop, banners, table cover and a canopy for waterfront or outdoor activations — helps you present professionally to a discerning Northwest crowd.',
+    conventionCenters: [
+      { name: 'Seattle Convention Center', desc: 'Downtown Seattle’s main hall across its original Arch building and the newer Summit building, offering greatly expanded exhibit space for technology, gaming and trade events.' },
+      { name: 'Lumen Field Event Center', desc: 'A large event hall beside the stadium in SoDo, used for consumer expos and the Pacific Marine Expo.' },
+      { name: 'Bell Harbor International Conference Center', desc: 'A waterfront venue on Elliott Bay used for mid-size conferences and corporate events.' }
+    ],
+    industries: [
+      ['Technology & cloud', 'Home to Amazon and Microsoft, Seattle is a centre of cloud, software and developer events.'],
+      ['Aerospace', 'A deep aerospace supply chain around Boeing supports aviation and manufacturing shows.'],
+      ['Maritime & fishing', 'The Pacific Marine Expo and a working waterfront drive maritime-industry gatherings.'],
+      ['Outdoor & recreation', 'Outdoor-gear and recreation brands headquartered in the region anchor related expos.'],
+      ['Food, coffee & beverage', 'Specialty coffee and food companies make Seattle a hub for food-and-beverage trade events.']
+    ],
+    climate:
+      'Seattle has a mild, marine climate: cool temperatures, low UV, and a long wet season from autumn through spring with frequent light rain rather than heavy storms. Summers are pleasant and dry. Rain cover is the main outdoor consideration, so a printed canopy earns its keep for waterfront and street activations — weight the legs for breezes off Puget Sound, and choose wrinkle-resistant fabric that re-hangs cleanly in the damp air.',
+    planning:
+      'The Seattle Convention Center uses an official freight contractor, usually with an advance warehouse and union labor at larger shows — budget for material handling and confirm receiving windows across the Arch and Summit buildings. Portable displays travel as a case or tube and set up without a crew, handy in a walkable downtown. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and PAX week and peak conference dates fill quickly.',
+    bestDisplays:
+      'For a convention-center booth, a tension-fabric backdrop or step & repeat anchors the wall, retractable banners carry your headline at the aisle, and a fitted table cover finishes the demo table. For waterfront, market and outdoor activations, a weighted canopy adds shade and rain cover. For hotel meetings and side-events, lightweight X-stand and tabletop banners set up in seconds.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Seattle?', a: 'Yes. Apex ships custom-printed displays to Seattle and across Washington — to the Seattle Convention Center, Lumen Field Event Center, or your business address.' },
+      { q: 'How early should I order for a Seattle show like PAX West?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. PAX week and peak dates are busy, so order a couple of weeks ahead.' },
+      { q: 'Do canopies handle Seattle rain?', a: 'Yes — the printed tops are water-resistant and give quick rain cover, which is useful for Northwest weather. Weight every leg for breezes off the water.' },
+      { q: 'Which displays work best inside the Seattle Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor and waterfront activations.' },
+      { q: 'Can you deliver across the Arch and Summit buildings?', a: 'Yes, to any Seattle address you provide, including convention receiving — just confirm which building and the venue’s labelling and delivery-window rules.' },
+      { q: 'Is rush production available for Seattle exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'nashville': {
+    answer:
+      'Nashville is a fast-growing convention city for healthcare, music and hospitality, centred on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
+    overview: [
+      'Nashville’s downtown Music City Center anchors one of the fastest-growing convention scenes in the country, backed by the city’s standing as a headquarters hub for healthcare management and, of course, the music industry. The nearby Gaylord Opryland resort adds one of the largest non-gaming convention venues in the United States, so the city hosts everything from medical meetings to Summer NAMM.',
+      'Exhibitors reach a broad mix of healthcare, hospitality and entertainment buyers, and the walkable downtown keeps energy high. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Nashville hotel, the Music City Center dock or a business address.'
+    ],
+    whyExhibit:
+      'Nashville combines a deep healthcare-industry base — the city is a national centre for hospital and health-services companies — with music, hospitality and a booming tourism economy. The Music City Center sits in the heart of a walkable downtown full of hotels and entertainment, which sustains strong booth traffic, and Gaylord Opryland draws large association conferences. A cohesive display kit — backdrop, banners, table cover and a canopy for outdoor or Broadway-adjacent activations — helps you stand out to a lively, growing audience.',
+    conventionCenters: [
+      { name: 'Music City Center', desc: 'Downtown Nashville’s main convention hall with roughly 2.1 million square feet total and about 350,000 square feet of exhibit space, host to healthcare, music and consumer shows.' },
+      { name: 'Gaylord Opryland Resort & Convention Center', desc: 'One of the largest non-gaming resort convention venues in the US, with vast exhibit and meeting space under its signature glass atriums.' },
+      { name: 'Nashville Fairgrounds & Music City venues', desc: 'Additional expo and event space around the city supports consumer shows and regional events.' }
+    ],
+    industries: [
+      ['Healthcare & health services', 'Nashville is a national headquarters hub for hospital and health-services companies, driving major medical and health-business events.'],
+      ['Music & entertainment', 'The music industry anchors events from Summer NAMM to countless music-business gatherings.'],
+      ['Hospitality & tourism', 'A booming tourism economy supports hospitality, food-service and events-industry shows.'],
+      ['Automotive & manufacturing', 'Regional auto and supplier plants underpin manufacturing and industrial expos.'],
+      ['Faith-based & publishing', 'Nashville’s publishing and faith-based organizations host large annual conventions.']
+    ],
+    climate:
+      'Nashville has a humid subtropical climate: hot, humid summers with afternoon thunderstorms, mild winters with occasional ice, and pleasant spring and fall shoulder seasons. For outdoor and Broadway-adjacent activations, plan for heat, humidity and pop-up storms — a printed canopy provides both shade and quick rain cover, and every leg should be weighted for gusts. Dye-sublimated graphics resist humidity and UV, and wrinkle-resistant fabric re-hangs cleanly in the moist air.',
+    planning:
+      'The Music City Center uses an official freight contractor, typically with an advance warehouse and union labor at larger shows — budget for material handling and confirm receiving windows. Portable displays pack into a case or tube and set up without a crew, easy to move around a walkable downtown. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and Nashville’s peak convention months book up fast.',
+    bestDisplays:
+      'For a Music City Center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the demo table. For outdoor, rooftop and honky-tonk-district activations, a weighted canopy adds shade and rain cover. For hotel meetings and Opryland events, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Nashville?', a: 'Yes. Apex ships custom-printed displays to Nashville and across Tennessee — to the Music City Center, Gaylord Opryland, or your business address.' },
+      { q: 'How early should I order for a Nashville show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Nashville’s convention calendar is busy, so order a couple of weeks ahead.' },
+      { q: 'Do canopies handle Nashville summer storms?', a: 'Yes — the printed tops give shade and quick rain cover for pop-up thunderstorms. Weight every leg for gusts, and dye-sublimated graphics resist the humidity.' },
+      { q: 'Which displays work best inside the Music City Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor activations.' },
+      { q: 'Can you deliver to Gaylord Opryland?', a: 'Yes, to any Nashville address you provide, including resort convention receiving — just confirm the venue’s labelling and delivery-window rules.' },
+      { q: 'Is rush production available for Nashville exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'indianapolis': {
+    answer:
+      'Indianapolis is a top Midwest convention city, hosting Gen Con, the PRI Show and the FFA Convention at the skywalk-connected Indiana Convention Center. Apex prints custom trade show displays and ships them to Indianapolis.',
+    overview: [
+      'The Indiana Convention Center sits at the heart of downtown Indianapolis, connected by climate-controlled skywalks to thousands of hotel rooms and Lucas Oil Stadium — one of the most walkable, connected convention campuses in the country. That layout, plus a central Midwest location, makes the city a favourite for huge annual events like Gen Con, the PRI Show and the FFA National Convention.',
+      'Exhibitors reach manufacturing, life-sciences, motorsports and sports-industry buyers in a compact, easy-to-navigate downtown. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Indianapolis hotel, the convention center dock or a business address.'
+    ],
+    whyExhibit:
+      'Indianapolis punches above its weight in conventions because the venue, stadium and hotels connect directly by skywalk, giving attendees an easy, weatherproof path between events — attendance stays strong even in winter. The city anchors advanced manufacturing, life sciences and a world-famous motorsports industry, so shows here reach serious industrial and technical buyers. A coordinated display kit — backdrop, banners, table cover and a canopy for outdoor or race-adjacent activations — helps you make the most of a high-traffic Midwest floor.',
+    conventionCenters: [
+      { name: 'Indiana Convention Center', desc: 'Downtown Indianapolis’s main hall with roughly 1.3 million square feet, skywalk-connected to Lucas Oil Stadium and thousands of hotel rooms, host to Gen Con, the PRI Show and the FFA Convention.' },
+      { name: 'Lucas Oil Stadium', desc: 'The adjacent stadium expands exhibit and event capacity for the city’s largest conventions and sporting events.' },
+      { name: 'Indiana State Fairgrounds', desc: 'A large expo and event complex north of downtown used for consumer shows and equipment-heavy events.' }
+    ],
+    industries: [
+      ['Advanced manufacturing', 'Indiana’s strong manufacturing base drives industrial, machinery and supplier trade shows.'],
+      ['Life sciences & pharma', 'A major pharmaceutical and life-sciences corridor supports medical and bioscience events.'],
+      ['Motorsports & performance', 'The PRI Show and the Indianapolis motorsports industry make the city a global performance-racing hub.'],
+      ['Sports & gaming', 'Home to the NCAA and host of Gen Con, Indianapolis anchors sports-business and tabletop-gaming events.'],
+      ['Agriculture & logistics', 'The FFA Convention and a central logistics network bring agriculture and distribution exhibitors.']
+    ],
+    climate:
+      'Indianapolis has a humid continental climate with four distinct seasons: hot, humid summers with thunderstorms, and cold winters with snow and ice — the skywalk system exists precisely because winter can be harsh. Most exhibiting is indoors, but for summer and race-season outdoor activations, weight canopy legs for gusts across open lots, and protect graphics from snow, salt and moisture in winter transit. Dye-sublimated fabric re-hangs crisp in any season.',
+    planning:
+      'The Indiana Convention Center uses an official freight contractor and union labor, typically with an advance warehouse before move-in — budget for material handling and confirm receiving windows, especially for stadium-connected events. Portable displays travel as a case or tube and set up without a crew, and the skywalk network makes it easy to move gear between hotels and the hall. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and marquee shows like Gen Con and PRI fill the calendar.',
+    bestDisplays:
+      'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the demo table. For race-season and outdoor activations, a weighted canopy adds a branded footprint. For hotel meetings and skywalk-connected side-events, lightweight X-stand and tabletop banners set up in seconds.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Indianapolis?', a: 'Yes. Apex ships custom-printed displays to Indianapolis and across Indiana — to the Indiana Convention Center, Lucas Oil Stadium, or your business address.' },
+      { q: 'How early should I order for a show like Gen Con or the PRI Show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Those marquee shows are busy — order two to three weeks ahead.' },
+      { q: 'Do I need weights on a canopy in Indianapolis?', a: 'For outdoor and race-season activations, yes — weight every leg for gusts across open lots, since most surfaces are paved and stakes aren’t an option.' },
+      { q: 'Which displays work best inside the Indiana Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor activations.' },
+      { q: 'Can you deliver to a skywalk-connected downtown hotel?', a: 'Yes, to any Indianapolis address you provide, including convention and hotel receiving — just confirm the venue’s labelling and delivery-window rules.' },
+      { q: 'Is rush production available for Indianapolis exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
+  },
+
+  'charlotte': {
+    answer:
+      'Charlotte is a major banking, energy and motorsports center, hosting trade shows at the uptown Charlotte Convention Center beside the NASCAR Hall of Fame. Apex prints custom trade show displays and ships them to Charlotte.',
+    overview: [
+      'Charlotte’s uptown Charlotte Convention Center — linked directly to the NASCAR Hall of Fame — anchors a fast-growing Southeast convention scene. As the second-largest banking center in the United States and a hub for energy and motorsports, the city draws finance, industrial and racing-industry events, along with a broad slate of regional trade shows.',
+      'Exhibitors reach a business-heavy, professionally minded audience in a compact, walkable uptown. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Charlotte hotel, the convention center dock or a business address.'
+    ],
+    whyExhibit:
+      'Charlotte combines serious corporate weight — major banks, Duke Energy and a dense motorsports industry all headquarter in the region — with a growing convention calendar and a walkable uptown that keeps hotels and the hall close together. That mix reaches finance, energy, manufacturing and racing buyers in one trip. A coordinated display kit — backdrop, banners, table cover and a canopy for outdoor or speedway-adjacent activations — helps you look credible to a professional Southeast audience.',
+    conventionCenters: [
+      { name: 'Charlotte Convention Center', desc: 'Uptown Charlotte’s main hall with roughly 550,000 square feet of exhibit space, linked to the NASCAR Hall of Fame and surrounded by uptown hotels.' },
+      { name: 'NASCAR Hall of Fame', desc: 'An attached event and exhibit venue used for receptions and racing-industry programming beside the convention center.' },
+      { name: 'Regional expo & event venues', desc: 'Additional expo and event space around the metro supports consumer shows and equipment-heavy events.' }
+    ],
+    industries: [
+      ['Banking & finance', 'Charlotte is the second-largest US banking center, driving finance and fintech events.'],
+      ['Energy', 'A cluster of energy companies and utilities makes Charlotte a hub for power and energy-sector shows.'],
+      ['Motorsports & automotive', 'NASCAR teams and suppliers headquartered nearby anchor racing and automotive events.'],
+      ['Manufacturing & logistics', 'A strong manufacturing and distribution base supports industrial trade shows.'],
+      ['Healthcare', 'Large regional health systems drive medical and health-business conventions.']
+    ],
+    climate:
+      'Charlotte has a humid subtropical climate: hot, humid summers with afternoon thunderstorms, mild winters with occasional ice, and long, pleasant spring and fall seasons ideal for outdoor events. For outdoor and speedway-adjacent activations, plan for heat, humidity and pop-up storms — a printed canopy delivers shade and quick rain cover, and every leg should be weighted for gusts. Dye-sublimated graphics resist humidity and UV.',
+    planning:
+      'The Charlotte Convention Center uses an official freight contractor, typically with an advance warehouse and union labor at larger shows — budget for material handling and confirm receiving windows. Portable displays pack into a case or tube and set up without a crew, easy to move around a compact uptown. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and peak convention dates book up.',
+    bestDisplays:
+      'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the demo table. For outdoor and speedway-adjacent activations, a weighted canopy adds a branded footprint with shade and rain cover. For hotel meetings and uptown side-events, lightweight X-stand and tabletop banners set up fast.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Charlotte?', a: 'Yes. Apex ships custom-printed displays to Charlotte and across North Carolina — to the Charlotte Convention Center, the NASCAR Hall of Fame, or your business address.' },
+      { q: 'How early should I order for a Charlotte show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Order a couple of weeks ahead for major dates.' },
+      { q: 'Do canopies handle Charlotte summer storms?', a: 'Yes — the printed tops give shade and quick rain cover for afternoon thunderstorms. Weight every leg for gusts, and dye-sublimated graphics resist the humidity.' },
+      { q: 'Which displays work best inside the Charlotte Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor activations.' },
+      { q: 'Can you deliver to an uptown Charlotte hotel?', a: 'Yes, to any Charlotte address you provide, including convention and hotel receiving — just confirm the venue’s labelling and delivery-window rules.' },
+      { q: 'Is rush production available for Charlotte exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ]
   }
 };
 
