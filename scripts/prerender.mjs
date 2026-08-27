@@ -341,6 +341,21 @@ for (const cp of CATEGORY_PAGES) {
       ? `<h2>Canopy size guides</h2><ul>${cp.guideLinks.map((g) => `<li><a href="${g.to}">${esc(g.label)}</a></li>`).join('')}</ul>`
       : '';
     const included = `<h2>What's included</h2><ul>${cp.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>`;
+    const answer = cp.answer ? `<p class="answer-block">${esc(cp.answer)}</p>` : '';
+    // Comparison table — live "from" price by product slug (never hardcoded, so it
+    // can't drift from the pricing engine). Static cells hold only stable attributes.
+    const bySlug = Object.fromEntries(productList.map((p) => [p.slug, p]));
+    const priceCol = Array.isArray(cp.compareCols) && cp.compareCols.includes('From');
+    const compareTable = Array.isArray(cp.compare) && cp.compare.length
+      ? `<h2>Compare ${esc(cp.nav.toLowerCase())}</h2><table><thead><tr><th>${cp.hub ? 'Category' : 'Product'}</th>${cp.compareCols.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${cp.compare.map((row) => {
+          const sp = row.slug && bySlug[row.slug] ? bySlug[row.slug].startingPrice : undefined;
+          const priceTd = priceCol ? `<td>${sp != null ? `from $${sp}` : 'Quote'}</td>` : '';
+          return `<tr><td><a href="${row.to}">${esc(row.name)}</a></td>${row.cells.map((c) => `<td>${esc(c)}</td>`).join('')}${priceTd}</tr>`;
+        }).join('')}</tbody></table>`
+      : '';
+    const faqHtml = Array.isArray(cp.faqs) && cp.faqs.length
+      ? `<h2>Frequently asked questions</h2>${cp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
+      : '';
     // Link the hub to its Tier-1 city landing pages so they sit in the crawl graph.
     const localForHub = { 'custom-canopies': 'canopies', 'trade-show-displays': 'displays', 'banner-stands': 'banner-stands', 'backdrops': 'backdrops', 'table-covers': 'table-covers' }[cp.slug];
     const lc = localForHub && LOCAL_CATEGORIES.find((l) => l.key === localForHub);
@@ -351,12 +366,15 @@ for (const cp of CATEGORY_PAGES) {
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.nav)}</span></nav>
       <h1>${esc(cp.h1)}</h1>
       <p>${esc(cp.intro)}</p>
+      ${answer}
       ${subTiles}
       <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
       <ul>${catProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
+      ${compareTable}
       ${included}
       ${cities}
-      ${guides}`;
+      ${guides}
+      ${faqHtml}`;
     // Representative raster OG: a real photo of a product in this category (the
     // hub falls back to a canopy). Never a misleading render.
     const catPhoto = (catProducts.map(productPhoto).find(Boolean)) || productPhoto(coreProducts[0]);
@@ -382,6 +400,15 @@ for (const cp of CATEGORY_PAGES) {
               '@type': 'ItemList',
               itemListElement: catProducts.map((p, i) => ({
                 '@type': 'ListItem', position: i + 1, url: `${ORIGIN}/products/${p.slug}`, name: p.name
+              }))
+            }]
+          : []),
+        ...(Array.isArray(cp.faqs) && cp.faqs.length
+          ? [{
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: cp.faqs.map((f) => ({
+                '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a }
               }))
             }]
           : [])

@@ -46,9 +46,20 @@ export default function CategoryPage({ slug }) {
                 '@type': 'ListItem', position: i + 1, url: `${origin}/products/${p.slug}`, name: p.name
               }))
             }]
+          : []),
+        ...(page.faqs?.length
+          ? [{
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: page.faqs.map((f) => ({
+                '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a }
+              }))
+            }]
           : [])
       ]
     : null;
+  const priceMap = Object.fromEntries(products.map((p) => [p.slug, p.startingPrice]));
+  const liveFrom = (s) => (priceMap[s] != null ? `from $${priceMap[s]}` : 'Quote');
 
   useDocumentMeta(page ? page.title : 'Category', page ? page.description : undefined, jsonLd);
 
@@ -76,6 +87,8 @@ export default function CategoryPage({ slug }) {
           <Link className="btn btn-outline" to="/quote">Request a quote</Link>
         </div>
       </section>
+
+      {page.answer && <p className="answer-block">{page.answer}</p>}
 
       {page.hub && (
         <section className="cat-cards-section">
@@ -145,6 +158,45 @@ export default function CategoryPage({ slug }) {
           <div className="loc-grid">
             {page.guideLinks.map((g) => (
               <Link className="loc-chip" to={g.to} key={g.to}><span>{g.label}</span></Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {page.compare?.length > 0 && (
+        <section className="section-block">
+          <h2>Compare {page.nav.toLowerCase()}</h2>
+          <div className="table-wrap">
+            <table className="compare-table">
+              <thead>
+                <tr><th>{page.hub ? 'Category' : 'Product'}</th>{page.compareCols.map((c) => <th key={c}>{c}</th>)}</tr>
+              </thead>
+              <tbody>
+                {page.compare.map((row) => {
+                  const priceCol = page.compareCols.includes('From');
+                  return (
+                    <tr key={row.name}>
+                      <td><Link to={row.to}>{row.name}</Link></td>
+                      {row.cells.map((cell, i) => <td key={i}>{cell}</td>)}
+                      {priceCol && <td>{row.slug ? liveFrom(row.slug) : ''}</td>}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {page.faqs?.length > 0 && (
+        <section className="section-block">
+          <h2>Frequently asked questions</h2>
+          <div className="faq-list">
+            {page.faqs.map((f, i) => (
+              <details className="faq-item" key={i} open={i === 0}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
             ))}
           </div>
         </section>

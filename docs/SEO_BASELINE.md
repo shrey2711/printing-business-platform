@@ -122,9 +122,9 @@ Legend: ✅ done · 🟡 partial · ⬜ open (no owner data needed) · 🔒 owne
 | 3 Structured data | ✅ | all page types emit valid JSON-LD (see §4); connect via `@id`; no fake review schema |
 | 4 Content contradictions | ✅ | **Done:** Standard Retractable size/FAQ contradiction fixed (was "33×81, ask for other sizes via quote" — actually sells 33×81 **and** 47×81 at instant price; corrected `size`, FAQ, seoDescription); stale "quote-only" header comment corrected (banner stands + step-repeat are instant-priced). Verified: "Shipping additional." has no double-period; production-vs-transit wording uniform. **Flagged for owner:** spelling house-style split (see §7) |
 | 5 PDP IA & conversion | 🟡 | tabs (desc/specs/template/FAQ) + gallery + what's-in-the-box exist. Open: structured verified-field block (packed dims, weight, setup people) with config placeholders |
-| 6 Category & comparison | 🟡 | category hubs exist w/ ItemList. Open: comparison tables + concise FAQs per hub |
+| 6 Category & comparison | ✅ | **Done:** every category page now has a **comparison table** (live "from $X" price injected by slug — never hardcoded, so it can't drift) + 3–4 concise **FAQs** (visible + FAQPage schema), client + SSR. Unique per category (no repeated paragraphs) |
 | 7 Location QC | ✅ | tiered model + `audit-locations.mjs` scorer + `LOCATION_AUDIT.md`; brief §7 "do not expand" honored |
-| 8 AEO | 🟡 | answer-blocks on city pages + PDP/blog FAQs. Open: answer-first blocks on category pages |
+| 8 AEO | ✅ | answer-blocks on city pages + PDP/blog FAQs. **Done:** 40–60-word answer-first block added to every category page (client + SSR), backed by the comparison table + FAQs for extraction |
 | 9 GEO / entity | 🟡 | stable Org `@id`, logo, email, tel, area served, About page. 🔒 legal name, founding year, `sameAs` socials, team |
 | 10 Merchant feed | ✅ | **Done:** live `/feed.xml` (RSS 2.0 + g:), 17 priced products, 4 quote-only excluded, USD, generated at build from `listProducts()`, price parity gated by `npm test`. Account connection is owner's step (`MERCHANT_CENTER_SETUP.md`). CAD feed = later |
 | 11 Internal linking | ✅ | `internalLinks.js` clusters, guide↔product↔city links, hub "by city". Backlog doc: `SEO_CONTENT_CLUSTER_PLAN.md` |

@@ -795,6 +795,10 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .spec-table { width: 100%; border-collapse: collapse; }
 .spec-table th, .spec-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line-soft); font-size: 0.9rem; vertical-align: top; }
 .spec-table th { width: 30%; color: var(--muted); font-weight: 600; }
+.table-wrap { overflow-x: auto; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.compare-table th, .compare-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.compare-table thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
 .template-list { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
 .template-list a { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; color: var(--blue-dark); border: 1px solid var(--line); border-radius: 6px; padding: 0.7rem 1rem; }
 .template-list a:hover { border-color: var(--blue); background: var(--panel); }
