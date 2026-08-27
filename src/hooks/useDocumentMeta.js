@@ -29,7 +29,11 @@ export default function useDocumentMeta(title, description, jsonLd, robots, cano
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const fullTitle = title ? `${title} | ${brand.name}` : `${brand.name} — ${brand.tagline}`;
+    // A title already containing " | " is a complete title (its own suffix) —
+    // pass it through; otherwise append the brand.
+    const fullTitle = title
+      ? (title.includes(' | ') ? title : `${title} | ${brand.name}`)
+      : `${brand.name} — ${brand.tagline}`;
     document.title = fullTitle;
 
     const url = window.location.origin + pathname;

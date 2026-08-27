@@ -22,7 +22,7 @@ import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
-import { LOCAL_CATEGORIES, SEO_CITIES } from '../src/data/citySeo.js';
+import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle } from '../src/data/citySeo.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
@@ -564,7 +564,9 @@ for (const lc of LOCAL_CATEGORIES) {
         <ul>${otherLis}</ul>`;
       return render({
         path: `/${lc.slug}/${city.slug}`,
-        title: `${lc.label} in ${cityWithAbbr(city)} | ${BRAND}`,
+        title: lc.slug === 'trade-show-displays'
+          ? cityDisplaysTitle(city)
+          : `${lc.label} in ${cityWithAbbr(city)} | ${BRAND}`,
         description: `Custom ${lc.label.toLowerCase()} printed and shipped to ${city.city}, ${city.stateName} — instant online pricing and a free artwork proof.`,
         image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,

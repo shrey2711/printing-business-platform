@@ -94,6 +94,17 @@ export const SEO_CITIES = [
   { slug: 'san-antonio', city: 'San Antonio', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 2, venue: 'the Henry B. González Convention Center', scene: 'Texas conventions and events' }
 ];
 
+// §7 SEO title for the "Trade Show Displays" city page: a descriptive suffix
+// instead of the brand, fit-descending so long city names stay within ~60 chars.
+// Shared by the prerenderer and the client CityCategoryPage for exact parity.
+export const cityDisplaysTitle = (city) => {
+  const base = `Trade Show Displays in ${city.city}`;
+  for (const suffix of [' | Custom Booths & Event Displays', ' | Custom Booths & Displays', ' | Booths & Event Displays', ' | Booths & Displays']) {
+    if ((base + suffix).length <= 62) return base + suffix;
+  }
+  return base;
+};
+
 export const getSeoCity = (slug) => SEO_CITIES.find((c) => c.slug === slug) || null;
 export const getLocalCategory = (key) => LOCAL_CATEGORIES.find((c) => c.key === key) || null;
 export const getLocalCategoryBySlug = (slug) => LOCAL_CATEGORIES.find((c) => c.slug === slug) || null;
