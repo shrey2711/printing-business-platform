@@ -63,8 +63,8 @@ export const LOCAL_CATEGORIES = [
   }
 ];
 
-// tier 1 = indexed with unique content; tier 2/3 = noindex until earned.
-// venue/scene are public facts about each city's convention scene.
+// Indexing gate (prerender): tier 1-2 = indexed with unique content; tier 3 =
+// noindex,follow until it earns unique depth. venue/scene are public facts.
 export const SEO_CITIES = [
   { slug: 'las-vegas', city: 'Las Vegas', abbr: 'NV', stateName: 'Nevada', stateSlug: 'nevada', tier: 1, venue: 'the Las Vegas Convention Center, Mandalay Bay and Caesars Forum', scene: 'the busiest trade-show city in the country, home to CES and hundreds of expos a year' },
   { slug: 'orlando', city: 'Orlando', abbr: 'FL', stateName: 'Florida', stateSlug: 'florida', tier: 1, venue: 'the Orange County Convention Center', scene: 'one of the largest convention venues in the United States' },
@@ -91,7 +91,7 @@ export const SEO_CITIES = [
   { slug: 'san-diego', city: 'San Diego', abbr: 'CA', stateName: 'California', stateSlug: 'california', tier: 2, venue: 'the San Diego Convention Center', scene: 'Comic-Con and biotech expos' },
   { slug: 'boston', city: 'Boston', abbr: 'MA', stateName: 'Massachusetts', stateSlug: 'massachusetts', tier: 2, venue: 'the Boston Convention & Exhibition Center', scene: 'biotech, medical and technology conferences' },
 
-  { slug: 'san-antonio', city: 'San Antonio', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 3, venue: 'the Henry B. González Convention Center', scene: 'Texas conventions and events' }
+  { slug: 'san-antonio', city: 'San Antonio', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 2, venue: 'the Henry B. González Convention Center', scene: 'Texas conventions and events' }
 ];
 
 export const getSeoCity = (slug) => SEO_CITIES.find((c) => c.slug === slug) || null;
