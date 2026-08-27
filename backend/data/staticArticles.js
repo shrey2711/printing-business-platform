@@ -864,7 +864,7 @@ export const STATIC_ARTICLES = [
       description:
         'Compare Apex feather angled, feather convex and teardrop flags — shape, heights (7–14 ft), wind behaviour, bases and instant pricing from $140.'
     },
-    coverUrl: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png',
+    coverUrl: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.webp',
     publishedAt: '2026-08-20T00:00:00.000Z',
     updatedAt: '2026-08-20T00:00:00.000Z',
     html: `
@@ -1079,7 +1079,7 @@ export const STATIC_ARTICLES = [
       description:
         'Design a booth that gets noticed: build a focal point, plan traffic flow, use a branding hierarchy, and get height, lighting and color right.'
     },
-    coverUrl: '/images/showcase/backdrop-oakwood.jpeg',
+    coverUrl: '/images/showcase/backdrop-oakwood.webp',
     publishedAt: '2026-08-21T00:00:00.000Z',
     updatedAt: '2026-08-21T00:00:00.000Z',
     html: `

@@ -12,7 +12,9 @@
     "test:products": "node scripts/test-product-consistency.mjs",
     "test:locations": "node scripts/test-location-quality.mjs",
     "test:links": "node scripts/test-internal-links.mjs",
-    "test": "npm run build && node scripts/verify-tension-podium-pricing.mjs && npm run audit:seo && npm run audit:locations && npm run test:seo && npm run test:products && npm run test:locations && npm run test:links",
+    "test:images": "node scripts/test-image-assignment.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "test": "npm run build && node scripts/verify-tension-podium-pricing.mjs && npm run audit:seo && npm run audit:locations && npm run test:seo && npm run test:products && npm run test:locations && npm run test:links && npm run test:images",
     "preview": "vite preview",
     "start": "node backend/server.js"
   },
@@ -36,6 +38,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "concurrently": "^8.0.1",
     "nodemon": "^3.1.0",
+    "sharp": "^0.35.4",
     "vite": "^5.4.10"
   }
 }

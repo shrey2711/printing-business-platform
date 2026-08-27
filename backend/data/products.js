@@ -368,7 +368,7 @@ const tradeShowDisplays = [
     badge: 'Retractable',
     emoji: '📐',
     gallery: [
-      { src: '/images/displays/standard-retractable-front-back.png', alt: 'Apex standard retractable banner stand, front and back view, assembled with a printed graphic' },
+      { src: '/images/displays/standard-retractable-front-back.webp', alt: 'Apex standard retractable banner stand, front and back view, assembled with a printed graphic' },
       { src: '/images/displays/standard-retractable-detail.png', alt: 'Apex standard retractable banner stand aluminum base and support-pole hardware close-up' },
       { src: '/images/displays/standard-retractable-kit.png', alt: "What's included with the Apex standard retractable banner stand: aluminum base, support poles and padded carry bag" },
       { src: '/images/displays/apex-standard-retractable-dimensions.svg', alt: 'Dimension diagram for the Apex standard retractable banner: 33 by 81 inch and 47 by 81 inch printed graphic sizes' },
@@ -656,7 +656,7 @@ const tradeShowDisplays = [
     badge: 'Tabletop',
     emoji: '🪧',
     gallery: [
-      { src: '/images/displays/table-top-example.png', alt: 'Apex table top banner stand, front and back, with a full-color printed sample graphic' },
+      { src: '/images/displays/table-top-example.webp', alt: 'Apex table top banner stand, front and back, with a full-color printed sample graphic' },
       { src: '/images/displays/table-top-banner-stand.webp', alt: 'Apex table top retractable banner stand with a full-color printed graphic' },
       { src: '/images/displays/apex-table-top-banner-dimensions.svg', alt: 'Dimension diagram for the Apex table top banner stand: 11.5 by 17.5 inch printed graphic' }
     ],
@@ -734,7 +734,7 @@ const flagBaseGroup = {
 const FLAG_SHARED_FIGURES = [
   { src: '/images/flags/flag-base-options.png', alt: 'Flag base options — ground stake, cross base, cross base with water bag, and square base' },
   { src: '/images/flags/flag-pole-set-carry-bag.png', alt: 'Flag pole set with carry bag' },
-  { src: '/images/flags/flag-kit-in-bag-portable.png', alt: 'Flag kit packed in its carry bag — portable, easy to transport' }
+  { src: '/images/flags/flag-kit-in-bag-portable.webp', alt: 'Flag kit packed in its carry bag — portable, easy to transport' }
 ];
 
 const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro, active = false, gallery }) => ({
@@ -821,8 +821,8 @@ const flagProducts = [
     slug: 'feather-angled-flag', name: 'Feather Angled Flag', shape: 'angled feather', sizes: featherSizes,
     active: true,
     gallery: [
-      { src: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png', alt: 'Apex angled feather flag with a custom printed graphic on a cross base' },
-      { src: '/images/flags/feather_angled_flag_nova_dental_large_ground_stake.png', alt: 'Apex angled feather flag on a ground spike, custom printed' },
+      { src: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.webp', alt: 'Apex angled feather flag with a custom printed graphic on a cross base' },
+      { src: '/images/flags/feather_angled_flag_nova_dental_large_ground_stake.webp', alt: 'Apex angled feather flag on a ground spike, custom printed' },
       { src: '/images/flags/feather_angled_size_measurements_all_sizes.jpg', alt: 'Apex angled feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
       { src: '/images/flags/feather_angled_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
       { src: '/images/flags/feather_angled_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag — sliding the printed flag onto the pole' }
@@ -841,7 +841,7 @@ const flagProducts = [
     slug: 'feather-convex-flag', name: 'Feather Convex Flag', shape: 'convex feather', sizes: featherSizes,
     active: true,
     gallery: [
-      { src: '/images/flags/feather_convex_flag_solis_spa_large_cross_base.png', alt: 'Apex convex feather flag with a rounded convex top edge, custom printed on a cross base' },
+      { src: '/images/flags/feather_convex_flag_solis_spa_large_cross_base.webp', alt: 'Apex convex feather flag with a rounded convex top edge, custom printed on a cross base' },
       { src: '/images/flags/feather_convex_size_measurements_all_sizes.jpg', alt: 'Apex convex feather flag size chart — small 9 ft, medium 10.5 ft, large 14 ft' },
       { src: '/images/flags/feather_convex_hardware_cross_base.jpg', alt: 'Apex feather flag cross-base hardware' },
       { src: '/images/flags/feather_convex_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag onto the pole' }
@@ -854,9 +854,9 @@ const flagProducts = [
     slug: 'teardrop-flag', name: 'Teardrop Flag', shape: 'teardrop', sizes: teardropSizes,
     active: true,
     gallery: [
-      { src: '/images/flags/teardrop_flag_summit_coffee_large_cross_base.png', alt: 'Apex teardrop flag with a custom printed graphic on a cross base' },
-      { src: '/images/flags/teardrop_flag_bluesky_realty_large_ground_stake.png', alt: 'Apex teardrop flag on a ground spike, custom printed' },
-      { src: '/images/flags/teardrop_flag_peakfit_gym_large_square_base.png', alt: 'Apex teardrop flag on a square steel base, custom printed' },
+      { src: '/images/flags/teardrop_flag_summit_coffee_large_cross_base.webp', alt: 'Apex teardrop flag with a custom printed graphic on a cross base' },
+      { src: '/images/flags/teardrop_flag_bluesky_realty_large_ground_stake.webp', alt: 'Apex teardrop flag on a ground spike, custom printed' },
+      { src: '/images/flags/teardrop_flag_peakfit_gym_large_square_base.webp', alt: 'Apex teardrop flag on a square steel base, custom printed' },
       { src: '/images/flags/teardrop_size_measurements_all_sizes.jpg', alt: 'Apex teardrop flag size chart — small 7 ft, medium 9 ft, large 11.2 ft' },
       { src: '/images/flags/teardrop_hardware_cross_base.jpg', alt: 'Apex teardrop flag cross-base hardware' },
       { src: '/images/flags/teardrop_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex teardrop flag onto the pole' }
@@ -893,13 +893,13 @@ const tensionDisplay = {
     'A straight tension fabric display — a floor-standing trade-show backdrop where a dye-sublimated "pillowcase" fabric graphic zips over a lightweight aluminum tube frame for a smooth, seamless, frameless wall. Packs into a carry bag and sets up tool-free with stabilising feet.',
   size: '8–20 ft wide × ~8 ft tall',
   gallery: [
-    { src: '/images/displays/straight-tension-fabric-display-main.png', alt: 'Custom-printed Apex straight tension fabric display, angled front view' },
-    { src: '/images/displays/straight-tension-fabric-display-lifestyle-podium.png', alt: 'Straight tension fabric display with a matching printed podium and booth spotlights' },
-    { src: '/images/displays/straight-tension-fabric-display-double-sided.png', alt: 'Double-sided straight tension fabric display showing different printed front and back graphics' },
-    { src: '/images/displays/straight-tension-fabric-display-single-sided.png', alt: 'Single-sided straight tension fabric display with a printed front and plain back' },
-    { src: '/images/displays/straight-tension-fabric-display-frame.png', alt: 'Lightweight aluminum tube frame of a straight tension fabric display' },
-    { src: '/images/displays/straight-tension-fabric-display-frame-connector.png', alt: 'Push-button aluminum pole connection detail of the tension fabric display frame' },
-    { src: '/images/displays/straight-tension-fabric-display-packaging.png', alt: 'Straight tension fabric display packaging — soft canvas carry bag and hard case that converts to a podium' }
+    { src: '/images/displays/straight-tension-fabric-display-main.webp', alt: 'Custom-printed Apex straight tension fabric display, angled front view' },
+    { src: '/images/displays/straight-tension-fabric-display-lifestyle-podium.webp', alt: 'Straight tension fabric display with a matching printed podium and booth spotlights' },
+    { src: '/images/displays/straight-tension-fabric-display-double-sided.webp', alt: 'Double-sided straight tension fabric display showing different printed front and back graphics' },
+    { src: '/images/displays/straight-tension-fabric-display-single-sided.webp', alt: 'Single-sided straight tension fabric display with a printed front and plain back' },
+    { src: '/images/displays/straight-tension-fabric-display-frame.webp', alt: 'Lightweight aluminum tube frame of a straight tension fabric display' },
+    { src: '/images/displays/straight-tension-fabric-display-frame-connector.webp', alt: 'Push-button aluminum pole connection detail of the tension fabric display frame' },
+    { src: '/images/displays/straight-tension-fabric-display-packaging.webp', alt: 'Straight tension fabric display packaging — soft canvas carry bag and hard case that converts to a podium' }
   ],
   features: [
     'Lightweight aluminum tube frame',
@@ -1127,7 +1127,7 @@ const segKits = [
     slug: 'seg-modular-trade-show-kit-a', name: 'Trade Show SEG Modular Kit A', letter: 'A', heights: SEG_H3,
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit A — illuminated backlit booth with backdrop, archway return and counter' },
-      { src: '/images/seg-kits/apex-seg-modular-kit-a-structure.png', alt: 'Kit A structure — backdrop, single archway/return and display counter' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-a-structure.webp', alt: 'Kit A structure — backdrop, single archway/return and display counter' },
       { src: '/images/seg-kits/apex-seg-modular-kit-a-included.png', alt: "Kit A included components" },
       { src: '/images/seg-kits/apex-seg-modular-kit-a-sizes.png', alt: 'Kit A size matrix and component measurements' }
     ],
@@ -1144,7 +1144,7 @@ const segKits = [
     slug: 'seg-modular-trade-show-kit-b', name: 'Trade Show SEG Modular Kit B', letter: 'B', heights: SEG_H3,
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-b-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit B — illuminated booth with backdrop, side panel, overhead arch and counter' },
-      { src: '/images/seg-kits/apex-seg-modular-kit-b-structure.png', alt: 'Kit B structure — backdrop, side panel/arch front, overhead arch section and counter' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-b-structure.webp', alt: 'Kit B structure — backdrop, side panel/arch front, overhead arch section and counter' },
       { src: '/images/seg-kits/apex-seg-modular-kit-b-sizes.png', alt: 'Kit B size matrix and component measurements' }
     ],
     config: 'Backdrop + side panel/arch front + illuminated overhead/arch section + illuminated counter',
@@ -1160,7 +1160,7 @@ const segKits = [
     slug: 'seg-modular-trade-show-kit-c', name: 'Trade Show SEG Modular Kit C', letter: 'C', heights: SEG_H2,
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit C — illuminated booth with backdrop, left and right side panels and counter' },
-      { src: '/images/seg-kits/apex-seg-modular-kit-c-structure.png', alt: 'Kit C structure — backdrop with left and right illuminated side panels and a counter, no overhead arch' },
+      { src: '/images/seg-kits/apex-seg-modular-kit-c-structure.webp', alt: 'Kit C structure — backdrop with left and right illuminated side panels and a counter, no overhead arch' },
       { src: '/images/seg-kits/apex-seg-modular-kit-c-sizes.png', alt: 'Kit C size matrix and component measurements' }
     ],
     config: 'Backdrop + left & right illuminated side panels + illuminated counter (no overhead arch)',
@@ -1268,7 +1268,7 @@ const products = [
     gallery: [
       { src: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg', alt: 'Custom printed 13oz vinyl landscape banner with grommets' },
       { src: '/images/banners/13oz-vinyl-banner-cafe-portrait.jpeg', alt: 'Custom printed 13oz vinyl portrait banner with grommets' },
-      { src: '/images/banners/13oz-vinyl-banner-hem-grommets-pole-pockets.png', alt: '13oz vinyl banner finishing — hem & grommets and pole pockets' }
+      { src: '/images/banners/13oz-vinyl-banner-hem-grommets-pole-pockets.webp', alt: '13oz vinyl banner finishing — hem & grommets and pole pockets' }
     ],
     pricing: {
       model: 'area',
@@ -1396,7 +1396,7 @@ const products = [
     seoDescription:
       'Custom 9oz wrinkle-free fabric banners, dye-sublimated for a no-glare matte finish — packs without creasing, sewn hem. From $45, US & Canada.',
     gallery: [
-      { src: '/images/banners/fabric-banner-9oz-aroma-blend-folded.jpeg', alt: 'Custom dye-sublimated 9oz fabric banner folded, showing the matte fabric drape and sewn hem' },
+      { src: '/images/banners/fabric-banner-9oz-aroma-blend-folded.webp', alt: 'Custom dye-sublimated 9oz fabric banner folded, showing the matte fabric drape and sewn hem' },
       { src: '/images/banners/fabric-banner-9oz-finishing-velcro-pole-hem.jpeg', alt: '9oz fabric banner finishing — velcro, pole pocket and hem & grommet' }
     ],
     pricing: {

@@ -34,11 +34,11 @@ const solutions = [
 // range reads as "we print any brand", not all-Apex.
 const categoryCards = [
   { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/showcase/canopy-nova-tech.webp' },
-  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', img: '/images/displays/standard-retractable-front-back.png' },
+  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', img: '/images/displays/standard-retractable-front-back.webp' },
   { title: 'Banners', copy: 'Vinyl, mesh & fabric banners', to: '/banners', img: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg' },
   { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/showcase/tablecover-brightpath-dental.webp' },
-  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', img: '/images/showcase/backdrop-oakwood.jpeg' },
-  { title: 'Flags', copy: 'Feather & teardrop flags', to: '/flags', img: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.png' },
+  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', img: '/images/showcase/backdrop-oakwood.webp' },
+  { title: 'Flags', copy: 'Feather & teardrop flags', to: '/flags', img: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.webp' },
   { title: 'SEG Modular Kits', copy: 'Illuminated modular booths', to: '/seg-displays', img: '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg' },
   { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/showcase/canopy-harbor-realty.webp' },
   { title: 'Accessories', copy: 'Weights, sandbags & hardware', to: '/products', img: '/images/tents/sandbags.webp' }
