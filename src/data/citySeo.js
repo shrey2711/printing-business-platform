@@ -105,6 +105,16 @@ export const cityDisplaysTitle = (city) => {
   return base;
 };
 
+// §8 meta description for a city × category page: unique per city, ~140–160
+// chars, communicating the product, instant pricing, free proof and US shipping.
+// Falls back to a shorter form for long label+city combos so it stays <=165.
+export const cityCatDescription = (label, city) => {
+  const L = label.toLowerCase();
+  const full = `Custom ${L} for ${city.city} trade shows and events — printed to order with instant online pricing, a free artwork proof, and US shipping.`;
+  if (full.length <= 165) return full;
+  return `Custom ${L} for ${city.city} trade shows — printed to order with instant online pricing, a free artwork proof, and US shipping.`;
+};
+
 export const getSeoCity = (slug) => SEO_CITIES.find((c) => c.slug === slug) || null;
 export const getLocalCategory = (key) => LOCAL_CATEGORIES.find((c) => c.key === key) || null;
 export const getLocalCategoryBySlug = (slug) => LOCAL_CATEGORIES.find((c) => c.slug === slug) || null;

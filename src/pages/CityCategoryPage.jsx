@@ -4,7 +4,7 @@ import { getProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle } from '../data/citySeo';
+import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription } from '../data/citySeo';
 import { cityDetailFor } from '../data/cityDetail';
 
 const sizeKey = (s) => s.replace('canopy-tent-', '');
@@ -33,7 +33,7 @@ export default function CityCategoryPage({ categoryKey }) {
     city
       ? (cat.slug === 'trade-show-displays' ? cityDisplaysTitle(city) : `${cat.label} in ${cityWithAbbr(city)}`)
       : cat?.label || 'Location',
-    city ? `Custom ${cat.label.toLowerCase()} printed and shipped to ${city.city}, ${city.stateName} — instant online pricing and a free artwork proof.` : undefined,
+    city ? cityCatDescription(cat.label, city) : undefined,
     city
       ? [
           {
