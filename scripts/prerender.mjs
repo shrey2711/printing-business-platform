@@ -22,7 +22,7 @@ import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
-import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription } from '../src/data/citySeo.js';
+import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription, cityBreadcrumb } from '../src/data/citySeo.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
@@ -546,8 +546,12 @@ for (const lc of LOCAL_CATEGORIES) {
         ? `<h2>${esc(city.city)} FAQ</h2>${detail.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
         : '';
       const boothLinks = `<p>Complete your ${esc(city.city)} booth: <a href="/custom-canopies">canopy tents</a> · <a href="/banner-stands">banner stands</a> · <a href="/backdrops">backdrops</a> · <a href="/table-covers">table covers</a> · <a href="/trade-show-displays">all trade show displays</a>.</p>`;
+      const crumbs = cityBreadcrumb(lc.label, lc.slug, city);
+      const crumbNav = crumbs.map((c, i) => i === crumbs.length - 1
+        ? `<span>${esc(c.name)}</span>`
+        : `<a href="${c.url}">${esc(c.name)}</a>`).join(' / ');
       const body = `
-        <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="${lc.hub}">${esc(lc.hubLabel)}</a> / <span>${esc(city.city)}</span></nav>
+        <nav aria-label="Breadcrumb">${crumbNav}</nav>
         <h1>${esc(lc.label)} in ${esc(cityWithAbbr(city))}</h1>
         <p>${esc(dedupePeriods(lc.lead(city)))}</p>
         ${richHtml}
@@ -578,11 +582,9 @@ for (const lc of LOCAL_CATEGORIES) {
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-              { '@type': 'ListItem', position: 2, name: lc.hubLabel, item: `${ORIGIN}${lc.hub}` },
-              { '@type': 'ListItem', position: 3, name: `${lc.label} in ${city.city}`, item: `${ORIGIN}/${lc.slug}/${city.slug}` }
-            ]
+            itemListElement: crumbs.map((c, i) => ({
+              '@type': 'ListItem', position: i + 1, name: c.name, item: `${ORIGIN}${c.url === '/' ? '/' : c.url}`
+            }))
           },
           {
             // Types the page + wires it to the central WebSite/Organization entity.

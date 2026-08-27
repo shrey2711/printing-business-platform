@@ -4,7 +4,7 @@ import { getProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription } from '../data/citySeo';
+import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription, cityBreadcrumb } from '../data/citySeo';
 import { CITY_BOOTH_GUIDES } from '../data/internalLinks';
 import { cityDetailFor } from '../data/cityDetail';
 
@@ -40,11 +40,9 @@ export default function CityCategoryPage({ categoryKey }) {
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: `${brand.origin}/` },
-              { '@type': 'ListItem', position: 2, name: cat.hubLabel, item: `${brand.origin}${cat.hub}` },
-              { '@type': 'ListItem', position: 3, name: `${cat.label} in ${city.city}`, item: `${brand.origin}/${cat.slug}/${city.slug}` }
-            ]
+            itemListElement: cityBreadcrumb(cat.label, cat.slug, city).map((c, i) => ({
+              '@type': 'ListItem', position: i + 1, name: c.name, item: `${brand.origin}${c.url}`
+            }))
           },
           {
             '@context': 'https://schema.org',
@@ -97,7 +95,12 @@ export default function CityCategoryPage({ categoryKey }) {
   return (
     <main className="page">
       <nav className="crumbs">
-        <Link to="/">Home</Link> / <Link to={cat.hub}>{cat.hubLabel}</Link> / <span>{city.city}</span>
+        {cityBreadcrumb(cat.label, cat.slug, city).map((c, i, arr) => (
+          <span key={c.url}>
+            {i > 0 ? ' / ' : ''}
+            {i === arr.length - 1 ? <span>{c.name}</span> : <Link to={c.url}>{c.name}</Link>}
+          </span>
+        ))}
       </nav>
 
       <section className="loc-hero">

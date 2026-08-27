@@ -115,6 +115,20 @@ export const cityCatDescription = (label, city) => {
   return `Custom ${L} for ${city.city} trade shows — printed to order with instant online pricing, a free artwork proof, and US shipping.`;
 };
 
+// §23 breadcrumb: Home → Locations → State → {label} in {City} (location
+// hierarchy). All URLs are real (/locations, /locations/{state} state pages).
+// Returns [{ name, url }] with RELATIVE urls; callers make them absolute. DC has
+// no stateSlug, so the state level is omitted for it.
+export const cityBreadcrumb = (label, slug, city) => {
+  const crumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Locations', url: '/locations' }
+  ];
+  if (city.stateSlug) crumbs.push({ name: city.stateName, url: `/locations/${city.stateSlug}` });
+  crumbs.push({ name: `${label} in ${city.city}`, url: `/${slug}/${city.slug}` });
+  return crumbs;
+};
+
 export const getSeoCity = (slug) => SEO_CITIES.find((c) => c.slug === slug) || null;
 export const getLocalCategory = (key) => LOCAL_CATEGORIES.find((c) => c.key === key) || null;
 export const getLocalCategoryBySlug = (slug) => LOCAL_CATEGORIES.find((c) => c.slug === slug) || null;
