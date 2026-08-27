@@ -17,7 +17,7 @@ export default function ProductGallery({ images = [], label }) {
   return (
     <div className="pgallery">
       <div className="pgallery-main">
-        <img src={items[active].src} alt={items[active].alt || 'Product photo'} decoding="async" />
+        <img src={items[active].src} alt={items[active].alt || 'Product photo'} loading="eager" fetchpriority="high" decoding="async" />
       </div>
       {items.length > 1 && (
         <div className="pgallery-thumbs">

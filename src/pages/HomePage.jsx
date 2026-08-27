@@ -207,9 +207,9 @@ export default function HomePage() {
           {/* Booth collage — displays we print, in a range of customer brands */}
           <div className="hero-collage" aria-label="Trade show displays Apex prints in any brand: canopy, table cover, banner and backdrop">
             <div className="hc-tile hc-canopy"><TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" /></div>
-            <div className="hc-tile"><img src="/images/showcase/tablecover-corner-cafe.webp" alt="Custom printed table cover for a customer's brand" loading="lazy" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><img src="/images/showcase/xstand-sunset-yoga.webp" alt="Custom printed banner for a customer's brand" loading="lazy" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Custom step & repeat backdrop" loading="lazy" decoding="async" width="600" height="450" /></div>
+            <div className="hc-tile"><img src="/images/showcase/tablecover-corner-cafe.webp" alt="Custom printed table cover for a customer's brand" loading="eager" fetchpriority="high" decoding="async" width="600" height="450" /></div>
+            <div className="hc-tile"><img src="/images/showcase/xstand-sunset-yoga.webp" alt="Custom printed banner for a customer's brand" loading="eager" decoding="async" width="600" height="450" /></div>
+            <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Custom step & repeat backdrop" loading="eager" decoding="async" width="600" height="450" /></div>
           </div>
         </div>
       </section>
