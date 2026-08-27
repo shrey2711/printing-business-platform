@@ -923,7 +923,7 @@ const tensionDisplay = {
   related: ['step-and-repeat-backdrop', 'standard-retractable-banner', 'pleated-table-covers', 'hard-case-podium'],
   seoTitle: 'Straight Tension Fabric Display',
   seoDescription:
-    'Custom straight tension fabric display — 8, 10 and 20 ft wide pillowcase fabric backdrops on a lightweight aluminium frame. Single or double sided, graphic + frame or graphic only.',
+    'Custom straight tension fabric display — 8–20 ft pillowcase backdrops on a lightweight aluminium frame. Single or double sided, graphic + frame or graphic only.',
   faqs: [
     { q: 'What is a tension fabric display?', a: 'A floor-standing backdrop where a stretch dye-sublimated fabric graphic zips over a lightweight aluminium tube frame — like a pillowcase — for a smooth, seamless, frameless wall.' },
     { q: 'What does "graphic + frame" vs "graphic only" mean?', a: '"Graphic + frame" includes the aluminium frame and the printed fabric, ready to set up. "Graphic only" is a replacement fabric graphic for a frame you already own.' },

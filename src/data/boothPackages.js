@@ -15,9 +15,9 @@ export const BOOTH_PACKAGES_META = {
   slug: 'trade-show-booth-packages',
   nav: 'Booth Packages',
   h1: 'Trade Show Booth Packages',
-  title: 'Trade Show Booth Packages — Complete Display Kits',
+  title: 'Trade Show Booth Packages — Complete Kits',
   description:
-    'Build a complete trade show booth from Apex — recommended packages combining custom canopy tents, banner stands, table covers and backdrops. Shop the full booth or buy any product individually.'
+    'Build a complete trade show booth from Apex — packages combining canopy tents, banner stands, table covers and backdrops, or buy any product individually.'
 };
 
 // Each package references EXISTING product slugs. No prices invented here.

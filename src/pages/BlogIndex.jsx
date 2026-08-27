@@ -15,7 +15,7 @@ const TOPICS = [
 export default function BlogIndex() {
   useDocumentMeta(
     'Trade Show Resources & Buying Guides',
-    'Buying guides, size charts and setup tips for trade show displays — custom canopy tents, retractable and X-stand banner stands, table covers, backdrops, booth planning and artwork preparation.'
+    'Buying guides, size charts and setup tips for trade show displays — canopy tents, banner stands, table covers, backdrops, booth planning and artwork prep.'
   );
   const [posts, setPosts] = useState(null);
 

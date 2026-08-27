@@ -201,7 +201,7 @@ export const PAGES = [
     nav: 'Terms',
     title: 'Terms and Conditions',
     description:
-      'The terms for using apextradeshow.com and ordering custom printed canopy tents — your artwork and rights, proof approval, cancellation, colour, and how we handle problems.',
+      'The terms for using apextradeshow.com and ordering custom printed displays — your artwork and rights, proof approval, cancellation, and how we handle problems.',
     blocks: [
       { p: 'These terms cover using apextradeshow.com and ordering custom printed canopy tents from Apex Trade Show. By using the site or placing an order, you agree to them. We may update the site and these terms from time to time; the version posted here is the one that applies, and continuing to use the site means you accept it.' },
       { h: 'Your artwork and your rights', p: 'You are responsible for the artwork you send us. By placing an order you confirm that you own it or have permission to print it — including logos, images, fonts and any other third-party material — and you authorise us to print it on your tent. Please don’t send anything unlawful or offensive, or anything that infringes someone else’s trademark, copyright, privacy or publicity rights. We may decline or stop an order that breaks this.' },

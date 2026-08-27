@@ -33,7 +33,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'Standard vs Deluxe Retractable Banner',
       description:
-        'Compare the Apex Standard and Deluxe retractable banner stands — hardware, finish, portability and which fits your trade show needs. Both 33×81 in with replaceable graphics.'
+        'Compare the Apex Standard and Deluxe retractable banner stands — hardware, finish, portability and fit. Both 33×81 in with replaceable graphics.'
     },
     coverUrl: '/images/showcase/banner-summit-outdoors.webp',
     publishedAt: '2026-08-10T00:00:00.000Z',
@@ -103,7 +103,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'X-Stand vs Retractable Banner',
       description:
-        'Compare the Apex X-Stand banner (24×63 in) and retractable banner stands (33×81 in) — mechanism, durability, portability and cost — to pick the right display for your booth.'
+        'Compare the Apex X-Stand banner (24×63 in) and retractable banner stands (33×81 in) — mechanism, durability, portability and cost — pick the right one.'
     },
     coverUrl: '/images/showcase/xstand-volt.webp',
     publishedAt: '2026-08-11T00:00:00.000Z',
@@ -160,7 +160,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'What Size Retractable Banner Should I Buy?',
       description:
-        'Choosing a retractable banner size: tabletop (11.5×17.5 in) for counters and desks, or a full-height 33×81 in floor stand for aisles and entrances. A quick Apex sizing guide.'
+        'Choosing a retractable banner size: tabletop (11.5×17.5 in) for counters, or a full-height 33×81 in floor stand for aisles. A quick Apex sizing guide.'
     },
     coverUrl: '/images/showcase/xstand-sunset-yoga.webp',
     publishedAt: '2026-08-12T00:00:00.000Z',
@@ -256,7 +256,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'Pleated vs Stretch Table Covers',
       description:
-        'Compare Apex pleated (draped throw) and stretch (fitted) table covers — fit, look and best use. Both closed-back, full-colour, wrinkle-resistant and machine washable.'
+        'Compare Apex pleated (draped throw) and stretch (fitted) table covers — fit, look and best use. Both closed-back, wrinkle-resistant and washable.'
     },
     coverUrl: '/images/showcase/tablecover-corner-cafe.webp',
     publishedAt: '2026-08-14T00:00:00.000Z',
@@ -355,7 +355,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'Complete Trade Show Booth Checklist',
       description:
-        'A practical trade show booth checklist — canopy or backdrop, table cover, banner stands, artwork and accessories — with links to the right products for each part of your booth.'
+        'A practical trade show booth checklist — canopy or backdrop, table cover, banner stands, artwork and accessories — with links to the right products.'
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-16T00:00:00.000Z',
@@ -404,7 +404,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'How Much Does a Trade Show Display Cost?',
       description:
-        'Trade show display pricing from Apex — real starting prices for custom canopy tents, table covers, banner stands and step & repeat backdrops, with instant online pricing on most products. How to budget a full booth.'
+        'Trade show display pricing from Apex — real starting prices for custom canopy tents, banner stands, table covers and backdrops, plus how to budget a full booth.'
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-17T00:00:00.000Z',
@@ -1077,7 +1077,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'Trade Show Booth Design: Layout & Branding',
       description:
-        'Design a booth that gets noticed: build a clear focal point, plan traffic flow, use a branding hierarchy, and get height, lighting and colour right — for 10×10 and larger.'
+        'Design a booth that gets noticed: build a focal point, plan traffic flow, use a branding hierarchy, and get height, lighting and colour right.'
     },
     coverUrl: '/images/showcase/backdrop-oakwood.jpeg',
     publishedAt: '2026-08-21T00:00:00.000Z',
@@ -1159,9 +1159,9 @@ export const STATIC_ARTICLES = [
       'A plain-English guide to banner materials — 13oz vinyl, 18oz blockout, perforated mesh and 9oz fabric — with when to use each, plus hems, grommets and pole pockets.',
     tags: ['Printing Knowledge', 'Buying Guide'],
     seo: {
-      title: 'Banner Materials: Vinyl, Blockout, Mesh & Fabric',
+      title: 'Banner Materials: Vinyl, Blockout & Mesh',
       description:
-        'Compare banner materials — 13oz vinyl, 18oz blockout, mesh and 9oz fabric — indoor vs outdoor, single vs double sided, wind, finish, and hem/grommet/pole-pocket options.'
+        'Compare banner materials — 13oz vinyl, 18oz blockout, mesh and 9oz fabric — indoor vs outdoor, single vs double sided, finish and edge options.'
     },
     coverUrl: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg',
     publishedAt: '2026-08-21T00:00:00.000Z',

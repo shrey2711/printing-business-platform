@@ -45,6 +45,16 @@ const template = readFileSync(join(DIST, 'index.html'), 'utf8');
 const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Keep SEO titles within ~60 chars. Source strings hold raw "&", so .length
+// equals the rendered length. Drop the optional tail first, then the brand
+// suffix, so a long name (e.g. a long province) never overflows the title.
+const fitTitle = (main, tail = '') => {
+  const withAll = `${main}${tail} | ${BRAND}`;
+  if (withAll.length <= 62) return withAll;
+  const withBrand = `${main} | ${BRAND}`;
+  return withBrand.length <= 62 ? withBrand : main;
+};
+
 // Shared crawlable navigation, on every prerendered page.
 const NAV = `<nav aria-label="Primary">
   <a href="/">Home</a>
@@ -303,7 +313,7 @@ routes.push(() => {
   return render({
     path: '/products',
     title: `Shop All Products | ${BRAND}`,
-    description: 'Browse all Apex trade show display and event-branding products — custom canopy tents, banner stands, step & repeat backdrops and table covers. Free artwork proof, US & Canada.',
+    description: 'Browse all Apex trade show displays and event branding — canopy tents, banner stands, backdrops and table covers. Free artwork proof, ships US & Canada.',
     body,
     // ItemList of the catalog — every entry links a real, crawlable product page.
     jsonLd: {
@@ -696,7 +706,7 @@ for (const sol of SOLUTIONS) {
       <ul>${others.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;
     return render({
       path: `/solutions/${sol.slug}`,
-      title: `${sol.title} — Custom Printed | ${BRAND}`,
+      title: fitTitle(sol.title, ' — Custom Printed'),
       description: g.metaDescription,
       image: CANOPY_OG,
       imageAlt: `${sol.title} — custom printed canopy tents by ${BRAND}`,
@@ -993,7 +1003,7 @@ for (const s of territories) {
       <h2>Cities we serve in ${esc(s.name)}</h2><ul>${cityLinks}</ul>`;
     return render({
       path: `/locations/${s.slug}`,
-      title: `Custom Canopy Tents in ${s.name} | ${BRAND}`,
+      title: fitTitle(`Custom Canopy Tents in ${s.name}`),
       description: `Custom printed canopy tents in ${s.name}. Instant online pricing and shipping to ${s.cities.slice(0, 3).join(', ')} and ${areaWord}.`,
       image: CANOPY_OG,
       imageAlt: `Custom printed canopy tents in ${s.name} — ${BRAND}`,
@@ -1082,7 +1092,7 @@ routes.push(() =>
   render({
     path: '/quote',
     title: `Request a Quote | ${BRAND}`,
-    description: `Request a bulk or custom trade show display quote from ${BRAND} — canopy tents, banner stands, backdrops and table covers. Tell us your size, quantity and artwork.`,
+    description: `Request a custom trade show display quote from ${BRAND} — canopy tents, banner stands, backdrops and table covers. Send your size and artwork.`,
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Quote</span></nav>
       <h1>Request a Custom Quote</h1>
       <p>Most configurations — canopy tents, banner stands, backdrops and table covers — are priced
@@ -1202,7 +1212,7 @@ routes.push(() => {
     path: '/blog',
     title: `Trade Show Display Guides & Buying Resources | ${BRAND}`,
     description:
-      'Buying guides, size charts and setup tips for trade show displays — custom canopy tents, retractable and X-stand banner stands, table covers, backdrops, booth planning and artwork preparation.',
+      'Buying guides, size charts and setup tips for trade show displays — canopy tents, banner stands, table covers, backdrops, booth planning and artwork prep.',
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Resources</span></nav>
       <h1>Trade Show Resources &amp; Buying Guides</h1>
       <p>Practical guides to help you choose, print and set up a professional trade show booth — from

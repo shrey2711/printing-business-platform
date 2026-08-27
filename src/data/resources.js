@@ -7,7 +7,7 @@ export const RESOURCES_META = {
   title: 'Trade Show Learning Center',
   h1: 'Trade Show Learning Center',
   description:
-    'The Apex Learning Center: buying guides, booth design, printing knowledge and setup & care for trade show displays — canopies, banner stands, backdrops, table covers, banners and flags.',
+    'The Apex Learning Center — buying guides, booth design, printing knowledge and setup & care for trade show displays, canopies, banners, backdrops and table covers.',
   intro:
     'Practical, no-jargon guides to help you choose, print, build and care for a professional trade show booth. Written for business owners and exhibitors — not students.'
 };

@@ -109,7 +109,7 @@ export const SOLUTIONS = [
     blurb: 'Weekend markets and craft fairs where the booth is the whole storefront.',
     guide: {
       metaDescription:
-        'Custom printed vendor and market canopy tents — printed valance for your name, walls for weather and product display, and a quick one- or two-person setup for weekend markets.',
+        'Custom printed vendor and market canopy tents — printed valance for your name, walls for weather and product display, quick setup for weekend markets.',
       intro:
         'At a farmers market or craft fair your tent is your storefront. It has to read as your brand from across the lot, set up fast on a Saturday morning, and give you a clean surface to display product. A printed valance carrying your business name does more for walk-up traffic than any table sign.',
       focus: [
@@ -132,7 +132,7 @@ export const SOLUTIONS = [
     blurb: 'Outdoor expo space that has to match your indoor booth branding.',
     guide: {
       metaDescription:
-        'Custom printed trade show canopy tents — full-colour branding to match your indoor booth, printed back walls for a professional backdrop, and 10×20 double-booth options.',
+        'Custom printed trade show canopy tents — full-colour branding to match your indoor booth, printed back walls, and 10×20 double-booth options.',
       intro:
         'Outdoor expo space has to look as considered as your indoor booth. A printed canopy top, valance and back wall turn open pavement into a branded booth that photographs well and holds its own next to other exhibitors. Colour consistency with your indoor graphics matters — dye-sublimation prints hold brand colours cleanly.',
       focus: [
@@ -155,7 +155,7 @@ export const SOLUTIONS = [
     blurb: 'Team colours, shade for the bench, and something findable in a crowded lot.',
     guide: {
       metaDescription:
-        'Custom printed sports and tailgate canopy tents — team colours and logo, sideline shade, spectator visibility in a crowded lot, and a portable frame for weekly games.',
+        'Custom printed sports and tailgate canopy tents — team colours and logo, sideline shade, crowd visibility, and a portable frame for weekly games.',
       intro:
         'Team tents pull double duty: shade for the bench and gear on the sideline, and a landmark supporters can find in a packed tailgate lot. Printed in your team colours with the logo up top, it marks your spot from a distance and travels game to game without fuss.',
       focus: [
@@ -201,7 +201,7 @@ export const SOLUTIONS = [
     blurb: 'Registration desks, fundraisers and open days.',
     guide: {
       metaDescription:
-        'Custom printed church and school canopy tents — a branded landmark for registration, fundraisers and open days, with shade for volunteers and easy setup for regular events.',
+        'Custom printed church and school canopy tents — a branded landmark for registration, fundraisers and open days, with shade and easy setup for volunteers.',
       intro:
         'Churches and schools need a friendly, findable landmark for the events that fill the calendar — registration and welcome desks, fundraisers, sports days and open days. A tent printed with the organisation name gives volunteers an obvious base and shade to work under, and it reappears at every event through the year.',
       focus: [
