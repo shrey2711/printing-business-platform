@@ -34,7 +34,7 @@ export default function CityCategoryPage({ categoryKey }) {
     city
       ? (cat.slug === 'trade-show-displays' ? cityDisplaysTitle(city) : `${cat.label} in ${cityWithAbbr(city)}`)
       : cat?.label || 'Location',
-    city ? cityCatDescription(cat.label, city) : undefined,
+    city ? ((cat.slug === 'trade-show-displays' && detail?.metaDescription) ? detail.metaDescription : cityCatDescription(cat.label, city)) : undefined,
     city
       ? [
           {

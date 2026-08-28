@@ -579,7 +579,7 @@ for (const lc of LOCAL_CATEGORIES) {
         title: lc.slug === 'trade-show-displays'
           ? cityDisplaysTitle(city)
           : `${lc.label} in ${cityWithAbbr(city)} | ${BRAND}`,
-        description: cityCatDescription(lc.label, city),
+        description: (lc.slug === 'trade-show-displays' && detail?.metaDescription) ? detail.metaDescription : cityCatDescription(lc.label, city),
         image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,
         robots: city.tier > 2 ? 'noindex, follow' : undefined,

@@ -757,6 +757,10 @@ export const CITY_DETAIL = {
   },
 
   'seattle': {
+    // Seattle-specific meta description (overrides the generic template on the
+    // /trade-show-displays/{city} page). ~150 chars; names the product range.
+    metaDescription:
+      'Custom trade show displays in Seattle — canopies, banner stands, backdrops & table covers, printed to order with a free artwork proof and US shipping.',
     answer:
       'Seattle is a Pacific Northwest technology, aerospace and maritime hub, hosting PAX West and major trade shows at the expanded Seattle Convention Center. Apex prints custom trade show and exhibition displays and ships them to Seattle.',
     overview: [
