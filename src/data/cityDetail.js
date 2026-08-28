@@ -32,9 +32,13 @@ export const specTableFor = (cityName) => ({
 
 export const CITY_DETAIL = {
   'las-vegas': {
+    // Las Vegas-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Las Vegas — canopies, banner stands, backdrops and table covers for CES, SEMA and MAGIC booths, printed to order and shipped.',
+    specTable: specTableFor('Las Vegas'),
     // ~40-word answer-first summary (also used for the AEO answer block).
     answer:
-      'Las Vegas is the busiest trade-show city in the United States, hosting CES, MAGIC, World of Concrete and SEMA across venues like the Las Vegas Convention Center and Caesars Forum. Apex prints custom displays and ships them to Las Vegas.',
+      'Las Vegas is the busiest trade-show city in the United States, hosting CES, MAGIC, World of Concrete and SEMA at the Las Vegas Convention Center, Caesars Forum and The Venetian Expo. Apex prints custom trade show and exhibition displays and ships them to Las Vegas.',
     overview: [
       'No city runs more major trade shows than Las Vegas. Between the Las Vegas Convention Center, Caesars Forum, The Venetian Expo and the Mandalay Bay Convention Center, the city turns over enormous exhibitions almost every week of the year — CES alone draws well over 100,000 attendees. For an exhibitor that means fierce competition for attention on the floor, and a booth that has to read clearly from across a packed hall.',
       'Because so many shows here are national and international, your display is often the first impression a buyer gets of your brand. Sharp, full-color graphics on a canopy, banner stand or backdrop do more work in Las Vegas than almost anywhere else. Apex prints every piece to order and ships it to your Las Vegas hotel, venue or business address, so you can arrive to a booth that matches the scale of the room.'
@@ -62,12 +66,42 @@ export const CITY_DETAIL = {
       'Match the display to the show. For an indoor CES or MAGIC booth, a step & repeat or tension-fabric backdrop gives a clean branded wall, retractable banner stands hold key messaging at the aisle, and a fitted table cover turns a rented table into brand space. For SEMA and other shows with outdoor or parking-lot components, a printed canopy tent creates a shaded, branded footprint — just weight every leg. For sponsorships, registration areas and hotel-lobby activations, lightweight X-stand and tabletop banners set up in seconds and move easily between spaces.',
     // City-specific FAQ (rendered visibly + as FAQPage schema).
     faqs: [
-      { q: 'Do you ship trade show displays to Las Vegas?', a: 'Yes. Apex is an online supplier and ships custom-printed displays to Las Vegas and anywhere in Nevada — to your hotel, the show’s receiving dock, or a business address.' },
-      { q: 'Can I get a display in time for CES or a big Las Vegas show?', a: 'Standard production is 6–8 business days after proof approval, with an optional 2–3 business day rush; transit time is added on top and varies by destination. For CES, SEMA or MAGIC, order early — those weeks are the busiest of the year.' },
-      { q: 'Do canopy tents need weights at Las Vegas venues?', a: 'Yes. Most Las Vegas activations are on concrete or asphalt where ground stakes can’t be used, and desert wind can gust, so water or sand weight bags on each leg are strongly recommended.' },
-      { q: 'Will printed graphics fade in the Las Vegas sun?', a: 'Our graphics are dye-sublimated, which bonds the ink into the fabric for strong UV and fade resistance — a good match for the high desert sun.' },
-      { q: 'Which displays work best inside the Las Vegas Convention Center?', a: 'For indoor booths, a step & repeat backdrop or tension-fabric wall anchors the space, retractable banner stands mark the aisle, and a printed table cover finishes a demo table. Canopies are best for outdoor and sponsor areas.' },
-      { q: 'Where do you deliver in Las Vegas?', a: 'To any Las Vegas address you provide — resort convention receiving, an advance-warehouse, or your office. Confirm your venue’s labelling and delivery-window rules, as Strip venues often require advance-warehouse shipments.' }
+      { q: 'Do you ship trade show displays to Las Vegas?', a: 'Yes. Apex is an online supplier and ships custom-printed trade show and event displays to Las Vegas and anywhere in Nevada — to your hotel, the show\'s receiving dock, an advance warehouse or a business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Las Vegas?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Las Vegas product launches, press days and booths, made to order and shipped to your venue or business address. Both use a replaceable graphic on a reusable frame, so a new campaign is a reprint rather than a new display.' },
+      { q: 'Can I get a display in time for CES or a big Las Vegas show?', a: 'Standard production is 6–8 business days after proof approval, with an optional 2–3 business day rush; transit is added on top and varies by destination. For CES, SEMA or MAGIC, allow time for artwork approval, production and shipping rather than ordering in the final week.' },
+      { q: 'Do canopy tents need weights at Las Vegas venues?', a: 'Yes. Most Las Vegas outdoor activations sit on concrete or asphalt where ground stakes cannot be used, and desert gusts arrive without much warning, so a water or sand weight bag on every leg is strongly recommended for parking-lot booths, pool decks and forecourt activations.' },
+      { q: 'Will printed graphics fade in the Las Vegas sun?', a: 'Our graphics are dye-sublimated, which bonds the ink into the fabric rather than sitting on the surface, giving strong UV and fade resistance — a good match for high-desert sun on canopy tops, half-walls and outdoor backdrops through a long SEMA or World of Concrete week.' },
+      { q: 'Which displays work best inside the Las Vegas Convention Center?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best inside the Las Vegas Convention Center: they are portable, set up tool-free and avoid installation labor. Use a step & repeat or tension-fabric wall as the booth back, retractable banners at the aisle, and a fitted table cover on the demo table; save canopies for outdoor and parking-lot components.' },
+      { q: 'Can trade show displays be shipped to the Las Vegas Convention Center?', a: 'Yes. Apex ships your printed displays to any Las Vegas address you provide, including the Las Vegas Convention Center. We don\'t have a special delivery arrangement with the venue, so give us the exact receiving address and follow the show\'s current freight, labeling and delivery-window requirements — or route the shipment through the official advance warehouse. Confirm those details with show management before you ship.' },
+      { q: 'Is rush production available for Las Vegas exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Approve your proof as early as you can, because the weeks feeding into CES, MAGIC and SEMA are the busiest of the year for booth graphics.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Las Vegas',
+        body: 'A Las Vegas booth has to read from across a hall the size of several football fields, so build it from a few coordinated pieces rather than one busy structure. A step & repeat or tension-fabric backdrop carries the brand at eye level, retractable banner stands hold your clearest single message at the aisle, a printed table cover finishes the demo table, and a canopy covers any outdoor or parking-lot component. Ordering the whole set from one supplier keeps every panel color-matched, which is what makes a 10×10 on the CES or MAGIC floor look deliberate beside far larger stands. Everything packs into a case or tube for the flight in, printed to order with a free artwork proof.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Las Vegas',
+        body: 'Outdoor exhibiting is a real part of the Las Vegas calendar, not an afterthought: SEMA and World of Concrete spill into the lots and outdoor exhibit areas around the convention center, and resorts run sponsor activations on pool decks and forecourts. A printed pop-up canopy gives you shade and a branded footprint in Mojave heat and intense UV, where an unshaded booth empties out by midday. Those lots are concrete or asphalt, so stakes are out — put a water or sand weight bag on every leg. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing; dye-sublimated graphics hold their color under the Nevada sun.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Las Vegas',
+        body: 'Las Vegas is where products get launched, so the wall behind you usually ends up photographed. A step-and-repeat backdrop repeats your logo across the surface for press photos, interviews and sponsor step-offs — the media wall behind CES press days and Strip after-parties. A straight tension-fabric wall does the other job: one seamless graphic zipped over an aluminum frame for an uncluttered booth back that still reads from down the aisle. Both print to order, pack into a wheeled case that handles baggage claim at Harry Reid International, and take a replaceable graphic, so next year\'s campaign is a reprint instead of a new frame.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Las Vegas',
+        body: 'Banner stands are the pieces that survive a Las Vegas week, because they set up tool-free in seconds and this is a city where a brand moves from the show floor to a hotel suite to a sponsor lounge in a single day. Retractable banner stands roll their graphic into a weighted aluminum base for aisle-facing headlines; X-stand banners are the light, low-cost option for registration desks and hospitality suites; a tabletop banner works on a counter or demo table. Each packs into a slim case that checks as luggage, and each takes a replaceable graphic, so the message can change between CES, MAGIC and SEMA while the hardware stays.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Las Vegas',
+        body: 'Nearly every Las Vegas booth includes a rented six- or eight-foot table, and left bare or under house linen it quietly undoes the rest of your branding. A custom printed table cover fixes that for less than most booth line items: pick a fitted stretch cover for a tight modern look or a pleated cover for a classic draped throw, both closed on all four sides so your cases and stock stay hidden from the aisle. They print full-color in your brand colors, pack flat into a corner of the show case, and machine wash between shows — useful when one cover works CES in January and MAGIC weeks later.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
