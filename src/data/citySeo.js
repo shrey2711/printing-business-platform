@@ -70,7 +70,7 @@ export const SEO_CITIES = [
   { slug: 'orlando', city: 'Orlando', abbr: 'FL', stateName: 'Florida', stateSlug: 'florida', tier: 1, venue: 'the Orange County Convention Center', scene: 'one of the largest convention venues in the United States' },
   { slug: 'chicago', city: 'Chicago', abbr: 'IL', stateName: 'Illinois', stateSlug: 'illinois', tier: 1, venue: 'McCormick Place', scene: 'the largest convention center in North America' },
   { slug: 'atlanta', city: 'Atlanta', abbr: 'GA', stateName: 'Georgia', stateSlug: 'georgia', tier: 1, venue: 'the Georgia World Congress Center', scene: 'AmericasMart and major national trade shows' },
-  { slug: 'new-york', city: 'New York', abbr: 'NY', stateName: 'New York', stateSlug: 'new-york', tier: 1, venue: 'the Javits Center', scene: "the East Coast's flagship expo venue" },
+  { slug: 'new-york', city: 'New York', h1City: 'New York City', abbr: 'NY', stateName: 'New York', stateSlug: 'new-york', tier: 1, venue: 'the Javits Center', scene: "the East Coast's flagship expo venue" },
   { slug: 'dallas', city: 'Dallas', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 1, venue: 'the Kay Bailey Hutchison Convention Center', scene: 'the Dallas Market Center and year-round trade shows' },
   { slug: 'los-angeles', city: 'Los Angeles', abbr: 'CA', stateName: 'California', stateSlug: 'california', tier: 1, venue: 'the Los Angeles Convention Center', scene: 'entertainment, tech and lifestyle expos' },
   { slug: 'houston', city: 'Houston', abbr: 'TX', stateName: 'Texas', stateSlug: 'texas', tier: 1, venue: 'the George R. Brown Convention Center', scene: 'energy, medical and industrial trade shows' },
@@ -86,7 +86,7 @@ export const SEO_CITIES = [
   { slug: 'miami', city: 'Miami', abbr: 'FL', stateName: 'Florida', stateSlug: 'florida', tier: 2, venue: 'the Miami Beach Convention Center', scene: 'Art Basel and international expos' },
   { slug: 'baltimore', city: 'Baltimore', abbr: 'MD', stateName: 'Maryland', stateSlug: 'maryland', tier: 2, venue: 'the Baltimore Convention Center', scene: 'East Coast conventions' },
   { slug: 'anaheim', city: 'Anaheim', abbr: 'CA', stateName: 'California', stateSlug: 'california', tier: 2, venue: 'the Anaheim Convention Center', scene: 'the largest exhibit space on the West Coast' },
-  { slug: 'washington-dc', city: 'Washington, D.C.', abbr: 'DC', stateName: 'District of Columbia', stateSlug: null, tier: 2, venue: 'the Walter E. Washington Convention Center', scene: 'national association and government expos' },
+  { slug: 'washington-dc', city: 'Washington, D.C.', h1City: 'Washington, DC', abbr: 'DC', stateName: 'District of Columbia', stateSlug: null, tier: 2, venue: 'the Walter E. Washington Convention Center', scene: 'national association and government expos' },
   { slug: 'philadelphia', city: 'Philadelphia', abbr: 'PA', stateName: 'Pennsylvania', stateSlug: 'pennsylvania', tier: 2, venue: 'the Pennsylvania Convention Center', scene: 'Northeast trade shows' },
   { slug: 'san-diego', city: 'San Diego', abbr: 'CA', stateName: 'California', stateSlug: 'california', tier: 2, venue: 'the San Diego Convention Center', scene: 'Comic-Con and biotech expos' },
   { slug: 'boston', city: 'Boston', abbr: 'MA', stateName: 'Massachusetts', stateSlug: 'massachusetts', tier: 2, venue: 'the Boston Convention & Exhibition Center', scene: 'biotech, medical and technology conferences' },
@@ -127,6 +127,15 @@ export const cityBreadcrumb = (label, slug, city) => {
   if (city.stateSlug) crumbs.push({ name: city.stateName, url: `/locations/${city.stateSlug}` });
   crumbs.push({ name: `${label} in ${city.city}`, url: `/${slug}/${city.slug}` });
   return crumbs;
+};
+
+// §3 H1 display name: "City, ABBR", never redundant or double-punctuated.
+// `h1City` overrides the prose name where the H1 wants the fuller local form
+// (New York City, NY) or a different punctuation (Washington, DC). Exported so
+// the prerenderer and the client component cannot drift apart.
+export const cityWithAbbr = (c) => {
+  const name = c.h1City || c.city;
+  return (/[.]$/.test(name) || name.includes(c.abbr)) ? name : `${name}, ${c.abbr}`;
 };
 
 export const getSeoCity = (slug) => SEO_CITIES.find((c) => c.slug === slug) || null;

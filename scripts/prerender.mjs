@@ -22,7 +22,7 @@ import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
-import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription, cityBreadcrumb } from '../src/data/citySeo.js';
+import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../src/data/citySeo.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
   PRIORITY_STATES, stateContent, ORDERING_STEPS,
@@ -498,10 +498,8 @@ routes.push(() => {
 // earn depth (anti-thin-page gate). These are the canonical local pages — old
 // /locations/[state]/[city] canopy pages 301 into /trade-show-canopies/[city].
 //
-// "City, ABBR" but never redundant/double-punctuated — e.g. Washington, D.C.
-// already carries its region and ends in a period, so we don't append ", DC" or
-// a second period (avoids "Washington, D.C., DC" and "Washington, D.C..").
-const cityWithAbbr = (c) => (/[.]$/.test(c.city) || c.city.includes(c.abbr) ? c.city : `${c.city}, ${c.abbr}`);
+// cityWithAbbr ("City, ABBR", honouring per-city h1City overrides) is imported
+// from citySeo.js so SSR and the client component share one definition.
 const endSentence = (s) => (/[.!?]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
 // Collapse a run of periods to one — a city like "Washington, D.C." dropped into
 // a "…in {city}." template would otherwise read "…in Washington, D.C..".

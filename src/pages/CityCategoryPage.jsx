@@ -4,13 +4,11 @@ import { getProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription, cityBreadcrumb } from '../data/citySeo';
+import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../data/citySeo';
 import { CITY_BOOTH_GUIDES } from '../data/internalLinks';
 import { cityDetailFor } from '../data/cityDetail';
 
 const sizeKey = (s) => s.replace('canopy-tent-', '');
-// "City, ABBR" without redundancy/double punctuation (mirrors the prerenderer).
-const cityWithAbbr = (c) => (/[.]$/.test(c.city) || c.city.includes(c.abbr) ? c.city : `${c.city}, ${c.abbr}`);
 
 // One template for every /trade-show-canopies|trade-show-displays|banner-stands/[city]
 // page. categoryKey identifies which local category; :city comes from the route.
