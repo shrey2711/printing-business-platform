@@ -603,6 +603,10 @@ export const CITY_DETAIL = {
   },
 
   'miami': {
+    // Miami-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Miami — canopies, banner stands, backdrops and table covers for Miami Beach Convention Center booths, printed to order.',
+    specTable: specTableFor('Miami'),
     answer:
       'Miami is the US gateway to Latin America and host of Art Basel, eMerge Americas and the Miami International Boat Show at the Miami Beach Convention Center. Apex prints custom trade show displays and ships them to Miami.',
     overview: [
@@ -630,12 +634,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For an MBCC booth, a tension-fabric backdrop or step & repeat sets a clean brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For beachfront, poolside and resort activations, a heavily weighted canopy provides shade and shelter. For hotel suites and pop-ups, lightweight X-stand and tabletop banners set up fast and travel easily.',
     faqs: [
-      { q: 'Do you ship trade show displays to Miami?', a: 'Yes. Apex ships custom-printed displays to Miami and across South Florida — to the Miami Beach Convention Center, a resort venue, or your business address.' },
-      { q: 'How early should I order for Art Basel or a Miami show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. Art Basel week is extremely busy — order well ahead.' },
-      { q: 'Do canopies work on Miami Beach and waterfront venues?', a: 'Yes, for shade and rain cover — but weight every leg heavily, since coastal wind is constant and stakes usually can’t be used on paved or beach surfaces.' },
-      { q: 'Will graphics survive Miami sun and humidity?', a: 'Yes — dye-sublimated printing resists UV and humidity, and wrinkle-resistant fabric displays stay crisp in the tropical air.' },
-      { q: 'Can you deliver to a Miami Beach resort or the MBCC?', a: 'Yes, to any Miami address you provide, including convention and resort receiving. Confirm labelling and delivery windows, which are often strict on the beach.' },
-      { q: 'Is rush production available for Miami exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Miami?', a: 'Yes. Apex ships custom-printed trade show and event displays to Miami and across South Florida — to the Miami Beach Convention Center, the Miami Airport Convention Center, a beachfront resort or your business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Miami?', a: 'Yes — step & repeat backdrops are in constant demand in Miami for gallery openings, launch parties, fashion and beauty events and sponsor photography, alongside tension-fabric walls for booths. Both print to order, ship to your venue or business address, and take a replaceable graphic so one frame serves many events.' },
+      { q: 'How early should I order for Art Basel or a Miami show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. For Art Basel week, the Boat Show or a beachfront conference, work backwards from your install date and leave room for artwork approval, production and shipping.' },
+      { q: 'Do canopies work on Miami Beach and waterfront venues?', a: 'Yes, for both shade and rain cover, but weighting matters more here than almost anywhere. Coastal wind is constant rather than occasional, and stakes are usually not permitted on paved or beach surfaces, so put a full weight bag on every leg and check the venue\'s wind and permit rules first.' },
+      { q: 'Will graphics survive Miami sun and humidity?', a: 'Yes. Dye sublimation bonds the ink into the fabric, so intense subtropical UV and constant humidity do not lift or smear the print, and wrinkle-resistant polyester re-hangs cleanly after travel in damp air rather than holding fold lines through the show.' },
+      { q: 'Can trade show displays be shipped to the Miami Beach Convention Center?', a: 'Yes. Apex ships to any Miami address you provide, including the MBCC and beachfront resorts. We don\'t have a special delivery arrangement with these venues, so send the exact receiving address and follow the show\'s or property\'s current freight, labeling and delivery-window rules — beach properties are often strict about receiving.' },
+      { q: 'What displays suit an art fair or design event in Miami?', a: 'Restrained ones. A seamless tension-fabric wall or a clean step & repeat, a single retractable banner stand, and a fitted table cover in one flat brand color let the work stay the focus, while still identifying the gallery, brand or sponsor clearly in photographs.' },
+      { q: 'Is rush production available for Miami exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush covers production only, so plan the shipping leg separately, and allow margin during the June-to-November hurricane season when South Florida transit can be disrupted.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Miami',
+        body: 'Miami\'s calendar swings between international trade — boat show, cross-border technology, cruise and hospitality — and the design-led world of Art Basel week, so a booth here has to look considered rather than loud. A seamless tension-fabric or step & repeat backdrop sets the tone, retractable banner stands carry short bilingual-friendly copy at the aisle, a printed table cover finishes the meeting table, and a canopy handles beachfront and poolside activations. Ordering the set together keeps color exact across every surface, which matters when your booth will be photographed constantly. Printed to order and shipped to Miami.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Miami',
+        body: 'South Florida runs outdoors year-round: beachfront activations, pool decks, marina and boat-show docks, art-week satellite fairs, festivals and sampling programs. A printed pop-up canopy gives you shade against strong subtropical sun and a water-resistant roof for the rain that blows through most afternoons in summer. Wind is the constant design factor — a steady sea breeze plus no ability to stake on pavement or packed sand means a full weight bag on every leg, and half-walls only where they will not catch the breeze. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Miami',
+        body: 'Miami\'s event economy is photographic, so backdrop printing here is often bought for openings and parties rather than exhibit halls. A step-and-repeat backdrop tiles a logo behind gallery previews, fashion and beauty launches, sponsor arrivals and press interviews during art week. A straight tension-fabric wall is the exhibitor\'s version: one uninterrupted graphic over an aluminum frame that gives a booth at the Miami Beach Convention Center a clean, gallery-like back. Both break down into a wheeled case that moves easily between a hotel and a venue, and both take a replaceable graphic for the next event.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Miami',
+        body: 'During a Miami event week a brand might appear at a convention booth, a marina activation, a hotel suite and a gallery party, and banner stands are the format that can be in all four places. Retractable banner stands roll a full-height graphic into a weighted base and stand up in seconds; X-stand banners are light enough to carry across the sand-adjacent walkways of South Beach; tabletop banners brand a check-in or sampling counter. Each uses a replaceable printed graphic, so hardware bought for one season carries new artwork through the next round of South Florida events.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Miami',
+        body: 'At a Miami booth the table is usually where deals get discussed, often across two languages and a phone full of photos — so it should look like part of the brand, not like rented furniture. A custom printed table cover puts your colors and logo at seated eye level. Fitted stretch covers give a taut, modern face that suits design, marine and technology exhibitors; pleated covers give a formal draped skirt for association and hospitality events. Both close on all four sides to hide storage, print full-color, fold flat into a case, and machine wash after a humid beachfront week.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -964,6 +998,10 @@ export const CITY_DETAIL = {
   },
 
   'phoenix': {
+    // Phoenix-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Phoenix — canopies, banner stands, backdrops and table covers for Phoenix Convention Center booths, printed to order.',
+    specTable: specTableFor('Phoenix'),
     answer:
       'Phoenix’s downtown convention center hosts technology, healthcare and a fast-growing semiconductor industry. Apex prints custom trade show displays and ships them to Phoenix.',
     overview: [
@@ -991,12 +1029,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a Phoenix Convention Center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For outdoor and resort activations, a heavily weighted canopy provides essential shade. For hotel meetings, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to Phoenix?', a: 'Yes. Apex ships custom-printed displays to Phoenix and across Arizona — to the Phoenix Convention Center, a Valley resort, or your business address.' },
-      { q: 'Will graphics survive the Phoenix heat and sun?', a: 'Yes — dye-sublimated printing resists the intense desert UV, making it well suited to Phoenix’s year-round strong sun.' },
-      { q: 'Do canopies work in Phoenix, including monsoon season?', a: 'Yes — a canopy provides essential shade, but weight every leg heavily, especially July–September when monsoon storms bring sudden dust and wind.' },
-      { q: 'How early should I order for a Phoenix show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. The cooler-season convention months are busy — order ahead.' },
-      { q: 'Can you deliver to the Phoenix Convention Center?', a: 'Yes, to any Phoenix address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
-      { q: 'Is rush production available for Phoenix exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Phoenix?', a: 'Yes. Apex ships custom-printed trade show and event displays to Phoenix and across Arizona — to the Phoenix Convention Center, a Valley resort venue, a stadium expo or your business address. Everything is printed to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Phoenix?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Phoenix conventions, resort conferences and corporate events, shipped to your venue or business address. Both use a replaceable graphic over a reusable aluminum frame, so a returning exhibitor updates the artwork and keeps the hardware.' },
+      { q: 'Will graphics survive the Phoenix heat and sun?', a: 'Yes. Dye sublimation bonds the ink into the polyester rather than laying it on the surface, which is what gives canopy tops, half-walls and outdoor banners real fade resistance under the year-round desert UV that would bleach a surface-printed graphic quickly.' },
+      { q: 'Do canopies work in Phoenix, including monsoon season?', a: 'Yes, and shade is the single biggest reason to have one here. Weight every leg heavily, especially from July through September, when monsoon storms arrive with dust walls and sharp wind. Drop or remove printed half-walls if a storm is building, since walls turn a canopy into a sail.' },
+      { q: 'How early should I order for a Phoenix show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Count backwards from move-in and leave room for artwork approval, production and shipping instead of ordering in the final days before a convention center show.' },
+      { q: 'Can trade show displays be shipped to the Phoenix Convention Center?', a: 'Yes. Apex ships to any Phoenix address you provide, including the convention center and Valley resorts. We don\'t have a special delivery arrangement with these venues, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'What displays suit an outdoor event in Phoenix summer?', a: 'A canopy with weighted legs is the base requirement, because unshaded outdoor booths are not workable in extreme heat. Add a fabric backdrop under the canopy for branding, keep banner stands inside the shade line so bases stay cooler, and choose a table cover in a lighter tone.' },
+      { q: 'Is rush production available for Phoenix exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush shortens production only, so plan the shipping leg separately when working back from a Phoenix show or resort conference date.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Phoenix',
+        body: 'Phoenix has become a semiconductor and advanced-manufacturing town, and its convention calendar leans toward technical buyers who want specifics fast. Build the booth around a tension-fabric or step & repeat backdrop that carries the product or facility at full height, add retractable banner stands naming capabilities at the aisle, brand the table with a printed cover for spec sheets and samples, and keep a canopy for the outdoor and resort-courtyard activations the Valley climate invites for much of the year. Bought as a set, the pieces match in color and finish. Printed to order and shipped to Phoenix.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Phoenix',
+        body: 'In the Valley a canopy is not a nice extra, it is what makes an outdoor booth possible at all. Summer highs above 110°F and unrelenting UV mean an unshaded table empties within minutes, while a printed pop-up canopy holds visitors through spring training crowds, festivals, home shows, contractor days and campus events. Weight every leg heavily and plan for monsoon season from July into September, when dust and gusts arrive fast — drop the half-walls when a storm builds. Dye-sublimated graphics survive the desert sun without bleaching. Configure a 10×10, 10×15 or 10×20 online for instant pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Phoenix',
+        body: 'A backdrop is how a technical Phoenix exhibitor explains itself before anyone picks up a datasheet. A straight tension-fabric wall carries one seamless graphic across an aluminum frame — a fab, a component, a process diagram — at a scale readable from the aisle. A step-and-repeat backdrop covers the events side: logo-tiled walls for resort conference receptions, award nights and sponsor photography around the Valley. Both stretch on and off in minutes, pack into a wheeled case that rides in a truck bed without complaint, and take a replaceable printed graphic when the product line or campaign changes.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Phoenix',
+        body: 'The Valley is spread out, so a Phoenix marketing team often works a downtown convention, a Scottsdale resort conference and a Tempe campus event in the same week. Banner stands travel that way easily: a retractable banner stand rolls its full-height graphic into a weighted aluminum base and stands up in seconds, X-stand banners weigh almost nothing and cost little enough to leave several in rotation, and tabletop banners brand a counter without using floor space. Each takes a replaceable printed graphic, so hardware bought once carries a full season of Arizona events and messages.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Phoenix',
+        body: 'Phoenix booths and outdoor activations both run on the table — samples, literature, badge scanning, water for overheated visitors. A custom printed table cover turns that rented surface into branded space and hides the cases and coolers stored beneath it. Fitted stretch covers give a taut, engineered face suited to semiconductor and aerospace exhibitors; pleated covers give a draped front for resort conference and association settings. Both close on all four sides, print full-color in your brand colors, fold flat into a show case, and machine wash after a dusty outdoor day in the Valley — worth having when one cover works a downtown convention and a resort conference in the same month.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -1109,6 +1177,10 @@ export const CITY_DETAIL = {
   },
 
   'washington-dc': {
+    // Washington, D.C.-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Washington, D.C. — canopies, banner stands, backdrops and table covers for association booths, printed to order and shipped.',
+    specTable: specTableFor('Washington, D.C.'),
     answer:
       'Washington, D.C. is the association and government capital, host to major policy, defense and education shows at the Walter E. Washington Convention Center. Apex prints custom trade show displays and ships them to Washington.',
     overview: [
@@ -1136,16 +1208,50 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For outdoor and campus activations, a weighted canopy adds shelter. For hotel meetings and association events, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to Washington, D.C.?', a: 'Yes. Apex ships custom-printed displays to Washington and the D.C. area — to the Walter E. Washington Convention Center, Gaylord National, or your business address.' },
-      { q: 'How early should I order for a D.C. association show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. The association season is busy — order a few weeks ahead.' },
-      { q: 'How does freight reach the convention center?', a: 'The venue uses an official contractor and union labor, often with an advance warehouse; shipping there before move-in is smoother than to the floor. Portable displays can also ship directly to your hotel.' },
-      { q: 'Do outdoor canopies work in Washington?', a: 'Yes in spring and fall — weight every leg for gusts on paved surfaces. The printed tops provide shade and quick rain cover.' },
-      { q: 'Which displays suit a credential-conscious D.C. audience?', a: 'Clean, credible kits — a fabric backdrop or step & repeat, retractable banners, and a printed table cover — that present your brand professionally.' },
-      { q: 'Is rush production available for D.C. exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Washington, D.C.?', a: 'Yes. Apex ships custom-printed trade show and event displays to Washington and the wider D.C. area — to the Walter E. Washington Convention Center, Gaylord National at National Harbor, a downtown hotel or your office. Everything is printed to order with a free artwork proof; production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Washington?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for D.C. association meetings, policy briefings, awards programs and press events, shipped to your venue or business address. Both take a replaceable graphic over a reusable frame, which suits organizations running an annual meeting each year.' },
+      { q: 'How early should I order for a D.C. association show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Association annual meetings run on fixed calendars, so count back from move-in and allow room for artwork approval, production and shipping rather than ordering in the final days.' },
+      { q: 'How does freight reach the convention center?', a: 'Large shows at the Walter E. Washington Convention Center use an official freight contractor and union labor, usually with an advance warehouse before move-in — pre-delivered freight is smoother than arriving on setup morning. Portable displays are the alternative: they ship to your hotel and set up by hand with no crew.' },
+      { q: 'Do outdoor canopies work in Washington?', a: 'Yes, particularly through the long spring and fall seasons used for festivals, campus and mall-adjacent events, and outdoor briefings. Weight every leg, since D.C. activation space is paved and stakes are generally not permitted, and check permit and setback rules for the specific site before you plan the footprint.' },
+      { q: 'Which displays suit a credential-conscious D.C. audience?', a: 'Understated, well-finished pieces: a seamless tension-fabric wall, retractable banner stands with factual copy rather than sales language, and a fitted table cover. Association, agency and policy audiences treat a booth as a signal of seriousness, so accurate typography and restraint outperform bright promotional graphics.' },
+      { q: 'Can trade show displays be shipped to the Walter E. Washington Convention Center?', a: 'Yes. Apex ships to any D.C.-area address you provide, including the convention center and Gaylord National. We don\'t have a special delivery arrangement with either venue, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'Is rush production available for D.C. exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush covers production only, so allow separate time for shipping and for a federal or hotel mailroom\'s receiving process, which can add a day at the destination.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Washington, D.C.',
+        body: 'D.C. exhibiting is mostly association and government-adjacent work, where a booth is read as a credibility signal before anyone reads the copy. That favors a restrained, well-made set: a seamless tension-fabric or step & repeat backdrop in exact brand colors, retractable banner stands carrying factual program or service copy at the aisle, a printed table cover for the table where literature and sign-up sheets sit, and a canopy for spring and fall outdoor events. Bought together, the pieces match precisely across fabric and hardware. Printed to order and shipped to Washington, D.C.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Washington, D.C.',
+        body: 'Washington\'s outdoor season is generous at both ends of the year, and organizations use it for festivals, community and health fairs, campus events, race-day activations and public outreach days. A printed pop-up canopy gives a recognizable, weather-ready footprint: shade through humid summer weeks, dry cover when a storm crosses, and a clear identity in a crowded row of white tents. Weight every leg — activation sites here are paved and stakes are generally not permitted — and confirm permit, size and setback rules for the specific location. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Washington',
+        body: 'A backdrop in Washington often ends up in a photo that outlives the event. A step-and-repeat backdrop tiles an organization\'s logo behind award presentations, fly-in receptions, press availabilities and recognition programs, keeping attribution in every frame. A straight tension-fabric wall is the exhibit-hall version: one seamless graphic over an aluminum frame that gives an association booth a clean, finished back without the visual noise of pipe and drape. Both collapse into a wheeled case that moves between the convention center and a downtown hotel ballroom, and both accept a replaceable printed graphic each year.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Washington',
+        body: 'A D.C. annual meeting typically spreads across an exhibit hall, several breakout rooms, a hill-day breakfast and an evening reception, and banner stands are the only display format that can cover all of it. Retractable banner stands roll a full-height graphic into a weighted aluminum base and stand in seconds. X-stand banners weigh little and cost less, so a chapter or program can have branding in every room. Tabletop banners brand a registration or advocacy table. Each uses a replaceable printed graphic, so hardware bought this year carries next year\'s theme.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Washington',
+        body: 'Association and agency booths run on the table: membership forms, policy one-pagers, sign-up sheets and a laptop for demos. A rented table under plain linen makes a serious organization look temporary, while a custom printed table cover puts the name and mark at the height people read while they talk. Fitted stretch covers give a taut, formal face; pleated covers give the traditional draped skirt many association programs prefer. Both close on all four sides so boxes and bags stay hidden, print full-color in exact brand colors, fold flat into a case, and machine wash between meetings.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
   'san-francisco': {
+    // San Francisco-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in San Francisco — banner stands, backdrops, table covers and canopies for Moscone Center booths, printed to order and shipped.',
+    specTable: specTableFor('San Francisco'),
     answer:
       'San Francisco is a global technology and life-sciences convention hub, hosting Dreamforce, the Game Developers Conference and the RSA Conference at the Moscone Center in SoMa. Apex prints custom trade show displays and ships them to San Francisco.',
     overview: [
@@ -1173,12 +1279,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For an indoor Moscone booth, a tension-fabric backdrop or step & repeat gives a clean, modern brand wall that photographs well, retractable banner stands hold your message at the aisle, and a fitted table cover turns a rented table into brand space. For rooftop, courtyard and sponsor activations common during big conference weeks, a weighted canopy creates a branded footprint against the bay wind. Lightweight X-stand and tabletop banners suit registration desks and hotel side-events.',
     faqs: [
-      { q: 'Do you ship trade show displays to San Francisco?', a: 'Yes. Apex is an online supplier and ships custom-printed displays to San Francisco and across the Bay Area — to your hotel, the Moscone Center receiving dock, or a business address.' },
-      { q: 'How early should I order for a Moscone show like Dreamforce or RSA?', a: 'Production is 6–8 business days after proof approval (2–3 with rush), plus transit that varies by address. Those conference weeks are the busiest of the year, so order two to three weeks ahead.' },
-      { q: 'Do canopies need weights in San Francisco?', a: 'Yes. Wind off the bay and through the SoMa streets can gust hard, and most activations are on pavement, so weight every leg — ground stakes usually aren’t an option.' },
-      { q: 'Which displays work best inside the Moscone Center?', a: 'A tension-fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor and rooftop activations.' },
-      { q: 'Can you deliver to a downtown San Francisco hotel?', a: 'Yes, to any San Francisco address you provide, including hotel and convention receiving. Confirm the venue’s labelling and delivery-window rules first.' },
-      { q: 'Is rush production available for Bay Area shows?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to San Francisco?', a: 'Yes. Apex is an online supplier and ships custom-printed trade show and event displays to San Francisco and across the Bay Area — to a SoMa hotel, the Moscone Center receiving dock, an advance warehouse or your office. Production runs 6–8 business days (2–3 with rush) after proof approval, before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in San Francisco?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Bay Area conferences, launch events and demo days, shipped to your venue or business address. Both take a replaceable graphic on a reusable frame, which suits companies that exhibit at several Moscone conferences each year.' },
+      { q: 'How early should I order for a Moscone show like Dreamforce or RSA?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Work backwards from move-in and allow room for artwork approval, production and shipping rather than ordering in the last week before a major SoMa conference.' },
+      { q: 'Do canopies need weights in San Francisco?', a: 'Yes. Wind funnels hard through the SoMa street grid and off the bay even on clear days, and nearly every activation site is pavement where ground stakes cannot be used — so water or sand weight bags on all four legs are required for street, plaza and rooftop setups.' },
+      { q: 'Which displays work best inside the Moscone Center?', a: 'Tension-fabric backdrops, retractable banner stands and printed table covers work best inside Moscone: they set up tool-free, avoid installation labor, and read cleanly in a hall built for software demos. Use a seamless fabric wall as the booth back, retractable banners at the aisle, and a fitted cover on the demo table.' },
+      { q: 'Can trade show displays be shipped to the Moscone Center?', a: 'Yes. Apex ships to any San Francisco address you provide, including the Moscone Center and downtown hotels. We don\'t have a special delivery arrangement with the venue, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'What displays suit a startup with a small Moscone booth?', a: 'A tension-fabric backdrop, one retractable banner stand and a fitted table cover cover the whole footprint. The set travels as two cases, sets up without a crew or drayage, and gives a 10×10 a finished look — which matters most at conferences where the booth next door has a full custom build.' },
+      { q: 'Is rush production available for Bay Area shows?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush covers production only, so leave separate margin for shipping into San Francisco and for the venue\'s receiving process once it arrives.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in San Francisco',
+        body: 'A Moscone booth usually has one job: get a demo in front of someone in the ninety seconds they will give you. That argues for restraint. A seamless tension-fabric backdrop carrying the product name and one claim, a retractable banner stand at the aisle, a printed table cover under the laptops, and a canopy only if you also run something outdoors — that is the whole kit for most software, security and life-science exhibitors here. Ordered as a set, the pieces match exactly, so a startup 10×10 reads as finished next to a much larger custom build. Printed to order and shipped to San Francisco.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in San Francisco',
+        body: 'San Francisco\'s outdoor branding happens in plazas, parklets, rooftop decks, street fairs, farmers markets and the sponsor footprints that spill outside Moscone during conference weeks. A printed pop-up canopy is what turns a rented patch of pavement into a recognizable brand space. Heat is rarely the issue — wind is. Gusts run through the SoMa grid and off the bay year-round, and stakes are impossible on pavement, so weight every leg and keep half-walls only on the sheltered side. Marine damp is the other factor: wrinkle-resistant fabric re-hangs clean. Configure a 10×10, 10×15 or 10×20 online.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in San Francisco',
+        body: 'For Bay Area exhibitors, a straight tension-fabric wall is usually the right backdrop: one seamless graphic zipped over an aluminum frame, big enough for an architecture diagram, a dashboard screenshot or a single bold product line, with no seams to distract from a live demo behind it. A step-and-repeat backdrop covers launch parties, press interviews and funding announcements, tiling the logo so every photo carries the brand. Both pack into a wheeled case that fits a hotel room and a service elevator, and both take a replaceable printed graphic between product cycles.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in San Francisco',
+        body: 'Conference weeks in San Francisco scatter a company across the Moscone floor, a hotel side event, a partner happy hour and an office open house, often on the same day. Banner stands are the only display format that keeps up: retractable banner stands roll a full-height graphic into a weighted base and stand in seconds, X-stand banners weigh little enough to carry on foot between SoMa venues, and tabletop banners brand a check-in table. Each uses a replaceable printed graphic, so hardware bought for one conference gets reused with new artwork at the next release.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in San Francisco',
+        body: 'At a Moscone booth the table holds the demo, and everyone in the aisle looks at it. A rented table with house linen and a laptop on top says nothing; a custom printed table cover puts your product name and colors directly beneath the thing you want people to try. Fitted stretch covers pull taut for a clean modern face that suits software and security exhibitors; pleated covers give a draped front for life-science and finance events. Both close on all four sides so cables, cases and bags disappear, print full-color, pack flat into a carry-on, and machine wash.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -1329,6 +1465,10 @@ export const CITY_DETAIL = {
   },
 
   'indianapolis': {
+    // Indianapolis-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Indianapolis — canopies, banner stands, backdrops and table covers for Indiana Convention Center booths, printed to order.',
+    specTable: specTableFor('Indianapolis'),
     answer:
       'Indianapolis is a top Midwest convention city, hosting Gen Con, the PRI Show and the FFA Convention at the skywalk-connected Indiana Convention Center. Apex prints custom trade show displays and ships them to Indianapolis.',
     overview: [
@@ -1356,16 +1496,50 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the demo table. For race-season and outdoor activations, a weighted canopy adds a branded footprint. For hotel meetings and skywalk-connected side-events, lightweight X-stand and tabletop banners set up in seconds.',
     faqs: [
-      { q: 'Do you ship trade show displays to Indianapolis?', a: 'Yes. Apex ships custom-printed displays to Indianapolis and across Indiana — to the Indiana Convention Center, Lucas Oil Stadium, or your business address.' },
-      { q: 'How early should I order for a show like Gen Con or the PRI Show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Those marquee shows are busy — order two to three weeks ahead.' },
-      { q: 'Do I need weights on a canopy in Indianapolis?', a: 'For outdoor and race-season activations, yes — weight every leg for gusts across open lots, since most surfaces are paved and stakes aren’t an option.' },
-      { q: 'Which displays work best inside the Indiana Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor activations.' },
-      { q: 'Can you deliver to a skywalk-connected downtown hotel?', a: 'Yes, to any Indianapolis address you provide, including convention and hotel receiving — just confirm the venue’s labelling and delivery-window rules.' },
-      { q: 'Is rush production available for Indianapolis exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Indianapolis?', a: 'Yes. Apex ships custom-printed trade show and event displays to Indianapolis and across Indiana — to the Indiana Convention Center, Lucas Oil Stadium, the State Fairgrounds or your business address. Everything is printed to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Indianapolis?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Indianapolis conventions, racing-industry events and association meetings, shipped to your venue or business address. The graphic is replaceable on a reusable frame, so a team or exhibitor updates artwork between seasons and keeps the hardware.' },
+      { q: 'How early should I order for a show like Gen Con or the PRI Show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Count backwards from move-in and leave room for artwork approval, production and shipping rather than ordering in the final week before a downtown convention.' },
+      { q: 'Do I need weights on a canopy in Indianapolis?', a: 'Yes for any outdoor or race-season activation. Paddock lots, fairgrounds and downtown plazas are paved or hardpack where stakes are not an option, and open ground here catches gusts easily, so put a water or sand weight bag on every leg before the canopy goes up.' },
+      { q: 'Which displays work best inside the Indiana Convention Center?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best in the Indiana Convention Center: they set up tool-free, avoid installation labor and travel easily through the skywalk system from a connected hotel. Use a step & repeat or tension-fabric wall as the booth back and a fitted cover on the demo table.' },
+      { q: 'Can trade show displays be shipped to the Indiana Convention Center?', a: 'Yes. Apex ships to any Indianapolis address you provide, including the convention center and skywalk-connected hotels. We don\'t have a special delivery arrangement with these venues, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'What displays suit a motorsports or performance exhibitor?', a: 'Tall, high-contrast graphics that read past parked hardware: a tension-fabric backdrop behind the car or engine display, retractable banner stands at the booth corners naming product lines, and a durable table cover for the counter where parts and catalogs sit through a long show.' },
+      { q: 'Is rush production available for Indianapolis exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush shortens production only, so allow separate margin for shipping, particularly for winter dates when Midwest weather can slow freight.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Indianapolis',
+        body: 'Indianapolis packs an unusual range into one downtown: gaming conventions, agriculture, advanced manufacturing and the performance-racing industry all book the same halls. A coordinated display set adapts across them. A tension-fabric or step & repeat backdrop carries the brand above whatever occupies your floor, retractable banner stands name product lines at the aisle, a printed table cover finishes the counter where catalogs and parts sit, and a canopy covers fairgrounds and race-season activations. Buying the set together keeps color consistent across every surface. Everything packs into a case or tube, travels the skywalk by hand, and ships to Indianapolis printed to order.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Indianapolis',
+        body: 'Indiana\'s outdoor season packs a lot into a few months: race weekends and paddock hospitality, county and state fair events, festivals, farmers markets, dealer and equipment demo days, and campus recruiting. A printed pop-up canopy gives you shade through humid Midwest afternoons and a water-resistant roof when a thunderstorm rolls across open ground. Weight all four legs, because fairgrounds and paddock lots are hardpack or asphalt where stakes cannot be driven and wind crosses unbroken. Dye-sublimated graphics keep their color through a full season outdoors. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Indianapolis',
+        body: 'For a performance or manufacturing exhibitor, a backdrop is what keeps your name visible when a car, engine or machine takes up the floor. A straight tension-fabric wall stretches one seamless graphic over an aluminum frame at full booth height, so the brand reads from down the aisle rather than being blocked at eye level. A step-and-repeat backdrop handles driver appearances, sponsor photography, award nights and association receptions. Both break down into a wheeled case that fits in a trailer or a hotel elevator, and both take a replaceable printed graphic when sponsors or product lines change.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Indianapolis',
+        body: 'Downtown Indianapolis is compact and skywalk-connected, so a lot of display hardware here gets carried rather than trucked. Retractable banner stands suit that perfectly: a full-height printed graphic rolls into a weighted aluminum base, stands up in seconds, and packs back into a case one person walks from a connected hotel to the hall. X-stand banners are lighter again and cheap enough to place at several rooms of a multi-track convention. Tabletop banners brand a registration counter. All take replaceable graphics, so hardware bought for one show serves the next year\'s message.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Indianapolis',
+        body: 'Whether the booth is selling gearbox components, seed genetics or a tabletop game, the Indianapolis show table takes a beating over a long weekend — product handled, catalogs stacked, orders written. A custom printed table cover turns that rented surface into brand space and hides the cases stored underneath. Fitted stretch covers give a taut, technical face for manufacturing and motorsports exhibitors; pleated covers give a draped skirt for agriculture and association settings. Both close on all four sides, print full-color in your brand colors, fold flat into the show case, and machine wash between events.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
   'charlotte': {
+    // Charlotte-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Charlotte — canopies, banner stands, backdrops and table covers for Charlotte Convention Center booths, printed to order.',
+    specTable: specTableFor('Charlotte'),
     answer:
       'Charlotte is a major banking, energy and motorsports center, hosting trade shows at the uptown Charlotte Convention Center beside the NASCAR Hall of Fame. Apex prints custom trade show displays and ships them to Charlotte.',
     overview: [
@@ -1393,12 +1567,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the demo table. For outdoor and speedway-adjacent activations, a weighted canopy adds a branded footprint with shade and rain cover. For hotel meetings and uptown side-events, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to Charlotte?', a: 'Yes. Apex ships custom-printed displays to Charlotte and across North Carolina — to the Charlotte Convention Center, the NASCAR Hall of Fame, or your business address.' },
-      { q: 'How early should I order for a Charlotte show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Order a couple of weeks ahead for major dates.' },
-      { q: 'Do canopies handle Charlotte summer storms?', a: 'Yes — the printed tops give shade and quick rain cover for afternoon thunderstorms. Weight every leg for gusts, and dye-sublimated graphics resist the humidity.' },
-      { q: 'Which displays work best inside the Charlotte Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor activations.' },
-      { q: 'Can you deliver to an uptown Charlotte hotel?', a: 'Yes, to any Charlotte address you provide, including convention and hotel receiving — just confirm the venue’s labelling and delivery-window rules.' },
-      { q: 'Is rush production available for Charlotte exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Charlotte?', a: 'Yes. Apex ships custom-printed trade show and event displays to Charlotte and across North Carolina — to the Charlotte Convention Center, the NASCAR Hall of Fame, an uptown hotel or your business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Charlotte?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Charlotte conferences, banking and energy events and racing-industry programming, shipped to your venue or business address. Both use a replaceable graphic over a reusable aluminum frame, so the frame outlasts any single campaign.' },
+      { q: 'How early should I order for a Charlotte show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Working back from your move-in date, leave room for artwork approval, production and shipping rather than ordering in the last week before an uptown event.' },
+      { q: 'Do canopies handle Charlotte summer storms?', a: 'Yes. A printed canopy gives shade through humid Piedmont afternoons and a water-resistant roof when a pop-up thunderstorm builds, which is routine from late spring into summer. Weight all four legs for the gust front that arrives first, especially on the paved lots used for uptown and speedway-adjacent activations.' },
+      { q: 'Which displays work best inside the Charlotte Convention Center?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best in the Charlotte Convention Center: they are portable, set up tool-free and need no installation labor. Use a step & repeat or tension-fabric wall for the booth back, retractable banners at the aisle, and a fitted cover on the demo table.' },
+      { q: 'Can trade show displays be shipped to the Charlotte Convention Center?', a: 'Yes. Apex ships to any Charlotte address you provide, including the convention center and uptown hotels. We don\'t have a special delivery arrangement with these venues, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or route the shipment through the official advance warehouse.' },
+      { q: 'What displays suit a banking or energy-sector event in Charlotte?', a: 'Restrained, well-finished pieces: a seamless tension-fabric wall in corporate brand colors, one or two retractable banner stands with specific service-line copy, and a fitted table cover. Finance and utility audiences read a booth as a credibility signal, so clean typography does more here than heavy promotional graphics.' },
+      { q: 'Is rush production available for Charlotte exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush shortens production only, so plan the shipping leg separately when counting back to a Charlotte move-in or event date.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Charlotte',
+        body: 'Charlotte puts banking, energy, healthcare and motorsports exhibitors in the same uptown hall, and those audiences judge a booth on finish rather than noise. Build around a seamless tension-fabric or step & repeat backdrop in exact brand colors, add retractable banner stands carrying specific service lines at the aisle, brand the meeting table with a printed cover, and keep a canopy for speedway-adjacent and outdoor corporate activations. Ordering the pieces as a set is what makes the colors match across fabric and hardware. Everything is printed to order, packs into a case or tube, and ships to Charlotte.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Charlotte',
+        body: 'The Carolina calendar gives you long, comfortable spring and fall seasons for outdoor work, and Charlotte brands use them: race weekends and speedway hospitality, corporate campus events, festivals, farmers markets, youth sports and community days. A printed pop-up canopy claims that space and covers the two weather problems here — humid summer heat, and the afternoon thunderstorm that appears in an hour. Weight every leg for the gusts those storms push ahead of them, particularly on paved lots where stakes are impossible. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing and reuse it all season.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Charlotte',
+        body: 'A backdrop is the fastest way to make an uptown booth look like it belongs to a serious company. A straight tension-fabric wall stretches one seamless graphic over an aluminum frame — a clean brand statement for a bank, utility or health system where restraint reads as credibility. A step-and-repeat backdrop covers the photographed side of the calendar: sponsor arrivals, driver appearances at the NASCAR Hall of Fame, award dinners and recruiting events. Both pack into a wheeled case that moves between the convention center and a hotel ballroom, and both take a replaceable graphic each year.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Charlotte',
+        body: 'Charlotte\'s uptown core is walkable, so a team often covers a convention booth, a hotel breakout and a client event within a few blocks on the same day. Retractable banner stands make that practical: a full-height graphic rolls into a weighted aluminum base and stands up in seconds wherever it lands. X-stand banners weigh very little and cost less, useful for placing branding at several sessions at once. Tabletop banners brand a registration or recruiting table. All use replaceable printed graphics, so the hardware carries new messaging from one Charlotte event season to the next.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Charlotte',
+        body: 'Most Charlotte booth conversations happen seated at a table with a proposal, a rate sheet or a parts catalog between you — which makes the table the most-photographed and most-used surface you have. A custom printed table cover replaces rented house linen with your colors and logo at exactly that height. Fitted stretch covers pull taut for the polished look finance and energy exhibitors want; pleated covers give a traditional draped front for association and healthcare events. Both close on all four sides to hide storage, print full-color, fold flat, and machine wash after a humid Carolina show weekend.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   }
 };
