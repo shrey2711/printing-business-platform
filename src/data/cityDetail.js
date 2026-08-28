@@ -687,7 +687,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'Few metros match Boston’s concentration of life-science, medical and academic buyers — Kendall Square and the surrounding cluster make it a magnet for biotech and pharma events, while the universities anchor education and research gatherings. A cohesive, professional display kit helps you earn credibility with a discerning audience and stand out in the BCEC’s large Seaport halls.',
     conventionCenters: [
-      { name: 'Boston Convention & Exhibition Center (BCEC)', desc: 'The largest exhibition venue in New England, in the Seaport district, hosting biotech, medical, seafood and technology shows.' },
+      { name: 'Thomas M. Menino Convention and Exhibition Center (formerly the BCEC)', desc: 'The largest exhibition venue in New England, in the Seaport district, renamed in 2025 and still widely called the BCEC. Hosts biotech, medical, technology and Seafood Expo North America.' },
       { name: 'Hynes Convention Center', desc: 'A centrally located Back Bay venue connected to hotels and the Prudential Center, popular for mid-size conferences.' },
       { name: 'Seaport hotels & ballrooms', desc: 'Waterfront hotels near the BCEC provide additional meeting and ballroom space for association programming.' }
     ],
@@ -705,7 +705,7 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a BCEC booth, a tension-fabric backdrop or step & repeat anchors the wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For campus and outdoor activations, a weighted canopy adds shelter. For Hynes and hotel meetings, lightweight X-stand and tabletop banners set up quickly.',
     faqs: [
-      { q: 'Do you ship trade show displays to Boston?', a: 'Yes. Apex ships custom-printed trade show and event displays to Boston and across New England — to the Boston Convention & Exhibition Center, the Hynes Convention Center, a Seaport hotel or your business address. Everything is printed to order with a free artwork proof; production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you ship trade show displays to Boston?', a: 'Yes. Apex ships custom-printed trade show and event displays to Boston and across New England — to the Menino Convention and Exhibition Center (the former BCEC), the Hynes Convention Center, a Seaport hotel or your business address. Everything is printed to order with a free artwork proof; production runs 6–8 business days (2–3 with rush) before transit.' },
       { q: 'Do you offer backdrop printing and step & repeat backdrops in Boston?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Boston conferences, life-science symposia and university events, shipped to your venue or business address. A replaceable graphic on a reusable frame suits research groups and companies that exhibit at several meetings each year.' },
       { q: 'How early should I order for a Boston life-science show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Working back from move-in, leave room for artwork approval, production and shipping instead of ordering in the last week before a BCEC or Hynes event.' },
       { q: 'How does freight reach the BCEC?', a: 'Large BCEC shows use an official freight contractor and usually an advance warehouse that receives shipments before move-in and delivers them to your space — smoother than sending freight to the hall on setup day. Portable displays are the alternative: they ship to your Seaport hotel and are carried in by hand.' },
@@ -948,7 +948,7 @@ export const CITY_DETAIL = {
       ['Healthcare & medical', 'New Orleans is a top host for large national medical and healthcare conventions.'],
       ['Energy & oil and gas', 'Gulf Coast energy and services industries support specialized trade shows.'],
       ['Maritime & logistics', 'The Port of New Orleans underpins maritime, shipping and supply-chain events.'],
-      ['Food & hospitality', 'A world-famous food culture anchors culinary and hospitality gatherings.'],
+      ['Food & hospitality', 'A world-famous food culture anchors culinary and hospitality gatherings, including Farm & Table New Orleans at the convention center.'],
       ['Gaming & entertainment', 'Gaming and entertainment shows use the downtown arena and convention venues.']
     ],
     climate:
@@ -1017,6 +1017,7 @@ export const CITY_DETAIL = {
     ],
     industries: [
       ['Semiconductor & electronics', 'Major semiconductor investment (Intel, TSMC) is fueling electronics and advanced-manufacturing events.'],
+      ['Consumer & pop culture', 'Phoenix Fan Fusion and Game On Expo bring large consumer crowds to the convention center each year.'],
       ['Healthcare & bioscience', 'A growing healthcare and bioscience sector supports medical conventions.'],
       ['Technology', 'An expanding tech base drives B2B and consumer technology shows.'],
       ['Real estate & construction', 'Rapid growth underpins building, real-estate and construction expos.'],
@@ -1196,7 +1197,7 @@ export const CITY_DETAIL = {
     ],
     industries: [
       ['Associations & nonprofits', 'D.C. is the US capital for trade associations and nonprofits and their annual meetings.'],
-      ['Government & defense', 'Federal agencies and contractors drive defense, security and govtech events.'],
+      ['Government & defense', 'Federal agencies and contractors drive defense, security and govtech events, and the Washington Auto Show runs its policy preview day here each January.'],
       ['Education & policy', 'Universities and policy organizations anchor education and research conventions.'],
       ['Healthcare & policy', 'Health-policy and medical-association events are a year-round fixture.'],
       ['Technology & govtech', 'A growing govtech and cybersecurity sector supports B2B technology shows.']
@@ -1401,7 +1402,7 @@ export const CITY_DETAIL = {
     answer:
       'Nashville is a fast-growing convention city for healthcare, music and hospitality, centered on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
     overview: [
-      'Nashville’s downtown Music City Center anchors one of the fastest-growing convention scenes in the country, backed by the city’s standing as a headquarters hub for healthcare management and, of course, the music industry. The nearby Gaylord Opryland resort adds one of the largest non-gaming convention venues in the United States, so the city hosts everything from medical meetings to Summer NAMM.',
+      'Nashville’s downtown Music City Center anchors one of the fastest-growing convention scenes in the country, backed by the city’s standing as a headquarters hub for healthcare management and, of course, the music industry. The nearby Gaylord Opryland resort adds one of the largest non-gaming convention venues in the United States, so the city hosts everything from national medical meetings to music-industry and faith-based conventions.',
       'Exhibitors reach a broad mix of healthcare, hospitality and entertainment buyers, and the walkable downtown keeps energy high. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Nashville hotel, the Music City Center dock or a business address.'
     ],
     whyExhibit:
@@ -1413,9 +1414,9 @@ export const CITY_DETAIL = {
     ],
     industries: [
       ['Healthcare & health services', 'Nashville is a national headquarters hub for hospital and health-services companies, driving major medical and health-business events.'],
-      ['Music & entertainment', 'The music industry anchors events from Summer NAMM to countless music-business gatherings.'],
+      ['Music & entertainment', 'The music industry anchors a steady calendar of music-business, publishing and touring-industry gatherings.'],
       ['Hospitality & tourism', 'A booming tourism economy supports hospitality, food-service and events-industry shows.'],
-      ['Automotive & manufacturing', 'Regional auto and supplier plants underpin manufacturing and industrial expos.'],
+      ['Automotive & manufacturing', 'Regional auto and supplier plants underpin manufacturing and industrial expos, and the Nashville International Auto Show fills the Music City Center each year.'],
       ['Faith-based & publishing', 'Nashville’s publishing and faith-based organizations host large annual conventions.']
     ],
     climate:
@@ -1557,6 +1558,7 @@ export const CITY_DETAIL = {
       ['Banking & finance', 'Charlotte is the second-largest US banking center, driving finance and fintech events.'],
       ['Energy', 'A cluster of energy companies and utilities makes Charlotte a hub for power and energy-sector shows.'],
       ['Motorsports & automotive', 'NASCAR teams and suppliers headquartered nearby anchor racing and automotive events.'],
+      ['Consumer & pop culture', 'Heroes Convention fills the convention center each June, alongside collector and consumer shows downtown.'],
       ['Manufacturing & logistics', 'A strong manufacturing and distribution base supports industrial trade shows.'],
       ['Healthcare', 'Large regional health systems drive medical and health-business conventions.']
     ],
