@@ -640,6 +640,10 @@ export const CITY_DETAIL = {
   },
 
   'boston': {
+    // Boston-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Boston — canopies, banner stands, backdrops and table covers for BCEC and Hynes booths, printed to order with US shipping.',
+    specTable: specTableFor('Boston'),
     answer:
       'Boston is New England’s convention hub and a global life-sciences center, host to major biotech, medical and seafood shows at the Boston Convention & Exhibition Center. Apex prints custom trade show displays and ships them to Boston.',
     overview: [
@@ -667,12 +671,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a BCEC booth, a tension-fabric backdrop or step & repeat anchors the wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For campus and outdoor activations, a weighted canopy adds shelter. For Hynes and hotel meetings, lightweight X-stand and tabletop banners set up quickly.',
     faqs: [
-      { q: 'Do you ship trade show displays to Boston?', a: 'Yes. Apex ships custom-printed displays to Boston and across New England — to the BCEC, the Hynes, or your business address.' },
-      { q: 'How early should I order for a Boston life-science show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. Boston’s biotech and medical seasons are busy — order a few weeks ahead.' },
-      { q: 'How does freight reach the BCEC?', a: 'Large shows use an official contractor and often an advance warehouse; shipping there before move-in is smoother than to the floor. Portable displays can also ship directly to your hotel.' },
-      { q: 'Do outdoor canopies work in the Seaport?', a: 'Yes, with weights on every leg — harbor wind is steady, so water or sand bags are essential for any outdoor activation.' },
-      { q: 'Which displays suit a technical Boston audience?', a: 'Clean, credible kits — a fabric backdrop or step & repeat, retractable banners, and a printed table cover — that present your brand professionally in large halls.' },
-      { q: 'Is rush production available for Boston exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Boston?', a: 'Yes. Apex ships custom-printed trade show and event displays to Boston and across New England — to the Boston Convention & Exhibition Center, the Hynes Convention Center, a Seaport hotel or your business address. Everything is printed to order with a free artwork proof; production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Boston?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Boston conferences, life-science symposia and university events, shipped to your venue or business address. A replaceable graphic on a reusable frame suits research groups and companies that exhibit at several meetings each year.' },
+      { q: 'How early should I order for a Boston life-science show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Working back from move-in, leave room for artwork approval, production and shipping instead of ordering in the last week before a BCEC or Hynes event.' },
+      { q: 'How does freight reach the BCEC?', a: 'Large BCEC shows use an official freight contractor and usually an advance warehouse that receives shipments before move-in and delivers them to your space — smoother than sending freight to the hall on setup day. Portable displays are the alternative: they ship to your Seaport hotel and are carried in by hand.' },
+      { q: 'Do outdoor canopies work in the Seaport?', a: 'Yes, with a weight bag on every leg. Harbor wind in the Seaport is steady rather than occasional, and the district is entirely paved, so stakes are not an option — water or sand bags do the anchoring for waterfront and plaza activations.' },
+      { q: 'Which displays suit a technical Boston audience?', a: 'Understated, well-made pieces: a seamless tension-fabric backdrop that can carry a diagram or data at full height, retractable banner stands with specific rather than promotional copy, and a fitted table cover for reprints and demos. Boston\'s research and clinical audiences read closely, so precision reads better than volume.' },
+      { q: 'Can trade show displays be shipped to the Boston Convention & Exhibition Center?', a: 'Yes. Apex ships to any Boston address you provide, including the BCEC and the Hynes. We don\'t have a special delivery arrangement with either venue, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'Is rush production available for Boston exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush shortens production only, so allow separate margin for shipping, particularly for a winter move-in when New England weather can slow transit.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Boston',
+        body: 'Boston booths are read, not skimmed. Biotech, medical, robotics and academic audiences will stand and study a diagram, so the display has to hold real information without looking cluttered. A tension-fabric or step & repeat backdrop gives you a full-height surface for a mechanism, pipeline or platform story; retractable banner stands break the message into specific claims at the aisle; a printed table cover anchors the table where reprints and samples sit; a canopy covers Seaport and campus activations outdoors. Ordering the set together keeps type and color consistent across every surface. Printed to order and shipped to Boston.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Boston',
+        body: 'Boston\'s outdoor season is short, so brands use it hard: Seaport waterfront events, campus recruiting and orientation fairs, farmers markets, neighborhood festivals, road races and summer corporate activations. A printed pop-up canopy gives you a branded, weather-ready footprint for all of it, with shade in humid July weeks and cover when a coastal shower blows through. Wind is the constant here — harbor gusts run steady across open pavement where stakes cannot be driven, so weight every leg with water or sand bags. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing and store it flat over winter.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Boston',
+        body: 'For a life-science exhibitor, a straight tension-fabric wall is often the most useful thing in the booth: one seamless graphic over an aluminum frame, wide enough to carry a mechanism of action, a trial timeline or a robotics platform at a size people can actually read from the aisle. A step-and-repeat backdrop handles the other half of Boston\'s calendar — award nights, alumni events, launches and press photography — tiling your logo so every photo carries the brand. Both pack into a wheeled case for the Seaport walk, and both take a replaceable graphic when the science or the campaign moves on.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Boston',
+        body: 'Boston programming scatters across the BCEC floor, Hynes meeting rooms, Seaport hotel ballrooms and Cambridge campus space, so branding usually needs to appear in several rooms on the same day. Retractable banner stands cover the booth with a full-height graphic that rolls into a weighted base. X-stand banners weigh little and cost less, which makes them practical for poster sessions, satellite symposia and recruiting tables at once. Tabletop banners brand a registration counter. All go up tool-free, travel in slim cases on the Red Line or as checked luggage, and take replaceable graphics between events.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Boston',
+        body: 'At a Boston conference the table carries reprints, device samples, a laptop demo and a stack of business cards, and it is where the substantive conversation happens after someone stops. A custom printed table cover makes that surface part of the display rather than rented furniture with a logo card on it. Fitted stretch covers give a taut, clinical-looking face that suits medical and technical exhibitors; pleated covers give a traditional draped front for university and association events. Both close on all four sides to hide cases and coats, print full-color, fold flat, and machine wash between meetings.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -788,6 +822,10 @@ export const CITY_DETAIL = {
   },
 
   'denver': {
+    // Denver-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Denver — canopies, banner stands, backdrops and table covers for Colorado Convention Center booths, printed to order.',
+    specTable: specTableFor('Denver'),
     answer:
       'Denver’s Colorado Convention Center hosts outdoor-industry, aerospace, energy and natural-products shows a mile above sea level. Apex prints custom trade show displays and ships them to Denver.',
     overview: [
@@ -815,16 +853,50 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For outdoor and mountain-event activations, a weighted canopy adds shade and shelter. For hotel and resort meetings, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to Denver?', a: 'Yes. Apex ships custom-printed displays to Denver and across Colorado — to the Colorado Convention Center, Gaylord Rockies, or your business address.' },
-      { q: 'Do graphics fade faster at Denver’s altitude?', a: 'UV is stronger a mile up, which is why we print with dye sublimation for strong fade resistance — a good match for the high-altitude sun.' },
-      { q: 'How early should I order for a Denver show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Order a couple of weeks ahead for major shows.' },
-      { q: 'Do outdoor canopies work in Denver weather?', a: 'Yes — weight every leg for gusty winds and be ready for quick weather changes. A canopy gives shade at altitude and shelter from sudden showers or snow.' },
-      { q: 'Can you deliver to the Colorado Convention Center?', a: 'Yes, to any Denver address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
-      { q: 'Is rush production available for Denver exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Denver?', a: 'Yes. Apex ships custom-printed trade show and event displays to Denver and across Colorado — to the Colorado Convention Center, the Gaylord Rockies, the National Western Complex or your business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Denver?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Denver trade shows, outdoor-industry events and corporate gatherings, shipped to your venue or business address. The graphic is replaceable on a reusable aluminum frame, so a brand can refresh its wall between seasons without new hardware.' },
+      { q: 'Do graphics fade faster at Denver\'s altitude?', a: 'UV is measurably stronger a mile above sea level, which is exactly why we print with dye sublimation: the ink bonds into the fabric rather than sitting on top of it, giving strong fade resistance for canopy tops, half-walls and outdoor banners used through a Colorado summer.' },
+      { q: 'How early should I order for a Denver show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Count backwards from move-in and leave room for artwork approval, production and shipping rather than ordering in the final days before a convention center show.' },
+      { q: 'Do outdoor canopies work in Denver weather?', a: 'Yes, provided every leg is weighted. Denver weather changes fast — a sunny morning can turn to gusts, hail or even shoulder-season snow — so water or sand bags on all four legs are essential, and a printed canopy gives both shade at altitude and quick shelter when conditions turn.' },
+      { q: 'Can trade show displays be shipped to the Colorado Convention Center?', a: 'Yes. Apex ships to any Denver address you provide, including the convention center and Gaylord Rockies. We don\'t have a special delivery arrangement with either venue, so give us the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'What displays suit an outdoor-industry or natural-products show?', a: 'Fabric-forward pieces that look at home next to gear: a tension-fabric backdrop with a large environmental image, retractable banner stands for product lines, a branded table cover for sampling, and a canopy if the brand also runs demo days or festival footprints outdoors through the summer.' },
+      { q: 'Is rush production available for Denver exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush covers production only, so plan the shipping leg separately, especially in winter when mountain-corridor weather can slow freight into Denver.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Denver',
+        body: 'Denver\'s show calendar leans toward outdoor, natural-products, aerospace and energy exhibitors — audiences that respond to real materials and clear photography rather than dense sales copy. Build the booth from a tension-fabric or step & repeat backdrop carrying one strong image, retractable banner stands naming product lines at the aisle, a printed table cover for sampling and paperwork, and a canopy for the demo days and festival footprints many Colorado brands run alongside the show. Bought as a set, the pieces match in color and finish, which is what separates a considered booth from an assembled one. Printed to order, shipped to Denver.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Denver',
+        body: 'Colorado brands live outdoors, and a printed canopy is the piece that gets used most: demo days, trailhead activations, festivals, farmers markets, race expos, stock-show grounds and campus events. Altitude is what makes the shade genuinely valuable — UV at a mile up is harsh, and a covered booth keeps visitors comfortable far longer. It also cuts both ways: weather turns quickly here, so a water-resistant printed top earns its place when an afternoon storm or shoulder-season snow arrives. Weight all four legs for gusts on paved ground. Configure a 10×10, 10×15 or 10×20 with printed walls online.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Denver',
+        body: 'Outdoor and natural-products exhibitors sell an environment as much as a product, and a backdrop is where that environment goes. A straight tension-fabric wall stretches one seamless photograph — a range, a river, a trail, a facility — over an aluminum frame, with no seams or hardware interrupting the image. A step-and-repeat backdrop covers the other need: logo-tiled walls for athlete appearances, sponsor photography and award presentations at Denver events. Both frames break down into a wheeled case that fits a truck or an overhead bin, and both take replaceable printed graphics as the season\'s campaign changes.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Denver',
+        body: 'A Denver brand often works a show downtown and a demo day in the mountains in the same week, so display hardware has to ride in a vehicle and go up without a crew. Retractable banner stands roll a full-height graphic into a weighted aluminum base and stand in seconds at the booth corner. X-stand banners weigh almost nothing, which matters when gear already fills the truck. Tabletop banners brand a sampling counter. Each takes a replaceable printed graphic, so the same hardware carries a spring line, a summer festival run and a fall trade show without being replaced.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Denver',
+        body: 'Sampling is central to Denver\'s natural-products and beverage shows, and sampling happens at a table — usually a rented one, usually under house linen that fights your packaging. A custom printed table cover replaces it with your colors at hand height, so photographs and passing traffic both register the brand. Fitted stretch covers pull taut for a modern, outdoor-brand look; pleated covers give a formal draped front for association and aerospace settings. Both close on all four sides so cases and stock stay out of sight, print full-color, pack flat into a gear bin, and machine wash after a sampling day.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
   'new-orleans': {
+    // New Orleans-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in New Orleans — canopies, banner stands, backdrops and table covers for Morial Convention Center booths, printed to order.',
+    specTable: specTableFor('New Orleans'),
     answer:
       'New Orleans hosts a heavy calendar of medical, energy and food shows at the Ernest N. Morial Convention Center beside the French Quarter. Apex prints custom trade show displays and ships them to New Orleans.',
     overview: [
@@ -852,12 +924,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a Morial Center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For outdoor and riverfront activations, a weighted canopy adds shade and shelter. For French Quarter hotel events, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to New Orleans?', a: 'Yes. Apex ships custom-printed displays to New Orleans and across Louisiana — to the Ernest N. Morial Convention Center or your business address.' },
-      { q: 'How early should I order for a New Orleans convention?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. The city’s big medical conventions are busy — order well ahead.' },
-      { q: 'Do canopies handle New Orleans heat and rain?', a: 'Yes — canopies give real shade and quick rain cover; the graphics are UV-stable, and you should weight every leg for sudden storm gusts.' },
-      { q: 'Can you deliver to the Morial Convention Center?', a: 'Yes, to any New Orleans address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
-      { q: 'Which displays suit the Morial Center’s huge halls?', a: 'A fabric backdrop or step & repeat that reads at distance, retractable banners, and a printed table cover — a portable, high-impact kit.' },
-      { q: 'Is rush production available for New Orleans exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to New Orleans?', a: 'Yes. Apex ships custom-printed trade show and event displays to New Orleans and across Louisiana — to the Ernest N. Morial Convention Center, a French Quarter or downtown hotel, or your business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in New Orleans?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for New Orleans conventions, receptions and press events, shipped to your venue or business address. Both use a replaceable graphic over a reusable frame, which suits associations that return to the Morial Center year after year.' },
+      { q: 'How early should I order for a New Orleans convention?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. For a large medical or energy convention, work backwards from move-in and leave room for artwork approval, production and shipping rather than ordering in the final days.' },
+      { q: 'Do canopies handle New Orleans heat and rain?', a: 'Yes. Shade is the main draw in Gulf Coast humidity, and the water-resistant printed top handles the heavy rain that arrives suddenly here. Weight all four legs — storms lead with wind, the ground is paved almost everywhere downtown, and water pools quickly, so keep cases and electronics off the deck.' },
+      { q: 'Can trade show displays be shipped to the Ernest N. Morial Convention Center?', a: 'Yes. Apex ships to any New Orleans address you provide, including the Morial Convention Center. We don\'t have a special delivery arrangement with the venue, so give us the exact receiving address and follow the show\'s current freight, labeling and delivery-window requirements, or route the shipment through the official advance warehouse.' },
+      { q: 'Which displays suit the Morial Center\'s huge halls?', a: 'Fabric backdrops, retractable banner stands and printed table covers suit roughly 1.1 million square feet of contiguous exhibit space: they read from a distance, set up tool-free and avoid installation labor. Anchor with a tension-fabric or step & repeat wall, mark the aisle with retractable banners, and finish the table with a fitted cover.' },
+      { q: 'Does Gulf humidity affect fabric displays in New Orleans?', a: 'Not in any way that shows. Dye-sublimated graphics bond the ink into polyester fabric, so humidity does not lift or smear them, and wrinkle-resistant fabric re-hangs cleanly after a case has been sitting in moist air. Let a backdrop hang for an hour after setup and creases relax on their own.' },
+      { q: 'Is rush production available for New Orleans exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush shortens production only, so plan the shipping leg separately, and allow extra margin during the June-to-November hurricane season when Gulf transit can be disrupted.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in New Orleans',
+        body: 'The Morial Convention Center runs one of the longest contiguous exhibit floors in the country, so a booth here competes down a very deep sightline. Height and clarity win: a tension-fabric or step & repeat backdrop puts your name above the crowd, retractable banner stands carry one short line each at the aisle, a printed table cover brands the table where the actual conversation happens, and a canopy handles riverfront and courtyard activations. Ordering the set from one supplier keeps color consistent across every fabric, so a compact booth still reads as a single designed stand. Printed to order and shipped to New Orleans.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in New Orleans',
+        body: 'Outdoor branding is constant in New Orleans — festival grounds, riverfront events, parade-season activations, courtyard receptions, second-line gatherings and campus days. A printed pop-up canopy is the practical answer to a climate that delivers heat, humidity and sudden heavy rain in the same afternoon: shade keeps people at your booth, and a water-resistant top keeps the giveaways dry. Weight every leg, because storms lead with gusts and downtown surfaces are paved. Dye-sublimated graphics resist UV and Gulf humidity without lifting. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing and reuse it all season.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in New Orleans',
+        body: 'New Orleans conventions run heavy social programming, so a backdrop often works two shifts: the booth wall by day and a photo wall at the evening reception. A step-and-repeat backdrop tiles your logo for those receptions, award presentations and press photos. A straight tension-fabric wall gives the daytime version — one seamless graphic zipped over an aluminum frame, giving a clean back to a booth on the Morial floor. Both collapse into a wheeled case that moves easily between the convention center and a hotel ballroom, and both take a replaceable printed graphic for next year\'s meeting.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in New Orleans',
+        body: 'A New Orleans convention spreads across the exhibit hall, hotel ballrooms and off-site venues within walking distance, and banner stands are what let one team brand all of it. Retractable banner stands roll a full-height graphic into a weighted base and stand up in seconds wherever you set them down. X-stand banners are light enough to carry several blocks by hand and cheap enough to place at every satellite session. Tabletop banners brand a registration counter. All take replaceable printed graphics, so hardware bought for one convention keeps working for the next event on the calendar.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in New Orleans',
+        body: 'Medical, energy and maritime exhibitors all end up doing business across a rented six- or eight-foot table, and bare edges with boxes underneath undercut everything else in the booth. A custom printed table cover turns it into brand surface: fitted stretch covers pull taut for a clean, technical look, pleated covers give the draped front that suits association and hospitality settings, and both close on all four sides so cases stay hidden. They print full-color in your brand colors, fold flat into the show case, and machine wash — practical after a humid week on the New Orleans floor.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -1156,6 +1258,10 @@ export const CITY_DETAIL = {
   },
 
   'nashville': {
+    // Nashville-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Nashville — canopies, banner stands, backdrops and table covers for Music City Center booths, printed to order and shipped.',
+    specTable: specTableFor('Nashville'),
     answer:
       'Nashville is a fast-growing convention city for healthcare, music and hospitality, centered on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
     overview: [
@@ -1183,12 +1289,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a Music City Center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the demo table. For outdoor, rooftop and honky-tonk-district activations, a weighted canopy adds shade and rain cover. For hotel meetings and Opryland events, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to Nashville?', a: 'Yes. Apex ships custom-printed displays to Nashville and across Tennessee — to the Music City Center, Gaylord Opryland, or your business address.' },
-      { q: 'How early should I order for a Nashville show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. Nashville’s convention calendar is busy, so order a couple of weeks ahead.' },
-      { q: 'Do canopies handle Nashville summer storms?', a: 'Yes — the printed tops give shade and quick rain cover for pop-up thunderstorms. Weight every leg for gusts, and dye-sublimated graphics resist the humidity.' },
-      { q: 'Which displays work best inside the Music City Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor activations.' },
-      { q: 'Can you deliver to Gaylord Opryland?', a: 'Yes, to any Nashville address you provide, including resort convention receiving — just confirm the venue’s labelling and delivery-window rules.' },
-      { q: 'Is rush production available for Nashville exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Nashville?', a: 'Yes. Apex ships custom-printed trade show and event displays to Nashville and across Tennessee — to the Music City Center, Gaylord Opryland, a downtown hotel or your business address. Everything is printed to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Nashville?', a: 'Yes — step & repeat backdrops get heavy use in Nashville for showcases, album events, award nights and sponsor photography, alongside tension-fabric walls for trade show booths. Both are printed to order, ship to your venue or business address, and take a replaceable graphic so one frame serves many events.' },
+      { q: 'How early should I order for a Nashville show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Count back from move-in day and leave room for artwork approval, production and shipping rather than ordering in the final week before a Music City Center event.' },
+      { q: 'Do canopies handle Nashville summer storms?', a: 'Yes. A printed canopy gives shade through humid Tennessee afternoons and a water-resistant roof when a pop-up thunderstorm arrives, which is common from late spring through summer. Weight all four legs for the gust front that precedes the rain, especially on the paved lots used for downtown activations.' },
+      { q: 'Which displays work best inside the Music City Center?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best inside the Music City Center: they are portable, set up tool-free and need no installation labor. Use a step & repeat or tension-fabric wall for the booth back, retractable banners at the aisle, and a fitted cover on the demo table.' },
+      { q: 'Can trade show displays be shipped to the Music City Center or Gaylord Opryland?', a: 'Yes. Apex ships to any Nashville address you provide, including both venues. We don\'t have a special delivery arrangement with either, so send the exact receiving address and follow the show\'s or resort\'s current freight, labeling and delivery-window rules, or ship through the official advance warehouse.' },
+      { q: 'What displays suit a music or entertainment event in Nashville?', a: 'A step & repeat wall for photos, retractable banner stands flanking a stage or merch area, and a printed table cover for the merch table itself. All three set up in minutes without tools, which matters at venues where load-in and changeover windows are short.' },
+      { q: 'Is rush production available for Nashville exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush shortens production only, so plan the shipping leg separately when working backwards from a Nashville show or event date.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Nashville',
+        body: 'Nashville puts two audiences in front of you — healthcare executives at Music City Center conventions and the music, hospitality and publishing worlds that fill the rest of the calendar — and a coordinated display set works for both. A step & repeat or tension-fabric backdrop builds the brand wall, retractable banner stands carry a single clear message at the aisle, a printed table cover finishes the demo or signing table, and a canopy covers the outdoor activations that downtown and Broadway-adjacent events invite. Buying the pieces together keeps colors matched. Everything is printed to order, packs into a case or tube, and ships to Nashville.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Nashville',
+        body: 'Nashville does a lot of business outdoors: festival footprints, downtown activations, tailgates, fairground events, brewery and distillery days, and summer sampling programs. A printed pop-up canopy is what makes those spaces yours, and in Tennessee it does double duty — shade through humid afternoons, then a water-resistant roof when a thunderstorm builds with little warning. Weight all four legs, because those storms lead with wind and most activation sites are paved. Dye-sublimated graphics resist both UV and humidity, staying saturated across a full festival season. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Nashville',
+        body: 'In a city built on performance and photography, backdrop printing gets ordered for more than trade shows. A step-and-repeat backdrop tiles a logo behind showcases, album release nights, award presentations, sponsor step-offs and artist meet-and-greets — the wall that makes every photo carry the brand. A straight tension-fabric wall is the exhibit version: one seamless graphic over an aluminum frame giving a booth at the Music City Center a clean, finished back. Both stretch on and off quickly, pack into a wheeled case that survives a load-in, and take a replaceable printed graphic for the next campaign or tour.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Nashville',
+        body: 'Nashville venues run tight changeovers, so anything that needs tools or a crew is a problem. Retractable banner stands solve it: a full-height printed graphic rolls out of a weighted aluminum base in seconds and rolls back just as fast at the end of the night. X-stand banners are lighter and cheaper again, useful when a conference program, a merch area and a hospitality suite all need branding at once. Tabletop banners work on a registration or signing table. Every one takes a replaceable graphic, so hardware bought for a convention keeps working through the event season.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Nashville',
+        body: 'Whether the table is holding health-system literature at a convention or merch at a showcase, it is where people stop and where money changes hands — and rented house linen makes it look like every other table in the room. A custom printed table cover puts your colors and logo at the height buyers and fans actually look. Fitted stretch covers give a taut modern face; pleated covers give a traditional draped skirt for association and healthcare settings. Both close on all four sides to hide stock, print full-color in your brand colors, fold flat, and machine wash after a humid Nashville weekend.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
