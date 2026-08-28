@@ -546,6 +546,11 @@ for (const lc of LOCAL_CATEGORIES) {
         ? `<h2>${esc(city.city)} FAQ</h2>${detail.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
         : '';
       const boothLinks = `<p>Complete your ${esc(city.city)} booth: <a href="/custom-canopies">canopy tents</a> · <a href="/banner-stands">banner stands</a> · <a href="/backdrops">backdrops</a> · <a href="/table-covers">table covers</a> · <a href="/trade-show-displays">all trade show displays</a>.</p>`;
+      // Dedicated contextual product H2 sections — displays (hub) page only, when
+      // the city supplies them (see cityDetail.productSections).
+      const productSectionsHtml = (lc.slug === 'trade-show-displays' && Array.isArray(detail?.productSections))
+        ? detail.productSections.map((s) => `<h2>${esc(s.h2)}</h2><p>${esc(s.body)}</p>${Array.isArray(s.links) && s.links.length ? `<p>${s.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}`).join('')
+        : '';
       const crumbs = cityBreadcrumb(lc.label, lc.slug, city);
       const crumbNav = crumbs.map((c, i) => i === crumbs.length - 1
         ? `<span>${esc(c.name)}</span>`
@@ -558,6 +563,7 @@ for (const lc of LOCAL_CATEGORIES) {
         <h2>${esc(lc.label)} for ${esc(city.city)} events</h2>
         <ul>${productLis}</ul>
         ${boothLinks}
+        ${productSectionsHtml}
         <h2>Trade shows in ${esc(city.city)}</h2>
         <p>${esc(city.city)} hosts ${esc(city.scene)}. Whether you're exhibiting at ${esc(city.venue)} or
         running an outdoor activation nearby, ${esc(BRAND)} prints your ${esc(lc.label.toLowerCase())} in your

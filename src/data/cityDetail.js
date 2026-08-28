@@ -791,6 +791,35 @@ export const CITY_DETAIL = {
       { q: 'Which displays work best inside the Seattle Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor and waterfront activations.' },
       { q: 'Can you deliver across the Arch and Summit buildings?', a: 'Yes, to any Seattle address you provide, including convention receiving — just confirm which building and the venue’s labelling and delivery-window rules.' },
       { q: 'Is rush production available for Seattle exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+    ],
+    // Dedicated contextual product sections — rendered only on the displays
+    // (hub) city page. Keep alongside the existing product cards/links.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Seattle',
+        body: 'A professional Seattle booth comes together from a few coordinated pieces rather than one big structure. Pair a step & repeat or tension-fabric backdrop as your booth wall with retractable banner stands at the aisle, a printed table cover on the demo table, and a canopy for any waterfront or outdoor activation. Ordering these trade show booth displays together from one supplier keeps every piece color-matched to your brand — the fastest way to make a compact Seattle exhibition stand read as a much larger, custom trade show display.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Seattle',
+        body: 'Custom canopy tents earn their place in Seattle for anything outdoors — waterfront brand activations along Elliott Bay, street festivals, farmers markets, corporate activations and outdoor trade shows. A printed pop-up canopy gives you a branded, weather-ready footprint with genuine rain cover for the wet Northwest season; weight the legs for breezes off Puget Sound. Configure a custom canopy in 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Seattle',
+        body: 'For a branded booth wall or a photography wall at a Seattle event, our backdrop printing covers two styles: a step-and-repeat backdrop that repeats your logo for press and sponsor photos, and a smooth tension-fabric display wall for a clean, seamless booth back. Both are printed to order and pack down for the trip to the Seattle Convention Center or a downtown hotel. Use a trade show backdrop as your booth’s anchor and photo background.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Seattle',
+        body: 'Banner stands are the portable workhorses of a Seattle booth. Retractable banner stands roll their graphic into a weighted base for aisle-facing messaging; X-stand banners are the lightweight, low-cost option; and a tabletop banner suits a registration or check-in table. All set up tool-free and travel easily to the convention center or a downtown hotel.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Seattle',
+        body: 'A custom table cover turns a rented Seattle demo or registration table into branded space. Choose a fitted stretch table cover for a tight, modern look or a pleated table cover for a classic draped throw — both closed-back and printed in your brand colors. Trade show table covers pack flat and are machine washable for repeat shows.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 

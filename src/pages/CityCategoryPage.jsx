@@ -169,6 +169,20 @@ export default function CityCategoryPage({ categoryKey }) {
         )}
       </section>
 
+      {cat.slug === 'trade-show-displays' && Array.isArray(detail?.productSections) && detail.productSections.map((s) => (
+        <section className="section-block" key={s.h2}>
+          <h2>{s.h2}</h2>
+          <p>{s.body}</p>
+          {Array.isArray(s.links) && s.links.length > 0 && (
+            <p className="info-links">
+              {s.links.map((l, i) => (
+                <span key={l.to}>{i > 0 ? ' · ' : ''}<Link to={l.to}>{l.label}</Link></span>
+              ))}
+            </p>
+          )}
+        </section>
+      ))}
+
       <section className="section-block card">
         <h2>Trade shows in {city.city}</h2>
         <p>
