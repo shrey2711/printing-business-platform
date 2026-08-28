@@ -373,7 +373,7 @@ invented) or downgrade them to noindex.
 | /trade-show-displays/indianapolis | 2234 | 78% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/nashville | 2230 | 78% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/san-francisco | 2344 | 78% | 6 | index | yes | 69 | Keep/index (distinct content) |
-| /trade-show-displays/washington-dc | 2202 | 78% | 6 | index | yes | 68 | Keep/index (distinct content) |
+| /trade-show-displays/washington-dc | 2208 | 78% | 6 | index | yes | 68 | Keep/index (distinct content) |
 | /trade-show-displays/atlanta | 2203 | 77% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/dallas | 2183 | 77% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/los-angeles | 2242 | 77% | 6 | index | yes | 69 | Keep/index (distinct content) |
@@ -383,6 +383,6 @@ invented) or downgrade them to noindex.
 | /trade-show-displays/boston | 2125 | 76% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/chicago | 2237 | 76% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/denver | 2136 | 76% | 6 | index | yes | 69 | Keep/index (distinct content) |
-| /trade-show-displays/new-york | 2280 | 76% | 6 | index | yes | 69 | Keep/index (distinct content) |
+| /trade-show-displays/new-york | 2283 | 76% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/phoenix | 2107 | 76% | 6 | index | yes | 69 | Keep/index (distinct content) |
 | /trade-show-displays/seattle | 2286 | 73% | 6 | index | yes | 69 | Keep/index (distinct content) |

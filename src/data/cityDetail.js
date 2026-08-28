@@ -443,17 +443,17 @@ export const CITY_DETAIL = {
         links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
       },
       {
-        h2: 'Trade Show Backdrops & Backdrop Printing in New York',
+        h2: 'Trade Show Backdrops & Backdrop Printing in New York City',
         body: 'In a media city, the wall behind you is a publishing surface. A step-and-repeat backdrop tiles your logo for press lines, launch parties, fashion presentations and influencer content — the classic New York media wall, and the reason backdrop printing gets ordered here for events that are not trade shows at all. A straight tension-fabric wall does the quieter job: one continuous graphic over an aluminum frame, giving a clean booth back at the Javits Center without pipe and drape showing through. Both use a replaceable printed graphic, so a returning exhibitor or agency reprints per campaign and keeps the frame.',
         links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
       },
       {
-        h2: 'Banner Stands & Retractable Banner Stands in New York',
+        h2: 'Banner Stands & Retractable Banner Stands in New York City',
         body: 'Banner stands are the most New York display we make: they arrive by parcel, ride a subway or a cab, go up in under a minute without a crew, and store in a closet the width of a coat. Retractable banner stands pull a tall graphic from a weighted base for booth corners and entrances; X-stand banners are light and cheap enough to run several across a showroom, panel event or pop-up; tabletop banners brand a counter or registration desk. Each takes a replaceable graphic, so an agency or brand can rotate messages between Javits shows, showroom appointments and client events all season.',
         links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
       },
       {
-        h2: 'Custom Trade Show Table Covers in New York',
+        h2: 'Custom Trade Show Table Covers in New York City',
         body: 'When your NYC booth is a table and two chairs — which it often is, given what floor space costs here — the tablecloth is the branding. A custom printed table cover replaces the rented house linen with your colors, logo and message at seated eye level. Fitted stretch covers pull taut for a sharp, modern look that photographs well at retail and fashion shows; pleated covers give a traditional draped front for association and finance events. Both close on all four sides so cases and coats disappear underneath. They pack flat in a carry-on, wash between events, and pair with a matching banner and backdrop.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
@@ -1230,17 +1230,17 @@ export const CITY_DETAIL = {
         links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
       },
       {
-        h2: 'Trade Show Backdrops & Backdrop Printing in Washington',
+        h2: 'Trade Show Backdrops & Backdrop Printing in Washington, D.C.',
         body: 'A backdrop in Washington often ends up in a photo that outlives the event. A step-and-repeat backdrop tiles an organization\'s logo behind award presentations, fly-in receptions, press availabilities and recognition programs, keeping attribution in every frame. A straight tension-fabric wall is the exhibit-hall version: one seamless graphic over an aluminum frame that gives an association booth a clean, finished back without the visual noise of pipe and drape. Both collapse into a wheeled case that moves between the convention center and a downtown hotel ballroom, and both accept a replaceable printed graphic each year.',
         links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
       },
       {
-        h2: 'Banner Stands & Retractable Banner Stands in Washington',
+        h2: 'Banner Stands & Retractable Banner Stands in Washington, D.C.',
         body: 'A D.C. annual meeting typically spreads across an exhibit hall, several breakout rooms, a hill-day breakfast and an evening reception, and banner stands are the only display format that can cover all of it. Retractable banner stands roll a full-height graphic into a weighted aluminum base and stand in seconds. X-stand banners weigh little and cost less, so a chapter or program can have branding in every room. Tabletop banners brand a registration or advocacy table. Each uses a replaceable printed graphic, so hardware bought this year carries next year\'s theme.',
         links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
       },
       {
-        h2: 'Custom Trade Show Table Covers in Washington',
+        h2: 'Custom Trade Show Table Covers in Washington, D.C.',
         body: 'Association and agency booths run on the table: membership forms, policy one-pagers, sign-up sheets and a laptop for demos. A rented table under plain linen makes a serious organization look temporary, while a custom printed table cover puts the name and mark at the height people read while they talk. Fitted stretch covers give a taut, formal face; pleated covers give the traditional draped skirt many association programs prefer. Both close on all four sides so boxes and bags stay hidden, print full-color in exact brand colors, fold flat into a case, and machine wash between meetings.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
