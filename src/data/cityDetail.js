@@ -758,7 +758,7 @@ export const CITY_DETAIL = {
 
   'seattle': {
     answer:
-      'Seattle is a Pacific Northwest technology, aerospace and maritime hub, hosting PAX West and major trade shows at the expanded Seattle Convention Center. Apex prints custom trade show displays and ships them to Seattle.',
+      'Seattle is a Pacific Northwest technology, aerospace and maritime hub, hosting PAX West and major trade shows at the expanded Seattle Convention Center. Apex prints custom trade show and exhibition displays and ships them to Seattle.',
     overview: [
       'Seattle’s downtown Seattle Convention Center — expanded with its Summit building — anchors a convention scene built on cloud technology, aerospace, maritime industries and specialty food and coffee. Home to Amazon and Microsoft and a dense startup ecosystem, the city draws technical, detail-oriented audiences, and events like PAX West pack the halls each year.',
       'That audience notices build quality, and the damp Northwest climate rewards displays that travel and re-hang well. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Seattle hotel, the convention center dock or a business address.'
@@ -782,9 +782,10 @@ export const CITY_DETAIL = {
     planning:
       'The Seattle Convention Center uses an official freight contractor, usually with an advance warehouse and union labor at larger shows — budget for material handling and confirm receiving windows across the Arch and Summit buildings. Portable displays travel as a case or tube and set up without a crew, handy in a walkable downtown. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and PAX week and peak conference dates fill quickly.',
     bestDisplays:
-      'For a convention-center booth, a tension-fabric backdrop or step & repeat anchors the wall, retractable banners carry your headline at the aisle, and a fitted table cover finishes the demo table. For waterfront, market and outdoor activations, a weighted canopy adds shade and rain cover. For hotel meetings and side-events, lightweight X-stand and tabletop banners set up in seconds.',
+      'For a convention-center booth, custom backdrop printing — a tension-fabric backdrop or step & repeat media wall — anchors the wall, retractable banner stands carry your headline at the aisle, and a custom printed table cover finishes the demo table. For waterfront, market and outdoor activations, a weighted canopy adds shade and rain cover. For hotel meetings and smaller event displays, lightweight X-stand and tabletop banners set up in seconds.',
     faqs: [
-      { q: 'Do you ship trade show displays to Seattle?', a: 'Yes. Apex ships custom-printed displays to Seattle and across Washington — to the Seattle Convention Center, Lumen Field Event Center, or your business address.' },
+      { q: 'Do you ship trade show displays to Seattle?', a: 'Yes. Apex ships custom-printed trade show and event displays to Seattle and across Washington — to the Seattle Convention Center, Lumen Field Event Center, or your business address.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Seattle?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Seattle exhibitions and press events, made to order and shipped to your venue or business address. See our Seattle trade show backdrops for sizing and options.' },
       { q: 'How early should I order for a Seattle show like PAX West?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. PAX week and peak dates are busy, so order a couple of weeks ahead.' },
       { q: 'Do canopies handle Seattle rain?', a: 'Yes — the printed tops are water-resistant and give quick rain cover, which is useful for Northwest weather. Weight every leg for breezes off the water.' },
       { q: 'Which displays work best inside the Seattle Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor and waterfront activations.' },
