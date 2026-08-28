@@ -761,6 +761,20 @@ export const CITY_DETAIL = {
     // /trade-show-displays/{city} page). ~150 chars; names the product range.
     metaDescription:
       'Custom trade show displays in Seattle — canopies, banner stands, backdrops & table covers, printed to order with a free artwork proof and US shipping.',
+    // §22 GEO/AEO: concise, extractable spec table (verified specs only — from
+    // products.js + productFacts). Rendered under the "Best displays" H2, no new
+    // heading, so the §24 hierarchy is unchanged.
+    specTable: {
+      caption: 'Seattle trade show display options at a glance',
+      cols: ['Display', 'Material', 'Printing', 'Sizes', 'Production'],
+      rows: [
+        ['Canopy tent', '600D polyester over an aluminum hex frame', 'Dye sublimation', '10×10, 10×15, 10×20', '6–8 business days (2–3 rush)'],
+        ['Retractable banner stand', 'Printed banner, aluminum base', 'Full-color', '33×81 in (also 47×81)', '6–8 business days (2–3 rush)'],
+        ['Step & repeat backdrop', 'Large-format fabric on an adjustable frame', 'Dye sublimation', '10×8 ft standard', '6–8 business days (2–3 rush)'],
+        ['Tension fabric display', 'Pillowcase fabric over an aluminum frame', 'Dye sublimation', '8, 10 or 20 ft wide', '6–8 business days (2–3 rush)'],
+        ['Table cover', 'Wrinkle-free polyester', 'Dye sublimation', '4, 6, 8 ft', '6–8 business days (2–3 rush)']
+      ]
+    },
     answer:
       'Seattle is a Pacific Northwest technology, aerospace and maritime hub, hosting PAX West and major trade shows at the expanded Seattle Convention Center. Apex prints custom trade show and exhibition displays and ships them to Seattle.',
     overview: [

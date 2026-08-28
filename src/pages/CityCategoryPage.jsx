@@ -144,10 +144,23 @@ export default function CityCategoryPage({ categoryKey }) {
             <p>{detail.climate}</p>
           </section>
           {detail.bestDisplays && (
-            <section className="section-block"><h2>Best displays for {city.city} trade shows</h2><p>{detail.bestDisplays}</p></section>
-          )}
-          {detail.planning && (
-            <section className="section-block"><h2>Planning your {city.city} booth</h2><p>{detail.planning}</p></section>
+            <section className="section-block">
+              <h2>Best displays for {city.city} trade shows</h2>
+              <p>{detail.bestDisplays}</p>
+              {cat.slug === 'trade-show-displays' && detail.specTable && (
+                <div className="table-wrap">
+                  <table className="compare-table">
+                    <caption>{detail.specTable.caption}</caption>
+                    <thead><tr>{detail.specTable.cols.map((c) => <th key={c}>{c}</th>)}</tr></thead>
+                    <tbody>
+                      {detail.specTable.rows.map((r) => (
+                        <tr key={r[0]}>{r.map((cell, i) => <td key={i}>{cell}</td>)}</tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </section>
           )}
         </>
       )}
@@ -182,6 +195,10 @@ export default function CityCategoryPage({ categoryKey }) {
           )}
         </section>
       ))}
+
+      {detail && detail.planning && (
+        <section className="section-block"><h2>Planning your {city.city} booth</h2><p>{detail.planning}</p></section>
+      )}
 
       <section className="section-block card">
         <h2>Trade shows in {city.city}</h2>

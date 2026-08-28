@@ -525,6 +525,10 @@ for (const lc of LOCAL_CATEGORIES) {
       // entry; otherwise the standard template. Keeps rollout incremental with no
       // thin/empty sections.
       const detail = cityDetailFor(city.slug);
+      const st = (lc.slug === 'trade-show-displays') ? detail?.specTable : null;
+      const specTableHtml = st
+        ? `<div class="table-wrap"><table class="compare-table"><caption>${esc(st.caption)}</caption><thead><tr>${st.cols.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${st.rows.map((r) => `<tr>${r.map((cell) => `<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
+        : '';
       const richHtml = detail
         ? `
         <p class="answer-block">${esc(detail.answer)}</p>
@@ -539,8 +543,7 @@ for (const lc of LOCAL_CATEGORIES) {
         <p>${esc(BRAND)} prints to order and ships to ${esc(city.city)}, ${esc(city.stateName)}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address. Ship to your venue's receiving dock, an advance warehouse, or your business address.</p>
         <h2>Outdoor &amp; climate tips for ${esc(city.city)}</h2>
         <p>${esc(detail.climate)}</p>
-        ${detail.bestDisplays ? `<h2>Best displays for ${esc(city.city)} trade shows</h2><p>${esc(detail.bestDisplays)}</p>` : ''}
-        ${detail.planning ? `<h2>Planning your ${esc(city.city)} booth</h2><p>${esc(detail.planning)}</p>` : ''}`
+        ${detail.bestDisplays ? `<h2>Best displays for ${esc(city.city)} trade shows</h2><p>${esc(detail.bestDisplays)}</p>${specTableHtml}` : ''}`
         : '';
       const cityFaqHtml = detail
         ? `<h2>${esc(city.city)} FAQ</h2>${detail.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
@@ -551,6 +554,9 @@ for (const lc of LOCAL_CATEGORIES) {
       const productSectionsHtml = (lc.slug === 'trade-show-displays' && Array.isArray(detail?.productSections))
         ? detail.productSections.map((s) => `<h2>${esc(s.h2)}</h2><p>${esc(s.body)}</p>${Array.isArray(s.links) && s.links.length ? `<p>${s.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}`).join('')
         : '';
+      // Planning renders AFTER the product sections (logical §24 order: plan the
+      // booth once you've chosen displays).
+      const planningHtml = detail?.planning ? `<h2>Planning your ${esc(city.city)} booth</h2><p>${esc(detail.planning)}</p>` : '';
       const crumbs = cityBreadcrumb(lc.label, lc.slug, city);
       const crumbNav = crumbs.map((c, i) => i === crumbs.length - 1
         ? `<span>${esc(c.name)}</span>`
@@ -564,6 +570,7 @@ for (const lc of LOCAL_CATEGORIES) {
         <ul>${productLis}</ul>
         ${boothLinks}
         ${productSectionsHtml}
+        ${planningHtml}
         <h2>Trade shows in ${esc(city.city)}</h2>
         <p>${esc(city.city)} hosts ${esc(city.scene)}. Whether you're exhibiting at ${esc(city.venue)} or
         running an outdoor activation nearby, ${esc(BRAND)} prints your ${esc(lc.label.toLowerCase())} in your
