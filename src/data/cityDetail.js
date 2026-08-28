@@ -12,6 +12,24 @@
 //  - NEVER invent customers, projects, reviews or case studies.
 //  - Headings and paragraphs are unique per city (no boilerplate reuse).
 
+// §22 GEO/AEO spec table. The ROWS are product facts (identical everywhere —
+// verified from products.js/productFacts), so they live here once instead of
+// being copy-pasted per city; only the caption is city-specific. A city opts in
+// with `specTable: specTableFor('Denver')`.
+export const DISPLAY_SPEC_COLS = ['Display', 'Material', 'Printing', 'Sizes', 'Production'];
+export const DISPLAY_SPEC_ROWS = [
+  ['Canopy tent', '600D polyester over an aluminum hex frame', 'Dye sublimation', '10×10, 10×15, 10×20', '6–8 business days (2–3 rush)'],
+  ['Retractable banner stand', 'Printed banner, aluminum base', 'Full-color', '33×81 in (also 47×81)', '6–8 business days (2–3 rush)'],
+  ['Step & repeat backdrop', 'Large-format fabric on an adjustable frame', 'Dye sublimation', '10×8 ft standard', '6–8 business days (2–3 rush)'],
+  ['Tension fabric display', 'Pillowcase fabric over an aluminum frame', 'Dye sublimation', '8, 10 or 20 ft wide', '6–8 business days (2–3 rush)'],
+  ['Table cover', 'Wrinkle-free polyester', 'Dye sublimation', '4, 6, 8 ft', '6–8 business days (2–3 rush)']
+];
+export const specTableFor = (cityName) => ({
+  caption: `${cityName} trade show display options at a glance`,
+  cols: DISPLAY_SPEC_COLS,
+  rows: DISPLAY_SPEC_ROWS
+});
+
 export const CITY_DETAIL = {
   'las-vegas': {
     // ~40-word answer-first summary (also used for the AEO answer block).
@@ -764,17 +782,7 @@ export const CITY_DETAIL = {
     // §22 GEO/AEO: concise, extractable spec table (verified specs only — from
     // products.js + productFacts). Rendered under the "Best displays" H2, no new
     // heading, so the §24 hierarchy is unchanged.
-    specTable: {
-      caption: 'Seattle trade show display options at a glance',
-      cols: ['Display', 'Material', 'Printing', 'Sizes', 'Production'],
-      rows: [
-        ['Canopy tent', '600D polyester over an aluminum hex frame', 'Dye sublimation', '10×10, 10×15, 10×20', '6–8 business days (2–3 rush)'],
-        ['Retractable banner stand', 'Printed banner, aluminum base', 'Full-color', '33×81 in (also 47×81)', '6–8 business days (2–3 rush)'],
-        ['Step & repeat backdrop', 'Large-format fabric on an adjustable frame', 'Dye sublimation', '10×8 ft standard', '6–8 business days (2–3 rush)'],
-        ['Tension fabric display', 'Pillowcase fabric over an aluminum frame', 'Dye sublimation', '8, 10 or 20 ft wide', '6–8 business days (2–3 rush)'],
-        ['Table cover', 'Wrinkle-free polyester', 'Dye sublimation', '4, 6, 8 ft', '6–8 business days (2–3 rush)']
-      ]
-    },
+    specTable: specTableFor('Seattle'),
     answer:
       'Seattle is a Pacific Northwest technology, aerospace and maritime hub, hosting PAX West and major trade shows at the expanded Seattle Convention Center. Apex prints custom trade show and exhibition displays and ships them to Seattle.',
     overview: [

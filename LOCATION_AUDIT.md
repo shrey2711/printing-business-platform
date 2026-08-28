@@ -235,78 +235,77 @@ invented) or downgrade them to noindex.
 | /locations/washington-dc/washington | 107 | 74% | 1 | noindex | no | 32 | Noindex temporarily (already gated) |
 | /locations/wisconsin/green-bay | 105 | 74% | 1 | noindex | no | 32 | Noindex temporarily (already gated) |
 | /locations/northwest-territories/yellowknife | 104 | 73% | 1 | noindex | no | 32 | Noindex temporarily (already gated) |
-| /banner-stands/chicago | 1125 | 97% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/houston | 1129 | 97% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/las-vegas | 1499 | 97% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/new-york | 1159 | 97% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/orlando | 1217 | 97% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/san-diego | 1071 | 97% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/san-francisco | 1274 | 97% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /trade-show-canopies/san-francisco | 1294 | 97% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-displays/anaheim | 1146 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/charlotte | 1183 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/chicago | 1211 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/dallas | 1165 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/denver | 1128 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/houston | 1215 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/indianapolis | 1251 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/las-vegas | 1585 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/los-angeles | 1223 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/miami | 1198 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/nashville | 1224 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/new-orleans | 1164 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/new-york | 1245 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/orlando | 1303 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/philadelphia | 1133 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/san-antonio | 1099 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/san-diego | 1157 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/san-francisco | 1360 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/seattle | 1215 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/washington-dc | 1196 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /banner-stands/anaheim | 1060 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/atlanta | 1086 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/baltimore | 983 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/boston | 1043 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/charlotte | 1097 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/dallas | 1079 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/denver | 1042 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/indianapolis | 1165 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/los-angeles | 1137 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/miami | 1112 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/nashville | 1138 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/new-orleans | 1078 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/philadelphia | 1047 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/phoenix | 1007 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/san-antonio | 1013 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/seattle | 1129 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /banner-stands/washington-dc | 1110 | 96% | 1 | index | yes | 47 | Improve (templated but has headings) |
-| /trade-show-canopies/anaheim | 1080 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/boston | 1063 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/charlotte | 1117 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/chicago | 1145 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/dallas | 1099 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/denver | 1062 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/houston | 1149 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/indianapolis | 1185 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/las-vegas | 1519 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/los-angeles | 1157 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/miami | 1132 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/nashville | 1158 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/new-orleans | 1098 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/new-york | 1179 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/orlando | 1237 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/philadelphia | 1067 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/san-antonio | 1033 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/san-diego | 1091 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/seattle | 1149 | 96% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-displays/atlanta | 1172 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/baltimore | 1069 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/boston | 1129 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-displays/phoenix | 1093 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-canopies/atlanta | 1106 | 95% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/baltimore | 1003 | 95% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/phoenix | 1027 | 95% | 1 | index | yes | 46 | Improve (templated but has headings) |
-| /trade-show-canopies/washington-dc | 1130 | 95% | 1 | index | yes | 46 | Improve (templated but has headings) |
+| /trade-show-displays/san-diego | 1185 | 98% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/san-francisco | 1388 | 98% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /banner-stands/anaheim | 1087 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/atlanta | 1113 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/dallas | 1106 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/houston | 1156 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/indianapolis | 1192 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/las-vegas | 1527 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/los-angeles | 1165 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/nashville | 1165 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/new-orleans | 1106 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/new-york | 1188 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/orlando | 1244 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/san-antonio | 1041 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/san-diego | 1099 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/san-francisco | 1302 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/seattle | 1382 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/washington-dc | 1138 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/san-diego | 1120 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/san-francisco | 1323 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/seattle | 1403 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-displays/anaheim | 1173 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/atlanta | 1199 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/baltimore | 1096 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/boston | 1156 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/charlotte | 1211 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/chicago | 1238 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/dallas | 1192 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/denver | 1155 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/houston | 1242 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/indianapolis | 1278 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/las-vegas | 1613 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/los-angeles | 1251 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/miami | 1225 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/nashville | 1251 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/new-orleans | 1192 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/new-york | 1274 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/orlando | 1330 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/philadelphia | 1160 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/phoenix | 1120 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/san-antonio | 1127 | 97% | 1 | index | yes | 56 | Improve (templated but has headings) |
+| /trade-show-displays/washington-dc | 1224 | 97% | 1 | index | yes | 55 | Improve (templated but has headings) |
+| /banner-stands/baltimore | 1010 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/boston | 1070 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/charlotte | 1125 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/chicago | 1152 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/denver | 1069 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/miami | 1139 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/philadelphia | 1074 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/phoenix | 1034 | 96% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /trade-show-canopies/anaheim | 1108 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/atlanta | 1134 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/charlotte | 1146 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/chicago | 1173 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/dallas | 1127 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/denver | 1090 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/houston | 1177 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/indianapolis | 1213 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/las-vegas | 1548 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/los-angeles | 1186 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/miami | 1160 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/nashville | 1186 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/new-orleans | 1127 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/new-york | 1209 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/orlando | 1265 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/philadelphia | 1095 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/phoenix | 1055 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/san-antonio | 1062 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/washington-dc | 1159 | 96% | 1 | index | yes | 50 | Improve (templated but has headings) |
+| /trade-show-canopies/baltimore | 1031 | 95% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/boston | 1091 | 95% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /locations/nunavut | 565 | 87% | 4 | index | yes | 35 | Improve (templated but has headings) |
 | /locations/north-dakota | 588 | 86% | 4 | index | yes | 37 | Improve (templated but has headings) |
 | /locations/northwest-territories | 576 | 86% | 4 | index | yes | 35 | Improve (templated but has headings) |
@@ -314,7 +313,6 @@ invented) or downgrade them to noindex.
 | /locations/ontario | 593 | 86% | 4 | index | yes | 39 | Improve (templated but has headings) |
 | /locations/saskatchewan | 579 | 86% | 4 | index | yes | 37 | Improve (templated but has headings) |
 | /locations/yukon | 570 | 86% | 4 | index | yes | 35 | Improve (templated but has headings) |
-| /locations/georgia | 594 | 85% | 4 | index | yes | 38 | Improve (templated but has headings) |
 | /locations/kansas | 593 | 85% | 4 | index | yes | 38 | Improve (templated but has headings) |
 | /locations/maine | 589 | 85% | 4 | index | yes | 37 | Improve (templated but has headings) |
 | /locations/manitoba | 582 | 85% | 4 | index | yes | 37 | Improve (templated but has headings) |
@@ -326,63 +324,65 @@ invented) or downgrade them to noindex.
 | /locations/florida/orlando | 364 | 84% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
 | /locations/hawaii | 587 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/idaho | 586 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/illinois | 590 | 84% | 4 | index | yes | 38 | Keep/index (distinct content) |
-| /locations/indiana | 589 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/kentucky | 586 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/mississippi | 588 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/nebraska | 584 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/new-hampshire | 593 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/newfoundland-and-labrador | 596 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/north-carolina | 595 | 84% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/ohio | 591 | 84% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/oregon | 596 | 84% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/rhode-island | 589 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/tennessee | 592 | 84% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/vermont | 585 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/washington-dc | 591 | 84% | 4 | index | yes | 35 | Keep/index (distinct content) |
 | /locations/west-virginia | 591 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/wisconsin | 586 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/wyoming | 594 | 84% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/alabama | 592 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/alberta | 593 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
-| /locations/arizona | 603 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/arkansas | 591 | 83% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/british-columbia | 603 | 83% | 4 | index | yes | 39 | Keep/index (distinct content) |
 | /locations/connecticut | 593 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/delaware | 591 | 83% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/florida/miami | 369 | 83% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/georgia | 624 | 83% | 5 | index | yes | 39 | Keep/index (distinct content) |
 | /locations/iowa | 589 | 83% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/maryland | 593 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
-| /locations/massachusetts | 592 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/michigan | 594 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/minnesota | 594 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/missouri | 595 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
-| /locations/nevada | 596 | 83% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/new-mexico | 599 | 83% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/oklahoma | 592 | 83% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/pennsylvania | 592 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/south-carolina | 599 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/virginia | 594 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
-| /locations/washington | 599 | 83% | 4 | index | yes | 38 | Keep/index (distinct content) |
+| /locations/washington-dc | 591 | 83% | 4 | index | yes | 35 | Keep/index (distinct content) |
 | /locations/california/san-diego | 376 | 82% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
 | /locations/california/san-francisco | 381 | 82% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
-| /locations/colorado | 601 | 82% | 4 | index | yes | 38 | Keep/index (distinct content) |
-| /locations/louisiana | 603 | 82% | 4 | index | yes | 38 | Keep/index (distinct content) |
+| /locations/illinois | 620 | 82% | 5 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/indiana | 619 | 82% | 5 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/new-jersey | 601 | 82% | 4 | index | yes | 38 | Keep/index (distinct content) |
+| /locations/north-carolina | 627 | 82% | 5 | index | yes | 39 | Keep/index (distinct content) |
 | /locations/quebec | 597 | 82% | 4 | index | yes | 38 | Keep/index (distinct content) |
+| /locations/tennessee | 622 | 82% | 5 | index | yes | 39 | Keep/index (distinct content) |
 | /locations/texas/houston | 370 | 82% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
 | /locations/utah | 598 | 82% | 4 | index | yes | 37 | Keep/index (distinct content) |
 | /locations/washington/seattle | 372 | 82% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
-| /locations/florida | 612 | 81% | 4 | index | yes | 39 | Keep/index (distinct content) |
-| /locations/new-york | 612 | 81% | 4 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/arizona | 633 | 81% | 5 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/maryland | 623 | 81% | 5 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/massachusetts | 622 | 81% | 5 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/nevada | 627 | 81% | 5 | index | yes | 38 | Keep/index (distinct content) |
 | /locations/new-york/new-york-city | 382 | 81% | 3 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/pennsylvania | 622 | 81% | 5 | index | yes | 39 | Keep/index (distinct content) |
 | /locations/quebec/montreal | 378 | 81% | 3 | index | yes | 36 | Keep/index (distinct content) |
 | /locations/texas/austin | 375 | 81% | 3 | index | yes | 36 | Keep/index (distinct content) |
 | /locations/texas/dallas | 374 | 81% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
-| /locations/texas | 608 | 81% | 4 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/washington | 629 | 81% | 5 | index | yes | 39 | Keep/index (distinct content) |
 | /locations/british-columbia/vancouver | 385 | 80% | 3 | index | yes | 36 | Keep/index (distinct content) |
+| /locations/colorado | 631 | 80% | 5 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/louisiana | 634 | 80% | 5 | index | yes | 39 | Keep/index (distinct content) |
 | /locations/nevada/las-vegas | 375 | 80% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
 | /locations/ontario/toronto | 382 | 80% | 3 | index | yes | 36 | Keep/index (distinct content) |
 | /locations/california/los-angeles | 387 | 79% | 3 | index | no | 36 | Consolidate / Redirect (indexed elsewhere) |
+| /locations/florida | 649 | 79% | 5 | index | yes | 41 | Keep/index (distinct content) |
+| /locations/new-york | 644 | 79% | 5 | index | yes | 40 | Keep/index (distinct content) |
+| /locations/texas | 653 | 79% | 5 | index | yes | 42 | Keep/index (distinct content) |
 | /locations/alberta/calgary | 380 | 78% | 3 | index | yes | 36 | Keep/index (distinct content) |
-| /locations/california | 625 | 78% | 4 | index | yes | 39 | Keep/index (distinct content) |
+| /locations/california | 678 | 76% | 5 | index | yes | 43 | Keep/index (distinct content) |
+| /trade-show-displays/seattle | 2286 | 63% | 6 | index | yes | 69 | Keep/index (distinct content) |
