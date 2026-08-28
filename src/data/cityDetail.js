@@ -61,7 +61,7 @@ export const CITY_DETAIL = {
     climate:
       'Las Vegas sits in the Mojave Desert: expect very hot, dry summers (frequently above 100°F / 38°C), intense UV, and gusty wind across open lots and parking-area activations. For any outdoor or entrance canopy, always add weight — water or sand bags on every leg — because the ground is usually hard-surfaced and stakes are not an option. Dye-sublimated graphics resist fading under the strong sun, and a printed canopy top plus half-walls give attendees shade, which is a real draw in Nevada heat.',
     planning:
-      'Large Las Vegas venues typically route booth freight through the show\'s official contractor, and many offer an advance warehouse that receives shipments in the weeks before the show and delivers them to your space on setup day — shipping there is usually smoother than sending to the show floor on move-in morning. Budget for material handling (drayage) and expect union labor for installation at the biggest halls. Because portable displays like retractable banners, fabric backdrops and table covers pack into a single case or tube, they sidestep much of that cost and can often travel as checked luggage or a small parcel. Whichever route you choose, approve your artwork proof early: production runs 6–8 business days (2–3 with rush) before transit, and the weeks around CES, SEMA and MAGIC are the busiest of the year.',
+      'Large Las Vegas venues typically route booth freight through the show\'s official contractor, and many offer an advance warehouse that receives shipments in the weeks before the show and delivers them to your space on setup day — shipping there is usually smoother than sending to the show floor on move-in morning. Budget for material handling (drayage) and expect union labor for installation at the biggest halls. Because portable displays like retractable banners, fabric backdrops and table covers pack into a single case or tube, they sidestep much of that cost and can often travel as checked luggage or a small parcel. Whichever route you choose, approve your artwork proof early: production runs 6–8 business days (2–3 with rush) before transit, so for CES, SEMA or MAGIC, work back from move-in day and leave time for artwork approval, production and shipping.',
     bestDisplays:
       'Match the display to the show. For an indoor CES or MAGIC booth, a step & repeat or tension-fabric backdrop gives a clean branded wall, retractable banner stands hold key messaging at the aisle, and a fitted table cover turns a rented table into brand space. For SEMA and other shows with outdoor or parking-lot components, a printed canopy tent creates a shaded, branded footprint — just weight every leg. For sponsorships, registration areas and hotel-lobby activations, lightweight X-stand and tabletop banners set up in seconds and move easily between spaces.',
     // City-specific FAQ (rendered visibly + as FAQPage schema).
@@ -73,7 +73,7 @@ export const CITY_DETAIL = {
       { q: 'Will printed graphics fade in the Las Vegas sun?', a: 'Our graphics are dye-sublimated, which bonds the ink into the fabric rather than sitting on the surface, giving strong UV and fade resistance — a good match for high-desert sun on canopy tops, half-walls and outdoor backdrops through a long SEMA or World of Concrete week.' },
       { q: 'Which displays work best inside the Las Vegas Convention Center?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best inside the Las Vegas Convention Center: they are portable, set up tool-free and avoid installation labor. Use a step & repeat or tension-fabric wall as the booth back, retractable banners at the aisle, and a fitted table cover on the demo table; save canopies for outdoor and parking-lot components.' },
       { q: 'Can trade show displays be shipped to the Las Vegas Convention Center?', a: 'Yes. Apex ships your printed displays to any Las Vegas address you provide, including the Las Vegas Convention Center. We don\'t have a special delivery arrangement with the venue, so give us the exact receiving address and follow the show\'s current freight, labeling and delivery-window requirements — or route the shipment through the official advance warehouse. Confirm those details with show management before you ship.' },
-      { q: 'Is rush production available for Las Vegas exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Approve your proof as early as you can, because the weeks feeding into CES, MAGIC and SEMA are the busiest of the year for booth graphics.' }
+      { q: 'Is rush production available for Las Vegas exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Approve your proof as early as you can and count backwards from move-in, so artwork approval, production and transit all fit before a CES, MAGIC or SEMA setup date.' }
     ],
     // Contextual product H2 sections — displays (hub) city page only.
     productSections: [
@@ -133,7 +133,7 @@ export const CITY_DETAIL = {
     climate:
       'Orlando’s humid subtropical climate brings hot, wet summers with near-daily afternoon thunderstorms, high humidity, and an Atlantic hurricane season from June to November. For outdoor or entrance activations, choose a canopy for genuine shade and quick rain cover, and always weight the legs — sudden downpours and gusts are common. Dye-sublimated graphics shrug off UV and humidity, and wrinkle-resistant fabric displays travel and re-hang well in the moist air.',
     planning:
-      'Most large Orlando shows route freight through the official contractor, with an advance warehouse available before move-in — shipping there is usually easier than sending to the OCCC floor on setup morning. Budget for material handling, and remember that portable displays (retractable banners, fabric backdrops, table covers) pack into a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 with rush) before transit, and Orlando’s peak convention months book up quickly.',
+      'Most large Orlando shows route freight through the official contractor, with an advance warehouse available before move-in — shipping there is usually easier than sending to the OCCC floor on setup morning. Budget for material handling, and remember that portable displays (retractable banners, fabric backdrops, table covers) pack into a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 with rush) before transit, so for a major OCCC show, count back from move-in and allow time for artwork approval, production and transit.',
     bestDisplays:
       'Exhibition displays for an indoor OCCC booth start with the wall: a step & repeat or tension-fabric backdrop anchors it, retractable banners carry your headline at the aisle, and a fitted table cover brands the demo table. For resort, pool-deck or entrance activations along I-Drive, a printed canopy delivers shade and a branded footprint — weight every leg for Florida gusts. Lightweight X-stand and tabletop banners suit registration desks and hotel meeting rooms.',
     faqs: [
@@ -275,7 +275,7 @@ export const CITY_DETAIL = {
     climate:
       'Atlanta’s humid subtropical climate means hot, humid summers with frequent afternoon thunderstorms, heavy spring pollen, and mild winters. For outdoor or entrance activations, a canopy provides shade and quick rain cover — weight the legs for storm gusts. Dye-sublimated graphics handle the sun and humidity, and wrinkle-resistant fabric displays stay crisp despite the moisture.',
     planning:
-      'Large GWCC shows route freight through the official contractor, typically with an advance warehouse before move-in; shipping there is smoother than to the floor on setup day, and material handling should be budgeted. Portable displays — retractable banners, fabric backdrops, table covers — pack small and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and AmericasMart weeks are especially busy.',
+      'Large GWCC shows route freight through the official contractor, typically with an advance warehouse before move-in; shipping there is smoother than to the floor on setup day, and material handling should be budgeted. Portable displays — retractable banners, fabric backdrops, table covers — pack small and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, so for a GWCC show or an AmericasMart market week, plan backwards across artwork approval, production and shipping.',
     bestDisplays:
       'The exhibition displays that work hardest here are simple ones. For a GWCC booth, a step & repeat or tension-fabric backdrop builds the brand wall, retractable banners carry messaging at the aisle, and a fitted table cover finishes the table. For outdoor or campus activations, a weighted canopy adds shade and shelter. For AmericasMart showrooms and hotel meetings, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
@@ -403,7 +403,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'No US market puts more retail, media, finance and fashion decision-makers in one place. Shows at the Javits Center — from the NRF Big Show to NY NOW and NYCC — command national and global attention, and the surrounding hotels and offices mean strong local turnout. Because space and labor are expensive in New York, a smart, portable display kit delivers maximum brand impact for the footprint and budget.',
     conventionCenters: [
-      { name: 'Jacob K. Javits Convention Center', desc: 'Manhattan’s main convention hall on the Hudson-side West Side, expanded to around 840,000 square feet of exhibit space, hosting retail, consumer and pop-culture flagship shows.' },
+      { name: 'Jacob K. Javits Convention Center', desc: 'Manhattan’s main convention hall on the Hudson-side West Side, expanded to about 850,000 square feet of exhibit space with 500,000 of it contiguous, hosting retail, consumer and pop-culture flagship shows.' },
       { name: 'Metropolitan Pavilion', desc: 'A flexible midtown/Chelsea event venue used for fashion, art and specialty trade shows.' },
       { name: 'Pier 36 / Hotel ballrooms', desc: 'Downtown pier space and large Manhattan hotel ballrooms host fashion presentations and mid-size expos across the city.' }
     ],
@@ -474,7 +474,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'Houston concentrates decision-makers in energy and life sciences like few other cities. OTC alone brings tens of thousands of upstream and services professionals to NRG Park, and the Texas Medical Center — the largest medical complex in the world — anchors a deep healthcare and device audience nearby. Add a broad manufacturing and logistics base and central-US shipping access, and a coordinated display kit becomes an efficient way to stand out to buyers who travelled specifically to source.',
     conventionCenters: [
-      { name: 'George R. Brown Convention Center (GRB)', desc: 'Downtown Houston’s primary convention hall with roughly 1.9 million square feet, beside Discovery Green and the Toyota Center.' },
+      { name: 'George R. Brown Convention Center (GRB)', desc: 'Downtown Houston’s primary convention hall at about 1.85 million square feet in total, with more than 770,000 square feet of exhibit and event space, beside Discovery Green and the Toyota Center.' },
       { name: 'NRG Center / NRG Park', desc: 'A very large exhibition complex hosting the Offshore Technology Conference, the Houston Livestock Show & Rodeo and other big equipment-heavy events.' },
       { name: 'Marriott Marquis & convention hotels', desc: 'Connected downtown hotels provide additional ballroom and meeting space for association programming around GRB shows.' }
     ],
@@ -488,7 +488,7 @@ export const CITY_DETAIL = {
     climate:
       'Houston is hot and very humid, with heavy summer downpours, a real flood risk, and an Atlantic hurricane season from June to November. For outdoor or entrance activations, a canopy provides shade and quick rain cover — weight every leg, since storms arrive fast and the ground is usually paved. Dye-sublimated graphics resist UV and humidity, and wrinkle-resistant fabric displays stay crisp in the moist Gulf air.',
     planning:
-      'Large Houston shows route freight through the official contractor, generally with an advance warehouse before move-in and material handling to budget; NRG Park’s biggest events use union labor for installation. Portable displays — retractable banners, fabric backdrops, table covers — pack into a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 with rush) before transit, and OTC week is one of the busiest of the year.',
+      'Large Houston shows route freight through the official contractor, generally with an advance warehouse before move-in and material handling to budget; NRG Park’s biggest events use union labor for installation. Portable displays — retractable banners, fabric backdrops, table covers — pack into a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 with rush) before transit, so for OTC or another NRG Park show, count back from move-in and allow time for artwork approval, production and shipping.',
     bestDisplays:
       'Pick exhibition displays that stay visible above equipment. For a GRB booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For NRG Park’s large or outdoor footprints, a weighted canopy adds shade and shelter. For hotel meetings and hospitality suites, lightweight X-stand and tabletop banners set up in seconds.',
     faqs: [
@@ -559,7 +559,7 @@ export const CITY_DETAIL = {
     climate:
       'Los Angeles has a mild Mediterranean climate — abundant sun, low rainfall, and occasional dry Santa Ana winds. That makes outdoor and pop-up activations practical much of the year, but the strong UV calls for fade-resistant graphics and the wind events mean weighting canopy legs on hard surfaces. Dye-sublimated printing holds color under the bright sun, and a printed canopy provides welcome shade at outdoor venues.',
     planning:
-      'The LA Convention Center and larger venues use an official freight contractor, usually with an advance warehouse and union labor at the biggest shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, which suits multi-venue LA activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and flagship weeks like the Auto Show book up fast.',
+      'The LA Convention Center and larger venues use an official freight contractor, usually with an advance warehouse and union labor at the biggest shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, which suits multi-venue LA activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, so for a flagship week like the LA Auto Show, work back from install day and leave room for artwork approval, production and transit.',
     bestDisplays:
       'For an LACC booth, a tension-fabric backdrop or step & repeat builds the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For studio lots, rooftop and outdoor activations, a weighted canopy adds shade and branding. For showrooms and pop-ups around the city, lightweight X-stand and tabletop banners move easily between locations.',
     faqs: [
@@ -869,7 +869,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'Denver draws a distinctive mix of outdoor-industry, aerospace, energy and natural-products buyers, plus a fast-growing technology sector. The walkable downtown around the convention center keeps hotels and restaurants close, supporting strong attendance. A cohesive display kit — backdrop, banners, table cover, and a canopy for outdoor and mountain-event activations — helps you present professionally to an active, brand-aware audience.',
     conventionCenters: [
-      { name: 'Colorado Convention Center', desc: 'Downtown Denver’s main hall at roughly 584,000 square feet of exhibit space (expanding), host to outdoor-industry, natural-products and technology shows.' },
+      { name: 'Colorado Convention Center', desc: 'Downtown Denver’s main hall with about 584,000 contiguous square feet of exhibit and event space, expanded in 2024 with an 80,000-square-foot ballroom, host to outdoor-industry, natural-products and technology shows.' },
       { name: 'Gaylord Rockies Resort & Convention Center', desc: 'A large resort convention venue near Denver International Airport used for association conferences and big meetings.' },
       { name: 'National Western Complex', desc: 'A major event and expo complex hosting the National Western Stock Show and equipment-heavy events.' }
     ],
@@ -952,9 +952,9 @@ export const CITY_DETAIL = {
       ['Gaming & entertainment', 'Gaming and entertainment shows use the downtown arena and convention venues.']
     ],
     climate:
-      'New Orleans is hot and very humid, with heavy rain, a high water table, and an Atlantic hurricane season from June to November. For outdoor or entrance activations, a canopy provides shade and quick rain cover — weight every leg, since sudden storms and gusts are common and the ground is usually paved. Dye-sublimated graphics resist UV and humidity, and wrinkle-resistant fabric displays stay crisp in the moist Gulf air.',
+      'New Orleans sits barely above sea level with a high water table, so heavy rain becomes standing water faster than in most cities — worth knowing before you place a booth on low ground or set cases directly on the deck. Summer afternoons bring short, intense downpours, the spring festival season is warm and busy, and the Atlantic hurricane season runs June through November. Weight every canopy leg: riverfront and French Quarter sites are brick or asphalt where stakes cannot be driven, and breezes come off the Mississippi. Dye-sublimated graphics hold up in the humidity, and fabric that has travelled damp re-hangs cleanly once it is out of the case.',
     planning:
-      'The Morial Convention Center uses an official freight contractor with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel as a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and the busy medical-convention season books up quickly.',
+      'The Morial Convention Center uses an official freight contractor with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel as a case or tube and avoid much of that cost. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, so for a large medical convention, count back from move-in and allow time for artwork approval, production and shipping.',
     bestDisplays:
       'Exhibition displays have to carry down a very long sightline. For a Morial Center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For outdoor and riverfront activations, a weighted canopy adds shade and shelter. For French Quarter hotel events, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
@@ -1011,7 +1011,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'Phoenix offers a fast-growing, business-friendly market with expanding technology and semiconductor investment and a strong healthcare sector. The compact downtown keeps attendees close, and the region’s growth means rising local turnout on top of national travellers. A cohesive display kit — backdrop, banners, table cover, and a weighted canopy for shade — helps you make a strong impression in the convention center’s halls.',
     conventionCenters: [
-      { name: 'Phoenix Convention Center', desc: 'A downtown venue with roughly 900,000 square feet of exhibit space across connected buildings, served by light rail and surrounded by hotels.' },
+      { name: 'Phoenix Convention Center', desc: 'A downtown venue with more than 900,000 square feet of meeting and exhibit space across connected buildings, including a 312,500-square-foot main exhibit hall, served by light rail and surrounded by hotels.' },
       { name: 'Arizona Grand & resort venues', desc: 'Large resorts around the Valley provide convention and outdoor event space for association meetings.' },
       { name: 'State Farm Stadium & regional venues', desc: 'Arena and stadium venues in the metro host major consumer expos and events.' }
     ],
@@ -1119,7 +1119,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'San Diego pairs marquee reach — Comic-Con draws global attention — with a serious professional base in life sciences, defense (a major Navy presence) and telecom. The bayfront setting and Gaslamp hotels keep attendees close and engaged. A cohesive display kit — backdrop, banners, table cover, and a weighted canopy for outdoor space — helps a compact booth stand out in the convention center’s large halls.',
     conventionCenters: [
-      { name: 'San Diego Convention Center', desc: 'A bayfront venue with about 2.6 million square feet total, home to Comic-Con International and major biotech, medical and technology shows, beside the Gaslamp Quarter.' },
+      { name: 'San Diego Convention Center', desc: 'A bayfront venue with about 2.6 million square feet in total and roughly 615,000 square feet of exhibit space, home to Comic-Con International and major biotech, medical and technology shows, beside the Gaslamp Quarter.' },
       { name: 'Town & Country / Mission Valley venues', desc: 'Large hotel convention venues in Mission Valley host mid-size trade shows and conferences.' },
       { name: 'Gaslamp Quarter hotels', desc: 'Downtown hotels near the convention center provide ballroom and meeting space for association programming.' }
     ],
@@ -1133,7 +1133,7 @@ export const CITY_DETAIL = {
     climate:
       'San Diego has one of the mildest climates in the country — sunny, dry, and comfortable most of the year, with a steady coastal breeze and little rain. That makes outdoor and waterfront activations very practical, but weight canopy legs for the sea breeze, and use fade-resistant graphics against the reliable sun. A printed canopy adds shade for bayfront events.',
     planning:
-      'The San Diego Convention Center uses an official freight contractor, usually with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, handy for Gaslamp and bayfront activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, and Comic-Con week is the busiest of the year.',
+      'The San Diego Convention Center uses an official freight contractor, usually with an advance warehouse and union labor at big shows — budget for material handling. Portable displays travel easily by parcel or checked bag and set up without a crew, handy for Gaslamp and bayfront activations. Approve artwork early: production is 6–8 business days (2–3 rush) before transit, so for Comic-Con or a biotech convention, work back from move-in and leave time for artwork approval, production and transit.',
     bestDisplays:
       'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For bayfront and outdoor activations, a weighted canopy adds shade and branding. For hotel suites and pop-ups, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
@@ -1190,7 +1190,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'D.C. concentrates decision-makers like nowhere else — trade associations, federal agencies, contractors, universities and NGOs all headquarter or gather here. The convention center’s central location and Metro access support strong attendance, and the association calendar is packed year-round. A coordinated, professional display kit helps you earn credibility with a policy-savvy audience and stand out in the hall.',
     conventionCenters: [
-      { name: 'Walter E. Washington Convention Center', desc: 'Downtown D.C.’s main hall with roughly 2.3 million square feet total, near hotels and Metro, hosting national association, policy and consumer shows.' },
+      { name: 'Walter E. Washington Convention Center', desc: 'Downtown D.C.’s main hall with about 2.3 million square feet in total, including 703,000 square feet of exhibit space, near hotels and Metro, hosting national association, policy and consumer shows.' },
       { name: 'Gaylord National (National Harbor)', desc: 'A large resort convention venue just outside the city on the Potomac, popular for association conferences and big meetings.' },
       { name: 'Downtown hotels & ballrooms', desc: 'Major downtown hotels provide additional meeting and ballroom space for association programming.' }
     ],
@@ -1275,7 +1275,7 @@ export const CITY_DETAIL = {
     climate:
       'San Francisco has a cool Mediterranean, marine climate: mild temperatures year-round, famous summer fog, and steady wind off the bay rather than heat. Rain concentrates in the winter months; summers are dry but breezy. For any outdoor or rooftop activation, wind is the main concern — weight every canopy leg, because gusts through the SoMa street grid can be strong even on a clear day. Graphics rarely face harsh UV, but the damp marine air rewards wrinkle-resistant fabric that re-hangs cleanly.',
     planning:
-      'Moscone uses an official freight contractor and union labor, typically with an advance warehouse that receives shipments before move-in — sending there is smoother than delivering to the floor on setup morning, and you should budget for material handling (drayage). Portable displays like retractable banners, fabric backdrops and table covers pack into a case or tube, sidestep much of that cost and are easy to move around a walkable downtown. Approve your proof early: production runs 6–8 business days (2–3 with rush) before transit, and conference weeks like Dreamforce and RSA are the busiest of the year.',
+      'Moscone uses an official freight contractor and union labor, typically with an advance warehouse that receives shipments before move-in — sending there is smoother than delivering to the floor on setup morning, and you should budget for material handling (drayage). Portable displays like retractable banners, fabric backdrops and table covers pack into a case or tube, sidestep much of that cost and are easy to move around a walkable downtown. Approve your proof early: production runs 6–8 business days (2–3 with rush) before transit, so for a conference week like Dreamforce or RSA, work back from move-in and leave time for artwork approval, production and shipping.',
     bestDisplays:
       'For an indoor Moscone booth, a tension-fabric backdrop or step & repeat gives a clean, modern brand wall that photographs well, retractable banner stands hold your message at the aisle, and a fitted table cover turns a rented table into brand space. For rooftop, courtyard and sponsor activations common during big conference weeks, a weighted canopy creates a branded footprint against the bay wind. Lightweight X-stand and tabletop banners suit registration desks and hotel side-events.',
     faqs: [
@@ -1421,7 +1421,7 @@ export const CITY_DETAIL = {
     climate:
       'Nashville has a humid subtropical climate: hot, humid summers with afternoon thunderstorms, mild winters with occasional ice, and pleasant spring and fall shoulder seasons. For outdoor and Broadway-adjacent activations, plan for heat, humidity and pop-up storms — a printed canopy provides both shade and quick rain cover, and every leg should be weighted for gusts. Dye-sublimated graphics resist humidity and UV, and wrinkle-resistant fabric re-hangs cleanly in the moist air.',
     planning:
-      'The Music City Center uses an official freight contractor, typically with an advance warehouse and union labor at larger shows — budget for material handling and confirm receiving windows. Portable displays pack into a case or tube and set up without a crew, easy to move around a walkable downtown. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and Nashville’s peak convention months book up fast.',
+      'The Music City Center uses an official freight contractor, typically with an advance warehouse and union labor at larger shows — budget for material handling and confirm receiving windows. Portable displays pack into a case or tube and set up without a crew, easy to move around a walkable downtown. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, so for a Music City Center or Opryland date, plan backwards across artwork approval, production and transit.',
     bestDisplays:
       'For a Music City Center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the demo table. For outdoor, rooftop and honky-tonk-district activations, a weighted canopy adds shade and rain cover. For hotel meetings and Opryland events, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
@@ -1478,7 +1478,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'Indianapolis punches above its weight in conventions because the venue, stadium and hotels connect directly by skywalk, giving attendees an easy, weatherproof path between events — attendance stays strong even in winter. The city anchors advanced manufacturing, life sciences and a world-famous motorsports industry, so shows here reach serious industrial and technical buyers. A coordinated display kit — backdrop, banners, table cover and a canopy for outdoor or race-adjacent activations — helps you make the most of a high-traffic Midwest floor.',
     conventionCenters: [
-      { name: 'Indiana Convention Center', desc: 'Downtown Indianapolis’s main hall with roughly 1.3 million square feet, skywalk-connected to Lucas Oil Stadium and thousands of hotel rooms, host to Gen Con, the PRI Show and the FFA Convention.' },
+      { name: 'Indiana Convention Center', desc: 'Downtown Indianapolis’s main hall with about 1.3 million square feet in total, including 566,000 square feet of exhibit halls, skywalk-connected to Lucas Oil Stadium and thousands of hotel rooms, host to Gen Con, the PRI Show and the FFA Convention.' },
       { name: 'Lucas Oil Stadium', desc: 'The adjacent stadium expands exhibit and event capacity for the city’s largest conventions and sporting events.' },
       { name: 'Indiana State Fairgrounds', desc: 'A large expo and event complex north of downtown used for consumer shows and equipment-heavy events.' }
     ],
@@ -1549,7 +1549,7 @@ export const CITY_DETAIL = {
     whyExhibit:
       'Charlotte combines serious corporate weight — major banks, Duke Energy and a dense motorsports industry all headquarter in the region — with a growing convention calendar and a walkable uptown that keeps hotels and the hall close together. That mix reaches finance, energy, manufacturing and racing buyers in one trip. A coordinated display kit — backdrop, banners, table cover and a canopy for outdoor or speedway-adjacent activations — helps you look credible to a professional Southeast audience.',
     conventionCenters: [
-      { name: 'Charlotte Convention Center', desc: 'Uptown Charlotte’s main hall with roughly 550,000 square feet of exhibit space, linked to the NASCAR Hall of Fame and surrounded by uptown hotels.' },
+      { name: 'Charlotte Convention Center', desc: 'Uptown Charlotte’s main hall with 280,000 square feet of exhibit halls and roughly 600,000 leasable square feet after its 2021 expansion, linked to the NASCAR Hall of Fame and surrounded by uptown hotels.' },
       { name: 'NASCAR Hall of Fame', desc: 'An attached event and exhibit venue used for receptions and racing-industry programming beside the convention center.' },
       { name: 'Regional expo & event venues', desc: 'Additional expo and event space around the metro supports consumer shows and equipment-heavy events.' }
     ],
@@ -1561,7 +1561,7 @@ export const CITY_DETAIL = {
       ['Healthcare', 'Large regional health systems drive medical and health-business conventions.']
     ],
     climate:
-      'Charlotte has a humid subtropical climate: hot, humid summers with afternoon thunderstorms, mild winters with occasional ice, and long, pleasant spring and fall seasons ideal for outdoor events. For outdoor and speedway-adjacent activations, plan for heat, humidity and pop-up storms — a printed canopy delivers shade and quick rain cover, and every leg should be weighted for gusts. Dye-sublimated graphics resist humidity and UV.',
+      'Charlotte sits in the Piedmont, which gives it one of the longer outdoor seasons on this list: mild winters broken by the occasional ice event, a warm autumn that carries events into November, and hot, humid summers with afternoon thunderstorms. Spring pollen is the detail most exhibitors forget — a pale canopy top or table cover picks up a yellow film through April, so budget a wash between spring dates. Weight every leg for storm gusts at speedway lots and uptown plazas, where paving rules out stakes, and choose dye-sublimated graphics that keep their color through repeated summer use.',
     planning:
       'The Charlotte Convention Center uses an official freight contractor, typically with an advance warehouse and union labor at larger shows — budget for material handling and confirm receiving windows. Portable displays pack into a case or tube and set up without a crew, easy to move around a compact uptown. Approve your proof early: production is 6–8 business days (2–3 rush) before transit, and peak convention dates book up.',
     bestDisplays:
