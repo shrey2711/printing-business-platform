@@ -319,6 +319,10 @@ export const CITY_DETAIL = {
   },
 
   'dallas': {
+    // Dallas-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Dallas — canopies, banner stands, backdrops and table covers for downtown and Market Center booths, printed to order.',
+    specTable: specTableFor('Dallas'),
     answer:
       'Dallas is a leading Texas convention city, anchored by the Kay Bailey Hutchison Convention Center and the huge Dallas Market Center. Apex prints custom trade show displays and ships them to Dallas for energy, technology, healthcare and wholesale exhibitors.',
     overview: [
@@ -346,12 +350,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the wall, retractable banners hold the aisle, and a fitted table cover brands the table. For outdoor Texas activations, a weighted canopy provides shade. For Market Center showrooms and hotel events, lightweight X-stand and tabletop banners set up in seconds.',
     faqs: [
-      { q: 'Do you ship trade show displays to Dallas?', a: 'Yes. Apex ships custom-printed displays to Dallas–Fort Worth and across Texas — to the Kay Bailey Hutchison Convention Center, the Dallas Market Center, or your business address.' },
-      { q: 'How early should I order for a Dallas show or market week?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. For downtown shows and Market Center weeks, order a few weeks ahead.' },
-      { q: 'Do canopies handle Dallas heat and wind?', a: 'Yes — canopies give real shade in Texas heat and use UV-stable dye-sublimated graphics; weight every leg, as winds can gust ahead of spring storms.' },
-      { q: 'Can you deliver to the Dallas Market Center?', a: 'Yes, we deliver to any Dallas address you provide, including convention and market receiving. Confirm labelling and delivery-window rules with your space.' },
-      { q: 'Which displays suit the convention center’s large halls?', a: 'A fabric backdrop or step & repeat, retractable banners at the aisle, and a printed table cover — a portable kit that reads well across a big room.' },
-      { q: 'Is rush production available for Dallas exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Dallas?', a: 'Yes. Apex ships custom-printed trade show and event displays to Dallas–Fort Worth and across Texas — to the Kay Bailey Hutchison Convention Center, the Dallas Market Center, the Irving Convention Center or your business address. Everything is printed to order with a free artwork proof; production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Dallas?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Dallas trade shows, market weeks and corporate events, shipped to your venue or business address. The printed graphic is replaceable on the same frame, so a wholesale showroom can refresh its look between markets without rebuying hardware.' },
+      { q: 'How early should I order for a Dallas show or market week?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. Working back from move-in, leave room for artwork approval, production and shipping rather than ordering in the final week before a downtown show or a Market Center week.' },
+      { q: 'Do canopies handle Dallas heat and wind?', a: 'Yes. A printed canopy gives genuine shade in Texas summer heat that regularly passes 100°F, and dye-sublimated graphics resist the strong UV without fading. Weight every leg with water or sand bags — Dallas activations are usually on paved ground, and winds gust hard ahead of spring storms.' },
+      { q: 'Can trade show displays be shipped to the Kay Bailey Hutchison Convention Center?', a: 'Yes. Apex ships to any Dallas address you provide, including the convention center and the Dallas Market Center. We don\'t have a special delivery arrangement with either venue, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'Which displays suit the convention center\'s large halls?', a: 'Fabric backdrops, retractable banner stands and printed table covers suit the downtown halls best: they read across a wide contiguous floor and set up tool-free with no installation labor. Use a step & repeat or tension-fabric wall for the booth back, retractable banners at the aisle, and a fitted cover on the demo table.' },
+      { q: 'What works for a Dallas Market Center showroom?', a: 'Lightweight pieces that go up fast and store small: X-stand and tabletop banners, a fitted table cover and a compact fabric backdrop. Showroom space is fixed and resets between market weeks, so displays that fold into a case beat anything that needs assembly or installation labor.' },
+      { q: 'Is rush production available for Dallas exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush shortens production only, so plan the shipping leg separately when counting back to your Dallas move-in date.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Dallas',
+        body: 'Dallas exhibitors work two circuits: the big downtown halls of the Kay Bailey Hutchison Convention Center and the year-round wholesale floors of the Dallas Market Center. A single coordinated kit serves both. Build the wall with a step & repeat or tension-fabric backdrop, put retractable banner stands where buyers turn into the space, brand the writing table with a printed cover, and keep a canopy for outdoor equipment demos and campus events. Ordering the set together keeps every panel color-matched, which is what makes an energy or medical-device booth look considered rather than assembled. Printed to order, packed into a case or tube, shipped to Dallas.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Dallas',
+        body: 'North Texas heat is the reason canopies get ordered here. Summer afternoons run past 100°F with hard, direct sun, and an unshaded outdoor booth loses visitors by noon — at equipment demos, ranch and industrial expos, festivals, tailgates and corporate campus events. A printed pop-up canopy fixes that with shade plus a branded footprint visible across a lot. Weight all four legs: paved surfaces rule out stakes, and severe-storm season sends gusts through well ahead of the rain. Dye-sublimated graphics stay saturated under Texas UV. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Dallas',
+        body: 'Backdrop printing covers the two walls a Dallas exhibitor needs. A step-and-repeat backdrop tiles your logo across the surface for press, sponsor recognition and headshot photography at corporate and market-week events. A straight tension-fabric wall gives one seamless graphic stretched over an aluminum frame — the clean, uninterrupted booth back that makes a technical product read clearly under bright hall lighting. Both zip on and off the frame, break down into a wheeled case that fits a truck bed or a hotel elevator, and take a replaceable printed graphic, so an annual exhibitor updates the message and reuses the aluminum year after year.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Dallas',
+        body: 'With DFW an hour from most of the country, a lot of Dallas exhibiting is done by teams who fly in the night before — so displays that arrive as luggage matter. Retractable banner stands roll a tall printed graphic into a weighted aluminum base and stand up in seconds at the booth corner. X-stand banners are lighter and cheaper again, handy when you need branding in a showroom, a breakout room and a hotel suite at the same time. Tabletop banners brand a counter. All three take replaceable graphics, so the hardware carries between downtown shows and Market Center weeks.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Dallas',
+        body: 'Energy, healthcare and wholesale buyers all end up at your table with samples, specs or a catalog, so the table is where a Dallas booth earns its keep. A custom printed table cover turns rented furniture into brand surface at exactly the height people look while they talk. Fitted stretch covers give a tight, engineered face suited to technical exhibitors; pleated covers give the traditional draped skirt that fits market showrooms and association events. Both close on all four sides so cases and stock stay hidden. They print full-color, fold flat into the show case, and machine wash between Dallas events.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -427,6 +461,10 @@ export const CITY_DETAIL = {
   },
 
   'houston': {
+    // Houston-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Houston — canopies, banner stands, backdrops and table covers for GRB and NRG Park booths, printed to order and shipped.',
+    specTable: specTableFor('Houston'),
     answer:
       'Houston is a major energy and medical convention city, anchored by the George R. Brown Convention Center and NRG Park, host of the Offshore Technology Conference. Apex prints custom trade show displays and ships them to Houston.',
     overview: [
@@ -454,16 +492,50 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a GRB booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes a demo table. For NRG Park’s large or outdoor footprints, a weighted canopy adds shade and shelter. For hotel meetings and hospitality suites, lightweight X-stand and tabletop banners set up in seconds.',
     faqs: [
-      { q: 'Do you ship trade show displays to Houston?', a: 'Yes. Apex ships custom-printed displays to Houston and across Texas — to the George R. Brown Convention Center, NRG Park, or your business address.' },
-      { q: 'How early should I order for OTC or a Houston show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. OTC week is extremely busy — order well ahead.' },
-      { q: 'Do canopies handle Houston heat and storms?', a: 'Yes — canopies give real shade in the Gulf heat and quick rain cover; the graphics are UV-stable, and you should weight every leg for sudden storm gusts.' },
-      { q: 'Can you deliver to NRG Park or the GRB?', a: 'Yes, we deliver to any Houston address you provide, including convention receiving. Confirm the venue’s labelling and delivery-window rules.' },
-      { q: 'Which displays suit Houston’s large halls?', a: 'A fabric backdrop or step & repeat that reads at distance, retractable banners at the aisle, and a printed table cover — a portable, high-impact kit.' },
-      { q: 'Is rush production available for Houston exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to Houston?', a: 'Yes. Apex ships custom-printed trade show and event displays to Houston and across Texas — to the George R. Brown Convention Center, NRG Park, a downtown convention hotel or your business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Houston?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Houston conferences, energy expos and corporate events, shipped to your venue or business address. Both use a replaceable graphic over a reusable aluminum frame, which suits companies exhibiting at several Gulf Coast shows each year.' },
+      { q: 'How early should I order for OTC or a Houston show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. For the Offshore Technology Conference or another NRG Park or GRB show, allow time for artwork approval, production and shipping rather than ordering in the final days.' },
+      { q: 'Do canopies handle Houston heat and storms?', a: 'Yes. A printed canopy gives shade through humid Gulf Coast heat and a water-resistant roof when a downpour arrives, which happens quickly here. Weight all four legs for the gusts that lead a storm in, and keep electronics off the ground where water pools on paved activation space.' },
+      { q: 'Can trade show displays be shipped to the George R. Brown Convention Center or NRG Park?', a: 'Yes. Apex ships to any Houston address you provide, including both venues. We don\'t have a special delivery arrangement with either, so give us the exact receiving address and follow the show\'s current freight, labeling and delivery-window requirements — or route the shipment through the official advance warehouse.' },
+      { q: 'Which displays suit Houston\'s large halls?', a: 'Fabric backdrops, retractable banner stands and printed table covers suit the GRB and NRG Center best: they read from a distance across very large exhibit floors, set up tool-free, and avoid installation labor. Anchor with a tension-fabric or step & repeat wall, mark the aisle with retractable banners, and finish the table with a fitted cover.' },
+      { q: 'What displays work alongside heavy equipment at NRG Park?', a: 'Tall, high-contrast graphics: a fabric backdrop behind the equipment and retractable banner stands at the corners, so your name still reads when a machine, skid or vehicle occupies the floor. A branded table cover then gives the conversation a clear home in a booth built around hardware.' },
+      { q: 'Is rush production available for Houston exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush covers production only, so leave separate margin for shipping, especially during hurricane season when Gulf Coast transit can slow.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Houston',
+        body: 'Houston shows are equipment shows as often as they are booth shows, and that changes what a display has to do: your branding must stay legible when a pump, valve skid or imaging system takes the floor. Height and contrast solve it. A tension-fabric or step & repeat backdrop puts your name above the hardware, retractable banner stands hold spec highlights at the aisle line, a printed table cover gives the conversation a branded home, and a canopy covers outdoor demo areas. Ordering the set from one supplier keeps colors consistent across every surface. Printed to order and shipped to Houston in a case or tube.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Houston',
+        body: 'Between the humidity, the sun and the downpours, Houston outdoor events are a canopy problem waiting to be solved. Equipment demos in NRG Park lots, safety training days, rodeo-season events, festivals and refinery-adjacent contractor days all run outdoors on pavement or hardpack. A printed pop-up canopy gives shade that keeps people at your booth in Gulf heat, plus a water-resistant top when the sky opens. Weight every leg — storms here announce themselves with wind first. Dye-sublimated graphics resist both UV and humidity without going blotchy. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Houston',
+        body: 'For technical Houston exhibitors, a backdrop is the part of the booth that explains who you are before anyone reads a spec sheet. A straight tension-fabric wall carries one seamless graphic over an aluminum frame — a schematic, a platform photo, a product line — with no seams or hardware breaking the image. A step-and-repeat backdrop is the other tool, tiling your logo for press interviews, award nights and sponsor photography around conference programming. Both pack into a wheeled case, both take a replaceable printed graphic, so the frame you buy for one Gulf Coast show serves the next several.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Houston',
+        body: 'A banner stand is the cheapest thing in a Houston booth that still does real work. Retractable banner stands roll a full-height graphic into a weighted base and stand at the corner where aisle traffic makes its decision — ideal for naming a service line, a certification or a market segment. X-stand banners are light and inexpensive enough to place across a hospitality suite, a training room and a hotel session at the same time. Tabletop banners brand a counter without taking floor space. Each takes a replaceable graphic, so hardware bought for OTC keeps working through the rest of the year.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Houston',
+        body: 'In a booth built around equipment, the table is where the actual selling happens — quotes, drawings, safety documentation and business cards. A custom printed table cover turns that rented surface into branded space and hides the cases, cables and cores stored underneath. Fitted stretch covers give a tight, technical look that matches industrial exhibitors; pleated covers give a draped front that suits medical and association settings. Both are closed on all four sides, print full-color in your brand colors, fold flat into a case, and machine wash — worth having after a humid week on a Houston show floor.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
   'los-angeles': {
+    // Los Angeles-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Los Angeles — canopies, banner stands, backdrops and table covers for LACC and Long Beach booths, printed to order.',
+    specTable: specTableFor('Los Angeles'),
     answer:
       'Los Angeles is a top West Coast convention market, anchored by the LA Convention Center and shaped by entertainment, apparel and technology. Apex prints custom trade show displays and ships them to Los Angeles.',
     overview: [
@@ -491,12 +563,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For an LACC booth, a tension-fabric backdrop or step & repeat builds the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For studio lots, rooftop and outdoor activations, a weighted canopy adds shade and branding. For showrooms and pop-ups around the city, lightweight X-stand and tabletop banners move easily between locations.',
     faqs: [
-      { q: 'Do you ship trade show displays to Los Angeles?', a: 'Yes. Apex ships custom-printed displays across the LA metro — to the LA Convention Center, Long Beach, a studio or hotel venue, or your business address.' },
-      { q: 'How early should I order for an LA show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. For the LA Auto Show and other flagships, order a few weeks ahead.' },
-      { q: 'Are outdoor canopies practical in LA?', a: 'Very — the mild, dry climate makes outdoor activations common year-round. Use UV-stable graphics and weight every canopy leg, especially during Santa Ana wind events.' },
-      { q: 'Can you deliver to the LA Convention Center or a studio venue?', a: 'Yes, we deliver to any LA-area address you provide, including convention and studio receiving. Confirm labelling and delivery-window rules with your venue.' },
-      { q: 'Which displays suit LA’s media-savvy audiences?', a: 'Clean, modern kits — a seamless fabric backdrop or step & repeat, retractable banners, and a crisp table cover — plus a canopy for outdoor and pop-up activations.' },
-      { q: 'Is rush production available for LA exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address.' }
+      { q: 'Do you ship trade show displays to Los Angeles?', a: 'Yes. Apex ships custom-printed trade show and event displays across the LA metro — to the Los Angeles Convention Center, the Long Beach Convention & Entertainment Center, a studio lot, a hotel venue or your business address. Everything is printed to order with a free artwork proof; production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Los Angeles?', a: 'Yes — step & repeat backdrops are one of our most-requested items in LA, because premieres, press junkets, influencer events and brand activations all need a logo-tiled photo wall. We also print seamless tension-fabric walls for booths. Both are made to order and ship to your venue, studio or business address.' },
+      { q: 'How early should I order for an LA show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. For the LA Auto Show or another flagship at the convention center, work backwards from move-in and leave room for artwork approval, production and shipping.' },
+      { q: 'Are outdoor canopies practical in Los Angeles?', a: 'Yes, more than in most cities. The dry Mediterranean climate makes outdoor and pop-up activations workable nearly year-round, from beach events to studio lots and farmers markets. Use UV-stable dye-sublimated graphics against the constant sun, and weight every canopy leg — Santa Ana wind events arrive fast and most surfaces here are paved.' },
+      { q: 'Can trade show displays be shipped to the Los Angeles Convention Center?', a: 'Yes. Apex ships to any LA-area address you provide, including the convention center and studio receiving. We don\'t have a special delivery arrangement with these venues, so send the exact receiving address and follow the show\'s or lot\'s current freight, labeling and delivery-window rules, or use the official advance warehouse.' },
+      { q: 'Which displays suit LA\'s media-savvy audiences?', a: 'Clean, photogenic pieces: a seamless tension-fabric backdrop or a step & repeat wall, retractable banner stands with minimal copy, and a crisp fitted table cover. LA audiences photograph everything, so a display that looks intentional in a phone camera frame does more work than one crowded with text.' },
+      { q: 'What works for a pop-up shop or studio activation in LA?', a: 'A canopy for anything outdoors, a step & repeat or fabric wall as the photo background, X-stand banners for wayfinding, and a printed table cover for the sampling or checkout table. All of it sets up without tools or a crew and packs into a car, which suits activations that move between neighborhoods.' },
+      { q: 'Is rush production available for LA exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address. Rush shortens production only, so account for shipping time separately when planning to a premiere, show or activation date.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Los Angeles',
+        body: 'An LA booth is judged the way everything in this city is judged — on how it photographs. Build it from a few clean pieces rather than a cluttered structure: a seamless tension-fabric or step & repeat backdrop as the wall, retractable banner stands carrying short copy at the aisle, a printed table cover on the demo table, and a canopy for anything outdoors. Ordering the set together keeps color matched across fabrics, so the booth reads as one designed environment on the floor and in the photos attendees post. Everything is printed to order, packs into a case or tube, and ships across the LA metro.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Los Angeles',
+        body: 'Los Angeles is the rare US market where outdoor branding works nearly every week of the year, and a printed canopy is the base unit of it: beach and pier activations, farmers markets, studio lot events, festival footprints, sampling programs and outdoor product launches. Shade is the real product here — under constant sun, a covered booth simply holds people longer. Weight all four legs, because Santa Ana winds arrive suddenly and most LA activation space is asphalt or concrete where stakes are impossible. Dye-sublimated graphics resist fading through months of exposure. Configure 10×10, 10×15 or 10×20 with printed walls online.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Los Angeles',
+        body: 'Nowhere orders more step & repeat backdrops than LA, and the reason is simple: the wall behind a person is the frame every photo travels in. A step-and-repeat tiles your logo across the surface at a scale that stays readable when a photo is cropped for a feed — premieres, junkets, launch parties, influencer events and sponsor step-offs all run on it. A straight tension-fabric wall is the booth version, one continuous graphic zipped over an aluminum frame for a seamless background. Both use a replaceable printed graphic, so an agency reuses the frame and reprints per client.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Los Angeles',
+        body: 'LA activations move — a brand runs a pop-up in Venice on Saturday, a studio event downtown Monday, and a booth in Long Beach that Thursday. Banner stands are built for that pattern: retractable banner stands roll their graphic into a weighted base and go up in seconds, X-stand banners weigh almost nothing and fit behind a car seat, and tabletop banners brand a check-in or sampling counter. All of them travel without crates, crews or installation labor, and all take replaceable printed graphics, so one set of hardware carries several campaigns across the metro before anything needs reprinting.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Los Angeles',
+        body: 'Whether it is a beauty sampling table, a pop-up checkout, a festival merch stand or a booth at the convention center, the table is the surface people stand closest to in LA — and a rented table under house linen looks exactly like everyone else\'s. A custom printed table cover puts your colors and logo at hand height. Fitted stretch covers give a taut, modern face that photographs cleanly; pleated covers give a draped, traditional front. Both close on all four sides to hide stock and cases, print full-color, pack flat into a car, and machine wash between activations.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -834,6 +936,10 @@ export const CITY_DETAIL = {
   },
 
   'san-diego': {
+    // San Diego-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in San Diego — canopies, banner stands, backdrops and table covers for bayfront convention center booths, printed to order.',
+    specTable: specTableFor('San Diego'),
     answer:
       'San Diego’s waterfront convention center hosts Comic-Con International plus major biotech and defense shows. Apex prints custom trade show displays and ships them to San Diego.',
     overview: [
@@ -861,12 +967,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a convention-center booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold the aisle, and a fitted table cover finishes the table. For bayfront and outdoor activations, a weighted canopy adds shade and branding. For hotel suites and pop-ups, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to San Diego?', a: 'Yes. Apex ships custom-printed displays to San Diego and across Southern California — to the San Diego Convention Center, a Mission Valley venue, or your business address.' },
-      { q: 'How early should I order for Comic-Con or a San Diego show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. Comic-Con week is extremely busy — order well ahead.' },
-      { q: 'Are outdoor canopies practical in San Diego?', a: 'Very — the mild, sunny climate makes them useful most of the year. Use UV-stable graphics and weight every leg for the coastal breeze.' },
-      { q: 'Can you deliver to the San Diego Convention Center?', a: 'Yes, to any San Diego address you provide, including convention receiving. Confirm labelling and delivery-window rules.' },
-      { q: 'Which displays suit the convention center’s large halls?', a: 'A fabric backdrop or step & repeat, retractable banners, and a printed table cover — a portable, high-impact kit.' },
-      { q: 'Is rush production available for San Diego exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination.' }
+      { q: 'Do you ship trade show displays to San Diego?', a: 'Yes. Apex ships custom-printed trade show and event displays to San Diego and across Southern California — to the San Diego Convention Center, a Mission Valley hotel venue, a Gaslamp Quarter property or your business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in San Diego?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for San Diego conventions, biotech symposia and consumer events, shipped to your venue or business address. A replaceable graphic on a reusable frame works well for research groups and companies presenting at several conferences a year.' },
+      { q: 'How early should I order for Comic-Con or a San Diego show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. For Comic-Con International or a large biotech convention, count backwards from move-in and leave room for artwork approval, production and shipping rather than ordering late.' },
+      { q: 'Are outdoor canopies practical in San Diego?', a: 'Very. The climate is mild and dry most of the year, so bayfront activations, beach events, festivals and outdoor campus programs run constantly. Use UV-stable dye-sublimated graphics against the reliable sun, and weight every leg for the steady onshore breeze that comes off the bay each afternoon.' },
+      { q: 'Can trade show displays be shipped to the San Diego Convention Center?', a: 'Yes. Apex ships to any San Diego address you provide, including the convention center. We don\'t have a special delivery arrangement with the venue, so give us the exact receiving address and follow the show\'s current freight, labeling and delivery-window requirements, or route the shipment through the official advance warehouse.' },
+      { q: 'Which displays suit the convention center\'s large halls?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best on the bayfront exhibit floor: they read at a distance, set up tool-free and need no installation labor. Use a tension-fabric or step & repeat wall as the booth back, retractable banners at the aisle, and a fitted cover on the demo table.' },
+      { q: 'What displays suit a biotech or scientific conference in San Diego?', a: 'A seamless tension-fabric wall that can carry data, diagrams or a platform overview at full height, plus retractable banner stands for individual programs and a branded table cover for reprints and sample kits. Fabric graphics pack into a case that travels as luggage between conferences without creasing.' },
+      { q: 'Is rush production available for San Diego exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added by destination. Rush affects production time only, so plan the shipping leg separately when working back from a convention center move-in date.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in San Diego',
+        body: 'San Diego\'s bayfront convention floor hosts two very different crowds — scientific and defense audiences who read everything, and the consumer wave that arrives with Comic-Con — and a good booth serves both. A tension-fabric or step & repeat backdrop carries the identity at full height, retractable banner stands break the message into pieces people absorb while walking, a printed table cover anchors the conversation, and a canopy covers the bayfront and Gaslamp activations that spill outdoors. Bought as a coordinated set, the pieces match in color and finish, so a small booth looks planned. Printed to order and shipped to San Diego.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in San Diego',
+        body: 'San Diego weather makes outdoor branding a year-round option rather than a summer one, which is why canopies get so much use here: bayfront activations beside the convention center, beach and pier events, farmers markets, military and community days, and the outdoor programming that surrounds big downtown conventions. A printed pop-up canopy gives shade against consistent sun and a branded footprint people spot from across an open space. Weight all four legs for the afternoon sea breeze, since bayfront and beach setups sit on pavement or packed sand. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in San Diego',
+        body: 'A backdrop earns its place differently depending on which San Diego event you are at. For biotech, device and defense exhibitors, a straight tension-fabric wall gives one seamless surface big enough for a mechanism diagram, pipeline chart or platform overview that people study from three feet away. For consumer and entertainment events, a step-and-repeat backdrop tiles the logo behind photos, panels and signings. Both stretch over an aluminum frame, pack into a wheeled case that fits a hotel room, and take a replaceable printed graphic — so a lab or brand updates the story each year without rebuying the frame.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in San Diego',
+        body: 'Conference programming in San Diego spreads across the convention center, Gaslamp hotels and Mission Valley meeting space, so branding usually needs to exist in several rooms at once. Retractable banner stands handle the booth: a tall printed graphic that rolls into a weighted base and stands in seconds. X-stand banners are light and low-cost enough to place at session rooms, poster halls and hospitality events simultaneously. Tabletop banners brand a registration counter. All travel in slim cases that check as luggage, and all use replaceable graphics, so one set of hardware covers a full season of Southern California events.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in San Diego',
+        body: 'At a scientific conference the table holds reprints, sample kits and a laptop running a demo; at a consumer show it holds product and giveaways. Either way it is the surface attendees stand at longest, and a rented table under plain linen wastes it. A custom printed table cover puts brand color, a logo and a short line of copy right where the conversation happens. Fitted stretch covers give a clean modern face; pleated covers give a formal draped skirt for association settings. Both close on all four sides to hide storage, pack flat, and machine wash between San Diego events.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
