@@ -84,8 +84,8 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in Las Vegas',
-        body: 'Outdoor exhibiting is a real part of the Las Vegas calendar, not an afterthought: SEMA and World of Concrete spill into the lots and outdoor exhibit areas around the convention center, and resorts run sponsor activations on pool decks and forecourts. A printed pop-up canopy gives you shade and a branded footprint in Mojave heat and intense UV, where an unshaded booth empties out by midday. Those lots are concrete or asphalt, so stakes are out — put a water or sand weight bag on every leg. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing; dye-sublimated graphics hold their color under the Nevada sun.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'Outdoor exhibiting is a real part of the Las Vegas calendar, not an afterthought: SEMA and World of Concrete spill into the lots and outdoor exhibit areas around the convention center, and resorts run sponsor activations, corporate events and race-weekend hospitality on pool decks and forecourts, alongside street festivals and outdoor events off the Strip. A printed pop-up canopy gives you shade and a branded footprint in Mojave heat and intense UV, where an unshaded booth empties out by midday. Those lots are concrete or asphalt, so stakes are out — put a water or sand weight bag on every leg. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing; dye-sublimated graphics hold their color under the Nevada sun.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Las Vegas',
@@ -99,7 +99,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Las Vegas',
-        body: 'Nearly every Las Vegas booth includes a rented six- or eight-foot table, and left bare or under house linen it quietly undoes the rest of your branding. A custom printed table cover fixes that for less than most Las Vegas booth line items: pick a fitted stretch cover for a tight modern look or a pleated cover for a classic draped throw, both closed on all four sides so your cases and stock stay hidden from the aisle. They print full-color in your brand colors, pack flat into a corner of the show case, and machine wash between shows — useful when one cover works CES in January and MAGIC weeks later.',
+        body: 'Nearly every Las Vegas booth includes a rented six- or eight-foot demo or registration table, and left bare or under house linen it quietly undoes the rest of your branding. A custom printed table cover fixes that for less than most Las Vegas booth line items: pick a fitted stretch cover for a tight modern look or a pleated cover for a classic draped throw, both closed on all four sides so your cases and stock stay hidden from the aisle. They print full-color in your brand colors, pack flat into a corner of the show case, and machine wash between shows — useful when one cover works CES in January and MAGIC weeks later.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -155,8 +155,8 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in Orlando',
-        body: 'Orlando runs plenty of branding outdoors — resort pool decks, hotel forecourts along International Drive, theme-park adjacent activations, festivals and outdoor exhibit areas beside the convention halls. A printed pop-up canopy covers the two things Central Florida throws at you: heavy midday sun and a near-daily summer thunderstorm that arrives fast. Shade keeps visitors at your booth through the hottest hours, and a water-resistant printed top keeps the giveaways dry when the rain starts. Weight every leg, since those storms bring gusts, and add printed half-walls for a backdrop while leaving the front open. Configure a 10×10, 10×15 or 10×20 online for instant pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'Orlando runs plenty of branding outdoors — resort pool decks, hotel forecourts along International Drive, theme-park adjacent activations, festivals, weekend markets and outdoor events beside the convention halls. A printed pop-up canopy covers the two things Central Florida throws at you: heavy midday sun and a near-daily summer thunderstorm that arrives fast. Shade keeps visitors at your booth through the hottest hours, and a water-resistant printed top keeps the giveaways dry when the rain starts. Weight every leg, since those storms bring gusts, and add printed half-walls for a backdrop while leaving the front open. Configure a 10×10, 10×15 or 10×20 online for instant pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Orlando',
@@ -170,7 +170,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Orlando',
-        body: 'Orlando booths lean on the table: product demos, badge scanning, literature and giveaways all happen there, so a rented table under plain house linen wastes your best surface. A custom printed table cover puts brand color and a logo at the exact height Orlando attendees look while they talk to you. Fitted stretch covers give a taut, modern face; pleated covers give a traditional draped skirt; both close on all four sides so cases and stock stay out of sight. They print full-color, fold flat into the show case, and wash between events — practical in Florida humidity where fabric picks up a long convention week.',
+        body: 'Orlando booths lean on the table: product demos, registration and badge scanning, sampling, literature and giveaways all happen there, so a rented table under plain house linen wastes your best surface. A custom printed table cover puts brand color and a logo at the exact height Orlando attendees look while they talk to you. Fitted stretch covers give a taut, modern face; pleated covers give a traditional draped skirt; both close on all four sides so cases and stock stay out of sight. They print full-color, fold flat into the show case, and wash between events — practical in Florida humidity where fabric picks up a long convention week.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -227,7 +227,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Chicago',
         body: 'Chicago\'s outdoor season is short and busy: street festivals, neighborhood markets, lakefront events, campus and corporate activations, and equipment demos parked outside the halls. A printed pop-up canopy claims that space with your brand and gives shelter from both July sun and the rain that blows through quickly here. Wind is the design constraint — gusts off Lake Michigan are relentless, and paved plazas rule out stakes, so weight every leg with water or sand bags and keep half-walls on the windward side. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing, and store it flat for next season.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Chicago',
@@ -298,7 +298,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Atlanta',
         body: 'Outdoor branding in Atlanta runs most of the year, because winters are mild and the festival calendar is long — Centennial Olympic Park events, neighborhood festivals, tailgates, campus recruiting and outdoor product demos. A printed pop-up canopy gives shade through humid Georgia afternoons and dry ground when a thunderstorm builds, which it often does with little warning. Weight all four legs for the gusts that lead those storms in, especially on paved plazas where stakes cannot be driven. Dye-sublimated graphics hold their color through pollen season and repeated summer use. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Atlanta',
@@ -312,7 +312,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Atlanta',
-        body: 'Poultry, foodservice, logistics and gift shows all run on table conversations, so an Atlanta booth spends most of its selling time at a rented six- or eight-foot table. A custom printed table cover makes that Atlanta table work for you instead of showing bare edges and stacked boxes. Fitted stretch covers pull tight for a clean modern face; pleated covers give a traditional draped skirt that suits association and agriculture events. Both are closed on all four sides, hiding storage from the aisle. They print full-color in your brand colors, fold flat into the show case, and machine wash — useful after a humid Georgia week on the floor.',
+        body: 'Poultry, foodservice, logistics and gift shows all run on table conversations, so an Atlanta booth spends most of its selling time at a rented six- or eight-foot demo, sampling or registration table. A custom printed table cover makes that Atlanta table work for you instead of showing bare edges and stacked boxes. Fitted stretch covers pull tight for a clean modern face; pleated covers give a traditional draped skirt that suits association and agriculture events. Both are closed on all four sides, hiding storage from the aisle. They print full-color in your brand colors, fold flat into the show case, and machine wash — useful after a humid Georgia week on the floor.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -368,8 +368,8 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in Dallas',
-        body: 'North Texas heat is the reason canopies get ordered here. Summer afternoons run past 100°F with hard, direct sun, and an unshaded outdoor booth loses visitors by noon — at equipment demos, ranch and industrial expos, festivals, tailgates and corporate campus events. A printed pop-up canopy fixes that with shade plus a branded footprint visible across a lot. Weight all four legs: paved surfaces rule out stakes, and severe-storm season sends gusts through well ahead of the rain. Dye-sublimated graphics stay saturated under Texas UV. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'North Texas heat is the reason canopies get ordered in Dallas. Summer afternoons run past 100°F with hard, direct sun, and an unshaded outdoor booth loses visitors by noon — at equipment demos, ranch and industrial expos, festivals, tailgates and corporate campus events. A printed pop-up canopy fixes that with shade plus a branded footprint visible across a lot. Weight all four legs: paved surfaces rule out stakes, and severe-storm season sends gusts through well ahead of the rain. Dye-sublimated graphics stay saturated under Texas UV. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Dallas',
@@ -440,7 +440,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in New York City',
         body: 'Outdoors in New York means sidewalk and plaza activations, street fairs, borough festivals, farmers markets, campus events and sampling programs — spaces where you get a small footprint and have to make it unmistakable. A printed pop-up canopy does that, and gives your team shade in humid summer weeks plus quick cover when a storm rolls up the Hudson. Everything here is pavement, so stakes are out and weight bags on all four legs are required; wind funnels hard between buildings and off the water. Configure a 10×10, 10×15 or 10×20 with printed half-walls online, then pack it down flat for the next date.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in New York City',
@@ -454,7 +454,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in New York City',
-        body: 'When your NYC booth is a table and two chairs — which it often is, given what floor space costs here — the tablecloth is the branding. A custom printed table cover replaces a New York venue’s house linen with your colors, logo and message at seated eye level. Fitted stretch covers pull taut for a sharp, modern look that photographs well at retail and fashion shows; pleated covers give a traditional draped front for association and finance events. Both close on all four sides so cases and coats disappear underneath. They pack flat in a carry-on, wash between events, and pair with a matching banner and backdrop.',
+        body: 'When your NYC booth is a table and two chairs — which it often is, given what floor space costs here — the tablecloth is the branding. A custom printed table cover replaces a New York venue’s house linen with your colors, logo and message at seated eye level. Fitted stretch covers pull taut for a sharp, modern look that photographs well at retail and fashion shows; pleated covers give a traditional draped front for association and finance events. Both close on all four sides so cases and coats disappear underneath, whether that table is a demo station, a registration desk or a sampling counter. They pack flat in a carry-on, wash between events, and pair with a matching banner and backdrop.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -511,7 +511,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Houston',
         body: 'Between the humidity, the sun and the downpours, Houston outdoor events are a canopy problem waiting to be solved. Equipment demos in NRG Park lots, safety training days, rodeo-season events, festivals and refinery-adjacent contractor days all run outdoors on pavement or hardpack. A printed pop-up canopy gives shade that keeps people at your booth in Gulf heat, plus a water-resistant top when the sky opens. Weight every leg — storms here announce themselves with wind first. Dye-sublimated graphics resist both UV and humidity without going blotchy. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Houston',
@@ -525,7 +525,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Houston',
-        body: 'In a booth built around equipment, the table is where the actual selling happens — quotes, drawings, safety documentation and business cards. A custom printed table cover turns that rented Houston surface into branded space and hides the cases, cables and cores stored underneath. Fitted stretch covers give a tight, technical look that matches industrial exhibitors; pleated covers give a draped front that suits medical and association settings. Both are closed on all four sides, print full-color in your brand colors, fold flat into a case, and machine wash — worth having after a humid week on a Houston show floor.',
+        body: 'In a booth built around equipment, the table is where the actual selling happens — a demo station or registration desk stacked with quotes, drawings, safety documentation and business cards. A custom printed table cover turns that rented Houston surface into branded space and hides the cases, cables and cores stored underneath. Fitted stretch covers give a tight, technical look that matches industrial exhibitors; pleated covers give a draped front that suits medical and association settings. Both are closed on all four sides, print full-color in your brand colors, fold flat into a case, and machine wash — worth having after a humid week on a Houston show floor.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -582,7 +582,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Los Angeles',
         body: 'Los Angeles is the rare US market where outdoor branding works nearly every week of the year, and a printed canopy is the base unit of it: beach and pier activations, farmers markets, studio lot events, festival footprints, sampling programs and outdoor product launches. Shade is the real product here — under constant sun, a covered booth simply holds people longer. Weight all four legs, because Santa Ana winds arrive suddenly and most LA activation space is asphalt or concrete where stakes are impossible. Dye-sublimated graphics resist fading through months of exposure. Configure 10×10, 10×15 or 10×20 with printed walls online.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Los Angeles',
@@ -596,7 +596,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Los Angeles',
-        body: 'Whether it is a beauty sampling table, a pop-up checkout, a festival merch stand or a booth at the convention center, the table is the surface people stand closest to in LA — and a rented table under house linen looks exactly like everyone else\'s. A custom printed table cover puts your colors and logo at hand height for the LA crowd. Fitted stretch covers give a taut, modern face that photographs cleanly; pleated covers give a draped, traditional front. Both close on all four sides to hide stock and cases, print full-color, pack flat into a car, and machine wash between activations.',
+        body: 'Whether it is a beauty sampling table, a pop-up checkout, a registration desk, a festival merch stand or a booth at the convention center, the table is the surface people stand closest to in LA — and a rented table under house linen looks exactly like everyone else\'s. A custom printed table cover puts your colors and logo at hand height for the LA crowd. Fitted stretch covers give a taut, modern face that photographs cleanly; pleated covers give a draped, traditional front. Both close on all four sides to hide stock and cases, print full-color, pack flat into a car, and machine wash between activations.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -652,8 +652,8 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in Miami',
-        body: 'South Florida runs outdoors year-round: beachfront activations, pool decks, marina and boat-show docks, art-week satellite fairs, festivals and sampling programs. A printed pop-up canopy gives you shade against strong subtropical sun and a water-resistant roof for the rain that blows through most afternoons in summer. Wind is the constant design factor — a steady sea breeze plus no ability to stake on pavement or packed sand means a full weight bag on every leg, and half-walls only where they will not catch the breeze. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'Miami runs outdoors year-round: beachfront activations, pool decks, marina and boat-show docks, art-week satellite fairs, festivals, farmers markets, community events and sampling programs. A printed pop-up canopy gives you shade against strong subtropical sun and a water-resistant roof for the rain that blows through most afternoons in summer. Wind is the constant design factor — a steady sea breeze plus no ability to stake on pavement or packed sand means a full weight bag on every leg, and half-walls only where they will not catch the breeze. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Miami',
@@ -667,7 +667,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Miami',
-        body: 'At a Miami booth the table is usually where deals get discussed, often across two languages and a phone full of photos — so it should look like part of the brand, not like rented furniture. A custom printed table cover puts your colors and logo at seated eye level for Miami buyers. Fitted stretch covers give a taut, modern face that suits design, marine and technology exhibitors; pleated covers give a formal draped skirt for association and hospitality events. Both close on all four sides to hide storage, print full-color, fold flat into a case, and machine wash after a humid beachfront week.',
+        body: 'At a Miami booth the demo table, sampling counter or registration desk is usually where deals get discussed, often across two languages and a phone full of photos — so it should look like part of the brand, not like rented furniture. A custom printed table cover puts your colors and logo at seated eye level for Miami buyers. Fitted stretch covers give a taut, modern face that suits design, marine and technology exhibitors; pleated covers give a formal draped skirt for association and hospitality events. Both close on all four sides to hide storage, print full-color, fold flat into a case, and machine wash after a humid beachfront week.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -724,7 +724,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Boston',
         body: 'Boston\'s outdoor season is short, so brands use it hard: Seaport waterfront events, campus recruiting and orientation fairs, farmers markets, neighborhood festivals, road races and summer corporate activations. A printed pop-up canopy gives you a branded, weather-ready footprint for all of it, with shade in humid July weeks and cover when a coastal shower blows through. Wind is the constant here — harbor gusts run steady across open pavement where stakes cannot be driven, so weight every leg with water or sand bags. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing and store it flat over winter.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Boston',
@@ -905,8 +905,8 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in Denver',
-        body: 'Colorado brands live outdoors, and a printed canopy is the piece that gets used most: demo days, trailhead activations, festivals, farmers markets, race expos, stock-show grounds and campus events. Altitude is what makes the shade genuinely valuable — UV at a mile up is harsh, and a covered booth keeps visitors comfortable far longer. It also cuts both ways: weather turns quickly here, so a water-resistant printed top earns its place when an afternoon storm or shoulder-season snow arrives. Weight all four legs for gusts on paved ground. Configure a 10×10, 10×15 or 10×20 with printed walls online.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'Denver brands live outdoors, and a printed canopy is the piece that gets used most: demo days, trailhead activations, festivals, farmers markets, race expos, stock-show grounds and campus events. Altitude is what makes the shade genuinely valuable — UV at a mile up is harsh, and a covered booth keeps visitors comfortable far longer. It also cuts both ways: weather turns quickly here, so a water-resistant printed top earns its place when an afternoon storm or shoulder-season snow arrives. Weight all four legs for gusts on paved ground. Configure a 10×10, 10×15 or 10×20 with printed walls online.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Denver',
@@ -920,7 +920,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Denver',
-        body: 'Sampling is central to Denver\'s natural-products and beverage shows, and sampling happens at a table — usually a rented one, usually under house linen that fights your packaging. A custom printed table cover replaces it with your colors at hand height, so photographs and passing Denver traffic both register the brand. Fitted stretch covers pull taut for a modern, outdoor-brand look; pleated covers give a formal draped front for association and aerospace settings. Both close on all four sides so cases and stock stay out of sight, print full-color, pack flat into a gear bin, and machine wash after a sampling day.',
+        body: 'Sampling is central to Denver\'s natural-products and beverage shows, and sampling happens at a table — usually a rented demo or registration table, usually under house linen that fights your packaging. A custom printed table cover replaces it with your colors at hand height, so photographs and passing Denver traffic both register the brand. Fitted stretch covers pull taut for a modern, outdoor-brand look; pleated covers give a formal draped front for association and aerospace settings. Both close on all four sides so cases and stock stay out of sight, print full-color, pack flat into a gear bin, and machine wash after a sampling day.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -977,7 +977,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in New Orleans',
         body: 'Outdoor branding is constant in New Orleans — festival grounds, riverfront events, parade-season activations, courtyard receptions, second-line gatherings and campus days. A printed pop-up canopy is the practical answer to a climate that delivers heat, humidity and sudden heavy rain in the same afternoon: shade keeps people at your booth, and a water-resistant top keeps the giveaways dry. Weight every leg, because storms lead with gusts and downtown surfaces are paved. Dye-sublimated graphics resist UV and Gulf humidity without lifting. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing and reuse it all season.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in New Orleans',
@@ -991,7 +991,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in New Orleans',
-        body: 'Medical, energy and maritime exhibitors all end up doing business across a rented six- or eight-foot table, and bare edges with boxes underneath undercut everything else in the booth. A custom printed table cover turns a New Orleans booth table into brand surface: fitted stretch covers pull taut for a clean, technical look, pleated covers give the draped front that suits association and hospitality settings, and both close on all four sides so cases stay hidden. They print full-color in your brand colors, fold flat into the show case, and machine wash — practical after a humid week on the New Orleans floor.',
+        body: 'Medical, energy and maritime exhibitors all end up doing business across a rented six- or eight-foot demo or registration table, and bare edges with boxes underneath undercut everything else in the booth. A custom printed table cover turns a New Orleans booth table into brand surface: fitted stretch covers pull taut for a clean, technical look, pleated covers give the draped front that suits association and hospitality settings, and both close on all four sides so cases stay hidden. They print full-color in your brand colors, fold flat into the show case, and machine wash — practical after a humid week on the New Orleans floor.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -1047,8 +1047,8 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in Phoenix',
-        body: 'In the Valley a canopy is not a nice extra, it is what makes an outdoor booth possible at all. Summer highs above 110°F and unrelenting UV mean an unshaded table empties within minutes, while a printed pop-up canopy holds visitors through spring training crowds, festivals, home shows, contractor days and campus events. Weight every leg heavily and plan for monsoon season from July into September, when dust and gusts arrive fast — drop the half-walls when a storm builds. Dye-sublimated graphics survive the desert sun without bleaching. Configure a 10×10, 10×15 or 10×20 online for instant pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'In Phoenix a canopy is not a nice extra, it is what makes an outdoor booth possible at all. Summer highs above 110°F and unrelenting UV mean an unshaded table empties within minutes, while a printed pop-up canopy holds visitors through spring training crowds, festivals, home shows, contractor days and campus events. Weight every leg heavily and plan for monsoon season from July into September, when dust and gusts arrive fast — drop the half-walls when a storm builds. Dye-sublimated graphics survive the desert sun without bleaching. Configure a 10×10, 10×15 or 10×20 online for instant pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Phoenix',
@@ -1057,7 +1057,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Banner Stands & Retractable Banner Stands in Phoenix',
-        body: 'The Valley is spread out, so a Phoenix marketing team often works a downtown convention, a Scottsdale resort conference and a Tempe campus event in the same week. Banner stands travel that way easily: a retractable banner stand rolls its full-height graphic into a weighted aluminum base and stands up in seconds, X-stand banners weigh almost nothing and cost little enough to leave several in rotation, and tabletop banners brand a counter without using floor space. Each takes a replaceable printed graphic, so hardware bought once carries a full season of Arizona events and messages.',
+        body: 'The Valley is spread out, so a Phoenix marketing team often works a downtown convention, a Scottsdale resort conference and a Tempe campus event in the same week. Banner stands travel that way easily: a retractable banner stand rolls its full-height graphic into a weighted aluminum base and stands up in seconds, X-stand banners weigh almost nothing and cost little enough to leave several in rotation, and tabletop banners brand a registration counter without using floor space. Each takes a replaceable printed graphic, so hardware bought once carries a full season of Arizona events and messages.',
         links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
       },
       {
@@ -1156,11 +1156,11 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in San Diego',
         body: 'San Diego weather makes outdoor branding a year-round option rather than a summer one, which is why canopies get so much use here: bayfront activations beside the convention center, beach and pier events, farmers markets, military and community days, and the outdoor programming that surrounds big downtown conventions. A printed pop-up canopy gives shade against consistent sun and a branded footprint people spot from across an open space. Weight all four legs for the afternoon sea breeze, since bayfront and beach setups sit on pavement or packed sand. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in San Diego',
-        body: 'A backdrop earns its place differently depending on which San Diego event you are at. For biotech, device and defense exhibitors, a straight tension-fabric wall gives one seamless surface big enough for a mechanism diagram, pipeline chart or platform overview that people study from three feet away. For consumer and entertainment events, a step-and-repeat backdrop tiles the logo behind photos, panels and signings. Both stretch over an aluminum frame, pack into a wheeled case that fits a hotel room, and take a replaceable printed graphic — so a lab or brand updates the story each year without rebuying the frame.',
+        body: 'A backdrop earns its place differently depending on which San Diego event you are at. For biotech, device and defense exhibitor booths, a straight tension-fabric wall gives one seamless booth back big enough for a mechanism diagram, pipeline chart or platform overview that people study from three feet away. For consumer and entertainment events, a step-and-repeat backdrop tiles the logo behind photos, panels and signings. Both stretch over an aluminum frame, pack into a wheeled case that fits a hotel room, and take a replaceable printed graphic — so a lab or brand updates the story each year without rebuying the frame.',
         links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
       },
       {
@@ -1227,7 +1227,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Washington, D.C.',
         body: 'Washington\'s outdoor season is generous at both ends of the year, and organizations use it for festivals, community and health fairs, campus events, race-day activations and public outreach days. A printed pop-up canopy gives a recognizable, weather-ready footprint: shade through humid summer weeks, dry cover when a storm crosses, and a clear identity in a crowded row of white tents. Weight every leg — activation sites here are paved and stakes are generally not permitted — and confirm permit, size and setback rules for the specific location. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Washington, D.C.',
@@ -1297,12 +1297,12 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in San Francisco',
-        body: 'San Francisco\'s outdoor branding happens in plazas, parklets, rooftop decks, street fairs, farmers markets and the sponsor footprints that spill outside Moscone during conference weeks. A printed pop-up canopy is what turns a rented patch of pavement into a recognizable brand space. Heat is rarely the issue — wind is. Gusts run through the SoMa grid and off the bay year-round, and stakes are impossible on pavement, so weight every leg and keep half-walls only on the sheltered side. Marine damp is the other factor: wrinkle-resistant fabric re-hangs clean. Configure a 10×10, 10×15 or 10×20 online.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'San Francisco\'s outdoor branding happens in plazas, parklets and rooftop decks — street fairs, neighborhood festivals, farmers markets, corporate campus events, brand activations and the sponsor footprints that spill outside Moscone during conference weeks. A printed pop-up canopy is what turns a rented patch of pavement into a recognizable brand space. Heat is rarely the issue — wind is. Gusts run through the SoMa grid and off the bay year-round, and stakes are impossible on pavement, so weight every leg and keep half-walls only on the sheltered side. Marine damp is the other factor: wrinkle-resistant fabric re-hangs clean. Configure a 10×10, 10×15 or 10×20 online.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in San Francisco',
-        body: 'For Bay Area exhibitors, a straight tension-fabric wall is usually the right backdrop: one seamless graphic zipped over an aluminum frame, big enough for an architecture diagram, a dashboard screenshot or a single bold product line, with no seams to distract from a live demo behind it. A step-and-repeat backdrop covers launch parties, press interviews and funding announcements, tiling the logo so every photo carries the brand. Both pack into a wheeled case that fits a hotel room and a service elevator, and both take a replaceable printed graphic between product cycles.',
+        body: 'For San Francisco exhibitors, a straight tension-fabric wall is usually the right backdrop: one seamless graphic zipped over an aluminum frame, big enough for an architecture diagram, a dashboard screenshot or a single bold product line, with no seams to distract from a live demo behind it. A step-and-repeat backdrop covers launch parties, press interviews and funding announcements, tiling the logo so every photo carries the brand. Both pack into a wheeled case that fits a hotel room and a service elevator, and both take a replaceable printed graphic between product cycles.',
         links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
       },
       {
@@ -1312,7 +1312,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in San Francisco',
-        body: 'At a Moscone booth the table holds the demo, and everyone in the aisle looks at it. A rented table with house linen and a laptop on top says nothing; a custom printed table cover puts your product name and colors directly beneath the thing you want San Francisco visitors to try. Fitted stretch covers pull taut for a clean modern face that suits software and security exhibitors; pleated covers give a draped front for life-science and finance events. Both close on all four sides so cables, cases and bags disappear, print full-color, pack flat into a carry-on, and machine wash.',
+        body: 'At a Moscone booth the table holds the demo and doubles as your registration and lead-scan point, and everyone in the aisle looks at it. A rented table with house linen and a laptop on top says nothing; a custom printed table cover puts your product name and colors directly beneath the thing you want San Francisco visitors to try. Fitted stretch covers pull taut for a clean modern face that suits software and security exhibitors; pleated covers give a draped front for life-science and finance events. Both close on all four sides so cables, cases and bags disappear, print full-color, pack flat into a carry-on, and machine wash.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -1373,7 +1373,7 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Seattle',
         body: 'Custom canopy tents earn their place in Seattle for anything outdoors — waterfront brand activations along Elliott Bay, street festivals, farmers markets, corporate activations and outdoor trade shows. A printed pop-up canopy gives you a branded, weather-ready footprint with genuine rain cover for the wet Northwest season, which matters more here than in most cities: Seattle’s long, damp shoulder seasons make an unsheltered outdoor booth a gamble. Weight every leg for the breezes that come off Puget Sound, and add a printed top with half-walls for shade and a backdrop while keeping the front open to visitors. Configure a custom canopy in 10×10, 10×15 or 10×20 with printed walls for instant online pricing — the dye-sublimated graphics hold their color through repeated Northwest use.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Seattle',
@@ -1444,11 +1444,11 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Nashville',
         body: 'Nashville does a lot of business outdoors: festival footprints, downtown activations, tailgates, fairground events, brewery and distillery days, and summer sampling programs. A printed pop-up canopy is what makes those spaces yours, and in Tennessee it does double duty — shade through humid afternoons, then a water-resistant roof when a thunderstorm builds with little warning. Weight all four legs, because those storms lead with wind and most activation sites are paved. Dye-sublimated graphics resist both UV and humidity, staying saturated across a full festival season. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Nashville',
-        body: 'In a city built on performance and photography, backdrop printing gets ordered for more than trade shows. A step-and-repeat backdrop tiles a logo behind showcases, album release nights, award presentations, sponsor step-offs and artist meet-and-greets — the wall that makes every photo carry the brand. A straight tension-fabric wall is the exhibit version: one seamless graphic over an aluminum frame giving a booth at the Music City Center a clean, finished back. Both stretch on and off quickly, pack into a wheeled case that survives a load-in, and take a replaceable printed graphic for the next campaign or tour.',
+        body: 'In Nashville, a city built on performance and photography, backdrop printing gets ordered for more than trade shows. A step-and-repeat backdrop tiles a logo behind showcases, album release nights, award presentations, sponsor step-offs and artist meet-and-greets — the wall that makes every photo carry the brand. A straight tension-fabric wall is the exhibit version: one seamless graphic over an aluminum frame giving a booth at the Music City Center a clean, finished back. Both stretch on and off quickly, pack into a wheeled case that survives a load-in, and take a replaceable printed graphic for the next campaign or tour.',
         links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
       },
       {
@@ -1458,7 +1458,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Nashville',
-        body: 'Whether the table is holding health-system literature at a convention or merch at a showcase, it is where people stop and where money changes hands — and rented house linen makes it look like every other table in the room. A custom printed table cover puts your colors and logo at the height Nashville buyers and fans actually look. Fitted stretch covers give a taut modern face; pleated covers give a traditional draped skirt for association and healthcare settings. Both close on all four sides to hide stock, print full-color in your brand colors, fold flat, and machine wash after a humid Nashville weekend.',
+        body: 'Whether the table is a registration desk at a convention, a sampling station or a merch table at a showcase, it is where people stop and where money changes hands — and rented house linen makes it look like every other table in the room. A custom printed table cover puts your colors and logo at the height Nashville buyers and fans actually look. Fitted stretch covers give a taut modern face; pleated covers give a traditional draped skirt for association and healthcare settings. Both close on all four sides to hide stock, print full-color in your brand colors, fold flat, and machine wash after a humid Nashville weekend.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -1514,12 +1514,12 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Canopy Tents in Indianapolis',
-        body: 'Indiana\'s outdoor season packs a lot into a few months: race weekends and paddock hospitality, county and state fair events, festivals, farmers markets, dealer and equipment demo days, and campus recruiting. A printed pop-up canopy gives you shade through humid Midwest afternoons and a water-resistant roof when a thunderstorm rolls across open ground. Weight all four legs, because fairgrounds and paddock lots are hardpack or asphalt where stakes cannot be driven and wind crosses unbroken. Dye-sublimated graphics keep their color through a full season outdoors. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        body: 'Indianapolis packs its outdoor season into a few busy months: race weekends and paddock hospitality, county and state fair events, festivals, farmers markets, dealer and equipment demo days, and campus recruiting. A printed pop-up canopy gives you shade through humid Midwest afternoons and a water-resistant roof when a thunderstorm rolls across open ground. Weight all four legs, because fairgrounds and paddock lots are hardpack or asphalt where stakes cannot be driven and wind crosses unbroken. Dye-sublimated graphics keep their color through a full season outdoors. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Indianapolis',
-        body: 'For a performance or manufacturing exhibitor, a backdrop is what keeps your name visible when a car, engine or machine takes up the floor. A straight tension-fabric wall stretches one seamless graphic over an aluminum frame at full booth height, so the brand reads from down the aisle rather than being blocked at eye level. A step-and-repeat backdrop handles driver appearances, sponsor photography, award nights and association receptions. Both break down into a wheeled case that fits in a trailer or a hotel elevator, and both take a replaceable printed graphic when sponsors or product lines change.',
+        body: 'For an Indianapolis performance or manufacturing exhibitor, a backdrop is what keeps your name visible when a car, engine or machine takes up the floor. A straight tension-fabric wall stretches one seamless graphic over an aluminum frame at full booth height, so the brand reads from down the aisle rather than being blocked at eye level. A step-and-repeat backdrop handles driver appearances, sponsor photography, award nights and association receptions. Both break down into a wheeled case that fits in a trailer or a hotel elevator, and both take a replaceable printed graphic when sponsors or product lines change.',
         links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
       },
       {
@@ -1529,7 +1529,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Indianapolis',
-        body: 'Whether the booth is selling gearbox components, seed genetics or a tabletop game, the Indianapolis show table takes a beating over a long weekend — product handled, catalogs stacked, orders written. A custom printed table cover turns that rented Indianapolis surface into brand space and hides the cases stored underneath. Fitted stretch covers give a taut, technical face for manufacturing and motorsports exhibitors; pleated covers give a draped skirt for agriculture and association settings. Both close on all four sides, print full-color in your brand colors, fold flat into the show case, and machine wash between events.',
+        body: 'Whether the booth is selling gearbox components, seed genetics or a tabletop game, the Indianapolis show table takes a beating over a long weekend, whether it works as a demo counter or a registration desk — product handled, catalogs stacked, orders written. A custom printed table cover turns that rented Indianapolis surface into brand space and hides the cases stored underneath. Fitted stretch covers give a taut, technical face for manufacturing and motorsports exhibitors; pleated covers give a draped skirt for agriculture and association settings. Both close on all four sides, print full-color in your brand colors, fold flat into the show case, and machine wash between events.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
@@ -1586,11 +1586,11 @@ export const CITY_DETAIL = {
       {
         h2: 'Custom Canopy Tents in Charlotte',
         body: 'The Carolina calendar gives you long, comfortable spring and fall seasons for outdoor work, and Charlotte brands use them: race weekends and speedway hospitality, corporate campus events, festivals, farmers markets, youth sports and community days. A printed pop-up canopy claims that space and covers the two weather problems here — humid summer heat, and the afternoon thunderstorm that appears in an hour. Weight every leg for the gusts those storms push ahead of them, particularly on paved lots where stakes are impossible. Configure a 10×10, 10×15 or 10×20 with printed half-walls for instant online pricing and reuse it all season.',
-        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
       },
       {
         h2: 'Trade Show Backdrops & Backdrop Printing in Charlotte',
-        body: 'A backdrop is the fastest way to make an uptown booth look like it belongs to a serious company. A straight tension-fabric wall stretches one seamless graphic over an aluminum frame — a clean brand statement for a bank, utility or health system where restraint reads as credibility. A step-and-repeat backdrop covers the photographed side of the calendar: sponsor arrivals, driver appearances at the NASCAR Hall of Fame, award dinners and recruiting events. Both pack into a wheeled case that moves between the convention center and a hotel ballroom, and both take a replaceable graphic each year.',
+        body: 'A backdrop is the fastest way to make an uptown Charlotte booth look like it belongs to a serious company. A straight tension-fabric wall stretches one seamless graphic over an aluminum frame — a clean brand statement for a bank, utility or health system where restraint reads as credibility. A step-and-repeat backdrop covers the photographed side of the calendar: sponsor arrivals, driver appearances at the NASCAR Hall of Fame, award dinners and recruiting events. Both pack into a wheeled case that moves between the convention center and a hotel ballroom, and both take a replaceable graphic each year.',
         links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
       },
       {
@@ -1600,7 +1600,7 @@ export const CITY_DETAIL = {
       },
       {
         h2: 'Custom Trade Show Table Covers in Charlotte',
-        body: 'Most Charlotte booth conversations happen seated at a table with a proposal, a rate sheet or a parts catalog between you — which makes the table the most-photographed and most-used surface you have. A custom printed table cover replaces rented house linen with your colors and logo at exactly the height Charlotte buyers read. Fitted stretch covers pull taut for the polished look finance and energy exhibitors want; pleated covers give a traditional draped front for association and healthcare events. Both close on all four sides to hide storage, print full-color, fold flat, and machine wash after a humid Carolina show weekend.',
+        body: 'Most Charlotte booth conversations happen seated at a table with a proposal, a rate sheet or a parts catalog between you — which makes the table the most-photographed and most-used surface you have. A custom printed table cover replaces rented house linen with your colors and logo at exactly the height Charlotte buyers read, on a demo station and a registration desk alike. Fitted stretch covers pull taut for the polished look finance and energy exhibitors want; pleated covers give a traditional draped front for association and healthcare events. Both close on all four sides to hide storage, print full-color, fold flat, and machine wash after a humid Carolina show weekend.',
         links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
       }
     ]
