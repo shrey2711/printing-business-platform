@@ -796,7 +796,7 @@ export const CITY_DETAIL = {
 
   'nashville': {
     answer:
-      'Nashville is a fast-growing convention city for healthcare, music and hospitality, centerd on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
+      'Nashville is a fast-growing convention city for healthcare, music and hospitality, centered on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
     overview: [
       'Nashville’s downtown Music City Center anchors one of the fastest-growing convention scenes in the country, backed by the city’s standing as a headquarters hub for healthcare management and, of course, the music industry. The nearby Gaylord Opryland resort adds one of the largest non-gaming convention venues in the United States, so the city hosts everything from medical meetings to Summer NAMM.',
       'Exhibitors reach a broad mix of healthcare, hospitality and entertainment buyers, and the walkable downtown keeps energy high. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Nashville hotel, the Music City Center dock or a business address.'

@@ -769,7 +769,7 @@ export const STATIC_ARTICLES = [
 <h2>Bleed, safe zones and seams</h2>
 <ul>
   <li>Extend backgrounds to <strong>full bleed</strong> — past the trim edge — so there are no white slivers.</li>
-  <li>Keep logos and key text <strong>centerd and away from edges and seams</strong>.</li>
+  <li>Keep logos and key text <strong>centered and away from edges and seams</strong>.</li>
   <li>Remember the <strong>valance</strong> (the hanging skirt) is prime eye-level space — put your business name or tagline there.</li>
 </ul>
 
@@ -1013,7 +1013,7 @@ export const STATIC_ARTICLES = [
 
 <h2>Setting up backdrops and table covers</h2>
 <p>Step & repeat and tension-fabric backdrops assemble from a tube or extrusion frame that snaps together, then the fabric graphic slips or zips over it. Build the frame fully before fitting the graphic so the fabric ends up evenly tensioned and wrinkle-free. Adjustable frames let you dial the exact width — set it before you stretch the graphic on.</p>
-<p>Table covers simply drape (pleated) or stretch (fitted) over a standard table; smooth the top and align the front panel so your logo sits centerd and straight. Fitted stretch covers should be pulled down evenly on all sides for a tight, modern look.</p>
+<p>Table covers simply drape (pleated) or stretch (fitted) over a standard table; smooth the top and align the front panel so your logo sits centered and straight. Fitted stretch covers should be pulled down evenly on all sides for a tight, modern look.</p>
 
 <h2>During the show</h2>
 <p>Keep weight bags on outdoor canopy legs for the whole event, not just setup — afternoon wind can arrive fast. Do a quick daily walk-around: straighten table covers, re-tension any fabric that has relaxed, and wipe down surfaces at eye level where visitors notice smudges. Small touch-ups keep the booth looking intentional through a multi-day show.</p>

@@ -313,7 +313,7 @@ export const PAGES = [
       { list: [
         'Normal wear and tear', 'Improper use', 'Accidental damage', 'Damage caused after delivery', 'Customer modifications',
         'Failure to follow care instructions', 'Customer-supplied artwork errors', 'Customer-approved design errors',
-        'Normal colour variation', 'Variations inherent to the selected material', 'Damage caused by improper installation by others',
+        'Normal color variation', 'Variations inherent to the selected material', 'Damage caused by improper installation by others',
         'Damage caused by venue personnel or third parties'
       ] },
       { p: 'The determination of whether an issue constitutes a manufacturing defect will be made by Apex Trade Show based on reasonable inspection and available evidence, subject to applicable law.' },
