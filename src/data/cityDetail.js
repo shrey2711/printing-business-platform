@@ -79,7 +79,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Las Vegas',
-        body: 'A Las Vegas booth has to read from across a hall the size of several football fields, so build it from a few coordinated pieces rather than one busy structure. A step & repeat or tension-fabric backdrop carries the brand at eye level, retractable banner stands hold your clearest single message at the aisle, a printed table cover finishes the demo table, and a canopy covers any outdoor or parking-lot component. Ordering the whole set from one supplier keeps every panel color-matched, which is what makes a 10×10 on the CES or MAGIC floor look deliberate beside far larger stands. Everything packs into a case or tube for the flight in, printed to order with a free artwork proof.',
+        body: 'A Las Vegas booth has to read from across a hall the size of several football fields, so build it from a few coordinated exhibition displays rather than one busy structure. A step & repeat or tension-fabric backdrop carries the brand at eye level, retractable banner stands hold your clearest single message at the aisle, a printed table cover finishes the demo table, and a canopy covers any outdoor or parking-lot component. Ordering these custom trade show displays from one supplier keeps every panel color-matched, which is what makes a 10×10 on the CES or MAGIC floor look deliberate beside far larger stands. Everything packs into a case or tube for the flight in, printed to order with a free artwork proof.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -150,7 +150,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Orlando',
-        body: 'The Orange County Convention Center is one of the largest halls in the country, and a booth that works there is assembled from coordinated parts rather than a single centerpiece. Set a step & repeat or tension-fabric backdrop as the brand wall, add retractable banner stands at the aisle edge where I-Drive foot traffic passes, brand the demo table with a printed cover, and keep a canopy for resort or entrance activations. Buying the set from one supplier means every piece is color-matched, so a compact inline booth still holds its own beside the big island stands. It all packs into a case or tube and ships to Orlando ready for move-in.',
+        body: 'The Orange County Convention Center is one of the largest halls in the country, and a booth that works there is assembled from coordinated exhibition displays rather than a single centerpiece. Set a step & repeat or tension-fabric backdrop as the brand wall, add retractable banner stands at the aisle edge where I-Drive foot traffic passes, brand the demo table with a printed table cover, and keep a canopy for resort or entrance activations. Buying these custom trade show displays from one supplier means every piece is color-matched, so a compact inline booth still holds its own beside the big island stands. It all packs into a case or tube and ships to Orlando ready for move-in.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -221,7 +221,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Chicago',
-        body: 'McCormick Place is the largest convention center in North America, and the practical lesson for a 10×10 or 10×20 exhibitor is that scale is won with contrast, not square footage. A tall tension-fabric or step & repeat backdrop gives the booth a solid brand wall visible down a long aisle, retractable banner stands carry a short message at reading height, a printed table cover finishes the demo station, and a canopy handles any lakefront or plaza activation. Ordering the pieces together keeps colors matched across fabric and hardware, so the booth reads as one designed stand. Everything ships to Chicago in a case or tube, printed to order.',
+        body: 'McCormick Place is the largest convention center in North America, and the practical lesson for a 10×10 or 10×20 exhibitor is that scale is won with contrast, not square footage. A tall tension-fabric or step & repeat backdrop gives the booth a solid brand wall visible down a long aisle, retractable banner stands carry a short message at reading height, a printed table cover finishes the demo station, and a canopy handles any lakefront or plaza activation. Ordering these custom trade show displays together keeps colors matched across fabric and hardware, so the exhibition displays read as one designed stand. Everything ships to Chicago in a case or tube, printed to order.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -292,7 +292,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Atlanta',
-        body: 'Atlanta gives exhibitors two very different rooms: the enormous halls of the Georgia World Congress Center and the fixed showrooms of AmericasMart. One display kit covers both if you buy it as a set. A step & repeat or tension-fabric backdrop makes the brand wall, retractable banner stands carry the headline where aisle traffic turns, a printed table cover finishes the demo or writing table, and a canopy handles outdoor and campus activations. Matching colors across fabric and hardware is what makes a small downtown booth read as deliberate. Everything is printed to order, packs into a case or tube, and ships to Atlanta.',
+        body: 'Atlanta gives exhibitors two very different rooms: the enormous halls of the Georgia World Congress Center and the fixed showrooms of AmericasMart. One kit of custom trade show displays covers both if you buy it as a set. A step & repeat or tension-fabric backdrop makes the brand wall, retractable banner stands carry the headline where aisle traffic turns, a printed table cover finishes the demo or writing table, and a canopy handles outdoor and campus activations. Matching colors across these exhibition displays is what makes a small downtown booth read as deliberate. Everything is printed to order, packs into a case or tube, and ships to Atlanta.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -363,7 +363,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Dallas',
-        body: 'Dallas exhibitors work two circuits: the big downtown halls of the Kay Bailey Hutchison Convention Center and the year-round wholesale floors of the Dallas Market Center. A single coordinated kit serves both. Build the wall with a step & repeat or tension-fabric backdrop, put retractable banner stands where buyers turn into the space, brand the writing table with a printed cover, and keep a canopy for outdoor equipment demos and campus events. Ordering the set together keeps every panel color-matched, which is what makes an energy or medical-device booth look considered rather than assembled. Printed to order, packed into a case or tube, shipped to Dallas.',
+        body: 'Dallas exhibitors work two circuits: the big downtown halls of the Kay Bailey Hutchison Convention Center and the year-round wholesale floors of the Dallas Market Center. A single coordinated kit of custom trade show displays serves both. Build the wall with a step & repeat or tension-fabric backdrop, put retractable banner stands where buyers turn into the space, brand the writing table with a printed table cover, and keep a canopy for outdoor equipment demos and campus events. Ordering the set together keeps every panel color-matched, which is what makes an energy or medical-device exhibition booth look considered rather than assembled. Printed to order, packed into a case or tube, shipped to Dallas.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -505,7 +505,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Houston',
-        body: 'Houston shows are equipment shows as often as they are booth shows, and that changes what a display has to do: your branding must stay legible when a pump, valve skid or imaging system takes the floor. Height and contrast solve it. A tension-fabric or step & repeat backdrop puts your name above the hardware, retractable banner stands hold spec highlights at the aisle line, a printed table cover gives the conversation a branded home, and a canopy covers outdoor demo areas. Ordering the set from one supplier keeps colors consistent across every surface. Printed to order and shipped to Houston in a case or tube.',
+        body: 'Houston shows are equipment shows as often as they are booth shows, and that changes what a display has to do: your branding must stay legible when a pump, valve skid or imaging system takes the floor. Height and contrast solve it, so pick exhibition displays that stand above the machinery. A tension-fabric or step & repeat backdrop puts your name above the hardware, retractable banner stands hold spec highlights at the aisle line, a printed table cover gives the conversation a branded home, and a canopy covers outdoor demo areas. Ordering these custom trade show displays from one supplier keeps colors consistent across every surface. Printed to order and shipped to Houston in a case or tube.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -576,7 +576,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Los Angeles',
-        body: 'An LA exhibition booth is judged the way everything in this city is judged — on how it photographs. Build it from a few clean pieces rather than a cluttered structure: a seamless tension-fabric or step & repeat backdrop as the wall, retractable banner stands carrying short copy at the aisle, a printed table cover on the demo table, and a canopy for anything outdoors. Ordering the set together keeps color matched across fabrics, so the booth reads as one designed environment on the floor and in the photos attendees post. Everything is printed to order, packs into a case or tube, and ships across the LA metro.',
+        body: 'An LA exhibition booth is judged the way everything in this city is judged — on how it photographs. Build it from a few clean custom trade show displays rather than a cluttered structure: a seamless tension-fabric or step & repeat backdrop as the wall, retractable banner stands carrying short copy at the aisle, a printed table cover on the demo table, and a canopy for anything outdoors. Ordering the set together keeps color matched across fabrics, so the booth reads as one designed environment on the floor and in the photos attendees post. Everything is printed to order, packs into a case or tube, and ships across the LA metro.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -647,7 +647,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Miami',
-        body: 'Miami\'s calendar swings between international trade — boat show, cross-border technology, cruise and hospitality — and the design-led world of Art Basel week, so a booth here has to look considered rather than loud. A seamless tension-fabric or step & repeat backdrop sets the tone, retractable banner stands carry short bilingual-friendly copy at the aisle, a printed table cover finishes the meeting table, and a canopy handles beachfront and poolside activations. Ordering the set together keeps color exact across every surface, which matters when your booth will be photographed constantly. Printed to order and shipped to Miami.',
+        body: 'Miami\'s calendar swings between international trade — boat show, cross-border technology, cruise and hospitality — and the design-led world of Art Basel week, so exhibition displays here have to look considered rather than loud. A seamless tension-fabric or step & repeat backdrop sets the tone, retractable banner stands carry short bilingual-friendly copy at the aisle, a printed table cover finishes the meeting table, and a canopy handles beachfront and poolside activations. Ordering these custom trade show displays together keeps color exact across every surface, which matters when your booth will be photographed constantly. Printed to order and shipped to Miami.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -718,7 +718,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Boston',
-        body: 'Boston booths are read, not skimmed. Biotech, medical, robotics and academic audiences will stand and study a diagram, so the display has to hold real information without looking cluttered. A tension-fabric or step & repeat backdrop gives you a full-height surface for a mechanism, pipeline or platform story; retractable banner stands break the message into specific claims at the aisle; a printed table cover anchors the table where reprints and samples sit; a canopy covers Seaport and campus activations outdoors. Ordering the set together keeps type and color consistent across every surface. Printed to order and shipped to Boston.',
+        body: 'Boston exhibition displays are read, not skimmed. Biotech, medical, robotics and academic audiences will stand and study a diagram, so the display has to hold real information without looking cluttered. A tension-fabric or step & repeat backdrop gives you a full-height surface for a mechanism, pipeline or platform story; retractable banner stands break the message into specific claims at the aisle; a printed table cover anchors the table where reprints and samples sit; a canopy covers Seaport and campus activations outdoors. Ordering these custom trade show displays together keeps type and color consistent across every surface. Printed to order and shipped to Boston.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -900,7 +900,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Denver',
-        body: 'Denver\'s show calendar leans toward outdoor, natural-products, aerospace and energy exhibitors — audiences that respond to real materials and clear photography rather than dense sales copy. Build the booth from a tension-fabric or step & repeat backdrop carrying one strong image, retractable banner stands naming product lines at the aisle, a printed table cover for sampling and paperwork, and a canopy for the demo days and festival footprints many Colorado brands run alongside the show. Bought as a set, the pieces match in color and finish, which is what separates a considered booth from an assembled one. Printed to order, shipped to Denver.',
+        body: 'Denver\'s show calendar leans toward outdoor, natural-products, aerospace and energy exhibitors — audiences that respond to real materials and clear photography rather than dense sales copy. Build the booth from a tension-fabric or step & repeat backdrop carrying one strong image, retractable banner stands naming product lines at the aisle, a printed table cover for sampling and paperwork, and a canopy for the demo days and festival footprints many Colorado brands run alongside the show. Bought as a set, these custom trade show displays match in color and finish, which is what separates a considered booth from an assembled one. Exhibition displays printed to order, shipped to Denver.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -971,7 +971,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in New Orleans',
-        body: 'The Morial Convention Center runs one of the longest contiguous exhibit floors in the country, so a booth here competes down a very deep sightline. Height and clarity win: a tension-fabric or step & repeat backdrop puts your name above the crowd, retractable banner stands carry one short line each at the aisle, a printed table cover brands the table where the actual conversation happens, and a canopy handles riverfront and courtyard activations. Ordering the set from one supplier keeps color consistent across every fabric, so a compact booth still reads as a single designed stand. Printed to order and shipped to New Orleans.',
+        body: 'The Morial Convention Center runs one of the longest contiguous exhibit floors in the country, so exhibition displays here compete down a very deep sightline. Height and clarity win: a tension-fabric or step & repeat backdrop puts your name above the crowd, retractable banner stands carry one short line each at the aisle, a printed table cover brands the table where the actual conversation happens, and a canopy handles riverfront and courtyard activations. Ordering these custom trade show displays from one supplier keeps color consistent across every fabric, so a compact booth still reads as a single designed stand. Printed to order and shipped to New Orleans.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1042,7 +1042,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Phoenix',
-        body: 'Phoenix has become a semiconductor and advanced-manufacturing town, and its convention calendar leans toward technical buyers who want specifics fast. Build the booth around a tension-fabric or step & repeat backdrop that carries the product or facility at full height, add retractable banner stands naming capabilities at the aisle, brand the table with a printed cover for spec sheets and samples, and keep a canopy for the outdoor and resort-courtyard activations the Valley climate invites for much of the year. Bought as a set, the pieces match in color and finish. Printed to order and shipped to Phoenix.',
+        body: 'Phoenix has become a semiconductor and advanced-manufacturing town, and its convention calendar leans toward technical buyers who want specifics fast. Build the booth around a tension-fabric or step & repeat backdrop that carries the product or facility at full height, add retractable banner stands naming capabilities at the aisle, brand the table with a printed table cover for spec sheets and samples, and keep a canopy for the outdoor and resort-courtyard activations the Valley climate invites for much of the year. Bought as a set, these custom trade show displays match in color and finish. Printed to order and shipped to Phoenix as one set of exhibition displays.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1150,7 +1150,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in San Diego',
-        body: 'San Diego\'s bayfront convention floor hosts two very different crowds — scientific and defense audiences who read everything, and the consumer wave that arrives with Comic-Con — and a good booth serves both. A tension-fabric or step & repeat backdrop carries the identity at full height, retractable banner stands break the message into pieces people absorb while walking, a printed table cover anchors the conversation, and a canopy covers the bayfront and Gaslamp activations that spill outdoors. Bought as a coordinated set, the pieces match in color and finish, so a small booth looks planned. Printed to order and shipped to San Diego.',
+        body: 'San Diego\'s bayfront convention floor hosts two very different crowds — scientific and defense audiences who read everything, and the consumer wave that arrives with Comic-Con — and a good set of exhibition displays serves both. A tension-fabric or step & repeat backdrop carries the identity at full height, retractable banner stands break the message into pieces people absorb while walking, a printed table cover anchors the conversation, and a canopy covers the bayfront and Gaslamp activations that spill outdoors. Bought as a coordinated set, these custom trade show displays match in color and finish, so a small booth looks planned. Printed to order and shipped to San Diego.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1221,7 +1221,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Washington, D.C.',
-        body: 'D.C. exhibiting is mostly association and government-adjacent work, where a booth is read as a credibility signal before anyone reads the copy. That favors a restrained, well-made set: a seamless tension-fabric or step & repeat backdrop in exact brand colors, retractable banner stands carrying factual program or service copy at the aisle, a printed table cover for the table where literature and sign-up sheets sit, and a canopy for spring and fall outdoor events. Bought together, the pieces match precisely across fabric and hardware. Printed to order and shipped to Washington, D.C.',
+        body: 'D.C. exhibiting is mostly association and government-adjacent work, where exhibition displays are read as a credibility signal before anyone reads the copy. That favors a restrained, well-made set of custom trade show displays: a seamless tension-fabric or step & repeat backdrop in exact brand colors, retractable banner stands carrying factual program or service copy at the aisle, a printed table cover for the table where literature and sign-up sheets sit, and a canopy for spring and fall outdoor events. Bought together, the pieces match precisely across fabric and hardware. Printed to order and shipped to Washington, D.C.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1292,7 +1292,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in San Francisco',
-        body: 'A Moscone booth usually has one job: get a demo in front of someone in the ninety seconds they will give you. That argues for restraint in the exhibition displays you bring to San Francisco. A seamless tension-fabric backdrop carrying the product name and one claim, a retractable banner stand at the aisle, a printed table cover under the laptops, and a canopy only if you also run something outdoors — that is the whole kit for most software, security and life-science exhibitors here. Ordered as a set, the pieces match exactly, so a startup 10×10 reads as finished next to a much larger custom build. Printed to order and shipped to San Francisco.',
+        body: 'A Moscone booth usually has one job: get a demo in front of someone in the ninety seconds they will give you. That argues for restraint in the exhibition displays you bring to San Francisco. A seamless tension-fabric backdrop carrying the product name and one claim, a retractable banner stand at the aisle, a printed table cover under the laptops, and a canopy only if you also run something outdoors — that is the whole kit of custom trade show displays for most software, security and life-science exhibitors here. Ordered as a set, the pieces match exactly, so a startup 10×10 reads as finished next to a much larger custom build. Printed to order and shipped to San Francisco.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1367,7 +1367,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Seattle',
-        body: 'A professional Seattle booth comes together from a few coordinated pieces rather than one large structure — which suits the compact 10×10 and 10×20 spaces most Seattle Convention Center exhibitors book. Pair a step & repeat or tension-fabric backdrop as your booth wall with one or two retractable banner stands at the aisle, a printed table cover on the demo or registration table, and a canopy for any waterfront or outdoor activation. Ordering these trade show booth displays together from one supplier keeps every piece color-matched to your brand, so a modest footprint reads as a much larger, custom trade show display. Everything packs into a case or tube for the trip downtown, and each item is printed to order with a free artwork proof before it ships to Seattle.',
+        body: 'A professional Seattle booth comes together from a few coordinated exhibition displays rather than one large structure — which suits the compact 10×10 and 10×20 spaces most Seattle Convention Center exhibitors book. Pair a step & repeat or tension-fabric backdrop as your booth wall with one or two retractable banner stands at the aisle, a printed table cover on the demo or registration table, and a canopy for any waterfront or outdoor activation. Ordering these trade show booth displays together from one supplier keeps every piece color-matched to your brand, so a modest footprint reads as a much larger, custom trade show display. Everything packs into a case or tube for the trip downtown, and each item is printed to order with a free artwork proof before it ships to Seattle.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1438,7 +1438,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Nashville',
-        body: 'Nashville puts two audiences in front of you — healthcare executives at Music City Center conventions and the music, hospitality and publishing worlds that fill the rest of the calendar — and a coordinated set of exhibition displays works for both. A step & repeat or tension-fabric backdrop builds the brand wall, retractable banner stands carry a single clear message at the aisle, a printed table cover finishes the demo or signing table, and a canopy covers the outdoor activations that downtown and Broadway-adjacent events invite. Buying the pieces together keeps colors matched. Everything is printed to order, packs into a case or tube, and ships to Nashville.',
+        body: 'Nashville puts two audiences in front of you — healthcare executives at Music City Center conventions and the music, hospitality and publishing worlds that fill the rest of the calendar — and a coordinated set of exhibition displays works for both. A step & repeat or tension-fabric backdrop builds the brand wall, retractable banner stands carry a single clear message at the aisle, a printed table cover finishes the demo or signing table, and a canopy covers the outdoor activations that downtown and Broadway-adjacent events invite. Buying these custom trade show displays together keeps colors matched. Everything is printed to order, packs into a case or tube, and ships to Nashville.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1509,7 +1509,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Indianapolis',
-        body: 'Indianapolis packs an unusual range into one downtown: gaming conventions, agriculture, advanced manufacturing and the performance-racing industry all book the same halls. A coordinated display set adapts across them. A tension-fabric or step & repeat backdrop carries the brand above whatever occupies your floor, retractable banner stands name product lines at the aisle, a printed table cover finishes the counter where catalogs and parts sit, and a canopy covers fairgrounds and race-season activations. Buying the set together keeps color consistent across every surface. Everything packs into a case or tube, travels the skywalk by hand, and ships to Indianapolis printed to order.',
+        body: 'Indianapolis packs an unusual range into one downtown: gaming conventions, agriculture, advanced manufacturing and the performance-racing industry all book the same halls. A coordinated set of custom trade show displays adapts across them. A tension-fabric or step & repeat backdrop carries the brand above whatever occupies your floor, retractable banner stands name product lines at the aisle, a printed table cover finishes the counter where catalogs and parts sit, and a canopy covers fairgrounds and race-season activations. Buying these exhibition displays together keeps color consistent across every surface. Everything packs into a case or tube, travels the skywalk by hand, and ships to Indianapolis printed to order.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
@@ -1580,7 +1580,7 @@ export const CITY_DETAIL = {
     productSections: [
       {
         h2: 'Trade Show Booth Displays in Charlotte',
-        body: 'Charlotte puts banking, energy, healthcare and motorsports exhibitors in the same uptown hall, and those audiences judge a booth on finish rather than noise. Build around a seamless tension-fabric or step & repeat backdrop in exact brand colors, add retractable banner stands carrying specific service lines at the aisle, brand the meeting table with a printed cover, and keep a canopy for speedway-adjacent and outdoor corporate activations. Ordering the pieces as a set is what makes the colors match across fabric and hardware. Everything is printed to order, packs into a case or tube, and ships to Charlotte.',
+        body: 'Charlotte puts banking, energy, healthcare and motorsports exhibitors in the same uptown hall, and those audiences judge exhibition displays on finish rather than noise. Build around a seamless tension-fabric or step & repeat backdrop in exact brand colors, add retractable banner stands carrying specific service lines at the aisle, brand the meeting table with a printed table cover, and keep a canopy for speedway-adjacent and outdoor corporate activations. Ordering these custom trade show displays as a set is what makes the colors match across fabric and hardware. Everything is printed to order, packs into a case or tube, and ships to Charlotte.',
         links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
       },
       {
