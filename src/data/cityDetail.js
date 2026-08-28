@@ -106,6 +106,10 @@ export const CITY_DETAIL = {
   },
 
   'orlando': {
+    // Orlando-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Orlando — canopies, banner stands, backdrops and table covers for OCCC and I-Drive booths, printed to order with US shipping.',
+    specTable: specTableFor('Orlando'),
     answer:
       'Orlando is a top-three US convention city, anchored by the Orange County Convention Center — one of the largest halls in the country. Apex prints custom trade show displays and ships them to Orlando for shows at the OCCC and the I-Drive resort corridor.',
     overview: [
@@ -133,16 +137,50 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For an indoor OCCC booth, a step & repeat or tension-fabric backdrop anchors the wall, retractable banners carry your headline at the aisle, and a fitted table cover brands the demo table. For resort, pool-deck or entrance activations along I-Drive, a printed canopy delivers shade and a branded footprint — weight every leg for Florida gusts. Lightweight X-stand and tabletop banners suit registration desks and hotel meeting rooms.',
     faqs: [
-      { q: 'Do you ship trade show displays to Orlando?', a: 'Yes. Apex ships custom-printed displays to Orlando and across Florida — to your hotel, the Orange County Convention Center receiving dock, or a business address.' },
-      { q: 'How early should I order for an OCCC show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush), plus transit that varies by address. Orlando’s big national shows are busy — ordering two to three weeks ahead is safest.' },
-      { q: 'Do canopies hold up to Orlando rain and humidity?', a: 'Yes — the printed tops are water-resistant and the dye-sublimated graphics resist humidity and UV. Weight every leg, since afternoon storms and gusts are common.' },
-      { q: 'Which displays are best inside the Orange County Convention Center?', a: 'A fabric backdrop or step & repeat for the booth wall, retractable banner stands at the aisle, and a printed table cover for demos. Save canopies for outdoor or resort activations.' },
-      { q: 'Can you deliver to a resort convention venue like Gaylord Palms?', a: 'Yes. We deliver to any Orlando address you provide, including resort convention receiving — just confirm the venue’s labelling and delivery-window rules.' },
-      { q: 'Is rush production available for Orlando shows?', a: 'Yes, a 2–3 business day rush is available on most instant-priced products; transit is added on top and depends on your delivery address.' }
+      { q: 'Do you ship trade show displays to Orlando?', a: 'Yes. Apex ships custom-printed trade show and event displays to Orlando and across Florida — to your I-Drive hotel, the Orange County Convention Center receiving dock, an advance warehouse or a business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Orlando?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Orlando conventions, association meetings and press events, made to order and shipped to your venue or business address. The graphic is replaceable, so a new campaign reuses the same frame between OCCC shows.' },
+      { q: 'How early should I order for an OCCC show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by delivery address. Orlando\'s national shows fill the halls, so allow room for artwork approval, production and shipping rather than ordering in the last week before move-in.' },
+      { q: 'Do canopies hold up to Orlando rain and humidity?', a: 'Yes. The printed tops are water-resistant, which matters in a city with near-daily summer afternoon storms, and dye-sublimated graphics resist humidity and UV without fading. Weight every leg with water or sand bags, because those storms usually arrive with a burst of wind.' },
+      { q: 'Which displays are best inside the Orange County Convention Center?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best inside the OCCC because they are portable and set up tool-free. Use a step & repeat or tension-fabric wall as your booth back, retractable banners at the aisle, and a fitted cover on the demo table; keep canopies for outdoor and resort activations.' },
+      { q: 'Can trade show displays be shipped to the Orange County Convention Center?', a: 'Yes. Apex ships to any Orlando address you provide, including the OCCC. We don\'t have a special delivery arrangement with the venue, so send the exact receiving address — including the West or North/South building — and follow the show\'s current freight, labeling and delivery-window rules, or ship through the official advance warehouse.' },
+      { q: 'Can you deliver to a resort convention venue like Gaylord Palms?', a: 'Yes. We ship to any Orlando address you provide, including resort convention receiving at Gaylord Palms, Rosen Centre or Rosen Shingle Creek. Confirm the property\'s labeling, delivery-window and storage rules first, since resorts often accept freight only within a set number of days before the event.' },
+      { q: 'Is rush production available for Orlando shows?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added on top based on your delivery address. Rush covers production only, so factor in shipping time to Orlando when you plan backwards from move-in day.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Orlando',
+        body: 'The Orange County Convention Center is one of the largest halls in the country, and a booth that works there is assembled from coordinated parts rather than a single centerpiece. Set a step & repeat or tension-fabric backdrop as the brand wall, add retractable banner stands at the aisle edge where I-Drive foot traffic passes, brand the demo table with a printed cover, and keep a canopy for resort or entrance activations. Buying the set from one supplier means every piece is color-matched, so a compact inline booth still holds its own beside the big island stands. It all packs into a case or tube and ships to Orlando ready for move-in.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Orlando',
+        body: 'Orlando runs plenty of branding outdoors — resort pool decks, hotel forecourts along International Drive, theme-park adjacent activations, festivals and outdoor exhibit areas beside the convention halls. A printed pop-up canopy covers the two things Central Florida throws at you: heavy midday sun and a near-daily summer thunderstorm that arrives fast. Shade keeps visitors at your booth through the hottest hours, and a water-resistant printed top keeps the giveaways dry when the rain starts. Weight every leg, since those storms bring gusts, and add printed half-walls for a backdrop while leaving the front open. Configure a 10×10, 10×15 or 10×20 online for instant pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Orlando',
+        body: 'Backdrop printing covers two different jobs at an Orlando show. A step-and-repeat backdrop tiles your logo across the wall for award photos, speaker headshots and sponsor recognition — common at the association conferences that fill the OCCC and the Gaylord Palms atrium meeting space. A straight tension-fabric wall gives one seamless graphic over an aluminum frame, which is what you want as a clean booth back under bright expo lighting. Both zip on and off, pack into a wheeled case for the trip from your hotel, and take a replaceable printed graphic, so next year\'s theme costs a reprint rather than a whole new display.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Orlando',
+        body: 'In a venue where attendees walk long concourses between halls, a banner stand is what turns a passing glance into a stop. Retractable banner stands pull a tall graphic out of a weighted base and stand at the front corner of the booth carrying one clear message. X-stand banners weigh almost nothing and suit registration desks, breakout rooms and hospitality suites at the Rosen properties. Tabletop banners handle counters and demo stations. All three go up tool-free in under a minute, travel as a slim case that checks as luggage into Orlando International, and use a replaceable graphic so the hardware works show after show.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Orlando',
+        body: 'Orlando booths lean on the table: product demos, badge scanning, literature and giveaways all happen there, so a rented table under plain house linen wastes your best surface. A custom printed table cover puts brand color and a logo at the exact height attendees look while they talk to you. Fitted stretch covers give a taut, modern face; pleated covers give a traditional draped skirt; both close on all four sides so cases and stock stay out of sight. They print full-color, fold flat into the show case, and wash between events — practical in Florida humidity where fabric picks up a long convention week.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
   'chicago': {
+    // Chicago-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Chicago — canopies, banner stands, backdrops and table covers for McCormick Place booths, printed to order with US shipping.',
+    specTable: specTableFor('Chicago'),
     answer:
       'Chicago hosts North America’s largest convention center, McCormick Place, and marquee shows like IMTS, RSNA and the National Restaurant Association Show. Apex prints custom displays and ships them to Chicago for exhibitors across the city.',
     overview: [
@@ -170,16 +208,50 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a McCormick Place booth, a tension-fabric backdrop or step & repeat sets the brand wall, retractable banners hold messaging at the aisle, and a fitted table cover finishes a demo station. For lakefront or plaza activations, a weighted canopy gives shade and shelter. Lightweight X-stand and tabletop banners are ideal for Rosemont and hotel meeting spaces where setup speed matters.',
     faqs: [
-      { q: 'Do you ship trade show displays to Chicago?', a: 'Yes. Apex ships custom-printed displays to Chicago and across Illinois — to McCormick Place, Rosemont, a downtown venue or your business address.' },
-      { q: 'How should freight reach McCormick Place?', a: 'Large shows use an official contractor and often an advance warehouse; shipping there ahead of move-in is usually smoother than to the show floor. Portable displays can also ship directly to your hotel.' },
-      { q: 'When should I order for a Chicago show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. For IMTS, RSNA or the Restaurant Show, order a few weeks ahead — those are peak weeks.' },
-      { q: 'Do outdoor canopies work in Chicago wind?', a: 'Yes, with proper weights on every leg. Lake Michigan gusts are strong, so water or sand bags are essential for any outdoor activation.' },
-      { q: 'Which displays suit a large hall like McCormick Place?', a: 'A fabric backdrop or step & repeat reads from a distance, retractable banners mark the aisle, and a printed table cover brands your table — a strong, portable kit for big rooms.' },
-      { q: 'Is rush production available for Chicago exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address.' }
+      { q: 'Do you ship trade show displays to Chicago?', a: 'Yes. Apex ships custom-printed trade show and event displays to Chicago and across Illinois — to McCormick Place, the Donald E. Stephens Convention Center in Rosemont, a downtown hotel or your business address. Everything is printed to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Chicago?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Chicago trade shows, press events and conferences, made to order and shipped to your venue or business address. Both use a replaceable graphic over a reusable frame, which suits exhibitors returning to McCormick Place year after year.' },
+      { q: 'How should freight reach McCormick Place?', a: 'Large McCormick Place shows use an official freight contractor and usually an advance warehouse that receives crates in the weeks before move-in and delivers them to your space — generally smoother than sending freight to the hall on setup morning. Portable displays can also ship straight to your hotel and be carried in by hand.' },
+      { q: 'When should I order for a Chicago show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. For IMTS, RSNA, the National Restaurant Association Show or the Inspired Home Show, allow time for artwork approval, production and shipping instead of ordering in the final days.' },
+      { q: 'Do outdoor canopies work in Chicago wind?', a: 'Yes, with a weight bag on every leg. Gusts coming off Lake Michigan are strong along the lakefront and through downtown plazas, and most Chicago activation spaces are paved, so ground stakes are not an option — water or sand bags do the anchoring instead.' },
+      { q: 'Which displays suit a large hall like McCormick Place?', a: 'Fabric backdrops, retractable banner stands and printed table covers suit McCormick Place best: they read from a distance in a 2.6-million-square-foot venue, set up tool-free and avoid installation labor. Anchor the booth with a tension-fabric or step & repeat wall, mark the aisle with retractable banners, and finish the demo table with a fitted cover.' },
+      { q: 'Can trade show displays be shipped to McCormick Place?', a: 'Yes. Apex ships to any Chicago address you provide, including McCormick Place. We don\'t have a special delivery arrangement with the venue, so give us the exact receiving address and building, and follow the show\'s current freight, labeling and delivery-window requirements — or route the shipment through the official advance warehouse.' },
+      { q: 'Is rush production available for Chicago exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address. If your show falls in a winter move-in, build in a little extra transit margin for weather delays on the way into Chicago.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Chicago',
+        body: 'McCormick Place is the largest convention center in North America, and the practical lesson for a 10×10 or 10×20 exhibitor is that scale is won with contrast, not square footage. A tall tension-fabric or step & repeat backdrop gives the booth a solid brand wall visible down a long aisle, retractable banner stands carry a short message at reading height, a printed table cover finishes the demo station, and a canopy handles any lakefront or plaza activation. Ordering the pieces together keeps colors matched across fabric and hardware, so the booth reads as one designed stand. Everything ships to Chicago in a case or tube, printed to order.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Chicago',
+        body: 'Chicago\'s outdoor season is short and busy: street festivals, neighborhood markets, lakefront events, campus and corporate activations, and equipment demos parked outside the halls. A printed pop-up canopy claims that space with your brand and gives shelter from both July sun and the rain that blows through quickly here. Wind is the design constraint — gusts off Lake Michigan are relentless, and paved plazas rule out stakes, so weight every leg with water or sand bags and keep half-walls on the windward side. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing, and store it flat for next season.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Chicago',
+        body: 'Chicago\'s flagship shows are technical and photographed heavily, so backdrops do double duty. A step-and-repeat backdrop repeats your logo behind interviews, product reveals and award presentations — the media wall that shows up in trade-press coverage from RSNA or the Restaurant Show. A straight tension-fabric wall gives a smooth, seamless graphic that hides the pipe and drape behind it and makes a machine-tool or device demo look properly staged. Both frames break down into a wheeled case that fits a hotel elevator, and both take a replaceable printed graphic, so an annual exhibitor reprints the message and reuses the aluminum.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Chicago',
+        body: 'Banner stands are the cheapest way to buy attention in a hall where attendees walk miles a day. A retractable banner stand rolls its graphic into a weighted aluminum base, stands at the aisle line, and carries the one sentence that explains why someone should stop. X-stand banners are light and inexpensive enough to place several across a Rosemont breakout program or a downtown hotel session. Tabletop banners brand a counter without eating floor space. All set up tool-free in seconds, pack into a slim case for the train or a checked bag through O\'Hare, and take replaceable graphics between Chicago shows.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Chicago',
+        body: 'Chicago shows are working shows — equipment on the table, samples out, buyers taking notes — so the table is where your brand spends the most contact time. A printed table cover turns rented furniture into branded surface: choose a fitted stretch cover for a tight, engineered look that suits industrial and medical exhibitors, or a pleated cover for a traditional draped front at association events. Both are closed on all four sides, so crates, coats and stock stay hidden through a long move-in. They print full-color in your brand colors, pack flat, and machine wash, so one cover carries you through a full Chicago show season.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
   'atlanta': {
+    // Atlanta-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in Atlanta — canopies, banner stands, backdrops and table covers for GWCC and AmericasMart booths, printed to order and shipped.',
+    specTable: specTableFor('Atlanta'),
     answer:
       'Atlanta is a major Southeast convention hub, home to the Georgia World Congress Center and AmericasMart. Apex prints custom trade show displays and ships them to Atlanta for exhibitors across logistics, film, foodservice and gift industries.',
     overview: [
@@ -207,12 +279,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a GWCC booth, a step & repeat or tension-fabric backdrop builds the brand wall, retractable banners carry messaging at the aisle, and a fitted table cover finishes the table. For outdoor or campus activations, a weighted canopy adds shade and shelter. For AmericasMart showrooms and hotel meetings, lightweight X-stand and tabletop banners set up fast.',
     faqs: [
-      { q: 'Do you ship trade show displays to Atlanta?', a: 'Yes. Apex ships custom-printed displays to Atlanta and across Georgia — to the Georgia World Congress Center, AmericasMart, or your business address.' },
-      { q: 'How early should I order for an Atlanta show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit that varies by address. For GWCC shows and AmericasMart markets, order a few weeks ahead.' },
-      { q: 'Can you deliver to AmericasMart or the GWCC?', a: 'Yes — we deliver to any Atlanta address you provide, including convention and mart receiving. Confirm the venue’s labelling and delivery-window rules.' },
-      { q: 'Do canopies handle Atlanta’s summer storms?', a: 'Yes. The printed tops are water-resistant and provide fast shade or rain cover; always weight every leg for thunderstorm gusts.' },
-      { q: 'Which displays work best in the GWCC’s large halls?', a: 'A fabric backdrop or step & repeat that reads at a distance, retractable banners at the aisle, and a printed table cover — a portable, high-impact kit.' },
-      { q: 'Is rush production available for Atlanta exhibitors?', a: 'Yes, a 2–3 business day rush is offered on most instant-priced products, with transit added based on your delivery address.' }
+      { q: 'Do you ship trade show displays to Atlanta?', a: 'Yes. Apex ships custom-printed trade show and event displays to Atlanta and across Georgia — to the Georgia World Congress Center, AmericasMart, Cobb Galleria Centre or your business address. Everything is made to order with a free artwork proof, and production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in Atlanta?', a: 'Yes — we print step & repeat backdrops and tension-fabric display walls for Atlanta trade shows, premieres and corporate events, shipped to your venue or business address. Atlanta\'s film and entertainment sector orders a lot of media walls, and the replaceable graphic means one frame serves many productions.' },
+      { q: 'How early should I order for an Atlanta show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by delivery address. For GWCC shows and AmericasMart market weeks, allow time for artwork approval, production and shipping instead of ordering in the final days before setup.' },
+      { q: 'Can trade show displays be shipped to the Georgia World Congress Center?', a: 'Yes. Apex ships to any Atlanta address you provide, including the GWCC and AmericasMart. We don\'t have a special delivery arrangement with either venue, so give us the exact receiving address and building, and follow the show\'s current freight, labeling and delivery-window rules — or ship through the official advance warehouse.' },
+      { q: 'Do canopies handle Atlanta\'s summer storms?', a: 'Yes. The printed top is water-resistant and gives fast cover when an afternoon thunderstorm builds, which happens most summer days here. Weight every leg with water or sand bags for the gust front that arrives ahead of the rain, and keep half-walls on the windward side of the canopy.' },
+      { q: 'Which displays work best in the GWCC\'s large halls?', a: 'Fabric backdrops, retractable banner stands and printed table covers work best in the GWCC because they read from a distance across roughly 1.5 million square feet of exhibit space and set up tool-free. Use a step & repeat or tension-fabric wall for the booth back, retractable banners at the aisle, and a fitted cover on the table.' },
+      { q: 'What displays suit an AmericasMart showroom or market week?', a: 'Lightweight, fast-setup pieces: X-stand and tabletop banners, a fitted table cover and a compact fabric backdrop. Showroom space is fixed and turns over between markets, so displays that go up in minutes and pack into a closet between market weeks are more practical than built structures.' },
+      { q: 'Is rush production available for Atlanta exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address. Rush affects production time only, so plan the shipping leg separately when you are working back from an AmericasMart or GWCC move-in date.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Atlanta',
+        body: 'Atlanta gives exhibitors two very different rooms: the enormous halls of the Georgia World Congress Center and the fixed showrooms of AmericasMart. One display kit covers both if you buy it as a set. A step & repeat or tension-fabric backdrop makes the brand wall, retractable banner stands carry the headline where aisle traffic turns, a printed table cover finishes the demo or writing table, and a canopy handles outdoor and campus activations. Matching colors across fabric and hardware is what makes a small downtown booth read as deliberate. Everything is printed to order, packs into a case or tube, and ships to Atlanta.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Atlanta',
+        body: 'Outdoor branding in Atlanta runs most of the year, because winters are mild and the festival calendar is long — Centennial Olympic Park events, neighborhood festivals, tailgates, campus recruiting and outdoor product demos. A printed pop-up canopy gives shade through humid Georgia afternoons and dry ground when a thunderstorm builds, which it often does with little warning. Weight all four legs for the gusts that lead those storms in, especially on paved plazas where stakes cannot be driven. Dye-sublimated graphics hold their color through pollen season and repeated summer use. Configure a 10×10, 10×15 or 10×20 with printed walls for instant online pricing.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Atlanta',
+        body: 'Atlanta is a production town, and that shapes what people order. A step-and-repeat backdrop goes behind premieres, screenings, sponsor step-offs and award nights as much as it goes behind a trade show booth, tiling a logo across the frame so every photo carries the brand. A straight tension-fabric wall is the exhibit version: a single seamless graphic over an aluminum frame that gives the booth a clean, finished back under bright GWCC lighting. Both break down into a case one person rolls, and both take a replaceable printed graphic, so the frame outlives the campaign that paid for it.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Atlanta',
+        body: 'Because so many Atlanta buyers fly in through Hartsfield-Jackson, the displays that travel well get used the most. A retractable banner stand rolls its printed graphic into a weighted aluminum base, stands up in seconds at the booth corner, and checks as luggage in a slim padded case. X-stand banners cost less and weigh less again, which suits AmericasMart showrooms, hotel breakouts and multi-room programs where you need branding in several places at once. Tabletop banners work on a counter or registration desk. All use replaceable graphics, so the hardware carries over from one Atlanta market or show to the next.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Atlanta',
+        body: 'Poultry, foodservice, logistics and gift shows all run on table conversations, so an Atlanta booth spends most of its selling time at a rented six- or eight-foot table. A custom printed table cover makes that surface work for you instead of showing bare edges and stacked boxes. Fitted stretch covers pull tight for a clean modern face; pleated covers give a traditional draped skirt that suits association and agriculture events. Both are closed on all four sides, hiding storage from the aisle. They print full-color in your brand colors, fold flat into the show case, and machine wash — useful after a humid Georgia week on the floor.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
@@ -254,6 +356,10 @@ export const CITY_DETAIL = {
   },
 
   'new-york': {
+    // New York-specific meta description for the /trade-show-displays page.
+    metaDescription:
+      'Custom trade show displays in New York City — banner stands, backdrops, table covers and canopies for Javits Center booths, printed to order and shipped.',
+    specTable: specTableFor('New York'),
     answer:
       'New York City’s Javits Center hosts flagship shows like NRF, NY NOW and New York Comic Con. Apex prints custom trade show displays and ships them to NYC — with portable options built for tight Manhattan logistics.',
     overview: [
@@ -281,12 +387,42 @@ export const CITY_DETAIL = {
     bestDisplays:
       'For a Javits booth, a tension-fabric backdrop or step & repeat gives a seamless brand wall that packs into a bag, retractable banners hold the aisle, and a fitted table cover finishes the table — all crew-free to set up. For lobby, showroom or pop-up activations around the city, lightweight X-stand and tabletop banners move easily between venues. Reserve canopies for outdoor or plaza activations, always weighted.',
     faqs: [
-      { q: 'Do you ship trade show displays to New York City?', a: 'Yes. Apex ships custom-printed displays to NYC and the surrounding area — to the Javits Center, a Manhattan hotel or venue, or your business address.' },
-      { q: 'What’s the best way to get a display into the Javits Center?', a: 'The Javits Center uses union labor and an official freight contractor with tight loading windows; ship to the advance warehouse when offered. Portable displays can also ship directly to your hotel and set up without a crew.' },
-      { q: 'Which displays are best for expensive, space-tight NYC shows?', a: 'Portable, crew-free displays — fabric backdrops, retractable banners and table covers — deliver strong branding while minimizing labor, freight and setup costs.' },
-      { q: 'How early should I order for an NYC show?', a: 'Production is 6–8 business days after proof approval (2–3 with rush) plus transit. For NRF, NY NOW or NYCC, order well ahead — those weeks are extremely busy.' },
-      { q: 'Do you deliver to Manhattan venues and hotels?', a: 'Yes — to any NYC address you provide. Confirm the venue’s labelling and delivery-window rules, which are often strict in Manhattan.' },
-      { q: 'Is rush production available for New York exhibitors?', a: 'Yes, a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address.' }
+      { q: 'Do you ship trade show displays to New York City?', a: 'Yes. Apex ships custom-printed trade show and event displays to New York City and the surrounding metro — to the Javits Center, a Manhattan hotel or venue, a Brooklyn or Queens studio, or your office. Everything is printed to order with a free artwork proof; production runs 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Do you offer backdrop printing and step & repeat backdrops in New York?', a: 'Yes — step & repeat backdrops and tension-fabric walls are among our most-shipped items into New York, because press events, product launches and fashion presentations all need a branded photo wall. They print to order, pack into a wheeled case that fits a service elevator, and take a replaceable graphic for the next campaign.' },
+      { q: 'What\'s the best way to get a display into the Javits Center?', a: 'Ship to the show\'s advance warehouse when one is offered. The Javits Center uses union labor and an official freight contractor, and West Side loading windows are tightly scheduled, so pre-delivered freight avoids move-in morning entirely. Portable displays are the alternative: they ship to your hotel and set up by hand with no crew.' },
+      { q: 'Which displays are best for expensive, space-tight NYC shows?', a: 'Portable, crew-free displays: fabric backdrops, retractable banner stands and printed table covers. They deliver full-height branding while keeping labor, drayage and freight costs down, and they fit through a hotel door, into a taxi trunk, or up a Manhattan service elevator without a crate or a forklift.' },
+      { q: 'How early should I order for an NYC show?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit that varies by address. For NRF, NY NOW or New York Comic Con, allow time for artwork approval, production and shipping rather than ordering in the last week before move-in.' },
+      { q: 'Can trade show displays be shipped to the Javits Center?', a: 'Yes. Apex ships to any New York address you provide, including the Javits Center. We don\'t have a special delivery arrangement with the venue, so send the exact receiving address and follow the show\'s current freight, labeling and delivery-window rules — or use the official advance warehouse, which Manhattan loading constraints usually make the easier route.' },
+      { q: 'Do you deliver to Manhattan venues, hotels and showrooms?', a: 'Yes — to any address you give us, including hotel receiving, Metropolitan Pavilion, pier venues and midtown showrooms. Confirm the building\'s delivery-window and labeling rules first, since Manhattan buildings often restrict receiving hours and may not hold a package for long.' },
+      { q: 'Is rush production available for New York exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit added based on your delivery address. Rush shortens production only, so leave room for the shipment to clear a Manhattan building\'s receiving process on arrival.' }
+    ],
+    // Contextual product H2 sections — displays (hub) city page only.
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in New York City',
+        body: 'New York punishes bulky booths: freight is expensive, loading windows are short, union labor is standard at the Javits Center, and storage costs money. The answer is a display kit that one or two people carry. A tension-fabric or step & repeat backdrop builds a full-height brand wall out of a bag, retractable banner stands mark the aisle, a printed table cover finishes the demo table, and a canopy covers any plaza or street-level activation. Bought as a set, the pieces match in color and tone, so a compact inline booth reads as an intentional stand rather than an assortment. Printed to order and shipped to NYC.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in New York City',
+        body: 'Outdoors in New York means sidewalk and plaza activations, street fairs, borough festivals, farmers markets, campus events and sampling programs — spaces where you get a small footprint and have to make it unmistakable. A printed pop-up canopy does that, and gives your team shade in humid summer weeks plus quick cover when a storm rolls up the Hudson. Everything here is pavement, so stakes are out and weight bags on all four legs are required; wind funnels hard between buildings and off the water. Configure a 10×10, 10×15 or 10×20 with printed half-walls online, then pack it down flat for the next date.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in New York',
+        body: 'In a media city, the wall behind you is a publishing surface. A step-and-repeat backdrop tiles your logo for press lines, launch parties, fashion presentations and influencer content — the classic New York media wall, and the reason backdrop printing gets ordered here for events that are not trade shows at all. A straight tension-fabric wall does the quieter job: one continuous graphic over an aluminum frame, giving a clean booth back at the Javits Center without pipe and drape showing through. Both use a replaceable printed graphic, so a returning exhibitor or agency reprints per campaign and keeps the frame.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in New York',
+        body: 'Banner stands are the most New York display we make: they arrive by parcel, ride a subway or a cab, go up in under a minute without a crew, and store in a closet the width of a coat. Retractable banner stands pull a tall graphic from a weighted base for booth corners and entrances; X-stand banners are light and cheap enough to run several across a showroom, panel event or pop-up; tabletop banners brand a counter or registration desk. Each takes a replaceable graphic, so an agency or brand can rotate messages between Javits shows, showroom appointments and client events all season.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in New York',
+        body: 'When your NYC booth is a table and two chairs — which it often is, given what floor space costs here — the tablecloth is the branding. A custom printed table cover replaces the rented house linen with your colors, logo and message at seated eye level. Fitted stretch covers pull taut for a sharp, modern look that photographs well at retail and fashion shows; pleated covers give a traditional draped front for association and finance events. Both close on all four sides so cases and coats disappear underneath. They pack flat in a carry-on, wash between events, and pair with a matching banner and backdrop.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
     ]
   },
 
