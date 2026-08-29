@@ -98,7 +98,8 @@ export const SEO_CITIES = [
 // instead of the brand, fit-descending so long city names stay within ~60 chars.
 // Shared by the prerenderer and the client CityCategoryPage for exact parity.
 export const cityDisplaysTitle = (city) => {
-  const base = `Trade Show Displays in ${city.city}`;
+  // use the same display name as the H1 so the SERP title and the page agree
+  const base = `Trade Show Displays in ${city.h1City || city.city}`;
   for (const suffix of [' | Custom Booths & Event Displays', ' | Custom Booths & Displays', ' | Booths & Event Displays', ' | Booths & Displays']) {
     if ((base + suffix).length <= 62) return base + suffix;
   }
