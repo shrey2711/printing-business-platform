@@ -79,6 +79,24 @@ for (const city of rolled) {
   if (list) console.log(`${city.city.padEnd(16)} ${faqs.length} FAQs · ${localQs} name the city`);
 }
 
+// §13: answer-first must not become boilerplate. Across cities, the same FAQ
+// slot should not open with one identical clause everywhere — EXCEPT where the
+// answer states the central production policy, which §10 requires be worded
+// identically on every page.
+const POLICY = /6[–-]8 business days|2[–-]3 (?:business day )?(?:with )?rush/;
+const MIN_DISTINCT = 5;
+const slots = Math.max(...rolled.map((c) => (CITY_DETAIL[c.slug].faqs || []).length));
+for (let i = 0; i < slots; i++) {
+  const answers = rolled.map((c) => (CITY_DETAIL[c.slug].faqs || [])[i]).filter(Boolean).map((f) => f.a);
+  if (answers.length < 10) continue;
+  const policyAnswers = answers.filter((a) => POLICY.test(a.slice(0, 120))).length;
+  if (policyAnswers > answers.length / 2) continue; // central policy — repetition is required
+  const distinct = new Set(answers.map((a) => a.split(/\s+/).slice(0, 6).join(' '))).size;
+  if (distinct < MIN_DISTINCT) {
+    fails.push(`FAQ slot ${i + 1}: only ${distinct} distinct openings across ${answers.length} cities — reads as boilerplate`);
+  }
+}
+
 warns.forEach((w) => console.log(`  ! ${w}`));
 if (fails.length) {
   console.error(`\n✗ FAQ AUDIT FAILED — ${fails.length} issue(s):`);
