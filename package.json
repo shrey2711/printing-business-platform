@@ -13,7 +13,7 @@
     "test:locations": "node scripts/test-location-quality.mjs",
     "test:links": "node scripts/test-internal-links.mjs",
     "test:images": "node scripts/test-image-assignment.mjs",
-    "test:cities": "node scripts/check-city-rollout.mjs && node scripts/audit-city-parity.mjs && node scripts/audit-city-keywords.mjs && node scripts/audit-city-booth-section.mjs && node scripts/audit-city-product-sections.mjs && node scripts/audit-city-local-sections.mjs && node scripts/audit-city-events.mjs && node scripts/audit-city-faqs.mjs && node scripts/audit-city-links.mjs && node scripts/audit-city-uniqueness.mjs",
+    "test:cities": "node scripts/check-city-rollout.mjs && node scripts/audit-city-parity.mjs && node scripts/audit-city-keywords.mjs && node scripts/audit-city-booth-section.mjs && node scripts/audit-city-product-sections.mjs && node scripts/audit-city-local-sections.mjs && node scripts/audit-city-events.mjs && node scripts/audit-city-faqs.mjs && node scripts/audit-city-links.mjs && node scripts/audit-city-uniqueness.mjs && node scripts/audit-city-product-claims.mjs",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test a11y",
     "lhci": "lhci autorun",
