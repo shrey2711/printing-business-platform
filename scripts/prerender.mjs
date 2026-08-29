@@ -510,8 +510,18 @@ for (const lc of LOCAL_CATEGORIES) {
       const items = productList.filter((p) => lc.productCats.includes(p.category));
       const siblings = LOCAL_CATEGORIES.filter((l) => l.key !== lc.key);
       const others = SEO_CITIES.filter((c) => c.slug !== city.slug).slice(0, 8);
+      // §21 image SEO: the prerendered grid carries the real product photo, so
+      // the crawled page is not text-only. Alt text describes the PRODUCT (it
+      // is what the photo shows) rather than repeating "{label} in {city}" on
+      // every image, which would be keyword stuffing and useless to a reader.
       const productLis = items
-        .map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`)
+        .map((p) => {
+          const photo = productPhoto(p);
+          const img = photo
+            ? `<img src="${photo.replace(ORIGIN, '')}" alt="${esc(`${p.name} — custom printed by ${BRAND}`)}" width="320" height="320" loading="lazy" decoding="async"> `
+            : '';
+          return `<li>${img}<a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`;
+        })
         .join('');
       const siblingLinks = siblings
         .map((s) => `<a href="/${s.slug}/${city.slug}">${esc(s.label)} in ${esc(city.city)}</a>`)
