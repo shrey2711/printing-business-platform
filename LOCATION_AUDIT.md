@@ -246,7 +246,7 @@ invented) or downgrade them to noindex.
 | /banner-stands/houston | 1473 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
 | /banner-stands/indianapolis | 1481 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
 | /banner-stands/las-vegas | 1795 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
-| /banner-stands/los-angeles | 1461 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
+| /banner-stands/los-angeles | 1468 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
 | /banner-stands/miami | 1420 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
 | /banner-stands/nashville | 1493 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
 | /banner-stands/new-orleans | 1495 | 97% | 1 | index | yes | 52 | Improve (templated but has headings) |
@@ -264,6 +264,7 @@ invented) or downgrade them to noindex.
 | /trade-show-canopies/houston | 1494 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/indianapolis | 1502 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/las-vegas | 1816 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
+| /trade-show-canopies/los-angeles | 1489 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/miami | 1441 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/nashville | 1514 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/new-orleans | 1516 | 97% | 1 | index | yes | 51 | Improve (templated but has headings) |
@@ -282,7 +283,6 @@ invented) or downgrade them to noindex.
 | /trade-show-canopies/anaheim | 1108 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/boston | 1424 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/chicago | 1461 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
-| /trade-show-canopies/los-angeles | 1482 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/philadelphia | 1095 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/phoenix | 1382 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
 | /trade-show-canopies/san-antonio | 1062 | 96% | 1 | index | yes | 51 | Improve (templated but has headings) |
@@ -377,7 +377,7 @@ invented) or downgrade them to noindex.
 | /trade-show-displays/atlanta | 2245 | 77% | 6 | index | yes | 72 | Keep/index (distinct content) |
 | /trade-show-displays/boston | 2212 | 77% | 6 | index | yes | 72 | Keep/index (distinct content) |
 | /trade-show-displays/dallas | 2216 | 77% | 6 | index | yes | 72 | Keep/index (distinct content) |
-| /trade-show-displays/los-angeles | 2283 | 77% | 6 | index | yes | 72 | Keep/index (distinct content) |
+| /trade-show-displays/los-angeles | 2290 | 77% | 6 | index | yes | 72 | Keep/index (distinct content) |
 | /trade-show-displays/orlando | 2362 | 77% | 6 | index | yes | 72 | Keep/index (distinct content) |
 | /trade-show-displays/san-diego | 2262 | 77% | 6 | index | yes | 72 | Keep/index (distinct content) |
 | /locations/california | 678 | 76% | 5 | index | yes | 43 | Keep/index (distinct content) |
