@@ -34,7 +34,7 @@ export const CITY_DETAIL = {
   'las-vegas': {
     // Las Vegas-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Las Vegas — canopies, banner stands, backdrops and table covers for CES, SEMA and MAGIC booths, printed to order and shipped.',
+      'Custom trade show displays in Las Vegas — banner stands, backdrops and table covers for CES, SEMA and MAGIC booths, with a free artwork proof and US shipping.',
     specTable: specTableFor('Las Vegas'),
     // ~40-word answer-first summary (also used for the AEO answer block).
     answer:
@@ -108,7 +108,7 @@ export const CITY_DETAIL = {
   'orlando': {
     // Orlando-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Orlando — canopies, banner stands, backdrops and table covers for OCCC and I-Drive booths, printed to order with US shipping.',
+      'Custom trade show displays in Orlando — canopies, banner stands, backdrops and table covers for OCCC and I-Drive, printed to order with a free artwork proof.',
     specTable: specTableFor('Orlando'),
     answer:
       'Orlando is a top-three US convention city, anchored by the Orange County Convention Center — one of the largest halls in the country. Apex prints custom trade show displays and ships them to Orlando for shows at the OCCC and the I-Drive resort corridor.',
@@ -179,7 +179,7 @@ export const CITY_DETAIL = {
   'chicago': {
     // Chicago-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Chicago — canopies, banner stands, backdrops and table covers for McCormick Place booths, printed to order with US shipping.',
+      'Custom trade show displays in Chicago — banner stands, backdrops and table covers for McCormick Place booths, made to order with a free proof and US shipping.',
     specTable: specTableFor('Chicago'),
     answer:
       'Chicago hosts North America’s largest convention center, McCormick Place, and marquee shows like IMTS, RSNA and the National Restaurant Association Show. Apex prints custom displays and ships them to Chicago for exhibitors across the city.',
@@ -250,7 +250,7 @@ export const CITY_DETAIL = {
   'atlanta': {
     // Atlanta-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Atlanta — canopies, banner stands, backdrops and table covers for GWCC and AmericasMart booths, printed to order and shipped.',
+      'Custom trade show displays in Atlanta — banner stands, backdrops and table covers for GWCC and AmericasMart booths, with a free artwork proof and US shipping.',
     specTable: specTableFor('Atlanta'),
     answer:
       'Atlanta is a major Southeast convention hub, home to the Georgia World Congress Center and AmericasMart. Apex prints custom trade show displays and ships them to Atlanta for exhibitors across logistics, film, foodservice and gift industries.',
@@ -321,7 +321,7 @@ export const CITY_DETAIL = {
   'dallas': {
     // Dallas-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Dallas — canopies, banner stands, backdrops and table covers for downtown and Market Center booths, printed to order.',
+      'Custom trade show displays in Dallas — canopies, banner stands, backdrops and table covers for downtown and Market Center, with a free proof, shipped to you.',
     specTable: specTableFor('Dallas'),
     answer:
       'Dallas is a leading Texas convention city, anchored by the Kay Bailey Hutchison Convention Center and the huge Dallas Market Center. Apex prints custom trade show displays and ships them to Dallas for energy, technology, healthcare and wholesale exhibitors.',
@@ -392,7 +392,7 @@ export const CITY_DETAIL = {
   'new-york': {
     // New York-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in New York City — banner stands, backdrops, table covers and canopies for Javits Center booths, printed to order and shipped.',
+      'Custom trade show displays in New York City — canopies, banner stands, backdrops and table covers for Javits Center booths, with a free proof, shipped to you.',
     specTable: specTableFor('New York'),
     answer:
       'New York City’s Javits Center hosts flagship shows like NRF, NY NOW and New York Comic Con. Apex prints custom trade show displays and ships them to NYC — with portable options built for tight Manhattan logistics.',
@@ -463,7 +463,7 @@ export const CITY_DETAIL = {
   'houston': {
     // Houston-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Houston — canopies, banner stands, backdrops and table covers for GRB and NRG Park booths, printed to order and shipped.',
+      'Custom trade show displays in Houston — canopies, banner stands, backdrops and table covers for GRB and NRG Park, printed to order with a free artwork proof.',
     specTable: specTableFor('Houston'),
     answer:
       'Houston is a major energy and medical convention city, anchored by the George R. Brown Convention Center and NRG Park, host of the Offshore Technology Conference. Apex prints custom trade show displays and ships them to Houston.',
@@ -534,7 +534,7 @@ export const CITY_DETAIL = {
   'los-angeles': {
     // Los Angeles-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Los Angeles — canopies, banner stands, backdrops and table covers for LACC and Long Beach booths, printed to order.',
+      'Custom trade show displays in Los Angeles — banner stands, backdrops and table covers for LACC and Long Beach booths, made to order with a free artwork proof.',
     specTable: specTableFor('Los Angeles'),
     answer:
       'Los Angeles is a top West Coast convention market, anchored by the LA Convention Center and shaped by entertainment, apparel and technology. Apex prints custom trade show displays and ships them to Los Angeles.',
@@ -605,7 +605,7 @@ export const CITY_DETAIL = {
   'miami': {
     // Miami-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Miami — canopies, banner stands, backdrops and table covers for Miami Beach Convention Center booths, printed to order.',
+      'Custom trade show displays in Miami — banner stands, backdrops, table covers and canopies, printed to order with a free artwork proof and US shipping.',
     specTable: specTableFor('Miami'),
     answer:
       'Miami is the US gateway to Latin America and host of Art Basel, eMerge Americas and the Miami International Boat Show at the Miami Beach Convention Center. Apex prints custom trade show displays and ships them to Miami.',
@@ -676,7 +676,7 @@ export const CITY_DETAIL = {
   'boston': {
     // Boston-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Boston — canopies, banner stands, backdrops and table covers for BCEC and Hynes booths, printed to order with US shipping.',
+      'Custom trade show displays in Boston — banner stands, backdrops and table covers for Menino Center and Hynes, made to order with a free proof and US shipping.',
     specTable: specTableFor('Boston'),
     answer:
       'Boston is New England’s convention hub and a global life-sciences center, host to major biotech, medical and seafood shows at the Boston Convention & Exhibition Center. Apex prints custom trade show displays for exhibitions and events and ships them to Boston.',
@@ -858,7 +858,7 @@ export const CITY_DETAIL = {
   'denver': {
     // Denver-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Denver — canopies, banner stands, backdrops and table covers for Colorado Convention Center booths, printed to order.',
+      'Custom trade show displays in Denver — canopies, banner stands, backdrops and table covers for Colorado Convention Center, with a free proof, shipped to you.',
     specTable: specTableFor('Denver'),
     answer:
       'Denver’s Colorado Convention Center hosts outdoor-industry, aerospace, energy and natural-products shows a mile above sea level. Apex prints custom trade show displays and ships them to Denver.',
@@ -929,7 +929,7 @@ export const CITY_DETAIL = {
   'new-orleans': {
     // New Orleans-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in New Orleans — canopies, banner stands, backdrops and table covers for Morial Convention Center booths, printed to order.',
+      'Custom trade show displays in New Orleans — banner stands, backdrops and table covers for Morial Convention Center, with a free artwork proof and US shipping.',
     specTable: specTableFor('New Orleans'),
     answer:
       'New Orleans hosts a heavy calendar of medical, energy and food shows at the Ernest N. Morial Convention Center beside the French Quarter. Apex prints custom trade show displays and ships them to New Orleans.',
@@ -1000,7 +1000,7 @@ export const CITY_DETAIL = {
   'phoenix': {
     // Phoenix-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Phoenix — canopies, banner stands, backdrops and table covers for Phoenix Convention Center booths, printed to order.',
+      'Custom trade show displays in Phoenix — canopies, banner stands, backdrops and table covers for Phoenix Convention Center, with a free proof, shipped to you.',
     specTable: specTableFor('Phoenix'),
     answer:
       'Phoenix’s downtown convention center hosts technology, healthcare and a fast-growing semiconductor industry. Apex prints custom trade show displays for exhibitions and events and ships them to Phoenix.',
@@ -1109,7 +1109,7 @@ export const CITY_DETAIL = {
   'san-diego': {
     // San Diego-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in San Diego — canopies, banner stands, backdrops and table covers for bayfront convention center booths, printed to order.',
+      'Custom trade show displays in San Diego — canopies, banner stands, backdrops and table covers for bayfront booths, printed to order with a free artwork proof.',
     specTable: specTableFor('San Diego'),
     answer:
       'San Diego’s waterfront convention center hosts Comic-Con International plus major biotech and defense shows. Apex prints custom trade show displays for exhibitions and events and ships them to San Diego.',
@@ -1180,7 +1180,7 @@ export const CITY_DETAIL = {
   'washington-dc': {
     // Washington, D.C.-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Washington, D.C. — canopies, banner stands, backdrops and table covers for association booths, printed to order and shipped.',
+      'Custom trade show displays in Washington, D.C. — canopies, banner stands, backdrops and table covers for D.C. association, with a free proof, shipped to you.',
     specTable: specTableFor('Washington, D.C.'),
     answer:
       'Washington, D.C. is the association and government capital, host to major policy, defense and education shows at the Walter E. Washington Convention Center. Apex prints custom trade show displays and ships them to Washington.',
@@ -1251,7 +1251,7 @@ export const CITY_DETAIL = {
   'san-francisco': {
     // San Francisco-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in San Francisco — banner stands, backdrops, table covers and canopies for Moscone Center booths, printed to order and shipped.',
+      'Custom trade show displays in San Francisco — canopies, banner stands, backdrops and table covers for Moscone Center, made to order with a free artwork proof.',
     specTable: specTableFor('San Francisco'),
     answer:
       'San Francisco is a global technology and life-sciences convention hub, hosting Dreamforce, the Game Developers Conference and the RSA Conference at the Moscone Center in SoMa. Apex prints custom trade show displays and ships them to San Francisco.',
@@ -1397,7 +1397,7 @@ export const CITY_DETAIL = {
   'nashville': {
     // Nashville-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Nashville — canopies, banner stands, backdrops and table covers for Music City Center booths, printed to order and shipped.',
+      'Custom trade show displays in Nashville — canopies, banner stands, backdrops and table covers for Music City Center booths, with a free proof, shipped to you.',
     specTable: specTableFor('Nashville'),
     answer:
       'Nashville is a fast-growing convention city for healthcare, music and hospitality, centered on the downtown Music City Center. Apex prints custom trade show displays and ships them to Nashville.',
@@ -1468,7 +1468,7 @@ export const CITY_DETAIL = {
   'indianapolis': {
     // Indianapolis-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Indianapolis — canopies, banner stands, backdrops and table covers for Indiana Convention Center booths, printed to order.',
+      'Custom trade show displays in Indianapolis — banner stands, backdrops and table covers for Indiana Convention Center, made to order with a free artwork proof.',
     specTable: specTableFor('Indianapolis'),
     answer:
       'Indianapolis is a top Midwest convention city, hosting Gen Con, the PRI Show and the FFA Convention at the skywalk-connected Indiana Convention Center. Apex prints custom trade show displays for exhibitions and events and ships them to Indianapolis.',
@@ -1539,7 +1539,7 @@ export const CITY_DETAIL = {
   'charlotte': {
     // Charlotte-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Charlotte — canopies, banner stands, backdrops and table covers for Charlotte Convention Center booths, printed to order.',
+      'Custom trade show displays in Charlotte — banner stands, backdrops and table covers for Charlotte Convention Center booths, with a free proof, shipped to you.',
     specTable: specTableFor('Charlotte'),
     answer:
       'Charlotte is a major banking, energy and motorsports center, hosting trade shows at the uptown Charlotte Convention Center beside the NASCAR Hall of Fame. Apex prints custom trade show displays and ships them to Charlotte.',
