@@ -10,7 +10,9 @@
 //      in {City}).
 //   3. Every internal href resolves to a prerendered page — no broken or
 //      placeholder links.
-//   4. Anchor-text diversity: the same anchor string must not be reused for
+//   4. The Learning Center block is exactly the approved guide set (§15) — no
+//      missing guides, no ad-hoc extras, anchors matching the article labels.
+//   5. Anchor-text diversity: the same anchor string must not be reused for
 //      different destinations, and a single destination linked many times must
 //      not always carry the identical anchor.
 //
@@ -19,6 +21,7 @@
 import { readFileSync, existsSync } from 'fs';
 import { SEO_CITIES, cityWithAbbr } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
 
 const DIST = 'dist';
 const CAT = 'trade-show-displays';
@@ -74,7 +77,26 @@ for (const city of rolled) {
     if (!exists(h)) F(`broken link: ${h}`);
   }
 
-  // 4. anchor-text diversity
+  // 4. Learning Center block: exactly the approved guide set, each linked once,
+  //    with anchor text that matches the article — and no ad-hoc extras, so the
+  //    page does not accumulate internal links over time (§15).
+  const blogLinks = pairs.filter(([h]) => h.startsWith('/blog/'));
+  const blogSlugs = blogLinks.map(([h]) => h.replace('/blog/', '').replace(/\/$/, ''));
+  const approved = CITY_BOOTH_GUIDES.map((g) => g.slug);
+  for (const want of approved) if (!blogSlugs.includes(want)) F(`Learning Center link missing: /blog/${want}`);
+  for (const got of blogSlugs) if (!approved.includes(got)) F(`unapproved Learning Center link /blog/${got} — add it to CITY_BOOTH_GUIDES if it is genuinely relevant`);
+  const dupes = blogSlugs.filter((s, i) => blogSlugs.indexOf(s) !== i);
+  if (dupes.length) F(`Learning Center link repeated: ${[...new Set(dupes)].join(', ')}`);
+  for (const [h, t] of blogLinks) {
+    const label = (CITY_BOOTH_GUIDES.find((g) => `/blog/${g.slug}` === h) || {}).label;
+    if (label && t !== label) F(`Learning Center anchor "${t}" does not match the guide label "${label}"`);
+  }
+
+  // 5. no link overload
+  if (blogLinks.length > 6) F(`${blogLinks.length} Learning Center links — too many for one city page`);
+  if (new Set(hrefs).size > 60) F(`${new Set(hrefs).size} distinct internal targets — page is over-linked`);
+
+  // 6. anchor-text diversity
   const byAnchor = new Map();
   const byHref = new Map();
   for (const [h, t] of pairs) {
