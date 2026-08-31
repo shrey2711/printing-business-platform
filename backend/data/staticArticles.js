@@ -881,11 +881,11 @@ export const STATIC_ARTICLES = [
     <tr><td>Heights</td><td>9, 10.5, 14 ft</td><td>9, 10.5, 14 ft</td><td>7, 9, 11.2 ft</td></tr>
     <tr><td>Wind behaviour</td><td>Tall, flies and flutters</td><td>Flies, cleaner top edge</td><td>Holds its shape best</td></tr>
     <tr><td>Print</td><td>Dye-sub, 1 or 2 sided</td><td>Dye-sub, 1 or 2 sided</td><td>Dye-sub, 1 or 2 sided</td></tr>
-    <tr><td>Base</td><td colspan="3">Ground spike included · cross base +$31 · metal plate base +$35</td></tr>
+    <tr><td>Base</td><td colspan="3">Ground spike included · cross base +$31 · metal plate base +$35 · water bag +$20</td></tr>
     <tr><td>From</td><td>$140</td><td>$140</td><td>$140</td></tr>
   </tbody>
 </table>
-<p>Every flag includes a flexible pole and a carry bag; choose the base for your surface — spike for grass, cross or plate for hard floors.</p>
+<p>Every flag includes a flexible pole and a carry bag; choose the base for your surface — spike for grass, cross or plate for hard floors, or a water bag for ballast outdoors.</p>
 
 <h2>Feather Angled — height and motion</h2>
 <p>The classic feather with an angled, pointed tip. It reads as the tallest profile and moves the most in a breeze, so it catches attention from across a lot — the popular pick for event entrances and roadside promotion.</p>
@@ -912,7 +912,7 @@ export const STATIC_ARTICLES = [
       { q: 'Which flag is best for windy locations?', a: 'The teardrop. Its fabric is held on more sides, so it keeps its shape and flaps less than a feather flag in wind.' },
       { q: "What's the difference between angled and convex feather flags?", a: 'The angled flag tapers to a pointed tip at the top; the convex flag has a smooth curved top edge. Both are the same feather family and the same heights (9, 10.5 and 14 ft).' },
       { q: 'Can any flag be printed on both sides?', a: 'Yes — every shape is available single or double sided in full-color dye sublimation.' },
-      { q: 'What base do I need?', a: 'A ground spike is included for grass. For hard surfaces choose a cross base (+$31) or a metal plate base (+$35).' },
+      { q: 'What base do I need?', a: 'A ground spike is included for grass. For hard surfaces choose a cross base (+$31) or a metal plate base (+$35). A water bag (+$20) adds ballast outdoors where a spike will not go in — fill it on site, empty it before transport.' },
       { q: 'How much do custom flags cost?', a: 'Flags start at $140 with instant online pricing; the price updates as you choose height, sides and base.' }
     ]
   },

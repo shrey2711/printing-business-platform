@@ -718,15 +718,16 @@ const FLAG_MATRIX = {
 };
 
 // Base is an add-on that applies with the hardware package. Spike included ($0),
-// cross +$31, metal plate +$35 — added once. (Graphic-only orders ship without
+// cross +$31, metal plate +$35, water bag +$20 — added once. (Graphic-only orders ship without
 // hardware or a base; a future configurator pass will hide this group for them.)
 const flagBaseGroup = {
   id: 'base', label: 'Base', type: 'select', pricing: 'add',
-  help: 'Choose a base for the hardware package. Spike base is included; cross base +$31; metal plate base +$35. Graphic-only orders do not include a pole or base.',
+  help: 'Choose a base for the hardware package. Spike base is included; cross base +$31; metal plate base +$35; water bag +$20. Graphic-only orders do not include a pole or base.',
   choices: [
     { id: 'spike', label: 'Spike base — included', price: 0, default: true },
     { id: 'cross', label: 'Cross base (+$31)', price: 31 },
-    { id: 'plate', label: 'Metal plate base (+$35)', price: 35 }
+    { id: 'plate', label: 'Metal plate base (+$35)', price: 35 },
+    { id: 'water', label: 'Water bag (+$20)', price: 20 }
   ]
 };
 
@@ -760,7 +761,7 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
     ['Shape', `${shape} flag`],
     ['Sizes', sizes.map((s) => s.label).join(', ')],
     ['Print', 'Full-color dye sublimation, single- or double-sided'],
-    ['Hardware', 'Flexible pole kit + base (spike / cross / metal plate)'],
+    ['Hardware', 'Flexible pole kit + base (spike / cross / metal plate / water bag)'],
     ['Graphic', 'Replaceable'],
     ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
   ],
@@ -771,7 +772,7 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   faqs: [
     { q: 'What is the difference between "with hardware" and "graphic only"?', a: 'With hardware includes the flexible pole kit and a base so the flag is ready to fly. Graphic only is the printed flag on its own — for customers who already own compatible hardware.' },
     { q: 'Single-sided or double-sided?', a: 'Single-sided prints the front in full color; the reverse shows a mirrored print-through. Double-sided prints two separate faces with a blockout layer between them so each side reads correctly.' },
-    { q: 'Which base should I choose?', a: 'A spike base (included) pushes into grass for outdoor use. A cross base or metal plate base (small upcharge) weighs the flag down on hard floors indoors.' },
+    { q: 'Which base should I choose?', a: 'A spike base (included) pushes into grass for outdoor use. A cross base or metal plate base (small upcharge) weighs the flag down on hard floors indoors. A water bag (+$20) adds ballast for outdoor hard surfaces where you cannot drive a spike — fill it on site and empty it before transport.' },
     { q: 'How long does production take?', a: 'Standard production is 6–8 business days after proof approval; rush is 2–3 business days. This is production time — shipping/transit is additional.' }
   ],
   pricing: {
