@@ -543,10 +543,31 @@ for (const lc of LOCAL_CATEGORIES) {
       // entry; otherwise the standard template. Keeps rollout incremental with no
       // thin/empty sections.
       const detail = cityDetailFor(city.slug);
-      const st = (lc.slug === 'trade-show-displays') ? detail?.specTable : null;
+      // Spec table per category: the displays hub shows every product line,
+      // each category page shows only the rows for its own products.
+      const SPEC_ROWS_FOR = {
+        'trade-show-displays': null, // all rows
+        'trade-show-canopies': ['Canopy tent'],
+        'banner-stands': ['Retractable banner stand'],
+        'trade-show-backdrops': ['Step & repeat backdrop', 'Tension fabric display'],
+        'table-covers': ['Table cover']
+      };
+      const rowFilter = SPEC_ROWS_FOR[lc.slug];
+      const baseSpec = detail?.specTable;
+      const st = baseSpec
+        ? (rowFilter === null
+          ? baseSpec
+          : { ...baseSpec,
+            caption: `${city.city} ${lc.label.toLowerCase()} at a glance`,
+            rows: baseSpec.rows.filter((r) => rowFilter.includes(r[0])) })
+        : null;
       const specTableHtml = st
         ? `<div class="table-wrap"><table class="compare-table"><caption>${esc(st.caption)}</caption><thead><tr>${st.cols.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${st.rows.map((r) => `<tr>${r.map((cell) => `<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
         : '';
+      // Climate belongs on the pages whose product is used outdoors; the
+      // best-displays overview belongs on the hub that covers every product.
+      const showClimate = lc.slug === 'trade-show-displays' || lc.slug === 'trade-show-canopies';
+      const showBestDisplays = lc.slug === 'trade-show-displays';
       const richHtml = detail
         ? `
         <p class="answer-block">${esc(detail.answer)}</p>
@@ -559,18 +580,54 @@ for (const lc of LOCAL_CATEGORIES) {
         <ul>${detail.industries.map(([n, d]) => `<li><strong>${esc(n)}</strong> — ${esc(d)}</li>`).join('')}</ul>
         <h2>Shipping to ${esc(city.city)}</h2>
         <p>${esc(BRAND)} prints to order and ships to ${esc(city.city)}, ${esc(city.stateName)}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address. Ship to your venue's receiving dock, an advance warehouse, or your business address.</p>
-        <h2>Outdoor &amp; climate tips for ${esc(city.city)}</h2>
-        <p>${esc(detail.climate)}</p>
-        ${detail.bestDisplays ? `<h2>Best displays for ${esc(city.city)} trade shows</h2><p>${esc(detail.bestDisplays)}</p>${specTableHtml}` : ''}`
+        ${showClimate ? `<h2>Outdoor &amp; climate tips for ${esc(city.city)}</h2><p>${esc(detail.climate)}</p>` : ''}
+        ${showBestDisplays && detail.bestDisplays ? `<h2>Best displays for ${esc(city.city)} trade shows</h2><p>${esc(detail.bestDisplays)}</p>` : ''}
+        ${specTableHtml}`
         : '';
-      const cityFaqHtml = detail
-        ? `<h2>${esc(city.city)} FAQ</h2>${detail.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
+      // FAQ relevance per category. The displays hub answers everything; a
+      // category page answers the questions about ITS product plus the two that
+      // always apply (shipping to the city, rush production), so the five pages
+      // no longer repeat one identical eight-question block.
+      const FAQ_TOPIC = {
+        'trade-show-canopies': /canop|outdoor|weight|wind|sun|rain|shade/i,
+        'banner-stands': /banner|retractable|x-stand|tabletop|aisle/i,
+        'trade-show-backdrops': /backdrop|step & repeat|step and repeat|tension|media wall|photo/i,
+        'table-covers': /table cover|tablecloth|fitted|stretch|pleated/i
+      };
+      const alwaysFaq = /ship|deliver|receiving|rush|how early|in time for|order/i;
+      const topic = FAQ_TOPIC[lc.slug];
+      const cityFaqs = detail
+        ? (topic ? detail.faqs.filter((f) => topic.test(f.q) || alwaysFaq.test(f.q)) : detail.faqs)
+        : [];
+      const cityFaqHtml = cityFaqs.length
+        ? `<h2>${esc(city.city)} FAQ</h2>${cityFaqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
         : '';
       const boothLinks = `<p>Complete your ${esc(city.city)} booth: <a href="/custom-canopies">canopy tents</a> · <a href="/banner-stands">banner stands</a> · <a href="/backdrops">backdrops</a> · <a href="/table-covers">table covers</a> · <a href="/trade-show-displays">all trade show displays</a>.</p>`;
       // Dedicated contextual product H2 sections — displays (hub) page only, when
       // the city supplies them (see cityDetail.productSections).
-      const productSectionsHtml = (lc.slug === 'trade-show-displays' && Array.isArray(detail?.productSections))
-        ? detail.productSections.map((s) => `<h2>${esc(s.h2)}</h2><p>${esc(s.body)}</p>${Array.isArray(s.links) && s.links.length ? `<p>${s.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}`).join('')
+      // The five per-city product sections are written one per product family.
+      // Each renders on the ONE category page whose intent it matches, so no two
+      // city URLs repeat the same product prose. Index order in cityDetail is:
+      // 0 booth displays · 1 canopies · 2 backdrops · 3 banner stands · 4 table covers
+      // The displays hub carries all five (owner spec §5-§9: the city page must
+      // show booth displays, canopies, backdrops, banner stands and table
+      // covers). Each category page additionally surfaces the one section that
+      // matches its own intent, so a canopy searcher reads canopy prose on the
+      // canopy URL rather than a generic city page.
+      const SECTION_FOR = {
+        'trade-show-displays': [0, 1, 2, 3, 4],
+        'trade-show-canopies': [1],
+        'trade-show-backdrops': [2],
+        'banner-stands': [3],
+        'table-covers': [4]
+      };
+      const wanted = SECTION_FOR[lc.slug] || [];
+      const productSectionsHtml = Array.isArray(detail?.productSections)
+        ? wanted
+          .map((i) => detail.productSections[i])
+          .filter(Boolean)
+          .map((s) => `<h2>${esc(s.h2)}</h2><p>${esc(s.body)}</p>${Array.isArray(s.links) && s.links.length ? `<p>${s.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}`)
+          .join('')
         : '';
       // Planning renders AFTER the product sections (logical §24 order: plan the
       // booth once you've chosen displays).
@@ -641,11 +698,11 @@ for (const lc of LOCAL_CATEGORIES) {
             areaServed: { '@type': 'City', name: city.city },
             description: cityCatDescription(lc.label, city)
           },
-          ...(detail
+          ...(cityFaqs.length
             ? [{
                 '@context': 'https://schema.org',
                 '@type': 'FAQPage',
-                mainEntity: detail.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+                mainEntity: cityFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
               }]
             : [])
         ]

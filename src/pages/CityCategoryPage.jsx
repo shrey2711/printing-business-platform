@@ -12,11 +12,59 @@ const sizeKey = (s) => s.replace('canopy-tent-', '');
 
 // One template for every /trade-show-canopies|trade-show-displays|banner-stands/[city]
 // page. categoryKey identifies which local category; :city comes from the route.
+
+// Per-category view rules, mirroring scripts/prerender.mjs exactly. Each city
+// page renders only the product section, spec rows and FAQs that match its own
+// product intent, so the five category URLs for a city do not repeat one
+// another's content.
+const SECTION_FOR = {
+  'trade-show-displays': [0, 1, 2, 3, 4],
+  'trade-show-canopies': [1],
+  'trade-show-backdrops': [2],
+  'banner-stands': [3],
+  'table-covers': [4]
+};
+const SPEC_ROWS_FOR = {
+  'trade-show-displays': null, // all rows
+  'trade-show-canopies': ['Canopy tent'],
+  'banner-stands': ['Retractable banner stand'],
+  'trade-show-backdrops': ['Step & repeat backdrop', 'Tension fabric display'],
+  'table-covers': ['Table cover']
+};
+const FAQ_TOPIC = {
+  'trade-show-canopies': /canop|outdoor|weight|wind|sun|rain|shade/i,
+  'banner-stands': /banner|retractable|x-stand|tabletop|aisle/i,
+  'trade-show-backdrops': /backdrop|step & repeat|step and repeat|tension|media wall|photo/i,
+  'table-covers': /table cover|tablecloth|fitted|stretch|pleated/i
+};
+const ALWAYS_FAQ = /ship|deliver|receiving|rush|how early|in time for|order/i;
+
+const faqsForCategory = (detail, slug) => {
+  if (!detail || !Array.isArray(detail.faqs)) return [];
+  const topic = FAQ_TOPIC[slug];
+  return topic ? detail.faqs.filter((f) => topic.test(f.q) || ALWAYS_FAQ.test(f.q)) : detail.faqs;
+};
+const specTableForCategory = (detail, slug, cityName, label) => {
+  const base = detail && detail.specTable;
+  if (!base) return null;
+  const filter = SPEC_ROWS_FOR[slug];
+  if (filter === undefined) return null;
+  if (filter === null) return base;
+  return { ...base, caption: `${cityName} ${label.toLowerCase()} at a glance`, rows: base.rows.filter((r) => filter.includes(r[0])) };
+};
+
 export default function CityCategoryPage({ categoryKey }) {
   const cat = getLocalCategory(categoryKey);
   const { city: citySlug } = useParams();
   const city = getSeoCity(citySlug);
   const detail = cityDetailFor(citySlug);
+  const shownFaqs = faqsForCategory(detail, cat ? cat.slug : '');
+  const shownSpec = cat && city ? specTableForCategory(detail, cat.slug, city.city, cat.label) : null;
+  const shownSections = (Array.isArray(detail?.productSections) && cat)
+    ? (SECTION_FOR[cat.slug] || []).map((i) => detail.productSections[i]).filter(Boolean)
+    : [];
+  const showClimate = cat && (cat.slug === 'trade-show-displays' || cat.slug === 'trade-show-canopies');
+  const showBestDisplays = cat && cat.slug === 'trade-show-displays';
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -62,11 +110,11 @@ export default function CityCategoryPage({ categoryKey }) {
             areaServed: { '@type': 'City', name: city.city },
             description: cityCatDescription(cat.label, city)
           },
-          ...(detail && detail.faqs
+          ...(shownFaqs.length
             ? [{
                 '@context': 'https://schema.org',
                 '@type': 'FAQPage',
-                mainEntity: detail.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+                mainEntity: shownFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
               }]
             : [])
         ]
@@ -137,21 +185,23 @@ export default function CityCategoryPage({ categoryKey }) {
             <h2>Shipping to {city.city}</h2>
             <p>Apex prints to order and ships to {city.city}, {city.stateName}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address.</p>
           </section>
-          <section className="section-block">
-            <h2>Outdoor &amp; climate tips for {city.city}</h2>
-            <p>{detail.climate}</p>
-          </section>
-          {detail.bestDisplays && (
+          {showClimate && (
+            <section className="section-block">
+              <h2>Outdoor &amp; climate tips for {city.city}</h2>
+              <p>{detail.climate}</p>
+            </section>
+          )}
+          {showBestDisplays && detail.bestDisplays && (
             <section className="section-block">
               <h2>Best displays for {city.city} trade shows</h2>
               <p>{detail.bestDisplays}</p>
-              {cat.slug === 'trade-show-displays' && detail.specTable && (
+              {shownSpec && (
                 <div className="table-wrap">
                   <table className="compare-table">
-                    <caption>{detail.specTable.caption}</caption>
-                    <thead><tr>{detail.specTable.cols.map((c) => <th key={c}>{c}</th>)}</tr></thead>
+                    <caption>{shownSpec.caption}</caption>
+                    <thead><tr>{shownSpec.cols.map((c) => <th key={c}>{c}</th>)}</tr></thead>
                     <tbody>
-                      {detail.specTable.rows.map((r) => (
+                      {shownSpec.rows.map((r) => (
                         <tr key={r[0]}>{r.map((cell, i) => <td key={i}>{cell}</td>)}</tr>
                       ))}
                     </tbody>
@@ -180,7 +230,7 @@ export default function CityCategoryPage({ categoryKey }) {
         )}
       </section>
 
-      {cat.slug === 'trade-show-displays' && Array.isArray(detail?.productSections) && detail.productSections.map((s) => (
+      {shownSections.map((s) => (
         <section className="section-block" key={s.h2}>
           <h2>{s.h2}</h2>
           <p>{s.body}</p>
@@ -228,11 +278,11 @@ export default function CityCategoryPage({ categoryKey }) {
         </div>
       </section>
 
-      {detail && detail.faqs && (
+      {shownFaqs.length > 0 && (
         <section className="faq-section">
           <div className="section-head"><h2>{city.city} FAQ</h2></div>
           <div className="faq-list">
-            {detail.faqs.map((f) => (
+            {shownFaqs.map((f) => (
               <details className="faq-item" key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
             ))}
           </div>
