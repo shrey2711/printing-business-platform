@@ -185,7 +185,10 @@ app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => 
 app.post('/api/subscribe', writeLimiter, async (req, res) => {
   const { email, source, firstName, city } = req.body || {};
   if (!isEmail(email)) {
-    return res.status(400).json({ ok: false, error: 'Enter a valid email address.' });
+    // `configured` is echoed here too so the integration can be verified after a
+    // deploy WITHOUT adding a junk contact to the live list: post a deliberately
+    // invalid address and read the flag. It exposes a boolean, never the key.
+    return res.status(400).json({ ok: false, error: 'Enter a valid email address.', configured: brevoConfigured() });
   }
   const result = await subscribeContact({
     email,
