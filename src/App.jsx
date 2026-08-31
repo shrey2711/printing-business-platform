@@ -1,5 +1,6 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import EmailCapture from './components/EmailCapture';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage'; // eager — the landing page / LCP route
 // Route-level code-splitting: every other page loads as its own chunk on demand,
@@ -310,6 +311,7 @@ function Footer() {
             <img src="/images/logo.webp" alt={brand.name} width="203" height="46" />
           </span>
           <p className="ft-blurb">{brand.description}</p>
+          <EmailCapture variant="footer" source="footer" />
         </div>
         <div>
           <h4>Shop</h4>

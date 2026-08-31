@@ -18,6 +18,7 @@ import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
 import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
 import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
 import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from './lib/pricingOverrides.js';
+import { subscribeContact, brevoConfigured, isEmail } from './lib/brevo.js';
 
 dotenv.config();
 
@@ -167,6 +168,35 @@ app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => 
   }
 
   res.json({ success: true, message: 'Quote request received', reference, email });
+});
+
+// ============================================================================
+// Email capture (Brevo)
+// ============================================================================
+
+// Subscribe an address to the Brevo marketing list. Deliberately thin: no local
+// copy of the address is kept, so Brevo remains the single source of truth and
+// the only place an unsubscribe has to be honoured.
+//
+// Always answers 200 for a well-formed address, even when Brevo is unreachable
+// or unconfigured — a visitor who asked for a proof should never be shown a
+// stack trace because a marketing integration is down. Failures are reported in
+// `status` for logging, not as an error the customer has to act on.
+app.post('/api/subscribe', writeLimiter, async (req, res) => {
+  const { email, source, firstName, city } = req.body || {};
+  if (!isEmail(email)) {
+    return res.status(400).json({ ok: false, error: 'Enter a valid email address.' });
+  }
+  const result = await subscribeContact({
+    email,
+    source: typeof source === 'string' ? source.slice(0, 40) : 'site',
+    attributes: {
+      FIRSTNAME: typeof firstName === 'string' ? firstName.slice(0, 60) : undefined,
+      CITY: typeof city === 'string' ? city.slice(0, 60) : undefined
+    }
+  });
+  if (!result.ok) console.warn('[subscribe] brevo:', result.error);
+  res.json({ ok: true, status: result.status, configured: brevoConfigured() });
 });
 
 // ============================================================================

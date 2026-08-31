@@ -9,6 +9,7 @@ import TableCoverPhoto from '../components/TableCoverPhoto';
 import DisplayPhoto from '../components/DisplayPhoto';
 import ProductGallery from '../components/ProductGallery';
 import AccessoriesSection, { BANNER_ACCESSORIES } from '../components/AccessoriesSection';
+import EmailCapture from '../components/EmailCapture';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getCategoryForProduct } from '../data/categoryPages';
 import ColorwayStrip from '../components/ColorwayStrip';
@@ -683,6 +684,11 @@ export default function ProductConfigurator() {
           )}
         </aside>
       </div>
+
+      {/* Highest-intent capture point on the site: the visitor has configured a
+          product but has not ordered. The free proof is the reason to leave an
+          address, so it is offered here rather than as an interrupting popup. */}
+      <EmailCapture variant="proof" source={`configurator:${product.slug}`} />
 
       <ProductTabs product={product} />
 

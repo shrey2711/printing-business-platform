@@ -1257,3 +1257,32 @@ img { max-width: 100%; }
   /* Long anchor lists / breadcrumbs wrap rather than overflow. */
   .info-links, .crumbs, .display-types { word-break: break-word; }
 }
+
+
+/* ---- Email capture (Brevo list) ------------------------------------------ */
+.email-capture { margin: 1.25rem 0; }
+.email-capture--proof {
+  max-width: 620px; margin: 2rem auto; padding: 1.25rem 1.4rem;
+  border: 1px solid var(--line, #e4e4e7); border-radius: 12px; background: #fff;
+}
+.email-capture .ec-title { margin: 0 0 .35rem; font-size: 1.05rem; }
+.email-capture .ec-blurb { margin: 0 0 .8rem; font-size: .9rem; opacity: .8; line-height: 1.5; }
+.email-capture .ec-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+.email-capture .ec-input {
+  flex: 1 1 220px; min-width: 0; padding: .6rem .75rem;
+  border: 1px solid var(--line, #d4d4d8); border-radius: 8px; font: inherit;
+}
+.email-capture .ec-input:disabled { opacity: .6; }
+.email-capture .ec-submit { flex: 0 0 auto; }
+.email-capture .ec-msg { margin: .55rem 0 0; font-size: .87rem; }
+.email-capture .ec-msg--ok { color: #15803d; }
+.email-capture .ec-msg--error { color: #b91c1c; }
+.email-capture .ec-consent { margin: .6rem 0 0; font-size: .76rem; opacity: .7; line-height: 1.45; }
+.email-capture .ec-consent a { text-decoration: underline; }
+.site-footer .email-capture { margin-top: 1rem; }
+.site-footer .ec-title { font-size: .95rem; }
+.site-footer .ec-input { background: rgba(255,255,255,.06); color: inherit; border-color: rgba(255,255,255,.25); }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
