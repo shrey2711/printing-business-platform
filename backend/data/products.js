@@ -198,6 +198,21 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
     'Heavy-duty aluminum hex frame',
     'Free artwork proof before production'
   ],
+  specs: [
+    ['Footprint', size],
+    ['Top material', '600D polyester'],
+    ['Frame', 'Heavy-duty aluminum hex frame with telescopic legs'],
+    ['Printing', 'Dye-sublimated full-bleed'],
+    ['Printed walls', 'Up to 3 total, any mix of full and half height'],
+    ['Included', 'Carry bag with the complete set'],
+    ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
+  ],
+  applications: [
+    'Outdoor trade shows and expos',
+    'Farmers markets and street festivals',
+    'Brand activations and sampling',
+    'Sports, community and campus events'
+  ],
   // Config-aware: the kit choice (full set vs graphic-only) changes what ships.
   whatsIncluded: [
     'Complete set (frame + graphic): your custom-printed canopy top, a heavy-duty aluminum hex frame with telescopic legs, and a carry bag.',
@@ -251,6 +266,16 @@ const canopyTents = [
 
 const pleatedCovers = {
   slug: 'pleated-table-covers',
+  faqs: [
+    { q: 'What size table cover do I need?', a: 'Order to the table length rather than the booth: 4, 6 or 8 ft. Trade show rentals are usually 6 ft or 8 ft rectangular tables — confirm with the show\'s exhibitor services before printing.' },
+    { q: 'Does it cover all four sides?', a: 'Yes, the back is closed, so cases and stock stored under the table stay out of sight from the aisle.' },
+    { q: 'Can it be washed?', a: 'Yes. It is dye-sublimated on wrinkle-resistant polyester, so the ink is bonded into the fibre and the cover is machine washable between shows.' },
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
+  ],
+  whatsIncluded: [
+      'One custom-printed pleated table throw in the size you select (4, 6 or 8 ft).',
+      'Closed back on all four sides; dye-sublimated on wrinkle-resistant polyester.'
+    ],
   active: true,
   name: 'Pleated Table Covers',
   category: 'table-covers',
@@ -304,6 +329,16 @@ const pleatedCovers = {
 
 const stretchCovers = {
   slug: 'stretch-table-covers',
+  faqs: [
+    { q: 'What sizes are available?', a: '6 ft and 8 ft, fitted tight to the table. Order to the table length, not the booth width — a stretch cover sized for the wrong table will not fit at all.' },
+    { q: 'How is stretch different from a pleated throw?', a: 'Stretch pulls taut for a sharp, modern face; a pleated throw drapes with rounded corners for a traditional look. Both are closed-back on all four sides.' },
+    { q: 'Is it machine washable?', a: 'Yes — dye-sublimated stretch polyester, so it washes and returns to shape rather than fading or cracking.' },
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
+  ],
+  whatsIncluded: [
+      'One custom-printed fitted stretch table cover in the size you select (6 or 8 ft).',
+      'Closed back on all four sides; dye-sublimated on stretch polyester.'
+    ],
   active: true,
   name: 'Stretch Table Covers',
   category: 'table-covers',
@@ -362,6 +397,10 @@ const stretchCovers = {
 const tradeShowDisplays = [
   {
     slug: 'standard-retractable-banner',
+    whatsIncluded: [
+      'Your custom-printed banner graphic, replaceable.',
+      'The compact aluminum retractable base with two stabilising feet.'
+    ],
     active: true,
     name: 'Standard Retractable Banner Stand',
     category: 'banner-stands',
@@ -428,10 +467,19 @@ const tradeShowDisplays = [
       { q: 'What size is the Standard Retractable Banner Stand?', a: 'It comes in two widths — 33" × 81" (standard) and a wider 47" × 81" — both 81" tall. Pick your size on this page for an instant price; ask us if you need a non-standard size.' },
       { q: 'Can I replace the graphic later?', a: 'Yes — the banner is replaceable, so you can reuse the stand and just reprint the graphic.' },
       { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size and production speed for an instant price. Upload artwork or add our design service, and every order includes a free proof before printing.' }
-    ]
+    ,
+    { q: 'What size is the printed graphic?', a: '33" x 81" or 47" x 81". The wider option fills more of an aisle-facing corner; the narrower one fits tighter booths and hotel meeting rooms.' },
+    { q: 'What ships with the stand?', a: 'The custom-printed banner graphic and the compact aluminum retractable base with its two stabilising feet. The graphic is replaceable, so the base is reusable across campaigns.' },
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
+  ]
   },
   {
     slug: 'deluxe-retractable-banner',
+    whatsIncluded: [
+      'Your custom-printed banner graphic, replaceable.',
+      'The heavy aluminum base with chrome-style end caps.',
+      'An adjustable support pole.'
+    ],
     active: true,
     name: 'Deluxe Retractable Banner Stand',
     category: 'banner-stands',
@@ -491,10 +539,18 @@ const tradeShowDisplays = [
       { q: 'How is the Deluxe different from the Standard stand?', a: 'The Deluxe uses heavier aluminum hardware, chrome-style end caps and an adjustable pole for a more premium, professional look.' },
       { q: 'Is the graphic replaceable?', a: 'Yes — reuse the premium hardware and reprint the banner whenever your message changes.' },
       { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size and production speed for an instant price. Upload artwork or add our design service, and every order includes a free proof before printing.' }
-    ]
+    ,
+    { q: 'How is the deluxe different from the standard retractable?', a: 'The base and pole, not the print. The deluxe uses a heavier aluminum base with chrome-style end caps and an adjustable support pole, which stands up better to a busy hall and frequent travel.' },
+    { q: 'Can I replace the graphic later?', a: 'Yes. The printed banner is replaceable, so a new campaign or a rebrand means reordering the graphic rather than the whole stand.' },
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
+  ]
   },
   {
     slug: 'x-stand-banner',
+    whatsIncluded: [
+      'Your custom-printed banner, grommeted at the corners.',
+      'The collapsible lightweight X-frame.'
+    ],
     active: true,
     name: 'X-Stand Banner',
     category: 'banner-stands',
@@ -566,10 +622,18 @@ const tradeShowDisplays = [
       { q: 'Is the X-Stand a retractable banner?', a: 'No — the X-Stand uses a collapsible X-shaped frame and a grommet-mounted banner, not a roll-up cassette. It is lighter and more economical.' },
       { q: 'How does the banner attach?', a: 'The printed banner has grommets at the corners that hook onto the X-frame, so it is fast to mount and swap.' },
       { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size, choose the stand or graphic only, and your production speed for an instant price. Every order includes a free proof before printing.' }
-    ]
+    ,
+    { q: 'How does an X-stand differ from a retractable?', a: 'An X-stand is a collapsible X-shaped frame and the banner mounts to it with corner grommets — it is lighter and cheaper, but the graphic is not protected inside a base between shows. A retractable rolls its graphic into a weighted base.' },
+    { q: 'What sizes are available?', a: '24" x 63" or 32" x 71". Both fold flat and set up in seconds without tools.' },
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
+  ]
   },
   {
     slug: 'step-and-repeat-backdrop',
+    whatsIncluded: [
+      'Your custom-printed large-format fabric graphic, replaceable.',
+      'The adjustable, portable frame system.'
+    ],
     active: true,
     name: 'Step and Repeat Backdrop',
     category: 'backdrops',
@@ -646,10 +710,18 @@ const tradeShowDisplays = [
       { q: 'What size is the step and repeat backdrop?', a: "The standard display is 10' × 8' (120\" × 96\"). Ask about other sizes when you request a quote." },
       { q: 'Can it show repeating logos?', a: 'Yes — that is what it is built for. We space your logos or artwork evenly across the full surface so they read in every photo.' },
       { q: 'How much does it cost?', a: 'Pricing shows on this page — pick your size, choose the frame or graphic only, and your production speed for an instant price. Every order includes a free proof before printing.' }
-    ]
+    ,
+    { q: 'What size is a step & repeat backdrop?', a: '8\' x 8\' or 10\' x 8\', up to 120" x 96", on an adjustable portable frame. Allow 8 to 10 ft of clear floor in front of a 10 ft wall so a photographer can step back far enough.' },
+    { q: 'How should the logo grid be laid out?', a: 'Stagger the rows so a person standing centre never blocks a whole column, and size the logos to stay readable once a photo is cropped. Send the file and the free proof shows exactly how it will read.' },
+    { q: 'Can the graphic be replaced?', a: 'Yes — the large-format fabric graphic is replaceable and the frame is reusable, so a new campaign is a reprint rather than a new backdrop.' }
+  ]
   },
   {
     slug: 'table-top-banner-stand',
+    whatsIncluded: [
+      'Your custom-printed banner graphic, replaceable.',
+      'The compact aluminum tabletop base.'
+    ],
     active: true,
     name: 'Table Top Banner Stand',
     category: 'banner-stands',
@@ -699,7 +771,11 @@ const tradeShowDisplays = [
       { q: 'How big is the Table Top Banner Stand?', a: 'The graphic is 11.5" wide × 17.5" tall — a compact tabletop size, not a full-height floor banner.' },
       { q: 'Where is it used?', a: 'On tables and counters — registration desks, retail and restaurant counters, and trade-show tables.' },
       { q: 'How do I get pricing?', a: 'Request a quote with your artwork and quantity and we will send pricing and a free proof before production.' }
-    ]
+    ,
+    { q: 'Where is a tabletop banner used?', a: 'On a counter, registration desk or demo table, where it brands the surface without taking any floor space. It is the usual choice when a booth is a table rather than a built stand.' },
+    { q: 'What size is it?', a: '11.5" x 17.5" on a compact aluminum tabletop base, with a replaceable printed graphic.' },
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
+  ]
   }
 ];
 
@@ -764,6 +840,11 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
     ['Hardware', 'Flexible pole kit + base (spike / cross / metal plate / water bag)'],
     ['Graphic', 'Replaceable'],
     ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
+  ],
+  whatsIncluded: [
+    'Your custom-printed flag graphic, replaceable.',
+    'With hardware: the flexible pole kit and the base you select (spike base included; cross, metal plate or water bag are upgrades).',
+    'Graphic only: the printed flag on its own, to fit compatible hardware you already own.'
   ],
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping is calculated separately at checkout.',
   related: ['custom-canopies', 'standard-retractable-banner', 'x-stand-banner'],
@@ -884,6 +965,11 @@ const TENSION_MATRIX = {
 
 const tensionDisplay = {
   slug: 'straight-tension-fabric-display',
+  whatsIncluded: [
+      'Your dye-sublimated pillowcase-style fabric graphic with zipper closure, replaceable.',
+      'The lightweight aluminum tube frame with stabilising feet.',
+      'A carry bag.'
+    ],
   active: true,
   name: 'Straight Tension Fabric Display',
   category: 'backdrops',
@@ -929,6 +1015,10 @@ const tensionDisplay = {
     { q: 'What does "graphic + frame" vs "graphic only" mean?', a: '"Graphic + frame" includes the aluminum frame and the printed fabric, ready to set up. "Graphic only" is a replacement fabric graphic for a frame you already own.' },
     { q: 'Single- or double-sided?', a: 'Both are available. Single-sided prints one face; double-sided prints two separate faces. Some rush double-sided sizes are quoted per order — the configurator will say so and route you to a quote.' },
     { q: 'How long does production take?', a: 'Standard production is 6–8 business days after proof approval; rush is 2–3 business days. This is production time — shipping is additional.' }
+  ,
+    { q: 'What sizes does it come in?', a: '8 ft, 10 ft and 20 ft wide, at roughly 8 ft tall. A 10 ft fills the back wall of a standard 10x10 booth; 20 ft spans a 10x20.' },
+    { q: 'What ships with it?', a: 'The dye-sublimated pillowcase-style fabric graphic with a zipper closure, the lightweight aluminum tube frame with stabilising feet, and a carry bag.' },
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
   ],
   pricing: {
     model: 'configured',
@@ -1242,6 +1332,25 @@ const products = [
   // (public/images/banners/).
   {
     slug: '13oz-vinyl-banner',
+  faqs: [
+    { q: 'What size can I order?', a: 'Any size to the inch, up to 50 ft on one side. Pricing is by the square foot, so you are not limited to stock formats.' },
+    { q: 'How is the banner finished?', a: 'A welded hem with grommets every 2 ft is included, so it is ready to tie off out of the box. Pole pockets and other edge options apply where you select them.' }
+  ],
+    specs: [
+      ['Material', '13oz matte scrim vinyl'],
+      ['Printing', 'Full-color, UV-stable ink'],
+      ['Finishing', 'Welded hem with grommets every 2 ft included'],
+      ['Sizes', 'Made to size to the inch, up to 50 ft on one side'],
+      ['Rated for', 'Indoor and outdoor use'],
+      ['Pricing', 'By the square foot'],
+      ['Production', '6-8 business days standard, 2-3 day rush (production time, not delivery)']
+    ],
+    applications: [
+      'Storefront and window banners',
+      'Trade show and event backdrops',
+      'Promotions and seasonal offers',
+      'Outdoor signage on fences and railings'
+    ],
     active: true,
     name: '13oz Vinyl Banner',
     category: 'banners',
@@ -1286,6 +1395,25 @@ const products = [
   },
   {
     slug: '18oz-blockout-banner',
+  faqs: [
+    { q: 'What makes it suitable for double-sided printing?', a: 'An opaque grey centre layer blocks light from passing through, so two different prints never ghost into each other — which a single-layer banner cannot do.' },
+    { q: 'Is it worth the extra weight outdoors?', a: 'For long outdoor runs and exposed sites, yes: the heavier 18oz scrim holds up better to sustained wind than 13oz. On a fence, consider mesh instead so the wind passes through.' }
+  ],
+    specs: [
+      ['Material', '18oz blockout scrim vinyl with an opaque grey centre layer'],
+      ['Printing', 'Full-color; true double-sided ready — no light passes through'],
+      ['Finishing', 'Welded hem with grommets every 2 ft included'],
+      ['Sizes', 'Made to size to the inch, up to 50 ft on one side'],
+      ['Rated for', 'Heavy-duty wind and long outdoor use'],
+      ['Pricing', 'By the square foot'],
+      ['Production', '6-8 business days standard, 2-3 day rush (production time, not delivery)']
+    ],
+    applications: [
+      'Double-sided hanging banners',
+      'Long-run outdoor signage',
+      'Street pole and overhead banners',
+      'High-wind exposed sites'
+    ],
     active: true,
     name: '18oz Blockout Banner',
     category: 'banners',
@@ -1329,6 +1457,25 @@ const products = [
   },
   {
     slug: 'mesh-banner',
+  faqs: [
+    { q: 'Why choose mesh over solid vinyl?', a: 'The material is perforated so roughly 30% of the wind passes through, cutting the load that makes a solid banner flap and tear on an exposed fence or wrap.' },
+    { q: 'Does the perforation affect print quality?', a: 'The print is full-color on UV-stable ink and reads normally at viewing distance. Up close you can see the perforation, which is why mesh is used for large outdoor pieces rather than small indoor signs.' }
+  ],
+    specs: [
+      ['Material', 'Perforated mesh vinyl (~30% airflow)'],
+      ['Printing', 'Full-color, UV-stable ink'],
+      ['Finishing', 'Welded hem with grommets every 2 ft included'],
+      ['Sizes', 'Made to size to the inch, up to 50 ft on one side'],
+      ['Best for', 'Fences, building wraps and exposed outdoor sites'],
+      ['Pricing', 'By the square foot'],
+      ['Production', '6-8 business days standard, 2-3 day rush (production time, not delivery)']
+    ],
+    applications: [
+      'Construction fence wraps',
+      'Stadium and sports field banners',
+      'Building and scaffold wraps',
+      'Exposed outdoor fencing'
+    ],
     active: true,
     name: 'Mesh Banner',
     category: 'banners',
@@ -1372,6 +1519,25 @@ const products = [
   },
   {
     slug: 'fabric-banner-9oz-wrinkle-free',
+  faqs: [
+    { q: 'Why choose fabric over vinyl?', a: 'Dye-sublimated 9oz polyester gives a no-glare matte finish that photographs cleanly under lighting, and it packs and travels without creasing. Vinyl is the better outdoor choice; fabric is the better indoor one.' },
+    { q: 'What size can I order?', a: 'Made to size, up to 8 ft on one side, with sewn hemmed edges. Pricing is by the square foot.' }
+  ],
+    specs: [
+      ['Material', '9oz wrinkle-free polyester fabric'],
+      ['Printing', 'Dye sublimation — vivid, no-glare matte finish'],
+      ['Finishing', 'Sewn hemmed edges'],
+      ['Sizes', 'Made to size, up to 8 ft on one side'],
+      ['Best for', 'Indoor use under lighting; travels without creasing'],
+      ['Pricing', 'By the square foot'],
+      ['Production', '6-8 business days standard, 2-3 day rush (production time, not delivery)']
+    ],
+    applications: [
+      'Indoor trade show backdrops',
+      'Conference and stage banners',
+      'Retail and showroom displays',
+      'Travelling displays that pack without creasing'
+    ],
     active: true,
     name: '9oz Wrinkle-Free Fabric Banner',
     category: 'banners',

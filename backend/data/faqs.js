@@ -2,8 +2,12 @@
 // (sizes, materials, finishing, turnaround). Used on the product page and
 // prerendered as FAQPage structured data.
 export function getProductFaqs(product) {
-  // A product may carry its own curated FAQs (e.g. quote-only displays).
-  if (Array.isArray(product.faqs) && product.faqs.length) return product.faqs;
+  // A product may carry its own curated FAQs. They lead — they answer real
+  // purchase objections — but they no longer REPLACE the generated ones, which
+  // cover sizes, materials, finishing and turnaround straight from the pricing
+  // config. Authored first, then any generated question the author did not
+  // already cover (matched on the distinctive words of the question).
+  const authored = Array.isArray(product.faqs) ? product.faqs : [];
   const p = product.pricing;
   const name = product.name;
   const lower = name.toLowerCase();
@@ -63,5 +67,18 @@ export function getProductFaqs(product) {
     a: `Yes. Pricing is wholesale with automatic volume discounts — the more you order, the lower the per-piece price. The discount is applied instantly as you increase the quantity.`
   });
 
-  return faqs;
+  // Merge: authored questions win; a generated one is dropped when the authored
+  // set already asks something close enough (same key terms).
+  const key = (q) => q.toLowerCase().replace(/[^a-z ]/g, ' ').split(/\s+/)
+    .filter((w) => w.length > 3 && !['what', 'does', 'your', 'with', 'this', 'that', 'have', 'from', 'they', 'will', 'when', 'long', 'take', 'come', 'available'].includes(w))
+    .sort().join(' ');
+  const seen = new Set(authored.map((f) => key(f.q)));
+  const merged = [...authored];
+  for (const f of faqs) {
+    const k = key(f.q);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    merged.push(f);
+  }
+  return merged;
 }
