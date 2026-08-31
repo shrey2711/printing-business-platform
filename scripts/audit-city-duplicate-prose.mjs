@@ -33,6 +33,7 @@ const prose = (d) => [
   ...(d.conventionCenters || []).map((v) => v.desc),
   ...(d.industries || []).map((i) => i[1]),
   ...(d.productSections || []).map((s) => s.body),
+  ...Object.values(d.categoryLocal || {}),
   ...(d.faqs || []).map((f) => f.a)
 ].filter(Boolean).join(' ');
 

@@ -53,6 +53,13 @@ const specTableForCategory = (detail, slug, cityName, label) => {
   return { ...base, caption: `${cityName} ${label.toLowerCase()} at a glance`, rows: base.rows.filter((r) => filter.includes(r[0])) };
 };
 
+const CATEGORY_LOCAL_H2 = {
+  'trade-show-canopies': (c) => `Outdoor branding in ${c}`,
+  'banner-stands': (c) => `Getting banner stands into ${c} venues`,
+  'trade-show-backdrops': (c) => `Where ${c} exhibitors use backdrops`,
+  'table-covers': (c) => `Table covers at ${c} shows`
+};
+
 export default function CityCategoryPage({ categoryKey }) {
   const cat = getLocalCategory(categoryKey);
   const { city: citySlug } = useParams();
@@ -229,6 +236,13 @@ export default function CityCategoryPage({ categoryKey }) {
           </div>
         )}
       </section>
+
+      {detail?.categoryLocal?.[cat.slug] && CATEGORY_LOCAL_H2[cat.slug] && (
+        <section className="section-block">
+          <h2>{CATEGORY_LOCAL_H2[cat.slug](city.city)}</h2>
+          <p>{detail.categoryLocal[cat.slug]}</p>
+        </section>
+      )}
 
       {shownSections.map((s) => (
         <section className="section-block" key={s.h2}>

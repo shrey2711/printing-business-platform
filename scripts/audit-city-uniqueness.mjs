@@ -63,7 +63,8 @@ const SECTIONS = [
   ['FAQs', (d) => (d.faqs || []).map((f) => `${f.q} ${f.a}`).join(' '), 55],
   ['whole page', (d) => [d.answer, ...(d.overview || []), d.whyExhibit, d.climate, d.planning, d.bestDisplays,
     ...(d.conventionCenters || []).map((v) => v.desc), ...(d.industries || []).map((i) => i[1]),
-    ...d.productSections.map((s) => `${s.h2} ${s.body}`), ...(d.faqs || []).map((f) => `${f.q} ${f.a}`)].join(' '), 70]
+    ...d.productSections.map((s) => `${s.h2} ${s.body}`), ...Object.values(d.categoryLocal || {}),
+    ...(d.faqs || []).map((f) => `${f.q} ${f.a}`)].join(' '), 70]
 ];
 
 const rows = [];

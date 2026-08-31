@@ -622,6 +622,19 @@ for (const lc of LOCAL_CATEGORIES) {
         'table-covers': [4]
       };
       const wanted = SECTION_FOR[lc.slug] || [];
+      // Per city x category paragraph: local context written specifically for
+      // THIS product in THIS city, so a category URL carries something the
+      // displays hub does not. Keyed by category slug in cityDetail.categoryLocal.
+      const CATEGORY_LOCAL_H2 = {
+        'trade-show-canopies': (c) => `Outdoor branding in ${c}`,
+        'banner-stands': (c) => `Getting banner stands into ${c} venues`,
+        'trade-show-backdrops': (c) => `Where ${c} exhibitors use backdrops`,
+        'table-covers': (c) => `Table covers at ${c} shows`
+      };
+      const localPara = detail?.categoryLocal?.[lc.slug];
+      const categoryLocalHtml = (localPara && CATEGORY_LOCAL_H2[lc.slug])
+        ? `<h2>${esc(CATEGORY_LOCAL_H2[lc.slug](city.city))}</h2><p>${esc(localPara)}</p>`
+        : '';
       const productSectionsHtml = Array.isArray(detail?.productSections)
         ? wanted
           .map((i) => detail.productSections[i])
@@ -645,6 +658,7 @@ for (const lc of LOCAL_CATEGORIES) {
         <ul>${productLis}</ul>
         ${boothLinks}
         ${productSectionsHtml}
+        ${categoryLocalHtml}
         ${planningHtml}
         <h2>Trade shows in ${esc(city.city)}</h2>
         <p>${esc(city.city)} hosts ${esc(city.scene)}. Whether you're exhibiting at ${esc(city.venue)} or

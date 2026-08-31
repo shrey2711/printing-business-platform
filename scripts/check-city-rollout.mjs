@@ -58,6 +58,18 @@ for (const [slug, d] of rolledOut) {
     metas.set(slug, d.metaDescription);
   }
 
+  // Per city x category local paragraphs: one for each of the four non-hub
+  // categories, so a category URL carries something the displays hub does not.
+  const CATS = ['trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers'];
+  const local = d.categoryLocal || {};
+  for (const c of CATS) {
+    const para = local[c];
+    if (!para) { F(`no categoryLocal paragraph for ${c}`); continue; }
+    const n = wc(para);
+    if (n < 70 || n > 140) F(`categoryLocal ${c} is ${n} words (want 70-140)`);
+  }
+  for (const k of Object.keys(local)) if (!CATS.includes(k)) F(`unexpected categoryLocal key ${k}`);
+
   if (!d.specTable?.rows?.length) F('missing specTable');
   else if (!d.specTable.caption.startsWith(cityName(d, slug))) warns.push(`${slug}: specTable caption does not lead with the city name`);
 

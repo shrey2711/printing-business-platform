@@ -32,6 +32,13 @@ export const specTableFor = (cityName) => ({
 
 export const CITY_DETAIL = {
   'las-vegas': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Las Vegas outdoor exhibiting happens on asphalt. SEMA fills the lots around the convention center, World of Concrete runs heavy equipment outside the halls, and resorts stage sponsor activations on pool decks and forecourts — none of which have ground you can stake into. That single fact drives every canopy decision here: weight bags on all four legs, every time, because a Mojave gust across an open lot is what puts an unweighted tent through a parked car. Shade is the second consideration, since a booth with no cover empties out by midday between May and September.',
+      'banner-stands': 'The Las Vegas problem is distance, not space. Between the LVCC\'s West Hall, the Venetian Expo and Caesars Forum, an exhibitor\'s day can span three properties, and freight between them is a separate charge each time. Retractable banner stands travel in a padded case that a rideshare will take, so a team can move signage from a booth to a hotel suite to a sponsor lounge without booking anything. Get the copy short — in a hall the size of the West Hall people read your banner while walking, not while standing.',
+      'trade-show-backdrops': 'Las Vegas is where products get announced, so the wall behind you is doing press duty whether you planned it or not. CES press days, SEMA reveals and Strip launch parties all generate photography that outlives the show itself, which is the argument for a step & repeat rather than a plain backdrop: a logo grid survives cropping, a single centred logo does not. For booths in the LVCC halls, a tension-fabric wall is the quieter choice — one seamless graphic that reads down a very long aisle without competing with the noise around it.',
+      'table-covers': 'A Las Vegas booth almost always includes a rented six or eight foot table, and at CES or MAGIC that table is where the actual qualifying happens — badges scanned, specs discussed, samples handled. Bare or draped in house linen it undercuts everything else you shipped. Because so many exhibitors here work multiple shows a year across the Strip properties, a washable printed cover earns its cost quickly: it packs flat in the case that already holds your banner, and it comes out of a January CES looking the same as it did the previous November.'
+    },
     // Las Vegas-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Las Vegas — banner stands, backdrops and table covers for CES, SEMA and MAGIC booths, with a free artwork proof and US shipping.',
@@ -106,6 +113,13 @@ export const CITY_DETAIL = {
   },
 
   'orlando': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Orlando\'s outdoor calendar runs on I-Drive: resort pool decks, hotel forecourts, theme-park adjacent activations and the outdoor areas beside the OCCC halls. The weather pattern is the planning constraint — near-daily afternoon thunderstorms from June through September, arriving fast and passing quickly. A printed canopy gives you a roof for the twenty minutes that matters and shade for the rest of the day, but only if every leg is weighted; those storms lead with a gust front, and resort deck surfaces are all pavement or tile.',
+      'banner-stands': 'The Orange County Convention Center is a walking venue. Attendees cover long concourses between the West and North/South buildings, and much of that walking happens past booths rather than into them. Retractable banner stands work here precisely because they are read at a glance from the aisle line — one message, at head height, on the corner where traffic turns. For exhibitors running satellite programming at the Rosen properties or Gaylord Palms, X-stands are light enough to leave a set at each venue rather than shuttling one kit around.',
+      'trade-show-backdrops': 'Orlando\'s convention business is association-heavy, and association events photograph constantly: award presentations, board recognitions, speaker headshots and sponsor step-offs. A step & repeat backdrop is what makes those photos carry the organisation\'s brand rather than the venue\'s carpet. Inside the OCCC halls the same frame does different work — a straight tension-fabric wall gives the booth a clean back under bright hall lighting, which matters more here than in smaller venues because the OCCC\'s lighting is unforgiving of wrinkled or seamed graphics.',
+      'table-covers': 'Orlando booths lean on the table more than most, because so much of the show floor here is medical, education and hospitality exhibitors handing over literature and running short demos rather than displaying large equipment. That makes the table the primary surface a visitor sees. A fitted or pleated printed cover puts brand colour at the height people look while they talk, hides the boxes underneath, and — given Florida humidity and a long convention week — washes clean between shows rather than going home creased and stained.'
+    },
     // Orlando-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Orlando — canopies, banner stands, backdrops and table covers for OCCC and I-Drive, printed to order with a free artwork proof.',
@@ -177,6 +191,13 @@ export const CITY_DETAIL = {
   },
 
   'chicago': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Chicago\'s outdoor season is short and concentrated, which changes how a canopy earns its keep: street festivals, neighbourhood markets, lakefront events and campus activations packed into roughly five months. Wind is the constant. Gusts come off Lake Michigan across open plazas with nothing to break them, and almost every site here is paved, so stakes are not an option and weight bags are. Exhibitors who buy one canopy for a Chicago summer typically use it a dozen times, which is why the printed top and half-walls are worth ordering together up front.',
+      'banner-stands': 'McCormick Place is the largest convention centre in North America, and that scale is the whole banner-stand argument: attendees walk miles a day past hundreds of booths, deciding in a second or two whether to stop. A retractable stand at the aisle line carries the one sentence that earns that stop. The other Chicago factor is freight — McCormick\'s official contractor and drayage charges make a case that checks as luggage genuinely cheaper than shipping, which is why banner stands travel to this city more than any other display we ship.',
+      'trade-show-backdrops': 'Chicago\'s flagship shows are technical — IMTS, RSNA, the Restaurant Show — and their exhibitors photograph everything for trade press and internal reporting. A step & repeat wall gives those photos a branded background; a tension-fabric wall gives a machine-tool or device demo a clean backdrop that hides the pipe and drape behind it. In a hall with 2.6 million square feet of exhibit space, the seamless option matters: a wrinkled or panelled backdrop reads as improvised from thirty feet away, which is the distance most people judge your booth from.',
+      'table-covers': 'Chicago shows are working shows. At IMTS or the Restaurant Show the table holds equipment, samples and paperwork, and it stays busy for four days straight — which is exactly why a rented table with a house drape looks wrong beside a serious exhibit. A closed-back printed cover keeps crates and coats out of sight through a long move-in and gives the demo surface the same brand colour as the backdrop behind it. It also washes, which after a foodservice show is not a small consideration.'
+    },
     // Chicago-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Chicago — banner stands, backdrops and table covers for McCormick Place booths, made to order with a free proof and US shipping.',
@@ -248,6 +269,13 @@ export const CITY_DETAIL = {
   },
 
   'atlanta': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Atlanta\'s mild winters mean the outdoor calendar barely stops: Centennial Olympic Park events, neighbourhood festivals, tailgates, campus recruiting and outdoor product demos run most of the year. The two things to plan around are heat and pollen. Summer afternoons are humid enough that shade decides how long visitors stay at your booth, and spring coats everything in yellow film — a pale canopy top shows it within a day, so budget a wash between April dates. Weight every leg for the gust front that arrives ahead of an afternoon storm.',
+      'banner-stands': 'Atlanta draws buyers who fly in through Hartsfield-Jackson, and the exhibitors who serve them fly in too — which puts a premium on displays that check as luggage. A retractable banner stand in a padded case does; a built structure does not. The other Atlanta pattern is multi-venue: an exhibitor may work a GWCC show and an AmericasMart showroom in the same trip, and AmericasMart space is fixed and turns over between markets, so lightweight X-stands that set up in seconds beat anything requiring assembly.',
+      'trade-show-backdrops': 'Atlanta is a production town, and that shapes what gets ordered. Step & repeat walls go up behind premieres, screenings, sponsor step-offs and award nights as often as behind trade show booths, and the film and music sectors here treat the backdrop as part of the shot rather than as booth furniture. For GWCC exhibitors the calculation is different: across 1.5 million square feet of exhibit space, a seamless tension-fabric wall is what makes a modest booth read as intentional from down the aisle.',
+      'table-covers': 'Poultry, foodservice, logistics and gift shows all run on table conversations — buyers stop, handle a sample, take a card and move on. In that pattern the table is the booth, and an Atlanta exhibitor working AmericasMart markets uses the same cover across several buying weeks a year. Closed-back on all four sides matters here more than most places, because showroom and booth storage tends to live under the table in full view of the aisle. Washable polyester survives a humid Georgia week without going home stained.'
+    },
     // Atlanta-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Atlanta — banner stands, backdrops and table covers for GWCC and AmericasMart booths, with a free artwork proof and US shipping.',
@@ -319,6 +347,13 @@ export const CITY_DETAIL = {
   },
 
   'dallas': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'North Texas heat is the reason canopies get ordered in Dallas: summer afternoons past 100°F with hard, direct sun, where an unshaded outdoor booth simply loses its audience by noon. Equipment demos, ranch and industrial expos, festivals, tailgates and corporate campus events all run outdoors here for most of the year. Weighting is not optional — sites are paved, and spring severe-storm season pushes gusts well ahead of the rain, which is when unweighted tents move. Dye-sublimated graphics hold their colour through a full Texas season.',
+      'banner-stands': 'Dallas exhibitors typically work two circuits — the downtown convention centre and the Dallas Market Center\'s year-round wholesale floors — and the second one is what makes banner stands so useful here. Market showrooms are fixed spaces that reset between market weeks, so displays that go up in seconds and store flat beat anything that needs assembly or installation labour. With DFW an hour from most of the country, a padded case that checks as luggage covers both circuits without a freight booking.',
+      'trade-show-backdrops': 'Dallas backdrops do two different jobs depending on the circuit. At a downtown convention centre booth, a straight tension-fabric wall gives a technical exhibitor — energy, medical device, aerospace — a clean surface big enough for a schematic or a product line at a size people read from the aisle. At Market Center showrooms and corporate events, a step & repeat carries the brand through press and recognition photography. Both use a replaceable graphic, which suits exhibitors who return to the same market several times a year.',
+      'table-covers': 'Energy, healthcare and wholesale buyers all end up at the table with a spec sheet, a rate card or a catalogue between them, so a Dallas booth spends most of its selling time seated. That makes the table cover the piece a buyer looks at longest. Fitted stretch reads as engineered, which suits technical exhibitors; pleated reads as traditional, which suits market showrooms and association events. Both hide the cases underneath — worth having in a Market Center showroom where storage and selling space are the same square footage.'
+    },
     // Dallas-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Dallas — canopies, banner stands, backdrops and table covers for downtown and Market Center, with a free proof, shipped to you.',
@@ -390,6 +425,13 @@ export const CITY_DETAIL = {
   },
 
   'new-york': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Outdoor branding in New York means sidewalk and plaza activations, street fairs, borough festivals, farmers markets and campus events — small footprints, tight permits and no soft ground anywhere. Every site is pavement, so a canopy stands on weight alone, and wind funnels between buildings and off the Hudson in ways that catch people out on otherwise calm days. Check the permit conditions before you order: New York sites frequently cap footprint and set back from the kerb, which decides whether you need a 10x10 or can use a 10x15.',
+      'banner-stands': 'Banner stands suit New York better than any other display we make, for an unglamorous reason: they arrive by parcel, ride a subway or a cab, go up without a crew and store in a closet. That matters in a city where the Javits Center uses union labour, loading windows are scheduled tightly and Manhattan floor space costs more per square foot than anywhere else in the country. An exhibitor running a Javits booth, a showroom appointment and a client event in the same week can cover all three from one case.',
+      'trade-show-backdrops': 'New York is a media city, so the wall behind a person is a publishing surface. Step & repeat backdrops go up for press lines, launch parties, fashion presentations and influencer content far more often than for trade show booths — which is why backdrop printing gets ordered here by agencies as much as by exhibitors. At the Javits Center the same frame does the quieter job: one seamless tension-fabric graphic giving a booth a clean back without the crew and drayage a built wall would require.',
+      'table-covers': 'When a New York booth is a table and two chairs — which it often is, given Javits floor rates — the tablecloth is the branding. There is no backdrop to carry the colour, no structure to signal budget, just the surface between you and the buyer. A fitted stretch cover photographs cleanly at retail and fashion shows where everything ends up on someone\'s phone; a pleated throw suits the association and finance events around midtown. Either way it packs into a carry-on, which in this city is the difference between shipping and not.'
+    },
     // New York-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in New York City — canopies, banner stands, backdrops and table covers for Javits Center booths, with a free proof, shipped to you.',
@@ -461,6 +503,13 @@ export const CITY_DETAIL = {
   },
 
   'houston': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Houston\'s outdoor work is heavy: equipment demos in the NRG Park lots, safety training days, rodeo-season events, refinery contractor days and festivals. The climate gives you three problems at once — humidity that makes shade essential rather than pleasant, sudden downpours that arrive in minutes, and water that pools fast on flat paved lots. Keep cases and electronics off the deck, weight all four legs because storms lead with wind, and expect to use the canopy far more days per year than an exhibitor in a northern city would.',
+      'banner-stands': 'Houston splits across two very different venues, and banner stands are the display that works at both. At the George R. Brown, a retractable stand marks the aisle line in a conventional booth. At NRG Park, where the freight is vehicles and skids and the staging queues are long, a stand that arrives in a case with your team avoids the material-handling charge entirely. For OTC exhibitors running hospitality suites alongside the booth, X-stands are cheap enough to brand every room at once.',
+      'trade-show-backdrops': 'For a Houston technical exhibitor the backdrop is where the explaining happens before anyone picks up a datasheet. A straight tension-fabric wall carries a schematic, a platform photo or a product line at a size readable from the aisle — useful when your actual product is a pump or a valve skid that no one can see past. The step & repeat does the other job at the conference programming around OTC: press availabilities, award nights and sponsor photography that ends up in trade coverage.',
+      'table-covers': 'In a booth built around equipment, the table is where the business actually gets done — quotes, drawings, safety documentation and cards, with the hardware behind you as the reason people stopped. A printed cover turns that rented surface into brand space and hides the cases, cables and cores stored underneath, which in an NRG Park booth is a genuine amount of clutter. Washable matters here: a humid Gulf Coast week on a show floor leaves marks that a house drape would go home with.'
+    },
     // Houston-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Houston — canopies, banner stands, backdrops and table covers for GRB and NRG Park, printed to order with a free artwork proof.',
@@ -532,6 +581,13 @@ export const CITY_DETAIL = {
   },
 
   'los-angeles': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Los Angeles is the rare US market where outdoor branding works nearly every week of the year, and the canopy is the base unit of it: beach and pier activations, farmers markets, studio lot events, festival footprints and sampling programmes. Shade is the actual product — under constant sun a covered booth holds people measurably longer. Santa Ana wind events are the risk, arriving suddenly on otherwise still days, and every LA activation surface is asphalt or concrete, so weight bags on all four legs are the difference between a booth and an incident.',
+      'banner-stands': 'LA activations move. A brand runs a pop-up in Venice on Saturday, a studio event downtown on Monday and a Long Beach booth on Thursday, and the display kit has to survive being loaded into a car boot three times. Retractable stands go up in seconds without tools, X-stands weigh almost nothing and fit behind a seat, and tabletop banners brand a check-in counter without using floor space. Nothing here needs a crew, drayage or an install window — which is why LA teams buy more stands than structures.',
+      'trade-show-backdrops': 'Nowhere orders more step & repeat backdrops than Los Angeles, and the reason is simple: the wall behind a person is the frame every photo travels in. Premieres, junkets, launch parties, influencer events and sponsor step-offs all run on a logo grid sized to stay readable when a photo is cropped for a feed. For the LA Convention Center and Long Beach booths, a seamless tension-fabric wall does the other job — a clean, photogenic background that reads as designed rather than assembled.',
+      'table-covers': 'Whether it is a beauty sampling table, a pop-up checkout, a festival merch stand or a convention booth, the table is the surface people stand closest to in LA — and it is the surface that ends up in their photos. A fitted stretch cover pulls taut for a sharp face that photographs without wrinkles; a pleated throw suits the more formal association events downtown. Both close on all four sides to hide stock, pack flat into a car, and wash between activations, which matters when the same cover works four events a month.'
+    },
     // Los Angeles-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Los Angeles — banner stands, backdrops and table covers for LACC and Long Beach booths, made to order with a free artwork proof.',
@@ -603,6 +659,13 @@ export const CITY_DETAIL = {
   },
 
   'miami': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'South Florida runs outdoors year-round: beachfront activations, pool decks, marina and boat-show docks, art-week satellite fairs, festivals and sampling programmes. Two constraints shape every Miami canopy order. The sea breeze is constant rather than occasional, and you cannot stake into pavement or packed sand — so a full weight bag on every leg is the baseline, not a precaution. The second is sun: subtropical UV is strong enough that shade decides how long anyone stays at an outdoor booth in July.',
+      'banner-stands': 'During a Miami event week a brand might appear at a convention booth, a marina activation, a hotel suite and a gallery party, and banner stands are the format that can be in all four places at once. Retractable stands cover the booth; X-stands are light enough to carry along South Beach walkways where vehicle access is awkward; tabletop stands brand a check-in counter. All of it travels without freight, which matters in a city where event venues are spread across causeways rather than clustered.',
+      'trade-show-backdrops': 'Miami\'s event economy is photographic, so backdrop printing here is bought for openings and parties as often as for exhibit halls. A step & repeat tiles a logo behind gallery previews, fashion and beauty launches, sponsor arrivals and press interviews during art week — a logo grid that survives the crop is the entire brief. Inside the Miami Beach Convention Center the tension-fabric wall does the quieter job: one uninterrupted graphic giving a booth a clean, gallery-like back.',
+      'table-covers': 'At a Miami booth the table is usually where deals get discussed, often across two languages and a phone full of photos — so it should look like part of the brand rather than rented furniture. Design-led and marine buyers here notice finish, which is the argument for a taut fitted cover over a draped one at the boat show or an art-week fair. Both close on all four sides to hide storage, and both wash after a humid beachfront week that a house drape would not survive presentably.'
+    },
     // Miami-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Miami — banner stands, backdrops, table covers and canopies, printed to order with a free artwork proof and US shipping.',
@@ -674,6 +737,13 @@ export const CITY_DETAIL = {
   },
 
   'boston': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Boston\'s outdoor season is short, so brands use it hard: Seaport waterfront events, campus recruiting and orientation fairs, farmers markets, neighbourhood festivals and road races packed into a few months. Harbour wind is the constant here — steady across open Seaport pavement rather than occasional, and there is no soft ground anywhere in the district to stake into. Weight every leg. Humidity in July and August makes shade worth having, but the reason to buy a canopy in Boston is wind tolerance, not sun.',
+      'banner-stands': 'Boston programming scatters across the Menino Center floor, Hynes meeting rooms, Seaport hotel ballrooms and Cambridge campus space, often on the same day — which is exactly the pattern banner stands solve. A retractable stand covers the booth; X-stands are cheap and light enough to brand poster sessions, satellite symposia and recruiting tables simultaneously. They also ride the Red Line, which in a city where Seaport traffic backs up badly around move-in is a more reliable delivery method than a van.',
+      'trade-show-backdrops': 'For a life-science exhibitor the backdrop is often the most useful thing in the booth: one seamless tension-fabric surface wide enough to carry a mechanism of action, a trial timeline or a platform overview at a size people can genuinely read from the aisle. Boston audiences will stand and study it, which is not true everywhere. The step & repeat handles the other half of the calendar — award nights, alumni events, launches and press photography around the Seaport and Cambridge.',
+      'table-covers': 'At a Boston conference the table carries reprints, device samples, a laptop demo and a stack of cards, and it is where the substantive conversation happens after someone stops. Because the audiences here are clinical and academic, the finish matters more than the volume: a taut fitted cover reads as considered, a creased house drape reads as an afterthought. Both styles wash, which matters across a season that runs from the winter biotech meetings through to the spring seafood and medical shows.'
+    },
     // Boston-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Boston — banner stands, backdrops and table covers for Menino Center and Hynes, made to order with a free proof and US shipping.',
@@ -856,6 +926,13 @@ export const CITY_DETAIL = {
   },
 
   'denver': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Colorado brands live outdoors, and the canopy is the piece that gets used most: demo days, trailhead activations, festivals, farmers markets, race expos, stock-show grounds and campus events. Altitude is what makes the shade genuinely valuable — UV at a mile up is harsh enough that an uncovered booth is uncomfortable by late morning. Weather is the other factor and it cuts both ways: conditions turn fast here, so the printed top earns its place when an afternoon storm or a shoulder-season snow arrives with little warning.',
+      'banner-stands': 'A Denver brand often works a downtown convention and a mountain demo day in the same week, so display hardware has to ride in a vehicle and go up without a crew. Retractable stands do both — a full-height graphic out of a weighted base in seconds, then back in the case for the drive. X-stands weigh almost nothing, which matters when gear already fills the truck. For outdoor and natural-products exhibitors, the stand is often the only branding that travels to the trailhead at all.',
+      'trade-show-backdrops': 'Outdoor and natural-products exhibitors sell an environment as much as a product, and the backdrop is where that environment goes. A straight tension-fabric wall stretches one seamless photograph — a range, a river, a trail, a facility — with no seams or hardware interrupting the image, which is the whole point when the image is the pitch. The step & repeat covers the other need: logo-tiled walls for athlete appearances, sponsor photography and award presentations at Denver events.',
+      'table-covers': 'Sampling is central to Denver\'s natural-products and beverage shows, and sampling happens at a table — usually a rented one, usually under house linen that fights your packaging. A printed cover puts brand colour at hand height where both the photograph and the passing traffic register it. Fitted stretch suits the outdoor-brand look; pleated suits the association and aerospace settings. Either way it packs flat into a gear bin and washes after a sampling day, which a rented drape does not.'
+    },
     // Denver-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Denver — canopies, banner stands, backdrops and table covers for Colorado Convention Center, with a free proof, shipped to you.',
@@ -927,6 +1004,13 @@ export const CITY_DETAIL = {
   },
 
   'new-orleans': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Outdoor branding is constant in New Orleans — festival grounds, riverfront events, parade-season activations, courtyard receptions and campus days. The climate delivers heat, humidity and sudden heavy rain in the same afternoon, so the canopy is doing two jobs at once. The local detail that catches people out is drainage: the water table is high and rain becomes standing water quickly, so keep cases off the deck and choose your ground carefully. Weight every leg, since riverfront and Quarter sites are brick or asphalt.',
+      'banner-stands': 'A New Orleans convention spreads across the Morial exhibit hall, hotel ballrooms and off-site venues within walking distance, and banner stands are what let one team brand all of it. A retractable stand goes up wherever it is set down; X-stands are light enough to carry several blocks by hand, which matters in a compact downtown where moving a vehicle between venues costs more time than walking. Each takes a replaceable graphic, so hardware bought for one convention works the next.',
+      'trade-show-backdrops': 'New Orleans conventions run heavy social programming, so a backdrop here often works two shifts: the booth wall by day and a photo wall at the evening reception. That argues for owning both types — a step & repeat for the receptions, award presentations and press photos, and a tension-fabric wall for the daytime booth on the Morial floor. Both collapse into a case that moves easily between the convention centre and a hotel ballroom a few blocks away.',
+      'table-covers': 'Medical, energy and maritime exhibitors all end up doing business across a rented six or eight foot table, and on the Morial floor — one of the longest contiguous exhibit halls in the country — a bare table with boxes underneath is visible from a long way off. A closed-back printed cover fixes both the branding and the clutter. Given Gulf humidity across a long convention week, the fact that it washes is what makes it a multi-show purchase rather than a per-event cost.'
+    },
     // New Orleans-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in New Orleans — banner stands, backdrops and table covers for Morial Convention Center, with a free artwork proof and US shipping.',
@@ -998,6 +1082,13 @@ export const CITY_DETAIL = {
   },
 
   'phoenix': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'In the Valley a canopy is not an upgrade, it is what makes an outdoor booth possible. Summer highs above 110°F and year-round UV mean an unshaded table empties within minutes, and spring training crowds, festivals, home shows, contractor days and campus events all run outdoors here. Monsoon season from July into September is the other half of the planning: dust walls and sharp gusts arrive fast, so weight every leg heavily and drop the printed half-walls when a storm builds, because walls turn a canopy into a sail.',
+      'banner-stands': 'The Valley is spread out, so a Phoenix marketing team often works a downtown convention, a Scottsdale resort conference and a Tempe campus event in the same week. Banner stands travel that pattern easily: a retractable rolls its graphic into a weighted base and stands in seconds, X-stands cost little enough to leave several in rotation across venues, and tabletop stands brand a registration counter without using floor space. Everything goes in a vehicle, which suits a metro where driving between venues is the norm.',
+      'trade-show-backdrops': 'A backdrop is how a technical Phoenix exhibitor explains itself before anyone opens a datasheet. With semiconductor and advanced-manufacturing investment reshaping the local buyer base, a straight tension-fabric wall carrying a fab photo, a component diagram or a process overview does more work than a logo alone. The step & repeat covers the resort-conference side of the calendar — receptions, award nights and sponsor photography at the Scottsdale and Valley properties where much of the region\'s business programming happens.',
+      'table-covers': 'Phoenix booths and outdoor activations both run on the table: samples, literature, badge scanning and water for overheated visitors. A printed cover turns that rented surface into brand space and hides the cases and coolers stored beneath it, which at an outdoor event is most of what you brought. Lighter tones matter more here than elsewhere — a dark cover in direct Valley sun is genuinely hot to lean on — and the fabric washes off the dust that an outdoor Arizona day leaves on everything.'
+    },
     // Phoenix-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Phoenix — canopies, banner stands, backdrops and table covers for Phoenix Convention Center, with a free proof, shipped to you.',
@@ -1107,6 +1198,13 @@ export const CITY_DETAIL = {
   },
 
   'san-diego': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'San Diego\'s climate makes outdoor branding a year-round option rather than a summer one, which is why canopies see more use here than the show calendar alone would suggest: bayfront activations beside the convention centre, beach and pier events, farmers markets, military and community days. The constraint is the afternoon sea breeze off the bay, steady rather than gusty but constant, and every bayfront or beach-adjacent surface is pavement or packed sand. Weight all four legs and expect sun exposure to be the design factor, not rain.',
+      'banner-stands': 'Conference programming in San Diego spreads across the convention centre, Gaslamp hotels and Mission Valley meeting space, so branding usually needs to exist in several rooms on the same day. Banner stands are the only format that keeps up: retractable stands for the booth, X-stands light enough to leave at satellite symposia and poster halls, tabletop stands for registration counters. With the airport ten minutes from the bayfront, a checked-bag display kit is genuinely practical here in a way it is not in most cities.',
+      'trade-show-backdrops': 'A San Diego backdrop does different work depending on which crowd is in the building. For biotech, device and defence exhibitors, a straight tension-fabric wall gives one seamless surface big enough for a mechanism diagram or a pipeline chart that people study from three feet away. For Comic-Con and the consumer events, a step & repeat is the photo wall behind panels, signings and appearances — where the logo grid is the entire point, because every shot gets cropped.',
+      'table-covers': 'At a scientific conference the San Diego table holds reprints, sample kits and a laptop running a demo; at a consumer show it holds product and giveaways. Either way it is the surface attendees stand at longest, and the one that ends up in the background of every photo taken at your booth. A fitted stretch cover gives the clean face that suits a research exhibitor; a pleated throw suits the association settings in Mission Valley. Both close on all four sides to hide the storage underneath.'
+    },
     // San Diego-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in San Diego — canopies, banner stands, backdrops and table covers for bayfront booths, printed to order with a free artwork proof.',
@@ -1178,6 +1276,13 @@ export const CITY_DETAIL = {
   },
 
   'washington-dc': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Washington\'s outdoor season is generous at both ends of the year, and organisations use it for festivals, community and health fairs, campus events, race-day activations and public outreach days. The local constraint is regulatory rather than meteorological: D.C. activation sites are paved and staked anchoring is generally not permitted, and permit conditions frequently set the footprint and the setback from the kerb. Confirm those before ordering, because they decide whether you need a 10x10 or can run a 10x15.',
+      'banner-stands': 'A D.C. annual meeting typically spreads across an exhibit hall, several breakout rooms, a hill-day breakfast and an evening reception — and banner stands are the only display format that can cover all of it. Retractable stands handle the booth, X-stands are cheap enough for a chapter or programme to brand every room, and tabletop stands work an advocacy or registration table. Metro-accessible venues make a hand-carried case realistic, which avoids the union labour and drayage the convention centre would otherwise add.',
+      'trade-show-backdrops': 'A backdrop in Washington often ends up in a photo that outlives the event. A step & repeat tiles an organisation\'s logo behind award presentations, fly-in receptions, press availabilities and recognition programmes, keeping attribution in every frame — which for an association is frequently the point of the event. The tension-fabric wall is the exhibit-hall version: one seamless graphic giving a booth a clean, finished back without the visual noise of pipe and drape.',
+      'table-covers': 'Association and agency booths run on the table: membership forms, policy one-pagers, sign-up sheets and a laptop for demos. A rented table under plain linen makes a serious organisation look temporary, which is the opposite of what a D.C. exhibitor is trying to signal. A fitted cover reads formal, a pleated throw reads traditional, and both hide the boxes underneath. Order it in exact brand colours — this is an audience that notices when the blue is nearly right rather than right.'
+    },
     // Washington, D.C.-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Washington, D.C. — canopies, banner stands, backdrops and table covers for D.C. association, with a free proof, shipped to you.',
@@ -1249,6 +1354,13 @@ export const CITY_DETAIL = {
   },
 
   'san-francisco': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'San Francisco\'s outdoor branding happens in plazas, parklets, rooftop decks, street fairs, farmers markets and the sponsor footprints that spill outside Moscone during conference weeks. Heat is rarely the issue here — wind is. Gusts run through the SoMa grid and off the bay year-round, including on clear days, and every activation surface is pavement, so a canopy stands on weight alone. Marine damp is the second factor: fabric that has travelled in a case comes out slightly limp and wants an hour to hang out before doors.',
+      'banner-stands': 'Conference weeks in San Francisco scatter a company across the Moscone floor, a hotel side event, a partner happy hour and an office open house, frequently on the same day. Banner stands are the only display format that keeps up: a retractable stand goes up in seconds, an X-stand can be carried on foot between SoMa venues, and a tabletop stand brands a check-in desk. Given what Moscone drayage costs, a case that walks from a hotel is often cheaper than shipping the same graphic across the street.',
+      'trade-show-backdrops': 'For Bay Area exhibitors the straight tension-fabric wall is usually the right backdrop: one seamless graphic big enough for an architecture diagram, a dashboard screenshot or a single bold product line, with no seams competing with a live demo running in front of it. The step & repeat covers launch parties, press interviews and funding announcements — the events where the photo is the deliverable. Both matter in a city where the audience photographs the booth as often as they visit it.',
+      'table-covers': 'At a Moscone booth the table holds the demo, and everyone in the aisle looks at it. A rented table with house linen and a laptop on top says nothing about who you are; a printed cover puts the product name and colours directly beneath the thing you want people to try. For the startups filling the smaller booths, it is also the cheapest piece that makes a 10x10 look deliberate — packs into a carry-on, washes between conferences, and outlives the launch it was printed for.'
+    },
     // San Francisco-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in San Francisco — canopies, banner stands, backdrops and table covers for Moscone Center, made to order with a free artwork proof.',
@@ -1320,6 +1432,13 @@ export const CITY_DETAIL = {
   },
 
   'seattle': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Seattle canopies earn their keep on the waterfront and at street level: Elliott Bay activations, street festivals, farmers markets, corporate activations and outdoor trade shows. The Northwest pattern is drizzle rather than downpour, spread across a long wet season from autumn through spring, which makes a printed top useful on many more days than the summer-only calendar suggests. Breezes come off Puget Sound steadily, and downtown activation sites are paved, so weight every leg rather than relying on the shelter of nearby buildings.',
+      'banner-stands': 'Seattle\'s compact downtown is the reason banner stands work so well here — the convention centre, the hotels and most event space sit within a short walk, so a padded case travels by hand rather than by van. That matters in a city where the Arch and Summit buildings have separate receiving and freight routing is easy to get wrong. Retractable stands cover the booth aisle, and X-stands are light enough to brand a hotel meeting room and a convention booth on the same day.',
+      'trade-show-backdrops': 'Seattle audiences are technical and detail-oriented, which changes what a backdrop has to do: a tension-fabric wall carrying an architecture diagram or a platform overview gets read rather than glanced at, so seams and wrinkles are noticed. The step & repeat covers the other half of the calendar — press events, launches and sponsor photography around the convention centre and the waterfront hotels, where the logo grid is what survives a cropped image.',
+      'table-covers': 'A custom table cover turns a rented Seattle demo or registration table into branded space, which in a compact convention-centre booth is often the largest surface you control. Technology and aerospace exhibitors here tend to run laptop demos on that table, so a taut fitted cover keeps the surface looking deliberate under the cables. The fabric packs flat, weighs almost nothing in a show case, and washes — useful across a damp Northwest season where cases pick up moisture in transit.'
+    },
     // Seattle-specific meta description (overrides the generic template on the
     // /trade-show-displays/{city} page). ~150 chars; names the product range.
     metaDescription:
@@ -1395,6 +1514,13 @@ export const CITY_DETAIL = {
   },
 
   'nashville': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Nashville does a lot of business outdoors: festival footprints, downtown activations, tailgates, fairground events, brewery and distillery days and summer sampling programmes. Tennessee weather makes the canopy do double duty — shade through humid afternoons, then a roof when a thunderstorm builds with almost no warning from late spring onward. Those storms lead with wind, and most activation sites downtown are paved, so weight every leg. A canopy bought for the festival season here typically works a dozen dates before autumn.',
+      'banner-stands': 'Nashville venues run tight changeovers, and that is the whole case for banner stands in this market. A retractable stand rolls a full-height graphic out of its base in seconds and rolls back just as fast at the end of the night, which suits a city where a room may host a conference session in the afternoon and a showcase in the evening. For exhibitors working both the Music City Center and Gaylord Opryland in one trip, a case per venue beats moving one kit across town.',
+      'trade-show-backdrops': 'In a city built on performance and photography, backdrop printing gets ordered for far more than trade shows. A step & repeat tiles a logo behind showcases, album release nights, award presentations, sponsor step-offs and artist meet-and-greets — the wall that makes every photo carry the brand. The tension-fabric version does the exhibit-hall job: one seamless graphic giving a Music City Center booth a clean back, which matters for the healthcare and hospitality exhibitors who fill the hall between music events.',
+      'table-covers': 'Whether the table is holding health-system literature at a convention or merch at a showcase, in Nashville it is where people stop and where money changes hands. That dual use is the local argument for a printed cover: the same piece works a healthcare booth on Tuesday and a merch table on Friday, and rented house linen suits neither. Closed-back on all four sides keeps stock out of sight, and the fabric washes after a humid Nashville weekend rather than going home marked.'
+    },
     // Nashville-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Nashville — canopies, banner stands, backdrops and table covers for Music City Center booths, with a free proof, shipped to you.',
@@ -1466,6 +1592,13 @@ export const CITY_DETAIL = {
   },
 
   'indianapolis': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'Indiana packs its outdoor season into a few months: race weekends and paddock hospitality, county and state fair events, festivals, farmers markets, dealer demo days and campus recruiting. Fairgrounds and paddock lots are hardpack or asphalt where stakes cannot be driven, and open ground catches wind with nothing to break it, so weight all four legs. The season\'s intensity is the reason exhibitors here buy a canopy rather than rent one — it earns its cost across a summer rather than a single event.',
+      'banner-stands': 'Downtown Indianapolis is compact and skywalk-connected, so display hardware here gets carried rather than trucked. A retractable banner stand suits that exactly: a full-height graphic in a case one person walks from a connected hotel to the hall without ever going outside, which in January is the difference between a dry graphic and a wet one. For multi-track conventions like Gen Con, X-stands are cheap enough to place branding at several rooms simultaneously.',
+      'trade-show-backdrops': 'For a performance or manufacturing exhibitor, the backdrop is what keeps your name visible when a car, engine or machine takes up the floor. A tension-fabric wall carries the brand at full booth height, above the hardware, so it reads from down the aisle rather than being blocked at eye level. The step & repeat handles driver appearances, sponsor photography, award nights and association receptions — a large part of the calendar in a city whose motorsports industry runs on visibility.',
+      'table-covers': 'Whether the booth is selling gearbox components, seed genetics or a tabletop game, the Indianapolis show table takes a beating across a long weekend — product handled, catalogues stacked, orders written. A printed cover keeps the surface on-brand through all of it and hides the cases underneath. Because so much gear here is hand-carried through the skywalk, a cover that folds flat into the same case as the banner stand is the practical choice over anything rigid.'
+    },
     // Indianapolis-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Indianapolis — banner stands, backdrops and table covers for Indiana Convention Center, made to order with a free artwork proof.',
@@ -1537,6 +1670,13 @@ export const CITY_DETAIL = {
   },
 
   'charlotte': {
+    // Per-category local paragraph, rendered on that category's city page.
+    categoryLocal: {
+      'trade-show-canopies': 'The Carolina calendar gives long, comfortable spring and autumn seasons for outdoor work, and Charlotte brands use them: race weekends and speedway hospitality, corporate campus events, festivals, farmers markets, youth sports and community days. Two local factors shape the order. Summer thunderstorms build in an hour and push a gust front ahead of them, so weight every leg on the paved lots most events use. And spring pollen coats a pale canopy top in yellow film through April — plan a wash between spring dates.',
+      'banner-stands': 'Charlotte\'s uptown core is walkable, so a team often covers a convention booth, a hotel breakout and a client event within a few blocks on the same day — and banner stands are what make that practical without a vehicle. A retractable stand goes up in seconds wherever it lands; X-stands are light enough to place branding at several sessions at once. For the banking and energy exhibitors who dominate here, the restrained look of a single well-printed stand suits the audience better than volume.',
+      'trade-show-backdrops': 'A backdrop is the fastest way to make an uptown Charlotte booth look like it belongs to a serious company, which matters in a market where finance and utility buyers read a booth as a credibility signal. A straight tension-fabric wall in exact brand colours does that quietly. The step & repeat covers the photographed side of the calendar — sponsor arrivals, driver appearances at the NASCAR Hall of Fame next door, award dinners and recruiting events.',
+      'table-covers': 'Most Charlotte booth conversations happen seated at a table with a proposal, a rate sheet or a parts catalogue between you, which makes the table the most-used and most-photographed surface in the booth. Finance and energy exhibitors tend to want the taut, engineered look of a fitted stretch cover; association and healthcare events suit a pleated throw. Both hide the storage underneath and wash after a humid Carolina show weekend, which a rented drape does not.'
+    },
     // Charlotte-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Charlotte — banner stands, backdrops and table covers for Charlotte Convention Center booths, with a free proof, shipped to you.',
