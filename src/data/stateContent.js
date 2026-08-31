@@ -340,10 +340,29 @@ export const stateContent = {
   }
 };
 
-// Every state/province above has unique content, so all location pages are
-// indexed (no thin, noindex long tail remaining). Each links back to the product
-// money-pages (canopies, displays) — clusters feeding the commercial pages.
+// Every state/province above has unique content, so every location page renders
+// its full editorial body. PRIORITY_STATES governs CONTENT DEPTH only.
 export const PRIORITY_STATES = new Set(Object.keys(stateContent));
+
+// INDEXED_STATES governs INDEXABILITY, which is a different question.
+//
+// Unique content is necessary for indexing but not sufficient: 64 state pages
+// all titled "Custom Canopy Tents in {State}" compete with each other AND with
+// /custom-canopies for one head term plus a geo modifier. On a domain still
+// building authority that splits equity rather than compounding it, so only the
+// markets the business actually sells into are indexed. The rest stay
+// noindex,follow — readable, linked, still passing equity to the money pages,
+// just not competing for the same query.
+//
+// The set is DERIVED from the markets that already have a canonical city page
+// (src/data/citySeo.js), so it cannot drift out of sync with the city rollout.
+// Add a state here only when it earns its own demand, not to be comprehensive.
+import { SEO_CITIES } from './citySeo.js';
+
+export const INDEXED_STATES = new Set([
+  ...SEO_CITIES.map((c) => c.stateSlug).filter(Boolean),
+  'washington-dc' // city-state: its own city page carries the market
+]);
 
 // Shared, non-fabricated sections reused across priority state pages.
 export const ORDERING_STEPS = [

@@ -25,7 +25,7 @@ import {
 import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../src/data/citySeo.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
-  PRIORITY_STATES, stateContent, ORDERING_STEPS,
+  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../src/data/stateContent.js';
 import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
@@ -1104,7 +1104,8 @@ const stateDescription = (s, content, areaWord) => {
 // ---- Each state/province + city ----
 for (const s of territories) {
   const areaWord = s.country === 'CA' ? 'province-wide' : 'statewide';
-  const isPriority = PRIORITY_STATES.has(s.slug);
+  const isPriority = PRIORITY_STATES.has(s.slug);   // full editorial body
+  const isIndexed = INDEXED_STATES.has(s.slug);     // competes in the index
   const content = stateContent[s.slug];
   routes.push(() => {
     // SEO cities link to their canonical /trade-show-displays/{city} page (not the
@@ -1168,9 +1169,11 @@ for (const s of territories) {
       description: stateDescription(s, content, areaWord),
       image: CANOPY_OG,
       imageAlt: `Custom printed canopy tents in ${s.name} — ${BRAND}`,
-      // Long-tail state/province pages are templated — noindex until they earn
-      // unique content, so they don't dilute the priority markets.
-      robots: isPriority ? undefined : 'noindex, follow',
+      // Every state page carries unique content, but only the markets with a
+      // canonical city page compete in the index — 64 pages chasing one head
+      // term plus a geo modifier split authority on a young domain. The rest
+      // stay noindex,follow: readable, linked, still passing equity onward.
+      robots: isIndexed ? undefined : 'noindex, follow',
       body,
       jsonLd: [
         {
@@ -1579,7 +1582,7 @@ const smBlog = [
 const redirectedLoc = new Set(SEO_CITIES.filter((c) => c.stateSlug).map((c) => `/locations/${c.stateSlug}/${c.slug}`));
 const smLocations = [
   smUrl('/locations', '0.6', 'monthly', LMOD.city),
-  ...territories.filter((s) => PRIORITY_STATES.has(s.slug)).map((s) => smUrl(`/locations/${s.slug}`, '0.5', undefined, LMOD.city))
+  ...territories.filter((s) => INDEXED_STATES.has(s.slug)).map((s) => smUrl(`/locations/${s.slug}`, '0.5', undefined, LMOD.city))
 ];
 territories.forEach((s) =>
   s.cities.forEach((c) => {
