@@ -188,6 +188,15 @@ export default function CategoryPage({ slug }) {
         </section>
       )}
 
+      {/* Buying-decision guidance — same source the prerenderer renders, so SSR
+          and the client stay in step. */}
+      {page.guide?.length > 0 && page.guide.map((g) => (
+        <section className="section-block" key={g.h2}>
+          <h2>{g.h2}</h2>
+          <p>{g.p}</p>
+        </section>
+      ))}
+
       {page.faqs?.length > 0 && (
         <section className="section-block">
           <h2>Frequently asked questions</h2>

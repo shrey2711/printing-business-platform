@@ -371,6 +371,11 @@ for (const cp of CATEGORY_PAGES) {
     const cities = lc
       ? `<h2>${esc(lc.label)} by city</h2><ul>${SEO_CITIES.filter((c) => c.tier <= 2).map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}, ${esc(c.abbr)}</a></li>`).join('')}</ul>`
       : '';
+    // Buying-decision sections: how to choose within the category, sized and
+    // specified from the product records rather than restating the intro.
+    const guideHtml = Array.isArray(cp.guide)
+      ? cp.guide.map((g) => `<h2>${esc(g.h2)}</h2><p>${esc(g.p)}</p>`).join('')
+      : '';
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.nav)}</span></nav>
       <h1>${esc(cp.h1)}</h1>
@@ -380,6 +385,7 @@ for (const cp of CATEGORY_PAGES) {
       <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
       <ul>${catProducts.map(productLi).join('')}</ul>
       ${compareTable}
+      ${guideHtml}
       ${included}
       ${cities}
       ${guides}
