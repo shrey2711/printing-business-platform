@@ -228,7 +228,7 @@ routes.push(() => {
       <li><a href="/products">All products</a> — the complete range</li>
     </ul>
     <h2>Custom canopy tents</h2>
-    <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
+    <ul>${coreProducts.map(productLi).join('')}</ul>
     ${displayProducts.length ? `<h2>Banner stands &amp; backdrops</h2>
     <ul>${displayProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>` : ''}
     <h2>Canopy tent size guides</h2>
@@ -312,7 +312,7 @@ routes.push(() => {
     <h2>Shop by category</h2>
     <ul>${CATEGORY_PAGES.map((cp) => `<li><a href="/${cp.slug}">${esc(cp.h1)}</a></li>`).join('')}</ul>
     <h2>Custom canopy tents</h2>
-    <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
+    <ul>${coreProducts.map(productLi).join('')}</ul>
     <p>Not sure which size? Read the <a href="/sizes/10x10">10x10</a>, <a href="/sizes/10x15">10x15</a>
     and <a href="/sizes/10x20">10x20</a> size guides.</p>
     ${productSection('Banner stands & backdrops', displayProducts)}
@@ -378,7 +378,7 @@ for (const cp of CATEGORY_PAGES) {
       ${answer}
       ${subTiles}
       <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
-      <ul>${catProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>
+      <ul>${catProducts.map(productLi).join('')}</ul>
       ${compareTable}
       ${included}
       ${cities}
@@ -440,7 +440,11 @@ routes.push(() => {
       <p>${esc(pkg.tagline)}</p>
       <ul>${pkg.components.map((slug) => {
         const p = bySlug[slug];
-        return `<li><a href="/products/${slug}">${esc(p ? p.name : slug)}</a> — ${p ? priceFrom(p) : 'request a quote'}</li>`;
+        if (!p) return `<li><a href="/products/${slug}">${esc(slug)}</a> — request a quote</li>`;
+        // photo per component: a booth package is bought on how the pieces look together
+        const photo = productPhoto(p);
+        const img = photo ? `<img src="${photo.replace(ORIGIN, '')}" alt="${esc(`${p.name} — custom printed by ${BRAND}`)}" width="220" height="220" loading="lazy" decoding="async"> ` : '';
+        return `<li>${img}<a href="/products/${slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`;
       }).join('')}</ul>
       <p><strong>Best for:</strong> ${esc(pkg.bestFor)}</p>
     </div>`).join('');
@@ -658,9 +662,7 @@ for (const lp of LANDING_PAGES) {
       ? productList.filter((p) => lp.products.some((x) => x.slug === p.slug))
       : [];
     const productsHtml = lpProducts.length
-      ? `<h2>Shop ${esc(lp.nav.toLowerCase())}</h2><ul>${lpProducts
-          .map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`)
-          .join('')}</ul>`
+      ? `<h2>Shop ${esc(lp.nav.toLowerCase())}</h2><ul>${lpProducts.map(productLi).join('')}</ul>`
       : '';
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/trade-show-displays">Trade Show Displays</a> / <span>${esc(lp.nav)}</span></nav>
@@ -1099,6 +1101,17 @@ const stateDescription = (s, content, areaWord) => {
   const ordered = shapes.map((_, i) => shapes[(seed + i) % shapes.length]);
   const candidates = ordered.map((b) => b()).filter((d) => d.length >= 140 && d.length <= 165);
   return candidates[0] || ordered.map((b) => b()).sort((a, b) => Math.abs(152 - a.length) - Math.abs(152 - b.length))[0] || fallback;
+};
+
+// A product list item carrying the product's real photo. Category and landing
+// pages previously rendered link-only lists, so a crawler saw no imagery at all
+// on the pages that target the head terms. Alt text describes the product.
+const productLi = (p) => {
+  const photo = productPhoto(p);
+  const img = photo
+    ? `<img src="${photo.replace(ORIGIN, '')}" alt="${esc(`${p.name} — custom printed by ${BRAND}`)}" width="320" height="320" loading="lazy" decoding="async"> `
+    : '';
+  return `<li>${img}<a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`;
 };
 
 // ---- Each state/province + city ----

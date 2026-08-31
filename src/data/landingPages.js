@@ -49,6 +49,7 @@ export const LANDING_PAGES = [
   },
   {
     slug: 'tension-fabric-displays',
+    products: [{ slug: 'straight-tension-fabric-display' }, { slug: 'step-and-repeat-backdrop' }],
     nav: 'Tension Fabric Displays',
     title: 'Tension Fabric Displays | Portable Booths',
     h1: 'Tension Fabric Displays',
@@ -84,6 +85,7 @@ export const LANDING_PAGES = [
   },
   {
     slug: 'pop-up-displays',
+    products: [{ slug: 'seg-modular-trade-show-kit-a' }, { slug: 'seg-modular-trade-show-kit-b' }, { slug: 'seg-modular-trade-show-kit-c' }],
     nav: 'Pop-Up Displays',
     title: 'Pop-Up Displays | Trade Show Backwalls',
     h1: 'Pop-Up Displays',
