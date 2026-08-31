@@ -913,9 +913,28 @@ for (const summary of productList) {
     const crumbParent = cat
       ? `<a href="/${cat.slug}">${esc(cat.nav)}</a>`
       : `<a href="/products">Products</a>`;
+    // Product photography in the CRAWLED html. The gallery is authored with real
+    // alt text, so prefer it; otherwise fall back to the same images already
+    // used for og:image (for canopies that is the 1/2/3-wall set, which doubles
+    // as a configuration comparison). Client-side galleries stay as they are.
+    const galleryShots = (Array.isArray(product.gallery) ? product.gallery : [])
+      .map((g) => (typeof g === 'string' ? { src: g, alt: '' } : g))
+      .filter((g) => g && g.src && !/\.svg$/i.test(g.src))
+      .slice(0, 4);
+    const shots = galleryShots.length
+      ? galleryShots.map((g) => ({ src: g.src.replace(ORIGIN, ''), alt: g.alt || `${product.name} — custom printed by ${BRAND}` }))
+      : productImages.slice(0, 3).map((src, i) => ({
+        src: src.replace(ORIGIN, ''),
+        alt: `${product.name}${sizeM ? ` with ${i + 1} printed wall${i ? 's' : ''}` : ''} — custom printed by ${BRAND}`
+      }));
+    const shotsHtml = shots.length
+      ? `<div class="product-shots">${shots.map((g) => `<img src="${g.src}" alt="${esc(g.alt)}" width="640" height="640" loading="lazy" decoding="async">`).join('')}</div>`
+      : '';
+
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / ${crumbParent} / <span>${esc(product.name)}</span></nav>
       <h1>${esc(seoTitle.h1)}</h1>
+      ${shotsHtml}
       <p>${esc(product.description)}</p>
       <p>${startingPrice != null
         ? `<strong>Starting at $${startingPrice}${priceDisp.startingNote ? ` — ${esc(priceDisp.startingNote.toLowerCase())}` : ''}.</strong>${priceDisp.full ? ` ${esc(priceDisp.full.label)}: $${priceDisp.full.price}.` : ''}`
