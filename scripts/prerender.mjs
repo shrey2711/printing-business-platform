@@ -1049,6 +1049,39 @@ routes.push(() => {
   });
 });
 
+// State/province meta descriptions. The old version was a single template with
+// the name and three cities swapped in, which made 64 pages look identical to
+// anything scoring description diversity. This builds each one from the state's
+// OWN content — the event types it actually lists — and rotates the sentence
+// shape by slug so neighbouring states do not read alike. Falls back to the
+// city list only where a state has no content entry.
+const stateDescription = (s, content, areaWord) => {
+  const cities = s.cities.slice(0, 3).join(', ');
+  // Event labels are authored like "Rodeos & fairs" or "Las Vegas trade shows".
+  // Lower-case the first word only when it is a common noun, so proper nouns
+  // (Las Vegas, Mardi Gras, Cheyenne Frontier Days) keep their capitals.
+  const ev = (content && Array.isArray(content.events) ? content.events : [])
+    .map((e) => (/[A-Z]/.test(e.slice(1)) ? e : e.charAt(0).toLowerCase() + e.slice(1)));
+  // Comma-joined, never "and ... and": several labels already contain "&".
+  const one = ev[0] || '';
+  const two = ev.slice(0, 2).join(', ');
+  const shapes = [
+    () => `Custom printed canopy tents for ${two} in ${s.name}. Instant online pricing, a free artwork proof and shipping ${areaWord}.`,
+    () => `Branded pop-up canopy tents shipped ${areaWord} across ${s.name} — built for ${two}, with instant pricing online.`,
+    () => `Custom canopy tents in ${s.name} for ${two}. Configure size and printed walls online for an instant price.`,
+    () => `Printed canopy tents for ${s.name} events — ${two} — with instant online pricing and a free artwork proof.`,
+    () => `Custom printed canopy tents for ${one} in ${s.name}, with instant online pricing, a free artwork proof and shipping ${areaWord}.`,
+    () => `Canopy tents printed to order for ${s.name} — ${two} — shipped to ${cities} and ${areaWord}.`
+  ];
+  const fallback = `Custom printed canopy tents in ${s.name}. Instant online pricing and shipping to ${cities} and ${areaWord}.`;
+  if (!ev.length) return fallback;
+  // deterministic per state, so a rebuild never reshuffles descriptions
+  const seed = [...s.slug].reduce((n, ch) => n + ch.charCodeAt(0), 0);
+  const ordered = shapes.map((_, i) => shapes[(seed + i) % shapes.length]);
+  const candidates = ordered.map((b) => b()).filter((d) => d.length >= 140 && d.length <= 165);
+  return candidates[0] || ordered.map((b) => b()).sort((a, b) => Math.abs(152 - a.length) - Math.abs(152 - b.length))[0] || fallback;
+};
+
 // ---- Each state/province + city ----
 for (const s of territories) {
   const areaWord = s.country === 'CA' ? 'province-wide' : 'statewide';
@@ -1113,22 +1146,41 @@ for (const s of territories) {
     return render({
       path: `/locations/${s.slug}`,
       title: fitTitle(`Custom Canopy Tents in ${s.name}`),
-      description: `Custom printed canopy tents in ${s.name}. Instant online pricing and shipping to ${s.cities.slice(0, 3).join(', ')} and ${areaWord}.`,
+      description: stateDescription(s, content, areaWord),
       image: CANOPY_OG,
       imageAlt: `Custom printed canopy tents in ${s.name} — ${BRAND}`,
       // Long-tail state/province pages are templated — noindex until they earn
       // unique content, so they don't dilute the priority markets.
       robots: isPriority ? undefined : 'noindex, follow',
       body,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'Locations', item: `${ORIGIN}/locations` },
-          { '@type': 'ListItem', position: 3, name: s.name, item: `${ORIGIN}/locations/${s.slug}` }
-        ]
-      }
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+            { '@type': 'ListItem', position: 2, name: 'Locations', item: `${ORIGIN}/locations` },
+            { '@type': 'ListItem', position: 3, name: s.name, item: `${ORIGIN}/locations/${s.slug}` }
+          ]
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: `Custom Printed Canopy Tents in ${s.name}`,
+          url: `${ORIGIN}/locations/${s.slug}`,
+          description: stateDescription(s, content, areaWord),
+          isPartOf: { '@type': 'WebSite', url: `${ORIGIN}/` },
+          about: { '@type': 'Place', name: s.name }
+        },
+        // Matches the four FAQs rendered on the page, verbatim.
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: STATE_FAQS.map(([q, a]) => ({
+            '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a }
+          }))
+        }
+      ]
     });
   });
 
