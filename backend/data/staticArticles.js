@@ -26,6 +26,13 @@ const startFrom = (slug) => {
 export const STATIC_ARTICLES = [
   {
     slug: 'standard-vs-deluxe-retractable-banner',
+    faqs: [
+      { q: 'What actually differs between standard and deluxe?', a: 'The base and the pole, not the print. The standard has a compact aluminum base with two stabilising feet; the deluxe has a heavier base with chrome-style end caps and an adjustable support pole.' },
+      { q: 'Is the print quality different?', a: 'No. Both use the same full-color printing on a replaceable graphic, so the visible difference at a show is stability and the finish of the hardware rather than the image.' },
+      { q: 'Which should I buy if the stand travels weekly?', a: 'The deluxe. A heavier base survives being knocked in a busy hall and holds up better to repeated packing, which is where a lighter base eventually loosens.' },
+      { q: 'Is the standard model good enough for a trade show?', a: 'Yes, for most booths — particularly on carpet and in lower-traffic aisles. If the stand lives in one booth a few times a year, the standard base is enough.' },
+      { q: 'Can I replace the graphic on either model?', a: 'Yes. Both take a replaceable printed banner, so the base is the durable purchase and each campaign is a reprint.' }
+    ],
     title: 'Standard Retractable Banner vs Deluxe Retractable Banner: Which Should You Choose?',
     excerpt:
       'Same 33″ × 81″ graphic, different hardware. How to choose between the Apex Standard and Deluxe retractable banner stands for your booth.',
@@ -96,6 +103,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'x-stand-vs-retractable-banner',
+    faqs: [
+      { q: 'Which is cheaper, an X-stand or a retractable?', a: 'The X-stand, usually by a clear margin. It is a collapsible frame with a grommet-mounted banner rather than a weighted base with a roll mechanism.' },
+      { q: 'Why choose a retractable if it costs more?', a: 'Graphic protection. The banner rolls into the base between shows, so it does not get creased, scuffed or torn in transit — which is what tends to end an X-stand banner\'s life.' },
+      { q: 'Which is faster to set up?', a: 'Both go up in seconds without tools. The retractable pulls the graphic up out of the base; the X-stand opens and hooks the banner onto four corners.' },
+      { q: 'What sizes do they come in?', a: 'X-stands come in 24" x 63" or 32" x 71". Retractables come in 33" x 81", with a 47" x 81" option on the standard model.' }
+    ],
     title: 'X-Stand vs Retractable Banner: Which Banner Stand Is Right for You?',
     excerpt:
       'The X-stand is lighter and more economical; a retractable protects the graphic and looks more finished. How to choose for your booth.',
@@ -153,6 +166,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'what-size-retractable-banner',
+    faqs: [
+      { q: 'What is the standard retractable banner size?', a: '33" x 81" is the common full-height size, with 47" x 81" available when you want a wider graphic. Both stand about the same height, so the choice is how much horizontal space you have.' },
+      { q: 'Is a wider banner always better?', a: 'No. A 47" banner needs the floor space to match, and in a 10x10 booth it can crowd the entrance. In a tight booth, two 33" stands placed apart often work harder than one wide one.' },
+      { q: 'What size is a tabletop banner?', a: '11.5" x 17.5", on a compact aluminum base. It brands a counter or registration desk without using any floor space.' },
+      { q: 'Can I change the graphic later?', a: 'Yes — the printed banner is replaceable on every stand we sell, so the hardware is a one-time purchase and each campaign is a reprint.' }
+    ],
     title: 'What Size Retractable Banner Should I Buy?',
     excerpt:
       'Tabletop or full height? A quick guide to Apex retractable banner sizes — 11.5×17.5 in tabletop vs 33×81 in floor stands — and where each fits.',
@@ -203,6 +222,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: '6ft-vs-8ft-table-cover',
+    faqs: [
+      { q: 'How do I know whether my table is 6 ft or 8 ft?', a: 'Measure the length of the table top, or ask the show\'s exhibitor services what they supply — trade show rentals are usually 6 ft or 8 ft rectangular tables. Order the cover to the table length, not to your booth width.' },
+      { q: 'What happens if I order the wrong size?', a: 'A pleated throw is fairly forgiving because it drapes, so a slightly large one still looks intentional. A fitted stretch cover is not — it is cut to pull tight to a specific table length and will not fit a different one.' },
+      { q: 'Is there a 4 ft option?', a: 'Yes, in the pleated style. It suits a small demo table, a registration desk or a market stall rather than a standard trade show booth table.' },
+      { q: 'Are table covers machine washable?', a: 'Yes. Both styles are dye-sublimated polyester, so the ink is bonded into the fibre and the cover washes without the print cracking or fading.' }
+    ],
     title: '6 ft vs 8 ft Table Cover: Which Size Do You Need?',
     excerpt:
       'Match the cover to your table. A quick guide to choosing 6 ft or 8 ft custom table covers for trade shows, markets and events.',
@@ -249,6 +274,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'pleated-vs-stretch-table-cover',
+    faqs: [
+      { q: 'Which looks more professional, pleated or stretch?', a: 'Neither is objectively better — they signal different things. Stretch pulls taut for a modern, tailored face that suits technology and design exhibitors. Pleated drapes with rounded corners for a traditional look that suits association, finance and healthcare events.' },
+      { q: 'Do both cover all four sides?', a: 'Yes. Both are closed-back, so cases, stock and coats stored under the table stay out of sight from the aisle.' },
+      { q: 'Which sizes does each style come in?', a: 'Pleated throws come in 4, 6 and 8 ft. Fitted stretch covers come in 6 and 8 ft.' },
+      { q: 'Which one travels better?', a: 'Both pack flat and weigh very little. The stretch cover is slightly less prone to showing creases because the fabric is under tension once it is on the table.' }
+    ],
     title: 'Pleated vs Stretch Table Covers: Which Look Is Right for Your Booth?',
     excerpt:
       'A draped pleated throw or a tight fitted stretch cover? Compare the two Apex table-cover styles — fit, look and use — to choose.',
@@ -302,6 +333,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'trade-show-backdrop-size-guide',
+    faqs: [
+      { q: 'What size is a standard step & repeat backdrop?', a: '8\' x 8\' or 10\' x 8\', up to 120" x 96", on an adjustable portable frame. The 10 ft width is the usual choice for a press wall because it fits more than one person in shot.' },
+      { q: 'How much space do I need in front of it?', a: 'Allow roughly 8 to 10 ft of clear floor in front of a 10 ft wall so a photographer can step back far enough to frame it properly. A backdrop pushed into a corner rarely photographs well.' },
+      { q: 'How should I space the repeating logos?', a: 'Close enough that a cropped photo still contains a whole logo, and staggered row to row so a person standing centre never blocks an entire column. The free artwork proof shows you the grid before it prints.' },
+      { q: 'Is a tension fabric wall an alternative?', a: 'For a booth back wall, yes — it gives one seamless graphic 8, 10 or 20 ft wide instead of a repeating pattern. Choose step & repeat when the wall exists to be photographed.' }
+    ],
     title: 'Trade Show Backdrop Size Guide: Choosing a Step & Repeat',
     excerpt:
       'How big should your backdrop be, and how do you space the logos? A practical guide to the Apex step & repeat media wall.',
@@ -348,6 +385,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'trade-show-booth-checklist',
+    faqs: [
+      { q: 'What is the minimum I need for a 10x10 booth?', a: 'A backdrop or fabric wall, one or two retractable banner stands, and a printed table cover. Add a canopy only if part of the event happens outdoors.' },
+      { q: 'What should I buy first on a tight budget?', a: 'A retractable banner stand — it is the cheapest item that still stops someone in the aisle. A table cover second, because almost every booth has a rented table. A full backdrop third.' },
+      { q: 'How far ahead should I order?', a: 'Work backwards from move-in day. Production is 6-8 business days after proof approval, or 2-3 with rush, and transit is added on top — so allow time for artwork approval, production and shipping rather than ordering in the final week.' },
+      { q: 'Can I reuse a booth kit at the next show?', a: 'Yes, and that is the point of buying rather than renting. Every display here uses a replaceable graphic on a reusable frame, so the hardware carries across years and only the printed graphic changes.' }
+    ],
     title: 'The Complete Trade Show Booth Checklist',
     excerpt:
       'Everything a professional booth needs — shelter, table, signage, branding and the small stuff — with what to order for each.',
@@ -484,6 +527,13 @@ export const STATIC_ARTICLES = [
   // walls are capped at three total in any full/half combination.
   {
     slug: 'custom-canopy-tent-buying-guide',
+    faqs: [
+      { q: 'What size canopy tent should I buy?', a: '10x10 for a standard single booth or market pitch, 10x15 when you need room for a longer table or a queue, and 10x20 for a double booth. All three use the same aluminum hex frame and 600D polyester top, so size is about footprint rather than build quality.' },
+      { q: 'What comes with a custom canopy tent?', a: 'The complete set includes your custom-printed canopy top, a heavy-duty aluminum hex frame with telescopic legs, and a carry bag. You can also order the printed top on its own to fit a compatible frame you already own.' },
+      { q: 'How many printed walls can I add?', a: 'Up to three in total, in any mix of full and half height. A back wall turns the canopy into a booth; half walls give a counter line while keeping the front open to visitors.' },
+      { q: 'Do I need weights or will stakes do?', a: 'Stakes only work in grass. Most trade show and market pitches are on pavement, where a weight on every leg is the only thing holding the canopy down — and an unweighted canopy in a gust is the most common outdoor failure there is.' },
+      { q: 'How long does a custom canopy take to produce?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. Transit is added on top and depends on the delivery address.' }
+    ],
     title: 'Custom Canopy Tent Buying Guide',
     excerpt:
       'Everything to decide before ordering a custom printed canopy tent: size, what you get, walls, print coverage, delivery speed and artwork.',
@@ -624,6 +674,13 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: '10x10-vs-10x15-vs-10x20-custom-canopy-tents',
+    faqs: [
+      { q: 'Which canopy size is the most common?', a: '10x10. It matches the standard single booth and the typical market pitch, and it is the size most events sell by default.' },
+      { q: 'When is a 10x15 worth the extra?', a: 'When you need a longer table, room for a queue, or space to keep stock behind the counter without blocking the front. It is the middle option that stops a busy booth feeling cramped.' },
+      { q: 'Is a 10x20 just two 10x10s?', a: 'In footprint terms it covers a double booth, but it works as one continuous space — product at one end and seating or demos at the other, under a single printed roof rather than two.' },
+      { q: 'Do the walls change with the size?', a: 'The wall allowance stays the same — up to three printed walls in any mix of full and half height — but the walls themselves are made to match the frame size you order.' },
+      { q: 'Is the build quality the same across sizes?', a: 'Yes. All three use the same heavy-duty aluminum hex frame with telescopic legs and the same 600D polyester top with dye-sublimated printing.' }
+    ],
     title: '10x10 vs 10x15 vs 10x20 Custom Canopy Tents',
     excerpt:
       'A side-by-side comparison of the three custom canopy tent sizes — footprint, price, wall count and when each one makes sense.',
@@ -682,6 +739,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'custom-canopy-tent-wall-options-explained',
+    faqs: [
+      { q: 'How many walls can I add to a canopy tent?', a: 'Up to three in total, in any mix of full and half height. The fourth side stays open, which is what keeps the booth accessible from the aisle.' },
+      { q: 'What is the difference between a full wall and a half wall?', a: 'A full wall runs floor to roof and closes the side completely — useful for storage, weather or a printed backdrop. A half wall runs to about counter height, giving you a branded barrier that still lets people see and talk across it.' },
+      { q: 'Which wall setup is most popular?', a: 'One full back wall plus two half walls at the sides. It gives a branded backdrop for photos, a counter line on both sides and an open front.' },
+      { q: 'Should I use walls in windy conditions?', a: 'Be careful. Walls catch wind and turn the canopy into a sail, so in gusty conditions drop them and rely on the roof, with weights on every leg.' }
+    ],
     title: 'Custom Canopy Tent Wall Options Explained',
     excerpt:
       'Full walls, half walls, back and side walls — what each does, what they cost, and the one rule that governs how many you can add.',
@@ -738,6 +801,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'how-to-prepare-artwork-for-a-custom-canopy-tent',
+    faqs: [
+      { q: 'What file format should I send?', a: 'A vector file (PDF, AI, EPS) is ideal because it scales without losing sharpness. High-resolution raster files work too, provided the resolution holds up at the finished print size.' },
+      { q: 'What if I do not have a print-ready file?', a: 'Send what you have. Every order includes a free artwork proof, and our team will tell you before anything prints whether the file will hold up at full size or needs rework.' },
+      { q: 'Why do logos need to stay away from the edges?', a: 'Because the fabric wraps the frame and seams fall in predictable places. Keeping logos and text inside the safe zone stops them being distorted at a fold or cut off at a seam.' },
+      { q: 'Will the colours match my other printed material?', a: 'Dye sublimation is consistent between runs, but fabric and vinyl reproduce colour differently by nature. If exact matching matters, order your booth pieces together and check them on the same proof.' }
+    ],
     title: 'How to Prepare Canopy Tent Artwork',
     excerpt:
       'File types, resolution, color and layout tips so your custom canopy tent prints sharp — plus what to do if your artwork is not ready.',
@@ -801,6 +870,12 @@ export const STATIC_ARTICLES = [
   },
   {
     slug: 'print-coverage-explained',
+    faqs: [
+      { q: 'What does full-bleed printing mean on a canopy?', a: 'The graphic runs edge to edge across the printable surface with no unprinted border. Dye sublimation bonds the ink into the fabric, so the colour goes right to the seam rather than stopping short of it.' },
+      { q: 'Do I have to print every surface?', a: 'No. Many exhibitors print the canopy top and one back wall, and leave the side walls plain or skip them entirely. Coverage is a budget and design decision, not a technical requirement.' },
+      { q: 'Which surface matters most if I only print one?', a: 'The roof valance if you are seen from a distance in a market row, or the back wall if people mostly see you head-on from the aisle. Think about the angle your visitors actually approach from.' },
+      { q: 'Will the print fade outdoors?', a: 'Dye sublimation bonds the ink into the fibre rather than laying it on top, which is why it resists cracking, peeling and fading through repeated outdoor use far better than a surface print.' }
+    ],
     title: 'Canopy Print Coverage Explained: Top, Valance, Walls & Inside',
     excerpt:
       'What "print coverage" means on a custom canopy — the top, valance, walls and inside — and what to print where for the most impact.',
