@@ -91,7 +91,7 @@ if (!ca && !wantsVerify) {
   // to production, where this connection carries the database superuser
   // password past anyone able to sit in the middle of it.
   console.log('! TLS certificate verification is OFF (DB_SSL__REJECT_UNAUTHORIZED=false).');
-  console.log('  Fine locally. Before deploying, pin the CA: see directus/DEPLOY.md step 1b.');
+  console.log('  Fine locally. Before deploying, pin the CA: see DIRECTUS_SETUP.md section 2 (TLS).');
 }
 if (!ca && wantsVerify) {
   console.error('✗ DB_SSL__REJECT_UNAUTHORIZED is true but DB_SSL__CA is empty.');

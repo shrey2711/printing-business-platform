@@ -62,7 +62,7 @@ what you actually want.
 when the instance stores files on container disk, because a redeploy deletes
 them while the product records keep pointing at them — broken images across the
 catalogue and an import to do again. Set up S3 storage first
-(`directus/DEPLOY.md` step 1), or pass `--allow-local-storage` for a throwaway
+(`DIRECTUS_SETUP.md` step 1), or pass `--allow-local-storage` for a throwaway
 instance.
 
 ## Flags

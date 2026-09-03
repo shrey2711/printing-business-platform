@@ -51,7 +51,7 @@ export async function migrateImages() {
     console.error('✗ images: this instance stores files on container-local disk.');
     console.error('  A redeploy would delete every imported file while the products keep');
     console.error('  referencing them. Switch STORAGE_LOCATIONS to s3 first — see');
-    console.error('  directus/DEPLOY.md step 1 — or pass --allow-local-storage for a throwaway instance.');
+    console.error('  DIRECTUS_SETUP.md section 2 (storage) — or pass --allow-local-storage for a throwaway instance.');
     return false;
   }
   if (driver === null) {

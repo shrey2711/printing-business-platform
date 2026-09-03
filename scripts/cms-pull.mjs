@@ -198,7 +198,7 @@ const main = async () => {
 
   if (isLocal(DIRECTUS_URL) && IS_CI) {
     console.error(`✗ DIRECTUS_URL is ${DIRECTUS_URL} — a deployment host cannot reach a local address.`);
-    console.error('  Point it at the public Directus instance. See directus/DEPLOY.md.');
+    console.error('  Point it at the public Directus instance. See DIRECTUS_SETUP.md.');
     process.exit(1);
   }
 

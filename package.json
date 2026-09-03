@@ -11,6 +11,7 @@
     "test:seo": "node scripts/test-seo-invariants.mjs",
     "test:products": "node scripts/test-product-consistency.mjs",
     "test:seo-manager": "node scripts/test-seo-manager.mjs",
+    "verify:deploy": "node scripts/verify-deployment.mjs",
     "test:roles": "node scripts/test-roles.mjs",
     "test:media": "node scripts/test-media.mjs",
     "test:migrate": "node scripts/test-migrate-directus.mjs",
