@@ -134,12 +134,33 @@ export function planWrites(mapped) {
 const IS_CI = Boolean(process.env.VERCEL || process.env.CI);
 const isLocal = (url) => /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:|\/|$)/i.test(url);
 
+// Has this site ever synced from a CMS? If content_overrides already holds keys
+// this script manages, Directus IS in use, and losing its configuration is a
+// regression that must stop the build. If it holds none, the CMS simply has not
+// been adopted yet and the build should proceed on the shipped defaults.
+async function cmsAlreadyInUse() {
+  if (!supabase) return false;
+  const { data, error } = await supabase
+    .from('content_overrides')
+    .select('key')
+    .in('key', [...KNOWN_KEYS])
+    .limit(1);
+  if (error) return false;   // cannot tell -> do not block the deploy
+  return Boolean(data?.length);
+}
+
 const main = async () => {
   if (!DIRECTUS_URL || !DIRECTUS_TOKEN) {
-    if (IS_CI) {
-      console.error('✗ DIRECTUS_URL / DIRECTUS_TOKEN are not set in this deployment environment.');
-      console.error('  Content edited in Directus would NOT reach this build, silently.');
-      console.error('  Set both in the deployment host environment, or remove cms-pull from the build.');
+    const half = Boolean(DIRECTUS_URL) !== Boolean(DIRECTUS_TOKEN);
+    if (IS_CI && half) {
+      // One without the other is always a mistake, never a deliberate state.
+      console.error(`✗ Only ${DIRECTUS_URL ? 'DIRECTUS_URL' : 'DIRECTUS_TOKEN'} is set. Both are required.`);
+      process.exit(1);
+    }
+    if (IS_CI && (await cmsAlreadyInUse())) {
+      console.error('✗ DIRECTUS_URL / DIRECTUS_TOKEN are missing, but this site has CMS-managed content.');
+      console.error('  Building now would freeze that content at its last synced value and hide every later edit.');
+      console.error('  Restore both variables in the deployment environment.');
       process.exit(1);
     }
     console.log('DIRECTUS_URL / DIRECTUS_TOKEN not set — skipping CMS pull, existing content stands.');
