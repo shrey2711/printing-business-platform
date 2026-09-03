@@ -11,6 +11,7 @@
     "test:seo": "node scripts/test-seo-invariants.mjs",
     "test:products": "node scripts/test-product-consistency.mjs",
     "test:seo-manager": "node scripts/test-seo-manager.mjs",
+    "test:media": "node scripts/test-media.mjs",
     "test:migrate": "node scripts/test-migrate-directus.mjs",
     "test:cms-services": "node scripts/test-cms-services.mjs",
     "test:cms-content": "node scripts/test-cms-pull.mjs",
@@ -27,7 +28,7 @@
     "test:a11y": "playwright test a11y",
     "lhci": "lhci autorun",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "test": "npm run build && node scripts/verify-tension-podium-pricing.mjs && npm run audit:seo && npm run audit:locations && npm run test:seo && npm run test:products && npm run test:cms-pricing && npm run test:cms-content && npm run test:seo-manager && npm run test:cms-services && npm run test:migrate && npm run test:locations && npm run test:links && npm run test:images && npm run test:cities",
+    "test": "npm run build && node scripts/verify-tension-podium-pricing.mjs && npm run audit:seo && npm run audit:locations && npm run test:seo && npm run test:products && npm run test:cms-pricing && npm run test:cms-content && npm run test:seo-manager && npm run test:cms-services && npm run test:migrate && npm run test:media && npm run test:locations && npm run test:links && npm run test:images && npm run test:cities",
     "preview": "vite preview",
     "start": "node backend/server.js"
   },

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { list as getProducts } from '../services/cms/productService';
 import ProductCard from '../components/ProductCard';
+import CmsImage from '../components/CmsImage';
 import DisplayPhoto from '../components/DisplayPhoto';
 import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
@@ -190,14 +191,15 @@ export default function HomePage() {
               single uploaded image is the override, not the other way round. */}
           {c('home.hero.image') ? (
             <div className="hero-image">
-              <img
+              <CmsImage
                 src={c('home.hero.image')}
                 alt={c('home.hero.imageAlt') || c('home.hero.title')}
+                preset="hero"
                 loading="eager"
                 fetchpriority="high"
-                decoding="async"
-                width="1200"
-                height="900"
+                sizes="(max-width: 900px) 100vw, 1200px"
+                width={c('home.hero.imageWidth') || undefined}
+                height={c('home.hero.imageHeight') || undefined}
               />
             </div>
           ) : (

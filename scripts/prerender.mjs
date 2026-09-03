@@ -365,7 +365,11 @@ routes.push(() => {
     // Preload the home hero LCP image (matches the eager/fetchpriority tile in HomePage.jsx).
     // Preload the LCP image: the CMS hero image when one is set, otherwise the
     // eager collage tile that HomePage.jsx renders.
-    preloadImage: cms('home.hero.image') || '/images/showcase/tablecover-corner-cafe.webp',
+    // Preload the same URL the browser will request, preset included — preloading
+    // the unsized original would download a second, larger file for nothing.
+    preloadImage: cms('home.hero.image')
+      ? `${cms('home.hero.image')}${cms('home.hero.image').includes('?') ? '&' : '?'}key=hero`
+      : '/images/showcase/tablecover-corner-cafe.webp',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',

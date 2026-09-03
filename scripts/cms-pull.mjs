@@ -72,6 +72,10 @@ const PUBLISHED_UNSORTED = 'filter[status][_eq]=published&limit=-1';
 
 /** Map Directus records onto content keys. Returns { key: value }. */
 export function mapToContentKeys(d) {
+  // Directus records width and height when a file is uploaded. Carrying them
+  // through means the hero renders with real dimensions instead of reflowing
+  // the page when the image arrives.
+  const heroFile = d.heroFile || null;
   const out = {};
   const set = (key, value) => { out[key] = value; };
 
@@ -83,7 +87,9 @@ export function mapToContentKeys(d) {
   set('home.hero.image', hero.background_image ? asset(hero.background_image) : '');
   // Alt text is its own field on home_hero rather than the file's Title, so an
   // image reused elsewhere can still be described for its use in the hero.
-  set('home.hero.imageAlt', trim(hero.background_image_alt));
+  set('home.hero.imageAlt', trim(hero.background_image_alt) || trim(heroFile?.title));
+  set('home.hero.imageWidth', heroFile?.width ? String(heroFile.width) : '');
+  set('home.hero.imageHeight', heroFile?.height ? String(heroFile.height) : '');
 
   // Promo strip: the first live banner placed site-wide or on the home hero.
   // A banner outside its date window is treated as absent.
@@ -208,6 +214,19 @@ const main = async () => {
       get('site_settings')
     ]);
     d = { hero, featured, why, testimonials, cta, promos, settings };
+
+    // One extra read, only when a hero image is actually set.
+    if (hero?.background_image) {
+      try {
+        const res = await fetch(`${DIRECTUS_URL}/files/${hero.background_image}?fields=width,height,title`, {
+          headers: { Authorization: `Bearer ${DIRECTUS_TOKEN}` }
+        });
+        if (res.ok) d.heroFile = (await res.json()).data;
+      } catch {
+        // Dimensions are an optimisation; failing to read them must not stop a
+        // content sync that is otherwise fine.
+      }
+    }
   } catch (e) {
     if (e instanceof AuthError) {
       console.error(`✗ ${e.message}`);

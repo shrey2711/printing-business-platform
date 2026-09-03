@@ -55,6 +55,10 @@ CONTENT_FIELDS.push(
   { key: 'home.hero.cta2.href', label: 'Home — hero secondary button link', default: '/quote' },
   { key: 'home.hero.image', label: 'Home — hero image (leave blank to keep the product collage)', default: '' },
   { key: 'home.hero.imageAlt', label: 'Home — hero image alt text (describe the image for screen readers and search)', default: '' },
+  // Filled from the file's stored dimensions by cms-pull. Rendered as width and
+  // height attributes so the hero does not reflow when the image loads.
+  { key: 'home.hero.imageWidth', label: 'Home — hero image width (filled automatically)', default: '' },
+  { key: 'home.hero.imageHeight', label: 'Home — hero image height (filled automatically)', default: '' },
 
   // Promotional strip. Empty message = the strip does not render at all.
   { key: 'home.promo.message', label: 'Home — promotional strip message', default: '' },
