@@ -29,9 +29,19 @@ const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN || '';
 
 const KNOWN_KEYS = new Set(CONTENT_FIELDS.map((f) => f.key));
 
+// Resolve the same way scripts/buildData.mjs does. It accepts VITE_SUPABASE_URL
+// as a fallback, and a deployment that only sets the VITE_-prefixed name (which
+// the frontend requires) left this client null — so the sync read Directus,
+// planned the writes, and silently wrote nothing.
+//
+// The SERVICE ROLE key has no fallback on purpose: content_overrides is written
+// here, and the anon key cannot do it. Missing it is a configuration error, not
+// a reason to degrade.
+const SUPA_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const SUPA_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase =
-  process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
-    ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } })
+  SUPA_URL && SUPA_KEY
+    ? createClient(SUPA_URL, SUPA_KEY, { auth: { persistSession: false } })
     : null;
 
 const asset = (id) => (id ? `${DIRECTUS_URL}/assets/${id}` : '');
@@ -198,7 +208,19 @@ const main = async () => {
   deletes.forEach((k) => console.log(`  clear  ${k}`));
 
   if (DRY) { console.log('--dry-run: nothing written.'); return; }
-  if (!supabase) { console.warn('[cms-pull] Supabase service credentials missing — nothing written.'); return; }
+
+  if (!supabase) {
+    const detail = !SUPA_URL ? 'SUPABASE_URL (or VITE_SUPABASE_URL) is missing' : 'SUPABASE_SERVICE_ROLE_KEY is missing';
+    // Directus answered and there is content to publish, so writing nothing is
+    // a failure, not a degradation: the edit would be lost without a trace.
+    if (IS_CI && (writes.length || deletes.length)) {
+      console.error(`✗ ${detail}, so ${writes.length + deletes.length} content change(s) from Directus cannot be written.`);
+      console.error('  The build would publish stale content while the CMS shows the edit as live.');
+      process.exit(1);
+    }
+    console.warn(`[cms-pull] ${detail} — nothing written.`);
+    return;
+  }
 
   if (writes.length) {
     const { error } = await supabase.from('content_overrides').upsert(
