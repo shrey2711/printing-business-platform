@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getBlogPost } from '../services/blog';
+import { bySlug as getBlogPost } from '../services/cms/blogService';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function BlogPost() {

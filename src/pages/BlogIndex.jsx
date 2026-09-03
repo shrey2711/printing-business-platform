@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getBlogPosts } from '../services/blog';
+import { list as getBlogPosts } from '../services/cms/blogService';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 const TOPICS = [

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../services/api';
+import { list as getProducts } from '../services/cms/productService';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useMoney } from '../context/CurrencyContext';
 import { brand } from '../config/brand';

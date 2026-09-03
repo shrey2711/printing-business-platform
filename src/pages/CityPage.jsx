@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { getProducts } from '../services/api';
+import { list as getProducts } from '../services/cms/productService';
 import { getCity, slugify } from '../data/states';
 import { getSeoCity } from '../data/citySeo';
 import { PRIORITY_CITIES, cityContent } from '../data/cityContent';

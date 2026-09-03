@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getProducts } from '../services/api';
+import { list as getProducts } from '../services/cms/productService';
 import { getState, slugify } from '../data/states';
 import { SEO_CITIES } from '../data/citySeo';
 import {
