@@ -106,6 +106,26 @@ if (!template.includes('<div id="root"></div>')) {
   process.exit(1);
 }
 
+// Serialise structured data for embedding in a <script> element.
+//
+// JSON.stringify does NOT escape "</script>": the HTML parser ends the element
+// at that byte sequence regardless of JSON syntax, so a value containing it
+// would close the block and let whatever follows be parsed as markup. Editors
+// supply FAQ answers, breadcrumb titles and whole JSON-LD blocks through the
+// CMS, which makes this reachable by anyone with author access.
+//
+// Escaping < > & as unicode escapes keeps the JSON equivalent while removing
+// every way out of the element. U+2028/U+2029 are legal in JSON strings but
+// terminate a line in JavaScript, which breaks the parse.
+function jsonLdSafe(obj) {
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
+}
+
 function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt, preloadImage }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
   const o = seoMap[path];
@@ -196,7 +216,7 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
     html = html.replace('</head>', `<meta name="robots" content="${robots}">\n</head>`);
   }
   if (jsonLd) {
-    const script = `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
+    const script = `<script type="application/ld+json">${jsonLdSafe(jsonLd)}</script>`;
     html = html.replace('</head>', `${script}\n</head>`);
   }
   // Editor-authored FAQ entries become FAQPage schema. Added as its own block
@@ -215,7 +235,7 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
           acceptedAnswer: { '@type': 'Answer', text: f.answer || f.a }
         }))
       };
-      html = html.replace('</head>', `<script type="application/ld+json">${JSON.stringify(faqLd)}</script>\n</head>`);
+      html = html.replace('</head>', `<script type="application/ld+json">${jsonLdSafe(faqLd)}</script>\n</head>`);
     }
   }
   // Prerendered content lives inside #root; React replaces it on hydration.

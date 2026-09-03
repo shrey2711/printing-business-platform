@@ -44,7 +44,11 @@ const OVERRIDE = {
     breadcrumb_title: 'FIXTURE CRUMB',
     schema_type: 'CollectionPage',
     robots: 'noindex, follow',
-    faq_schema: [{ question: 'FIXTURE QUESTION?', answer: 'FIXTURE ANSWER.' }]
+    faq_schema: [
+      { question: 'FIXTURE QUESTION?', answer: 'FIXTURE ANSWER.' },
+      // Attempts to close the JSON-LD block and start executable markup.
+      { question: 'BREAKOUT</script><script>window.__pwned=1</script>', answer: 'and <!--' }
+    ]
   }
 };
 
@@ -138,6 +142,32 @@ check('every JSON-LD block on the page is still valid JSON', () => {
     try { JSON.parse(b); } catch (e) { return `invalid JSON-LD: ${e.message}`; }
   }
   return null;
+});
+
+check('editor text cannot break out of the JSON-LD block', () => {
+  // The payload must survive as DATA, never as markup. If "</script>" reached
+  // the output literally, the HTML parser would end the block there and treat
+  // the rest as executable.
+  if (/<script>window\.__pwned/.test(html)) return 'the payload became a real script element';
+  if (html.includes('BREAKOUT</script>')) return 'an unescaped </script> reached the page';
+  if (!html.includes('BREAKOUT')) return 'the payload vanished; the test is no longer exercising this';
+
+  // Exactly the script elements the page is supposed to have.
+  const opens = (html.match(/<script/g) || []).length;
+  const closes = (html.match(/<\/script>/g) || []).length;
+  if (opens !== closes) return `unbalanced script tags: ${opens} open, ${closes} close`;
+  return null;
+});
+
+check('the escaped payload is still valid JSON-LD carrying the original text', () => {
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+  const faq = blocks
+    .map((b) => { try { return JSON.parse(b); } catch { return null; } })
+    .find((j) => j && j['@type'] === 'FAQPage');
+  if (!faq) return 'no parseable FAQPage block';
+  const q = faq.mainEntity.map((e) => e.name).join(' ');
+  // Escaping must be reversible: a consumer parsing the JSON sees the real text.
+  return q.includes('BREAKOUT</script>') ? null : 'the escaped text did not decode back to the original';
 });
 
 rmSync(FIXTURE, { force: true });
