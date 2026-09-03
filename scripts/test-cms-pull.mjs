@@ -6,7 +6,7 @@
 //
 // Run: node scripts/test-cms-pull.mjs
 
-import { mapToContentKeys, planWrites } from './cms-pull.mjs';
+import { mapToContentKeys, planWrites, mapSeoRows } from './cms-pull.mjs';
 import { CONTENT_FIELDS, resolveContent, resolveList } from '../src/data/content.js';
 
 const fails = [];
@@ -178,6 +178,71 @@ check('every editable item in the brief has a content key', () => {
   ];
   const missing = required.filter((k) => !declared.has(k));
   return missing.length ? `missing: ${missing.join(', ')}` : null;
+});
+
+
+// ------------------------------------------------------- per-URL SEO rows --
+const SEO_IN = [
+  { path: '/trade-show-displays/denver', seo_title: 'Denver title', seo_description: 'Denver description.',
+    h1: 'Trade Show Displays in Denver, CO', canonical_url: '', og_title: 'Denver OG', og_description: 'Denver OG desc.',
+    breadcrumb_title: 'Denver', schema_type: 'CollectionPage', robots_index: true,
+    faq_schema: [{ q: 'Do you ship to Denver?', a: 'Yes.' }, { q: '', a: 'orphan answer' }] },
+  { path: 'https://example.com/evil', seo_title: 'absolute URL' },
+  { path: '/blank-row' },
+  { path: '/hidden-page', seo_title: 'Hidden', robots_index: false }
+];
+
+check('a valid SEO row maps every field across', () => {
+  const { rows } = mapSeoRows(SEO_IN);
+  const r = rows.find((x) => x.path === '/trade-show-displays/denver');
+  if (!r) return 'the valid row was dropped';
+  const expect = {
+    title: 'Denver title', description: 'Denver description.', h1: 'Trade Show Displays in Denver, CO',
+    og_title: 'Denver OG', og_description: 'Denver OG desc.', breadcrumb_title: 'Denver', schema_type: 'CollectionPage'
+  };
+  for (const [k, v] of Object.entries(expect)) if (r[k] !== v) return `${k} is ${JSON.stringify(r[k])}, expected ${JSON.stringify(v)}`;
+  return null;
+});
+
+check('an incomplete FAQ pair is dropped rather than emitted half-formed', () => {
+  const { rows } = mapSeoRows(SEO_IN);
+  const r = rows.find((x) => x.path === '/trade-show-displays/denver');
+  if (r.faq_schema.length !== 1) return `kept ${r.faq_schema.length} entries, expected 1`;
+  if (r.faq_schema[0].question !== 'Do you ship to Denver?') return 'wrong entry kept';
+  return null;
+});
+
+check('an absolute URL is refused as a path', () => {
+  const { rows, skipped } = mapSeoRows(SEO_IN);
+  if (rows.some((r) => r.path.includes('example.com'))) return 'an absolute URL was accepted';
+  if (!skipped.some((m) => m.includes('example.com'))) return 'it was dropped without saying so';
+  return null;
+});
+
+check('a row with nothing filled in is skipped', () => {
+  const { rows, skipped } = mapSeoRows(SEO_IN);
+  if (rows.some((r) => r.path === '/blank-row')) return 'an empty override was written';
+  if (!skipped.some((m) => m.includes('/blank-row'))) return 'it was dropped silently';
+  return null;
+});
+
+check('a page only leaves the index when explicitly unchecked', () => {
+  const { rows } = mapSeoRows(SEO_IN);
+  const hidden = rows.find((r) => r.path === '/hidden-page');
+  const indexed = rows.find((r) => r.path === '/trade-show-displays/denver');
+  if (hidden.robots !== 'noindex, follow') return `hidden page robots is ${JSON.stringify(hidden.robots)}`;
+  if (indexed.robots !== null) return 'an indexed page was given a robots value';
+  return null;
+});
+
+check('a blank canonical stays null rather than pinning the page to an empty URL', () => {
+  const { rows } = mapSeoRows(SEO_IN);
+  return rows.find((r) => r.path === '/trade-show-displays/denver').canonical === null ? null : 'blank canonical was written';
+});
+
+check('a trailing slash is normalised so the path matches a route', () => {
+  const { rows } = mapSeoRows([{ path: '/banner-stands/', seo_title: 'x' }]);
+  return rows[0]?.path === '/banner-stands' ? null : `path is ${JSON.stringify(rows[0]?.path)}`;
 });
 
 if (fails.length) {

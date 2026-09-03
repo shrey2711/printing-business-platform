@@ -95,6 +95,17 @@ let contentMap = {};
 const cms = (key) => resolveContent(contentMap, key);
 const cmsList = (key) => resolveList(contentMap, key);
 
+// The template is dist/index.html, which vite build regenerates. Running this
+// script twice without a rebuild in between reads an ALREADY prerendered page as
+// the template: the <div id="root"></div> placeholder is gone, so every route
+// silently keeps the previous run's body while still applying its own title.
+// That produces pages that look built and are wrong, so refuse instead.
+if (!template.includes('<div id="root"></div>')) {
+  console.error('prerender: dist/index.html has already been prerendered.');
+  console.error('  Run "npm run build" (vite build regenerates the template) rather than this script alone.');
+  process.exit(1);
+}
+
 function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt, preloadImage }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
   const o = seoMap[path];
@@ -104,6 +115,47 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
     if (o.robots) robots = o.robots;
     if (o.jsonld) jsonLd = o.jsonld;
     if (o.og_image_path) image = o.og_image_path;
+
+    // Replace the page's visible H1. Only the FIRST h1 is touched: a page has
+    // exactly one, and the audit gates fail the build if that stops being true.
+    if (o.h1) {
+      body = body.replace(/<h1([^>]*)>[\s\S]*?<\/h1>/, (_m, attrs) => `<h1${attrs}>${esc(o.h1)}</h1>`);
+    }
+
+    // schema_type re-labels the page's main entity without discarding the rest
+    // of the structured data the route already built.
+    if (o.schema_type && jsonLd && typeof jsonLd === 'object') {
+      // Routes emit either one node or an array of them. Relabel the page's own
+      // entity and leave the site-level and navigational nodes alone, or a page
+      // would claim to be a WebSite.
+      const SITE_LEVEL = ['WebSite', 'OnlineStore', 'Organization', 'BreadcrumbList'];
+      if (Array.isArray(jsonLd)) {
+        const i = jsonLd.findIndex((n) => n && !SITE_LEVEL.includes(n['@type']));
+        if (i !== -1) jsonLd = jsonLd.map((n, k) => (k === i ? { ...n, '@type': o.schema_type } : n));
+      } else {
+        jsonLd = { ...jsonLd, '@type': o.schema_type };
+      }
+    }
+
+    // An editor-supplied FAQ replaces the route's own rather than sitting beside
+    // it: two FAQPage blocks on one page is worse than either alone.
+    if (Array.isArray(o.faq_schema) && o.faq_schema.length && jsonLd) {
+      if (Array.isArray(jsonLd)) jsonLd = jsonLd.filter((n) => !n || n['@type'] !== 'FAQPage');
+      else if (jsonLd['@type'] === 'FAQPage') jsonLd = null;
+    }
+
+    // A page's own label in its breadcrumb trail, for when the H1 is too long
+    // to read well as a crumb. Only the last crumb — the ancestors belong to
+    // the pages they point at.
+    if (o.breadcrumb_title && jsonLd) {
+      const lists = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(
+        (n) => n && n['@type'] === 'BreadcrumbList' && Array.isArray(n.itemListElement)
+      );
+      for (const list of lists) {
+        const last = list.itemListElement[list.itemListElement.length - 1];
+        if (last) last.name = o.breadcrumb_title;
+      }
+    }
   }
   // Priority: dashboard override > per-route canonicalArg (e.g. a blog post that
   // canonicalises to another article) > the page itself.
@@ -112,6 +164,18 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   // Function-replacer based tag rewriting (see scripts/lib/seo-meta.mjs) — never
   // `$1…$2` strings, so a "$140" in a value can't be read as a capture-group ref.
   let html = applyMeta(template, { title, description, canonical, url });
+  // Social titles default to the SEO title and description (applyMeta already
+  // set them). These override only when the editor wants the share card to read
+  // differently from the search result.
+  if (o?.og_title) {
+    html = html.replace(/(<meta property="og:title" content=")[^"]*(")/, (_m, a, b) => a + esc(o.og_title) + b);
+    html = html.replace(/(<meta name="twitter:title" content=")[^"]*(")/, (_m, a, b) => a + esc(o.og_title) + b);
+  }
+  if (o?.og_description) {
+    html = html.replace(/(<meta property="og:description" content=")[^"]*(")/, (_m, a, b) => a + esc(o.og_description) + b);
+    html = html.replace(/(<meta name="twitter:description" content=")[^"]*(")/, (_m, a, b) => a + esc(o.og_description) + b);
+  }
+
   // Route-specific raster OG image (reuse real product/gallery photos). The
   // template ships a generic 1200×630 SVG as the fallback; when a page supplies
   // its own raster we swap og:image + twitter:image and drop the hardcoded
@@ -134,6 +198,25 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   if (jsonLd) {
     const script = `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
     html = html.replace('</head>', `${script}\n</head>`);
+  }
+  // Editor-authored FAQ entries become FAQPage schema. Added as its own block
+  // rather than merged, so it cannot damage the structured data a route built,
+  // and skipped when the route already emits its own FAQPage.
+  if (o?.faq_schema) {
+    const rows = (Array.isArray(o.faq_schema) ? o.faq_schema : [])
+      .filter((f) => f && (f.question || f.q) && (f.answer || f.a));
+    if (rows.length) {
+      const faqLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: rows.map((f) => ({
+          '@type': 'Question',
+          name: f.question || f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer || f.a }
+        }))
+      };
+      html = html.replace('</head>', `<script type="application/ld+json">${JSON.stringify(faqLd)}</script>\n</head>`);
+    }
   }
   // Prerendered content lives inside #root; React replaces it on hydration.
   html = html.replace('<div id="root"></div>', `<div id="root"><div id="seo-prerender">${body}${NAV}${FOOTER}</div></div>`);

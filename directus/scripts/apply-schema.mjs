@@ -70,6 +70,7 @@ const SEO = [
 const SEO_FULL = [
   ...SEO,
   F.string('h1', { meta: { note: 'Visible H1. Exactly one per page — the QA gate fails a page with none or two.' } }),
+  F.string('breadcrumb_title', { meta: { note: "This page's label in the breadcrumb trail. Falls back to the H1, which is often too long to read well as a crumb." } }),
   F.string('og_title', { meta: { note: 'Social share title. Falls back to the SEO title when blank.' } }),
   F.text('og_description', 'Social share description. Falls back to the meta description.'),
   F.file('og_image', 'Social share image. 1200x630 renders best.'),
@@ -495,7 +496,7 @@ async function ensureFolder(name) {
 
 (async () => {
   if (!DRY) {
-    const health = await api('/server/health');
+    const health = await api('/server/ping');
     if (!health.ok) {
       console.error(`Cannot reach Directus at ${URL_BASE} (${health.status}). Is it running?`);
       process.exit(1);

@@ -66,6 +66,13 @@ export async function loadContentMap() {
 
 // Per-route SEO overrides as { path: overrideRow }.
 export async function loadSeoMap() {
+  // A local fixture lets scripts/test-seo-manager.mjs exercise the real
+  // prerenderer against known overrides, with no database and no network.
+  const fixture = process.env.SEO_OVERRIDE_FIXTURE;
+  if (fixture) {
+    const { readFileSync } = await import('fs');
+    return JSON.parse(readFileSync(fixture, 'utf8'));
+  }
   if (!client) return {};
   const { data, error } = await client.from('seo_overrides').select('*');
   if (error) {
