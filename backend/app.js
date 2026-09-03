@@ -19,7 +19,7 @@ import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
 import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
 import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from './lib/pricingOverrides.js';
 import { subscribeContact, brevoConfigured, isEmail } from './lib/brevo.js';
-import { composePricing, priceShift } from './lib/pricingFromCms.js';
+import { composePricing, priceShift, scalePricing } from './lib/pricingFromCms.js';
 
 dotenv.config();
 
@@ -1077,6 +1077,106 @@ app.get('/api/admin/pricing', async (req, res) => {
 
 // Upsert (or clear) a product's pricing override. Admin only; validated;
 // audited; rebuilds the site so prerendered "from $X" badges update.
+// Bulk price change across many products at once.
+//
+// This is the most dangerous edit in the system: one request can reprice the
+// whole catalogue. Three rules follow from that:
+//
+//   1. Every product is composed and validated BEFORE anything is written. If
+//      one fails, nothing is written — a half-applied price rise across a
+//      catalogue is worse than no rise, because nobody can tell which half.
+//   2. It reuses composePricing + validatePricingBlock, the same checks a single
+//      edit goes through. No second, looser path to a customer's price.
+//   3. dryRun returns the full before/after list and writes nothing. The UI is
+//      expected to show that list and have someone read it.
+//
+// Body: { slugs?: [], category?: 'tents', percent?: 5, set?: { base_price: 899 },
+//         dryRun?: true, confirm?: true }
+app.put('/api/admin/pricing/bulk', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+
+  const { slugs, category, percent, set, dryRun, confirm } = req.body || {};
+  if (percent == null && !set) return res.status(400).json({ error: 'Supply either percent or set.' });
+  if (percent != null && set) return res.status(400).json({ error: 'Supply percent or set, not both.' });
+
+  // Resolve the target list.
+  let targets;
+  if (Array.isArray(slugs) && slugs.length) targets = slugs;
+  else if (category) targets = listProducts({ includeInactive: true }).filter((p) => p.category === category).map((p) => p.slug);
+  else return res.status(400).json({ error: 'Supply slugs or a category.' });
+
+  if (targets.length > 200) return res.status(400).json({ error: `${targets.length} products is too many for one request (limit 200).` });
+
+  // ---- compose and validate everything first ----
+  const planned = [];
+  const problems = [];
+  for (const slug of targets) {
+    const product = getProduct(slug);
+    if (!product) { problems.push(`${slug}: unknown product`); continue; }
+
+    const current = (await getPricingOverride(slug)) || product.pricing;
+
+    let simple = set;
+    if (percent != null) {
+      const scaled = scalePricing(current, percent);
+      if (!scaled.ok) { problems.push(`${slug}: ${scaled.error}`); continue; }
+      simple = scaled.simple;
+    }
+
+    const composed = composePricing(current, simple);
+    if (!composed.ok) { problems.push(`${slug}: ${composed.error}`); continue; }
+
+    const check = validatePricingBlock(slug, composed.pricing);
+    if (!check.ok) { problems.push(`${slug}: rejected — ${check.error}`); continue; }
+
+    const shift = priceShift(computePrice, slug, current, composed.pricing);
+    planned.push({ slug, current, pricing: composed.pricing, changes: composed.changes, shift });
+  }
+
+  if (problems.length) {
+    return res.status(400).json({
+      error: `${problems.length} of ${targets.length} product(s) could not be repriced. Nothing was changed.`,
+      problems
+    });
+  }
+
+  // A big swing needs saying out loud, exactly as it does for a single product.
+  const big = planned.filter((p) => p.shift.comparable && Math.abs(p.shift.pct) > 40);
+  if (big.length && !confirm) {
+    return res.status(409).json({
+      error: `${big.length} product(s) would move by more than 40%. Re-send with confirm: true if that is intended.`,
+      big: big.map((p) => ({ slug: p.slug, pct: p.shift.pct, from: p.shift.from, to: p.shift.to }))
+    });
+  }
+
+  if (dryRun) {
+    return res.json({
+      ok: true, dryRun: true, count: planned.length,
+      preview: planned.map((p) => ({ slug: p.slug, changes: p.changes, shift: p.shift }))
+    });
+  }
+
+  const now = new Date().toISOString();
+  const { error } = await supabaseAdmin.from('pricing_overrides').upsert(
+    planned.map((p) => ({ slug: p.slug, pricing: p.pricing, updated_at: now, updated_by: ctx.user.id })),
+    { onConflict: 'slug' }
+  );
+  if (error) return res.status(500).json({ error: error.message });
+
+  await supabaseAdmin.from('pricing_audit').insert(
+    planned.map((p) => ({ actor: ctx.user.id, slug: p.slug, before: p.current, after: p.pricing }))
+  );
+
+  invalidatePricingCache();
+  const rebuild = await triggerRebuild();
+  res.json({
+    ok: true, count: planned.length,
+    applied: planned.map((p) => ({ slug: p.slug, changes: p.changes, shift: p.shift })),
+    rebuild
+  });
+});
+
 app.put('/api/admin/pricing/:slug', writeLimiter, async (req, res) => {
   const ctx = await requireRole(req, res, 'admin');
   if (!ctx) return;

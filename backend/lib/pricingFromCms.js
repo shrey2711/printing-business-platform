@@ -33,7 +33,9 @@ export const EDITABLE_FIELDS = [
   'min_charge',        // area model floor
   'tiers',             // [{ min, price }] or [{ min, prices: { key: value } }]
   'option_prices',     // [{ group, choice, price }] — add-ons (walls, bases, …)
-  'option_multipliers' // [{ group, choice, mult }] — e.g. fabric upgrades
+  'option_multipliers', // [{ group, choice, mult }] — e.g. fabric upgrades
+  'variant_prices',     // [{ id, price }] — per-size unit price on unit-model products
+  'price_matrix'        // [{ key, price }] — cells of a size x turnaround matrix
 ];
 
 /**
@@ -144,6 +146,32 @@ export function composePricing(current, simple) {
     }
   }
 
+  // ---- matrix cells (size x turnaround grids: banner stands, flags, SEG kits) ----
+  if (simple.price_matrix != null) {
+    if (!Array.isArray(simple.price_matrix)) return { ok: false, error: 'price_matrix must be a list.' };
+    if (!next.priceMatrix || typeof next.priceMatrix !== 'object') return { ok: false, error: 'This product is not priced from a matrix.' };
+    for (const row of simple.price_matrix) {
+      if (!(row.key in next.priceMatrix)) return { ok: false, error: `No matrix cell "${row.key}" on this product.` };
+      if (!isPrice(row.price)) return { ok: false, error: `matrix ${row.key} price ${row.price} is not a valid price.` };
+      changes.push(`matrix ${row.key} ${next.priceMatrix[row.key]} -> ${round2(row.price)}`);
+      next.priceMatrix[row.key] = round2(row.price);
+    }
+  }
+
+  // ---- per-variant unit prices (unit-model products: flags, stands, covers) ----
+  if (simple.variant_prices != null) {
+    if (!Array.isArray(simple.variant_prices)) return { ok: false, error: 'variant_prices must be a list.' };
+    if (!Array.isArray(next.variants)) return { ok: false, error: 'This product is not priced per variant.' };
+    for (const row of simple.variant_prices) {
+      const variant = next.variants.find((v) => v.id === row.id);
+      if (!variant) return { ok: false, error: `No variant "${row.id}" on this product.` };
+      if (variant.unitPrice == null) return { ok: false, error: `Variant "${row.id}" has no unit price to set.` };
+      if (!isPrice(row.price)) return { ok: false, error: `variant ${row.id} price ${row.price} is not a valid price.` };
+      changes.push(`variant ${row.id} ${variant.unitPrice} -> ${round2(row.price)}`);
+      variant.unitPrice = round2(row.price);
+    }
+  }
+
   if (!changes.length) return { ok: false, error: 'Nothing to change — no recognised pricing fields were supplied.' };
   return { ok: true, pricing: next, changes };
 }
@@ -166,4 +194,89 @@ export function priceShift(computePrice, slug, before, after) {
     to: b.total,
     pct: Math.round(((b.total - a.total) / a.total) * 100)
   };
+}
+
+/**
+ * Turn "raise this product by N%" into the same friendly field payload
+ * composePricing() already validates. Deliberately NOT a separate write path:
+ * a bulk change is the most dangerous edit in the system, so it goes through
+ * exactly the checks a single edit does.
+ *
+ * Scales the field that actually drives the price for this model, and leaves
+ * add-on amounts alone — a 5% rise on a canopy should not silently reprice a
+ * sandbag.
+ *
+ * @returns {{ ok: boolean, simple?: object, error?: string }}
+ */
+export function scalePricing(current, percent) {
+  const pct = Number(percent);
+  if (!Number.isFinite(pct)) return { ok: false, error: 'The percentage must be a number.' };
+  if (pct === 0) return { ok: false, error: 'A 0% change would do nothing.' };
+  // Wider than the per-product confirm threshold, which still applies on top.
+  if (pct < -90 || pct > 200) return { ok: false, error: `${pct}% is outside the allowed range (-90 to 200).` };
+
+  // Quote-only products carry no prices at all, so there is nothing to scale.
+  // Say that plainly rather than reporting a missing field.
+  if (current.quoteOnly) return { ok: false, error: 'This product is quote-only and has no published price to change.' };
+
+  const f = 1 + pct / 100;
+  const scale = (n) => round2(Number(n) * f);
+
+  if (current.model === 'area') {
+    const simple = {};
+    if (current.pricePerSqFt != null) simple.price_per_sqft = scale(current.pricePerSqFt);
+    if (current.minChargeUsd != null) simple.min_charge = scale(current.minChargeUsd);
+    if (!Object.keys(simple).length) return { ok: false, error: 'This area-priced product has no rate to scale.' };
+    return { ok: true, simple };
+  }
+
+  if (Array.isArray(current.quantityTiers) && current.quantityTiers.length) {
+    const tiers = current.quantityTiers.map((t) => {
+      if (t.prices && typeof t.prices === 'object') {
+        const prices = {};
+        for (const [k, v] of Object.entries(t.prices)) prices[k] = scale(v);
+        return { min: Number(t.min), prices };
+      }
+      return { min: Number(t.min), price: scale(t.price) };
+    });
+    return { ok: true, simple: { tiers } };
+  }
+
+  if (current.basePrice != null) return { ok: true, simple: { base_price: scale(current.basePrice) } };
+
+  // Configured products price by adding up chosen options. Only the groups
+  // marked as the base carry the product's own price; the rest are add-ons
+  // (rush production, design help) and a percentage rise should not move them.
+  if (Array.isArray(current.optionGroups)) {
+    const option_prices = [];
+    for (const g of current.optionGroups) {
+      if (g.pricing !== 'base') continue;
+      for (const c of g.choices || []) {
+        if (typeof c.price === 'number') option_prices.push({ group: g.id, choice: c.id, price: scale(c.price) });
+      }
+    }
+    if (option_prices.length) return { ok: true, simple: { option_prices } };
+  }
+
+  // Matrix-priced products keep their prices in a size x turnaround grid.
+  if (current.priceMatrix && typeof current.priceMatrix === 'object') {
+    const price_matrix = Object.entries(current.priceMatrix)
+      .filter(([, v]) => typeof v === 'number')
+      .map(([key, v]) => ({ key, price: scale(v) }));
+    if (price_matrix.length) return { ok: true, simple: { price_matrix } };
+  }
+
+  // Unit products price per size.
+  if (Array.isArray(current.variants)) {
+    const variant_prices = current.variants
+      .filter((v) => typeof v.unitPrice === 'number')
+      .map((v) => ({ id: v.id, price: scale(v.unitPrice) }));
+    if (variant_prices.length) return { ok: true, simple: { variant_prices } };
+
+    // Competitive products derive our price from a competitor's, so there is no
+    // number here that a percentage could honestly move.
+    return { ok: false, error: 'This product is priced against a competitor, so a percentage change does not apply. Edit it individually.' };
+  }
+
+  return { ok: false, error: 'This product has no scalable price — edit it individually.' };
 }
