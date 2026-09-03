@@ -1,0 +1,43 @@
+# Directus for Apex Trade Show.
+#
+# Docker is the supported way to run Directus: the official image ships the
+# native modules (isolated-vm, sharp) prebuilt, so there is no C++ toolchain to
+# install on Windows or macOS.
+#
+#   cp .env.example .env      # then fill it in
+#   docker compose up -d
+#   open http://localhost:8055
+#
+# The database is your existing Supabase Postgres — no Postgres container here.
+# Directus keeps its ~30 tables in a dedicated `directus` schema (DB_SEARCH_PATH),
+# so it cannot collide with the storefront's tables or their RLS policies.
+# Run supabase/directus-schema.sql once before first start.
+
+services:
+  directus:
+    image: directus/directus:12.3.1
+    container_name: apex-directus
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8055}:8055"
+    env_file:
+      - .env
+    environment:
+      # Inside the container Directus always binds 8055; the host port is mapped above.
+      HOST: 0.0.0.0
+      PORT: 8055
+    volumes:
+      # Uploaded media (gitignored). Swap for S3/Supabase Storage in .env if you
+      # ever run more than one instance — local disk does not survive a redeploy
+      # on most container hosts.
+      - ./uploads:/directus/uploads
+      # Custom extensions, if any are added later.
+      - ./extensions:/directus/extensions
+      # Schema snapshots, so `schema apply` can run inside the container.
+      - ./schema:/directus/schema
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:8055/server/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s

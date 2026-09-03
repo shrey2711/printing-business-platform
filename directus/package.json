@@ -1,0 +1,23 @@
+{
+  "name": "apex-directus",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Directus CMS for Apex Trade Show — authoring layer only. The storefront, Stripe checkout and pricing engine stay in the main app.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "bootstrap": "directus bootstrap",
+    "start": "directus start",
+    "dev": "directus start",
+    "schema:apply": "directus schema apply --yes ./schema/snapshot.yaml",
+    "schema:snapshot": "directus schema snapshot --yes ./schema/snapshot.yaml",
+    "users:create": "directus users create",
+    "users:passwd": "directus users passwd"
+  },
+  "dependencies": {
+    "directus": "12.3.1",
+    "pg": "^8.13.1"
+  }
+}

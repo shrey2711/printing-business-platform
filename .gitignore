@@ -15,3 +15,13 @@ npm-debug.log*
 test-results/
 playwright-report/
 .lighthouseci/
+
+# --- Directus (CMS) ---
+# Real credentials, uploaded media and any local sqlite fallback stay out of git.
+directus/.env
+directus/.env.*
+!directus/.env.example
+directus/uploads/
+directus/extensions/*/node_modules/
+directus/database/
+directus/.directus/
