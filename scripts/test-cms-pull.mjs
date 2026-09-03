@@ -6,7 +6,8 @@
 //
 // Run: node scripts/test-cms-pull.mjs
 
-import { mapToContentKeys, planWrites, mapSeoRows } from './cms-pull.mjs';
+import { mapToContentKeys, planWrites } from './cms-pull.mjs';
+import { normaliseSeoRow, buildSeoMap } from './lib/seoRow.mjs';
 import { CONTENT_FIELDS, resolveContent, resolveList } from '../src/data/content.js';
 
 const fails = [];
@@ -182,68 +183,81 @@ check('every editable item in the brief has a content key', () => {
 
 
 // ------------------------------------------------------- per-URL SEO rows --
-const SEO_IN = [
-  { path: '/trade-show-displays/denver', seo_title: 'Denver title', seo_description: 'Denver description.',
-    h1: 'Trade Show Displays in Denver, CO', canonical_url: '', og_title: 'Denver OG', og_description: 'Denver OG desc.',
-    breadcrumb_title: 'Denver', schema_type: 'CollectionPage', robots_index: true,
-    faq_schema: [{ q: 'Do you ship to Denver?', a: 'Yes.' }, { q: '', a: 'orphan answer' }] },
-  { path: 'https://example.com/evil', seo_title: 'absolute URL' },
-  { path: '/blank-row' },
-  { path: '/hidden-page', seo_title: 'Hidden', robots_index: false }
-];
+// public.seo_overrides is written by TWO editors: the admin dashboard (title,
+// description, canonical, robots) and Directus (seo_title, seo_description,
+// canonical_url, robots_index). The prerenderer reads both.
 
-check('a valid SEO row maps every field across', () => {
-  const { rows } = mapSeoRows(SEO_IN);
-  const r = rows.find((x) => x.path === '/trade-show-displays/denver');
-  if (!r) return 'the valid row was dropped';
+const DASHBOARD_ROW = { path: '/a', title: 'Dashboard title', description: 'Dashboard description.' };
+const DIRECTUS_ROW = {
+  path: '/trade-show-displays/denver', status: 'published',
+  seo_title: 'Denver title', seo_description: 'Denver description.',
+  h1: 'Trade Show Displays in Denver, CO', canonical_url: '', og_title: 'Denver OG',
+  og_description: 'Denver OG desc.', breadcrumb_title: 'Denver', schema_type: 'CollectionPage',
+  robots_index: true, og_image: 'file-uuid',
+  faq_schema: [{ q: 'Do you ship to Denver?', a: 'Yes.' }, { q: '', a: 'orphan answer' }]
+};
+
+check('a Directus row maps every SEO field across', () => {
+  const r = normaliseSeoRow(DIRECTUS_ROW, 'https://cms.example.com');
   const expect = {
     title: 'Denver title', description: 'Denver description.', h1: 'Trade Show Displays in Denver, CO',
     og_title: 'Denver OG', og_description: 'Denver OG desc.', breadcrumb_title: 'Denver', schema_type: 'CollectionPage'
   };
   for (const [k, v] of Object.entries(expect)) if (r[k] !== v) return `${k} is ${JSON.stringify(r[k])}, expected ${JSON.stringify(v)}`;
+  if (r.og_image_path !== 'https://cms.example.com/assets/file-uuid') return `og image is ${r.og_image_path}`;
+  return null;
+});
+
+check('a dashboard row still works untouched', () => {
+  const r = normaliseSeoRow(DASHBOARD_ROW);
+  return r && r.title === 'Dashboard title' && r.description === 'Dashboard description.' ? null : JSON.stringify(r);
+});
+
+check('a blank Directus field never blanks the dashboard value in the same row', () => {
+  // Both editors share one row. An empty seo_title must leave title standing.
+  const r = normaliseSeoRow({ path: '/a', title: 'Dashboard title', seo_title: '', seo_description: '   ' });
+  if (r.title !== 'Dashboard title') return `title became ${JSON.stringify(r.title)}`;
   return null;
 });
 
 check('an incomplete FAQ pair is dropped rather than emitted half-formed', () => {
-  const { rows } = mapSeoRows(SEO_IN);
-  const r = rows.find((x) => x.path === '/trade-show-displays/denver');
+  const r = normaliseSeoRow(DIRECTUS_ROW);
   if (r.faq_schema.length !== 1) return `kept ${r.faq_schema.length} entries, expected 1`;
   if (r.faq_schema[0].question !== 'Do you ship to Denver?') return 'wrong entry kept';
   return null;
 });
 
-check('an absolute URL is refused as a path', () => {
-  const { rows, skipped } = mapSeoRows(SEO_IN);
-  if (rows.some((r) => r.path.includes('example.com'))) return 'an absolute URL was accepted';
-  if (!skipped.some((m) => m.includes('example.com'))) return 'it was dropped without saying so';
+check('a draft override never reaches the build', () => {
+  for (const status of ['draft', 'archived']) {
+    if (normaliseSeoRow({ ...DIRECTUS_ROW, status }) !== null) return `a ${status} row was applied`;
+  }
   return null;
 });
 
-check('a row with nothing filled in is skipped', () => {
-  const { rows, skipped } = mapSeoRows(SEO_IN);
-  if (rows.some((r) => r.path === '/blank-row')) return 'an empty override was written';
-  if (!skipped.some((m) => m.includes('/blank-row'))) return 'it was dropped silently';
+check('a row with nothing filled in is ignored', () =>
+  normaliseSeoRow({ path: '/blank', status: 'published' }) === null ? null : 'an empty override was applied');
+
+check('a page only leaves the index when someone asks', () => {
+  if (normaliseSeoRow(DIRECTUS_ROW).robots !== null) return 'an indexed page was given a robots value';
+  const off = normaliseSeoRow({ ...DIRECTUS_ROW, robots_index: false });
+  if (off.robots !== 'noindex, follow') return `robots is ${JSON.stringify(off.robots)}`;
+  const legacy = normaliseSeoRow({ path: '/x', seo_noindex: true });
+  if (legacy.robots !== 'noindex, follow') return 'the dashboard noindex flag was ignored';
   return null;
 });
 
-check('a page only leaves the index when explicitly unchecked', () => {
-  const { rows } = mapSeoRows(SEO_IN);
-  const hidden = rows.find((r) => r.path === '/hidden-page');
-  const indexed = rows.find((r) => r.path === '/trade-show-displays/denver');
-  if (hidden.robots !== 'noindex, follow') return `hidden page robots is ${JSON.stringify(hidden.robots)}`;
-  if (indexed.robots !== null) return 'an indexed page was given a robots value';
-  return null;
+check('a blank canonical stays null rather than pinning the page to an empty URL', () =>
+  normaliseSeoRow(DIRECTUS_ROW).canonical === null ? null : 'blank canonical was applied');
+
+check('a trailing slash is normalised so the path matches a route', () =>
+  normaliseSeoRow({ path: '/banner-stands/', seo_title: 'x' }).path === '/banner-stands' ? null : 'path not normalised');
+
+check('buildSeoMap keys by path and drops the rows it should', () => {
+  const map = buildSeoMap([DASHBOARD_ROW, DIRECTUS_ROW, { path: '/d', status: 'draft', seo_title: 'x' }, { path: '/e' }]);
+  const keys = Object.keys(map).sort();
+  return keys.join(',') === '/a,/trade-show-displays/denver' ? null : `kept ${keys.join(', ')}`;
 });
 
-check('a blank canonical stays null rather than pinning the page to an empty URL', () => {
-  const { rows } = mapSeoRows(SEO_IN);
-  return rows.find((r) => r.path === '/trade-show-displays/denver').canonical === null ? null : 'blank canonical was written';
-});
-
-check('a trailing slash is normalised so the path matches a route', () => {
-  const { rows } = mapSeoRows([{ path: '/banner-stands/', seo_title: 'x' }]);
-  return rows[0]?.path === '/banner-stands' ? null : `path is ${JSON.stringify(rows[0]?.path)}`;
-});
 
 if (fails.length) {
   console.error(`\n✗ CMS CONTENT PULL FAILED — ${fails.length}/${ran}:`);

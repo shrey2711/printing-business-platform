@@ -79,9 +79,10 @@ export async function loadSeoMap() {
     console.warn(`[build] could not load SEO overrides: ${error.message}`);
     return {};
   }
-  const map = {};
-  for (const row of data || []) map[row.path] = row;
-  return map;
+  // The dashboard and Directus write different columns of the same table, so
+  // read both here rather than having either write into the other's fields.
+  const { buildSeoMap } = await import('./lib/seoRow.mjs');
+  return buildSeoMap(data, process.env.DIRECTUS_URL);
 }
 
 // Pricing overrides as { slug: pricingBlock }, for baking overridden starting

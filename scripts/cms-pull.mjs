@@ -136,56 +136,6 @@ export function mapToContentKeys(d) {
   return out;
 }
 
-/**
- * Map published Directus seo_overrides rows onto the seo_overrides table the
- * prerenderer already reads. Only rows with a site-relative path are kept: an
- * absolute URL or a typo would create an override that silently never matches
- * a route, which is worse than no override because it looks configured.
- */
-export function mapSeoRows(rows, assetUrl = asset) {
-  const out = [];
-  const skipped = [];
-  for (const r of rows || []) {
-    const path = trim(r.path);
-    if (!path.startsWith('/') || path.includes('://')) {
-      skipped.push(`${JSON.stringify(r.path)} is not a site-relative path`);
-      continue;
-    }
-    const faq = (Array.isArray(r.faq_schema) ? r.faq_schema : [])
-      .filter((f) => f && (f.q || f.question) && (f.a || f.answer))
-      .map((f) => ({ question: trim(f.q || f.question), answer: trim(f.a || f.answer) }));
-
-    // robots_index defaults to true, so noindex only when explicitly turned off
-    // or the older seo_noindex flag is set. Nothing falls out of index by accident.
-    const noindex = r.seo_noindex === true || r.robots_index === false;
-
-    const row = {
-      path: path.replace(/\/+$/, '') || '/',
-      title: trim(r.seo_title) || null,
-      description: trim(r.seo_description) || null,
-      h1: trim(r.h1) || null,
-      canonical: trim(r.canonical_url) || null,
-      og_title: trim(r.og_title) || null,
-      og_description: trim(r.og_description) || null,
-      og_image_path: r.og_image ? assetUrl(r.og_image) : null,
-      breadcrumb_title: trim(r.breadcrumb_title) || null,
-      schema_type: trim(r.schema_type) || null,
-      faq_schema: faq.length ? faq : null,
-      robots: noindex ? 'noindex, follow' : null,
-      updated_at: new Date().toISOString()
-    };
-
-    // A row where every field is blank is an editor starting and not finishing.
-    // Writing it would pin the page to its generated values for no reason.
-    const meaningful = Object.entries(row).some(
-      ([k, v]) => !['path', 'updated_at'].includes(k) && v !== null
-    );
-    if (!meaningful) { skipped.push(`${row.path} has no values set`); continue; }
-    out.push(row);
-  }
-  return { rows: out, skipped };
-}
-
 /** Split mapped values into upserts and deletes, dropping unknown keys. */
 export function planWrites(mapped) {
   const writes = [];
@@ -248,17 +198,16 @@ const main = async () => {
 
   let d;
   try {
-    const [hero, featured, why, testimonials, cta, promos, settings, seo] = await Promise.all([
+    const [hero, featured, why, testimonials, cta, promos, settings] = await Promise.all([
       get('home_hero'),
       get(`home_featured_categories?${PUBLISHED}`),
       get(`home_why_choose_us?${PUBLISHED}`),
       get(`testimonials?${PUBLISHED}`),
       get('home_cta_banner'),
       get(`promo_banners?${PUBLISHED}`),
-      get('site_settings'),
-      get(`seo_overrides?${PUBLISHED_UNSORTED}`)
+      get('site_settings')
     ]);
-    d = { hero, featured, why, testimonials, cta, promos, settings, seo };
+    d = { hero, featured, why, testimonials, cta, promos, settings };
   } catch (e) {
     if (e instanceof AuthError) {
       console.error(`✗ ${e.message}`);
@@ -304,14 +253,11 @@ const main = async () => {
     const { error } = await supabase.from('content_overrides').delete().in('key', deletes);
     if (error) { console.error(`✗ cms-pull clear failed: ${error.message}`); process.exit(1); }
   }
-  // ---- per-URL SEO overrides ----
-  const { rows: seoRows, skipped: seoSkipped } = mapSeoRows(d.seo);
-  seoSkipped.forEach((m) => console.warn(`  ! SEO override skipped: ${m}`));
-  if (seoRows.length) {
-    const { error } = await supabase.from('seo_overrides').upsert(seoRows, { onConflict: 'path' });
-    if (error) { console.error(`✗ SEO override write failed: ${error.message}`); process.exitCode = 1; return; }
-    console.log(`✓ ${seoRows.length} per-URL SEO override(s) synced.`);
-  }
+  // Per-URL SEO overrides are NOT synced here. Directus manages
+  // public.seo_overrides directly — the same table the prerenderer reads — so an
+  // edit is already where the build needs it. Copying Directus's columns onto
+  // the dashboard's would blank a dashboard-set value whenever the matching
+  // Directus field was empty, since both editors share one row.
 
   console.log('✓ homepage and footer content synced from Directus.');
 };
