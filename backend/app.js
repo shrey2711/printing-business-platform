@@ -19,6 +19,7 @@ import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
 import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
 import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from './lib/pricingOverrides.js';
 import { subscribeContact, brevoConfigured, isEmail } from './lib/brevo.js';
+import { composePricing, priceShift } from './lib/pricingFromCms.js';
 
 dotenv.config();
 
@@ -1113,6 +1114,51 @@ app.put('/api/admin/pricing/:slug', writeLimiter, async (req, res) => {
   invalidatePricingCache();
   const rebuild = await triggerRebuild();
   res.json({ pricing: data.pricing, rebuild });
+});
+
+// Set a product's price from the CMS's friendly fields (base price, per-sqft
+// rate, tier price, add-on amount) instead of raw pricing JSON.
+//
+// This deliberately reuses the SAME path as the admin editor: compose ->
+// validatePricingBlock (which re-prices the product across every selection) ->
+// upsert -> audit -> cache invalidate -> rebuild. The CMS is another way in, not
+// another way around.
+//
+// A change beyond ±40% needs `confirm: true`, because the failure mode here is
+// mis-charging a customer rather than a broken page.
+app.put('/api/admin/pricing/:slug/simple', writeLimiter, async (req, res) => {
+  const ctx = await requireRole(req, res, 'admin');
+  if (!ctx) return;
+  const slug = req.params.slug;
+  const product = getProduct(slug);
+  if (!product) return res.status(404).json({ error: 'Unknown product.' });
+
+  const current = (await getPricingOverride(slug)) || product.pricing;
+  const composed = composePricing(current, req.body || {});
+  if (!composed.ok) return res.status(400).json({ error: composed.error });
+
+  const check = validatePricingBlock(slug, composed.pricing);
+  if (!check.ok) return res.status(400).json({ error: `Rejected: ${check.error}` });
+
+  const shift = priceShift(computePrice, slug, current, composed.pricing);
+  if (shift.comparable && Math.abs(shift.pct) > 40 && !req.body?.confirm) {
+    return res.status(409).json({
+      error: `That changes the price by ${shift.pct}% ($${shift.from} -> $${shift.to}). Re-send with confirm: true if that is intended.`,
+      shift
+    });
+  }
+
+  const { data, error } = await supabaseAdmin
+    .from('pricing_overrides')
+    .upsert({ slug, pricing: composed.pricing, updated_at: new Date().toISOString(), updated_by: ctx.user.id }, { onConflict: 'slug' })
+    .select()
+    .single();
+  if (error) return res.status(500).json({ error: error.message });
+
+  await supabaseAdmin.from('pricing_audit').insert({ actor: ctx.user.id, slug, before: current, after: composed.pricing });
+  invalidatePricingCache();
+  const rebuild = await triggerRebuild();
+  res.json({ ok: true, changes: composed.changes, shift, pricing: data.pricing, rebuild });
 });
 
 // Recent pricing changes, for the audit trail.
