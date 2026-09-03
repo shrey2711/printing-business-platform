@@ -45,10 +45,29 @@ cp .env.example .env
 
 Fill in:
 
-- `DB_HOST` / `DB_PASSWORD` — Supabase → Project Settings → Database →
-  Connection string. **Use the session connection on port 5432**, not the
-  transaction pooler on 6543: Directus runs migrations and needs prepared
-  statements, which the transaction pooler does not support.
+- `DB_HOST` / `DB_USER` / `DB_PASSWORD` — Supabase → Project Settings →
+  Database → Connection string → **Session pooler**. Copy the host and user
+  verbatim; do not assemble them by hand.
+
+  **Use the session pooler on port 5432**, not the transaction pooler on 6543:
+  Directus runs migrations and needs prepared statements, which the transaction
+  pooler does not support. Do not use the direct connection
+  (`db.<ref>.supabase.co`) — it is IPv6-only on current projects and does not
+  resolve from most Docker networks.
+
+  Two failure modes worth recognising:
+
+  | Error | Cause |
+  | --- | --- |
+  | `tenant/user postgres.<ref> not found` | Wrong instance number or region in the host. Ours is `aws-1-us-east-2`, not `aws-0`. |
+  | `no tenant identifier provided` | `DB_USER` is plain `postgres`. It must be `postgres.<project-ref>`. |
+  | Auth fails with a password you know is right | The file was saved with CRLF endings. Docker's `env_file` parser carries the trailing CR into the value. Save as LF. |
+
+  Verify before starting Docker:
+
+  ```bash
+  node scripts/check-directus-db.mjs
+  ```
 - `KEY` and `SECRET` — two separate random values:
   ```bash
   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
