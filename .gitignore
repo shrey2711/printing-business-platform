@@ -25,3 +25,5 @@ directus/uploads/
 directus/extensions/*/node_modules/
 directus/database/
 directus/.directus/
+directus/.directus*
+directus/*.txt
