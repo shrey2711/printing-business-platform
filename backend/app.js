@@ -422,6 +422,18 @@ async function requireAdmin(req, res) {
   return ctx ? ctx.user : null;
 }
 
+// Order handling, for the "staff" role. requireRole always admits an admin, so
+// this is admin-or-staff.
+//
+// Deliberately separate from requireAdmin: order records carry customer names,
+// addresses and payment references, so the people who edit site copy should not
+// see them by virtue of being able to edit copy. A content manager has no order
+// access and a staff member has no content access; only an admin has both.
+async function requireOrderAccess(req, res) {
+  const ctx = await requireRole(req, res, 'staff');
+  return ctx ? ctx.user : null;
+}
+
 // Identity + role for the current caller, so the dashboard can show the right
 // tabs. Never errors on auth — an anonymous caller just gets role: null.
 app.get('/api/me', async (req, res) => {
@@ -432,7 +444,7 @@ app.get('/api/me', async (req, res) => {
 });
 
 app.get('/api/admin/orders', async (req, res) => {
-  const admin = await requireAdmin(req, res);
+  const admin = await requireOrderAccess(req, res);
   if (!admin) return;
   const { data, error } = await supabaseAdmin
     .from('orders')
@@ -464,7 +476,7 @@ app.get('/api/admin/orders', async (req, res) => {
 });
 
 app.delete('/api/admin/orders/:id', async (req, res) => {
-  const admin = await requireAdmin(req, res);
+  const admin = await requireOrderAccess(req, res);
   if (!admin) return;
   const { data: order } = await supabaseAdmin
     .from('orders')
@@ -480,7 +492,7 @@ app.delete('/api/admin/orders/:id', async (req, res) => {
 });
 
 app.patch('/api/admin/orders/:id', async (req, res) => {
-  const admin = await requireAdmin(req, res);
+  const admin = await requireOrderAccess(req, res);
   if (!admin) return;
   const allowed = [
     'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
@@ -589,7 +601,7 @@ async function createInvoiceForOrder(order) {
 
 // Admin re-send / manual invoice button.
 app.post('/api/admin/orders/:id/invoice', writeLimiter, async (req, res) => {
-  const admin = await requireAdmin(req, res);
+  const admin = await requireOrderAccess(req, res);
   if (!admin) return;
   const { data: order } = await supabaseAdmin.from('orders').select('*').eq('id', req.params.id).single();
   if (!order) return res.status(404).json({ error: 'Order not found.' });
