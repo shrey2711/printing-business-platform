@@ -47,10 +47,19 @@ const supabase =
 const asset = (id) => (id ? `${DIRECTUS_URL}/assets/${id}` : '');
 const trim = (v) => (typeof v === 'string' ? v.trim() : v == null ? '' : v);
 
+// An authentication failure is NOT an outage. A wrong or expired token will
+// never recover on its own, so treating it like a temporary blip means every
+// future build silently ships stale content. Marked so the caller can fail the
+// deploy instead of degrading.
+class AuthError extends Error {}
+
 async function get(path) {
   const res = await fetch(`${DIRECTUS_URL}/items/${path}`, {
     headers: { Authorization: `Bearer ${DIRECTUS_TOKEN}` }
   });
+  if (res.status === 401 || res.status === 403) {
+    throw new AuthError(`Directus rejected the token (HTTP ${res.status} on ${path.split('?')[0]})`);
+  }
   if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
   return (await res.json()).data;
 }
@@ -196,7 +205,14 @@ const main = async () => {
     ]);
     d = { hero, featured, why, testimonials, cta, promos, settings };
   } catch (e) {
-    // Rule 1: an outage must not blank the site.
+    if (e instanceof AuthError) {
+      console.error(`✗ ${e.message}`);
+      console.error('  DIRECTUS_TOKEN is wrong, expired, or was pasted with the "DIRECTUS_TOKEN=" prefix or a stray');
+      console.error('  newline. Copy only the value. Regenerate it with directus/scripts/create-sync-token.mjs.');
+      if (IS_CI) process.exitCode = 1;
+      return;
+    }
+    // Rule 1: a genuine outage must not blank the site or fail a deploy.
     console.warn(`[cms-pull] Directus unreachable (${e.message}) — keeping existing content unchanged.`);
     return;
   }
