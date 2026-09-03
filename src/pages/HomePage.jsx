@@ -185,13 +185,30 @@ export default function HomePage() {
               <li>One supplier for your booth</li>
             </ul>
           </div>
-          {/* Booth collage — displays we print, in a range of customer brands */}
-          <div className="hero-collage" aria-label="Trade show displays Apex prints in any brand: canopy, table cover, banner and backdrop">
-            <div className="hc-tile hc-canopy"><TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" /></div>
-            <div className="hc-tile"><img src="/images/showcase/tablecover-corner-cafe.webp" alt="Custom printed table cover for a customer's brand" loading="eager" fetchpriority="high" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><img src="/images/showcase/xstand-sunset-yoga.webp" alt="Custom printed banner for a customer's brand" loading="eager" decoding="async" width="600" height="450" /></div>
-            <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Custom step & repeat backdrop" loading="eager" decoding="async" width="600" height="450" /></div>
-          </div>
+          {/* A hero image set in the CMS replaces the product collage. The
+              collage is the default because it shows four real products; a
+              single uploaded image is the override, not the other way round. */}
+          {c('home.hero.image') ? (
+            <div className="hero-image">
+              <img
+                src={c('home.hero.image')}
+                alt={c('home.hero.imageAlt') || c('home.hero.title')}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                width="1200"
+                height="900"
+              />
+            </div>
+          ) : (
+            // Booth collage — displays we print, in a range of customer brands
+            <div className="hero-collage" aria-label="Trade show displays Apex prints in any brand: canopy, table cover, banner and backdrop">
+              <div className="hc-tile hc-canopy"><TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" /></div>
+              <div className="hc-tile"><img src="/images/showcase/tablecover-corner-cafe.webp" alt="Custom printed table cover for a customer's brand" loading="eager" fetchpriority="high" decoding="async" width="600" height="450" /></div>
+              <div className="hc-tile"><img src="/images/showcase/xstand-sunset-yoga.webp" alt="Custom printed banner for a customer's brand" loading="eager" decoding="async" width="600" height="450" /></div>
+              <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Custom step & repeat backdrop" loading="eager" decoding="async" width="600" height="450" /></div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -475,7 +492,9 @@ export default function HomePage() {
       <section className="turnaround-band">
         <p className="turn-main">{c('home.cta.main')}</p>
         <p className="turn-sub">{c('home.cta.sub')}</p>
-        <Link className="btn btn-red" to="/products">Shop all displays</Link>
+        <Link className="btn btn-red" to={c('home.cta.href') || '/products'}>
+          {c('home.cta.label') || 'Shop all displays'}
+        </Link>
       </section>
     </>
   );

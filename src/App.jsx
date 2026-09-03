@@ -31,7 +31,7 @@ import Logo from './components/Logo';
 import ChunkErrorBoundary from './components/ChunkErrorBoundary';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
-import { useContentResolver } from './context/ContentContext';
+import { useContentResolver, useListResolver } from './context/ContentContext';
 
 // Shop menu — grouped by the real categories, one level deep, every link a real
 // destination (category filter or product page). Shared by the desktop dropdown
@@ -307,6 +307,7 @@ function Footer() {
   // so clearing a field in the CMS restores the shipped value rather than
   // leaving a hole.
   const c = useContentResolver();
+  const list = useListResolver();
   const phone = c('footer.phone') || brand.phone;
   const email = c('footer.email') || brand.email;
   return (
@@ -369,6 +370,15 @@ function Footer() {
           <p className="ft-muted">Email:</p>
           <p><a href={`mailto:${email}`}>{email}</a></p>
           <p><a href={`tel:${c('footer.phone') ? phone.replace(/[^0-9+]/g, '') : brand.phoneHref}`}>{phone}</a></p>
+          {list('footer.social').length > 0 && (
+            <div className="ft-social">
+              {list('footer.social')
+                .filter((sn) => sn.label && sn.url)
+                .map((sn) => (
+                  <a key={sn.url} href={sn.url} rel="noopener noreferrer" target="_blank">{sn.label}</a>
+                ))}
+            </div>
+          )}
         </div>
       </div>
       <div className="footer-legal">

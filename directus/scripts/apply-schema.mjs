@@ -186,7 +186,8 @@ const COLLECTIONS = [
     fields: [
       F.string('headline'), F.text('subheadline'),
       F.string('button_text'), F.string('button_link'),
-      F.file('background_image')
+      F.file('background_image'),
+      F.string('background_image_alt', { meta: { note: 'Describes the hero image for screen readers and search. Leave blank to fall back to the headline.' } })
     ]
   },
   {

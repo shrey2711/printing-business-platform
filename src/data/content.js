@@ -31,6 +31,8 @@ export const CONTENT_FIELDS = [
     label: 'Home — closing headline',
     default: 'Most canopies are produced in 6–8 business days after proof approval'
   },
+  { key: 'home.cta.label', label: 'Home — closing button text', default: 'Shop all displays' },
+  { key: 'home.cta.href', label: 'Home — closing button link', default: '/products' },
   {
     key: 'home.cta.sub',
     label: 'Home — closing subtext',
@@ -52,6 +54,7 @@ CONTENT_FIELDS.push(
   { key: 'home.hero.cta2.label', label: 'Home — hero secondary button text', default: 'Request a quote' },
   { key: 'home.hero.cta2.href', label: 'Home — hero secondary button link', default: '/quote' },
   { key: 'home.hero.image', label: 'Home — hero image (leave blank to keep the product collage)', default: '' },
+  { key: 'home.hero.imageAlt', label: 'Home — hero image alt text (describe the image for screen readers and search)', default: '' },
 
   // Promotional strip. Empty message = the strip does not render at all.
   { key: 'home.promo.message', label: 'Home — promotional strip message', default: '' },
@@ -119,7 +122,10 @@ CONTENT_FIELDS.push(
   { key: 'footer.blurb', label: 'Footer — blurb under the logo', default: '' },
   { key: 'footer.hours', label: 'Footer — customer service hours', default: '' },
   { key: 'footer.phone', label: 'Footer — phone', default: '' },
-  { key: 'footer.email', label: 'Footer — email', default: '' }
+  { key: 'footer.email', label: 'Footer — email', default: '' },
+  // Social links. Empty by default: a link to an account that does not exist is
+  // worse than no link, so these appear only once real profiles are supplied.
+  { key: 'footer.social', label: 'Footer — social links (label + url)', type: 'list', default: [] }
 );
 
 // Fast lookup of a field's default by key.

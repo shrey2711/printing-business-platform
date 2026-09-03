@@ -22,7 +22,10 @@ const check = (name, fn) => {
 };
 
 const FULL = {
-  hero: { headline: 'New headline', subheadline: '  padded sub  ', button_text: 'Go', button_link: '/products' },
+  hero: {
+    headline: 'New headline', subheadline: '  padded sub  ', button_text: 'Go', button_link: '/products',
+    background_image: 'file-id', background_image_alt: 'A printed booth'
+  },
   featured: [
     { title: 'Canopies', link: '/custom-canopies', image: 'abc' },
     { title: '', link: '/broken' },
@@ -34,9 +37,12 @@ const FULL = {
     { name: '', review: 'anonymous praise' },
     { name: 'Nameless', review: '' }
   ],
-  cta: { headline: 'Ready?', description: 'Start your booth.' },
+  cta: { headline: 'Ready?', description: 'Start your booth.', button_text: 'Shop now', button_link: '/products' },
   promos: [{ placement: 'site_wide', message: '10% off', link: '/sale', cta_label: 'Shop' }],
-  settings: { brand_phone: '555-0100', brand_email: 'hi@example.com', footer_blurb: '' }
+  settings: {
+    brand_phone: '555-0100', brand_email: 'hi@example.com', footer_blurb: '',
+    social_links: [{ label: 'Instagram', url: 'https://example.com/ig' }, { label: 'No URL', url: '' }]
+  }
 };
 
 check('hero values map across and are trimmed', () => {
@@ -122,6 +128,56 @@ check('an empty featured list keeps the shipped categories', () => {
   if ('home.featured.items' in m) return 'an empty category list was emitted';
   if (resolveList({}, 'home.featured.items').length < 5) return 'the shipped category default is thin';
   return null;
+});
+
+check('an uploaded hero image maps to a full asset URL with its alt text', () => {
+  const m = mapToContentKeys(FULL);
+  if (!/\/assets\/file-id$/.test(m['home.hero.image'])) return `not an asset URL: ${m['home.hero.image']}`;
+  if (m['home.hero.imageAlt'] !== 'A printed booth') return `alt not carried: ${m['home.hero.imageAlt']}`;
+  return null;
+});
+
+check('no hero image means the product collage stays', () => {
+  const m = mapToContentKeys({ ...FULL, hero: { headline: 'x' } });
+  const { writes, deletes } = planWrites(m);
+  if (writes.some((w) => w.key === 'home.hero.image')) return 'an empty image URL was published';
+  if (!deletes.includes('home.hero.image')) return 'the hero image key was not cleared';
+  return null;
+});
+
+check('the closing CTA button maps across', () => {
+  const m = mapToContentKeys(FULL);
+  if (m['home.cta.label'] !== 'Shop now') return `label: ${m['home.cta.label']}`;
+  if (m['home.cta.href'] !== '/products') return `href: ${m['home.cta.href']}`;
+  return null;
+});
+
+check('a social link without a URL is dropped', () => {
+  const m = mapToContentKeys(FULL);
+  const social = m['footer.social'];
+  if (social.length !== 1) return `expected 1 link, got ${JSON.stringify(social)}`;
+  if (social[0].label !== 'Instagram') return `wrong link kept: ${JSON.stringify(social[0])}`;
+  return null;
+});
+
+check('no social links means no social row', () => {
+  const m = mapToContentKeys({ ...FULL, settings: {} });
+  const { writes, deletes } = planWrites(m);
+  if (writes.some((w) => w.key === 'footer.social')) return 'an empty social list was written';
+  if (!deletes.includes('footer.social')) return 'the social key was not cleared';
+  if (resolveList({}, 'footer.social').length !== 0) return 'the shipped default is not an empty list';
+  return null;
+});
+
+check('every editable item in the brief has a content key', () => {
+  const declared = new Set(CONTENT_FIELDS.map((f) => f.key));
+  const required = [
+    'home.hero.title', 'home.hero.image', 'home.hero.cta.label', 'home.promo.message',
+    'home.featured.items', 'home.bestsellers.items', 'home.why.items', 'home.reviews.items',
+    'home.cta.main', 'home.cta.label', 'footer.blurb', 'footer.phone', 'footer.email'
+  ];
+  const missing = required.filter((k) => !declared.has(k));
+  return missing.length ? `missing: ${missing.join(', ')}` : null;
 });
 
 if (fails.length) {

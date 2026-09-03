@@ -260,7 +260,9 @@ routes.push(() => {
       'Custom trade show displays from one supplier: canopy tents, banner stands, backdrops, table covers, flags. Instant pricing, free artwork proof, US & Canada.',
     body,
     // Preload the home hero LCP image (matches the eager/fetchpriority tile in HomePage.jsx).
-    preloadImage: '/images/showcase/tablecover-corner-cafe.webp',
+    // Preload the LCP image: the CMS hero image when one is set, otherwise the
+    // eager collage tile that HomePage.jsx renders.
+    preloadImage: cms('home.hero.image') || '/images/showcase/tablecover-corner-cafe.webp',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',

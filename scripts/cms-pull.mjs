@@ -58,6 +58,9 @@ export function mapToContentKeys(d) {
   set('home.hero.cta.label', trim(hero.button_text));
   set('home.hero.cta.href', trim(hero.button_link));
   set('home.hero.image', hero.background_image ? asset(hero.background_image) : '');
+  // Alt text is its own field on home_hero rather than the file's Title, so an
+  // image reused elsewhere can still be described for its use in the hero.
+  set('home.hero.imageAlt', trim(hero.background_image_alt));
 
   // Promo strip: the first live banner placed site-wide or on the home hero.
   // A banner outside its date window is treated as absent.
@@ -92,11 +95,20 @@ export function mapToContentKeys(d) {
   const cta = d.cta || {};
   set('home.cta.main', trim(cta.headline));
   set('home.cta.sub', trim(cta.description));
+  set('home.cta.label', trim(cta.button_text));
+  set('home.cta.href', trim(cta.button_link));
 
   const s = d.settings || {};
   set('footer.blurb', trim(s.footer_blurb));
   set('footer.phone', trim(s.brand_phone));
   set('footer.email', trim(s.brand_email));
+
+  // Social links: both a label and a URL, or the row is dropped rather than
+  // rendering a link that goes nowhere.
+  const social = (Array.isArray(s.social_links) ? s.social_links : [])
+    .filter((l) => trim(l.label) && trim(l.url))
+    .map((l) => ({ label: trim(l.label), url: trim(l.url) }));
+  set('footer.social', social);
 
   return out;
 }
