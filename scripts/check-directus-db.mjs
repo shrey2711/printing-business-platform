@@ -74,21 +74,40 @@ if (problems.length) {
   process.exit(1);
 }
 
+// --- TLS ---------------------------------------------------------------------
+// Supabase's Postgres endpoint presents a self-signed chain, so verification
+// only works with its CA pinned. Honour whatever the env file asks for, so this
+// check exercises the SAME TLS settings the container will use.
+const wantsVerify = (env.DB_SSL__REJECT_UNAUTHORIZED || '').toLowerCase() !== 'false';
+const ca = env.DB_SSL__CA || '';
+// An env file cannot hold real newlines, so a PEM pasted into one arrives with
+// literal backslash-n; turn those back into line breaks before handing it to TLS.
+const ssl = ca
+  ? { ca: ca.split(String.raw`\n`).join('\n'), rejectUnauthorized: wantsVerify }
+  : { rejectUnauthorized: wantsVerify };
+
+if (!ca && !wantsVerify) {
+  // Not fatal — this is the documented local setting — but it must not travel
+  // to production, where this connection carries the database superuser
+  // password past anyone able to sit in the middle of it.
+  console.log('! TLS certificate verification is OFF (DB_SSL__REJECT_UNAUTHORIZED=false).');
+  console.log('  Fine locally. Before deploying, pin the CA: see directus/DEPLOY.md step 1b.');
+}
+if (!ca && wantsVerify) {
+  console.error('✗ DB_SSL__REJECT_UNAUTHORIZED is true but DB_SSL__CA is empty.');
+  console.error('  Supabase presents a self-signed chain, so verification needs its CA pinned.');
+  console.error('  Download it: Supabase -> Settings -> Database -> SSL Configuration.');
+  process.exit(1);
+}
+
 // --- live connection ---------------------------------------------------------
-// TLS runs with rejectUnauthorized:false because Supabase's Postgres endpoint
-// presents a certificate signed by its own CA, which Node does not carry. The
-// connection is still encrypted, but it is NOT protected against an active
-// man-in-the-middle. To verify properly, download the project's CA certificate
-// (Supabase -> Settings -> Database -> SSL configuration) and set:
-//   ssl: { ca: readFileSync('prod-ca-2021.crt'), rejectUnauthorized: true }
-// and DB_SSL__CA in directus/.env alongside it.
 const client = new pg.Client({
   host: env.DB_HOST,
   port: Number(env.DB_PORT) || 5432,
   database: env.DB_DATABASE || 'postgres',
   user: env.DB_USER,
   password: env.DB_PASSWORD,
-  ssl: { rejectUnauthorized: false },
+  ssl,
   connectionTimeoutMillis: 15000
 });
 
@@ -96,7 +115,7 @@ const schema = (env.DB_SEARCH_PATH || 'directus').split(',')[0].trim();
 
 try {
   await client.connect();
-  console.log(`✓ connected to ${env.DB_HOST}:${env.DB_PORT}`);
+  console.log(`✓ connected to ${env.DB_HOST}:${env.DB_PORT}${ca && wantsVerify ? ' (certificate verified against the pinned CA)' : ''}`);
 
   const v = await client.query('select version()');
   console.log(`   ${v.rows[0].version.split(',')[0]}`);

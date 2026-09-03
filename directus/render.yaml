@@ -29,8 +29,16 @@ services:
         sync: false        # postgres.<project-ref>, not plain postgres
       - key: DB_PASSWORD
         sync: false
+      # Supabase's pooler presents a self-signed chain, so verification needs
+      # their CA pinned. Both of these go together: setting REJECT_UNAUTHORIZED
+      # true WITHOUT the CA breaks the connection, and setting it false ships
+      # the database password over a connection open to an active
+      # man-in-the-middle. Get the PEM from Supabase -> Settings -> Database ->
+      # SSL Configuration -> Download certificate, and paste its contents.
       - key: DB_SSL__REJECT_UNAUTHORIZED
-        value: "false"
+        value: "true"
+      - key: DB_SSL__CA
+        sync: false
       - key: DB_SEARCH_PATH
         value: directus,public
 

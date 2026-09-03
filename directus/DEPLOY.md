@@ -56,6 +56,30 @@ Do this **before** editors start uploading, or you will lose their work.
 
 ---
 
+## 1b. Pin the database certificate
+
+Locally, `DB_SSL__REJECT_UNAUTHORIZED=false` is tolerable. In production it is
+not: the connection carries the Postgres superuser password, and without
+verification an active man-in-the-middle can read it. Supabase's pooler presents
+a self-signed chain, so plain verification fails — the CA has to be pinned.
+
+Supabase -> Settings -> Database -> SSL Configuration -> Download certificate.
+Then set BOTH, together:
+
+```
+DB_SSL__REJECT_UNAUTHORIZED=true
+DB_SSL__CA=<the full PEM, ----BEGIN CERTIFICATE---- through ----END CERTIFICATE---->
+```
+
+Setting `true` without the CA breaks the connection; setting `false` is what you
+are trying to get away from. Verify after deploying:
+
+```bash
+node scripts/check-directus-db.mjs directus/.env.production
+```
+
+---
+
 ## 2. Deploy
 
 ### Railway
