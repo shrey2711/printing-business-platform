@@ -5,16 +5,10 @@ import ProductCard from '../components/ProductCard';
 import DisplayPhoto from '../components/DisplayPhoto';
 import TentPhoto from '../components/TentPhoto';
 import useDocumentMeta from '../hooks/useDocumentMeta';
-import { useContentResolver } from '../context/ContentContext';
+import { useContentResolver, useListResolver } from '../context/ContentContext';
 import { brand } from '../config/brand';
 import { SHOWCASE } from '../data/showcase';
 
-const trustBadges = [
-  { icon: '🖨️', title: 'Dye-sublimated print', copy: 'Ink bonded into the fabric — it will not crack, peel or fade.' },
-  { icon: '📐', title: 'Free artwork proof', copy: 'You approve a visual proof before anything goes to production.' },
-  { icon: '🎯', title: 'One supplier, one brand', copy: 'Canopy, banners, backdrop and table cover — printed to match.' },
-  { icon: '💬', title: 'Real people on support', copy: 'Talk to someone who knows trade show displays.' }
-];
 
 const solutions = [
   { icon: '🧺', title: 'Vendor & market booths', copy: 'Weekend markets and craft fairs where the booth is the storefront.' },
@@ -32,17 +26,6 @@ const solutions = [
 // deliberately use other colors/products).
 // Each card uses a DIFFERENT customer brand (from the showcase set) so the
 // range reads as "we print any brand", not all-Apex.
-const categoryCards = [
-  { title: 'Custom Canopies', copy: 'Printed pop-up tents & walls', to: '/custom-canopies', img: '/images/showcase/canopy-nova-tech.webp' },
-  { title: 'Banner Stands', copy: 'Retractable & X-stand banners', to: '/banner-stands', img: '/images/displays/standard-retractable-front-back.webp' },
-  { title: 'Banners', copy: 'Vinyl, mesh & fabric banners', to: '/banners', img: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg' },
-  { title: 'Table Covers', copy: 'Pleated & stretch throws', to: '/table-covers', img: '/images/showcase/tablecover-brightpath-dental.webp' },
-  { title: 'Backdrops', copy: 'Step & repeat media walls', to: '/backdrops', img: '/images/showcase/backdrop-oakwood.webp' },
-  { title: 'Flags', copy: 'Feather & teardrop flags', to: '/flags', img: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.webp' },
-  { title: 'SEG Modular Kits', copy: 'Illuminated modular booths', to: '/seg-displays', img: '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg' },
-  { title: 'Trade Show Displays', copy: 'Shop the complete range', to: '/trade-show-displays', img: '/images/showcase/canopy-harbor-realty.webp' },
-  { title: 'Accessories', copy: 'Weights, sandbags & hardware', to: '/products', img: '/images/tents/sandbags.webp' }
-];
 
 // Purpose-led discovery — maps a shopper's intent to a category landing page.
 const displayTypes = [
@@ -138,14 +121,6 @@ const homeFaqs = [
 ];
 
 // A mix across categories for product discovery (all real, in-database products).
-const featuredSlugs = [
-  'canopy-tent-10x10',
-  'standard-retractable-banner',
-  'pleated-table-covers',
-  'step-and-repeat-backdrop',
-  'x-stand-banner',
-  'table-top-banner-stand'
-];
 
 const sizeKey = (slug) => slug.replace('canopy-tent-', '');
 const cardPreview = {
@@ -157,6 +132,7 @@ const cardPreview = {
 export default function HomePage() {
   useDocumentMeta('Trade Show Displays, Canopies, Banners & Backdrops', brand.description);
   const c = useContentResolver();
+  const list = useListResolver();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -182,6 +158,7 @@ export default function HomePage() {
     ));
 
   const bySlug = new Map(products.map((p) => [p.slug, p]));
+  const featuredSlugs = list('home.bestsellers.items');
   const featured = featuredSlugs.map((s) => bySlug.get(s)).filter(Boolean);
   const canopyProducts = products.filter((p) => p.slug.startsWith('canopy-tent-'));
 
@@ -195,8 +172,12 @@ export default function HomePage() {
             <h1>{c('home.hero.title')}</h1>
             <p>{c('home.hero.subtitle')}</p>
             <div className="hero-actions">
-              <Link className="btn btn-red" to="/products">Shop Trade Show Displays</Link>
-              <Link className="btn btn-outline" to="/products?category=tents">Shop Custom Canopies</Link>
+              <Link className="btn btn-red" to={c('home.hero.cta.href') || '/products'}>
+                {c('home.hero.cta.label') || 'Shop Trade Show Displays'}
+              </Link>
+              <Link className="btn btn-outline" to={c('home.hero.cta2.href') || '/products?category=tents'}>
+                {c('home.hero.cta2.label') || 'Shop Custom Canopies'}
+              </Link>
             </div>
             <ul className="hero-ticks">
               <li>Canopies · banners · backdrops · table covers</li>
@@ -214,14 +195,25 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Promotional strip. Empty message = no strip at all, rather than an
+          empty band taking up the fold. */}
+      {c('home.promo.message') && (
+        <section className="promo-strip">
+          <p>{c('home.promo.message')}</p>
+          {c('home.promo.href') && c('home.promo.cta') && (
+            <Link className="btn btn-light btn-sm" to={c('home.promo.href')}>{c('home.promo.cta')}</Link>
+          )}
+        </section>
+      )}
+
       {/* Shop by category — signals the full range in the first screenful */}
       <section className="cat-cards-section">
         <div className="section-head">
-          <h2>Shop by category</h2>
+          <h2>{c('home.featured.title')}</h2>
           <p>Everything you need to build a professional trade show booth, from one supplier.</p>
         </div>
         <div className="cat-cards">
-          {categoryCards.map((cat) => (
+          {list('home.featured.items').map((cat) => (
             <Link className="cat-card" to={cat.to} key={cat.title}>
               <div className="cat-card-media">
                 {cat.img ? (
@@ -335,8 +327,8 @@ export default function HomePage() {
       {/* Product discovery — a mix across categories */}
       <section className="size-section">
         <div className="section-head">
-          <h2>Featured across the range</h2>
-          <p>A mix of what Apex prints for your booth.</p>
+          <h2>{c('home.bestsellers.title')}</h2>
+          <p>{c('home.bestsellers.subtitle')}</p>
         </div>
         <div className="pcard-grid">
           {loading
@@ -386,12 +378,12 @@ export default function HomePage() {
 
       {/* Trust badges */}
       <section className="trust-row">
-        {trustBadges.map((b) => (
+        {list('home.why.items').map((b) => (
           <div className="trust-badge" key={b.title}>
             <span className="trust-icon" aria-hidden="true">{b.icon}</span>
             <div>
               <strong>{b.title}</strong>
-              <p>{b.copy}</p>
+              <p>{b.description || b.copy}</p>
             </div>
           </div>
         ))}
@@ -459,6 +451,25 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Reviews. Renders ONLY when genuine reviews have been published, and
+          deliberately emits no Review/AggregateRating schema — see the rule in
+          src/data/socialProof.js. */}
+      {list('home.reviews.items').length > 0 && (
+        <section className="reviews-section">
+          <div className="section-head"><h2>{c('home.reviews.title')}</h2></div>
+          <div className="reviews-grid">
+            {list('home.reviews.items').map((r, i) => (
+              <figure className="review-card" key={`${r.name || 'review'}-${i}`}>
+                <blockquote>{r.review}</blockquote>
+                <figcaption>
+                  {r.name}{r.company ? `, ${r.company}` : ''}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Closing CTA */}
       <section className="turnaround-band">

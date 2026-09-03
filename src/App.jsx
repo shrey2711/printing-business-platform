@@ -31,6 +31,7 @@ import Logo from './components/Logo';
 import ChunkErrorBoundary from './components/ChunkErrorBoundary';
 import { brand, currencyCodes } from './config/brand';
 import { useCurrency } from './context/CurrencyContext';
+import { useContentResolver } from './context/ContentContext';
 
 // Shop menu — grouped by the real categories, one level deep, every link a real
 // destination (category filter or product page). Shared by the desktop dropdown
@@ -302,6 +303,12 @@ function HeaderNav() {
 }
 
 function Footer() {
+  // Editable footer text. Each key falls back to the brand default when blank,
+  // so clearing a field in the CMS restores the shipped value rather than
+  // leaving a hole.
+  const c = useContentResolver();
+  const phone = c('footer.phone') || brand.phone;
+  const email = c('footer.email') || brand.email;
   return (
     <footer className="site-footer">
       <div className="footer-rainbow" />
@@ -310,7 +317,7 @@ function Footer() {
           <span className="ft-logo">
             <img src="/images/logo.webp" alt={brand.name} width="203" height="46" />
           </span>
-          <p className="ft-blurb">{brand.description}</p>
+          <p className="ft-blurb">{c('footer.blurb') || brand.description}</p>
           <EmailCapture variant="footer" source="footer" />
         </div>
         <div>
@@ -358,10 +365,10 @@ function Footer() {
         <div>
           <h4>Contact</h4>
           <p className="ft-muted">Customer Service Hours:</p>
-          <p>{brand.hours}</p>
+          <p>{c('footer.hours') || brand.hours}</p>
           <p className="ft-muted">Email:</p>
-          <p><a href={`mailto:${brand.email}`}>{brand.email}</a></p>
-          <p><a href={`tel:${brand.phoneHref}`}>{brand.phone}</a></p>
+          <p><a href={`mailto:${email}`}>{email}</a></p>
+          <p><a href={`tel:${c('footer.phone') ? phone.replace(/[^0-9+]/g, '') : brand.phoneHref}`}>{phone}</a></p>
         </div>
       </div>
       <div className="footer-legal">

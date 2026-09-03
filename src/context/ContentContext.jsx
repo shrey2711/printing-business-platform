@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { resolveContent } from '../data/content';
+import { resolveContent, resolveList } from '../data/content';
 
 // Fetches dashboard content overrides once and exposes useContent(key), which
 // returns the override or the hardcoded default. Prerendered HTML already has
@@ -40,4 +40,11 @@ export function useContent(key) {
 export function useContentResolver() {
   const { overrides } = useContext(ContentContext);
   return (key) => resolveContent(overrides, key);
+}
+
+// A resolver for LIST fields (featured cards, why-us cards, reviews):
+// const list = useListResolver(); list('home.featured.items')
+export function useListResolver() {
+  const { overrides } = useContext(ContentContext);
+  return (key) => resolveList(overrides, key);
 }

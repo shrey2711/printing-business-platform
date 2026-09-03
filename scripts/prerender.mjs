@@ -33,7 +33,7 @@ import { cityDetailFor } from '../src/data/cityDetail.js';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
 import { guidesForCategory, productsForGuide, CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
-import { resolveContent } from '../src/data/content.js';
+import { resolveContent, resolveList } from '../src/data/content.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
@@ -88,6 +88,12 @@ const FOOTER = `<nav aria-label="Company">
 // Populated by top-level await before the render loop runs.
 let seoMap = {};
 let contentMap = {};
+
+// Editable copy, resolved against the same defaults the React app uses, so the
+// prerendered HTML a crawler sees matches what a visitor sees. Routes run after
+// contentMap is loaded, so these are safe to call inside a route builder.
+const cms = (key) => resolveContent(contentMap, key);
+const cmsList = (key) => resolveList(contentMap, key);
 
 function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt, preloadImage }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
@@ -211,22 +217,17 @@ const HOME_FAQS = [
 // ---- Home ----
 routes.push(() => {
   const body = `
-    <h1>Custom Trade Show Displays, Banner Stands &amp; Canopy Tents Across the USA</h1>
-    <p>${esc(BRAND)} is your one supplier for a professional trade show booth — custom canopy tents,
-    retractable banner stands, step &amp; repeat backdrops, table covers and event branding
-    accessories, all in your brand. Instant online pricing on canopies, a free artwork proof on every
-    order. ${esc(brand.shippingBlurb)}.</p>
-    <h2>Shop by category</h2>
-    <ul>
-      <li><a href="/custom-canopies">Custom Canopy Tents</a> — printed pop-up tents &amp; walls</li>
-      <li><a href="/banner-stands">Banner Stands</a> — retractable &amp; X-stand banners</li>
-      <li><a href="/banners">Banners</a> — vinyl, mesh &amp; fabric banners</li>
-      <li><a href="/backdrops">Backdrops</a> — step &amp; repeat media walls</li>
-      <li><a href="/table-covers">Table Covers</a> — pleated &amp; stretch throws</li>
-      <li><a href="/flags">Flags</a> — feather &amp; teardrop flags</li>
-      <li><a href="/seg-displays">SEG Modular Kits</a> — illuminated modular booths</li>
-      <li><a href="/products">All products</a> — the complete range</li>
-    </ul>
+    <h1>${esc(cms('home.hero.title'))}</h1>
+    <p>${esc(cms('home.hero.subtitle'))}</p>
+    ${cms('home.promo.message') ? `<p><strong>${esc(cms('home.promo.message'))}</strong>${
+      cms('home.promo.href') && cms('home.promo.cta')
+        ? ` <a href="${esc(cms('home.promo.href'))}">${esc(cms('home.promo.cta'))}</a>` : ''}</p>` : ''}
+    <h2>${esc(cms('home.featured.title'))}</h2>
+    <ul>${cmsList('home.featured.items').map((cat) =>
+      `<li><a href="${esc(cat.to || cat.href || '/products')}">${esc(cat.title || cat.label || '')}</a>${
+        cat.copy || cat.blurb ? ` — ${esc(cat.copy || cat.blurb)}` : ''}</li>`).join('')}${
+      cmsList('home.featured.items').some((cat) => (cat.to || cat.href) === '/products')
+        ? '' : '<li><a href="/products">All products</a> — the complete range</li>'}</ul>
     <h2>Custom canopy tents</h2>
     <ul>${coreProducts.map(productLi).join('')}</ul>
     ${displayProducts.length ? `<h2>Banner stands &amp; backdrops</h2>
@@ -244,6 +245,11 @@ routes.push(() => {
     <ul>${HOME_GUIDES.map((g) => `<li><a href="${g.to}">${esc(g.title)}</a></li>`).join('')}</ul>
     <h2>Trade show displays by city</h2>
     <ul>${HOME_CITIES.map(([l, s]) => `<li><a href="/trade-show-displays/${s}">Trade show displays in ${esc(l)}</a></li>`).join('')}</ul>
+    ${cmsList('home.why.items').length ? `<h2>${esc(cms('home.why.title'))}</h2>
+    ${cmsList('home.why.items').map((w) => `<h3>${esc(w.title)}</h3><p>${esc(w.description)}</p>`).join('')}` : ''}
+    ${cmsList('home.reviews.items').length ? `<h2>${esc(cms('home.reviews.title'))}</h2>
+    ${cmsList('home.reviews.items').map((r) => `<blockquote><p>${esc(r.review)}</p><cite>${esc(r.name)}${
+      r.company ? `, ${esc(r.company)}` : ''}</cite></blockquote>`).join('')}` : ''}
     <h2>Frequently asked questions</h2>
     ${HOME_FAQS.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
   return render({

@@ -5,6 +5,14 @@ import { listContent, saveContent } from '../../services/adminCms';
 // Edit site copy. Each field shows its current value (override or the built-in
 // default) and saves an override; clearing a field reverts to the default.
 // Text-content changes show on the site within ~60s — no rebuild needed.
+// List fields (category cards, why-us cards, reviews) hold an array. They are
+// edited here as JSON text and parsed back on save; anything that is not a
+// valid array is refused rather than written, since a malformed value would
+// otherwise reach the live homepage.
+const isList = (field) => field.type === 'list';
+const asText = (field, value) =>
+  isList(field) ? JSON.stringify(value ?? [], null, 2) : value ?? '';
+
 export default function ContentTab({ onError, onFlash }) {
   const [overrides, setOverrides] = useState({});
   const [values, setValues] = useState({});
@@ -19,7 +27,7 @@ export default function ContentTab({ onError, onFlash }) {
         setOverrides(map);
         // Seed inputs with override-or-default.
         const seed = {};
-        for (const f of CONTENT_FIELDS) seed[f.key] = map[f.key] ?? f.default;
+        for (const f of CONTENT_FIELDS) seed[f.key] = asText(f, map[f.key] ?? f.default);
         setValues(seed);
       })
       .catch((e) => onError(e.message))
@@ -28,11 +36,30 @@ export default function ContentTab({ onError, onFlash }) {
   }, []);
 
   const save = async (field) => {
-    const value = values[field.key];
+    const raw = values[field.key];
+    let value = raw;
+    if (isList(field)) {
+      if (String(raw).trim() === '') value = [];
+      else {
+        try {
+          value = JSON.parse(raw);
+        } catch {
+          onError(`${field.label}: that is not valid JSON — the change was not saved.`);
+          return;
+        }
+        if (!Array.isArray(value)) {
+          onError(`${field.label}: expected a list (a JSON array) — the change was not saved.`);
+          return;
+        }
+      }
+    }
     setSavingKey(field.key);
     try {
       // Saving the exact default clears the override (keeps the DB clean).
-      const toSave = value === field.default ? '' : value;
+      const isDefault = isList(field)
+        ? JSON.stringify(value) === JSON.stringify(field.default)
+        : value === field.default;
+      const toSave = isDefault ? '' : value;
       await saveContent(field.key, toSave);
       setOverrides((prev) => {
         const next = { ...prev };
@@ -48,7 +75,7 @@ export default function ContentTab({ onError, onFlash }) {
     }
   };
 
-  const revert = (field) => setValues((v) => ({ ...v, [field.key]: field.default }));
+  const revert = (field) => setValues((v) => ({ ...v, [field.key]: asText(field, field.default) }));
 
   if (loading) return <p className="muted">Loading content…</p>;
 
@@ -68,8 +95,9 @@ export default function ContentTab({ onError, onFlash }) {
                 <label>{field.label}</label>
                 {overridden && <span className="cms-tag-custom">customized</span>}
               </div>
-              {field.multiline ? (
+              {field.multiline || isList(field) ? (
                 <textarea
+                  rows={isList(field) ? 10 : undefined}
                   value={values[field.key] ?? ''}
                   onChange={(e) => setValues((v) => ({ ...v, [field.key]: e.target.value }))}
                 />

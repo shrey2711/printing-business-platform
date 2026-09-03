@@ -479,7 +479,9 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 /* ---------- Trust badges ---------- */
 .trust-row {
   max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  /* The card count is editable in the CMS, so the track count follows the
+     content instead of being pinned at four. */
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem;
 }
 .trust-badge {
   display: flex; gap: 0.8rem; align-items: flex-start;
@@ -488,6 +490,26 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .trust-icon { font-size: 1.5rem; line-height: 1; }
 .trust-badge strong { display: block; color: var(--navy); font-size: 0.92rem; margin-bottom: 0.15rem; }
 .trust-badge p { margin: 0; font-size: 0.8rem; color: var(--muted); }
+
+/* ---------- Promotional strip (CMS-controlled; absent when no message) ---------- */
+.promo-strip {
+  display: flex; align-items: center; justify-content: center; gap: 0.9rem; flex-wrap: wrap;
+  background: var(--navy); color: #fff; padding: 0.75rem 1.5rem; text-align: center;
+}
+.promo-strip p { margin: 0; font-size: 0.95rem; font-weight: 600; }
+.btn-light { background: #fff; color: var(--navy); border: 1px solid #fff; }
+.btn-light:hover { background: #f1f5f9; }
+.btn-sm { padding: 0.35rem 0.85rem; font-size: 0.85rem; }
+
+/* ---------- Customer reviews (rendered only when real reviews exist) ---------- */
+.reviews-section { max-width: 1400px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.review-card {
+  margin: 0; background: var(--panel); border-radius: 10px; padding: 1.2rem 1.3rem;
+  display: flex; flex-direction: column; gap: 0.7rem;
+}
+.review-card blockquote { margin: 0; color: var(--navy); font-size: 0.95rem; line-height: 1.55; }
+.review-card figcaption { color: var(--muted); font-size: 0.85rem; font-weight: 600; }
 
 /* ---------- Category rails ---------- */
 .cat-rail { margin-bottom: 2.5rem; }
