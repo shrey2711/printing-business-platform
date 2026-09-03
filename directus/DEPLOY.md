@@ -84,15 +84,30 @@ node scripts/check-directus-db.mjs directus/.env.production
 
 ### Railway
 
-1. New Project → Deploy from GitHub repo → pick this repo, root directory `directus`.
-2. Railway detects `docker-compose.yml`. If it asks for an image instead, use
-   `directus/directus:12.3.1` — pin the version; `latest` upgrades under you.
-3. Add every variable from your local `directus/.env`, **except** change:
-   - `PUBLIC_URL` → the Railway URL (e.g. `https://apex-cms.up.railway.app`)
+**Railway ignores `docker-compose.yml`.** Pointed at this repo without a root
+directory it finds the root `package.json`, builds the *storefront*, and fails:
+
+```
+✗ DIRECTUS_URL / DIRECTUS_TOKEN are not set in this deployment environment.
+process "npm run build" did not complete successfully: exit code 1
+```
+
+That message means Railway is building the wrong application. `directus/Dockerfile`
+and `directus/railway.json` exist so it builds the CMS instead.
+
+1. New Project → Deploy from GitHub repo → pick this repo.
+2. **Settings → Source → Root Directory: `directus`.** This is the step that
+   matters; without it Railway builds the storefront.
+   Confirm Builder is **Dockerfile** (railway.json sets this).
+3. **Settings → Networking → Generate Domain.** Railway does not expose a
+   service publicly by default, and an unreachable CMS fails the Vercel build.
+4. Variables → add everything from your local `directus/.env`, **except**:
+   - `PUBLIC_URL` → the Railway domain from step 3
    - `CORS_ORIGIN` → `https://www.apextradeshow.com`
-   - the storage block above
-4. `KEY` and `SECRET` must be the **same values** as local. Changing `SECRET`
-   invalidates every session and the build token.
+   - the storage block from step 1 and the TLS pair from step 1b
+   - do **not** set `PORT`; Railway supplies it
+5. `KEY` and `SECRET` must be the **same values** as local. Changing `SECRET`
+   invalidates every session and the read-only build token.
 
 ### Render
 
