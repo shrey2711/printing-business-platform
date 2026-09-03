@@ -126,10 +126,30 @@ export function planWrites(mapped) {
   return { writes, deletes };
 }
 
+// A build running on a deployment host is a different situation from a build on
+// a laptop: there, a missing or local Directus URL is a MISCONFIGURATION, not an
+// absence. Skipping quietly would ship a deploy whose editors believe their
+// changes are live. Rule 1 still holds for a genuine outage — that is handled
+// further down, where an unreachable CMS leaves existing content alone.
+const IS_CI = Boolean(process.env.VERCEL || process.env.CI);
+const isLocal = (url) => /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:|\/|$)/i.test(url);
+
 const main = async () => {
   if (!DIRECTUS_URL || !DIRECTUS_TOKEN) {
+    if (IS_CI) {
+      console.error('✗ DIRECTUS_URL / DIRECTUS_TOKEN are not set in this deployment environment.');
+      console.error('  Content edited in Directus would NOT reach this build, silently.');
+      console.error('  Set both in the deployment host environment, or remove cms-pull from the build.');
+      process.exit(1);
+    }
     console.log('DIRECTUS_URL / DIRECTUS_TOKEN not set — skipping CMS pull, existing content stands.');
     return;
+  }
+
+  if (isLocal(DIRECTUS_URL) && IS_CI) {
+    console.error(`✗ DIRECTUS_URL is ${DIRECTUS_URL} — a deployment host cannot reach a local address.`);
+    console.error('  Point it at the public Directus instance. See directus/DEPLOY.md.');
+    process.exit(1);
   }
 
   let d;

@@ -394,6 +394,74 @@ async function ensureCollection(def) {
 }
 
 // Many-to-one relations, created once both sides exist.
+// A `files` alias field is a many-to-many to directus_files. Directus builds the
+// junction collection in the admin app, client-side — the API does NOT create it
+// for you. Without it the field exists in the metadata but has no column, and
+// every read of the collection fails with a 500:
+//   column products.gallery does not exist
+// So the junction is part of the schema and belongs here.
+async function ensureFilesJunction({ collection, field }) {
+  const junction = `${collection}_files`;
+  const fk = `${collection}_id`;
+  if (DRY) { console.log(`  ~ files junction ${junction} for ${collection}.${field}`); return; }
+
+  // The junction's foreign key must match the parent's primary key TYPE, or
+  // Postgres refuses the constraint with "cannot be implemented". Read it rather
+  // than assume: these collections use integer ids, directus_files uses uuid.
+  const pk = await api(`/fields/${collection}/id`);
+  const pkType = (pk.ok && pk.body?.data?.type) || 'integer';
+
+  const exists = await api(`/collections/${junction}`);
+  if (!exists.ok) {
+    const made = await api('/collections', {
+      method: 'POST',
+      body: JSON.stringify({
+        collection: junction,
+        meta: { hidden: true, icon: 'import_export', note: `Junction for ${collection}.${field}. Managed by Directus; do not edit directly.` },
+        schema: { name: junction },
+        fields: [
+          { field: 'id', type: 'integer', meta: { hidden: true }, schema: { is_primary_key: true, has_auto_increment: true } },
+          { field: fk, type: pkType, meta: { hidden: true }, schema: { is_nullable: true } },
+          { field: 'directus_files_id', type: 'uuid', meta: { hidden: true }, schema: { is_nullable: true } },
+          { field: 'sort', type: 'integer', meta: { hidden: true }, schema: { is_nullable: true } }
+        ]
+      })
+    });
+    if (!made.ok) { console.error(`  ! junction ${junction}: ${JSON.stringify(made.body.errors || made.body)}`); return; }
+  }
+
+  const rels = await api(`/relations/${junction}`);
+  const have = new Set(((rels.ok && rels.body.data) || []).map((r) => r.field));
+
+  if (!have.has(fk)) {
+    // one_field ties the junction back to the alias field, which is what makes
+    // the M2M readable as `gallery` instead of a bare column lookup.
+    const r = await api('/relations', {
+      method: 'POST',
+      body: JSON.stringify({
+        collection: junction, field: fk, related_collection: collection,
+        meta: { one_field: field, sort_field: 'sort', junction_field: 'directus_files_id' },
+        schema: { on_delete: 'CASCADE' }
+      })
+    });
+    if (!r.ok) console.error(`  ! relation ${junction}.${fk}: ${JSON.stringify(r.body.errors || r.body)}`);
+  }
+
+  if (!have.has('directus_files_id')) {
+    const r = await api('/relations', {
+      method: 'POST',
+      body: JSON.stringify({
+        collection: junction, field: 'directus_files_id', related_collection: 'directus_files',
+        meta: { junction_field: fk },
+        schema: { on_delete: 'CASCADE' }
+      })
+    });
+    if (!r.ok) console.error(`  ! relation ${junction}.directus_files_id: ${JSON.stringify(r.body.errors || r.body)}`);
+  }
+
+  console.log(`  ~ files junction ${junction} for ${collection}.${field}`);
+}
+
 async function ensureRelation(rel) {
   // DRY first: a dry run must never need a live server.
   if (DRY) { console.log(`  ~ relation ${rel.collection}.${rel.field} -> ${rel.related_collection}`); return; }
@@ -437,6 +505,15 @@ async function ensureFolder(name) {
   for (const def of COLLECTIONS) await ensureCollection(def);
   console.log('');
   for (const rel of RELATIONS) await ensureRelation(rel);
+
+  // Every `files` alias needs its junction, or reading the collection 500s.
+  for (const c of COLLECTIONS) {
+    for (const f of c.fields || []) {
+      if (f.meta?.special?.includes('files')) {
+        await ensureFilesJunction({ collection: c.collection, field: f.field });
+      }
+    }
+  }
   console.log('');
   for (const name of FOLDERS) await ensureFolder(name);
   console.log(`\n${DRY ? 'would create' : 'created'}: ${summary.collections} collections, ${summary.fields} fields (${summary.skipped} already present)`);
