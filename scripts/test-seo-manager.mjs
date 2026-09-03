@@ -172,6 +172,16 @@ check('the escaped payload is still valid JSON-LD carrying the original text', (
 
 rmSync(FIXTURE, { force: true });
 
+// Rebuild without the fixture. This test is the only thing that writes fixture
+// values into dist/, and leaving them there means the next person to look at a
+// built page — or to upload dist/ by hand — sees test data.
+try {
+  execFileSync('node', [join('node_modules', 'vite', 'bin', 'vite.js'), 'build'], { cwd: ROOT, stdio: 'pipe' });
+  execFileSync('node', [join('scripts', 'prerender.mjs')], { cwd: ROOT, stdio: 'pipe' });
+} catch (e) {
+  console.error('! could not restore dist/ after the test — run \"npm run build\".');
+}
+
 if (fails.length) {
   console.error(`\n✗ SEO MANAGER FAILED — ${fails.length}/${ran}:`);
   fails.forEach((f) => console.error(`  ✗ ${f}`));
