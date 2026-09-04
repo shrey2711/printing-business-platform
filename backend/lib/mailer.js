@@ -392,7 +392,7 @@ function quoteStaffHtml(q) {
     ['Reference', q.reference], ['Name', q.name], ['Email', q.email], ['Phone', q.phone],
     // Address and country decide shipping cost and lead time, so they belong in
     // the notification rather than in a follow-up email asking for them.
-    ['Address', q.address], ['Country', q.country],
+    ['Address', q.address], ['Country', q.country], ['Postal code', q.postal],
     ['Product', q.product], ['Quantity', q.quantity], ['Specs', q.specs],
     ['Est. price', q.estimatedPrice], ['Notes', q.description],
     // Small files ride along as an attachment; anything larger was uploaded

@@ -161,6 +161,26 @@ app.post('/api/price', async (req, res) => {
 // Guest quote request (authenticated orders go through Supabase directly).
 // Emails the quote to staff (with the artwork attached) AND a copy to the
 // customer. Email is best-effort — a mail failure never fails the submission.
+// Contact validation, imported from the module the form uses so the two cannot
+// diverge. Loaded lazily: it is an ES module in src/, and this file is the
+// serverless entry point.
+let contactValidator = null;
+async function validateQuoteContact(body) {
+  if (!contactValidator) {
+    contactValidator = await import('../src/lib/contactValidation.js');
+  }
+  return contactValidator.validateContact({
+    name: body.name,
+    email: body.email,
+    phone: body.phone,
+    country: body.country,
+    street: body.street,
+    city: body.city,
+    state: body.state,
+    postal: body.postal
+  });
+}
+
 // Formats we can send to print without redrawing the artwork.
 const QUOTE_ARTWORK_TYPES = ['application/pdf', 'image/jpeg'];
 const QUOTE_ARTWORK_EXT = /\.(pdf|jpe?g)$/i;
@@ -202,17 +222,13 @@ app.post('/api/quote/artwork-url', writeLimiter, async (req, res) => {
 app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => {
   const b = req.body || {};
 
-  // Validated here as well as in the form. The browser check is a convenience;
-  // this is the one that holds, since the endpoint accepts any POST.
-  const required = { name: 'name', email: 'email', phone: 'phone number', address: 'delivery address', country: 'country' };
-  const missing = Object.entries(required)
-    .filter(([field]) => !String(b[field] || '').trim())
-    .map(([, label]) => label);
-  if (missing.length) {
-    return res.status(400).json({ error: `Please provide your ${missing.join(', ')}.` });
-  }
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(b.email).trim())) {
-    return res.status(400).json({ error: 'That email address does not look right.' });
+  // The same rules the form runs, applied again here. The browser check is a
+  // courtesy to the customer; this is the one that holds, since the endpoint
+  // accepts any POST.
+  const contact = await validateQuoteContact(b);
+  if (!contact.ok) {
+    const first = Object.values(contact.errors)[0];
+    return res.status(400).json({ error: first, errors: contact.errors });
   }
 
   if (req.file) {

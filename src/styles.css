@@ -982,6 +982,9 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 
 .order-flag { color: #b54708; font-weight: 600; font-size: 0.72rem; }
 
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+@media (max-width: 700px) { .three-col { grid-template-columns: 1fr; } }
+
 .footer-legal { background: #2c3037; color: #adb4bd; text-align: center; padding: 0.9rem; font-size: 0.8rem; }
 
 /* ---------- Header auth state ---------- */
