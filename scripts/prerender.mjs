@@ -1440,8 +1440,16 @@ for (const s of territories) {
         <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <a href="/locations/${s.slug}">${esc(s.name)}</a> / <span>${esc(c)}</span></nav>
         <h1>Custom Printed Canopy Tents in ${esc(c)}, ${esc(s.name)}</h1>
         ${richBody}`;
+      // Where a full city page exists (/trade-show-displays/<city>), THIS page
+      // points at it. Both were indexable and self-canonical, so a 390-word
+      // location page was competing with a 1,500-word city page for the same
+      // query and splitting the signals between them. Keeping the page (it is
+      // linked and useful) while canonicalising consolidates that.
+      const canonicalCity = SEO_CITIES.find((sc) => sc.slug === citySlug && sc.stateSlug === s.slug);
+
       return render({
         path: `/locations/${s.slug}/${citySlug}`,
+        canonical: canonicalCity ? `${ORIGIN}/trade-show-displays/${canonicalCity.slug}` : undefined,
         title: `Custom Canopy Tents in ${c}, ${s.abbr} | ${BRAND}`,
         description: `Order custom printed canopy tents in ${c}, ${s.name} with instant online pricing and fast shipping.`,
         // Priority cities have unique content and are indexed; the rest stay

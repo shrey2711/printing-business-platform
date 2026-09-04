@@ -344,24 +344,29 @@ export const stateContent = {
 // its full editorial body. PRIORITY_STATES governs CONTENT DEPTH only.
 export const PRIORITY_STATES = new Set(Object.keys(stateContent));
 
-// INDEXED_STATES governs INDEXABILITY, which is a different question.
+// INDEXED_STATES governs INDEXABILITY, which is a different question from
+// content depth.
 //
-// Unique content is necessary for indexing but not sufficient: 64 state pages
-// all titled "Custom Canopy Tents in {State}" compete with each other AND with
-// /custom-canopies for one head term plus a geo modifier. On a domain still
-// building authority that splits equity rather than compounding it, so only the
-// markets the business actually sells into are indexed. The rest stay
-// noindex,follow — readable, linked, still passing equity to the money pages,
-// just not competing for the same query.
+// Every state and province page is indexed. They carry roughly 600 words of
+// genuine, state-specific content — comparable to the pages that were already
+// indexed — so each has something of its own to rank with.
 //
-// The set is DERIVED from the markets that already have a canonical city page
-// (src/data/citySeo.js), so it cannot drift out of sync with the city rollout.
-// Add a state here only when it earns its own demand, not to be comprehensive.
-import { SEO_CITIES } from './citySeo.js';
+// This was previously restricted to the markets with a canonical city page, on
+// the reasoning that 64 similar pages split link equity rather than compounding
+// it. The owner's call is to index them all; the pages are substantial enough
+// that the risk is reputational rather than structural, and it is reversible by
+// narrowing this set again.
+//
+// City pages are deliberately NOT included in that decision. The 204 city stubs
+// are identical to one another once the place name is removed, at about 110
+// words each, which is the doorway pattern. They stay noindex,follow — readable,
+// linked, still passing equity to the money pages — until they carry real local
+// content. That gate lives on PRIORITY_CITIES in scripts/prerender.mjs.
+import { states, territories } from './states.js';
 
 export const INDEXED_STATES = new Set([
-  ...SEO_CITIES.map((c) => c.stateSlug).filter(Boolean),
-  'washington-dc' // city-state: its own city page carries the market
+  ...states.map((s) => s.slug),
+  ...territories.map((s) => s.slug)
 ]);
 
 // Shared, non-fabricated sections reused across priority state pages.
