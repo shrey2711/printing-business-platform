@@ -117,6 +117,39 @@ check('the server enforces the same formats as the browser', () => {
 check('the accepted MIME list is exactly PDF and JPEG', () =>
   ACCEPTED_MIME.join(',') === 'application/pdf,image/jpeg' ? null : `list drifted: ${ACCEPTED_MIME.join(', ')}`);
 
+check('a quote cannot mint a signed URL for another order the artwork bucket holds', () => {
+  // The designs bucket holds every customer's order artwork. Without a shape
+  // check, artworkPath is a signing oracle for an unauthenticated caller.
+  const app = readFileSync(new URL('../backend/app.js', import.meta.url), 'utf8');
+  const m = app.match(/artworkPath && !\/(.+?)\/i\.test\(artworkPath\)/);
+  if (!m) return 'no shape check before signing an artwork path';
+
+  const re = new RegExp(m[1], 'i');
+  const generated = 'quotes/1757000000000-0123456789abcdef.pdf';
+  if (!re.test(generated)) return `the guard rejects a path the endpoint itself generates: ${generated}`;
+
+  const attacks = [
+    '00000000-0000-0000-0000-000000000000/1757000000000-deadbeefdeadbeef.pdf',
+    'quotes/../../secrets.pdf',
+    'quotes/1757000000000-0123456789abcdef.pdf.exe',
+    'quotes/anything.pdf'
+  ];
+  const through = attacks.filter((a) => re.test(a));
+  return through.length ? `the guard accepts: ${through.join(', ')}` : null;
+});
+
+check('the artwork link in the staff email is built from escaped parts', () => {
+  // quoteRows escapes every value; the artwork row is the one exception, so it
+  // has to escape the pieces it builds that markup from.
+  const mailer = readFileSync(new URL('../backend/lib/mailer.js', import.meta.url), 'utf8');
+  const i = mailer.indexOf("['Artwork'");
+  if (i === -1) return 'the artwork row is gone';
+  const row = mailer.slice(i, i + 300);
+  if (!/esc\(q\.artworkUrl\)/.test(row)) return 'the URL is interpolated unescaped';
+  if (!/esc\(q\.artworkName/.test(row)) return 'the file name is interpolated unescaped';
+  return null;
+});
+
 if (fails.length) {
   console.error(`\n✗ ARTWORK FAILED — ${fails.length}/${ran}:`);
   fails.forEach((x) => console.error(`  ✗ ${x}`));

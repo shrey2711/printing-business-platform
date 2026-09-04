@@ -230,6 +230,15 @@ app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => 
   // expires before anyone opens it is the same as no artwork.
   let artworkUrl = null;
   let artworkPath = String(b.artworkPath || '').trim() || null;
+
+  // Only a path this endpoint generated. Without this the field is an open
+  // signing oracle: the designs bucket holds every customer's order artwork, and
+  // an unauthenticated caller could name any object in it and have a signed URL
+  // minted. The shape below is exactly what /api/quote/artwork-url produces.
+  if (artworkPath && !/^quotes\/\d{13}-[a-f0-9]{16}\.(pdf|jpe?g)$/i.test(artworkPath)) {
+    return res.status(400).json({ error: 'That artwork reference is not valid. Please upload the file again.' });
+  }
+
   if (artworkPath && supabaseAdmin) {
     const { data: signed } = await supabaseAdmin.storage
       .from('designs')

@@ -361,7 +361,12 @@ function quoteRows(pairs) {
     .map(
       ([k, v], i) => `<tr>
         <td style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};${i ? `border-top:1px solid ${C.line};` : ''}">${esc(k)}</td>
-        <td align="right" style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:${C.navy};${i ? `border-top:1px solid ${C.line};` : ''}">${esc(v)}</td>
+        <td align="right" style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:${C.navy};${i ? `border-top:1px solid ${C.line};` : ''}">${
+          // Values are escaped. A { html } value is the one exception, for a row
+          // that needs a link — and the caller is responsible for escaping the
+          // pieces it builds that markup from.
+          v && typeof v === 'object' && typeof v.html === 'string' ? v.html : esc(v)
+        }</td>
       </tr>`
     )
     .join('');
@@ -378,7 +383,7 @@ function quoteStaffHtml(q) {
     // Small files ride along as an attachment; anything larger was uploaded
     // straight to storage and is linked instead.
     ['Artwork', q.artworkUrl
-      ? `<a href="${q.artworkUrl}">${q.artworkName || 'Download artwork'}</a> (link valid 14 days)`
+      ? { html: `<a href="${esc(q.artworkUrl)}">${esc(q.artworkName || 'Download artwork')}</a> (link valid 14 days)` }
       : q.fileName]
   ]);
   const inner = `
