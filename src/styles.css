@@ -985,6 +985,18 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
 @media (max-width: 700px) { .three-col { grid-template-columns: 1fr; } }
 
+.address-autocomplete { position: relative; }
+.address-autocomplete input { width: 100%; }
+.address-busy { position: absolute; right: 0.7rem; top: 0.55rem; color: var(--muted); }
+.address-suggestions {
+  position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% - 1.1rem);
+  margin: 0; padding: 0.25rem; list-style: none; background: #fff;
+  border: 1px solid var(--line, #e4e9f2); border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(22, 35, 59, 0.14); max-height: 260px; overflow-y: auto;
+}
+.address-suggestions li { padding: 0.5rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+.address-suggestions li.is-active, .address-suggestions li:hover { background: var(--panel); }
+
 .footer-legal { background: #2c3037; color: #adb4bd; text-align: center; padding: 0.9rem; font-size: 0.8rem; }
 
 /* ---------- Header auth state ---------- */

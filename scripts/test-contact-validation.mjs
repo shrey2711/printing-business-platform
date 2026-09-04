@@ -160,6 +160,31 @@ check('the server validates with the same module the form uses', () => {
   return null;
 });
 
+check('address search never blocks a manual entry', () => {
+  // The lookup is an enhancement. If it fails, is slow, or has never heard of
+  // an address, the customer must still be able to type one and submit.
+  const cmp = readFileSync(new URL('../src/components/AddressAutocomplete.jsx', import.meta.url), 'utf8');
+  if (!cmp.includes('onChange(e.target.value)')) return 'the field is not freely typeable';
+  if (cmp.includes('disabled')) return 'the input can be disabled by the lookup';
+  const lib = readFileSync(new URL('../src/lib/addressSearch.js', import.meta.url), 'utf8');
+  if (!lib.includes('catch (e)')) return 'a failed lookup is not caught';
+  if (!lib.includes('return [];')) return 'a failure does not degrade to no suggestions';
+  return null;
+});
+
+check('a suggestion never blanks a field it has no value for', () => {
+  // A partial result must not wipe a city or postal code already typed.
+  for (const page of ['QuotePage.jsx', 'PlaceOrderPage.jsx']) {
+    const src = readFileSync(new URL('../src/pages/' + page, import.meta.url), 'utf8');
+    const i = src.indexOf('applyAddress');
+    if (i === -1) return page + ' does not apply a chosen address';
+    const block = src.slice(i, i + 500);
+    if (!block.includes('a.city ||')) return page + ' overwrites city with an empty value';
+    if (!block.includes('a.postal ||')) return page + ' overwrites the postal code with an empty value';
+  }
+  return null;
+});
+
 if (fails.length) {
   console.error(`\n✗ CONTACT VALIDATION FAILED — ${fails.length}/${ran}:`);
   fails.forEach((f) => console.error(`  ✗ ${f}`));

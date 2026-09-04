@@ -4,6 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import { placeOrder, notifyOrderPlaced } from '../services/orders';
 import { startCheckout, validateCoupon } from '../services/checkout';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import AddressAutocomplete from '../components/AddressAutocomplete';
+import { validateContact, formatAddress } from '../lib/contactValidation';
+import { countryOptions, POSTAL, NO_POSTAL } from '../data/countries';
+
+const COUNTRIES = countryOptions();
 
 export default function PlaceOrderPage() {
   useDocumentMeta('Place Your Order', undefined, undefined, 'noindex, follow');
@@ -23,10 +28,22 @@ export default function PlaceOrderPage() {
   // a delivery address too, and Stripe only collects one if the customer gets
   // that far. Without these the staff notification carried an email and nothing
   // else, and every order started with a round of chasing.
-  const [contact, setContact] = useState({ name: '', phone: '', address: '', country: '' });
+  const [contact, setContact] = useState({
+    name: '', phone: '', street: '', city: '', state: '', postal: '', country: ''
+  });
   const setField = (k) => (e) => setContact((c) => ({ ...c, [k]: e.target.value }));
-  const contactReady =
-    contact.name.trim() && contact.phone.trim() && contact.address.trim() && contact.country.trim();
+  // A chosen suggestion fills the rest; anything it does not supply keeps what
+  // was already typed rather than being blanked.
+  const applyAddress = (a) => setContact((c) => ({
+    ...c,
+    street: a.street || c.street,
+    city: a.city || c.city,
+    state: a.state || c.state,
+    postal: a.postal || c.postal,
+    country: a.country || c.country
+  }));
+  const contactCheck = validateContact(contact);
+  const contactReady = contactCheck.ok;
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [couponInput, setCouponInput] = useState('');
@@ -95,7 +112,7 @@ export default function PlaceOrderPage() {
         idempotencyKey,
         artworkChoice,
         paymentChoice: payLater ? 'invoice_later' : 'pay_now',
-        contact
+        contact: { ...contact, address: formatAddress(contact) }
       });
 
       // Fire confirmation + staff alert emails (best-effort).
@@ -163,22 +180,52 @@ export default function PlaceOrderPage() {
           </div>
 
           <div className="field">
-            <label htmlFor="caddress">Delivery address *</label>
-            <textarea
-              id="caddress"
-              rows="3"
-              value={contact.address}
-              onChange={setField('address')}
-              placeholder="Street, city, state and postal code"
+            <label htmlFor="ccountry">Country *</label>
+            <select id="ccountry" value={contact.country} onChange={setField('country')} required>
+              <option value="">Select a country…</option>
+              {COUNTRIES.map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
+            </select>
+            <small className="muted">Shipping cost and transit time depend on where this is going.</small>
+          </div>
+
+          <div className="field">
+            <label htmlFor="cstreet">Street address *</label>
+            <AddressAutocomplete
+              id="cstreet"
+              name="street"
+              value={contact.street}
+              country={contact.country}
+              onChange={(v) => setContact((c) => ({ ...c, street: v }))}
+              onSelect={applyAddress}
               required
             />
           </div>
 
-          <div className="field">
-            <label htmlFor="ccountry">Country *</label>
-            <input id="ccountry" value={contact.country} onChange={setField('country')} required />
-            <small className="muted">Shipping cost and transit time depend on where this is going.</small>
+          <div className="three-col">
+            <div className="field">
+              <label htmlFor="ccity">City *</label>
+              <input id="ccity" value={contact.city} onChange={setField('city')} required />
+            </div>
+            <div className="field">
+              <label htmlFor="cstate">State / province</label>
+              <input id="cstate" value={contact.state} onChange={setField('state')} />
+            </div>
+            <div className="field">
+              <label htmlFor="cpostal">
+                {NO_POSTAL.has(contact.country) ? 'Postal code (not used here)' : 'Postal code *'}
+              </label>
+              <input
+                id="cpostal"
+                value={contact.postal}
+                onChange={setField('postal')}
+                placeholder={POSTAL[contact.country] ? `e.g. ${POSTAL[contact.country].hint}` : ''}
+              />
+            </div>
           </div>
+
+          {!contactCheck.ok && (contact.name || contact.street) ? (
+            <p className="field-error">{Object.values(contactCheck.errors)[0]}</p>
+          ) : null}
 
           {needsArtwork && !file ? (
             <div className="field artwork-gate">

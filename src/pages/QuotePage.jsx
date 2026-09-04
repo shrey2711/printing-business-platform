@@ -4,6 +4,7 @@ import { submitQuote } from '../services/api';
 import { ARTWORK_SPEC, MAX_LABEL, validateArtwork, validatePdfPages } from '../lib/artworkSpec';
 import { validateContact, formatAddress } from '../lib/contactValidation';
 import { countryOptions, POSTAL, NO_POSTAL, DIAL } from '../data/countries';
+import AddressAutocomplete from '../components/AddressAutocomplete';
 
 // Built once: 235 entries, and the list never changes while the page is open.
 const COUNTRIES = countryOptions();
@@ -57,6 +58,22 @@ export default function QuotePage() {
         // An unreadable file is not necessarily invalid; prepress will catch it.
       }
     }
+  };
+
+  // Filling the rest of the fields from a chosen suggestion, so the postal code
+  // and the country come from the same record rather than being typed
+  // separately. Anything the provider does not supply is left as it was, rather
+  // than blanked — a partial result must not wipe what someone already typed.
+  const applyAddress = (a) => {
+    setFormData((prev) => ({
+      ...prev,
+      street: a.street || prev.street,
+      city: a.city || prev.city,
+      state: a.state || prev.state,
+      postal: a.postal || prev.postal,
+      country: a.country || prev.country
+    }));
+    setErrors({});
   };
 
   const handleChange = (event) => {
@@ -179,12 +196,13 @@ export default function QuotePage() {
 
           <div className="field">
             <label htmlFor="street">Street address *</label>
-            <input
+            <AddressAutocomplete
               id="street"
               name="street"
               value={formData.street}
-              onChange={handleChange}
-              placeholder="Building number and street"
+              country={formData.country}
+              onChange={(v) => setFormData((prev) => ({ ...prev, street: v }))}
+              onSelect={applyAddress}
               required
             />
             {errors.street ? <p className="field-error">{errors.street}</p> : null}
