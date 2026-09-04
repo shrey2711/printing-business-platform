@@ -10,6 +10,8 @@ export default function QuotePage() {
     name: '',
     email: '',
     phone: '',
+    address: '',
+    country: '',
     product: prefill.product || 'Vinyl Banners',
     quantity: prefill.quantity ? String(prefill.quantity) : '1',
     specs: prefill.specs || '',
@@ -30,12 +32,21 @@ export default function QuotePage() {
 
   // The submit button goes live (theme blue) only once the required fields —
   // name, email, quantity and project details — are filled; dimmed otherwise.
+  // Artwork must be a PDF or a JPEG. Anything else — an AI file, a screenshot
+  // pasted into a Word document — cannot go to print without being redrawn, and
+  // finding that out after the quote wastes a day for both sides.
+  const ACCEPTED = ['application/pdf', 'image/jpeg'];
+  const fileOk = !file || ACCEPTED.includes(file.type) || /\.(pdf|jpe?g)$/i.test(file.name);
+
   const canSubmit =
     formData.name.trim() &&
     formData.email.trim() &&
     formData.phone.trim() &&
+    formData.address.trim() &&
+    formData.country.trim() &&
     formData.quantity.trim() &&
-    formData.description.trim();
+    formData.description.trim() &&
+    fileOk;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -95,6 +106,26 @@ export default function QuotePage() {
               <label htmlFor="phone">Phone</label>
               <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} required />
             </div>
+          </div>
+
+          <div className="field">
+            <label htmlFor="address">Delivery address *</label>
+            <textarea
+              id="address"
+              name="address"
+              rows="3"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Street, city, state and postal code"
+              required
+            />
+          </div>
+
+          <div className="field-row">
+            <div className="field">
+              <label htmlFor="country">Country *</label>
+              <input id="country" name="country" value={formData.country} onChange={handleChange} required />
+            </div>
             <div className="field">
               <label htmlFor="quantity">Quantity</label>
               <input id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} required />
@@ -114,8 +145,19 @@ export default function QuotePage() {
           ) : null}
 
           <div className="field">
-            <label htmlFor="file">Upload artwork (PDF, AI, PNG, JPG)</label>
-            <input id="file" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+            <label htmlFor="file">Upload artwork (PDF or JPEG)</label>
+            <input
+              id="file"
+              type="file"
+              accept="application/pdf,image/jpeg,.pdf,.jpg,.jpeg"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+            />
+            {file && !fileOk ? (
+              <p className="field-error">
+                {file.name} is not a PDF or JPEG. Those are the two formats we can send straight to
+                print — please export and try again.
+              </p>
+            ) : null}
           </div>
 
           <div className="field">

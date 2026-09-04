@@ -53,9 +53,16 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
     const session = event.data.object;
     const orderId = session.metadata?.orderId;
     if (orderId && session.payment_status === 'paid') {
+      // Record the amount as well as the status. Without it a genuinely paid
+      // checkout order shows an amount of 0, which is indistinguishable from an
+      // order marked paid in error.
       await supabaseAdmin
         .from('orders')
-        .update({ status: 'paid' })
+        .update({
+          status: 'paid',
+          amount_total: (session.amount_total || 0) / 100,
+          currency: (session.currency || 'usd').toUpperCase()
+        })
         .eq('id', orderId)
         .eq('status', 'submitted'); // don't downgrade later statuses
     }
@@ -66,14 +73,21 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
     const inv = event.data.object;
     const orderId = inv.metadata?.orderId;
     if (orderId) {
+      // Only advance the order when money actually moved. Stripe emits
+      // invoice.paid for a zero invoice too, and treating that as payment marks
+      // a real order paid with nothing collected.
+      const collected = (inv.amount_paid || 0) / 100;
+      const patch = {
+        invoice_status: 'paid',
+        amount_total: collected,
+        currency: (inv.currency || 'usd').toUpperCase()
+      };
+      if (collected > 0) patch.status = 'paid';
+      else console.error(`[webhook] invoice.paid for order ${orderId} collected $0 — not marking it paid.`);
+
       await supabaseAdmin
         .from('orders')
-        .update({
-          status: 'paid',
-          invoice_status: 'paid',
-          amount_total: inv.amount_paid / 100,
-          currency: (inv.currency || 'usd').toUpperCase()
-        })
+        .update(patch)
         .eq('id', orderId)
         .in('status', ['submitted']); // only advance an unpaid order
     }
@@ -95,7 +109,12 @@ const writeLimiter = rateLimit({
 });
 
 // Memory storage keeps this stateless so it works on Vercel serverless.
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({
+  storage: multer.memoryStorage(),
+  // Print-ready PDFs are large; 25MB matches the CMS limit and stops a single
+  // request exhausting the function's memory.
+  limits: { fileSize: 25 * 1024 * 1024, files: 1 }
+});
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Printing API is running' });
@@ -142,14 +161,44 @@ app.post('/api/price', async (req, res) => {
 // Guest quote request (authenticated orders go through Supabase directly).
 // Emails the quote to staff (with the artwork attached) AND a copy to the
 // customer. Email is best-effort — a mail failure never fails the submission.
+// Formats we can send to print without redrawing the artwork.
+const QUOTE_ARTWORK_TYPES = ['application/pdf', 'image/jpeg'];
+const QUOTE_ARTWORK_EXT = /\.(pdf|jpe?g)$/i;
+
 app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => {
   const b = req.body || {};
+
+  // Validated here as well as in the form. The browser check is a convenience;
+  // this is the one that holds, since the endpoint accepts any POST.
+  const required = { name: 'name', email: 'email', phone: 'phone number', address: 'delivery address', country: 'country' };
+  const missing = Object.entries(required)
+    .filter(([field]) => !String(b[field] || '').trim())
+    .map(([, label]) => label);
+  if (missing.length) {
+    return res.status(400).json({ error: `Please provide your ${missing.join(', ')}.` });
+  }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(b.email).trim())) {
+    return res.status(400).json({ error: 'That email address does not look right.' });
+  }
+
+  if (req.file) {
+    const okType = QUOTE_ARTWORK_TYPES.includes(req.file.mimetype);
+    const okExt = QUOTE_ARTWORK_EXT.test(req.file.originalname || '');
+    if (!okType && !okExt) {
+      return res.status(400).json({
+        error: 'Artwork must be a PDF or JPEG — those are the formats we can send straight to print.'
+      });
+    }
+  }
+
   const reference = `Q-${Date.now().toString().slice(-6)}`;
   const quote = {
     reference,
     name: b.name,
     email: b.email,
     phone: b.phone,
+    address: b.address,
+    country: b.country,
     product: b.product,
     quantity: b.quantity,
     specs: b.specs,
@@ -457,11 +506,22 @@ app.get('/api/admin/orders', async (req, res) => {
   const orders = await Promise.all(
     (data || []).map(async (o) => {
       let designUrl = null;
+      let designDownloadUrl = null;
+      let designName = null;
       if (o.design_path) {
+        designName = String(o.design_path).split('/').pop();
         const { data: signed } = await supabaseAdmin.storage
           .from('designs')
           .createSignedUrl(o.design_path, 3600);
         designUrl = signed?.signedUrl || null;
+        // A second URL with the download flag set. The viewing link opens a PDF
+        // in the browser, which is what you want for a quick check; saving it
+        // needs Supabase to send Content-Disposition, and that is a property of
+        // the signed URL rather than something the page can add.
+        const { data: dl } = await supabaseAdmin.storage
+          .from('designs')
+          .createSignedUrl(o.design_path, 3600, { download: designName });
+        designDownloadUrl = dl?.signedUrl || null;
       }
       let email = emailCache.get(o.user_id);
       if (email === undefined) {
@@ -469,7 +529,7 @@ app.get('/api/admin/orders', async (req, res) => {
         email = u?.user?.email || null;
         emailCache.set(o.user_id, email);
       }
-      return { ...o, designUrl, customer_email: email };
+      return { ...o, designUrl, designDownloadUrl, designName, customer_email: email };
     })
   );
   res.json({ orders });
@@ -546,8 +606,24 @@ async function createInvoiceForOrder(order) {
     const priced = computePrice(order.config, pricing ? { pricing } : {});
     if (priced.ok) subtotal = priced.total;
   }
-  // Allow $0 (a free/test order): Stripe finalizes a $0 invoice as paid.
   if (subtotal < 0 || !Number.isFinite(subtotal)) throw new Error('This order has no priceable configuration.');
+
+  // A $0 invoice finalizes as PAID immediately. That is correct for an order
+  // that genuinely costs nothing, and catastrophic for one that does not: the
+  // order is marked paid, no money is taken, and the only visible trace is an
+  // amount of 0 next to a real price.
+  //
+  // So refuse to invoice at all when the re-priced total is 0 but the order was
+  // quoted a price. Re-pricing can return 0 for reasons that have nothing to do
+  // with the customer owing nothing — a configuration the engine no longer
+  // recognises, a product renamed, an override that fails to compose.
+  const quoted = Number(String(order.estimated_price ?? '').replace(/[^0-9.]/g, '')) || 0;
+  if (subtotal === 0 && quoted > 0) {
+    throw new Error(
+      `Refusing to invoice: this order re-prices to $0 but was quoted $${quoted.toFixed(2)}. ` +
+      'A $0 invoice would be marked paid without taking payment. Check the order configuration.'
+    );
+  }
 
   const cur = currencies[order.currency] || currencies[BASE_CURRENCY];
   const amountCents = Math.round(subtotal * cur.rate * 100);
@@ -589,10 +665,19 @@ async function createInvoiceForOrder(order) {
     invoice_pdf: finalized.invoice_pdf,
     invoice_status: finalized.status
   };
-  // $0 invoices are paid on finalize and may not fire a webhook — mark it here.
-  if (finalized.status === 'paid' && order.status === 'submitted') {
+  // Advance to paid only when the invoice actually settles the amount owed.
+  // "Finalized as paid" is not the same thing: a zero invoice reaches that state
+  // with nothing collected.
+  const paidCents = finalized.amount_paid || 0;
+  const settled = paidCents >= amountCents && (amountCents > 0 || quoted === 0);
+  if (finalized.status === 'paid' && order.status === 'submitted' && settled) {
     patch.status = 'paid';
-    patch.amount_total = (finalized.amount_paid || 0) / 100;
+    patch.amount_total = paidCents / 100;
+  } else if (finalized.status === 'paid' && !settled) {
+    console.error(
+      `[invoice] ${finalized.id} for order ${order.id} finalized as paid but collected ` +
+      `$${(paidCents / 100).toFixed(2)} against $${(amountCents / 100).toFixed(2)} owed — leaving the order unpaid.`
+    );
   }
   await supabaseAdmin.from('orders').update(patch).eq('id', order.id);
 

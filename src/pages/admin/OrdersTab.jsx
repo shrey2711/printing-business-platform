@@ -110,7 +110,26 @@ export default function OrdersTab({ onError, onFlash }) {
               />
             </span>
             <span>
-              {o.designUrl ? <a href={o.designUrl} target="_blank" rel="noreferrer">View</a> : <span className="muted">—</span>}
+              {o.designUrl ? (
+                <span className="art-links">
+                  <a href={o.designUrl} target="_blank" rel="noreferrer">View</a>
+                  {o.designDownloadUrl ? (
+                    <>
+                      {' · '}
+                      <a
+                        href={o.designDownloadUrl}
+                        download={o.designName || 'artwork'}
+                        title={`Download ${o.designName || 'artwork'}`}
+                      >
+                        Download
+                      </a>
+                    </>
+                  ) : null}
+                  {o.designName ? <span className="art-name">{o.designName.replace(/^.*\./, '').toUpperCase()}</span> : null}
+                </span>
+              ) : (
+                <span className="muted">—</span>
+              )}
             </span>
             <span style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}>
               {o.invoice_url ? (

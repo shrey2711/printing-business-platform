@@ -370,6 +370,9 @@ function quoteRows(pairs) {
 function quoteStaffHtml(q) {
   const table = quoteRows([
     ['Reference', q.reference], ['Name', q.name], ['Email', q.email], ['Phone', q.phone],
+    // Address and country decide shipping cost and lead time, so they belong in
+    // the notification rather than in a follow-up email asking for them.
+    ['Address', q.address], ['Country', q.country],
     ['Product', q.product], ['Quantity', q.quantity], ['Specs', q.specs],
     ['Est. price', q.estimatedPrice], ['Notes', q.description], ['Artwork', q.fileName]
   ]);
