@@ -40,7 +40,7 @@ async function uploadDesign(userId, source) {
 }
 
 // Place an order: optionally upload a design, then insert the order row.
-export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey, artworkChoice, paymentChoice }) {
+export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey, artworkChoice, paymentChoice, contact }) {
   if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
 
   // Idempotency: if this exact attempt already created an order (retry / double
@@ -73,6 +73,13 @@ export async function placeOrder({ user, product, specs, quantity, estimatedPric
       // invoiced — without this the two look identical.
       artwork_choice: artworkChoice || (design ? 'uploaded' : null),
       payment_choice: paymentChoice || null,
+      // Captured at order time rather than at checkout: an unpaid order needs a
+      // contact and an address too, and Stripe only collects one if the customer
+      // gets that far.
+      customer_name: contact?.name || null,
+      customer_phone: contact?.phone || null,
+      shipping_address: contact?.address || null,
+      shipping_country: contact?.country || null,
       status: 'submitted'
     })
     .select()

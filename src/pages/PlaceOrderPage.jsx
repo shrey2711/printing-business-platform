@@ -19,6 +19,14 @@ export default function PlaceOrderPage() {
   // stuck before it starts — nobody can print it, and nobody knows it is waiting.
   const [artworkLater, setArtworkLater] = useState(false);
   const [payLater, setPayLater] = useState(false);
+  // Collected here rather than at checkout: an unpaid order needs a contact and
+  // a delivery address too, and Stripe only collects one if the customer gets
+  // that far. Without these the staff notification carried an email and nothing
+  // else, and every order started with a round of chasing.
+  const [contact, setContact] = useState({ name: '', phone: '', address: '', country: '' });
+  const setField = (k) => (e) => setContact((c) => ({ ...c, [k]: e.target.value }));
+  const contactReady =
+    contact.name.trim() && contact.phone.trim() && contact.address.trim() && contact.country.trim();
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [couponInput, setCouponInput] = useState('');
@@ -86,7 +94,8 @@ export default function PlaceOrderPage() {
         config: incoming.config || null,
         idempotencyKey,
         artworkChoice,
-        paymentChoice: payLater ? 'invoice_later' : 'pay_now'
+        paymentChoice: payLater ? 'invoice_later' : 'pay_now',
+        contact
       });
 
       // Fire confirmation + staff alert emails (best-effort).
@@ -130,12 +139,45 @@ export default function PlaceOrderPage() {
 
           <div className="field">
             <label>Artwork</label>
-            <input type="file" accept="image/*,application/pdf,.ai,.eps"
-              onChange={(e) => setFile(e.target.files?.[0] || null)} />
+            <input
+              type="file"
+              accept="application/pdf,image/jpeg,.pdf,.jpg,.jpeg"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+            />
             <small>
-              Upload a print-ready file (PDF, AI, EPS, or high-resolution PNG/JPG). We send a free
-              artwork proof for your approval before anything goes to production.
+              PDF or JPEG, single page, built to the ordered size. See the{' '}
+              <Link to="/artwork-guidelines">artwork guidelines</Link> for colour, resolution and
+              file setup. We send a free proof for your approval before anything goes to production.
             </small>
+          </div>
+
+          <div className="field-row">
+            <div className="field">
+              <label htmlFor="cname">Contact name *</label>
+              <input id="cname" value={contact.name} onChange={setField('name')} required />
+            </div>
+            <div className="field">
+              <label htmlFor="cphone">Phone *</label>
+              <input id="cphone" type="tel" value={contact.phone} onChange={setField('phone')} required />
+            </div>
+          </div>
+
+          <div className="field">
+            <label htmlFor="caddress">Delivery address *</label>
+            <textarea
+              id="caddress"
+              rows="3"
+              value={contact.address}
+              onChange={setField('address')}
+              placeholder="Street, city, state and postal code"
+              required
+            />
+          </div>
+
+          <div className="field">
+            <label htmlFor="ccountry">Country *</label>
+            <input id="ccountry" value={contact.country} onChange={setField('country')} required />
+            <small className="muted">Shipping cost and transit time depend on where this is going.</small>
           </div>
 
           {needsArtwork && !file ? (
@@ -203,7 +245,7 @@ export default function PlaceOrderPage() {
           <button
             className="btn btn-red"
             type="submit"
-            disabled={busy || !isSupabaseReady || !artworkReady}
+            disabled={busy || !isSupabaseReady || !artworkReady || !contactReady}
           >
             {busy
               ? 'Submitting…'
@@ -211,7 +253,9 @@ export default function PlaceOrderPage() {
                 ? (payLater ? 'Submit order — invoice me' : `Submit & pay ${incoming.estimatedPrice}`)
                 : 'Submit order'}
           </button>
-          {!artworkReady ? (
+          {!contactReady ? (
+            <p className="panel-foot">Add your contact and delivery details to continue.</p>
+          ) : !artworkReady ? (
             <p className="panel-foot">Add your artwork, or tick the box above, to continue.</p>
           ) : null}
           {incoming.config?.slug && (

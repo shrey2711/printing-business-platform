@@ -332,11 +332,26 @@ export function adminAlertHtml(order, customerEmail, appUrl) {
     <tr><td style="padding:26px 28px 8px;">
       <h1 style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:20px;color:${C.navy};">🖨️ New order ${shortId(order.id)}</h1>
       <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">A new order just came in — review the artwork and update its status.</p>
-      ${detailsCard({ ...order, status: 'paid' })}
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">Customer</td>
-        <td align="right" style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:${C.navy};">${customerEmail || '—'}</td>
-      </tr></table>
+      ${/* The order's real state. This used to be hardcoded to 'paid', which
+            made every new-order alert look like money had arrived. */ ''}
+      ${detailsCard(order)}
+      ${quoteRows([
+        ['Customer', order.customer_name],
+        ['Email', customerEmail],
+        ['Phone', order.customer_phone],
+        ['Address', order.shipping_address],
+        ['Country', order.shipping_country],
+        // What the customer said they would do, so an order waiting on us is
+        // not chased like one waiting on them.
+        ['Artwork', order.design_path
+          ? 'Uploaded'
+          : order.artwork_choice === 'email_later'
+            ? 'Customer will email it'
+            : order.artwork_choice === 'design_service'
+              ? 'Design service'
+              : 'None supplied'],
+        ['Payment', order.payment_choice === 'invoice_later' ? 'Asked to be invoiced' : null]
+      ])}
       ${button(appUrl ? `${appUrl}/admin` : '', 'Open admin dashboard', C.navy)}
     </td></tr>
     ${footer()}`;

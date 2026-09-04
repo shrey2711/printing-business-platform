@@ -142,8 +142,12 @@ check('the artwork link in the staff email is built from escaped parts', () => {
   // quoteRows escapes every value; the artwork row is the one exception, so it
   // has to escape the pieces it builds that markup from.
   const mailer = readFileSync(new URL('../backend/lib/mailer.js', import.meta.url), 'utf8');
-  const i = mailer.indexOf("['Artwork'");
-  if (i === -1) return 'the artwork row is gone';
+  // Scoped to the quote template: the admin alert has an Artwork row too, and it
+  // carries a plain label rather than a link.
+  const scope = mailer.indexOf('function quoteStaffHtml');
+  if (scope === -1) return 'quoteStaffHtml is gone';
+  const i = mailer.indexOf("['Artwork'", scope);
+  if (i === -1) return 'the artwork row is gone from the quote email';
   const row = mailer.slice(i, i + 300);
   if (!/esc\(q\.artworkUrl\)/.test(row)) return 'the URL is interpolated unescaped';
   if (!/esc\(q\.artworkName/.test(row)) return 'the file name is interpolated unescaped';
