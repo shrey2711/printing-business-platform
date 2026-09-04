@@ -1415,18 +1415,25 @@ for (const s of territories) {
     const citySlug = slugify(c);
     const cityIsPriority = PRIORITY_CITIES.has(citySlug);
     const cc = cityContent[citySlug];
+    // State content differs per state, so this section varies 64 ways rather than
+    // being another block identical on every city page.
+    const sc = stateContent[s.slug];
     routes.push(() => {
       const products6 = `<ul>${coreProducts.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>`;
       const cityPhotos = SIZES
         .map((z) => `<img src="/images/tents/${z.slug}-1wall.webp" alt="${esc(z.label)} custom printed canopy tent" width="1200" height="900" loading="lazy" decoding="async">`)
         .join('');
       const cityComparison = `<ul>${SIZE_COMPARISON.map(([sz, txt]) => `<li><a href="/sizes/${sz}">${sz} canopy tent</a> — ${esc(txt)}</li>`).join('')}</ul>`;
-      const richBody = cityIsPriority && cc
+      const richBody = cc
         ? `<h2>Custom canopy tents in ${esc(c)}</h2><p>${esc(cc.intro)}</p>
            <p>${cityPhotos}</p>
            <h2>Where canopy tents get used in ${esc(c)}</h2>
            <ul>${cc.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
            <h2>Choosing a size for ${esc(c)} events</h2>${cityComparison}
+           ${sc ? `<h2>Shipping to ${esc(c)} and the rest of ${esc(s.name)}</h2>
+           <p>${esc(sc.intro)}</p>
+           <p>Everything is printed to order and shipped to ${esc(c)}; transit time is added to
+           production and depends on where in ${esc(s.name)} it is going.</p>` : ''}
            <h2>Ordering &amp; artwork</h2>
            <ol>${ORDERING_STEPS.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
            <h2>Shop canopy tents</h2>${products6}
