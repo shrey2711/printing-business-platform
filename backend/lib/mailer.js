@@ -374,7 +374,12 @@ function quoteStaffHtml(q) {
     // the notification rather than in a follow-up email asking for them.
     ['Address', q.address], ['Country', q.country],
     ['Product', q.product], ['Quantity', q.quantity], ['Specs', q.specs],
-    ['Est. price', q.estimatedPrice], ['Notes', q.description], ['Artwork', q.fileName]
+    ['Est. price', q.estimatedPrice], ['Notes', q.description],
+    // Small files ride along as an attachment; anything larger was uploaded
+    // straight to storage and is linked instead.
+    ['Artwork', q.artworkUrl
+      ? `<a href="${q.artworkUrl}">${q.artworkName || 'Download artwork'}</a> (link valid 14 days)`
+      : q.fileName]
   ]);
   const inner = `
     ${header()}

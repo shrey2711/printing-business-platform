@@ -165,6 +165,40 @@ app.post('/api/price', async (req, res) => {
 const QUOTE_ARTWORK_TYPES = ['application/pdf', 'image/jpeg'];
 const QUOTE_ARTWORK_EXT = /\.(pdf|jpe?g)$/i;
 
+// Artwork for a quote goes straight to storage, not through this function.
+//
+// A serverless request body caps out around 4.5MB, and print-ready artwork runs
+// to hundreds of megabytes. So the browser asks for a signed upload URL, PUTs
+// the file to Supabase directly, and sends us only the path.
+//
+// The URL is single-use, scoped to one generated path in a private bucket, and
+// expires. It grants no read access and cannot overwrite an existing object.
+app.post('/api/quote/artwork-url', writeLimiter, async (req, res) => {
+  if (!supabaseAdmin) return res.status(503).json({ error: 'Uploads are not configured.' });
+
+  const name = String(req.body?.filename || '').trim();
+  if (!/\.(pdf|jpe?g)$/i.test(name)) {
+    return res.status(400).json({ error: 'Artwork must be a PDF or JPEG.' });
+  }
+  const size = Number(req.body?.size || 0);
+  if (size > 300 * 1024 * 1024) {
+    return res.status(400).json({ error: 'Artwork must be 300MB or smaller.' });
+  }
+
+  // Quote requests are open to people without an account, so the path is
+  // generated here rather than taken from the request — a caller cannot choose
+  // where the file lands or overwrite someone else's.
+  const ext = name.split('.').pop().toLowerCase();
+  const path = `quotes/${Date.now()}-${crypto.randomBytes(8).toString('hex')}.${ext}`;
+
+  const { data, error } = await supabaseAdmin.storage
+    .from('designs')
+    .createSignedUploadUrl(path);
+  if (error) return res.status(500).json({ error: error.message });
+
+  res.json({ path, token: data.token, signedUrl: data.signedUrl });
+});
+
 app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => {
   const b = req.body || {};
 
@@ -191,9 +225,23 @@ app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => 
     }
   }
 
+  // Large artwork arrives as a storage path rather than an attachment. Link to
+  // it with a signed URL valid long enough to actually be used — a link that
+  // expires before anyone opens it is the same as no artwork.
+  let artworkUrl = null;
+  let artworkPath = String(b.artworkPath || '').trim() || null;
+  if (artworkPath && supabaseAdmin) {
+    const { data: signed } = await supabaseAdmin.storage
+      .from('designs')
+      .createSignedUrl(artworkPath, 60 * 60 * 24 * 14);
+    artworkUrl = signed?.signedUrl || null;
+  }
+
   const reference = `Q-${Date.now().toString().slice(-6)}`;
   const quote = {
     reference,
+    artworkUrl,
+    artworkName: artworkPath ? artworkPath.split('/').pop() : null,
     name: b.name,
     email: b.email,
     phone: b.phone,
@@ -204,7 +252,7 @@ app.post('/api/quote', writeLimiter, upload.single('file'), async (req, res) => 
     specs: b.specs,
     estimatedPrice: b.estimatedPrice,
     description: b.description,
-    fileName: req.file ? req.file.originalname : null
+    fileName: req.file ? req.file.originalname : (artworkPath ? artworkPath.split('/').pop() : null)
   };
   // Notification inbox(es) — info@ + team Gmail by default (see notifyEmails).
   const staffTo = notifyEmails;

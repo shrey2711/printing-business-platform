@@ -65,11 +65,23 @@ export const PAGES = [
     blocks: [
       { p: 'Good print starts with good artwork. These guidelines cover the files we accept and how to prepare them so your canopy tent, banner, backdrop or table cover prints crisp and on-color. Not sure about your file? Send it anyway — we check every file at no charge and send a free proof before printing.' },
       { h: 'Accepted file formats', list: [
-        'Vector (preferred): print-ready PDF, AI or EPS — these scale to any display size with no loss of quality.',
-        'Raster: high-resolution PNG or JPG. Supply the largest, highest-resolution version you have.'
+        'PDF or JPEG only. A PDF must be a single page — one artwork per file.',
+        'Maximum file size 300MB.',
+        'Working files (AI, EPS, PSD, INDD) need exporting first — export to PDF with fonts outlined.',
+        'You can also email artwork to us if you would rather not upload it.'
       ] },
-      { h: 'Resolution & scale', p: 'Trade show graphics print large, so low-resolution images can look soft when scaled up. Vector artwork is best for logos and text. For photos or raster art, provide the highest resolution available. Our team flags anything that may not hold up before it prints.' },
-      { h: 'Color', p: 'Printing is full-color dye sublimation. Solid brand colors, gradients, photos and full-bleed backgrounds all print. If exact brand-color matching matters, tell us in your order notes and we will confirm on the proof.' },
+      { h: 'Color', list: [
+        'Build in CMYK. Convert Pantone and other spot colors to CMYK before sending — an unconverted spot color prints as whatever it converts to, which may not be the shade you expect.',
+        'Printing is full-color dye sublimation: solid brand colors, gradients, photos and full-bleed backgrounds all print.',
+        'If exact brand-color matching matters, say so in your order notes and we will confirm on the proof.'
+      ] },
+      { h: 'Resolution', p: '150dpi at the finished size is ample for large format. Trade show graphics are viewed from a distance, so higher resolution mostly adds file size rather than visible quality. Below 150dpi, raster images can look soft once scaled up — we flag anything that may not hold before it prints.' },
+      { h: 'Size, bleed and crop marks', list: [
+        'Build artwork to the size you ordered. Scaled artwork is detected and fitted automatically, but building to size gives the most predictable result.',
+        'Do not add bleed, and do not include crop marks — they are not needed for these products and end up printed or trimmed into.',
+        'Convert live fonts to outlines so text cannot reflow or substitute.',
+        'Use the provided design template for your product where one exists.'
+      ] },
       { h: 'What you can print', p: 'The printable area depends on the product — a canopy tent prints on the top, valance and walls; banner stands, backdrops and table covers print across the full graphic. Each product page lists the print surfaces and finished sizes for that item.' },
       { h: 'No print-ready file?', p: 'Add our design service at checkout and we build the artwork for you from your logo and direction.' },
       { h: 'The proof', p: 'Every order includes a free visual proof for your approval. Nothing goes to production until you say yes.' },

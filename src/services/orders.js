@@ -1,4 +1,5 @@
 import { supabase, isSupabaseReady, DESIGN_BUCKET, authHeader } from '../lib/supabase';
+import { validateArtwork, validatePdfPages } from '../lib/artworkSpec';
 
 // Convert a dataURL into a File for upload (kept as a generic helper).
 function dataUrlToFile(dataUrl, filename) {
@@ -15,6 +16,19 @@ async function uploadDesign(userId, source) {
   if (!source) return null;
   const file =
     typeof source === 'string' ? dataUrlToFile(source, `design-${Date.now()}.png`) : source;
+
+  // A file the printer cannot use is worse than no file: it looks like artwork
+  // was supplied, and the problem surfaces in prepress instead of here, where
+  // the customer can still fix it. Artwork produced by the design studio is a
+  // generated PNG and is exempt — it never goes to print unedited.
+  if (typeof source !== 'string') {
+    const check = validateArtwork(file);
+    if (!check.ok) throw new Error(check.error);
+    if (/\.pdf$/i.test(file.name)) {
+      const pages = validatePdfPages(await file.arrayBuffer(), file.name);
+      if (!pages.ok) throw new Error(pages.error);
+    }
+  }
   const ext = (file.name.split('.').pop() || 'png').toLowerCase();
   const path = `${userId}/${Date.now()}-${Math.round(performance.now())}.${ext}`;
   const { error } = await supabase.storage.from(DESIGN_BUCKET).upload(path, file, {

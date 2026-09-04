@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { submitQuote } from '../services/api';
+import { ARTWORK_SPEC, MAX_LABEL, validateArtwork, validatePdfPages } from '../lib/artworkSpec';
 
 export default function QuotePage() {
   const location = useLocation();
@@ -21,9 +22,31 @@ export default function QuotePage() {
 
   const [formData, setFormData] = useState(initialState);
   const [file, setFile] = useState(null);
+  const [fileError, setFileError] = useState(null);
   const [status, setStatus] = useState({ type: '', message: '' });
   const [reference, setReference] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // A multi-page PDF is the one problem that cannot be seen from the file name
+  // or size, so the bytes are read here to count pages before submitting.
+  const handleFile = async (event) => {
+    const picked = event.target.files?.[0] || null;
+    setFile(picked);
+    setFileError(null);
+    if (!picked) return;
+
+    const basic = validateArtwork(picked);
+    if (!basic.ok) { setFileError(basic.error); return; }
+
+    if (/\.pdf$/i.test(picked.name)) {
+      try {
+        const pages = validatePdfPages(await picked.arrayBuffer(), picked.name);
+        if (!pages.ok) setFileError(pages.error);
+      } catch {
+        // An unreadable file is not necessarily invalid; prepress will catch it.
+      }
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,11 +55,10 @@ export default function QuotePage() {
 
   // The submit button goes live (theme blue) only once the required fields —
   // name, email, quantity and project details — are filled; dimmed otherwise.
-  // Artwork must be a PDF or a JPEG. Anything else — an AI file, a screenshot
-  // pasted into a Word document — cannot go to print without being redrawn, and
-  // finding that out after the quote wastes a day for both sides.
-  const ACCEPTED = ['application/pdf', 'image/jpeg'];
-  const fileOk = !file || ACCEPTED.includes(file.type) || /\.(pdf|jpe?g)$/i.test(file.name);
+  // Checked here so the customer finds out while they can still fix it, rather
+  // than in prepress a day later. The same rules run on the server.
+  const artworkError = fileError || (file ? (validateArtwork(file).error || null) : null);
+  const fileOk = !artworkError;
 
   const canSubmit =
     formData.name.trim() &&
@@ -150,14 +172,24 @@ export default function QuotePage() {
               id="file"
               type="file"
               accept="application/pdf,image/jpeg,.pdf,.jpg,.jpeg"
-              onChange={(e) => setFile(e.target.files?.[0] || null)}
+              onChange={handleFile}
             />
-            {file && !fileOk ? (
-              <p className="field-error">
-                {file.name} is not a PDF or JPEG. Those are the two formats we can send straight to
-                print — please export and try again.
+            {artworkError ? <p className="field-error">{artworkError}</p> : null}
+            <details className="artwork-spec">
+              <summary>Artwork requirements</summary>
+              <dl>
+                {ARTWORK_SPEC.map(([term, detail]) => (
+                  <div key={term}>
+                    <dt>{term}</dt>
+                    <dd>{detail}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p>
+                Rather send it by email? Submit this form and reply to the confirmation with your
+                artwork attached.
               </p>
-            ) : null}
+            </details>
           </div>
 
           <div className="field">
