@@ -27,3 +27,8 @@ directus/database/
 directus/.directus/
 directus/.directus*
 directus/*.txt
+
+# Lighthouse reports written by scripts/acceptance.mjs (removed after each run)
+.lh-*.json
+.acceptance-seo.json
+.seo-override-fixture.json

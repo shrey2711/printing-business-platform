@@ -17,6 +17,7 @@ import { readFileSync, writeFileSync, rmSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import pg from 'pg';
+import { tmpdir } from 'os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -361,7 +362,9 @@ try {
       try {
         scored = [];
         for (const u of urls) {
-          const out = join(ROOT, `.lh-${u.replace(/\W+/g, '_') || 'home'}.json`);
+          // Written to the temp directory, not the repository: an interrupted
+          // run left one of these behind and it was committed by accident.
+          const out = join(tmpdir(), `lh-${u.replace(/\W+/g, '_') || 'home'}-${process.pid}.json`);
           execFileSync('npx', ['--yes', 'lighthouse@12', `${LIVE}${u}`,
             '--only-categories=seo', '--output=json', `--output-path=${out}`,
             '--chrome-flags="--headless=new --no-sandbox --disable-gpu"', '--quiet'
