@@ -21,6 +21,13 @@ const statusColor = {
 // An order counts as paid once it's paid or moved further along.
 const isPaid = (o) => ['paid', 'in_production', 'shipped'].includes(o.status);
 
+// Stripe's hosted page shows a receipt once an invoice is settled, so a button
+// labelled "Pay invoice" against a settled invoice sends people to a receipt and
+// looks broken. The order status and the invoice status can legitimately differ
+// — an invoice settles before our webhook advances the order — so the label
+// follows the invoice.
+const invoiceSettled = (o) => o.invoice_status === 'paid';
+
 export default function AccountPage() {
   useDocumentMeta('My Account', undefined, undefined, 'noindex, follow');
   const { displayName, isAuthenticated, isSupabaseReady, loading } = useAuth();
@@ -234,7 +241,7 @@ export default function AccountPage() {
               <div className="order-card-actions">
                 {o.invoice_url && (
                   <a className="btn btn-blue btn-sm" href={o.invoice_url} target="_blank" rel="noreferrer">
-                    {isPaid(o) ? 'View invoice' : 'Pay invoice'}
+                    {isPaid(o) || invoiceSettled(o) ? 'View receipt' : 'Pay invoice'}
                   </a>
                 )}
                 {o.invoice_pdf && (

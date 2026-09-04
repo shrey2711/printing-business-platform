@@ -2,6 +2,24 @@ import { useEffect, useState } from 'react';
 import { getAllOrders, updateOrder, deleteOrder, sendInvoice } from '../../services/admin';
 import { formatCharged } from '../../lib/money';
 
+// What an unpaid order is actually waiting on, so a serious customer who asked
+// to be invoiced is not chased the same way as one who submitted and vanished.
+//
+// The distinction only exists for orders placed after artwork_choice and
+// payment_choice were recorded; older orders show nothing rather than a guess.
+function waitingOn(o) {
+  if (['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(o.status)) return '';
+  const wants = [];
+  if (o.payment_choice === 'invoice_later') wants.push('asked to be invoiced');
+  if (o.artwork_choice === 'email_later') wants.push('sending artwork by email');
+  if (wants.length) return `⏳ ${wants.join(', ')}`;
+
+  // Neither paid nor told us anything: no artwork, no payment, no stated intent.
+  if (!o.design_path && !o.artwork_choice && !o.payment_choice) return '⚠ no artwork, no payment — unconfirmed';
+  if (!o.design_path && o.artwork_choice !== 'design_service') return '⚠ waiting on artwork';
+  return '';
+}
+
 const STATUSES = [
   'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
 ];
@@ -88,7 +106,10 @@ export default function OrdersTab({ onError, onFlash }) {
           <div className="orders-row admin-row" key={o.id}>
             <span className="mono">#{String(o.id).slice(0, 8)}</span>
             <span className="wrap">{o.customer_email || '—'}</span>
-            <span className="wrap">{o.product}<br /><small className="muted">{o.specs} · Qty {o.quantity}</small></span>
+            <span className="wrap">
+              {o.product}<br /><small className="muted">{o.specs} · Qty {o.quantity}</small>
+              {waitingOn(o) ? <><br /><small className="order-flag">{waitingOn(o)}</small></> : null}
+            </span>
             <span>{o.amount_total ? formatCharged(o.amount_total, o.currency) : o.estimated_price || '—'}</span>
             <span>
               <select

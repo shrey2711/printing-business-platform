@@ -40,7 +40,7 @@ async function uploadDesign(userId, source) {
 }
 
 // Place an order: optionally upload a design, then insert the order row.
-export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey }) {
+export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey, artworkChoice, paymentChoice }) {
   if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
 
   // Idempotency: if this exact attempt already created an order (retry / double
@@ -68,6 +68,11 @@ export async function placeOrder({ user, product, specs, quantity, estimatedPric
       design_path: designPath,
       config: config || null,
       idempotency_key: idempotencyKey || null,
+      // What the customer said they would do. An order with neither artwork nor
+      // a payment attempt is chased differently from one where they asked to be
+      // invoiced — without this the two look identical.
+      artwork_choice: artworkChoice || (design ? 'uploaded' : null),
+      payment_choice: paymentChoice || null,
       status: 'submitted'
     })
     .select()
