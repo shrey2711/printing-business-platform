@@ -12,17 +12,23 @@
 // Vercel, not on disk: run `vercel env pull .env.production.local` first if you
 // want those filled in too.
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync, copyFileSync } from 'fs';
 import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const OUT = join(dirname(ROOT), 'DEVELOPER-CREDENTIALS.md');
+// Both files go in one folder so the handover is a single thing to share, and
+// the credentials are never separated from the document explaining what not to
+// do with them.
+const BUNDLE = join(dirname(ROOT), 'developer-handover');
+const OUT = join(BUNDLE, 'DEVELOPER-CREDENTIALS.md');
+const ONBOARDING = join(BUNDLE, 'DEVELOPER-ONBOARDING.md');
 
-if (OUT.startsWith(ROOT)) {
+if (BUNDLE.startsWith(ROOT)) {
   console.error('Refusing to write inside the repository.');
   process.exit(1);
 }
+mkdirSync(BUNDLE, { recursive: true });
 
 const read = (p) => (existsSync(join(ROOT, p)) ? readFileSync(join(ROOT, p), 'utf8') : '');
 const parse = (text) => {
@@ -99,6 +105,10 @@ const lines = [
   '',
   `Generated ${new Date().toISOString().slice(0, 10)} from the values on this machine.`,
   '',
+  '**Read DEVELOPER-ONBOARDING.md in this folder first.** It explains what each',
+  'variable does, what is safe to hand over, and how to get running without most',
+  'of these.',
+  '',
   '**Send this through a password manager share link, not email or chat.**',
   'Delete it once the developer has loaded the values, and rotate every key here',
   'when the engagement ends.',
@@ -132,7 +142,23 @@ for (const [section, keys] of WANTED) {
 // Set at creation rather than chmod'd afterwards, so there is no window where
 // the secrets sit world-readable.
 writeFileSync(OUT, lines.join('\n'), { encoding: 'utf8', mode: 0o600 });
-console.log(`Wrote ${OUT}`);
+
+// Pair the credentials with the document that says what not to do with them.
+const src = join(ROOT, 'docs', 'DEVELOPER_ONBOARDING.md');
+if (existsSync(src)) copyFileSync(src, ONBOARDING);
+else console.log('  WARNING: docs/DEVELOPER_ONBOARDING.md is missing — credentials sent without it.');
+
+// An earlier version wrote a single loose file next to the repo. Remove it so
+// there is only ever one copy of these secrets on disk.
+const legacy = join(dirname(ROOT), 'DEVELOPER-CREDENTIALS.md');
+if (existsSync(legacy)) {
+  rmSync(legacy);
+  console.log(`  Removed the previous loose copy at ${legacy}`);
+}
+
+console.log(`Wrote ${BUNDLE}`);
+console.log('  DEVELOPER-CREDENTIALS.md  (secrets)');
+console.log('  DEVELOPER-ONBOARDING.md   (what they mean, what not to share)');
 if (process.platform === 'win32') {
   console.log('  NOTE: Windows ignores POSIX file modes. This file inherits the');
   console.log('  folder\'s ACL, and OneDrive will sync it. Move it out of OneDrive');
