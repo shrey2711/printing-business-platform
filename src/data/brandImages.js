@@ -28,7 +28,9 @@ export const PRODUCT_CARD_IMAGE = {
   'coroplast-signs': '/images/signs/coroplast-signs-booth-directional.jpeg',
   'pvc-board-signs': '/images/signs/pvc-board-signs-booth-panel.jpeg',
   'acp-aluminum-signs': '/images/signs/acp-aluminum-signs-fascia-panel.jpeg',
-  'business-cards-16pt-matte': '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg'
+  'business-cards-16pt-matte': '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg',
+  'flyers-80lb-uncoated': '/images/marketing/flyers-80lb-uncoated-booth-handout.jpeg',
+  'brochures-80lb-uncoated': '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg'
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;

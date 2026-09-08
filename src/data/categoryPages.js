@@ -318,6 +318,12 @@ export const CATEGORY_PAGES = [
     ],
     answer:
       'Marketing essentials are the printed collateral a visitor takes away from your booth — business cards, flyers and brochures. Apex produces them on the same trade print network as its large format displays, so the colour on a 16pt matte card matches the backdrop behind it.',
+    compareCols: ['Stock', 'Best for', 'From'],
+    compare: [
+      { slug: 'business-cards-16pt-matte', name: 'Business Cards, 16pt Matte', to: '/products/business-cards-16pt-matte', cells: ['16pt gloss C2S, matte coated', 'Handing over in a conversation'] },
+      { slug: 'flyers-80lb-uncoated', name: 'Flyers, 80lb Enviro Uncoated', to: '/products/flyers-80lb-uncoated', cells: ['80lb uncoated, 30% recycled', 'One offer, printed in quantity'] },
+      { slug: 'brochures-80lb-uncoated', name: 'Brochures, 80lb Enviro Uncoated', to: '/products/brochures-80lb-uncoated', cells: ['80lb uncoated, 30% recycled', 'Detail a qualified visitor takes away'] }
+    ],
     faqs: [
       { q: 'What does 16pt matte mean on a business card?', a: '16pt is the thickness of the card stock — noticeably heavier than the 14pt most desktop print shops run, which is what stops a card softening in a pocket. Matte is the finish: no gloss, no glare under booth lighting, and a surface you can actually write a note on.' },
       { q: 'What is 80lb uncoated stock?', a: 'A weight and a finish. 80lb is a text-weight paper with enough body that a flyer does not feel flimsy in the hand. Uncoated means no gloss layer, so the sheet takes a pen, reads without glare, and looks closer to stationery than to a supermarket leaflet.' },

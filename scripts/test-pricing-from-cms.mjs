@@ -233,7 +233,10 @@ check('a percentage change reaches the real price of every priced product', () =
     'seg-modular-trade-show-kit-c',
     'coroplast-signs',
     'pvc-board-signs',
-    'acp-aluminum-signs'
+    'acp-aluminum-signs',
+    'business-cards-16pt-matte',
+    'flyers-80lb-uncoated',
+    'brochures-80lb-uncoated'
   ]);
   const surprise = unsupported.filter((s) => !EXPECTED_UNPRICED.has(s));
   if (surprise.length) return `${surprise.length} priced product(s) cannot be bulk-priced: ${surprise.join(', ')}`;

@@ -104,7 +104,9 @@ export const navGroups = [
   {
     name: 'Marketing Essentials',
     items: [
-      { name: 'Business Cards (16pt Matte)', slug: 'business-cards-16pt-matte' }
+      { name: 'Business Cards (16pt Matte)', slug: 'business-cards-16pt-matte' },
+      { name: 'Flyers (80lb Uncoated)', slug: 'flyers-80lb-uncoated' },
+      { name: 'Brochures (80lb Uncoated)', slug: 'brochures-80lb-uncoated' }
     ]
   }
 ];
@@ -1992,6 +1994,198 @@ const products = [
             { id: '5000', label: '5,000', default: false },
             { id: '10000', label: '10,000', default: false },
             { id: '25000', label: '25,000', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'flyers-80lb-uncoated',
+    faqs: [
+      { q: 'What stock are the flyers printed on?', a: '80lb enviro stock, which contains 30% post-consumer recycled content. That figure is what the mill states for this sheet and it is the only recycled-content claim we make for it.' },
+      { q: 'What does uncoated mean in practice?', a: 'There is no gloss or matte layer sealed over the paper, so you are handling the sheet itself. Two things follow. It takes pen and marker, so someone at the booth can write a price or a date on it and the ink stays put. And it does not throw glare back under exhibition lighting the way a coated sheet does.' },
+      { q: 'What sizes can I order?', a: 'Six: 3.5" x 8.5", 8.5" x 5.5", 4.25" x 11", 8.5" x 11", 11" x 17" and 17" x 22". Every one is cut to size and boxed.' },
+      { q: 'Should I print one side or both?', a: '4/0 prints the front and leaves the back blank, which gives the visitor a clean surface to write on. 4/4 prints both faces, so the back can carry a schedule, a map or a QR code. Both are full colour CMYK.' },
+      { q: 'What is the minimum quantity?', a: '25 flyers, and we print up to 100,000 in a run. Optional bundling is available if you want them split into counted stacks rather than loose in the box.' },
+      // Titled to match the generated question so this replaces the site-wide
+      // artwork answer, which is written for large format (150dpi, no bleed) and
+      // wrong for small format. See the note on business cards.
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. Keep text and logos clear of the trim, because the cutter works to a tolerance and artwork built with no bleed can leave a white edge. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Stock', '80lb enviro stock, containing 30% post-consumer recycled content'],
+      ['Coating', 'Uncoated'],
+      ['Printing', 'Full colour CMYK, 4/0 single sided or 4/4 double sided'],
+      ['Sizes', '3.5" x 8.5", 8.5" x 5.5", 4.25" x 11", 8.5" x 11", 11" x 17", 17" x 22"'],
+      ['Quantities', '25 to 100,000'],
+      ['Finishing', 'Cut to size and boxed; optional bundling'],
+      ['Shipping', 'Shipped flat, not folded']
+    ],
+    applications: [
+      'Booth handouts a visitor can write a price or a date on',
+      'Single-offer sheets for a show special with a deadline on it',
+      'Session and demo schedules handed out at the aisle',
+      'Inserts for a sponsored show bag'
+    ],
+    active: true,
+    name: 'Flyers, 80lb Enviro Uncoated',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '📰',
+    quoteOnly: true,
+    tagline: 'Uncoated 80lb enviro stock with 30% post-consumer recycled content, in six sizes from 3.5" x 8.5" to 17" x 22".',
+    description:
+      'Flyers on 80lb enviro stock, an uncoated sheet containing 30% post-consumer recycled content. Uncoated means there is no gloss layer sealed over the paper, so the sheet takes pen and marker and a visitor can write on it at the booth without the ink beading off. It also reads matte under exhibition lighting rather than throwing glare back at whoever is reading it. Printed full colour on one side or both, cut to size and shipped flat, so nothing arrives with a fold you did not ask for.',
+    features: [
+      '80lb enviro stock containing 30% post-consumer recycled content',
+      'Uncoated, so the sheet takes pen and marker at the booth',
+      'No gloss layer, so it reads matte under exhibition lighting',
+      'Six sizes, from 3.5" x 8.5" up to 17" x 22"',
+      'Full colour on one side or both, from 25 up to 100,000'
+    ],
+    whatsIncluded: [
+      'Your flyers, printed full colour, cut to size and boxed.',
+      'Bundling into counted stacks only where you ask for it on the order.',
+      'Shipped flat. Flyers are not folded, so order brochures instead if you need a folded piece.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier. See
+    // the note on business cards: the placeholder gate in test-seo-invariants
+    // fails the build while this token is still in rendered output.
+    turnaround: 'Production: TODO_TURNAROUND business days. Shipping is calculated separately at checkout.',
+    seoTitle: 'Flyers | 80lb Enviro Uncoated',
+    seoDescription:
+      'Custom flyers on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six sizes, full colour on one side or both, from 25 to 100,000.',
+    related: ['brochures-80lb-uncoated', 'business-cards-16pt-matte'],
+    gallery: [
+      { src: '/images/marketing/flyers-80lb-uncoated-booth-handout.jpeg', alt: 'Uncoated 80lb flyer handed out at a trade show booth' },
+      { src: '/images/marketing/flyers-80lb-uncoated-size-range.jpeg', alt: 'Uncoated flyers shown in several sizes side by side' },
+      { src: '/images/marketing/flyers-80lb-uncoated-written-on.webp', alt: 'Uncoated flyer with a note written on it in pen' }
+    ],
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
+      // the page, the Product schema and the Merchant feed from claiming a
+      // number. Add a quantityTiers price table and delete quoteOnly to publish.
+      quoteOnly: true,
+      baseLabel: 'Flyers, 80lb Enviro Uncoated',
+      optionGroups: [
+        {
+          id: 'size', label: 'Size', type: 'select', choices: [
+            { id: '3-5x8-5', label: '3.5" x 8.5"', default: true },
+            { id: '8-5x5-5', label: '8.5" x 5.5"', default: false },
+            { id: '4-25x11', label: '4.25" x 11"', default: false },
+            { id: '8-5x11', label: '8.5" x 11"', default: false },
+            { id: '11x17', label: '11" x 17"', default: false },
+            { id: '17x22', label: '17" x 22"', default: false }
+          ]
+        },
+        {
+          id: 'sides', label: 'Printed sides', type: 'select', choices: [
+            { id: '4-0', label: 'Single sided (4/0)', default: true },
+            { id: '4-4', label: 'Double sided (4/4)', default: false }
+          ]
+        },
+        {
+          id: 'bundling', label: 'Bundling', type: 'select', choices: [
+            { id: 'none', label: 'Loose in the box', default: true },
+            { id: 'bundled', label: 'Bundled into counted stacks', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'brochures-80lb-uncoated',
+    faqs: [
+      { q: 'What stock are the brochures printed on?', a: 'The same 80lb enviro stock as our flyers, uncoated, containing 30% post-consumer recycled content. That figure is what the mill states for this sheet and it is the only recycled-content claim we make for it.' },
+      // Deliberately does not name tri-fold, z-fold or any other layout. The
+      // supplier confirms "folded" and "optional scoring" and nothing more, so
+      // naming a fold here would be inventing a spec.
+      { q: 'How are the brochures folded?', a: 'Folding is part of the finishing and the brochures arrive folded and boxed. We do not publish a fixed list of fold layouts for this product, so send the fold you want with your artwork and we will confirm it on the proof before anything runs.' },
+      { q: 'What does scoring do, and do I need it?', a: 'Scoring presses a crease into the sheet before it is folded. On a heavier uncoated stock the fibre can crack along a fold that has not been scored, which shows as a broken white line through the printed colour. It is optional, and it is worth adding when the fold runs through a solid or dark area of the design.' },
+      { q: 'What sizes can I order?', a: 'Six flat sizes: 8.5" x 11", 8.5" x 14", 9" x 12", 11" x 17", 17" x 22" and 11" x 25.5". Those are the sizes before folding, so the finished piece is smaller.' },
+      { q: 'What is the minimum quantity?', a: '25 brochures, and we print up to 100,000 in a run. Optional bundling is available if you want them split into counted stacks rather than loose in the box.' },
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. Build it to the flat size, not the folded size, and mark where the folds go. Keep anything you cannot afford to lose away from the trim and the fold lines. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Stock', '80lb enviro stock, containing 30% post-consumer recycled content'],
+      ['Coating', 'None'],
+      ['Printing', 'Full colour CMYK, 4/0 single sided or 4/4 double sided'],
+      ['Flat sizes', '8.5" x 11", 8.5" x 14", 9" x 12", 11" x 17", 17" x 22", 11" x 25.5"'],
+      ['Quantities', '25 to 100,000'],
+      ['Finishing', 'Cut to size, folded and boxed; optional bundling'],
+      ['Scoring', 'Optional, to stop the fold cracking']
+    ],
+    applications: [
+      'The take-away for a visitor who has already asked a real question',
+      'Product and specification detail that will not fit on a single flyer',
+      'Bag-sized leave-behinds for a sponsored show bag',
+      'Follow-up packs posted to badges scanned during the show'
+    ],
+    active: true,
+    name: 'Brochures, 80lb Enviro Uncoated',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '📑',
+    quoteOnly: true,
+    tagline: 'Uncoated 80lb enviro stock with 30% post-consumer recycled content, folded and boxed, in six flat sizes.',
+    description:
+      'Brochures on the same 80lb enviro stock as our flyers, uncoated and containing 30% post-consumer recycled content. A brochure folds, and the fold is what buys the space a single sheet does not have: room to answer a question properly for someone who has already asked one. It is the piece a qualified visitor takes away and reads after the show, and the flat sizes here fold down to fit a bag. Optional scoring creases the sheet before folding, which stops the fibre cracking along the fold.',
+    features: [
+      '80lb enviro stock containing 30% post-consumer recycled content',
+      'Uncoated, so the paper takes pen and reads matte under booth lighting',
+      'Folded and boxed, ready to hand out',
+      'Optional scoring, which stops the fold cracking on a heavier sheet',
+      'Six flat sizes, from 8.5" x 11" up to 11" x 25.5"'
+    ],
+    whatsIncluded: [
+      'Your brochures, printed full colour, cut to size, folded and boxed.',
+      'Scoring and bundling only where you add them to the order.',
+      'No folder, sleeve or insert. The brochures ship folded, in the box.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier.
+    turnaround: 'Production: TODO_TURNAROUND business days. Shipping is calculated separately at checkout.',
+    seoTitle: 'Brochures | 80lb Enviro Uncoated',
+    seoDescription:
+      'Custom folded brochures on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six flat sizes, full colour, from 25 to 100,000.',
+    related: ['flyers-80lb-uncoated', 'business-cards-16pt-matte'],
+    gallery: [
+      { src: '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg', alt: 'Folded uncoated 80lb brochures stacked on a booth counter' },
+      { src: '/images/marketing/brochures-80lb-uncoated-open-spread.jpeg', alt: 'Uncoated brochure opened flat to show the printed spread' },
+      { src: '/images/marketing/brochures-80lb-uncoated-scored-fold-detail.webp', alt: 'Close detail of a scored fold on an uncoated brochure' }
+    ],
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — see the flyers note above.
+      quoteOnly: true,
+      baseLabel: 'Brochures, 80lb Enviro Uncoated',
+      optionGroups: [
+        {
+          id: 'size', label: 'Flat size', type: 'select', choices: [
+            { id: '8-5x11', label: '8.5" x 11"', default: true },
+            { id: '8-5x14', label: '8.5" x 14"', default: false },
+            { id: '9x12', label: '9" x 12"', default: false },
+            { id: '11x17', label: '11" x 17"', default: false },
+            { id: '17x22', label: '17" x 22"', default: false },
+            { id: '11x25-5', label: '11" x 25.5"', default: false }
+          ]
+        },
+        {
+          id: 'sides', label: 'Printed sides', type: 'select', choices: [
+            { id: '4-0', label: 'Single sided (4/0)', default: true },
+            { id: '4-4', label: 'Double sided (4/4)', default: false }
+          ]
+        },
+        {
+          id: 'scoring', label: 'Scoring', type: 'select', choices: [
+            { id: 'none', label: 'No scoring', default: true },
+            { id: 'scored', label: 'Scored before folding', default: false }
+          ]
+        },
+        {
+          id: 'bundling', label: 'Bundling', type: 'select', choices: [
+            { id: 'none', label: 'Loose in the box', default: true },
+            { id: 'bundled', label: 'Bundled into counted stacks', default: false }
           ]
         }
       ]

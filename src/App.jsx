@@ -118,7 +118,9 @@ const shopMenu = [
     label: 'Marketing Essentials',
     to: '/marketing-essentials',
     items: [
-      { label: 'Business Cards (16pt Matte)', to: '/products/business-cards-16pt-matte' }
+      { label: 'Business Cards (16pt Matte)', to: '/products/business-cards-16pt-matte' },
+      { label: 'Flyers (80lb Uncoated)', to: '/products/flyers-80lb-uncoated' },
+      { label: 'Brochures (80lb Uncoated)', to: '/products/brochures-80lb-uncoated' }
     ]
   }
 ];
