@@ -1405,17 +1405,20 @@ const products = [
   {
     slug: '13oz-vinyl-banner',
   faqs: [
-    { q: 'What size can I order?', a: 'Any size to the inch, up to 50 ft on one side. Pricing is by the square foot, so you are not limited to stock formats.' },
-    { q: 'How is the banner finished?', a: 'A welded hem with grommets every 2 ft is included, so it is ready to tie off out of the box. Pole pockets and other edge options apply where you select them.' }
+    { q: 'What size can I order?', a: "Any size to the inch, up to 10' x 145' single sided. A pole pocket is sewn from the same material and costs width, so with a pocket the maximum is 9.5' x 145'; double sided is also 9.5' x 145'. Larger than that is produced by welding panels together and is quoted on request. Pricing is by the square foot, so you are not limited to stock formats." },
+    { q: 'How is the banner finished?', a: 'Standard hems, white double stitched thread and No. 2 Stimpson brass grommets are included at no charge, so it is ready to tie off out of the box. Pole pockets in 2", 3" and 4", windslits, velcro, webbing with D-rings, sewn-in rope and reinforced corner tabs are all available; the ones not shown in the configurator are quoted on request.' },
+    { q: 'Will it arrive rolled or folded?', a: 'Rolled when the shortest side is 88" or under, folded when it is 89" or over. A folded banner can carry crease lines from transport, which relax over a few days once it is hung.' }
   ],
     specs: [
-      ['Material', '13oz matte scrim vinyl'],
+      ['Material', '13oz scrim vinyl, waterproof and UV safe'],
       ['Printing', 'Full-color, UV-stable ink'],
-      ['Finishing', 'Welded hem with grommets every 2 ft included'],
-      ['Sizes', 'Made to size to the inch, up to 50 ft on one side'],
+      ['Finishing', 'Standard hems with No. 2 Stimpson brass grommets included'],
+      ['Sizes', "Made to size to the inch, up to 10' x 145' single sided; 9.5' x 145' with a pole pocket or double sided. Larger is available by welding, quoted on request"],
       ['Rated for', 'Indoor and outdoor use'],
+      ['Shipping form', 'Rolled at 88" and under on the shortest side; folded at 89" and over'],
+      ['Optional finishing', 'Pole pockets 2" (poles to 1"), 3" (to 1.5") or 4" (to 2"); windslits; 1" white loop-side velcro; 1" white nylon webbing with silver D-rings; sewn-in nylon rope 3/16" or 5/16"; reinforced corners with banner tabs'],
       ['Pricing', 'By the square foot'],
-      ['Production', '6-8 business days standard, 2-3 day rush (production time, not delivery)']
+      ['Production', 'Approved before 12pm PST ships the same business day; before 4pm PST ships the next business day; over 100 pieces adds 2 business days (production time, not delivery)']
     ],
     applications: [
       'Storefront and window banners',
@@ -1430,20 +1433,20 @@ const products = [
     emoji: '🎯',
     tagline: 'Full-color 13oz scrim vinyl banners, made to any size for indoor or outdoor use.',
     description:
-      'Our most popular banner: durable 13oz scrim vinyl printed edge to edge in vivid, UV-stable color. Rated for indoor and outdoor use — storefronts, events, trade shows and promotions — and finished with a welded hem and grommets every 2 ft so it is ready to hang out of the box. Made to size to the inch.',
+      'Our most popular banner: durable 13oz scrim vinyl printed edge to edge in vivid, UV-stable color. Rated for indoor and outdoor use — storefronts, events, trade shows and promotions — and finished with standard hems, white double stitched thread and No. 2 Stimpson brass grommets, so it is ready to hang out of the box. Made to size to the inch, up to 10 ft by 145 ft.',
     features: [
-      '13oz matte scrim vinyl',
-      'Indoor & outdoor rated, UV-stable ink',
+      '13oz scrim vinyl, waterproof and UV safe',
+      'Indoor and outdoor rated, full colour UV printed',
       'Welded hem + grommets every 2 ft included',
-      'Single-sided full-color print',
-      'Made to any size — up to 50 ft on one side'
+      'Double sided prints front and back on single ply, quoted on request',
+      "Made to any size up to 10' x 145'; 9.5' wide with a pole pocket"
     ],
     whatsIncluded: [
       'One custom-printed 13oz scrim vinyl banner, made to your exact size.',
-      'Edge finishing as configured — a welded hem with grommets every 2 ft is included; pole pockets and other edge options apply where you select them.',
+      'Standard hems, white double stitched thread and No. 2 Stimpson brass grommets, included at no charge. Pole pockets and the other edge options apply where you select them.',
       'No pole, stand or hardware — the banner ships ready to hang by its grommets or pocket.'
     ],
-    turnaround: 'Ships in 2–4 business days',
+    turnaround: 'Production: same business day when artwork is approved before 12pm PST, next business day before 4pm PST. Over 100 pieces adds 2 business days. Shipping is calculated separately at checkout.',
     seoTitle: '13oz Vinyl Banner | Full-Color Print',
     seoDescription:
       'Custom 13oz scrim vinyl banners made to any size, indoor or outdoor — welded hem and grommets included, UV-stable print. From $45, US & Canada.',
@@ -1457,8 +1460,13 @@ const products = [
       pricePerSqFt: 2.75,
       minChargeUsd: 45,
       minAreaSqFt: 0,
-      sizeSmallCapIn: 600,
-      sizeLargeCapIn: 1800,
+      // Supplier maximum: 10' x 145' single sided. A pole pocket is sewn from
+      // the same material and costs width, dropping the short side to 9.5'.
+      // These were 600 x 1800 (50' x 150'), five times the real short-side
+      // limit, so the engine priced and accepted banners nobody could produce.
+      sizeSmallCapIn: 120,
+      sizeSmallCapWithPocketIn: 114,
+      sizeLargeCapIn: 1740,
       defaultWidthIn: 72,
       defaultHeightIn: 36,
       materials: [{ id: '13oz-scrim', name: '13oz Scrim Vinyl', multiplier: 1 }],
@@ -1468,23 +1476,26 @@ const products = [
   {
     slug: '18oz-blockout-banner',
   faqs: [
-    { q: 'What makes it suitable for double-sided printing?', a: 'An opaque grey centre layer blocks light from passing through, so two different prints never ghost into each other — which a single-layer banner cannot do.' },
-    { q: 'Is it worth the extra weight outdoors?', a: 'For long outdoor runs and exposed sites, yes: the heavier 18oz scrim holds up better to sustained wind than 13oz. On a fence, consider mesh instead so the wind passes through.' }
+    { q: 'What makes it suitable for double-sided printing?', a: 'The construction. It is a PVC face front and back with a blockout layer sandwiched between them, scrim reinforced. That middle layer stops light passing through the banner, so the image on one face cannot ghost into the other. A single-layer banner cannot do this, which is the whole reason to specify 18oz blockout.' },
+    { q: 'What is included, and what is not?', a: 'Hemming is included on single sided banners only, along with No. 2 Stimpson brass grommets. A double sided banner is hemmed as a charged option rather than free. Pole pockets, windslits, webbing with D-rings, sewn-in rope and reinforced corner tabs are available; velcro is not offered on double sided.' },
+    { q: 'Will it arrive rolled or folded?', a: 'Rolled when the shortest side is 88" or under, folded when it is 89" or over. A folded banner can carry crease lines from transport, which relax over a few days once it is hung.' }
   ],
     specs: [
-      ['Material', '18oz blockout scrim vinyl with an opaque grey centre layer'],
-      ['Printing', 'Full-color; true double-sided ready — no light passes through'],
-      ['Finishing', 'Welded hem with grommets every 2 ft included'],
-      ['Sizes', 'Made to size to the inch, up to 50 ft on one side'],
-      ['Rated for', 'Heavy-duty wind and long outdoor use'],
+      ['Material', '18oz matte vinyl: PVC faces front and back with a blockout layer between them, scrim reinforced. Waterproof and UV safe'],
+      ['Printing', 'Full colour UV printed. The blockout layer stops light and image bleed-through, which is what makes a true double sided print possible'],
+      ['Finishing', 'Standard hems with No. 2 Stimpson brass grommets included'],
+      ['Sizes', "Made to size to the inch, up to 10' x 145' single sided; 9.5' x 145' with a pole pocket or double sided. Larger is available by welding, quoted on request"],
+      ['Rated for', 'Indoor and outdoor use'],
+      ['Shipping form', 'Rolled at 88" and under on the shortest side; folded at 89" and over'],
+      ['Optional finishing', 'Pole pockets 2", 3" or 4"; windslits; 1" white loop-side velcro (not available on double sided); 1" white nylon webbing with silver D-rings; sewn-in nylon rope 3/16" or 5/16"; reinforced corners with banner tabs'],
       ['Pricing', 'By the square foot'],
-      ['Production', '6-8 business days standard, 2-3 day rush (production time, not delivery)']
+      ['Production', 'Approved before 12pm PST ships the same business day; before 4pm PST ships the next business day; over 100 pieces adds 2 business days (production time, not delivery)']
     ],
     applications: [
-      'Double-sided hanging banners',
-      'Long-run outdoor signage',
-      'Street pole and overhead banners',
-      'High-wind exposed sites'
+      'Double sided hanging banners where both faces must stay clean',
+      'Backlit and bright locations where a single-layer banner would show through',
+      'Long-run indoor and outdoor signage',
+      'Anywhere the back of the banner is as visible as the front'
     ],
     active: true,
     name: '18oz Blockout Banner',
@@ -1493,20 +1504,20 @@ const products = [
     emoji: '🌓',
     tagline: 'Heavy 18oz blockout vinyl with an opaque core — the choice for double-sided banners.',
     description:
-      'An 18oz heavy-duty scrim with an opaque gray center layer that blocks light from passing through, so two different prints never bleed into each other — the right pick for true double-sided banners and bright, high-traffic locations. Heavier and more tear-resistant than 13oz for long outdoor runs, street banners and building drapes. Finished with a welded hem and grommets every 2 ft.',
+      'An 18oz matte vinyl built as a PVC face front and back with a blockout layer sandwiched between them, scrim reinforced. That middle layer is the point: it stops light passing through the banner, so two different prints never bleed into each other. It is the right pick for a true double sided banner and for bright locations where a single-layer banner would show its back image. Waterproof and UV safe. No. 2 Stimpson brass grommets are included, and hemming is included on single sided banners.',
     features: [
-      '18oz blockout scrim vinyl',
-      'Opaque center blocks light — true double-sided ready',
-      'Heavy-duty for wind & long outdoor use',
+      '18oz matte vinyl, scrim reinforced, waterproof and UV safe',
+      'A blockout layer between two PVC faces stops light and image bleed-through',
+      'The construction that makes a true double sided print possible',
       'Welded hem + grommets every 2 ft included',
-      'Made to any size — up to 50 ft on one side'
+      "Made to any size up to 10' x 145'; 9.5' wide with a pole pocket"
     ],
     whatsIncluded: [
-      'One custom-printed 18oz blockout vinyl banner, made to your exact size — single- or double-sided as configured.',
-      'Edge finishing as configured — a welded hem with grommets every 2 ft is included; pole pockets and other edge options apply where you select them.',
+      'One custom-printed 18oz blockout vinyl banner, made to your exact size.',
+      'No. 2 Stimpson brass grommets, included at no charge. Hemming is included on single sided banners only; on a double sided banner it is a charged option. Pole pockets and the other edge options apply where you select them.',
       'No pole, stand or hardware — the banner ships ready to hang by its grommets or pocket.'
     ],
-    turnaround: 'Ships in 2–4 business days',
+    turnaround: 'Production: same business day when artwork is approved before 12pm PST, next business day before 4pm PST. Over 100 pieces adds 2 business days. Shipping is calculated separately at checkout.',
     seoTitle: '18oz Blockout Banner | Double-Sided',
     seoDescription:
       'Custom 18oz blockout vinyl banners with an opaque core for true double-sided prints — heavy-duty, hem and grommets included. From $45, US & Canada.',
@@ -1519,8 +1530,13 @@ const products = [
       pricePerSqFt: 4.0,
       minChargeUsd: 45,
       minAreaSqFt: 0,
-      sizeSmallCapIn: 600,
-      sizeLargeCapIn: 1800,
+      // Supplier maximum: 10' x 145' single sided. A pole pocket is sewn from
+      // the same material and costs width, dropping the short side to 9.5'.
+      // These were 600 x 1800 (50' x 150'), five times the real short-side
+      // limit, so the engine priced and accepted banners nobody could produce.
+      sizeSmallCapIn: 120,
+      sizeSmallCapWithPocketIn: 114,
+      sizeLargeCapIn: 1740,
       defaultWidthIn: 72,
       defaultHeightIn: 36,
       materials: [{ id: '18oz-blockout', name: '18oz Blockout Vinyl', multiplier: 1 }],
@@ -1530,17 +1546,22 @@ const products = [
   {
     slug: 'mesh-banner',
   faqs: [
-    { q: 'Why choose mesh over solid vinyl?', a: 'The material is perforated so roughly 30% of the wind passes through, cutting the load that makes a solid banner flap and tear on an exposed fence or wrap.' },
-    { q: 'Does the perforation affect print quality?', a: 'The print is full-color on UV-stable ink and reads normally at viewing distance. Up close you can see the perforation, which is why mesh is used for large outdoor pieces rather than small indoor signs.' }
+    { q: 'Why choose mesh over solid vinyl?', a: 'The material is a 70/30 perforation, meaning roughly 30% of the surface is open holes rather than vinyl. Air moves through those holes instead of pushing against a solid sheet, which is what cuts the load that makes a solid banner flap and tear on an exposed fence, a scaffold or a building wrap.' },
+    { q: 'Does the perforation affect print quality?', a: 'The print is full colour UV printed and reads normally at viewing distance. Up close you can see the perforation, which is why mesh is used for large outdoor pieces read from a distance rather than for small indoor signs.' },
+    { q: 'How is a double sided mesh banner made?', a: 'Differently from our solid vinyls. On 13oz and 18oz a double sided banner is printed front and back on one ply of material. Mesh cannot work that way because it is perforated, so a double sided mesh banner is two printed banners sewn back to back.' },
+    { q: 'Will it arrive rolled or folded?', a: 'Rolled up to 96" on the shortest side, and folded above that.' }
   ],
     specs: [
-      ['Material', 'Perforated mesh vinyl (~30% airflow)'],
+      ['Material', '10oz matte mesh vinyl, 70/30 perforation, waterproof and UV safe'],
       ['Printing', 'Full-color, UV-stable ink'],
-      ['Finishing', 'Welded hem with grommets every 2 ft included'],
-      ['Sizes', 'Made to size to the inch, up to 50 ft on one side'],
+      ['Finishing', 'Standard hems with No. 2 Stimpson brass grommets included'],
+      ['Sizes', "Made to size to the inch, up to 10' x 145' single sided; 9.5' x 145' with a pole pocket or double sided. Larger is available by welding, quoted on request"],
       ['Best for', 'Fences, building wraps and exposed outdoor sites'],
+      ['Double sided', 'Two banners sewn back to back, rather than the single ply method used on 13oz and 18oz'],
+      ['Shipping form', 'Rolled up to 96" on the shortest side; folded above that'],
+      ['Optional finishing', 'Pole pockets 2", 3" or 4"; 1" white loop-side velcro; nylon webbing with silver D-rings; sewn-in nylon rope 3/16" or 5/16"; reinforced corner tabs (clear plastic banner-ups)'],
       ['Pricing', 'By the square foot'],
-      ['Production', '6-8 business days standard, 2-3 day rush (production time, not delivery)']
+      ['Production', 'Approved before 12pm PST ships the same business day; before 4pm PST ships the next business day; over 100 pieces adds 2 business days (production time, not delivery)']
     ],
     applications: [
       'Construction fence wraps',
@@ -1555,20 +1576,20 @@ const products = [
     emoji: '🌬️',
     tagline: 'Perforated mesh vinyl that lets wind pass through — ideal for fences and building wraps.',
     description:
-      'Printed on perforated mesh vinyl that lets roughly 30% of the wind pass straight through, cutting the wind load that makes solid banners flap and tear. Built for fence lines, scaffolding, stadium rails and building wraps where airflow matters, while still holding bold outdoor color. Finished with a welded hem and grommets every 2 ft.',
+      'Printed on 10oz matte mesh vinyl with a 70/30 perforation, so roughly 30% of the surface is open holes and air passes through instead of pushing against a solid sheet. That is what cuts the load that makes solid banners flap and tear on a fence line, a scaffold or a stadium rail. Waterproof and UV safe, and still holds bold outdoor colour. Hemming and No. 2 Stimpson brass grommets are included, sewn with white double stitched thread.',
     features: [
-      'Perforated mesh vinyl (~30% airflow)',
-      'Reduced wind load for fences & wraps',
-      'Outdoor rated, UV-stable ink',
+      '10oz matte mesh vinyl with a 70/30 perforation, waterproof and UV safe',
+      'Roughly 30% open area, so air passes through instead of loading the banner',
+      'Built for fence lines, scaffolding and building wraps',
       'Welded hem + grommets every 2 ft included',
-      'Made to any size — up to 50 ft on one side'
+      "Made to any size up to 10' x 145'; 9.5' wide with a pole pocket"
     ],
     whatsIncluded: [
-      'One custom-printed perforated mesh vinyl banner, made to your exact size.',
-      'Edge finishing as configured — a welded hem with grommets every 2 ft is included; pole pockets and other edge options apply where you select them.',
+      'One custom-printed 10oz mesh vinyl banner, made to your exact size.',
+      'Hemming and No. 2 Stimpson brass grommets with white double stitched thread, included at no charge. Pole pockets and the other edge options apply where you select them.',
       'No pole, stand or hardware — the banner ships ready to zip-tie or hang to a fence, rail or frame by its grommets.'
     ],
-    turnaround: 'Ships in 2–4 business days',
+    turnaround: 'Production: same business day when artwork is approved before 12pm PST, next business day before 4pm PST. Over 100 pieces adds 2 business days. Shipping is calculated separately at checkout.',
     seoTitle: 'Mesh Banner | Perforated Wind-Resistant',
     seoDescription:
       'Custom perforated mesh banners that let wind through — ideal for fences and building wraps. Hem and grommets included. From $45, US & Canada.',
@@ -1581,8 +1602,13 @@ const products = [
       pricePerSqFt: 3.1,
       minChargeUsd: 45,
       minAreaSqFt: 0,
-      sizeSmallCapIn: 600,
-      sizeLargeCapIn: 1800,
+      // Supplier maximum: 10' x 145' single sided. A pole pocket is sewn from
+      // the same material and costs width, dropping the short side to 9.5'.
+      // These were 600 x 1800 (50' x 150'), five times the real short-side
+      // limit, so the engine priced and accepted banners nobody could produce.
+      sizeSmallCapIn: 120,
+      sizeSmallCapWithPocketIn: 114,
+      sizeLargeCapIn: 1740,
       defaultWidthIn: 96,
       defaultHeightIn: 48,
       materials: [{ id: 'mesh-vinyl', name: 'Perforated Mesh Vinyl', multiplier: 1 }],

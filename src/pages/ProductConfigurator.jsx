@@ -114,9 +114,18 @@ export default function ProductConfigurator() {
   // mirrored from the server. The numbers come from the same product config so
   // the message can't drift from the rule; the server re-validates and rejects
   // independently — this only gives instant feedback and blocks the CTA.
+  // A pole pocket is sewn from the same material and costs width, so the short
+  // side cap drops when one is selected. Mirrors bannerSmallCap in pricing.js.
+  const poleSel = config?.finishing?.pole;
   const sizeCaps =
     isArea && product?.pricing?.sizeSmallCapIn != null
-      ? { small: product.pricing.sizeSmallCapIn, large: product.pricing.sizeLargeCapIn }
+      ? {
+          small:
+            poleSel && poleSel !== 'none' && product.pricing.sizeSmallCapWithPocketIn != null
+              ? product.pricing.sizeSmallCapWithPocketIn
+              : product.pricing.sizeSmallCapIn,
+          large: product.pricing.sizeLargeCapIn
+        }
       : null;
   const sizeError = (() => {
     if (!sizeCaps || !config) return null;
