@@ -1,6 +1,8 @@
 // Generate useful, unique FAQs for each product from its own data
 // (sizes, materials, finishing, turnaround). Used on the product page and
 // prerendered as FAQPage structured data.
+import { ARTWORK_SPEC } from '../../src/lib/artworkSpec.js';
+
 export function getProductFaqs(product) {
   // A product may carry its own curated FAQs. They lead — they answer real
   // purchase objections — but they no longer REPLACE the generated ones, which
@@ -59,10 +61,16 @@ export function getProductFaqs(product) {
     });
   }
 
-  // Turnaround + shipping
+  // Turnaround + shipping.
+  //
+  // `turnaround` is authored per product and some values end without a full
+  // stop, which ran two sentences together in the visible FAQ and in the
+  // FAQPage schema: "Ships in 2-4 business days We ship across the United
+  // States…". Close the sentence here rather than editing every record.
+  const turnaround = String(product.turnaround || '').trim().replace(/[.\s]+$/, '');
   faqs.push({
     q: `How fast is production and shipping?`,
-    a: `${product.turnaround} We ship across the United States and Canada — see our Shipping page for delivery details.`
+    a: `${turnaround ? `${turnaround}. ` : ''}We ship across the United States and Canada — see our Shipping page for delivery details.`
   });
 
   // Finishing / double-sided
@@ -80,10 +88,18 @@ export function getProductFaqs(product) {
     });
   }
 
-  // Artwork / files
+  // Artwork / files.
+  //
+  // Answered from the rules the uploader actually enforces. This used to say we
+  // accept "PDF, AI, EPS, and high-resolution PNG or JPG", which the quote and
+  // order forms reject: src/lib/artworkSpec.js allows PDF and JPEG only, single
+  // page, up to MAX_LABEL. Telling a customer to send a file the form will not
+  // take is worse than telling them nothing. Text is derived from ARTWORK_SPEC
+  // so the two cannot drift apart again.
+  const spec = Object.fromEntries(ARTWORK_SPEC);
   faqs.push({
     q: `What artwork file formats do you accept?`,
-    a: `We accept print-ready PDF, AI, EPS, and high-resolution PNG or JPG files. Send us your file — or just a logo — and we'll check it at no charge and send a free proof before printing.`
+    a: `${spec['Accepted formats']}, up to ${spec['Maximum file size']}. ${spec['Colour space']}. ${spec['Resolution']}. ${spec['Size']}, and do not include bleed or crop marks. Convert live fonts to outlines. We check every file at no charge and send a free proof before printing.`
   });
 
   // Bulk / wholesale discounts
