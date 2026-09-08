@@ -16,7 +16,12 @@ export const categories = [
   { id: 'backdrops', name: 'Backdrops' },
   { id: 'table-covers', name: 'Table Covers' },
   { id: 'flags', name: 'Flags' },
-  { id: 'seg-kits', name: 'SEG Modular Kits' }
+  { id: 'seg-kits', name: 'SEG Modular Kits' },
+  // Categories whose landing pages are live and whose products are still being
+  // added. The filter chip and the category grid populate themselves from
+  // `products` below, so nothing here changes when the first SKU lands.
+  { id: 'rigid-signs', name: 'Rigid Signs' },
+  { id: 'marketing-essentials', name: 'Marketing Essentials' }
 ];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
@@ -86,6 +91,22 @@ export const navGroups = [
       { name: 'SEG Modular Kit A', slug: 'seg-modular-trade-show-kit-a' },
       { name: 'SEG Modular Kit B', slug: 'seg-modular-trade-show-kit-b' },
       { name: 'SEG Modular Kit C', slug: 'seg-modular-trade-show-kit-c' }
+    ]
+  },
+  {
+    name: 'Rigid Signs',
+    items: [
+      { name: 'Coroplast Signs (4mm)', slug: 'coroplast-signs' },
+      { name: 'PVC Board (1/8")', slug: 'pvc-board-signs' },
+      { name: 'ACP Aluminum Sandwich Board', slug: 'acp-aluminum-signs' }
+    ]
+  },
+  {
+    name: 'Marketing Essentials',
+    items: [
+      { name: 'Business Cards (16pt Matte)', slug: 'business-cards-16pt-matte' },
+      { name: 'Flyers (80lb Uncoated)', slug: 'flyers-80lb-uncoated' },
+      { name: 'Brochures (80lb Uncoated)', slug: 'brochures-80lb-uncoated' }
     ]
   }
 ];
@@ -1312,6 +1333,57 @@ const FABRIC_FINISHING_GROUPS = [
   ] }
 ];
 
+// Rigid signs. Only the two finishing choices the supplier actually offers on
+// coroplast, plus the sides selector. No `mult` or `rate` on any choice: the
+// product is quote-only until its price is set, so nothing here computes yet
+// and a rate written now would be a guess. Set the rates with the price.
+const COROPLAST_FINISHING_GROUPS = [
+  { id: 'sides', label: '# of Sides', ui: 'pills', choices: [
+    { id: '1', name: '1 Side (4/0)' },
+    { id: '2', name: '2 Sides (4/4)' }
+  ] },
+  { id: 'grommets', label: 'Grommets', choices: [
+    { id: 'none', name: 'No Grommets' },
+    { id: 'corners', name: 'No. 2 Brass Grommets' }
+  ] },
+  { id: 'stake', label: 'H-Stake', choices: [
+    { id: 'none', name: 'No Stake' },
+    { id: 'h-stake', name: '10" x 30" Steel H-Stake' }
+  ] }
+];
+
+// PVC board takes grommets and nothing else. No stake option: the supplier does
+// not offer one on this material, and offering a choice we cannot fulfil is
+// worse than offering none. Rates are set with the price, as above.
+const PVC_FINISHING_GROUPS = [
+  { id: 'sides', label: '# of Sides', ui: 'pills', choices: [
+    { id: '1', name: '1 Side (4/0)' },
+    { id: '2', name: '2 Sides (4/4)' }
+  ] },
+  { id: 'grommets', label: 'Grommets', choices: [
+    { id: 'none', name: 'No Grommets' },
+    { id: 'corners', name: 'Grommets' }
+  ] }
+];
+
+// Aluminum composite. Corner radius and punched holes instead of grommets: on a
+// metal-skinned panel the mounting is drilled, not eyeletted. Rates set with
+// the price, as above.
+const ACP_FINISHING_GROUPS = [
+  { id: 'sides', label: '# of Sides', ui: 'pills', choices: [
+    { id: '1', name: '1 Side (4/0)' },
+    { id: '2', name: '2 Sides (4/4)' }
+  ] },
+  { id: 'corners', label: 'Corner Radius', choices: [
+    { id: 'square', name: 'Square Corners' },
+    { id: 'radius', name: 'Rounded Corners' }
+  ] },
+  { id: 'holes', label: 'Mounting Holes', choices: [
+    { id: 'none', name: 'No Holes' },
+    { id: 'punched', name: '0.25" Punched Mounting Holes' }
+  ] }
+];
+
 const products = [
   ...canopyTents,
   pleatedCovers,
@@ -1603,6 +1675,564 @@ const products = [
       defaultHeightIn: 48,
       materials: [{ id: '9oz-poly', name: '9oz Wrinkle-Free Polyester', multiplier: 1 }],
       finishingGroups: FABRIC_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'coroplast-signs',
+    faqs: [
+      { q: 'What size can I order?', a: 'From 6" x 6" up to 48" x 96", cut to the size you enter. Flutes run vertically as standard. A sign wider than 48" runs horizontal flutes instead.' },
+      { q: 'What is the difference between single and double sided?', a: 'Single sided is a 4/0 print with the back left white. Double sided is 4/4, printed on both faces. Double sided artwork has to be supplied as two separate files, one per face.' },
+      { q: 'How do I mount the sign?', a: 'Two optional finishing choices are available. No. 2 brass grommets let you hang or tie the sign to a frame or a fence. A 10" x 30" steel H-stake pushes into the ground and holds the sign upright. Add either one to the order; neither is included by default.' },
+      { q: 'Can I use these outdoors?', a: 'Yes. The sheet is 4mm corrugated plastic and the ink is UV printed direct to it, so there is no laminated surface layer to lift at the edges. We do not publish a rated outdoor lifespan for this material, so treat it as event and short-run signage rather than permanent exterior signage.' },
+      // Deliberately worded to match the question the FAQ generator asks, so the
+      // verified supplier turnaround replaces the generic one instead of the
+      // page carrying both.
+      { q: 'How fast is production and shipping?', a: 'Artwork approved before 6am PST ships the same business day. Approved between 6:01am and 11:59pm PST ships the next business day. An order over 300 pieces adds one business day. Shipping time is separate and depends on the delivery address.' },
+      // Same reason: the generated answer lists file types the uploader rejects.
+      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. Maximum upload is 300MB. A double sided sign needs two separate files.' }
+    ],
+    specs: [
+      ['Material', '4mm white corrugated plastic (coroplast)'],
+      ['Printing', 'Direct UV printed, matte finish'],
+      ['Sides', '4/0 single sided or 4/4 double sided'],
+      ['Sizes', 'Made to size from 6" x 6" up to 48" x 96"'],
+      ['Flute direction', 'Vertical as standard; signs wider than 48" run horizontal flutes'],
+      ['Optional finishing', 'No. 2 brass grommets, or a 10" x 30" steel H-stake'],
+      ['Production', 'Approved before 6am PST ships the same business day; approved 6:01am to 11:59pm PST ships the next business day; over 300 pieces adds one business day']
+    ],
+    applications: [
+      'Booth directional signs pointing to a demo station, a meeting area or a counter',
+      'Aisle markers hung at eye level so a booth number reads down the row',
+      'Sponsor boards listing the companies backing an event',
+      'Parking and check-in signage on H-stakes outside the venue'
+    ],
+    active: true,
+    name: 'Coroplast Signs',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🪧',
+    tagline: '4mm corrugated plastic signs, UV printed and cut to size from 6" x 6" up to 48" x 96".',
+    description:
+      'Coroplast is 4mm corrugated plastic. It is light enough to carry in with the rest of a booth kit and stiff enough to stand on its own as a directional or check-in sign. We print direct to the sheet with UV ink in a matte finish, single sided or double sided, and cut each sign to the size you order. Flutes run vertically as standard, which is the direction that lets a sign sit on an H-stake.',
+    features: [
+      '4mm corrugated plastic, light enough to carry in with the rest of your booth kit',
+      'Matte UV print, so booth lighting does not glare off the face in photos',
+      'Single or double sided, so an aisle sign reads from both directions',
+      'Cut to any size from 6" x 6" up to 48" x 96" rather than a fixed format',
+      'Takes No. 2 brass grommets for hanging or a steel H-stake for ground placement'
+    ],
+    whatsIncluded: [
+      'One 4mm coroplast sign, UV printed and cut to the size you order.',
+      'Grommets or an H-stake only where you add them to the order. Both are optional finishing.',
+      'No frame, post or wall fixings. The sign ships flat, ready to mount however you have specified.'
+    ],
+    turnaround: 'Production: same business day when artwork is approved before 6am PST, otherwise the next business day. Shipping is calculated separately at checkout.',
+    seoTitle: 'Coroplast Signs | 4mm Corrugated Plastic',
+    seoDescription:
+      'Custom 4mm coroplast signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Grommets and H-stakes available.',
+    related: ['pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/signs/coroplast-signs-booth-directional.jpeg
+    //   /images/signs/coroplast-signs-double-sided-aisle-marker.jpeg
+    //   /images/signs/coroplast-signs-grommets-h-stake.webp
+    pricing: {
+      model: 'area',
+      // TODO_PRICE — supplier pricing not set yet. While `quoteOnly` is true the
+      // card, the page, the Product schema and the Merchant feed all treat this
+      // as a quote product: no price is shown and no Offer is emitted, which is
+      // the only honest state for a SKU with no price. To publish a price, set
+      // pricePerSqFt and minChargeUsd below and delete the quoteOnly line.
+      quoteOnly: true,
+      pricePerSqFt: null,
+      minChargeUsd: null,
+      minAreaSqFt: 0,
+      minWidthIn: 6,
+      minHeightIn: 6,
+      maxWidthIn: 48,
+      maxHeightIn: 96,
+      sizeSmallCapIn: 288,
+      sizeLargeCapIn: 576,
+      defaultWidthIn: 24,
+      defaultHeightIn: 18,
+      materials: [{ id: '4mm-coroplast', name: '4mm Corrugated Plastic', multiplier: 1 }],
+      finishingGroups: COROPLAST_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'pvc-board-signs',
+    faqs: [
+      { q: 'What size can I order?', a: 'From 6" x 6" up to 48" x 96", custom cut to the dimensions you enter. The board comes in one thickness, 1/8".' },
+      // `linkSlugs` renders as anchors after the answer. Slugs only, resolved
+      // against the catalogue, so nothing in this data becomes markup. A slug
+      // that does not resolve is dropped rather than rendering a dead link.
+      {
+        q: 'What is the difference between coroplast, PVC and ACP?',
+        a: 'Coroplast is 4mm corrugated plastic. It is fluted and light, which makes it the short-run choice for signage that only has to last an event. PVC board is a 1/8" expanded PVC sheet: rigid, with a smooth face that reads as a permanent sign, and light enough to pack into a case and reship between shows. ACP is an aluminum composite panel and is the heavier of the three. PVC is the indoor workhorse in the middle.',
+        linkSlugs: ['coroplast-signs', 'acp-aluminum-signs']
+      },
+      { q: 'Can I print both sides?', a: 'Yes. 4/0 prints one face and leaves the back white. 4/4 prints both faces. Each artwork file is a single page, so a 4/4 sign needs one file per face.' },
+      { q: 'How do I mount a PVC panel?', a: 'Grommets are the one optional finishing on this material. Add them to the order and the panel can be hung or tied. Nothing else is supplied with the sign, so screws, standoffs and frames come from your side.' },
+      { q: 'How fast is production and shipping?', a: 'Ordered before 12pm PST it ships the same business day. Ordered before 4pm PST it ships the next business day. An order over 100 units adds two business days. Shipping time is separate and depends on the delivery address.' },
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. Note that this differs from our large format banners, which take 150dpi and no bleed: a rigid panel is trimmed after printing, and without bleed the cut can leave a white edge. Keep text and logos clear of the trim. Maximum upload is 300MB.' }
+    ],
+    specs: [
+      ['Material', '1/8" white PVC board (expanded PVC sheet)'],
+      ['Thickness', '1/8" only'],
+      ['Printing', 'Direct UV printed, matte finish'],
+      ['Sides', '4/0 single sided or 4/4 double sided'],
+      ['Sizes', 'Custom cut to your ordered dimensions, from 6" x 6" up to 48" x 96"'],
+      ['Optional finishing', 'Grommets'],
+      ['Production', 'Ordered before 12pm PST ships the same business day; before 4pm PST ships the next business day; over 100 units adds 2 business days']
+    ],
+    applications: [
+      'Indoor booth panels mounted to a frame or a wall',
+      'Retail and counter displays that stay up between shows',
+      'Reusable directional and menu boards that get packed and reshipped',
+      'Sponsor and pricing boards inside a booth'
+    ],
+    active: true,
+    name: 'PVC Board Signs',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🅰️',
+    tagline: 'Rigid 1/8" white PVC panels, UV printed and cut to size from 6" x 6" up to 48" x 96".',
+    description:
+      'PVC board is a 1/8" expanded PVC sheet. It is stiffer than coroplast and holds a flat face without a frame behind it, which is what makes it read as a permanent sign rather than a temporary one. It is also light enough to pack into a case and reship between shows, where an aluminum composite panel of the same size is heavier to move. We print direct to the sheet with UV ink in a matte finish, single sided or double sided, and cut each panel to the size you order.',
+    features: [
+      'Rigid 1/8" expanded PVC that holds a flat face without a frame behind it',
+      'Smooth matte surface that reads as a permanent sign rather than a temporary one',
+      'Lighter to handle and ship than an aluminum composite panel of the same size',
+      'Single or double sided, cut to any size from 6" x 6" up to 48" x 96"',
+      'Sturdy enough to pack and reship between shows instead of reprinting each time'
+    ],
+    whatsIncluded: [
+      'One 1/8" white PVC board sign, UV printed and cut to the size you order.',
+      'Grommets only where you add them to the order. Grommets are the one optional finishing on this material.',
+      'No frame, standoffs or wall fixings. The panel ships flat, ready to mount however you have specified.'
+    ],
+    turnaround: 'Production: same business day when ordered before 12pm PST, next business day when ordered before 4pm PST. Shipping is calculated separately at checkout.',
+    seoTitle: 'PVC Board Signs | Rigid Indoor Panels',
+    seoDescription:
+      'Custom 1/8 inch PVC board signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Rigid panels for indoor booths.',
+    related: ['coroplast-signs', 'acp-aluminum-signs', 'fabric-banner-9oz-wrinkle-free'],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/signs/pvc-board-signs-booth-panel.jpeg
+    //   /images/signs/pvc-board-signs-retail-counter-display.jpeg
+    //   /images/signs/pvc-board-signs-grommets-edge-detail.webp
+    pricing: {
+      model: 'area',
+      // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
+      // signs above: while `quoteOnly` is true nothing on this page, in the
+      // Product schema or in the Merchant feed claims a price. Set pricePerSqFt
+      // and minChargeUsd and delete the quoteOnly line to publish one.
+      quoteOnly: true,
+      pricePerSqFt: null,
+      minChargeUsd: null,
+      minAreaSqFt: 0,
+      minWidthIn: 6,
+      minHeightIn: 6,
+      maxWidthIn: 48,
+      maxHeightIn: 96,
+      sizeSmallCapIn: 288,
+      sizeLargeCapIn: 576,
+      defaultWidthIn: 24,
+      defaultHeightIn: 18,
+      materials: [{ id: '1-8-pvc', name: '1/8" White PVC Board', multiplier: 1 }],
+      finishingGroups: PVC_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'acp-aluminum-signs',
+    faqs: [
+      { q: 'What size can I order?', a: 'From 6" x 6" up to 48" x 96", cut to the size you enter. The panel comes in one thickness, 1/8" (3mm).' },
+      { q: 'How do I mount an ACP panel?', a: 'Order it with 0.25" punched mounting holes and the panel arrives ready to screw or bolt up, so nothing has to be drilled on site. Several corner radius options are available as well, which is what stops a large panel presenting a sharp square corner at head height. Tell us the hole positions and the corner you want with the order. No screws, standoffs or frame are supplied.' },
+      { q: 'How long does an ACP sign last outdoors?', a: 'We do not publish a rated lifespan, because it depends on exposure, mounting and climate rather than on the panel alone. What we can tell you is what it is made of: two 0.15mm aluminum skins bonded either side of a polyethylene core, printed direct and finished with a gloss UV coating for scratch resistance. Metal skins are why it stays rigid and weather resistant at full size, which is the reason to choose it for signage that stays mounted rather than coming down after an event.' },
+      {
+        q: 'What is the difference between coroplast, PVC and ACP?',
+        a: 'Coroplast is 4mm corrugated plastic, fluted and light, for short-run signage that only has to last an event. PVC board is a 1/8" expanded PVC sheet, rigid with a smooth face, and the indoor panel that packs and reships between shows. ACP is this one: aluminum skins over a plastic core, and the heaviest of the three, for signage that stays mounted.',
+        linkSlugs: ['coroplast-signs', 'pvc-board-signs']
+      },
+      { q: 'How fast is production and shipping?', a: 'Ordered before 12pm PST it ships the same business day. Ordered before 4pm PST it ships the next business day. An order over 100 units adds two business days. Shipping time is separate and depends on the delivery address.' },
+      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. No Pantone or spot colours; convert them to CMYK before you export. Maximum upload is 300MB.' }
+    ],
+    specs: [
+      ['Material', 'Aluminum composite panel: two 0.15mm aluminum skins bonded to a polyethylene core'],
+      ['Thickness', '1/8" (3mm) only'],
+      ['Printing', 'Direct UV printed with a gloss UV coating for scratch resistance'],
+      ['Sides', '4/0 single sided or 4/4 double sided'],
+      ['Sizes', 'Made to size from 6" x 6" up to 48" x 96"'],
+      ['Optional finishing', 'Multiple corner radius options; 0.25" punched mounting holes'],
+      ['Production', 'Ordered before 12pm PST ships the same business day; before 4pm PST ships the next business day; over 100 units adds 2 business days']
+    ],
+    applications: [
+      'Branded fascia panels above a booth or a storefront',
+      'Permanent exterior signage that stays mounted year round',
+      'Booth panels that need to look finished from arm\'s length',
+      'Outdoor directional and parking signage at a venue'
+    ],
+    active: true,
+    name: 'ACP Signs (Aluminum Composite)',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🛡️',
+    tagline: '3mm aluminum composite panels, UV printed with a gloss protective coating and cut to size up to 48" x 96".',
+    description:
+      'ACP is an aluminum composite panel: two 0.15mm aluminum skins bonded either side of a polyethylene core, 3mm thick in total. The metal skins are what keep a full size panel rigid and weather resistant, and the print is finished with a gloss UV coating that protects the face from scratching in handling and transport. It is the panel to specify when a sign stays mounted outdoors, or when someone will be standing close enough to see the surface.',
+    features: [
+      'Two 0.15mm aluminum skins over a polyethylene core, so a full size panel stays rigid',
+      'Gloss UV coating over the print, which resists scratching in handling and transport',
+      'Weather resistant, so a sign can stay mounted instead of coming down after the event',
+      '0.25" punched mounting holes and corner radius options, specified with the order',
+      'Single or double sided, cut to any size from 6" x 6" up to 48" x 96"'
+    ],
+    whatsIncluded: [
+      'One 3mm aluminum composite panel, UV printed with a gloss protective coating and cut to the size you order.',
+      'Corner radius and 0.25" punched mounting holes only where you add them to the order.',
+      'No screws, standoffs or frame. The panel ships flat, ready to mount however you have specified.'
+    ],
+    turnaround: 'Production: same business day when ordered before 12pm PST, next business day when ordered before 4pm PST. Shipping is calculated separately at checkout.',
+    seoTitle: 'ACP Signs | Aluminum Composite Panels',
+    seoDescription:
+      'Custom 3mm aluminum composite signs, UV printed with a gloss protective coating and cut to size up to 48 by 96 inches. Rigid, weather resistant panels.',
+    related: ['pvc-board-signs', 'coroplast-signs', 'seg-modular-trade-show-kit-a'],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/signs/acp-aluminum-signs-fascia-panel.jpeg
+    //   /images/signs/acp-aluminum-signs-exterior-mounted.jpeg
+    //   /images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp
+    pricing: {
+      model: 'area',
+      // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
+      // signs above: while `quoteOnly` is true nothing on this page, in the
+      // Product schema or in the Merchant feed claims a price. Set pricePerSqFt
+      // and minChargeUsd and delete the quoteOnly line to publish one.
+      quoteOnly: true,
+      pricePerSqFt: null,
+      minChargeUsd: null,
+      minAreaSqFt: 0,
+      minWidthIn: 6,
+      minHeightIn: 6,
+      maxWidthIn: 48,
+      maxHeightIn: 96,
+      sizeSmallCapIn: 288,
+      sizeLargeCapIn: 576,
+      defaultWidthIn: 24,
+      defaultHeightIn: 18,
+      materials: [{ id: '3mm-acp', name: '3mm Aluminum Composite Panel', multiplier: 1 }],
+      finishingGroups: ACP_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'business-cards-16pt-matte',
+    faqs: [
+      { q: 'What stock are the cards printed on?', a: '95 bright, 16pt gloss C2S. 16pt is the caliper, and it is noticeably thicker than the 14pt most desk and office printers run, which is what stops a card softening in a pocket over three days of a show.' },
+      { q: 'Matte or gloss — what is the difference here?', a: 'The stock itself is gloss C2S, which is coated on both sides. We then apply a matte coating over both faces, so the card you receive reads matte: no shine under booth lighting, and a surface that takes a pen if someone wants to write on the back.' },
+      { q: 'Should I print one side or both?', a: '4/0 prints the front and leaves the back plain, which is the cheaper option and gives you a clean surface to write on. 4/4 prints both faces, so the back can carry a QR code, a stand number or a second language. Both are full colour CMYK.' },
+      { q: 'Can I get rounded corners?', a: 'Yes. Square corners are standard. Rounded corners are cut from a template, so pull the template before you design and keep anything you cannot afford to lose away from the corner radius.' },
+      { q: 'What is the minimum quantity?', a: '100 cards, and we print up to 25,000 in a single run. Cards are cut to 3.5" x 2" and boxed.' },
+      // Titled to match the question the FAQ generator asks, so this replaces
+      // the site-wide artwork answer. That answer is correct for large format
+      // and wrong here: this product wants a print-ready PDF at 300dpi WITH a
+      // 1/16" bleed, where the large format spec is 150dpi and explicitly no
+      // bleed. Two contradictory answers on one page is worse than either.
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. The bleed matters on a small card: the cutter works to a tolerance, and artwork built exactly to 3.5" x 2" with no bleed can leave a white edge on one side. Keep text and logos clear of the trim. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Stock', '95 bright, 16pt gloss C2S'],
+      ['Finish', 'Matte coating both sides'],
+      ['Printing', 'Full colour CMYK, 4/0 single sided or 4/4 double sided'],
+      ['Size', '3.5" x 2"'],
+      ['Corners', 'Square as standard; rounded corners available via template'],
+      ['Quantities', '100 to 25,000'],
+      ['Finishing', 'Cut to size and boxed']
+    ],
+    applications: [
+      'Cards handed out at the booth, where a conversation ends with something going into a pocket',
+      'Leave-behinds for a sales team working the floor away from the stand',
+      'Badge-swap and badge-scan follow up, with a note written on the matte back',
+      'Ordered alongside a booth so the card matches the backdrop and table cover it is handed out in front of'
+    ],
+    active: true,
+    name: 'Business Cards, 16pt Matte',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '💼',
+    size: '3.5" x 2"',
+    quoteOnly: true,
+    tagline: '16pt matte business cards on 95 bright C2S stock, 3.5" x 2", from 100 to 25,000.',
+    description:
+      'A 16pt card is noticeably thicker than the 14pt most office printers run, which is what stops it softening in a pocket over three days of a show. The stock is 95 bright gloss C2S with a matte coating applied to both faces, so it does not glare under booth lighting and it takes a pen if someone wants to write on the back. Printed full colour on one side or both, cut to 3.5" x 2" and boxed. Square corners are standard, and rounded corners are cut from a template.',
+    features: [
+      '16pt gloss C2S stock on 95 bright, thick enough not to soften in a pocket',
+      'Matte coating on both faces, so the card does not glare under booth lighting',
+      'A matte surface takes a pen, so a note written on the back survives the show',
+      'Full colour CMYK on one side or both',
+      'Square corners as standard, rounded corners cut from a template'
+    ],
+    whatsIncluded: [
+      'Your business cards, cut to 3.5" x 2" and boxed.',
+      'Matte coating on both faces as standard. Rounded corners only where you order them.',
+      'No cardholder or stand, and no packaging beyond the box the cards ship in.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier for
+    // this item. The token renders into the page and the FAQ schema on purpose,
+    // and the placeholder gate in test-seo-invariants fails the build while it
+    // is still here, so it cannot reach production unfilled.
+    // TODO_TURNAROUND — the supplier has not confirmed a production figure for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Business Cards | 16pt Matte',
+    seoDescription:
+      'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
+    related: ['flyers-80lb-uncoated', 'brochures-80lb-uncoated', 'standard-retractable-banner'],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/marketing/business-cards-16pt-matte-booth-handout.jpeg
+    //   /images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg
+    //   /images/marketing/business-cards-16pt-matte-rounded-corners.webp
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
+      // the page, the Product schema and the Merchant feed from claiming a
+      // number. Add a quantityTiers price table and delete quoteOnly to publish.
+      quoteOnly: true,
+      baseLabel: 'Business Cards, 16pt Matte',
+      optionGroups: [
+        {
+          id: 'sides', label: 'Printed sides', type: 'select', choices: [
+            { id: '4-0', label: 'Single sided (4/0)', default: true },
+            { id: '4-4', label: 'Double sided (4/4)', default: false }
+          ]
+        },
+        {
+          id: 'corners', label: 'Corners', type: 'select', choices: [
+            { id: 'square', label: 'Square', default: true },
+            { id: 'rounded', label: 'Rounded (from template)', default: false }
+          ]
+        },
+        {
+          id: 'quantity', label: 'Quantity', type: 'select', choices: [
+            { id: '100', label: '100', default: true },
+            { id: '250', label: '250', default: false },
+            { id: '500', label: '500', default: false },
+            { id: '1000', label: '1,000', default: false },
+            { id: '2500', label: '2,500', default: false },
+            { id: '5000', label: '5,000', default: false },
+            { id: '10000', label: '10,000', default: false },
+            { id: '25000', label: '25,000', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'flyers-80lb-uncoated',
+    faqs: [
+      { q: 'What stock are the flyers printed on?', a: '80lb enviro stock, which contains 30% post-consumer recycled content. That figure is what the mill states for this sheet and it is the only recycled-content claim we make for it.' },
+      { q: 'What does uncoated mean in practice?', a: 'There is no gloss or matte layer sealed over the paper, so you are handling the sheet itself. Two things follow. It takes pen and marker, so someone at the booth can write a price or a date on it and the ink stays put. And it does not throw glare back under exhibition lighting the way a coated sheet does.' },
+      { q: 'What sizes can I order?', a: 'Six: 3.5" x 8.5", 8.5" x 5.5", 4.25" x 11", 8.5" x 11", 11" x 17" and 17" x 22". Every one is cut to size and boxed.' },
+      { q: 'Should I print one side or both?', a: '4/0 prints the front and leaves the back blank, which gives the visitor a clean surface to write on. 4/4 prints both faces, so the back can carry a schedule, a map or a QR code. Both are full colour CMYK.' },
+      { q: 'What is the minimum quantity?', a: '25 flyers, and we print up to 100,000 in a run. Optional bundling is available if you want them split into counted stacks rather than loose in the box.' },
+      // Titled to match the generated question so this replaces the site-wide
+      // artwork answer, which is written for large format (150dpi, no bleed) and
+      // wrong for small format. See the note on business cards.
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. Keep text and logos clear of the trim, because the cutter works to a tolerance and artwork built with no bleed can leave a white edge. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Stock', '80lb enviro stock, containing 30% post-consumer recycled content'],
+      ['Coating', 'Uncoated'],
+      ['Printing', 'Full colour CMYK, 4/0 single sided or 4/4 double sided'],
+      ['Sizes', '3.5" x 8.5", 8.5" x 5.5", 4.25" x 11", 8.5" x 11", 11" x 17", 17" x 22"'],
+      ['Quantities', '25 to 100,000'],
+      ['Finishing', 'Cut to size and boxed; optional bundling'],
+      ['Shipping', 'Shipped flat, not folded']
+    ],
+    applications: [
+      'Booth handouts a visitor can write a price or a date on',
+      'Single-offer sheets for a show special with a deadline on it',
+      'Session and demo schedules handed out at the aisle',
+      'Inserts for a sponsored show bag'
+    ],
+    active: true,
+    name: 'Flyers, 80lb Enviro Uncoated',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '📰',
+    quoteOnly: true,
+    tagline: 'Uncoated 80lb enviro stock with 30% post-consumer recycled content, in six sizes from 3.5" x 8.5" to 17" x 22".',
+    description:
+      'Flyers on 80lb enviro stock, an uncoated sheet containing 30% post-consumer recycled content. Uncoated means there is no gloss layer sealed over the paper, so the sheet takes pen and marker and a visitor can write on it at the booth without the ink beading off. It also reads matte under exhibition lighting rather than throwing glare back at whoever is reading it. Printed full colour on one side or both, cut to size and shipped flat, so nothing arrives with a fold you did not ask for.',
+    features: [
+      '80lb enviro stock containing 30% post-consumer recycled content',
+      'Uncoated, so the sheet takes pen and marker at the booth',
+      'No gloss layer, so it reads matte under exhibition lighting',
+      'Six sizes, from 3.5" x 8.5" up to 17" x 22"',
+      'Full colour on one side or both, from 25 up to 100,000'
+    ],
+    whatsIncluded: [
+      'Your flyers, printed full colour, cut to size and boxed.',
+      'Bundling into counted stacks only where you ask for it on the order.',
+      'Shipped flat. Flyers are not folded, so order brochures instead if you need a folded piece.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier. See
+    // the note on business cards: the placeholder gate in test-seo-invariants
+    // fails the build while this token is still in rendered output.
+    // TODO_TURNAROUND — the supplier has not confirmed a production figure for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Flyers | 80lb Enviro Uncoated',
+    seoDescription:
+      'Custom flyers on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six sizes, full colour on one side or both, from 25 to 100,000.',
+    related: ['brochures-80lb-uncoated', 'business-cards-16pt-matte'],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/marketing/flyers-80lb-uncoated-booth-handout.jpeg
+    //   /images/marketing/flyers-80lb-uncoated-size-range.jpeg
+    //   /images/marketing/flyers-80lb-uncoated-written-on.webp
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
+      // the page, the Product schema and the Merchant feed from claiming a
+      // number. Add a quantityTiers price table and delete quoteOnly to publish.
+      quoteOnly: true,
+      baseLabel: 'Flyers, 80lb Enviro Uncoated',
+      optionGroups: [
+        {
+          id: 'size', label: 'Size', type: 'select', choices: [
+            { id: '3-5x8-5', label: '3.5" x 8.5"', default: true },
+            { id: '8-5x5-5', label: '8.5" x 5.5"', default: false },
+            { id: '4-25x11', label: '4.25" x 11"', default: false },
+            { id: '8-5x11', label: '8.5" x 11"', default: false },
+            { id: '11x17', label: '11" x 17"', default: false },
+            { id: '17x22', label: '17" x 22"', default: false }
+          ]
+        },
+        {
+          id: 'sides', label: 'Printed sides', type: 'select', choices: [
+            { id: '4-0', label: 'Single sided (4/0)', default: true },
+            { id: '4-4', label: 'Double sided (4/4)', default: false }
+          ]
+        },
+        {
+          id: 'bundling', label: 'Bundling', type: 'select', choices: [
+            { id: 'none', label: 'Loose in the box', default: true },
+            { id: 'bundled', label: 'Bundled into counted stacks', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'brochures-80lb-uncoated',
+    faqs: [
+      { q: 'What stock are the brochures printed on?', a: 'The same 80lb enviro stock as our flyers, uncoated, containing 30% post-consumer recycled content. That figure is what the mill states for this sheet and it is the only recycled-content claim we make for it.' },
+      // Deliberately does not name tri-fold, z-fold or any other layout. The
+      // supplier confirms "folded" and "optional scoring" and nothing more, so
+      // naming a fold here would be inventing a spec.
+      { q: 'How are the brochures folded?', a: 'Folding is part of the finishing and the brochures arrive folded and boxed. We do not publish a fixed list of fold layouts for this product, so send the fold you want with your artwork and we will confirm it on the proof before anything runs.' },
+      { q: 'What does scoring do, and do I need it?', a: 'Scoring presses a crease into the sheet before it is folded. On a heavier uncoated stock the fibre can crack along a fold that has not been scored, which shows as a broken white line through the printed colour. It is optional, and it is worth adding when the fold runs through a solid or dark area of the design.' },
+      { q: 'What sizes can I order?', a: 'Six flat sizes: 8.5" x 11", 8.5" x 14", 9" x 12", 11" x 17", 17" x 22" and 11" x 25.5". Those are the sizes before folding, so the finished piece is smaller.' },
+      { q: 'What is the minimum quantity?', a: '25 brochures, and we print up to 100,000 in a run. Optional bundling is available if you want them split into counted stacks rather than loose in the box.' },
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. Build it to the flat size, not the folded size, and mark where the folds go. Keep anything you cannot afford to lose away from the trim and the fold lines. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Stock', '80lb enviro stock, containing 30% post-consumer recycled content'],
+      ['Coating', 'None'],
+      ['Printing', 'Full colour CMYK, 4/0 single sided or 4/4 double sided'],
+      ['Flat sizes', '8.5" x 11", 8.5" x 14", 9" x 12", 11" x 17", 17" x 22", 11" x 25.5"'],
+      ['Quantities', '25 to 100,000'],
+      ['Finishing', 'Cut to size, folded and boxed; optional bundling'],
+      ['Scoring', 'Optional, to stop the fold cracking']
+    ],
+    applications: [
+      'The take-away for a visitor who has already asked a real question',
+      'Product and specification detail that will not fit on a single flyer',
+      'Bag-sized leave-behinds for a sponsored show bag',
+      'Follow-up packs posted to badges scanned during the show'
+    ],
+    active: true,
+    name: 'Brochures, 80lb Enviro Uncoated',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '📑',
+    quoteOnly: true,
+    tagline: 'Uncoated 80lb enviro stock with 30% post-consumer recycled content, folded and boxed, in six flat sizes.',
+    description:
+      'Brochures on the same 80lb enviro stock as our flyers, uncoated and containing 30% post-consumer recycled content. A brochure folds, and the fold is what buys the space a single sheet does not have: room to answer a question properly for someone who has already asked one. It is the piece a qualified visitor takes away and reads after the show, and the flat sizes here fold down to fit a bag. Optional scoring creases the sheet before folding, which stops the fibre cracking along the fold.',
+    features: [
+      '80lb enviro stock containing 30% post-consumer recycled content',
+      'Uncoated, so the paper takes pen and reads matte under booth lighting',
+      'Folded and boxed, ready to hand out',
+      'Optional scoring, which stops the fold cracking on a heavier sheet',
+      'Six flat sizes, from 8.5" x 11" up to 11" x 25.5"'
+    ],
+    whatsIncluded: [
+      'Your brochures, printed full colour, cut to size, folded and boxed.',
+      'Scoring and bundling only where you add them to the order.',
+      'No folder, sleeve or insert. The brochures ship folded, in the box.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier.
+    // TODO_TURNAROUND — the supplier has not confirmed a production figure for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Brochures | 80lb Enviro Uncoated',
+    seoDescription:
+      'Custom folded brochures on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six flat sizes, full colour, from 25 to 100,000.',
+    related: ['flyers-80lb-uncoated', 'business-cards-16pt-matte'],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/marketing/brochures-80lb-uncoated-folded-stack.jpeg
+    //   /images/marketing/brochures-80lb-uncoated-open-spread.jpeg
+    //   /images/marketing/brochures-80lb-uncoated-scored-fold-detail.webp
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — see the flyers note above.
+      quoteOnly: true,
+      baseLabel: 'Brochures, 80lb Enviro Uncoated',
+      optionGroups: [
+        {
+          id: 'size', label: 'Flat size', type: 'select', choices: [
+            { id: '8-5x11', label: '8.5" x 11"', default: true },
+            { id: '8-5x14', label: '8.5" x 14"', default: false },
+            { id: '9x12', label: '9" x 12"', default: false },
+            { id: '11x17', label: '11" x 17"', default: false },
+            { id: '17x22', label: '17" x 22"', default: false },
+            { id: '11x25-5', label: '11" x 25.5"', default: false }
+          ]
+        },
+        {
+          id: 'sides', label: 'Printed sides', type: 'select', choices: [
+            { id: '4-0', label: 'Single sided (4/0)', default: true },
+            { id: '4-4', label: 'Double sided (4/4)', default: false }
+          ]
+        },
+        {
+          id: 'scoring', label: 'Scoring', type: 'select', choices: [
+            { id: 'none', label: 'No scoring', default: true },
+            { id: 'scored', label: 'Scored before folding', default: false }
+          ]
+        },
+        {
+          id: 'bundling', label: 'Bundling', type: 'select', choices: [
+            { id: 'none', label: 'Loose in the box', default: true },
+            { id: 'bundled', label: 'Bundled into counted stacks', default: false }
+          ]
+        }
+      ]
     }
   },
   {

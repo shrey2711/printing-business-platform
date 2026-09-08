@@ -1,8 +1,15 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Tabbed detail block under the configurator: Description, Product
 // Specifications, Template (downloadable PDF dielines) and FAQs.
-export default function ProductTabs({ product }) {
+//
+// `catalog` is an optional Map of slug -> product, used only to turn an FAQ's
+// `linkSlugs` into links. Answers themselves stay plain text (they are carried
+// verbatim into FAQPage schema, which does not take markup), so the links are
+// built from slugs rather than embedded in the copy. Mirrors faqLinksHtml in
+// scripts/prerender.mjs so the crawled HTML and the app agree.
+export default function ProductTabs({ product, catalog }) {
   const sizeKey = product.slug.startsWith('canopy-tent-')
     ? product.slug.replace('canopy-tent-', '')
     : null;
@@ -103,12 +110,27 @@ export default function ProductTabs({ product }) {
           <div className="ptab-panel">
             <h2>Frequently asked questions</h2>
             <div className="faq-list">
-              {faqs.map((f, i) => (
-                <details className="faq-item" key={i} open={i === 0}>
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </details>
-              ))}
+              {faqs.map((f, i) => {
+                const links = (f.linkSlugs || [])
+                  .map((s) => catalog?.get(s))
+                  .filter(Boolean);
+                return (
+                  <details className="faq-item" key={i} open={i === 0}>
+                    <summary>{f.q}</summary>
+                    <p>{f.a}</p>
+                    {links.length > 0 && (
+                      <p className="faq-links">
+                        {links.map((p, n) => (
+                          <span key={p.slug}>
+                            {n > 0 ? ' · ' : ''}
+                            <Link to={`/products/${p.slug}`}>{p.name}</Link>
+                          </span>
+                        ))}
+                      </p>
+                    )}
+                  </details>
+                );
+              })}
             </div>
           </div>
         )}

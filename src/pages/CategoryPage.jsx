@@ -19,10 +19,17 @@ const sizeKey = (s) => s.replace('canopy-tent-', '');
 export default function CategoryPage({ slug }) {
   const page = getCategoryPage(slug);
   const [products, setProducts] = useState([]);
+  // Distinguishes "still fetching" from "fetched, and this category has no
+  // products yet" — without it a live category whose SKUs are still being added
+  // sits on "Loading…" forever.
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let alive = true;
-    getProducts().then((p) => alive && setProducts(p)).catch(() => {});
+    getProducts()
+      .then((p) => alive && setProducts(p))
+      .catch(() => {})
+      .finally(() => alive && setLoaded(true));
     return () => { alive = false; };
   }, []);
 
@@ -123,7 +130,14 @@ export default function CategoryPage({ slug }) {
       <section className="size-section">
         <div className="section-head"><h2>{page.hub ? 'Featured products' : page.h1}</h2></div>
         {shown.length === 0 ? (
-          <p className="muted">Loading…</p>
+          loaded ? (
+            <p className="muted">
+              Products in this category are being added.{' '}
+              <Link to="/quote">Request a quote</Link> and we will price your job in the meantime.
+            </p>
+          ) : (
+            <p className="muted">Loading…</p>
+          )
         ) : (
           <div className="pcard-grid">
             {shown.map((p) => {

@@ -4,6 +4,12 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "trailingSlash": false,
+  "git": {
+    "deploymentEnabled": {
+      "//": "feat/rigid-signs cannot build until 18 product photos exist under public/images/signs and public/images/marketing, and the three TODO_TURNAROUND figures are filled. verify-media refuses to build a catalogue that references photographs that are not there, so every push produced a failed preview. Turned off here rather than weakening the gate. DELETE THIS BLOCK when the branch merges.",
+      "feat/rigid-signs": false
+    }
+  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }

@@ -25,6 +25,10 @@ export const PRODUCT_CARD_IMAGE = {
   'seg-modular-trade-show-kit-a': '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg',
   'seg-modular-trade-show-kit-b': '/images/seg-kits/apex-seg-modular-kit-b-main.jpeg',
   'seg-modular-trade-show-kit-c': '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg'
+  // PHOTOGRAPHY PENDING — the rigid signs and marketing essentials have no card
+  // image yet, so ProductCard falls through to the ProductArt illustration. Add
+  // an entry per product as its photos land (filenames are listed against each
+  // record in backend/data/products.js).
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;

@@ -60,6 +60,13 @@ for (const loc of urls) {
     for (const hole of ['undefined', 'NaN', '[object Object]']) {
       if (text.includes(hole)) fail(key, `${label} contains "${hole}" — an unset field reached the rendered output`);
     }
+    // Author placeholders (TODO_TURNAROUND, TODO_PRICE) are deliberate markers
+    // for data we do not have yet. They are fine in a record and fine in a
+    // comment; they must never be published. Failing here is what stops a
+    // half-finished product page being deployed with the token still in it.
+    for (const todo of text.match(/TODO_[A-Z_]+/g) || []) {
+      fail(key, `${label} contains the placeholder "${todo}" — fill it in before this page ships`);
+    }
   }
 
   // Exactly one H1.

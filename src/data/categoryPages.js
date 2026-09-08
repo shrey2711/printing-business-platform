@@ -257,6 +257,80 @@ export const CATEGORY_PAGES = [
       { q: 'Should I choose a step & repeat or a tension fabric wall?', a: 'Choose step & repeat when the wall exists to be photographed — the tiled logo is what makes the brand survive a cropped shot. Choose a straight tension fabric display when it is your booth back wall and you want one seamless image rather than a repeating pattern.' },
       { q: 'Can I reprint the graphic later?', a: 'Yes. Both backdrop types use a replaceable printed graphic on a reusable frame, so a new campaign is a reprint rather than a new display.' }
     ]
+  },
+  {
+    slug: 'rigid-signs',
+    guide: [
+      { h2: 'Which substrate should you choose?', p: 'Three substrates cover almost every flat-panel job, and the difference is density rather than print quality. Coroplast is corrugated plastic — fluted like cardboard, very light, and the cheapest way to produce a run of directional or event signs that only need to survive a weekend. PVC board is solid and smooth, which is what makes it read as a permanent sign rather than a temporary one; it is the usual pick for indoor signage meant to last a season or more. ACP aluminum composite bonds two thin aluminum skins to a polyethylene core, giving a rigid panel that stays flat outdoors where plastic would bow in the heat.' },
+      { h2: 'Sizing, cutting and mounting', p: 'Panels are cut to your exact size up to 48" x 96", so a sign is specified to the space it goes in rather than to a stock format. Decide how it will be held up before you decide how big it is: an H-stake pushed into grass suits coroplast and nothing heavier, standoffs and screws suit PVC and ACP on a wall, and anything hung needs drilled holes placed while the panel is still on the table. Tell us the mounting method with the order and the holes are cut in the right places the first time.' },
+      { h2: 'Printing direct to substrate', p: 'The ink is printed onto the board itself, not onto a vinyl film that is then laminated over it. That matters outdoors and in high-traffic spaces, because a laminated skin has an edge, and an edge is where signage starts to lift, curl and peel. Direct-to-substrate printing has no such layer to fail. Artwork should arrive built to the finished panel size at 150dpi in CMYK, with no crop marks or bleeds — see the artwork guidelines before you export.' }
+    ],
+    category: 'rigid-signs',
+    nav: 'Rigid Signs',
+    h1: 'Rigid Signs — Coroplast, PVC & Aluminum Panels',
+    title: 'Rigid Signs',
+    description:
+      'Custom rigid signs printed direct to substrate — coroplast, PVC board and ACP aluminum composite, cut to any size up to 48" x 96". Free artwork proof.',
+    intro:
+      'Rigid signs are flat printed panels — the signage that stands on its own without a frame, a pole or a stand behind it. Every panel is printed direct to substrate, so the ink sits on the board itself rather than on a vinyl skin laid over the top, and each one is cut to your exact size up to 48" x 96". Coroplast is the lightweight corrugated plastic used for short-run directional and event signs; PVC board is denser and smoother, for indoor signage meant to last; ACP aluminum composite is the panel that holds its shape outdoors.',
+    points: [
+      'Printed direct to substrate — no laminated skin to lift or peel.',
+      'Coroplast, PVC board and ACP aluminum composite.',
+      'Cut to any size up to 48" x 96".',
+      'Booth signage, wayfinding, and outdoor promotion.'
+    ],
+    answer:
+      'Rigid signs are flat panel signage printed direct to substrate and cut to size up to 48" x 96". Apex prints lightweight coroplast for short-run directional and event signs, solid PVC board for lasting indoor signage, and ACP aluminum composite for panels that stay flat outdoors.',
+    compareCols: ['Material', 'Best for', 'From'],
+    compare: [
+      { slug: 'coroplast-signs', name: 'Coroplast Signs', to: '/products/coroplast-signs', cells: ['4mm corrugated plastic', 'Short-run event and directional signs'] },
+      { slug: 'pvc-board-signs', name: 'PVC Board Signs', to: '/products/pvc-board-signs', cells: ['1/8" expanded PVC sheet', 'Indoor panels reused between shows'] },
+      { slug: 'acp-aluminum-signs', name: 'ACP Signs (Aluminum Composite)', to: '/products/acp-aluminum-signs', cells: ['3mm aluminum composite panel', 'Exterior signage that stays mounted'] }
+    ],
+    faqs: [
+      { q: 'What is the difference between coroplast, PVC and aluminum signs?', a: 'Density, and therefore lifespan. Coroplast is corrugated plastic — light and inexpensive, right for short-run directional and event signage. PVC board is solid and smooth, which suits indoor signs meant to last a season or more. ACP aluminum composite is two aluminum skins over a plastic core, and it is the one that stays flat outdoors where the others would bow.' },
+      { q: 'How large can a rigid sign be printed?', a: 'Up to 48" x 96" on a single panel, cut to any size within that. Larger installations are usually split across several panels and butted together on the wall — send the wall dimensions with your quote request and we will advise on the split.' },
+      { q: 'What does printing direct to substrate mean?', a: 'The ink is applied to the board itself rather than to a vinyl film that is then laminated on top. There is no separate surface layer, so there is no edge for weather or handling to lift — which is where laminated signage usually starts to fail.' },
+      { q: 'Which rigid sign works outdoors?', a: 'ACP aluminum composite for anything mounted permanently outdoors, because it holds its shape through heat and damp. Coroplast is outdoor-capable for short runs — a weekend event, a real estate or election period — but it is corrugated plastic and will eventually flex and fade.' },
+      { q: 'How should I set up artwork for a rigid sign?', a: 'Build it to the finished panel size at 150dpi in CMYK, as a single-page PDF or JPEG, with no crop marks or bleeds and fonts converted to outlines. The full artwork guidelines cover colour space, resolution and file setup, and every order gets a free proof before anything is cut.' }
+    ]
+  },
+  {
+    slug: 'marketing-essentials',
+    guide: [
+      { h2: 'The half of the booth that leaves with the visitor', p: 'A display works for the length of the show; a printed piece works after it. Every real conversation at the aisle ends with something going into a hand or a bag, and that piece is what gets read on the flight home, weeks after the booth has been packed into its case. Budget for it as part of the booth rather than as an afterthought, because a booth with nothing to hand out puts the entire cost of the show on whether the visitor remembers a name.' },
+      { h2: 'Cards, flyers and brochures — what each one is for', p: 'They are not interchangeable. A business card exists to survive a pocket and produce a phone number later, which is why weight matters more than design surface: 16pt matte is thick enough not to soften and matte enough to write on. A flyer is a single sheet doing one job — one offer, one show, one deadline — and it is the piece you print in quantity and expect to be discarded. A brochure folds, which buys the space to explain something the flyer cannot, and it is the piece a serious enquiry takes away.' },
+      { h2: 'Matching print to your booth graphics', p: 'Colour is the thing that gives away collateral ordered somewhere else. Large format graphics and small format collateral are printed by different processes, on different stock, and a brand blue set on a fabric backdrop rarely lands the same way on an uncoated card unless the two are produced together. Ordering both here puts them on the same trade print network, which is the practical way to keep a booth looking like one brand rather than several. Supply CMYK artwork, not Pantones, and check the proof against your display files.' }
+    ],
+    category: 'marketing-essentials',
+    nav: 'Marketing Essentials',
+    h1: 'Business Cards, Flyers & Brochures',
+    title: 'Marketing & Business Essentials',
+    description:
+      'Business cards, flyers and brochures printed on the same trade network as our large format work — 16pt matte cards, 80lb uncoated stock. Free artwork proof.',
+    intro:
+      'Print collateral is the half of a booth that leaves with the visitor. A conversation at the aisle ends with something in a hand — a card, a flyer, a folded brochure — and that piece is what gets read on the flight home, long after the display has been packed away. We produce all of it on the same trade print network as our large format work, so the colour on a business card matches the colour on the backdrop standing behind you. 16pt matte business cards, 80lb uncoated flyers and 80lb uncoated brochures, printed to order and proofed before they run.',
+    points: [
+      '16pt matte business cards.',
+      '80lb uncoated flyers.',
+      '80lb uncoated folded brochures.',
+      'Printed alongside your large format booth graphics.'
+    ],
+    answer:
+      'Marketing essentials are the printed collateral a visitor takes away from your booth — business cards, flyers and brochures. Apex produces them on the same trade print network as its large format displays, so the colour on a 16pt matte card matches the backdrop behind it.',
+    compareCols: ['Stock', 'Best for', 'From'],
+    compare: [
+      { slug: 'business-cards-16pt-matte', name: 'Business Cards, 16pt Matte', to: '/products/business-cards-16pt-matte', cells: ['16pt gloss C2S, matte coated', 'Handing over in a conversation'] },
+      { slug: 'flyers-80lb-uncoated', name: 'Flyers, 80lb Enviro Uncoated', to: '/products/flyers-80lb-uncoated', cells: ['80lb uncoated, 30% recycled', 'One offer, printed in quantity'] },
+      { slug: 'brochures-80lb-uncoated', name: 'Brochures, 80lb Enviro Uncoated', to: '/products/brochures-80lb-uncoated', cells: ['80lb uncoated, 30% recycled', 'Detail a qualified visitor takes away'] }
+    ],
+    faqs: [
+      { q: 'What does 16pt matte mean on a business card?', a: '16pt is the thickness of the card stock — noticeably heavier than the 14pt most desktop print shops run, which is what stops a card softening in a pocket. Matte is the finish: no gloss, no glare under booth lighting, and a surface you can actually write a note on.' },
+      { q: 'What is 80lb uncoated stock?', a: 'A weight and a finish. 80lb is a text-weight paper with enough body that a flyer does not feel flimsy in the hand. Uncoated means no gloss layer, so the sheet takes a pen, reads without glare, and looks closer to stationery than to a supermarket leaflet.' },
+      { q: 'Will the colour match my booth graphics?', a: 'That is the reason to order both from one supplier. Large format and small format are printed by different processes on different stock, so an exact match is never automatic — but producing them on the same network, from the same CMYK artwork, is what keeps a booth looking like one brand. Check the free proof against your display files before approving.' },
+      { q: 'How should I supply artwork for print collateral?', a: 'A single-page PDF or JPEG per piece, built to the finished size at 150dpi, in CMYK with no Pantones or spot colours, fonts converted to outlines, and no crop marks or bleeds. The artwork guidelines cover the full specification, and every order is proofed before it runs.' },
+      { q: 'Can I order collateral without ordering a display?', a: 'Yes. Cards, flyers and brochures are ordered on their own like anything else in the catalogue. Most customers order them alongside a booth because of the colour matching, but there is no requirement to.' }
+    ]
   }
 ];
 
