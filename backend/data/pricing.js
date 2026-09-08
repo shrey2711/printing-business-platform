@@ -40,7 +40,7 @@ export function computePrice(input, opts = {}) {
       // crafted request with an out-of-range size is rejected, not priced.
       w = Number(width ?? pricing.defaultWidthIn);
       h = Number(height ?? pricing.defaultHeightIn);
-      const sizeErr = bannerSizeError(w, h, pricing);
+      const sizeErr = bannerSizeError(w, h, pricing, finishing);
       if (sizeErr) return { ok: false, sizeError: true, error: sizeErr };
     } else {
       w = clampNum(width ?? pricing.defaultWidthIn, pricing.minWidthIn, pricing.maxWidthIn);
@@ -311,7 +311,7 @@ function isCappedSize(pricing) {
 // Returns an error message string, or null when the size is valid. All numbers
 // come from the product's own pricing config so the message can never drift from
 // the rule it enforces. Shared by computePrice and the pricing verify script.
-export function bannerSizeError(width, height, pricing) {
+export function bannerSizeError(width, height, pricing, selections) {
   const w = Number(width);
   const h = Number(height);
   if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) {
@@ -319,14 +319,31 @@ export function bannerSizeError(width, height, pricing) {
   }
   const small = Math.min(w, h);
   const large = Math.max(w, h);
-  if (small > pricing.sizeSmallCapIn || large > pricing.sizeLargeCapIn) {
-    return bannerSizeCapMessage(pricing);
+  const smallCap = bannerSmallCap(pricing, selections);
+  if (small > smallCap || large > pricing.sizeLargeCapIn) {
+    return bannerSizeCapMessage(pricing, selections);
   }
   return null;
 }
 
-export function bannerSizeCapMessage(pricing) {
-  return `Size not available. This banner can be up to ${pricing.sizeSmallCapIn}" on one side and ${pricing.sizeLargeCapIn}" on the other. Please adjust your dimensions or contact us for oversized orders.`;
+// A pole pocket is folded and sewn from the same material, so it costs width:
+// the supplier's maximum drops from 10' to 9.5' on the short side once a pocket
+// is added. Products that do not declare the reduced cap keep the single cap,
+// so this changes nothing for anything but the banners.
+export function bannerSmallCap(pricing, selections) {
+  const pole = selections?.pole;
+  const hasPocket = pole != null && pole !== 'none';
+  return hasPocket && pricing.sizeSmallCapWithPocketIn != null
+    ? pricing.sizeSmallCapWithPocketIn
+    : pricing.sizeSmallCapIn;
+}
+
+export function bannerSizeCapMessage(pricing, selections) {
+  const smallCap = bannerSmallCap(pricing, selections);
+  const pocketNote = smallCap !== pricing.sizeSmallCapIn
+    ? ` A pole pocket reduces the maximum from ${pricing.sizeSmallCapIn}" to ${smallCap}" on that side.`
+    : '';
+  return `Size not available. This banner can be up to ${smallCap}" on one side and ${pricing.sizeLargeCapIn}" on the other.${pocketNote} Please adjust your dimensions or contact us for oversized orders.`;
 }
 
 function applyFinishing(finishing = [], selected, ctx) {

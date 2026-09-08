@@ -10,9 +10,12 @@ import { getProduct, priceDisplayFor } from '../backend/data/products.js';
 import { computePrice, bannerSizeError } from '../backend/data/pricing.js';
 
 const BANNERS = {
-  '13oz-vinyl-banner': { rate: 2.75, small: 600, large: 1800 },
-  '18oz-blockout-banner': { rate: 4.0, small: 600, large: 1800 },
-  'mesh-banner': { rate: 3.1, small: 600, large: 1800 },
+  // Supplier maximum is 10' x 145' single sided, dropping to 9.5' on the short
+  // side once a pole pocket is added. These read 600 x 1800 (50' x 150') until
+  // the spec audit, which meant the engine priced banners nobody could make.
+  '13oz-vinyl-banner': { rate: 2.75, small: 120, large: 1740, smallWithPocket: 114 },
+  '18oz-blockout-banner': { rate: 4.0, small: 120, large: 1740, smallWithPocket: 114 },
+  'mesh-banner': { rate: 3.1, small: 120, large: 1740, smallWithPocket: 114 },
   'fabric-banner-9oz-wrinkle-free': { rate: 5.0, small: 96, large: 1200 }
 };
 
@@ -33,6 +36,7 @@ for (const [slug, spec] of Object.entries(BANNERS)) {
   eq(`${slug} minChargeUsd`, p.pricing.minChargeUsd, 45);
   eq(`${slug} smallCap`, p.pricing.sizeSmallCapIn, spec.small);
   eq(`${slug} largeCap`, p.pricing.sizeLargeCapIn, spec.large);
+  eq(`${slug} smallCap with pole pocket`, p.pricing.sizeSmallCapWithPocketIn, spec.smallWithPocket);
   // Starting ("from") price is the $45 floor.
   eq(`${slug} startingPrice`, priceDisplayFor(p.pricing).startingPrice, 45);
 }
@@ -82,7 +86,7 @@ eq('explicit standard unchanged', computePrice({ slug: '13oz-vinyl-banner', widt
 eq('13oz 24x24 rush over min = 69.75', computePrice({ slug: '13oz-vinyl-banner', width: 24, height: 24, quantity: 1, finishing: { days: 'rush' } }).unitPrice, 69.75);
 
 // ---- Size validation (sorted caps, orientation independent) -----------------
-const vinyl = getProduct('13oz-vinyl-banner').pricing; // 600 × 1800
+const vinyl = getProduct('13oz-vinyl-banner').pricing; // 120 × 1740, 114 with a pole pocket
 const fabric = getProduct('fabric-banner-9oz-wrinkle-free').pricing; // 96 × 1200
 const valid = (label, pricing, w, h) => eq(`valid ${label}`, bannerSizeError(w, h, pricing), null);
 const invalid = (label, pricing, w, h) => {
@@ -90,14 +94,16 @@ const invalid = (label, pricing, w, h) => {
   if (!bannerSizeError(w, h, pricing)) errors.push(`invalid ${label}: expected an error, got null`);
 };
 
-// 600×1800 product
-valid('at cap 600×1800', vinyl, 600, 1800);
-valid('swapped 1800×600', vinyl, 1800, 600);
-invalid('one over 601×1800', vinyl, 601, 1800);
-invalid('one over 600×1801', vinyl, 600, 1801);
+// 120×1740 product (10' × 145')
+valid('at cap 120×1740', vinyl, 120, 1740);
+valid('swapped 1740×120', vinyl, 1740, 120);
+invalid('one over 121×1740', vinyl, 121, 1740);
+invalid('one over 120×1741', vinyl, 120, 1741);
 invalid('both over 700×1900', vinyl, 700, 1900);
 invalid('square over 700×700', vinyl, 700, 700);
-invalid('601×1801', vinyl, 601, 1801);
+invalid('121×1741', vinyl, 121, 1741);
+// The size the site sold before the spec audit must now be refused.
+invalid('old 50ft cap 600×1800', vinyl, 600, 1800);
 invalid('zero 0×100', vinyl, 0, 100);
 invalid('negative -5×100', vinyl, -5, 100);
 invalid('non-numeric abc×100', vinyl, 'abc', 100);
@@ -111,11 +117,30 @@ invalid('fabric one over 96×1201', fabric, 96, 1201);
 invalid('fabric both over 200×1300', fabric, 200, 1300);
 invalid('fabric zero 0×50', fabric, 0, 50);
 
+// A pole pocket is sewn from the same material and costs width: the short side
+// drops from 120" to 114". A banner that is legal without a pocket must be
+// refused with one, or the site sells a size the supplier cannot produce.
+valid('115×1740 with no pocket selected', vinyl, 115, 1740);
+valid('114×1740 with a pole pocket', vinyl, 114, 1740);
+checked++;
+if (!bannerSizeError(120, 1740, vinyl, { pole: 'top' })) {
+  errors.push('invalid 120×1740 with a pole pocket: expected an error, got null');
+}
+checked++;
+if (bannerSizeError(120, 1740, vinyl, { pole: 'none' })) {
+  errors.push('valid 120×1740 with pole "none": expected null, got an error');
+}
+
 // Message pulls numbers from config so it can't drift from the rule.
 eq(
   'message uses config caps',
   bannerSizeError(700, 700, vinyl),
-  'Size not available. This banner can be up to 600" on one side and 1800" on the other. Please adjust your dimensions or contact us for oversized orders.'
+  'Size not available. This banner can be up to 120" on one side and 1740" on the other. Please adjust your dimensions or contact us for oversized orders.'
+);
+eq(
+  'message explains the pole pocket reduction',
+  bannerSizeError(700, 700, vinyl, { pole: 'top' }),
+  'Size not available. This banner can be up to 114" on one side and 1740" on the other. A pole pocket reduces the maximum from 120" to 114" on that side. Please adjust your dimensions or contact us for oversized orders.'
 );
 
 // ---- Server rejects out-of-range sizes (never trusts client) ----------------
