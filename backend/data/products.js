@@ -1774,7 +1774,7 @@ const products = [
       { q: 'Can I print both sides?', a: 'Yes. 4/0 prints one face and leaves the back white. 4/4 prints both faces. Each artwork file is a single page, so a 4/4 sign needs one file per face.' },
       { q: 'How do I mount a PVC panel?', a: 'Grommets are the one optional finishing on this material. Add them to the order and the panel can be hung or tied. Nothing else is supplied with the sign, so screws, standoffs and frames come from your side.' },
       { q: 'How fast is production and shipping?', a: 'Ordered before 12pm PST it ships the same business day. Ordered before 4pm PST it ships the next business day. An order over 100 units adds two business days. Shipping time is separate and depends on the delivery address.' },
-      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. Maximum upload is 300MB.' }
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. Note that this differs from our large format banners, which take 150dpi and no bleed: a rigid panel is trimmed after printing, and without bleed the cut can leave a white edge. Keep text and logos clear of the trim. Maximum upload is 300MB.' }
     ],
     specs: [
       ['Material', '1/8" white PVC board (expanded PVC sheet)'],
@@ -1851,7 +1851,7 @@ const products = [
       { q: 'How long does an ACP sign last outdoors?', a: 'We do not publish a rated lifespan, because it depends on exposure, mounting and climate rather than on the panel alone. What we can tell you is what it is made of: two 0.15mm aluminum skins bonded either side of a polyethylene core, printed direct and finished with a gloss UV coating for scratch resistance. Metal skins are why it stays rigid and weather resistant at full size, which is the reason to choose it for signage that stays mounted rather than coming down after an event.' },
       {
         q: 'What is the difference between coroplast, PVC and ACP?',
-        a: 'Coroplast is 4mm corrugated plastic, fluted and light, for short-run signage that only has to last an event. PVC board is a 1/8" expanded PVC sheet, rigid with a smooth face, and the indoor panel that packs and reships between shows. ACP is this one: aluminum skins over a plastic core, the heaviest and the most weather resistant of the three, for signage that stays up.',
+        a: 'Coroplast is 4mm corrugated plastic, fluted and light, for short-run signage that only has to last an event. PVC board is a 1/8" expanded PVC sheet, rigid with a smooth face, and the indoor panel that packs and reships between shows. ACP is this one: aluminum skins over a plastic core, and the heaviest of the three, for signage that stays mounted.',
         linkSlugs: ['coroplast-signs', 'pvc-board-signs']
       },
       { q: 'How fast is production and shipping?', a: 'Ordered before 12pm PST it ships the same business day. Ordered before 4pm PST it ships the next business day. An order over 100 units adds two business days. Shipping time is separate and depends on the delivery address.' },
