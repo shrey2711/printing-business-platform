@@ -117,7 +117,9 @@ const shopMenu = [
   {
     label: 'Marketing Essentials',
     to: '/marketing-essentials',
-    items: []
+    items: [
+      { label: 'Business Cards (16pt Matte)', to: '/products/business-cards-16pt-matte' }
+    ]
   }
 ];
 

@@ -27,7 +27,8 @@ export const PRODUCT_CARD_IMAGE = {
   'seg-modular-trade-show-kit-c': '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg',
   'coroplast-signs': '/images/signs/coroplast-signs-booth-directional.jpeg',
   'pvc-board-signs': '/images/signs/pvc-board-signs-booth-panel.jpeg',
-  'acp-aluminum-signs': '/images/signs/acp-aluminum-signs-fascia-panel.jpeg'
+  'acp-aluminum-signs': '/images/signs/acp-aluminum-signs-fascia-panel.jpeg',
+  'business-cards-16pt-matte': '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg'
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;

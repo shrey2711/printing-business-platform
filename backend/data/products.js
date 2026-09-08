@@ -100,6 +100,12 @@ export const navGroups = [
       { name: 'PVC Board (1/8")', slug: 'pvc-board-signs' },
       { name: 'ACP Aluminum Sandwich Board', slug: 'acp-aluminum-signs' }
     ]
+  },
+  {
+    name: 'Marketing Essentials',
+    items: [
+      { name: 'Business Cards (16pt Matte)', slug: 'business-cards-16pt-matte' }
+    ]
   }
 ];
 
@@ -1888,6 +1894,107 @@ const products = [
       defaultHeightIn: 18,
       materials: [{ id: '3mm-acp', name: '3mm Aluminum Composite Panel', multiplier: 1 }],
       finishingGroups: ACP_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'business-cards-16pt-matte',
+    faqs: [
+      { q: 'What stock are the cards printed on?', a: '95 bright, 16pt gloss C2S. 16pt is the caliper, and it is noticeably thicker than the 14pt most desk and office printers run, which is what stops a card softening in a pocket over three days of a show.' },
+      { q: 'Matte or gloss — what is the difference here?', a: 'The stock itself is gloss C2S, which is coated on both sides. We then apply a matte coating over both faces, so the card you receive reads matte: no shine under booth lighting, and a surface that takes a pen if someone wants to write on the back.' },
+      { q: 'Should I print one side or both?', a: '4/0 prints the front and leaves the back plain, which is the cheaper option and gives you a clean surface to write on. 4/4 prints both faces, so the back can carry a QR code, a stand number or a second language. Both are full colour CMYK.' },
+      { q: 'Can I get rounded corners?', a: 'Yes. Square corners are standard. Rounded corners are cut from a template, so pull the template before you design and keep anything you cannot afford to lose away from the corner radius.' },
+      { q: 'What is the minimum quantity?', a: '100 cards, and we print up to 25,000 in a single run. Cards are cut to 3.5" x 2" and boxed.' },
+      // Titled to match the question the FAQ generator asks, so this replaces
+      // the site-wide artwork answer. That answer is correct for large format
+      // and wrong here: this product wants a print-ready PDF at 300dpi WITH a
+      // 1/16" bleed, where the large format spec is 150dpi and explicitly no
+      // bleed. Two contradictory answers on one page is worse than either.
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. The bleed matters on a small card: the cutter works to a tolerance, and artwork built exactly to 3.5" x 2" with no bleed can leave a white edge on one side. Keep text and logos clear of the trim. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Stock', '95 bright, 16pt gloss C2S'],
+      ['Finish', 'Matte coating both sides'],
+      ['Printing', 'Full colour CMYK, 4/0 single sided or 4/4 double sided'],
+      ['Size', '3.5" x 2"'],
+      ['Corners', 'Square as standard; rounded corners available via template'],
+      ['Quantities', '100 to 25,000'],
+      ['Finishing', 'Cut to size and boxed']
+    ],
+    applications: [
+      'Cards handed out at the booth, where a conversation ends with something going into a pocket',
+      'Leave-behinds for a sales team working the floor away from the stand',
+      'Badge-swap and badge-scan follow up, with a note written on the matte back',
+      'Ordered alongside a booth so the card matches the backdrop and table cover it is handed out in front of'
+    ],
+    active: true,
+    name: 'Business Cards, 16pt Matte',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '💼',
+    size: '3.5" x 2"',
+    quoteOnly: true,
+    tagline: '16pt matte business cards on 95 bright C2S stock, 3.5" x 2", from 100 to 25,000.',
+    description:
+      'A 16pt card is noticeably thicker than the 14pt most office printers run, which is what stops it softening in a pocket over three days of a show. The stock is 95 bright gloss C2S with a matte coating applied to both faces, so it does not glare under booth lighting and it takes a pen if someone wants to write on the back. Printed full colour on one side or both, cut to 3.5" x 2" and boxed. Square corners are standard, and rounded corners are cut from a template.',
+    features: [
+      '16pt gloss C2S stock on 95 bright, thick enough not to soften in a pocket',
+      'Matte coating on both faces, so the card does not glare under booth lighting',
+      'A matte surface takes a pen, so a note written on the back survives the show',
+      'Full colour CMYK on one side or both',
+      'Square corners as standard, rounded corners cut from a template'
+    ],
+    whatsIncluded: [
+      'Your business cards, cut to 3.5" x 2" and boxed.',
+      'Matte coating on both faces as standard. Rounded corners only where you order them.',
+      'No cardholder or stand, and no packaging beyond the box the cards ship in.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier for
+    // this item. The token renders into the page and the FAQ schema on purpose,
+    // and the placeholder gate in test-seo-invariants fails the build while it
+    // is still here, so it cannot reach production unfilled.
+    turnaround: 'Production: TODO_TURNAROUND business days. Shipping is calculated separately at checkout.',
+    seoTitle: 'Business Cards | 16pt Matte',
+    seoDescription:
+      'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
+    related: ['flyers-80lb-uncoated', 'brochures-80lb-uncoated', 'standard-retractable-banner'],
+    gallery: [
+      { src: '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg', alt: '16pt matte business card handed over at a trade show booth' },
+      { src: '/images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg', alt: 'Stack of 16pt business cards showing the edge thickness' },
+      { src: '/images/marketing/business-cards-16pt-matte-rounded-corners.webp', alt: '16pt matte business cards with rounded corners' }
+    ],
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
+      // the page, the Product schema and the Merchant feed from claiming a
+      // number. Add a quantityTiers price table and delete quoteOnly to publish.
+      quoteOnly: true,
+      baseLabel: 'Business Cards, 16pt Matte',
+      optionGroups: [
+        {
+          id: 'sides', label: 'Printed sides', type: 'select', choices: [
+            { id: '4-0', label: 'Single sided (4/0)', default: true },
+            { id: '4-4', label: 'Double sided (4/4)', default: false }
+          ]
+        },
+        {
+          id: 'corners', label: 'Corners', type: 'select', choices: [
+            { id: 'square', label: 'Square', default: true },
+            { id: 'rounded', label: 'Rounded (from template)', default: false }
+          ]
+        },
+        {
+          id: 'quantity', label: 'Quantity', type: 'select', choices: [
+            { id: '100', label: '100', default: true },
+            { id: '250', label: '250', default: false },
+            { id: '500', label: '500', default: false },
+            { id: '1000', label: '1,000', default: false },
+            { id: '2500', label: '2,500', default: false },
+            { id: '5000', label: '5,000', default: false },
+            { id: '10000', label: '10,000', default: false },
+            { id: '25000', label: '25,000', default: false }
+          ]
+        }
+      ]
     }
   },
   {
