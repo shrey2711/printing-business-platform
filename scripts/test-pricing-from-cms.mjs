@@ -222,8 +222,21 @@ check('a percentage change reaches the real price of every priced product', () =
     if (pct < 8 || pct > 10.5) wrong.push(`${p.slug}: moved ${pct.toFixed(1)}% on a 10% change`);
   }
   if (wrong.length) return wrong.join('; ');
-  // Quote-only kits and the competitor-priced stand have no number to scale.
-  if (unsupported.length > 4) return `${unsupported.length} products cannot be bulk-priced: ${unsupported.join(', ')}`;
+  // Products with no number to scale: the three quote-only SEG kits, the
+  // competitor-priced stand, and the rigid signs while their prices are unset.
+  // Named rather than counted, so a product that silently LOSES its price still
+  // fails here instead of being absorbed by a raised threshold.
+  const EXPECTED_UNPRICED = new Set([
+    'table-top-banner-stand',
+    'seg-modular-trade-show-kit-a',
+    'seg-modular-trade-show-kit-b',
+    'seg-modular-trade-show-kit-c',
+    'coroplast-signs',
+    'pvc-board-signs',
+    'acp-aluminum-signs'
+  ]);
+  const surprise = unsupported.filter((s) => !EXPECTED_UNPRICED.has(s));
+  if (surprise.length) return `${surprise.length} priced product(s) cannot be bulk-priced: ${surprise.join(', ')}`;
   return null;
 });
 

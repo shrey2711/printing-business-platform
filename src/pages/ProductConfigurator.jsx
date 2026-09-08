@@ -43,17 +43,22 @@ export default function ProductConfigurator() {
     product?.seoDescription || product?.tagline
   );
 
-  // Related products (by slug) for the detail page.
+  // Related products (by slug) for the detail page. The same lookup is kept in
+  // state so an FAQ answer carrying `linkSlugs` can be turned into real links
+  // without a second fetch.
   const [related, setRelated] = useState([]);
+  const [catalog, setCatalog] = useState(null);
   useEffect(() => {
     const slugs = product?.related;
-    if (!slugs?.length) { setRelated([]); return; }
+    const needsCatalog = slugs?.length || (product?.faqs || []).some((f) => f.linkSlugs?.length);
+    if (!needsCatalog) { setRelated([]); return; }
     let alive = true;
     getProducts()
       .then((all) => {
         if (!alive) return;
         const bySlug = new Map(all.map((p) => [p.slug, p]));
-        setRelated(slugs.map((s) => bySlug.get(s)).filter(Boolean));
+        setCatalog(bySlug);
+        setRelated((slugs || []).map((s) => bySlug.get(s)).filter(Boolean));
       })
       .catch(() => {});
     return () => { alive = false; };
@@ -690,7 +695,7 @@ export default function ProductConfigurator() {
           address, so it is offered here rather than as an interrupting popup. */}
       <EmailCapture variant="proof" source={`configurator:${product.slug}`} />
 
-      <ProductTabs product={product} />
+      <ProductTabs product={product} catalog={catalog} />
 
       {(product.category === 'banner-stands' || product.category === 'backdrops') && (
         <AccessoriesSection

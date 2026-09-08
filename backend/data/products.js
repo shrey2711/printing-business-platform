@@ -16,7 +16,12 @@ export const categories = [
   { id: 'backdrops', name: 'Backdrops' },
   { id: 'table-covers', name: 'Table Covers' },
   { id: 'flags', name: 'Flags' },
-  { id: 'seg-kits', name: 'SEG Modular Kits' }
+  { id: 'seg-kits', name: 'SEG Modular Kits' },
+  // Categories whose landing pages are live and whose products are still being
+  // added. The filter chip and the category grid populate themselves from
+  // `products` below, so nothing here changes when the first SKU lands.
+  { id: 'rigid-signs', name: 'Rigid Signs' },
+  { id: 'marketing-essentials', name: 'Marketing Essentials' }
 ];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
@@ -86,6 +91,14 @@ export const navGroups = [
       { name: 'SEG Modular Kit A', slug: 'seg-modular-trade-show-kit-a' },
       { name: 'SEG Modular Kit B', slug: 'seg-modular-trade-show-kit-b' },
       { name: 'SEG Modular Kit C', slug: 'seg-modular-trade-show-kit-c' }
+    ]
+  },
+  {
+    name: 'Rigid Signs',
+    items: [
+      { name: 'Coroplast Signs (4mm)', slug: 'coroplast-signs' },
+      { name: 'PVC Board (1/8")', slug: 'pvc-board-signs' },
+      { name: 'ACP Aluminum Sandwich Board', slug: 'acp-aluminum-signs' }
     ]
   }
 ];
@@ -1312,6 +1325,57 @@ const FABRIC_FINISHING_GROUPS = [
   ] }
 ];
 
+// Rigid signs. Only the two finishing choices the supplier actually offers on
+// coroplast, plus the sides selector. No `mult` or `rate` on any choice: the
+// product is quote-only until its price is set, so nothing here computes yet
+// and a rate written now would be a guess. Set the rates with the price.
+const COROPLAST_FINISHING_GROUPS = [
+  { id: 'sides', label: '# of Sides', ui: 'pills', choices: [
+    { id: '1', name: '1 Side (4/0)' },
+    { id: '2', name: '2 Sides (4/4)' }
+  ] },
+  { id: 'grommets', label: 'Grommets', choices: [
+    { id: 'none', name: 'No Grommets' },
+    { id: 'corners', name: 'No. 2 Brass Grommets' }
+  ] },
+  { id: 'stake', label: 'H-Stake', choices: [
+    { id: 'none', name: 'No Stake' },
+    { id: 'h-stake', name: '10" x 30" Steel H-Stake' }
+  ] }
+];
+
+// PVC board takes grommets and nothing else. No stake option: the supplier does
+// not offer one on this material, and offering a choice we cannot fulfil is
+// worse than offering none. Rates are set with the price, as above.
+const PVC_FINISHING_GROUPS = [
+  { id: 'sides', label: '# of Sides', ui: 'pills', choices: [
+    { id: '1', name: '1 Side (4/0)' },
+    { id: '2', name: '2 Sides (4/4)' }
+  ] },
+  { id: 'grommets', label: 'Grommets', choices: [
+    { id: 'none', name: 'No Grommets' },
+    { id: 'corners', name: 'Grommets' }
+  ] }
+];
+
+// Aluminum composite. Corner radius and punched holes instead of grommets: on a
+// metal-skinned panel the mounting is drilled, not eyeletted. Rates set with
+// the price, as above.
+const ACP_FINISHING_GROUPS = [
+  { id: 'sides', label: '# of Sides', ui: 'pills', choices: [
+    { id: '1', name: '1 Side (4/0)' },
+    { id: '2', name: '2 Sides (4/4)' }
+  ] },
+  { id: 'corners', label: 'Corner Radius', choices: [
+    { id: 'square', name: 'Square Corners' },
+    { id: 'radius', name: 'Rounded Corners' }
+  ] },
+  { id: 'holes', label: 'Mounting Holes', choices: [
+    { id: 'none', name: 'No Holes' },
+    { id: 'punched', name: '0.25" Punched Mounting Holes' }
+  ] }
+];
+
 const products = [
   ...canopyTents,
   pleatedCovers,
@@ -1577,6 +1641,253 @@ const products = [
       defaultHeightIn: 48,
       materials: [{ id: '9oz-poly', name: '9oz Wrinkle-Free Polyester', multiplier: 1 }],
       finishingGroups: FABRIC_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'coroplast-signs',
+    faqs: [
+      { q: 'What size can I order?', a: 'From 6" x 6" up to 48" x 96", cut to the size you enter. Flutes run vertically as standard. A sign wider than 48" runs horizontal flutes instead.' },
+      { q: 'What is the difference between single and double sided?', a: 'Single sided is a 4/0 print with the back left white. Double sided is 4/4, printed on both faces. Double sided artwork has to be supplied as two separate files, one per face.' },
+      { q: 'How do I mount the sign?', a: 'Two optional finishing choices are available. No. 2 brass grommets let you hang or tie the sign to a frame or a fence. A 10" x 30" steel H-stake pushes into the ground and holds the sign upright. Add either one to the order; neither is included by default.' },
+      { q: 'Can I use these outdoors?', a: 'Yes. The sheet is 4mm corrugated plastic and the ink is UV printed direct to it, so there is no laminated surface layer to lift at the edges. We do not publish a rated outdoor lifespan for this material, so treat it as event and short-run signage rather than permanent exterior signage.' },
+      // Deliberately worded to match the question the FAQ generator asks, so the
+      // verified supplier turnaround replaces the generic one instead of the
+      // page carrying both.
+      { q: 'How fast is production and shipping?', a: 'Artwork approved before 6am PST ships the same business day. Approved between 6:01am and 11:59pm PST ships the next business day. An order over 300 pieces adds one business day. Shipping time is separate and depends on the delivery address.' },
+      // Same reason: the generated answer lists file types the uploader rejects.
+      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. Maximum upload is 300MB. A double sided sign needs two separate files.' }
+    ],
+    specs: [
+      ['Material', '4mm white corrugated plastic (coroplast)'],
+      ['Printing', 'Direct UV printed, matte finish'],
+      ['Sides', '4/0 single sided or 4/4 double sided'],
+      ['Sizes', 'Made to size from 6" x 6" up to 48" x 96"'],
+      ['Flute direction', 'Vertical as standard; signs wider than 48" run horizontal flutes'],
+      ['Optional finishing', 'No. 2 brass grommets, or a 10" x 30" steel H-stake'],
+      ['Production', 'Approved before 6am PST ships the same business day; approved 6:01am to 11:59pm PST ships the next business day; over 300 pieces adds one business day']
+    ],
+    applications: [
+      'Booth directional signs pointing to a demo station, a meeting area or a counter',
+      'Aisle markers hung at eye level so a booth number reads down the row',
+      'Sponsor boards listing the companies backing an event',
+      'Parking and check-in signage on H-stakes outside the venue'
+    ],
+    active: true,
+    name: 'Coroplast Signs',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🪧',
+    tagline: '4mm corrugated plastic signs, UV printed and cut to size from 6" x 6" up to 48" x 96".',
+    description:
+      'Coroplast is 4mm corrugated plastic. It is light enough to carry in with the rest of a booth kit and stiff enough to stand on its own as a directional or check-in sign. We print direct to the sheet with UV ink in a matte finish, single sided or double sided, and cut each sign to the size you order. Flutes run vertically as standard, which is the direction that lets a sign sit on an H-stake.',
+    features: [
+      '4mm corrugated plastic, light enough to carry in with the rest of your booth kit',
+      'Matte UV print, so booth lighting does not glare off the face in photos',
+      'Single or double sided, so an aisle sign reads from both directions',
+      'Cut to any size from 6" x 6" up to 48" x 96" rather than a fixed format',
+      'Takes No. 2 brass grommets for hanging or a steel H-stake for ground placement'
+    ],
+    whatsIncluded: [
+      'One 4mm coroplast sign, UV printed and cut to the size you order.',
+      'Grommets or an H-stake only where you add them to the order. Both are optional finishing.',
+      'No frame, post or wall fixings. The sign ships flat, ready to mount however you have specified.'
+    ],
+    turnaround: 'Production: same business day when artwork is approved before 6am PST, otherwise the next business day. Shipping is calculated separately at checkout.',
+    seoTitle: 'Coroplast Signs | 4mm Corrugated Plastic',
+    seoDescription:
+      'Custom 4mm coroplast signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Grommets and H-stakes available.',
+    related: ['pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
+    gallery: [
+      { src: '/images/signs/coroplast-signs-booth-directional.jpeg', alt: 'Custom printed 4mm coroplast booth directional sign' },
+      { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker sign hung at eye level' },
+      { src: '/images/signs/coroplast-signs-grommets-h-stake.webp', alt: 'Coroplast sign finishing — brass grommets and a steel H-stake' }
+    ],
+    pricing: {
+      model: 'area',
+      // TODO_PRICE — supplier pricing not set yet. While `quoteOnly` is true the
+      // card, the page, the Product schema and the Merchant feed all treat this
+      // as a quote product: no price is shown and no Offer is emitted, which is
+      // the only honest state for a SKU with no price. To publish a price, set
+      // pricePerSqFt and minChargeUsd below and delete the quoteOnly line.
+      quoteOnly: true,
+      pricePerSqFt: null,
+      minChargeUsd: null,
+      minAreaSqFt: 0,
+      minWidthIn: 6,
+      minHeightIn: 6,
+      maxWidthIn: 48,
+      maxHeightIn: 96,
+      sizeSmallCapIn: 288,
+      sizeLargeCapIn: 576,
+      defaultWidthIn: 24,
+      defaultHeightIn: 18,
+      materials: [{ id: '4mm-coroplast', name: '4mm Corrugated Plastic', multiplier: 1 }],
+      finishingGroups: COROPLAST_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'pvc-board-signs',
+    faqs: [
+      { q: 'What size can I order?', a: 'From 6" x 6" up to 48" x 96", custom cut to the dimensions you enter. The board comes in one thickness, 1/8".' },
+      // `linkSlugs` renders as anchors after the answer. Slugs only, resolved
+      // against the catalogue, so nothing in this data becomes markup. A slug
+      // that does not resolve is dropped rather than rendering a dead link.
+      {
+        q: 'What is the difference between coroplast, PVC and ACP?',
+        a: 'Coroplast is 4mm corrugated plastic. It is fluted and light, which makes it the short-run choice for signage that only has to last an event. PVC board is a 1/8" expanded PVC sheet: rigid, with a smooth face that reads as a permanent sign, and light enough to pack into a case and reship between shows. ACP is an aluminum composite panel and is the heavier of the three. PVC is the indoor workhorse in the middle.',
+        linkSlugs: ['coroplast-signs', 'acp-aluminum-signs']
+      },
+      { q: 'Can I print both sides?', a: 'Yes. 4/0 prints one face and leaves the back white. 4/4 prints both faces. Each artwork file is a single page, so a 4/4 sign needs one file per face.' },
+      { q: 'How do I mount a PVC panel?', a: 'Grommets are the one optional finishing on this material. Add them to the order and the panel can be hung or tied. Nothing else is supplied with the sign, so screws, standoffs and frames come from your side.' },
+      { q: 'How fast is production and shipping?', a: 'Ordered before 12pm PST it ships the same business day. Ordered before 4pm PST it ships the next business day. An order over 100 units adds two business days. Shipping time is separate and depends on the delivery address.' },
+      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. Maximum upload is 300MB.' }
+    ],
+    specs: [
+      ['Material', '1/8" white PVC board (expanded PVC sheet)'],
+      ['Thickness', '1/8" only'],
+      ['Printing', 'Direct UV printed, matte finish'],
+      ['Sides', '4/0 single sided or 4/4 double sided'],
+      ['Sizes', 'Custom cut to your ordered dimensions, from 6" x 6" up to 48" x 96"'],
+      ['Optional finishing', 'Grommets'],
+      ['Production', 'Ordered before 12pm PST ships the same business day; before 4pm PST ships the next business day; over 100 units adds 2 business days']
+    ],
+    applications: [
+      'Indoor booth panels mounted to a frame or a wall',
+      'Retail and counter displays that stay up between shows',
+      'Reusable directional and menu boards that get packed and reshipped',
+      'Sponsor and pricing boards inside a booth'
+    ],
+    active: true,
+    name: 'PVC Board Signs',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🅰️',
+    tagline: 'Rigid 1/8" white PVC panels, UV printed and cut to size from 6" x 6" up to 48" x 96".',
+    description:
+      'PVC board is a 1/8" expanded PVC sheet. It is stiffer than coroplast and holds a flat face without a frame behind it, which is what makes it read as a permanent sign rather than a temporary one. It is also light enough to pack into a case and reship between shows, where an aluminum composite panel of the same size is heavier to move. We print direct to the sheet with UV ink in a matte finish, single sided or double sided, and cut each panel to the size you order.',
+    features: [
+      'Rigid 1/8" expanded PVC that holds a flat face without a frame behind it',
+      'Smooth matte surface that reads as a permanent sign rather than a temporary one',
+      'Lighter to handle and ship than an aluminum composite panel of the same size',
+      'Single or double sided, cut to any size from 6" x 6" up to 48" x 96"',
+      'Sturdy enough to pack and reship between shows instead of reprinting each time'
+    ],
+    whatsIncluded: [
+      'One 1/8" white PVC board sign, UV printed and cut to the size you order.',
+      'Grommets only where you add them to the order. Grommets are the one optional finishing on this material.',
+      'No frame, standoffs or wall fixings. The panel ships flat, ready to mount however you have specified.'
+    ],
+    turnaround: 'Production: same business day when ordered before 12pm PST, next business day when ordered before 4pm PST. Shipping is calculated separately at checkout.',
+    seoTitle: 'PVC Board Signs | Rigid Indoor Panels',
+    seoDescription:
+      'Custom 1/8 inch PVC board signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Rigid panels for indoor booths.',
+    related: ['coroplast-signs', 'acp-aluminum-signs', 'fabric-banner-9oz-wrinkle-free'],
+    gallery: [
+      { src: '/images/signs/pvc-board-signs-booth-panel.jpeg', alt: 'Custom printed 1/8 inch PVC board panel in a trade show booth' },
+      { src: '/images/signs/pvc-board-signs-retail-counter-display.jpeg', alt: 'PVC board sign used as a retail counter display' },
+      { src: '/images/signs/pvc-board-signs-grommets-edge-detail.webp', alt: 'PVC board sign edge detail showing a grommet' }
+    ],
+    pricing: {
+      model: 'area',
+      // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
+      // signs above: while `quoteOnly` is true nothing on this page, in the
+      // Product schema or in the Merchant feed claims a price. Set pricePerSqFt
+      // and minChargeUsd and delete the quoteOnly line to publish one.
+      quoteOnly: true,
+      pricePerSqFt: null,
+      minChargeUsd: null,
+      minAreaSqFt: 0,
+      minWidthIn: 6,
+      minHeightIn: 6,
+      maxWidthIn: 48,
+      maxHeightIn: 96,
+      sizeSmallCapIn: 288,
+      sizeLargeCapIn: 576,
+      defaultWidthIn: 24,
+      defaultHeightIn: 18,
+      materials: [{ id: '1-8-pvc', name: '1/8" White PVC Board', multiplier: 1 }],
+      finishingGroups: PVC_FINISHING_GROUPS
+    }
+  },
+  {
+    slug: 'acp-aluminum-signs',
+    faqs: [
+      { q: 'What size can I order?', a: 'From 6" x 6" up to 48" x 96", cut to the size you enter. The panel comes in one thickness, 1/8" (3mm).' },
+      { q: 'How do I mount an ACP panel?', a: 'Order it with 0.25" punched mounting holes and the panel arrives ready to screw or bolt up, so nothing has to be drilled on site. Several corner radius options are available as well, which is what stops a large panel presenting a sharp square corner at head height. Tell us the hole positions and the corner you want with the order. No screws, standoffs or frame are supplied.' },
+      { q: 'How long does an ACP sign last outdoors?', a: 'We do not publish a rated lifespan, because it depends on exposure, mounting and climate rather than on the panel alone. What we can tell you is what it is made of: two 0.15mm aluminum skins bonded either side of a polyethylene core, printed direct and finished with a gloss UV coating for scratch resistance. Metal skins are why it stays rigid and weather resistant at full size, which is the reason to choose it for signage that stays mounted rather than coming down after an event.' },
+      {
+        q: 'What is the difference between coroplast, PVC and ACP?',
+        a: 'Coroplast is 4mm corrugated plastic, fluted and light, for short-run signage that only has to last an event. PVC board is a 1/8" expanded PVC sheet, rigid with a smooth face, and the indoor panel that packs and reships between shows. ACP is this one: aluminum skins over a plastic core, the heaviest and the most weather resistant of the three, for signage that stays up.',
+        linkSlugs: ['coroplast-signs', 'pvc-board-signs']
+      },
+      { q: 'How fast is production and shipping?', a: 'Ordered before 12pm PST it ships the same business day. Ordered before 4pm PST it ships the next business day. An order over 100 units adds two business days. Shipping time is separate and depends on the delivery address.' },
+      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. No Pantone or spot colours; convert them to CMYK before you export. Maximum upload is 300MB.' }
+    ],
+    specs: [
+      ['Material', 'Aluminum composite panel: two 0.15mm aluminum skins bonded to a polyethylene core'],
+      ['Thickness', '1/8" (3mm) only'],
+      ['Printing', 'Direct UV printed with a gloss UV coating for scratch resistance'],
+      ['Sides', '4/0 single sided or 4/4 double sided'],
+      ['Sizes', 'Made to size from 6" x 6" up to 48" x 96"'],
+      ['Optional finishing', 'Multiple corner radius options; 0.25" punched mounting holes'],
+      ['Production', 'Ordered before 12pm PST ships the same business day; before 4pm PST ships the next business day; over 100 units adds 2 business days']
+    ],
+    applications: [
+      'Branded fascia panels above a booth or a storefront',
+      'Permanent exterior signage that stays mounted year round',
+      'Booth panels that need to look finished from arm\'s length',
+      'Outdoor directional and parking signage at a venue'
+    ],
+    active: true,
+    name: 'ACP Signs (Aluminum Composite)',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🛡️',
+    tagline: '3mm aluminum composite panels, UV printed with a gloss protective coating and cut to size up to 48" x 96".',
+    description:
+      'ACP is an aluminum composite panel: two 0.15mm aluminum skins bonded either side of a polyethylene core, 3mm thick in total. The metal skins are what keep a full size panel rigid and weather resistant, and the print is finished with a gloss UV coating that protects the face from scratching in handling and transport. It is the panel to specify when a sign stays mounted outdoors, or when someone will be standing close enough to see the surface.',
+    features: [
+      'Two 0.15mm aluminum skins over a polyethylene core, so a full size panel stays rigid',
+      'Gloss UV coating over the print, which resists scratching in handling and transport',
+      'Weather resistant, so a sign can stay mounted instead of coming down after the event',
+      '0.25" punched mounting holes and corner radius options, specified with the order',
+      'Single or double sided, cut to any size from 6" x 6" up to 48" x 96"'
+    ],
+    whatsIncluded: [
+      'One 3mm aluminum composite panel, UV printed with a gloss protective coating and cut to the size you order.',
+      'Corner radius and 0.25" punched mounting holes only where you add them to the order.',
+      'No screws, standoffs or frame. The panel ships flat, ready to mount however you have specified.'
+    ],
+    turnaround: 'Production: same business day when ordered before 12pm PST, next business day when ordered before 4pm PST. Shipping is calculated separately at checkout.',
+    seoTitle: 'ACP Signs | Aluminum Composite Panels',
+    seoDescription:
+      'Custom 3mm aluminum composite signs, UV printed with a gloss protective coating and cut to size up to 48 by 96 inches. Rigid, weather resistant panels.',
+    related: ['pvc-board-signs', 'coroplast-signs', 'seg-modular-trade-show-kit-a'],
+    gallery: [
+      { src: '/images/signs/acp-aluminum-signs-fascia-panel.jpeg', alt: 'Custom printed aluminum composite fascia panel above a booth' },
+      { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'Aluminum composite sign mounted on an exterior wall' },
+      { src: '/images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp', alt: 'Aluminum composite sign detail showing a rounded corner and a punched mounting hole' }
+    ],
+    pricing: {
+      model: 'area',
+      // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
+      // signs above: while `quoteOnly` is true nothing on this page, in the
+      // Product schema or in the Merchant feed claims a price. Set pricePerSqFt
+      // and minChargeUsd and delete the quoteOnly line to publish one.
+      quoteOnly: true,
+      pricePerSqFt: null,
+      minChargeUsd: null,
+      minAreaSqFt: 0,
+      minWidthIn: 6,
+      minHeightIn: 6,
+      maxWidthIn: 48,
+      maxHeightIn: 96,
+      sizeSmallCapIn: 288,
+      sizeLargeCapIn: 576,
+      defaultWidthIn: 24,
+      defaultHeightIn: 18,
+      materials: [{ id: '3mm-acp', name: '3mm Aluminum Composite Panel', multiplier: 1 }],
+      finishingGroups: ACP_FINISHING_GROUPS
     }
   },
   {

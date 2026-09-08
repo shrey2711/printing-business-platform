@@ -24,7 +24,10 @@ export const PRODUCT_CARD_IMAGE = {
   'teardrop-flag': '/images/flags/teardrop_flag_summit_coffee_large_cross_base.webp',
   'seg-modular-trade-show-kit-a': '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg',
   'seg-modular-trade-show-kit-b': '/images/seg-kits/apex-seg-modular-kit-b-main.jpeg',
-  'seg-modular-trade-show-kit-c': '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg'
+  'seg-modular-trade-show-kit-c': '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg',
+  'coroplast-signs': '/images/signs/coroplast-signs-booth-directional.jpeg',
+  'pvc-board-signs': '/images/signs/pvc-board-signs-booth-panel.jpeg',
+  'acp-aluminum-signs': '/images/signs/acp-aluminum-signs-fascia-panel.jpeg'
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;

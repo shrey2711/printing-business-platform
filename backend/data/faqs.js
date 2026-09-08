@@ -13,16 +13,41 @@ export function getProductFaqs(product) {
   const lower = name.toLowerCase();
   const faqs = [];
 
+  // A product with no published price shows "Request a quote" everywhere, so an
+  // answer promising an instant price or a discount that updates as you type is
+  // simply false on that page. Both generated answers below branch on this.
+  const quoteOnly = !!p.quoteOnly || p.model === 'quote' || p.model === 'competitive';
+
   // Sizes
+  const enterSizes = quoteOnly
+    ? 'Enter your exact width and height on the product page and we will quote it.'
+    : 'Enter your exact width and height on the product page to see instant pricing.';
   if (p.model === 'area') {
-    faqs.push({
-      q: `What sizes are available for ${lower}?`,
-      a: `We print ${lower} in custom sizes from ${p.minWidthIn}"×${p.minHeightIn}" up to ${p.maxWidthIn}"×${p.maxHeightIn}". Enter your exact width and height on the product page to see instant pricing.`
-    });
+    // Only the rigid signs carry explicit min/max bounds. The banners never
+    // have, and interpolating them anyway published
+    // `from undefined"×undefined" up to undefined"×undefined"` into the visible
+    // FAQ and the FAQPage schema of every banner page. Fall back to the
+    // product's own verified `Sizes` spec row, and emit nothing at all rather
+    // than a sentence with holes in it.
+    const bounds = [p.minWidthIn, p.minHeightIn, p.maxWidthIn, p.maxHeightIn];
+    const sizeRow = (product.specs || []).find(([k]) => /^sizes?$/i.test(String(k).trim()));
+    if (bounds.every((n) => Number.isFinite(n))) {
+      faqs.push({
+        q: `What sizes are available for ${lower}?`,
+        a: `We print ${lower} in custom sizes from ${p.minWidthIn}"×${p.minHeightIn}" up to ${p.maxWidthIn}"×${p.maxHeightIn}". ${enterSizes}`
+      });
+    } else if (sizeRow) {
+      faqs.push({
+        q: `What sizes are available for ${lower}?`,
+        a: `${String(sizeRow[1]).replace(/\.$/, '')}. ${enterSizes}`
+      });
+    }
   } else if (p.variants?.length) {
     faqs.push({
       q: `What sizes does the ${lower} come in?`,
-      a: `Available sizes: ${p.variants.map((v) => v.name).join(', ')}. Choose your size on the product page to see the price.`
+      a: `Available sizes: ${p.variants.map((v) => v.name).join(', ')}. ${quoteOnly
+        ? 'Choose your size on the product page and we will quote it.'
+        : 'Choose your size on the product page to see the price.'}`
     });
   }
 
@@ -64,7 +89,9 @@ export function getProductFaqs(product) {
   // Bulk / wholesale discounts
   faqs.push({
     q: `Do you offer bulk or wholesale discounts on ${lower}?`,
-    a: `Yes. Pricing is wholesale with automatic volume discounts — the more you order, the lower the per-piece price. The discount is applied instantly as you increase the quantity.`
+    a: quoteOnly
+      ? `Yes. Pricing is wholesale and the per-piece price falls as the quantity rises. Send your quantity with your quote request and the volume price is included in the quote.`
+      : `Yes. Pricing is wholesale with automatic volume discounts — the more you order, the lower the per-piece price. The discount is applied instantly as you increase the quantity.`
   });
 
   // Merge: authored questions win; a generated one is dropped when the authored

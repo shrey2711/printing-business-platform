@@ -100,6 +100,24 @@ const shopMenu = [
       { label: 'SEG Modular Kit B', to: '/products/seg-modular-trade-show-kit-b' },
       { label: 'SEG Modular Kit C', to: '/products/seg-modular-trade-show-kit-c' }
     ]
+  },
+  // Categories whose landing pages are live while their products are still
+  // being added. `items` stays empty deliberately — every entry in this menu
+  // must be a real destination, and a link to a product page that does not
+  // exist yet renders a not-found. Add the item links with the products.
+  {
+    label: 'Rigid Signs',
+    to: '/rigid-signs',
+    items: [
+      { label: 'Coroplast Signs (4mm)', to: '/products/coroplast-signs' },
+      { label: 'PVC Board (1/8")', to: '/products/pvc-board-signs' },
+      { label: 'ACP Aluminum Sandwich Board', to: '/products/acp-aluminum-signs' }
+    ]
+  },
+  {
+    label: 'Marketing Essentials',
+    to: '/marketing-essentials',
+    items: []
   }
 ];
 
@@ -330,6 +348,8 @@ function Footer() {
             <Link to="/banners">Banners</Link>
             <Link to="/backdrops">Backdrops</Link>
             <Link to="/table-covers">Table Covers</Link>
+            <Link to="/rigid-signs">Rigid Signs</Link>
+            <Link to="/marketing-essentials">Marketing Essentials</Link>
             <Link to="/seg-displays">SEG Displays</Link>
             <Link to="/tension-fabric-displays">Tension Fabric Displays</Link>
             <Link to="/pop-up-displays">Pop-Up Displays</Link>
@@ -435,6 +455,8 @@ function App() {
         <Route path="/banners" element={<CategoryPage slug="banners" />} />
         <Route path="/table-covers" element={<CategoryPage slug="table-covers" />} />
         <Route path="/backdrops" element={<CategoryPage slug="backdrops" />} />
+        <Route path="/rigid-signs" element={<CategoryPage slug="rigid-signs" />} />
+        <Route path="/marketing-essentials" element={<CategoryPage slug="marketing-essentials" />} />
         <Route path="/trade-show-booth-packages" element={<BoothPackagesPage />} />
         {/* Display-type SEO landing pages (quote-based, no invented pricing) */}
         <Route path="/seg-displays" element={<LandingPage slug="seg-displays" />} />

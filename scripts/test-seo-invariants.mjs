@@ -47,6 +47,21 @@ for (const loc of urls) {
   if (!existsSync(file)) { fail(key, 'sitemap URL has no prerendered file (would 404)'); continue; }
   const html = readFileSync(file, 'utf8');
 
+  // No interpolation holes in crawlable copy. A template reading a field the
+  // product does not carry renders the word "undefined" (or NaN, or
+  // [object Object]) straight into the page and into the structured data, which
+  // reads to a customer as a broken site and to Google as a broken answer. It
+  // shipped that way on every banner page for months, so it is a gate now.
+  // Scoped to the prerendered body and the JSON-LD, never the bundled JS.
+  const prerendered = (html.match(/<div id="seo-prerender">([\s\S]*?)<\/div>\s*<\/div>/) || [])[1] || '';
+  const ldBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((m) => m[1]).join('\n');
+  for (const [label, text] of [['page copy', prerendered], ['JSON-LD', ldBlocks]]) {
+    for (const hole of ['undefined', 'NaN', '[object Object]']) {
+      if (text.includes(hole)) fail(key, `${label} contains "${hole}" — an unset field reached the rendered output`);
+    }
+  }
+
   // Exactly one H1.
   const h1s = count(html, /<h1[\s>]/g);
   if (h1s !== 1) fail(key, `expected exactly 1 <h1>, found ${h1s}`);

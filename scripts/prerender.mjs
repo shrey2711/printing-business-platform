@@ -64,6 +64,8 @@ const NAV = `<nav aria-label="Primary">
   <a href="/banner-stands">Banner Stands</a>
   <a href="/backdrops">Backdrops</a>
   <a href="/table-covers">Table Covers</a>
+  <a href="/rigid-signs">Rigid Signs</a>
+  <a href="/marketing-essentials">Marketing Essentials</a>
   <a href="/trade-show-booth-packages">Booth Packages</a>
   <a href="/locations">Locations</a>
   <a href="/resources">Learning Center</a>
@@ -498,7 +500,10 @@ for (const cp of CATEGORY_PAGES) {
       ${answer}
       ${subTiles}
       <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
-      <ul>${catProducts.map(productLi).join('')}</ul>
+      ${catProducts.length
+        ? `<ul>${catProducts.map(productLi).join('')}</ul>`
+        : `<p>Products in this category are being added. <a href="/quote">Request a quote</a> and we
+          will price your job in the meantime.</p>`}
       ${compareTable}
       ${guideHtml}
       ${included}
@@ -1005,6 +1010,22 @@ for (const sol of SOLUTIONS) {
   });
 }
 
+// An FAQ answer is plain text everywhere it is used: escaped into the page and
+// carried verbatim into FAQPage schema, where markup is not allowed. So an
+// answer that needs to point at another product carries `linkSlugs` instead,
+// and the anchors are built here from the catalogue. Only the slug comes from
+// the data, the name and the href are looked up, and a slug that does not
+// resolve is dropped rather than rendering a link to a page that is not there.
+function faqLinksHtml(faq) {
+  const links = (Array.isArray(faq.linkSlugs) ? faq.linkSlugs : [])
+    .map((s) => productList.find((x) => x.slug === s))
+    .filter(Boolean);
+  if (!links.length) return '';
+  return `<p>${links
+    .map((p) => `<a href="/products/${p.slug}">${esc(p.name)}</a>`)
+    .join(' · ')}</p>`;
+}
+
 // Commercial-intent title/H1/description per product. Canopy sizes target
 // "<size> custom canopy tent with logo"; others keep a sensible default.
 function productSeoTitle(product) {
@@ -1140,7 +1161,7 @@ for (const summary of productList) {
       ${specs.map(([k, v]) => `<p><strong>${esc(k)}:</strong> ${esc(v)}</p>`).join('')}
       <p><a href="/products/${product.slug}">${startingPrice != null ? `Configure your ${esc(product.name)} and get an instant price →` : `Configure your ${esc(product.name)} and request a quote →`}</a></p>
       <h2>Frequently asked questions</h2>
-      ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
+      ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>${faqLinksHtml(f)}`).join('')}
       <h2>Related products</h2>
       <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>
       <h2>Guides for your booth</h2>
