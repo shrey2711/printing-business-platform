@@ -1731,12 +1731,11 @@ const products = [
     seoDescription:
       'Custom 4mm coroplast signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Grommets and H-stakes available.',
     related: ['pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
-    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
-    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
-    // entry in src/data/brandImages.js when these files land:
-    //   /images/signs/coroplast-signs-booth-directional.jpeg
-    //   /images/signs/coroplast-signs-double-sided-aisle-marker.jpeg
-    //   /images/signs/coroplast-signs-grommets-h-stake.webp
+    gallery: [
+      { src: '/images/signs/coroplast-signs-booth-directional.jpeg', alt: 'Coroplast booth directional sign zip-tied to an exhibition booth upright' },
+      { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker hung between trade show aisles' },
+      { src: '/images/signs/coroplast-signs-grommets-h-stake.webp', alt: 'Cut edge of a coroplast panel showing the internal flutes and a brass grommet' }
+    ],
     pricing: {
       model: 'area',
       // TODO_PRICE — supplier pricing not set yet. While `quoteOnly` is true the
@@ -1817,12 +1816,11 @@ const products = [
     seoDescription:
       'Custom 1/8 inch PVC board signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Rigid panels for indoor booths.',
     related: ['coroplast-signs', 'acp-aluminum-signs', 'fabric-banner-9oz-wrinkle-free'],
-    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
-    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
-    // entry in src/data/brandImages.js when these files land:
-    //   /images/signs/pvc-board-signs-booth-panel.jpeg
-    //   /images/signs/pvc-board-signs-retail-counter-display.jpeg
-    //   /images/signs/pvc-board-signs-grommets-edge-detail.webp
+    gallery: [
+      { src: '/images/signs/pvc-board-signs-booth-panel.jpeg', alt: 'Rigid PVC board panel mounted flush on a trade show booth wall' },
+      { src: '/images/signs/pvc-board-signs-retail-counter-display.jpeg', alt: 'PVC board wayfinding panel on the wall of a retail store' },
+      { src: '/images/signs/pvc-board-signs-grommets-edge-detail.webp', alt: 'Close view of a PVC board corner showing the solid core and the square cut edge' }
+    ],
     pricing: {
       model: 'area',
       // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
@@ -1899,12 +1897,11 @@ const products = [
     seoDescription:
       'Custom 3mm aluminum composite signs, UV printed with a gloss protective coating and cut to size up to 48 by 96 inches. Rigid, weather resistant panels.',
     related: ['pvc-board-signs', 'coroplast-signs', 'seg-modular-trade-show-kit-a'],
-    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
-    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
-    // entry in src/data/brandImages.js when these files land:
-    //   /images/signs/acp-aluminum-signs-fascia-panel.jpeg
-    //   /images/signs/acp-aluminum-signs-exterior-mounted.jpeg
-    //   /images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp
+    gallery: [
+      { src: '/images/signs/acp-aluminum-signs-fascia-panel.jpeg', alt: 'Aluminium composite panel sign on the fascia above a building entrance' },
+      { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'ACP sign bolted through its corner holes to a steel post frame at a yard entrance' },
+      { src: '/images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp', alt: 'Cut edge of an aluminium composite panel showing both aluminium skins over the core, with a rounded corner and a punched mounting hole' }
+    ],
     pricing: {
       model: 'area',
       // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
@@ -1992,12 +1989,11 @@ const products = [
     seoDescription:
       'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
     related: ['flyers-80lb-uncoated', 'brochures-80lb-uncoated', 'standard-retractable-banner'],
-    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
-    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
-    // entry in src/data/brandImages.js when these files land:
-    //   /images/marketing/business-cards-16pt-matte-booth-handout.jpeg
-    //   /images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg
-    //   /images/marketing/business-cards-16pt-matte-rounded-corners.webp
+    gallery: [
+      { src: '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg', alt: '16pt matte business cards in an acrylic holder on a trade show booth counter' },
+      { src: '/images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg', alt: 'Stacked edges of 16pt business cards showing the thickness of the stock' },
+      { src: '/images/marketing/business-cards-16pt-matte-rounded-corners.webp', alt: '16pt matte business cards fanned to show the rounded corner option' }
+    ],
     pricing: {
       model: 'configured',
       // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
@@ -2094,12 +2090,11 @@ const products = [
     seoDescription:
       'Custom flyers on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six sizes, full colour on one side or both, from 25 to 100,000.',
     related: ['brochures-80lb-uncoated', 'business-cards-16pt-matte'],
-    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
-    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
-    // entry in src/data/brandImages.js when these files land:
-    //   /images/marketing/flyers-80lb-uncoated-booth-handout.jpeg
-    //   /images/marketing/flyers-80lb-uncoated-size-range.jpeg
-    //   /images/marketing/flyers-80lb-uncoated-written-on.webp
+    gallery: [
+      { src: '/images/marketing/flyers-80lb-uncoated-booth-handout.jpeg', alt: 'Uncoated 80lb flyer standing in an acrylic literature holder on a booth counter' },
+      { src: '/images/marketing/flyers-80lb-uncoated-size-range.jpeg', alt: 'Uncoated flyers in four different sizes laid side by side' },
+      { src: '/images/marketing/flyers-80lb-uncoated-written-on.webp', alt: 'Ballpoint pen notes written directly onto an uncoated flyer' }
+    ],
     pricing: {
       model: 'configured',
       // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
@@ -2192,12 +2187,11 @@ const products = [
     seoDescription:
       'Custom folded brochures on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six flat sizes, full colour, from 25 to 100,000.',
     related: ['flyers-80lb-uncoated', 'business-cards-16pt-matte'],
-    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
-    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
-    // entry in src/data/brandImages.js when these files land:
-    //   /images/marketing/brochures-80lb-uncoated-folded-stack.jpeg
-    //   /images/marketing/brochures-80lb-uncoated-open-spread.jpeg
-    //   /images/marketing/brochures-80lb-uncoated-scored-fold-detail.webp
+    gallery: [
+      { src: '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg', alt: 'Folded uncoated brochures in a literature rack on a booth counter' },
+      { src: '/images/marketing/brochures-80lb-uncoated-open-spread.jpeg', alt: 'Uncoated brochure opened flat showing the three column interior' },
+      { src: '/images/marketing/brochures-80lb-uncoated-scored-fold-detail.webp', alt: 'Close view of a scored fold on uncoated stock with no cracking along the crease' }
+    ],
     pricing: {
       model: 'configured',
       // TODO_PRICE — see the flyers note above.
