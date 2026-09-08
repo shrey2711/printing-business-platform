@@ -126,8 +126,20 @@ for (const [section, keys] of WANTED) {
   lines.push('```', '');
 }
 
-writeFileSync(OUT, lines.join('\n'), 'utf8');
+// 0o600 — owner read/write only. Without an explicit mode the file inherits the
+// process umask, which on most systems means 0644: every account on the machine
+// can read a file holding the Stripe key and the Supabase service role key.
+// Set at creation rather than chmod'd afterwards, so there is no window where
+// the secrets sit world-readable.
+writeFileSync(OUT, lines.join('\n'), { encoding: 'utf8', mode: 0o600 });
 console.log(`Wrote ${OUT}`);
+if (process.platform === 'win32') {
+  console.log('  NOTE: Windows ignores POSIX file modes. This file inherits the');
+  console.log('  folder\'s ACL, and OneDrive will sync it. Move it out of OneDrive');
+  console.log('  if you do not want a cloud copy.');
+} else {
+  console.log('  Permissions: 0600 (owner only).');
+}
 console.log(`  ${found} value(s) filled from disk, ${missing} left as TODO.`);
 console.log('  Values were not printed here. Open the file to read them.');
 console.log('\nThis file is OUTSIDE the repository on purpose. Do not move it in.');
