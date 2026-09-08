@@ -282,6 +282,8 @@ const displayProducts = productList.filter((p) => p.category === 'banner-stands'
 const bannerProducts = productList.filter((p) => p.category === 'banners');
 const flagProductsList = productList.filter((p) => p.category === 'flags');
 const segProductsList = productList.filter((p) => p.category === 'seg-kits');
+const rigidSignsList = productList.filter((p) => p.category === 'rigid-signs');
+const marketingList = productList.filter((p) => p.category === 'marketing-essentials');
 // Render a heading + crawlable product link list (used across hub pages).
 const productSection = (heading, list) =>
   list.length
@@ -435,7 +437,9 @@ routes.push(() => {
     ${productSection('Banner stands & backdrops', displayProducts)}
     ${productSection('Banners', bannerProducts)}
     ${productSection('Flags', flagProductsList)}
-    ${productSection('SEG modular kits', segProductsList)}`;
+    ${productSection('SEG modular kits', segProductsList)}
+    ${productSection('Rigid signs', rigidSignsList)}
+    ${productSection('Marketing essentials', marketingList)}`;
   return render({
     path: '/products',
     title: `Shop All Products | ${BRAND}`,
