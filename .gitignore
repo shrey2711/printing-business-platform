@@ -7,6 +7,21 @@ uploads/
 .env.*
 !.env.example
 .env.local
+
+# Credential files that are NOT named ".env". A real leak on this project came
+# from directus/.directus.txt — secrets pasted into a file the .env rules did
+# not match, which git then happily tracked. Anything that reads like a
+# credential handover is ignored regardless of extension.
+*credential*
+*credentials*
+*secret*.txt
+*secrets*.txt
+developer-env*
+developer_env*
+DEVELOPER-ENV*
+DEVELOPER_ENV*
+*.env.txt
+env.txt
 .vercel/
 .DS_Store
 npm-debug.log*
