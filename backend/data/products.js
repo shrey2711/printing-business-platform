@@ -1731,11 +1731,12 @@ const products = [
     seoDescription:
       'Custom 4mm coroplast signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Grommets and H-stakes available.',
     related: ['pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
-    gallery: [
-      { src: '/images/signs/coroplast-signs-booth-directional.jpeg', alt: 'Custom printed 4mm coroplast booth directional sign' },
-      { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker sign hung at eye level' },
-      { src: '/images/signs/coroplast-signs-grommets-h-stake.webp', alt: 'Coroplast sign finishing — brass grommets and a steel H-stake' }
-    ],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/signs/coroplast-signs-booth-directional.jpeg
+    //   /images/signs/coroplast-signs-double-sided-aisle-marker.jpeg
+    //   /images/signs/coroplast-signs-grommets-h-stake.webp
     pricing: {
       model: 'area',
       // TODO_PRICE — supplier pricing not set yet. While `quoteOnly` is true the
@@ -1816,11 +1817,12 @@ const products = [
     seoDescription:
       'Custom 1/8 inch PVC board signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Rigid panels for indoor booths.',
     related: ['coroplast-signs', 'acp-aluminum-signs', 'fabric-banner-9oz-wrinkle-free'],
-    gallery: [
-      { src: '/images/signs/pvc-board-signs-booth-panel.jpeg', alt: 'Custom printed 1/8 inch PVC board panel in a trade show booth' },
-      { src: '/images/signs/pvc-board-signs-retail-counter-display.jpeg', alt: 'PVC board sign used as a retail counter display' },
-      { src: '/images/signs/pvc-board-signs-grommets-edge-detail.webp', alt: 'PVC board sign edge detail showing a grommet' }
-    ],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/signs/pvc-board-signs-booth-panel.jpeg
+    //   /images/signs/pvc-board-signs-retail-counter-display.jpeg
+    //   /images/signs/pvc-board-signs-grommets-edge-detail.webp
     pricing: {
       model: 'area',
       // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
@@ -1897,11 +1899,12 @@ const products = [
     seoDescription:
       'Custom 3mm aluminum composite signs, UV printed with a gloss protective coating and cut to size up to 48 by 96 inches. Rigid, weather resistant panels.',
     related: ['pvc-board-signs', 'coroplast-signs', 'seg-modular-trade-show-kit-a'],
-    gallery: [
-      { src: '/images/signs/acp-aluminum-signs-fascia-panel.jpeg', alt: 'Custom printed aluminum composite fascia panel above a booth' },
-      { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'Aluminum composite sign mounted on an exterior wall' },
-      { src: '/images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp', alt: 'Aluminum composite sign detail showing a rounded corner and a punched mounting hole' }
-    ],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/signs/acp-aluminum-signs-fascia-panel.jpeg
+    //   /images/signs/acp-aluminum-signs-exterior-mounted.jpeg
+    //   /images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp
     pricing: {
       model: 'area',
       // TODO_PRICE — supplier pricing not set yet. See the note on coroplast
@@ -1980,16 +1983,21 @@ const products = [
     // this item. The token renders into the page and the FAQ schema on purpose,
     // and the placeholder gate in test-seo-invariants fails the build while it
     // is still here, so it cannot reach production unfilled.
-    turnaround: 'Production: TODO_TURNAROUND business days. Shipping is calculated separately at checkout.',
+    // TODO_TURNAROUND — the supplier has not confirmed a production figure for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
     seoTitle: 'Business Cards | 16pt Matte',
     seoDescription:
       'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
     related: ['flyers-80lb-uncoated', 'brochures-80lb-uncoated', 'standard-retractable-banner'],
-    gallery: [
-      { src: '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg', alt: '16pt matte business card handed over at a trade show booth' },
-      { src: '/images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg', alt: 'Stack of 16pt business cards showing the edge thickness' },
-      { src: '/images/marketing/business-cards-16pt-matte-rounded-corners.webp', alt: '16pt matte business cards with rounded corners' }
-    ],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/marketing/business-cards-16pt-matte-booth-handout.jpeg
+    //   /images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg
+    //   /images/marketing/business-cards-16pt-matte-rounded-corners.webp
     pricing: {
       model: 'configured',
       // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
@@ -2077,16 +2085,21 @@ const products = [
     // TODO_TURNAROUND — no confirmed production figure from the supplier. See
     // the note on business cards: the placeholder gate in test-seo-invariants
     // fails the build while this token is still in rendered output.
-    turnaround: 'Production: TODO_TURNAROUND business days. Shipping is calculated separately at checkout.',
+    // TODO_TURNAROUND — the supplier has not confirmed a production figure for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
     seoTitle: 'Flyers | 80lb Enviro Uncoated',
     seoDescription:
       'Custom flyers on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six sizes, full colour on one side or both, from 25 to 100,000.',
     related: ['brochures-80lb-uncoated', 'business-cards-16pt-matte'],
-    gallery: [
-      { src: '/images/marketing/flyers-80lb-uncoated-booth-handout.jpeg', alt: 'Uncoated 80lb flyer handed out at a trade show booth' },
-      { src: '/images/marketing/flyers-80lb-uncoated-size-range.jpeg', alt: 'Uncoated flyers shown in several sizes side by side' },
-      { src: '/images/marketing/flyers-80lb-uncoated-written-on.webp', alt: 'Uncoated flyer with a note written on it in pen' }
-    ],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/marketing/flyers-80lb-uncoated-booth-handout.jpeg
+    //   /images/marketing/flyers-80lb-uncoated-size-range.jpeg
+    //   /images/marketing/flyers-80lb-uncoated-written-on.webp
     pricing: {
       model: 'configured',
       // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
@@ -2170,16 +2183,21 @@ const products = [
       'No folder, sleeve or insert. The brochures ship folded, in the box.'
     ],
     // TODO_TURNAROUND — no confirmed production figure from the supplier.
-    turnaround: 'Production: TODO_TURNAROUND business days. Shipping is calculated separately at checkout.',
+    // TODO_TURNAROUND — the supplier has not confirmed a production figure for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
     seoTitle: 'Brochures | 80lb Enviro Uncoated',
     seoDescription:
       'Custom folded brochures on uncoated 80lb enviro stock with 30% post-consumer recycled content. Six flat sizes, full colour, from 25 to 100,000.',
     related: ['flyers-80lb-uncoated', 'business-cards-16pt-matte'],
-    gallery: [
-      { src: '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg', alt: 'Folded uncoated 80lb brochures stacked on a booth counter' },
-      { src: '/images/marketing/brochures-80lb-uncoated-open-spread.jpeg', alt: 'Uncoated brochure opened flat to show the printed spread' },
-      { src: '/images/marketing/brochures-80lb-uncoated-scored-fold-detail.webp', alt: 'Close detail of a scored fold on an uncoated brochure' }
-    ],
+    // PHOTOGRAPHY PENDING. Ships with the ProductArt SVG placeholder until
+    // real photos exist. Restore `gallery` here and the PRODUCT_CARD_IMAGE
+    // entry in src/data/brandImages.js when these files land:
+    //   /images/marketing/brochures-80lb-uncoated-folded-stack.jpeg
+    //   /images/marketing/brochures-80lb-uncoated-open-spread.jpeg
+    //   /images/marketing/brochures-80lb-uncoated-scored-fold-detail.webp
     pricing: {
       model: 'configured',
       // TODO_PRICE — see the flyers note above.

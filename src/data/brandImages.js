@@ -24,13 +24,11 @@ export const PRODUCT_CARD_IMAGE = {
   'teardrop-flag': '/images/flags/teardrop_flag_summit_coffee_large_cross_base.webp',
   'seg-modular-trade-show-kit-a': '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg',
   'seg-modular-trade-show-kit-b': '/images/seg-kits/apex-seg-modular-kit-b-main.jpeg',
-  'seg-modular-trade-show-kit-c': '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg',
-  'coroplast-signs': '/images/signs/coroplast-signs-booth-directional.jpeg',
-  'pvc-board-signs': '/images/signs/pvc-board-signs-booth-panel.jpeg',
-  'acp-aluminum-signs': '/images/signs/acp-aluminum-signs-fascia-panel.jpeg',
-  'business-cards-16pt-matte': '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg',
-  'flyers-80lb-uncoated': '/images/marketing/flyers-80lb-uncoated-booth-handout.jpeg',
-  'brochures-80lb-uncoated': '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg'
+  'seg-modular-trade-show-kit-c': '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg'
+  // PHOTOGRAPHY PENDING — the rigid signs and marketing essentials have no card
+  // image yet, so ProductCard falls through to the ProductArt illustration. Add
+  // an entry per product as its photos land (filenames are listed against each
+  // record in backend/data/products.js).
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;
