@@ -144,6 +144,14 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
 .header-nav > a:not(.btn).active { color: var(--red); border-bottom-color: var(--red); }
 .nav-spacer { flex: 1; }
 .header-nav .btn-sm { margin-left: 0.4rem; }
+/* The bar carries nine category links and two buttons, and every label is
+   nowrap, so between the 820px mobile breakpoint and a full-width desktop it
+   has to give somewhere. Tighten the padding rather than let it overflow. */
+@media (max-width: 1180px) {
+  .header-nav { padding: 0 0.9rem; }
+  .header-nav > a:not(.btn) { padding: 0.7rem 0.55rem; font-size: 0.85rem; }
+  .header-nav .btn-sm { margin-left: 0.25rem; }
+}
 
 /* Shop mega-dropdown (desktop) */
 .shop-dd { position: relative; }
@@ -154,9 +162,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
 .shop-dd-trigger:hover { color: var(--red); }
 .shop-menu {
   position: absolute; top: 100%; left: 0; display: none;
-  grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 0.3rem 1.4rem;
+  grid-template-columns: repeat(4, minmax(168px, 1fr)); gap: 0.3rem 1.4rem;
   background: #fff; border: 1px solid var(--line); border-radius: 0 0 12px 12px;
-  box-shadow: 0 14px 34px rgba(16, 35, 59, 0.16); padding: 1.1rem 1.3rem; z-index: 40; min-width: 660px;
+  box-shadow: 0 14px 34px rgba(16, 35, 59, 0.16); padding: 1.1rem 1.3rem; z-index: 40; min-width: 720px;
 }
 .shop-dd:hover .shop-menu, .shop-dd:focus-within .shop-menu { display: grid; }
 /* After a menu item is clicked, force the dropdown closed even though the
@@ -168,7 +176,14 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
   border-bottom: 1px solid var(--line-soft); letter-spacing: 0.01em;
 }
 .shop-col-head:hover { color: var(--red); }
-.shop-col a:not(.shop-col-head) { padding: 0.3rem 0; font-size: 0.86rem; font-weight: 400; color: var(--ink); white-space: nowrap; }
+/* Wrapping, not nowrap. A long product label ("ACP Aluminum Sandwich Board")
+   is wider than the 150px column and used to run out past the panel edge where
+   it was clipped mid-word. Wrapping keeps every label inside its column
+   whatever it is called. */
+.shop-col a:not(.shop-col-head) {
+  padding: 0.3rem 0; font-size: 0.86rem; font-weight: 400; color: var(--ink);
+  white-space: normal; overflow-wrap: break-word; line-height: 1.35;
+}
 .shop-col a:hover { color: var(--red); }
 .shop-all {
   grid-column: 1 / -1; margin-top: 0.4rem; padding-top: 0.7rem;
