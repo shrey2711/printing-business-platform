@@ -152,6 +152,14 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
   .header-nav > a:not(.btn) { padding: 0.7rem 0.55rem; font-size: 0.85rem; }
   .header-nav .btn-sm { margin-left: 0.25rem; }
 }
+/* Between the 820px mobile breakpoint and ~1010px the row still runs out of
+   width and pushes "Get a Quote" off the right edge. Tighten further and drop
+   the "Shop All" button, which only repeats the "Shop" trigger beside it —
+   both go to /products. The quote CTA is the one that must survive. */
+@media (max-width: 1010px) {
+  .header-nav > a:not(.btn) { padding: 0.7rem 0.4rem; font-size: 0.82rem; }
+  .header-nav .btn-outline.btn-sm { display: none; }
+}
 
 /* Shop mega-dropdown (desktop) */
 .shop-dd { position: relative; }

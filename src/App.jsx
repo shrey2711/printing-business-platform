@@ -271,7 +271,7 @@ function HeaderNav() {
         <Link to="/custom-canopies">Canopies</Link>
         <Link to="/banners">Banners</Link>
         <Link to="/rigid-signs">Rigid Signs</Link>
-        <Link to="/marketing-essentials">Marketing</Link>
+        <Link to="/marketing-essentials">Marketing Essentials</Link>
         <Link to="/products?category=flags">Flags</Link>
         <Link to="/products?category=seg-kits">SEG Kits</Link>
         <Link to="/trade-show-booth-packages">Booth Packages</Link>
