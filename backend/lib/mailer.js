@@ -1,7 +1,7 @@
 // Transactional email via SMTP (Brevo/SES/…) or Resend, with branded,
 // table-based HTML templates. No-ops safely when neither is configured.
 import nodemailer from 'nodemailer';
-import { trackingUrl, carrierName } from '../../src/lib/tracking.js';
+import { trackingUrl, carrierName, isAggregateLink } from '../../src/lib/tracking.js';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 // EMAIL_FROM must use a domain you've verified in Resend. For quick testing,
@@ -388,7 +388,7 @@ export async function sendTrackingEmail({ to, order, appUrl = DEFAULT_APP_URL })
       <h1 style="margin:14px 0 8px;font-family:Arial,sans-serif;font-size:22px;color:${C.navy};">Your order is on its way 🚚</h1>
       <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">
         ${name ? `Your parcel is with ${name}.` : 'Your parcel is on its way.'}
-        ${url ? 'Track it any time with the button below.' : 'Use the tracking number below with your carrier.'}
+        Track it any time with the button below.
       </p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:14px 16px;margin:16px 0;">
         <tr><td style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:${C.muted};padding-bottom:6px;">
@@ -400,8 +400,17 @@ export async function sendTrackingEmail({ to, order, appUrl = DEFAULT_APP_URL })
       </table>
       ${url ? button(url, 'Track your parcel', C.green) : ''}
       ${detailsCard(order, { showAmount: false })}
+      ${/* Orders ship from China direct, so the first scan is days rather than
+            hours and the carrier changes hands on arrival. Saying so up front
+            saves the "my tracking hasn't moved" email three days later. */ ''}
       <p style="margin:6px 0 0;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;color:${C.muted};">
-        Tracking can take a few hours to show its first scan after the carrier collects it.
+        Your order ships direct from our production facility, so tracking can take a few days to show
+        its first scan, and it may go quiet in transit before customs clearance. It is normal for the
+        parcel to be passed to a local carrier for final delivery${
+          isAggregateLink(order.carrier, order.tracking_number)
+            ? ' — the link above follows it across both.'
+            : '.'
+        }
       </p>
       ${button(appUrl ? `${appUrl}/account` : '', 'View your order', C.navy)}
     </td></tr>
