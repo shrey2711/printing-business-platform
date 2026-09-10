@@ -89,7 +89,16 @@ check('every path that sets paid checks Stripe or an amount first', () => {
     //     from rather than claiming a new payment
     const isAdminPatch = /allowed\s*=\s*\[/.test(before);
     const isProofRevert = /proof_ready|proof_approved|proof_feedback/.test(before.slice(-400));
-    if (!verified && !isAdminPatch && !isProofRevert) {
+    // This guard is about DATABASE WRITES. `status: 'paid'` is also how the
+    // mailer is told which template to render, and telling someone their
+    // payment arrived is not the same as recording that it did. Narrowed to the
+    // write, rather than relaxed: an email argument on the same line is the only
+    // thing excused, and any real update still has to prove payment.
+    const lineStart = app.lastIndexOf('\n', m.index) + 1;
+    const lineEnd = app.indexOf('\n', m.index);
+    const line = app.slice(lineStart, lineEnd === -1 ? undefined : lineEnd);
+    const isMailArgument = /send[A-Za-z]*Email\(|sendNewOrderAlert\(/.test(line);
+    if (!verified && !isAdminPatch && !isProofRevert && !isMailArgument) {
       problems.push(app.slice(0, m.index).split('\n').length);
     }
   }

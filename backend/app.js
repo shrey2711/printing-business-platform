@@ -37,6 +37,26 @@ app.use(cors());
 
 // The Stripe webhook needs the RAW request body for signature verification,
 // so it must be registered BEFORE the JSON body parser.
+// One announcement per payment: the customer's single confirmation, and the
+// staff alert that corrects the "awaiting payment" one sent at placement.
+// Called only by the path that actually transitioned the order, so a webhook
+// and a return-from-Stripe confirm racing on the same order send one set, not
+// two. Never throws — a mail failure must not fail a payment.
+async function announcePayment(orderId) {
+  try {
+    const { data: order } = await supabaseAdmin.from('orders').select('*').eq('id', orderId).single();
+    if (!order) return;
+    const { data: u } = await supabaseAdmin.auth.admin.getUserById(order.user_id);
+    const email = u?.user?.email || order.customer_email || '';
+    // A webhook has no incoming request to derive a base URL from.
+    const appUrl = (process.env.PUBLIC_BASE_URL || 'https://www.apextradeshow.com').replace(/\/$/, '');
+    if (email) await sendOrderStatusEmail({ to: email, order, status: 'paid', appUrl });
+    await sendNewOrderAlert({ to: notifyEmails, order, customerEmail: email, appUrl });
+  } catch (e) {
+    console.error(`[payment] announce failed for ${orderId}: ${e.message}`);
+  }
+}
+
 app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   if (!stripe || !supabaseAdmin) return res.status(503).end();
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -66,7 +86,7 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
       // Record the amount as well as the status. Without it a genuinely paid
       // checkout order shows an amount of 0, which is indistinguishable from an
       // order marked paid in error.
-      await supabaseAdmin
+      const { data: moved } = await supabaseAdmin
         .from('orders')
         .update({
           status: 'paid',
@@ -74,29 +94,14 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
           currency: (session.currency || 'usd').toUpperCase()
         })
         .eq('id', orderId)
-        .eq('status', 'submitted'); // don't downgrade later statuses
+        .eq('status', 'submitted') // don't downgrade later statuses
+        .select('id');
 
-      // Tell staff the money actually arrived. The new-order alert is sent at
-      // placement, BEFORE the customer reaches Stripe, so it necessarily says
-      // "awaiting payment" and carries the pre-discount estimate. Without this
-      // second message nothing ever corrects that, and the only record of a
-      // real payment is a status word in the dashboard.
-      try {
-        const { data: paidOrder } = await supabaseAdmin
-          .from('orders').select('*').eq('id', orderId).single();
-        if (paidOrder) {
-          const { data: u } = await supabaseAdmin.auth.admin.getUserById(paidOrder.user_id);
-          await sendNewOrderAlert({
-            to: notifyEmails,
-            order: paidOrder,
-            customerEmail: u?.user?.email || paidOrder.customer_email || '',
-            // A webhook has no incoming request to derive a base URL from.
-            appUrl: (process.env.PUBLIC_BASE_URL || 'https://www.apextradeshow.com').replace(/\/$/, '')
-          });
-        }
-      } catch (e) {
-        console.error(`[webhook] payment alert failed for ${orderId}: ${e.message}`);
-      }
+      // Only the path that actually moved the row emails anyone. Both the
+      // webhook and the return-from-Stripe confirm can race on the same order;
+      // gating on the update having changed a row means the customer gets one
+      // "payment received", not two.
+      if ((moved || []).length) await announcePayment(orderId);
     }
   }
 
@@ -498,26 +503,35 @@ app.post('/api/orders/:id/notify', writeLimiter, async (req, res) => {
   // Auto-create the Stripe invoice FIRST, so its pay link can ride along in our
   // own confirmation email — that way the customer gets the link even if
   // Stripe's own invoice emails are disabled. Never let this break the order.
-  let invoice = { sent: false };
-  if (stripe && !order.stripe_invoice_id) {
+  // Only customers who ASKED to be invoiced get an invoice. This used to run
+  // for every order, so someone paying by card was emailed a "pay your invoice"
+  // link at the same moment they were on Stripe's checkout page — two live ways
+  // to pay for one order, and a real route to being charged twice.
+  const wantsInvoice = order.payment_choice === 'invoice_later';
+  let invoice = { sent: false, reason: wantsInvoice ? undefined : 'paying by card — no invoice raised' };
+  if (wantsInvoice && stripe && !order.stripe_invoice_id) {
     try {
       const r = await createInvoiceForOrder(order);
       invoice = { sent: true, invoiceUrl: r.invoiceUrl };
     } catch (e) {
       invoice = { sent: false, reason: e.message };
     }
-  } else if (order.invoice_url) {
+  } else if (wantsInvoice && order.invoice_url) {
     invoice = { sent: true, invoiceUrl: order.invoice_url };
   }
 
-  // Email the customer their order confirmation WITH the invoice pay link (via
-  // our own SMTP, not Stripe). Still viewable on their account page too.
-  const confirmation = await sendOrderConfirmationEmail({
-    to: user.email,
-    order,
-    appUrl,
-    invoiceUrl: invoice.invoiceUrl
-  });
+  // One email per customer, not two.
+  //
+  // Someone paying by card is seconds away from a "payment received" email, so
+  // a "we've received your order" note sent first is noise that arrives before
+  // the thing it describes has happened. Their single confirmation is sent when
+  // the money lands, by the webhook (or the return-from-Stripe path).
+  //
+  // Someone who asked to be invoiced is not about to pay, so their one email is
+  // this one, and it carries the pay link.
+  const confirmation = wantsInvoice
+    ? await sendOrderConfirmationEmail({ to: user.email, order, appUrl, invoiceUrl: invoice.invoiceUrl })
+    : { sent: false, reason: 'paying by card — confirmation is sent once payment clears' };
   const alert = await sendNewOrderAlert({ to: notifyEmails, order, customerEmail: user.email, appUrl });
   res.json({ confirmation, alert, invoice });
 });
@@ -536,7 +550,15 @@ app.post('/api/checkout/confirm', writeLimiter, async (req, res) => {
   const session = await stripe.checkout.sessions.retrieve(order.stripe_session_id);
   if (session.payment_status === 'paid') {
     if (order.status === 'submitted') {
-      await supabaseAdmin.from('orders').update({ status: 'paid' }).eq('id', order.id);
+      // Same conditional update as the webhook, so whichever arrives second
+      // moves no row and sends no duplicate email.
+      const { data: moved } = await supabaseAdmin
+        .from('orders')
+        .update({ status: 'paid' })
+        .eq('id', order.id)
+        .eq('status', 'submitted')
+        .select('id');
+      if ((moved || []).length) await announcePayment(order.id);
     }
     return res.json({ paid: true });
   }
