@@ -1,6 +1,7 @@
 // Transactional email via SMTP (Brevo/SES/…) or Resend, with branded,
 // table-based HTML templates. No-ops safely when neither is configured.
 import nodemailer from 'nodemailer';
+import { trackingUrl, carrierName } from '../../src/lib/tracking.js';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 // EMAIL_FROM must use a domain you've verified in Resend. For quick testing,
@@ -213,7 +214,18 @@ function detailsCard(order, { showAmount = true } = {}) {
     // as a pre-discount quote rather than letting it read as the amount owed.
     else if (order.estimated_price) rows.push(['Estimated (before any discount)', order.estimated_price]);
   }
-  if (order.tracking_number) rows.push(['Tracking', `${order.carrier ? order.carrier + ' ' : ''}${order.tracking_number}`]);
+  if (order.tracking_number) {
+    // Make the number itself the link where we know the carrier. A tracking
+    // number with no link asks the customer to work out who has their parcel
+    // and find the right site.
+    const url = trackingUrl(order.carrier, order.tracking_number);
+    const name = carrierName(order.carrier, order.tracking_number);
+    const label = `${name ? name + ' ' : ''}${order.tracking_number}`;
+    rows.push([
+      'Tracking',
+      url ? `<a href="${url}" style="color:${C.blue};text-decoration:none;font-weight:700;">${label}</a>` : label
+    ]);
+  }
 
   const body = rows
     .map(
@@ -359,6 +371,46 @@ function customerEmailHtml(order, status, appUrl, invoiceUrl) {
     </td></tr>
     ${footer()}`;
   return shell(inner, meta.heading);
+}
+
+// Sent when a tracking number is added or changed without the status moving.
+// Previously these edits were silent, so a parcel could be handed to a carrier
+// and the customer never told.
+export async function sendTrackingEmail({ to, order, appUrl = DEFAULT_APP_URL }) {
+  if (!to || !order?.tracking_number) return { sent: false, reason: 'no recipient or tracking number' };
+  const url = trackingUrl(order.carrier, order.tracking_number);
+  const name = carrierName(order.carrier, order.tracking_number);
+  const inner = `
+    ${header()}
+    <tr><td style="height:5px;background:${C.green};"></td></tr>
+    <tr><td style="padding:28px 28px 8px;">
+      <div style="display:inline-block;background:${C.green}1a;color:${C.green};font-family:Arial,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:5px 12px;border-radius:999px;">Tracking</div>
+      <h1 style="margin:14px 0 8px;font-family:Arial,sans-serif;font-size:22px;color:${C.navy};">Your order is on its way 🚚</h1>
+      <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">
+        ${name ? `Your parcel is with ${name}.` : 'Your parcel is on its way.'}
+        ${url ? 'Track it any time with the button below.' : 'Use the tracking number below with your carrier.'}
+      </p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:14px 16px;margin:16px 0;">
+        <tr><td style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:${C.muted};padding-bottom:6px;">
+          ${name ? name + ' tracking number' : 'Tracking number'}
+        </td></tr>
+        <tr><td style="font-family:'Courier New',monospace;font-size:19px;font-weight:700;color:${C.navy};word-break:break-all;">
+          ${order.tracking_number}
+        </td></tr>
+      </table>
+      ${url ? button(url, 'Track your parcel', C.green) : ''}
+      ${detailsCard(order, { showAmount: false })}
+      <p style="margin:6px 0 0;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;color:${C.muted};">
+        Tracking can take a few hours to show its first scan after the carrier collects it.
+      </p>
+      ${button(appUrl ? `${appUrl}/account` : '', 'View your order', C.navy)}
+    </td></tr>
+    ${footer()}`;
+  return send({
+    to,
+    subject: `${BRAND} — tracking for order ${shortId(order.id)}`,
+    html: shell(inner, `Tracking for order ${shortId(order.id)}: ${order.tracking_number}`)
+  });
 }
 
 export async function sendOrderStatusEmail({ to, order, status, appUrl = DEFAULT_APP_URL }) {

@@ -10,7 +10,8 @@ import { computePrice } from './data/pricing.js';
 import { getProductFaqs } from './data/faqs.js';
 import { STATIC_ARTICLES, getStaticArticle } from './data/staticArticles.js';
 import { stripe, stripeMode, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
-import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest } from './lib/mailer.js';
+import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest, sendTrackingEmail } from './lib/mailer.js';
+import { CARRIERS } from '../src/lib/tracking.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
 import { currencies, BASE_CURRENCY, brand } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
@@ -739,6 +740,14 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   if (carrier !== undefined) patch.carrier = carrier || null;
   if (!Object.keys(patch).length) return res.status(400).json({ error: 'Nothing to update.' });
 
+  // Read the row first so a tracking edit can be compared against what was
+  // there. Re-saving the same number must not email the customer again.
+  const { data: before } = await supabaseAdmin
+    .from('orders')
+    .select('tracking_number, carrier')
+    .eq('id', req.params.id)
+    .single();
+
   const { data, error } = await supabaseAdmin
     .from('orders')
     .update(patch)
@@ -747,12 +756,34 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
     .single();
   if (error) return res.status(500).json({ error: error.message });
 
-  // Email the customer when the STATUS changes (not for silent tracking edits).
+  // Email the customer on a status change, and now also when a tracking number
+  // is added or changed. Tracking edits used to be silent, so a parcel could be
+  // handed to a carrier without the customer ever being told.
+  //
+  // A status change wins when both happen at once: its email already carries
+  // the tracking number and a link to it, so sending both would be two emails
+  // about one event.
+  const trackingChanged =
+    tracking_number !== undefined &&
+    (tracking_number || '') !== (before?.tracking_number || '') &&
+    Boolean(data.tracking_number);
+
   let email = { sent: false, reason: 'no-status-change' };
   if (status !== undefined) {
     try {
       const { data: u } = await supabaseAdmin.auth.admin.getUserById(data.user_id);
       email = await sendOrderStatusEmail({ to: u?.user?.email, order: data, status, appUrl: baseUrl(req) });
+    } catch (e) {
+      email = { sent: false, reason: e.message };
+    }
+  } else if (trackingChanged) {
+    try {
+      const { data: u } = await supabaseAdmin.auth.admin.getUserById(data.user_id);
+      email = await sendTrackingEmail({
+        to: u?.user?.email || data.customer_email,
+        order: data,
+        appUrl: baseUrl(req)
+      });
     } catch (e) {
       email = { sent: false, reason: e.message };
     }

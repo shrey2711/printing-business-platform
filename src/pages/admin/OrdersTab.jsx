@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllOrders, getAdminSession, updateOrder, deleteOrder, sendInvoice } from '../../services/admin';
 import { formatCharged } from '../../lib/money';
+import { CARRIERS } from '../../lib/tracking';
 
 // What an unpaid order is actually waiting on, so a serious customer who asked
 // to be invoiced is not chased the same way as one who submitted and vanished.
@@ -80,11 +81,27 @@ export default function OrdersTab({ onError, onFlash }) {
     }
   };
 
+  const saveCarrier = async (o, carrier) => {
+    if (carrier === (o.carrier || '')) return;
+    try {
+      const { order, email } = await updateOrder(o.id, { carrier });
+      setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, carrier: order.carrier } : x)));
+      onFlash(email?.sent
+        ? `✓ Carrier saved — tracking emailed to ${o.customer_email}`
+        : '✓ Carrier saved');
+    } catch (e) {
+      onError(e.message);
+    }
+  };
+
   const saveTracking = async (o, tracking_number) => {
     if (tracking_number === (o.tracking_number || '')) return;
     try {
-      const { order } = await updateOrder(o.id, { tracking_number });
+      const { order, email } = await updateOrder(o.id, { tracking_number });
       setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, tracking_number: order.tracking_number } : x)));
+      onFlash(email?.sent
+        ? `✓ Tracking saved — emailed to ${o.customer_email}`
+        : `✓ Tracking saved — email NOT sent (${email?.reason || 'unknown'})`);
       onFlash('✓ Tracking saved');
     } catch (e) {
       onError(e.message);
@@ -178,13 +195,25 @@ export default function OrdersTab({ onError, onFlash }) {
                 ))}
               </select>
             </span>
-            <span>
+            <span className="track-cell">
               <input
                 className="track-input"
                 defaultValue={o.tracking_number || ''}
                 placeholder="add #"
                 onBlur={(e) => saveTracking(o, e.target.value.trim())}
               />
+              {/* Pick the carrier rather than inferring it from the number's
+                  shape, so the customer's tracking link is right every time.
+                  Saving either field emails them the number and the link. */}
+              <select
+                className="track-carrier"
+                value={o.carrier || ''}
+                onChange={(e) => saveCarrier(o, e.target.value)}
+                title="Carrier — used for the tracking link in the customer's email"
+              >
+                <option value="">Carrier…</option>
+                {CARRIERS.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+              </select>
             </span>
             <span>
               {o.designUrl ? (
