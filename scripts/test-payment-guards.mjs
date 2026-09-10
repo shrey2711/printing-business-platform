@@ -96,6 +96,26 @@ check('every path that sets paid checks Stripe or an amount first', () => {
   return problems.length ? `unverified 'paid' assignment near line(s) ${problems.join(', ')}` : null;
 });
 
+check('the webhook refuses an unsigned event in production', () => {
+  // With no signing secret the handler used to fall back to JSON.parse on the
+  // raw body, trusting whatever was posted. That turns the webhook into an
+  // unauthenticated "mark any order paid" endpoint for anyone who knows the
+  // URL and an order id. The unsigned path must exist only outside production.
+  const i = app.indexOf("app.post('/api/stripe/webhook'");
+  if (i === -1) return 'the webhook route is gone';
+  const body = app.slice(i, i + 1600);
+  if (!/JSON\.parse\(req\.body\)/.test(body)) return null; // no unsigned path at all — fine
+  const guarded = /!secret[\s\S]{0,160}NODE_ENV\s*===\s*'production'[\s\S]{0,200}return res\.status\(\d{3}\)/.test(body);
+  return guarded ? null : 'an unsigned webhook event is accepted without a production check';
+});
+
+check('a paid status is never written from a request body', () => {
+  // The status must come from Stripe's own answer, never from JSON the caller
+  // supplied. Catches the shape of the original bug: trusting the client.
+  const bad = /status:\s*req\.body[^\n]*paid|paid.*=\s*req\.body\.(status|paid)/.test(app);
+  return bad ? 'a paid status is taken from the request body' : null;
+});
+
 if (fails.length) {
   console.error(`\n✗ PAYMENT GUARDS FAILED — ${fails.length}/${ran}:`);
   fails.forEach((f) => console.error(`  ✗ ${f}`));

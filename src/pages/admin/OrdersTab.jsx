@@ -20,6 +20,22 @@ function waitingOn(o) {
   return '';
 }
 
+// Why an order can read "paid" with nothing in the live Stripe dashboard.
+//
+// A test-mode checkout completes normally and Stripe reports payment_status
+// "paid", so the order advances correctly — but no card is charged and the
+// payment only exists behind the dashboard's Test mode toggle. The session id
+// is the evidence: cs_test_… is a test payment, cs_live_… is real money.
+function paymentNote(o) {
+  const id = o.stripe_session_id || '';
+  if (id.startsWith('cs_test_')) return '⚠ TEST payment — no money was taken';
+  if (['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(o.status)
+      && !id && o.invoice_status !== 'paid') {
+    return '⚠ marked paid with no Stripe session';
+  }
+  return '';
+}
+
 const STATUSES = [
   'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
 ];
@@ -110,7 +126,14 @@ export default function OrdersTab({ onError, onFlash }) {
               {o.product}<br /><small className="muted">{o.specs} · Qty {o.quantity}</small>
               {waitingOn(o) ? <><br /><small className="order-flag">{waitingOn(o)}</small></> : null}
             </span>
-            <span>{o.amount_total ? formatCharged(o.amount_total, o.currency) : o.estimated_price || '—'}</span>
+            <span>
+              {o.amount_total ? formatCharged(o.amount_total, o.currency) : o.estimated_price || '—'}
+              {/* amount_total is written when the checkout session is CREATED,
+                  so on its own it says what we asked for, not what was taken.
+                  A test-mode session id is the giveaway for a payment that
+                  completed without money moving. */}
+              {paymentNote(o) ? <><br /><small className="order-flag">{paymentNote(o)}</small></> : null}
+            </span>
             <span>
               <select
                 className={`status-select ${statusColor[o.status] || ''}`}

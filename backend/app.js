@@ -9,7 +9,7 @@ import { listProducts, getProduct, categories, navGroups } from './data/products
 import { computePrice } from './data/pricing.js';
 import { getProductFaqs } from './data/faqs.js';
 import { STATIC_ARTICLES, getStaticArticle } from './data/staticArticles.js';
-import { stripe, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
+import { stripe, stripeMode, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest } from './lib/mailer.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
 import { currencies, BASE_CURRENCY, brand } from '../src/config/brand.js';
@@ -40,11 +40,21 @@ app.use(cors());
 app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   if (!stripe || !supabaseAdmin) return res.status(503).end();
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  // Without a signing secret this endpoint accepted ANY unsigned JSON body,
+  // which means anyone who knew the URL could POST a checkout.session.completed
+  // with someone else's orderId and mark that order paid. The comment said "dev
+  // only" but nothing enforced it, so a production deploy with the secret unset
+  // was an open "mark any order paid" endpoint. Fail closed instead: the
+  // unsigned path is now available only outside production.
+  if (!secret && process.env.NODE_ENV === 'production') {
+    console.error('[webhook] STRIPE_WEBHOOK_SECRET is not set — refusing to trust an unsigned event.');
+    return res.status(503).send('Webhook signing secret not configured.');
+  }
   let event;
   try {
     event = secret
       ? stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], secret)
-      : JSON.parse(req.body); // fallback if no secret set (dev only)
+      : JSON.parse(req.body); // unsigned: non-production only, guarded above
   } catch (err) {
     return res.status(400).send(`Webhook signature error: ${err.message}`);
   }
@@ -562,7 +572,10 @@ app.get('/api/me', async (req, res) => {
   const user = await getUserFromToken(req.headers.authorization);
   if (!user) return res.json({ authenticated: false, role: null });
   const role = await getRole(user);
-  res.json({ authenticated: true, email: user.email, role });
+  // stripeMode lets the dashboard say plainly that payments are running against
+  // the test account, rather than leaving staff to wonder why an order is paid
+  // and Stripe shows nothing.
+  res.json({ authenticated: true, email: user.email, role, stripeMode });
 });
 
 app.get('/api/admin/orders', async (req, res) => {

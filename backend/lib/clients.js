@@ -7,6 +7,16 @@ import { createClient } from '@supabase/supabase-js';
 const stripeKey = process.env.STRIPE_SECRET_KEY;
 export const stripe = stripeKey ? new Stripe(stripeKey) : null;
 
+// Which Stripe account the server is talking to. A test key takes test cards,
+// charges nobody, and its payments never appear in the live dashboard — a
+// checkout still completes and Stripe still reports payment_status "paid", so
+// an order legitimately reaches "paid" with no money moved. Surfaced to admins
+// so a real charge and a test charge are never confused. The key itself is
+// never exposed; only this flag is.
+export const stripeMode = stripeKey
+  ? (stripeKey.startsWith('sk_test_') || stripeKey.startsWith('rk_test_') ? 'test' : 'live')
+  : 'unconfigured';
+
 const supaUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
