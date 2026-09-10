@@ -23,6 +23,7 @@ import {
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
 import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../src/data/citySeo.js';
+import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
   PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS,
@@ -497,6 +498,14 @@ for (const cp of CATEGORY_PAGES) {
     const guideHtml = Array.isArray(cp.guide)
       ? cp.guide.map((g) => `<h2>${esc(g.h2)}</h2><p>${esc(g.p)}</p>`).join('')
       : '';
+    // Product + city pages for this category. Gives each pilot page a
+    // contextual inbound link from the page most topically related to it, and
+    // gives the category page a route into the local buying intent.
+    const cityBuy = CITY_PRODUCT_PAGES.filter((x) =>
+      x.products.some((sl) => (productList.find((pp) => pp.slug === sl) || {}).category === cp.category));
+    const cityBuyHtml = cityBuy.length
+      ? `<h2>Buy locally</h2><ul>${cityBuy.map((x) => `<li><a href="/${x.slug}">${esc(x.h1)}</a></li>`).join('')}</ul>`
+      : '';
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.nav)}</span></nav>
       <h1>${esc(cp.h1)}</h1>
@@ -509,6 +518,7 @@ for (const cp of CATEGORY_PAGES) {
         : `<p>Products in this category are being added. <a href="/quote">Request a quote</a> and we
           will price your job in the meantime.</p>`}
       ${compareTable}
+      ${cityBuyHtml}
       ${guideHtml}
       ${included}
       ${cities}
@@ -551,6 +561,67 @@ for (const cp of CATEGORY_PAGES) {
               }))
             }]
           : [])
+      ]
+    });
+  });
+}
+
+// ---- Product + city landing pages (transactional) ----
+// A separate layer from the generic /{category}/{city} pages: those answer
+// "what is exhibiting here like", these answer "I want to buy this, here".
+// Every one carries real products with live prices, so the crawled HTML has to
+// contain the same products and prices the app renders.
+for (const cp of CITY_PRODUCT_PAGES) {
+  routes.push(() => {
+    const city = SEO_CITIES.find((c) => c.slug === cp.citySlug);
+    const items = cp.products.map((sl) => productList.find((p) => p.slug === sl)).filter(Boolean);
+    const lane = LOCAL_CATEGORIES.find((l) => (l.productCats || []).some((c) => items.some((p) => p.category === c)));
+    const body = `
+      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.h1)}</span></nav>
+      <h1>${esc(cp.h1)}</h1>
+      <p>${esc(cp.intro)}</p>
+      <h2>${esc(cp.h1)} — configure and price</h2>
+      <ul>${items.map(productLi).join('')}</ul>
+      ${cp.local.map((sec) => `<h2>${esc(sec.h2)}</h2><p>${esc(sec.p)}</p>`).join('')}
+      <h2>Frequently asked questions</h2>
+      ${cp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
+      ${city && lane ? `<h2>Exhibiting in ${esc(city.city)}?</h2><ul>
+        <li><a href="/${lane.slug}/${city.slug}">${esc(lane.label)} in ${esc(city.city)}</a></li>
+        <li><a href="/products">All Apex products</a></li>
+        <li><a href="/trade-show-booth-packages">Complete booth packages</a></li>
+      </ul>` : ''}`;
+    return render({
+      path: `/${cp.slug}`,
+      title: `${cp.title} | ${BRAND}`,
+      description: cp.description,
+      image: items.map(productPhoto).find(Boolean) || null,
+      imageAlt: `${cp.h1} — ${BRAND}`,
+      body,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+            { '@type': 'ListItem', position: 2, name: cp.h1, item: `${ORIGIN}/${cp.slug}` }
+          ]
+        },
+        ...(items.length
+          ? [{
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              itemListElement: items.map((p, i) => ({
+                '@type': 'ListItem', position: i + 1, url: `${ORIGIN}/products/${p.slug}`, name: p.name
+              }))
+            }]
+          : []),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: cp.faqs.map((f) => ({
+            '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a }
+          }))
+        }
       ]
     });
   });
@@ -1806,6 +1877,8 @@ const smPages = [
   ...PAGES.filter((p) => !p.stub).map((p) => smUrl(`/${p.slug}`, '0.4', undefined, LMOD.pages))
 ];
 const smCategories = [
+  // Product + city pilot pages: commercial landing pages, same weight as a category.
+  ...CITY_PRODUCT_PAGES.map((cp) => smUrl(`/${cp.slug}`, '0.8', 'weekly', LMOD.products)),
   smUrl('/products', '0.9', 'weekly', LMOD.products),
   ...CATEGORY_PAGES.map((cp) => smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly', LMOD.categories)),
   smUrl('/trade-show-booth-packages', '0.8', 'weekly', LMOD.booth),

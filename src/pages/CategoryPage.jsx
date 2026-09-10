@@ -6,6 +6,7 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { getCategoryPage, SUBCATEGORIES } from '../data/categoryPages';
 import { LANDING_PAGES } from '../data/landingPages';
+import { CITY_PRODUCT_PAGES } from '../data/cityProductPages';
 
 const cardPreview = {
   'canopy-tent-10x10': { full: 3, half: 0 },
@@ -80,6 +81,8 @@ export default function CategoryPage({ slug }) {
   }
 
   const shown = page.hub ? items.slice(0, 8) : items;
+  const cityBuy = CITY_PRODUCT_PAGES.filter((x) =>
+    x.products.some((sl) => (products.find((p) => p.slug === sl) || {}).category === page.category));
 
   return (
     <main className="page">
@@ -156,6 +159,19 @@ export default function CategoryPage({ slug }) {
           </div>
         )}
       </section>
+
+      {/* Product + city pages for this category. Mirrors the block the
+          prerenderer emits, so the crawled HTML and the app agree. */}
+      {cityBuy.length > 0 && (
+        <section className="section-block-bare">
+          <h2 className="section-title">Buy locally</h2>
+          <div className="loc-grid">
+            {cityBuy.map((x) => (
+              <Link className="loc-chip" to={`/${x.slug}`} key={x.slug}><span>{x.h1}</span></Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {page.points?.length > 0 && (
         <section className="section-block card">

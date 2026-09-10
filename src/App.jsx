@@ -26,10 +26,12 @@ const InfoPage = lazy(() => import('./pages/InfoPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const BoothPackagesPage = lazy(() => import('./pages/BoothPackagesPage'));
 const CityCategoryPage = lazy(() => import('./pages/CityCategoryPage'));
+const CityProductPage = lazy(() => import('./pages/CityProductPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 import Logo from './components/Logo';
 import ChunkErrorBoundary from './components/ChunkErrorBoundary';
 import { brand, currencyCodes } from './config/brand';
+import { CITY_PRODUCT_PAGES } from './data/cityProductPages';
 import { useCurrency } from './context/CurrencyContext';
 import { useContentResolver, useListResolver } from './context/ContentContext';
 
@@ -506,6 +508,12 @@ function App() {
         <Route path="/pop-up-displays" element={<LandingPage slug="pop-up-displays" />} />
         <Route path="/flags" element={<LandingPage slug="flags" />} />
         {/* City × category local landing pages (option A canonical local pages) */}
+        {/* Transactional product + city pages. Generated from the data so
+            adding one is a single edit, and so the router and the
+            prerenderer can never disagree about which exist. */}
+        {CITY_PRODUCT_PAGES.map((p) => (
+          <Route key={p.slug} path={`/${p.slug}`} element={<CityProductPage slug={p.slug} />} />
+        ))}
         <Route path="/trade-show-canopies/:city" element={<CityCategoryPage categoryKey="canopies" />} />
         <Route path="/trade-show-displays/:city" element={<CityCategoryPage categoryKey="displays" />} />
         <Route path="/banner-stands/:city" element={<CityCategoryPage categoryKey="banner-stands" />} />
