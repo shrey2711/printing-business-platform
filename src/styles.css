@@ -234,6 +234,11 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus
     display: flex; align-items: center; padding: 0.95rem 1.5rem; font-weight: 600;
     border-bottom: 1px solid var(--line-soft); color: var(--ink); min-height: 48px;
   }
+  /* Sign out is a button, not a link — match it to the rows around it. */
+  .m-link-btn {
+    width: 100%; background: none; border: 0; border-bottom: 1px solid var(--line-soft);
+    font: inherit; font-weight: 600; text-align: left; cursor: pointer; color: var(--red-dark);
+  }
 }
 
 /* ---------- Home hero ---------- */

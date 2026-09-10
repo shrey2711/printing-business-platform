@@ -737,6 +737,21 @@ async function createInvoiceForOrder(order) {
       'A $0 invoice would be marked paid without taking payment. Check the order configuration.'
     );
   }
+  // The guard above only fired when a price was quoted. An order with no
+  // priceable config AND no stored estimate slipped through with subtotal 0 and
+  // quoted 0: no line item was added, Stripe finalized the invoice as PAID at
+  // $0.00, and `settled` then evaluated true, marking the order paid with
+  // nothing collected. That is the August bug reached through a different door.
+  //
+  // Nothing in this catalogue costs nothing. Refuse to invoice $0 at all,
+  // whatever the quote says.
+  if (subtotal === 0) {
+    throw new Error(
+      'Refusing to invoice: this order re-prices to $0. Stripe finalizes a zero ' +
+      'invoice as paid immediately, which would mark the order paid without ' +
+      'taking any money. Check the order configuration and price it manually.'
+    );
+  }
 
   const cur = currencies[order.currency] || currencies[BASE_CURRENCY];
   const amountCents = Math.round(subtotal * cur.rate * 100);
@@ -757,14 +772,25 @@ async function createInvoiceForOrder(order) {
     metadata: { orderId: order.id },
     description: desc
   });
-  if (amountCents > 0) {
-    await stripe.invoiceItems.create({
-      customer: customer.id,
-      invoice: invoice.id,
-      amount: amountCents,
-      currency: cur.stripe,
-      description: `${desc} (qty ${order.quantity || 1})`
-    });
+  await stripe.invoiceItems.create({
+    customer: customer.id,
+    invoice: invoice.id,
+    amount: amountCents,
+    currency: cur.stripe,
+    description: `${desc} (qty ${order.quantity || 1})`
+  });
+
+  // Never finalize on an assumption. Re-read the draft and confirm Stripe
+  // actually attached the line item: if it did not, finalizing turns this into
+  // a $0 invoice that is immediately "paid".
+  const draft = await stripe.invoices.retrieve(invoice.id);
+  if ((draft.amount_due || 0) <= 0) {
+    await stripe.invoices.del(invoice.id).catch(() => {});
+    throw new Error(
+      `Refusing to finalize: the draft invoice for order ${order.id} has an amount due of ` +
+      `$${((draft.amount_due || 0) / 100).toFixed(2)} after adding a line item for ` +
+      `$${(amountCents / 100).toFixed(2)}. The draft has been deleted rather than finalized as paid.`
+    );
   }
 
   // Finalize (makes it payable + gives a hosted_invoice_url) but DON'T call

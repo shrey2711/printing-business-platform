@@ -190,6 +190,38 @@ function HeaderAuth() {
   );
 }
 
+// Account links for the mobile menu. The desktop header shows an inline
+// sign-in form, which is hidden below 820px, so these are the only way in on a
+// phone.
+function MobileAuthLinks({ onNavigate }) {
+  const { isAuthenticated, canSeeAdmin, displayName, logout } = useAuth();
+  const navigate = useNavigate();
+  if (isAuthenticated) {
+    return (
+      <>
+        <Link className="m-link" to="/account" onClick={onNavigate}>
+          👤 {displayName?.split(' ')[0] || 'My account'}
+        </Link>
+        <Link className="m-link" to="/account" onClick={onNavigate}>My orders</Link>
+        {canSeeAdmin && <Link className="m-link" to="/admin" onClick={onNavigate}>Dashboard</Link>}
+        <button
+          type="button"
+          className="m-link m-link-btn"
+          onClick={async () => { onNavigate?.(); await logout(); navigate('/'); }}
+        >
+          Sign out
+        </button>
+      </>
+    );
+  }
+  return (
+    <>
+      <Link className="m-link" to="/login" onClick={onNavigate}>Sign in</Link>
+      <Link className="m-link" to="/register" onClick={onNavigate}>Create account</Link>
+    </>
+  );
+}
+
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -320,6 +352,10 @@ function HeaderNav() {
           <Link className="m-link" to="/trade-show-booth-packages">Booth Packages</Link>
           <Link className="m-link" to="/locations">Locations</Link>
           <Link className="m-link" to="/blog">Blog</Link>
+          {/* Account access. The inline sign-in form is display:none below
+              820px and this menu carried no auth links at all, so on a phone
+              there was no way to sign in, register, or reach an order. */}
+          <MobileAuthLinks onNavigate={() => setMobileOpen(false)} />
         </div>
       )}
     </>

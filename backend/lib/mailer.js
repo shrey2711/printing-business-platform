@@ -152,27 +152,57 @@ function progress(status) {
     return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;"><tr>
       <td style="background:#fdeef0;color:${C.red};font-family:Arial,sans-serif;font-size:13px;font-weight:700;padding:12px 14px;border-radius:8px;">This order was canceled.</td></tr></table>`;
   }
+  // Six labelled dots in one row cannot fit a phone. Each label sat under a
+  // 26px cell, so "Proof sent" and "In production" wrapped and ran into their
+  // neighbours — on a real device it rendered as "SubmittedPaid Proof sent
+  // Approved In production Shipped" in a single unreadable clump.
+  //
+  // A segmented bar carries the same information and cannot collide: the step
+  // is named once, in full, above segments that need no text of their own.
   const current = Math.max(0, STEPS.indexOf(status));
-  const cells = STEPS.map((step, i) => {
+  const segments = STEPS.map((_, i) => {
     const done = i <= current;
-    const dotBg = done ? C.green : '#e7ebf1';
-    const dotColor = done ? '#ffffff' : '#98a2b3';
-    const labelColor = done ? C.navy : C.muted;
-    const mark = i < current ? '&#10003;' : String(i + 1);
-    return `<td align="center" style="font-family:Arial,sans-serif;">
-      <div style="width:26px;height:26px;line-height:26px;border-radius:50%;background:${dotBg};color:${dotColor};font-size:12px;font-weight:700;margin:0 auto;">${mark}</div>
-      <div style="font-size:11px;color:${labelColor};padding-top:5px;">${STEP_LABEL[step]}</div>
+    return `<td style="padding:0 2px;">
+      <div style="height:6px;border-radius:3px;background:${done ? C.green : '#e3e8ef'};font-size:0;line-height:0;">&nbsp;</div>
     </td>`;
-  }).join('<td style="height:3px;background:#e7ebf1;"></td>');
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:14px 0 6px;"><tr>${cells}</tr></table>`;
+  }).join('');
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:18px 0 6px;">
+    <tr><td style="padding:0 0 7px;font-family:Arial,sans-serif;font-size:13px;color:${C.muted};">
+      Step ${current + 1} of ${STEPS.length}
+      <span style="color:${C.navy};font-weight:700;">&nbsp;&bull;&nbsp;${STEP_LABEL[STEPS[current]] || ''}</span>
+      <span style="color:${C.muted};">&nbsp;&rarr;&nbsp;next: ${current + 1 < STEPS.length ? STEP_LABEL[STEPS[current + 1]] : 'complete'}</span>
+    </td></tr>
+    <tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>${segments}</tr></table></td></tr>
+  </table>`;
+}
+
+// A date a customer can actually read, in the order they expect to see it.
+function orderDate(order) {
+  const raw = order.created_at || order.createdAt;
+  if (!raw) return null;
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+// The configurator packs every choice into one "•"-separated string. Right
+// aligned in a narrow table cell that becomes an unreadable wall on a phone.
+// Split it back into lines so each choice reads on its own.
+function specsList(specs) {
+  const parts = String(specs || '').split('•').map((s) => s.trim()).filter(Boolean);
+  if (parts.length < 2) return null;
+  return parts
+    .map((p) => `<div style="font-family:Arial,sans-serif;font-size:13px;line-height:1.5;color:${C.ink};padding:1px 0;">&bull;&nbsp;${p}</div>`)
+    .join('');
 }
 
 // Order detail rows.
 function detailsCard(order, { showAmount = true } = {}) {
   const rows = [];
   rows.push(['Order', shortId(order.id)]);
+  const placed = orderDate(order);
+  if (placed) rows.push(['Order date', placed]);
   rows.push(['Product', order.product || '—']);
-  if (order.specs) rows.push(['Specs', order.specs]);
   rows.push(['Quantity', String(order.quantity || 1)]);
   if (showAmount) {
     const paid = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status);
@@ -184,12 +214,23 @@ function detailsCard(order, { showAmount = true } = {}) {
   const body = rows
     .map(
       ([k, v], i) => `<tr>
-        <td style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};${i ? `border-top:1px solid ${C.line};` : ''}">${k}</td>
-        <td align="right" style="padding:9px 0;font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:${C.navy};${i ? `border-top:1px solid ${C.line};` : ''}">${v}</td>
+        <td style="padding:10px 0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};white-space:nowrap;${i ? `border-top:1px solid ${C.line};` : ''}">${k}</td>
+        <td align="right" style="padding:10px 0;font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:${C.navy};${i ? `border-top:1px solid ${C.line};` : ''}">${v}</td>
       </tr>`
     )
     .join('');
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:8px 0;">${body}</table>`;
+
+  // Specs get their own full-width block under the table. Squeezed into a
+  // right-aligned cell they became a ragged wall of text on a phone.
+  const list = order.specs ? specsList(order.specs) : null;
+  const specsBlock = !order.specs
+    ? ''
+    : `<tr><td colspan="2" style="padding:12px 0 2px;border-top:1px solid ${C.line};">
+        <div style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:${C.muted};padding-bottom:6px;">What you ordered</div>
+        ${list || `<div style="font-family:Arial,sans-serif;font-size:13px;line-height:1.5;color:${C.ink};">${order.specs}</div>`}
+      </td></tr>`;
+
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:14px 0;">${body}${specsBlock}</table>`;
 }
 
 function shell(innerHtml, preheader = '') {
@@ -331,11 +372,30 @@ export function adminAlertHtml(order, customerEmail, appUrl) {
     <tr><td style="height:5px;background:${C.red};"></td></tr>
     <tr><td style="padding:26px 28px 8px;">
       <h1 style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:20px;color:${C.navy};">🖨️ New order ${shortId(order.id)}</h1>
-      <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">A new order just came in — review the artwork and update its status.</p>
+      <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">
+        A new order just came in — review the artwork and update its status.${orderDate(order) ? ` Placed ${orderDate(order)}.` : ''}
+      </p>
+      ${/* Whether money has actually arrived is the first thing staff need and
+            the last thing that should be guessed at from a status word. */ ''}
+      <div style="display:inline-block;margin-top:10px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;${
+        ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status)
+          ? `background:#e8f6ee;color:${C.green};`
+          : `background:#fff4e5;color:#a15c00;`
+      }">${
+        ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status)
+          ? `PAID${order.amount_total != null ? ' — ' + money(order.amount_total, order.currency) : ''}`
+          : order.payment_choice === 'invoice_later' ? 'UNPAID — asked to be invoiced' : 'UNPAID'
+      }</div>
       ${/* The order's real state. This used to be hardcoded to 'paid', which
             made every new-order alert look like money had arrived. */ ''}
       ${detailsCard(order)}
-      ${quoteRows([
+      <div style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:${C.muted};padding:18px 0 2px;">Ship to</div>
+      ${/* quoteRows returns bare <tr>s. Dropped straight into a <td> they are
+            invalid HTML, and every mail client hoists them out of the cell —
+            which is why these rows rendered outside the card, running off the
+            right edge. They need their own table, exactly as the quote emails
+            already do. */ ''}
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:6px 0 4px;">${quoteRows([
         ['Customer', order.customer_name],
         ['Email', customerEmail],
         ['Phone', order.customer_phone],
@@ -351,7 +411,7 @@ export function adminAlertHtml(order, customerEmail, appUrl) {
               ? 'Design service'
               : 'None supplied'],
         ['Payment', order.payment_choice === 'invoice_later' ? 'Asked to be invoiced' : null]
-      ])}
+      ])}</table>
       ${button(appUrl ? `${appUrl}/admin` : '', 'Open admin dashboard', C.navy)}
     </td></tr>
     ${footer()}`;
