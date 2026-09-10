@@ -29,6 +29,10 @@ export default function useDocumentMeta(title, description, jsonLd, robots, cano
   const { pathname } = useLocation();
 
   useEffect(() => {
+    // `title === false` means "this component is embedded in a page that owns
+    // the document head". Not the same as no title: passing null still resets
+    // the title to the brand default, which would wipe the host page's.
+    if (title === false) return;
     // A title already containing " | " is a complete title (its own suffix) —
     // pass it through; otherwise append the brand.
     const fullTitle = title

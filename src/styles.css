@@ -1383,3 +1383,12 @@ img { max-width: 100%; }
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+
+/* ---------- Product + city pages ---------- */
+/* Product switcher above the embedded configurator. */
+.city-product-picker { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.1rem; }
+.city-product-picker .chip-price { opacity: 0.75; font-weight: 500; }
+/* The configurator mounted inside another page: it supplies its own grid, so it
+   only needs the vertical rhythm the page section would otherwise give it. */
+.config-embedded { margin-top: 0.2rem; }
+.config-embedded .config-layout { margin-top: 0; }

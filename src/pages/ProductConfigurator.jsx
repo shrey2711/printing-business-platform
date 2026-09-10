@@ -15,8 +15,17 @@ import { getCategoryForProduct } from '../data/categoryPages';
 import ColorwayStrip from '../components/ColorwayStrip';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 
-export default function ProductConfigurator() {
-  const { slug } = useParams();
+// `slug` and `embedded` let the product + city pages mount this exact
+// configurator inside their own page. Reused rather than reimplemented on
+// purpose: a second purchasing surface is a second place for the money path to
+// go wrong, and this one is the one covered by the payment guards.
+//
+// Embedded, it drops the parts the host page already owns — its own <main>, the
+// back link, and the document title — and keeps everything that takes an order:
+// options, size, quantity, live price, artwork routing and the CTA.
+export default function ProductConfigurator({ slug: slugProp, embedded = false }) {
+  const params = useParams();
+  const slug = slugProp || params.slug;
   const navigate = useNavigate();
   const money = useMoney();
   const { currency } = useCurrency();
@@ -33,7 +42,9 @@ export default function ProductConfigurator() {
   // Commercial-intent title for canopy sizes (matches the prerendered title).
   const canopySize = product?.slug?.match(/canopy-tent-(\d+x\d+)/)?.[1];
   useDocumentMeta(
-    product
+    embedded
+      ? false
+      : product
       ? product.seoTitle
         ? product.seoTitle
         : canopySize
@@ -191,7 +202,9 @@ export default function ProductConfigurator() {
       }
     });
 
-  if (loading) return <main className="page"><p className="muted">Loading…</p></main>;
+  if (loading) return embedded
+    ? <p className="muted">Loading…</p>
+    : <main className="page"><p className="muted">Loading…</p></main>;
   if (notFound || !product)
     return (
       <main className="page">
@@ -314,9 +327,14 @@ export default function ProductConfigurator() {
     </div>
   );
 
+  // Embedded, the host page supplies <main> and its own navigation — nesting a
+  // second <main> is invalid and the back link belongs to the product page.
+  const Shell = embedded ? 'div' : 'main';
   return (
-    <main className="page">
-      <Link className="back-link" to={cat ? `/${cat.slug}` : '/products'}>← All {cat ? cat.nav : 'products'}</Link>
+    <Shell className={embedded ? 'config-embedded' : 'page'}>
+      {!embedded && (
+        <Link className="back-link" to={cat ? `/${cat.slug}` : '/products'}>← All {cat ? cat.nav : 'products'}</Link>
+      )}
 
       <div className="config-layout">
         {/* Left: product visual + info */}
@@ -726,7 +744,7 @@ export default function ProductConfigurator() {
           </div>
         </section>
       )}
-    </main>
+    </Shell>
   );
 }
 

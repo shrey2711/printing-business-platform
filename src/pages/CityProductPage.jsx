@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { list as getProducts } from '../services/cms/productService';
-import ProductCard from '../components/ProductCard';
+import ProductConfigurator from './ProductConfigurator';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { getCityProductPage } from '../data/cityProductPages';
@@ -19,6 +19,10 @@ export default function CityProductPage({ slug }) {
   const city = page ? SEO_CITIES.find((c) => c.slug === page.citySlug) : null;
   const [products, setProducts] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  // Which product's configurator is mounted. These pages cover a product group,
+  // so the page picks one to configure and lets the visitor switch — rather than
+  // stacking three or four full configurators down the page.
+  const [active, setActive] = useState(page ? page.products[0] : null);
 
   useEffect(() => {
     let alive = true;
@@ -88,15 +92,36 @@ export default function CityProductPage({ slug }) {
         <h1>{page.h1}</h1>
         <p className="lead">{page.intro}</p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-          <Link className="btn btn-red" to={`/products/${page.products[0]}`}>Configure &amp; buy</Link>
+          <a className="btn btn-red" href="#configure">Configure &amp; buy</a>
           <Link className="btn btn-outline" to="/quote">Request a quote</Link>
         </div>
       </section>
 
-      {/* The buying half of the page: real products, live prices, straight into
-          the configurator that takes payment. */}
-      <section className="size-section">
-        <div className="section-head"><h2>{page.h1} — configure and price</h2></div>
+      {/* The buying half of the page. This mounts the real Apex configurator —
+          the same component /products/{slug} uses — so options, live pricing,
+          quantity, artwork routing and checkout are the production ones rather
+          than a second implementation that could drift from them. */}
+      <section className="size-section" id="configure">
+        <div className="section-head"><h2>{page.h1} — configure and buy</h2></div>
+
+        {items.length > 1 && (
+          <div className="city-product-picker" role="tablist" aria-label="Choose a product to configure">
+            {items.map((p) => (
+              <button
+                key={p.slug}
+                type="button"
+                role="tab"
+                aria-selected={active === p.slug}
+                className={`chip ${active === p.slug ? 'chip-active' : ''}`}
+                onClick={() => setActive(p.slug)}
+              >
+                {p.name}
+                {p.startingPrice != null ? <span className="chip-price"> from ${p.startingPrice}</span> : null}
+              </button>
+            ))}
+          </div>
+        )}
+
         {!loaded ? (
           <p className="muted">Loading…</p>
         ) : items.length === 0 ? (
@@ -104,14 +129,8 @@ export default function CityProductPage({ slug }) {
             These products are being updated. <Link to="/quote">Request a quote</Link> and we will price your job.
           </p>
         ) : (
-          <div className="pcard-grid">
-            {items.map((p) => <ProductCard key={p.slug} product={p} />)}
-          </div>
+          <ProductConfigurator slug={active || page.products[0]} embedded />
         )}
-        <p className="panel-foot">
-          Every product above prices instantly as you configure it, and goes straight to secure checkout.
-          Artwork is uploaded with the order, and we send a free proof before anything prints.
-        </p>
       </section>
 
       {page.local.map((s) => (
