@@ -207,7 +207,11 @@ function detailsCard(order, { showAmount = true } = {}) {
   if (showAmount) {
     const paid = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status);
     if (paid && order.amount_total != null) rows.push(['Total paid', money(order.amount_total, order.currency)]);
-    else if (order.estimated_price) rows.push(['Estimated', order.estimated_price]);
+    // "Estimated" is the quote before any discount and in the currency the
+    // customer was browsing in, so it can differ sharply from what is actually
+    // charged — a 99% code turns a CAD 227.61 estimate into USD 1.65. Label it
+    // as a pre-discount quote rather than letting it read as the amount owed.
+    else if (order.estimated_price) rows.push(['Estimated (before any discount)', order.estimated_price]);
   }
   if (order.tracking_number) rows.push(['Tracking', `${order.carrier ? order.carrier + ' ' : ''}${order.tracking_number}`]);
 
@@ -384,8 +388,18 @@ export function adminAlertHtml(order, customerEmail, appUrl) {
       }">${
         ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status)
           ? `PAID${order.amount_total != null ? ' — ' + money(order.amount_total, order.currency) : ''}`
-          : order.payment_choice === 'invoice_later' ? 'UNPAID — asked to be invoiced' : 'UNPAID'
+          : order.payment_choice === 'invoice_later' ? 'AWAITING PAYMENT — asked to be invoiced' : 'AWAITING PAYMENT'
       }</div>
+      ${/* This alert is sent the moment the order is placed, before the
+            customer has reached Stripe, so "awaiting payment" and the estimate
+            are a snapshot rather than the final word. Say so, instead of
+            leaving staff to wonder why a paid order arrived marked unpaid. */ ''}
+      ${['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status)
+        ? ''
+        : `<p style="margin:8px 0 0;font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.5;">
+             Sent when the order was placed — the customer may be paying right now. A second
+             email follows once payment clears, and the dashboard always shows the live status.
+           </p>`}
       ${/* The order's real state. This used to be hardcoded to 'paid', which
             made every new-order alert look like money had arrived. */ ''}
       ${detailsCard(order)}

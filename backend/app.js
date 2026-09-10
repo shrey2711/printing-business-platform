@@ -75,6 +75,28 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
         })
         .eq('id', orderId)
         .eq('status', 'submitted'); // don't downgrade later statuses
+
+      // Tell staff the money actually arrived. The new-order alert is sent at
+      // placement, BEFORE the customer reaches Stripe, so it necessarily says
+      // "awaiting payment" and carries the pre-discount estimate. Without this
+      // second message nothing ever corrects that, and the only record of a
+      // real payment is a status word in the dashboard.
+      try {
+        const { data: paidOrder } = await supabaseAdmin
+          .from('orders').select('*').eq('id', orderId).single();
+        if (paidOrder) {
+          const { data: u } = await supabaseAdmin.auth.admin.getUserById(paidOrder.user_id);
+          await sendNewOrderAlert({
+            to: notifyEmails,
+            order: paidOrder,
+            customerEmail: u?.user?.email || paidOrder.customer_email || '',
+            // A webhook has no incoming request to derive a base URL from.
+            appUrl: (process.env.PUBLIC_BASE_URL || 'https://www.apextradeshow.com').replace(/\/$/, '')
+          });
+        }
+      } catch (e) {
+        console.error(`[webhook] payment alert failed for ${orderId}: ${e.message}`);
+      }
     }
   }
 
@@ -712,6 +734,18 @@ async function createInvoiceForOrder(order) {
   if (order.stripe_invoice_id) {
     return { invoiceUrl: order.invoice_url, invoiceId: order.stripe_invoice_id, existing: true };
   }
+  // Never bill an order that has already been settled. The Invoice button sits
+  // on every row including paid ones, and nothing stopped it: this order paid
+  // $1.65 through checkout, and invoicing it would have raised a fresh demand
+  // for the full re-priced amount. A second charge against a customer who has
+  // already paid is the worst outcome this code can produce.
+  const SETTLED = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'];
+  if (SETTLED.includes(order.status) || order.invoice_status === 'paid') {
+    throw new Error(
+      `Order ${String(order.id).slice(0, 8)} is already ${order.status} — refusing to raise an ` +
+      'invoice against an order that has been paid.'
+    );
+  }
 
   let subtotal = 0;
   if (order.config?.slug) {
@@ -720,6 +754,14 @@ async function createInvoiceForOrder(order) {
     if (priced.ok) subtotal = priced.total;
   }
   if (subtotal < 0 || !Number.isFinite(subtotal)) throw new Error('This order has no priceable configuration.');
+
+  // Honour the coupon the customer was quoted with. Checkout applies it; this
+  // path did not, so an unpaid order placed with a discount was invoiced at
+  // full price — billing more than the customer agreed to.
+  if (order.coupon_code) {
+    const { total: discounted } = applyCoupon(subtotal, order.coupon_code);
+    if (Number.isFinite(discounted) && discounted > 0) subtotal = discounted;
+  }
 
   // A $0 invoice finalizes as PAID immediately. That is correct for an order
   // that genuinely costs nothing, and catastrophic for one that does not: the
@@ -754,7 +796,19 @@ async function createInvoiceForOrder(order) {
   }
 
   const cur = currencies[order.currency] || currencies[BASE_CURRENCY];
-  const amountCents = Math.round(subtotal * cur.rate * 100);
+  // `cur.rate` does not exist. The currency objects in src/config/brand.js carry
+  // `fallbackRate`, and the working rate comes from the server's FX cache via
+  // getRate() — which is what the checkout path has always done. Reading
+  // cur.rate gave undefined, so this was `subtotal * undefined * 100` = NaN, and
+  // Stripe rejected it with "Invalid integer: NaN". Every invoice failed.
+  const fxRate = await getRate(cur.code);
+  const amountCents = Math.round(subtotal * fxRate * 100);
+  if (!Number.isFinite(amountCents) || amountCents <= 0) {
+    throw new Error(
+      `Refusing to invoice: computed a charge of ${amountCents} cents from a subtotal of ` +
+      `${subtotal} at rate ${fxRate}. Nothing was sent to Stripe.`
+    );
+  }
 
   const { data: u } = await supabaseAdmin.auth.admin.getUserById(order.user_id);
   const email = u?.user?.email;
