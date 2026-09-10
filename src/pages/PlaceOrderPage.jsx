@@ -3,6 +3,8 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { placeOrder, notifyOrderPlaced } from '../services/orders';
 import { startCheckout, validateCoupon } from '../services/checkout';
+import { getPrice } from '../services/api';
+import { useMoney } from '../context/CurrencyContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import AddressAutocomplete from '../components/AddressAutocomplete';
 import { validateContact, formatAddress } from '../lib/contactValidation';
@@ -13,6 +15,7 @@ const COUNTRIES = countryOptions();
 export default function PlaceOrderPage() {
   useDocumentMeta('Place Your Order', undefined, undefined, 'noindex, follow');
   const { user, isAuthenticated, isSupabaseReady, loading } = useAuth();
+  const money = useMoney();
   const location = useLocation();
   const navigate = useNavigate();
   const incoming = location.state || {};
@@ -49,6 +52,8 @@ export default function PlaceOrderPage() {
   const [couponInput, setCouponInput] = useState('');
   const [coupon, setCoupon] = useState(null); // { code, label }
   const [couponMsg, setCouponMsg] = useState('');
+  // Server-recomputed total once a coupon is applied: { total, was, off }.
+  const [discounted, setDiscounted] = useState(null);
   // Stable per-attempt key so retries/double-clicks don't create duplicate orders.
   const [idempotencyKey] = useState(() =>
     (crypto?.randomUUID?.() || `k-${Date.now()}-${Math.random().toString(36).slice(2)}`)
@@ -58,12 +63,29 @@ export default function PlaceOrderPage() {
     setCouponMsg('');
     if (!couponInput.trim()) return;
     const res = await validateCoupon(couponInput.trim());
-    if (res.valid) {
-      setCoupon({ code: res.code, label: res.label });
-      setCouponMsg(`✓ ${res.label} applied`);
-    } else {
+    if (!res.valid) {
       setCoupon(null);
+      setDiscounted(null);
       setCouponMsg('Invalid or expired code.');
+      return;
+    }
+    setCoupon({ code: res.code, label: res.label });
+    setCouponMsg(`✓ ${res.label} applied`);
+    // Re-price on the server with the coupon applied. The button used to keep
+    // quoting the undiscounted estimate carried over from the configurator, so
+    // it promised one figure and checkout charged another. The number comes
+    // from the same endpoint and the same applyCoupon() the checkout uses, so
+    // the two cannot disagree.
+    if (incoming.config?.slug) {
+      try {
+        const priced = await getPrice({ ...incoming.config, coupon: res.code });
+        if (priced?.ok !== false && typeof priced?.total === 'number') {
+          setDiscounted({ total: priced.total, was: priced.totalBeforeDiscount, off: priced.discount });
+        }
+      } catch {
+        // Leave the original estimate showing rather than a guess.
+        setDiscounted(null);
+      }
     }
   };
 
@@ -150,7 +172,10 @@ export default function PlaceOrderPage() {
             {incoming.specs && <div><span>Specs</span><strong>{incoming.specs}</strong></div>}
             <div><span>Quantity</span><strong>{incoming.quantity || 1}</strong></div>
             {incoming.estimatedPrice && (
-              <div><span>Estimated price</span><strong>{incoming.estimatedPrice}</strong></div>
+              <div>
+                <span>{discounted ? 'Total after discount' : 'Estimated price'}</span>
+                <strong>{discounted ? money(discounted.total) : incoming.estimatedPrice}</strong>
+              </div>
             )}
           </div>
 
@@ -270,6 +295,15 @@ export default function PlaceOrderPage() {
               {couponMsg && (
                 <small className={coupon ? 'coupon-ok' : 'coupon-bad'}>{couponMsg}</small>
               )}
+              {/* Show the arithmetic, so the new total is obviously a discount
+                  and not a different product. */}
+              {discounted && (
+                <div className="coupon-total">
+                  <span className="was">{discounted.was != null ? money(discounted.was) : incoming.estimatedPrice}</span>
+                  {discounted.off ? <span className="off">−{money(discounted.off)}</span> : null}
+                  <strong>{money(discounted.total)}</strong>
+                </div>
+              )}
             </div>
           )}
 
@@ -297,7 +331,9 @@ export default function PlaceOrderPage() {
             {busy
               ? 'Submitting…'
               : incoming.config?.slug && incoming.estimatedPrice
-                ? (payLater ? 'Submit order — invoice me' : `Submit & pay ${incoming.estimatedPrice}`)
+                ? (payLater
+                    ? 'Submit order — invoice me'
+                    : `Submit & pay ${discounted ? money(discounted.total) : incoming.estimatedPrice}`)
                 : 'Submit order'}
           </button>
           {!contactReady ? (

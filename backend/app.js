@@ -192,6 +192,20 @@ app.post('/api/price', async (req, res) => {
   const pricing = await getPricingOverride(body.slug);
   const result = computePrice(body, pricing ? { pricing } : {});
   if (!result.ok) return res.status(400).json(result);
+  // A coupon changes what the customer is asked to pay, so the figure on the
+  // pay button has to come from the same place checkout gets it. Computing it
+  // in the browser instead let the two disagree: the button kept quoting the
+  // full price after a discount was applied, then charged the discounted one.
+  if (body.coupon) {
+    const { discount, total, coupon } = applyCoupon(result.total, body.coupon);
+    if (coupon) {
+      result.couponCode = coupon.code;
+      result.couponLabel = coupon.label;
+      result.discount = discount;
+      result.totalBeforeDiscount = result.total;
+      result.total = total;
+    }
+  }
   res.json(result);
 });
 
