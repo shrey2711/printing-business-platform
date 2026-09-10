@@ -1,5 +1,17 @@
 import { authHeader } from '../lib/supabase';
 
+// Who the dashboard is signed in as, and which Stripe account the takings land
+// in. Never throws: this only annotates the orders screen, so a failure here
+// must not stop orders loading.
+export async function getAdminSession() {
+  try {
+    const res = await fetch('/api/admin/session', { headers: { ...(await authHeader()) } });
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function getAllOrders() {
   const res = await fetch('/api/admin/orders', { headers: { ...(await authHeader()) } });
   if (res.status === 401) throw new Error('Please sign in.');

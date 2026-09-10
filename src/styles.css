@@ -1155,7 +1155,9 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 }
 .admin-tab:hover { color: var(--navy); }
 .admin-tab-active { color: var(--red); border-bottom-color: var(--red); }
-.tab-head { display: flex; justify-content: flex-end; margin-bottom: 0.6rem; }
+.tab-head { display: flex; justify-content: flex-end; align-items: center; gap: 0.9rem; margin-bottom: 0.6rem; }
+/* Which Stripe account the takings land in, shown beside the order count. */
+.stripe-dest { font-size: 0.82rem; }
 
 /* CMS + blog list rows */
 .cms-row { display: grid; align-items: center; gap: 0.8rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--line-soft); }

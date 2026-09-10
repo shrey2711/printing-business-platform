@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAllOrders, updateOrder, deleteOrder, sendInvoice } from '../../services/admin';
+import { getAllOrders, getAdminSession, updateOrder, deleteOrder, sendInvoice } from '../../services/admin';
 import { formatCharged } from '../../lib/money';
 
 // What an unpaid order is actually waiting on, so a serious customer who asked
@@ -48,8 +48,10 @@ const statusColor = {
 export default function OrdersTab({ onError, onFlash }) {
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
+    getAdminSession().then(setSession);
     getAllOrders()
       .then(setOrders)
       .catch((e) => onError(e.message))
@@ -112,6 +114,19 @@ export default function OrdersTab({ onError, onFlash }) {
     <>
       <div className="tab-head">
         <span className="muted">{orders.length} order{orders.length === 1 ? '' : 's'}</span>
+        {/* Where the money actually goes. An order once read "paid" with no
+            sign of the payment simply because the takings land in a different
+            Stripe account than the one being checked. */}
+        {session?.stripeAccount || session?.stripeMode ? (
+          <span className={`muted stripe-dest${session.stripeMode === 'test' ? ' order-flag' : ''}`}>
+            {session.stripeMode === 'test'
+              ? '⚠ Stripe TEST mode — payments take no money'
+              : `Payments go to ${session.stripeAccount?.name || session.stripeAccount?.email || session.stripeAccount?.id || 'Stripe'}`}
+            {session.stripeAccount?.email && session.stripeMode !== 'test'
+              ? ` (${session.stripeAccount.email})`
+              : ''}
+          </span>
+        ) : null}
       </div>
       <div className="orders-table admin-table card">
         <div className="orders-row admin-row orders-head">

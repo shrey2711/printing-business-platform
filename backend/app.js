@@ -525,6 +525,27 @@ app.post('/api/checkout/confirm', writeLimiter, async (req, res) => {
 // Admin (email allowlist)
 // ============================================================================
 
+// Which Stripe account the takings land in. Retrieved once and kept, because
+// it cannot change without a redeploy and the dashboard asks for it on every
+// admin page load. Never throws: if Stripe is unreachable the dashboard simply
+// shows nothing rather than failing to load.
+let stripeAccountCache;
+async function stripeAccountInfo() {
+  if (stripeAccountCache !== undefined) return stripeAccountCache;
+  if (!stripe) return (stripeAccountCache = null);
+  try {
+    const acct = await stripe.accounts.retrieve();
+    stripeAccountCache = {
+      id: acct.id,
+      email: acct.email || null,
+      name: acct.business_profile?.name || acct.settings?.dashboard?.display_name || null
+    };
+  } catch {
+    stripeAccountCache = null;
+  }
+  return stripeAccountCache;
+}
+
 // Gate a route by role. Pass the roles allowed to proceed; 'admin' always
 // satisfies an 'editor' requirement (admins can do everything editors can).
 // Returns { user, role } on success, or null after having sent the response.
@@ -575,7 +596,13 @@ app.get('/api/me', async (req, res) => {
   // stripeMode lets the dashboard say plainly that payments are running against
   // the test account, rather than leaving staff to wonder why an order is paid
   // and Stripe shows nothing.
-  res.json({ authenticated: true, email: user.email, role, stripeMode });
+  //
+  // stripeAccount answers the other half of that question. An order once read
+  // "paid" with no sign of the money, and the reason was simply that the
+  // takings were landing in a different Stripe account than the one being
+  // checked. Naming the destination account here makes that a two-second look
+  // rather than an investigation.
+  res.json({ authenticated: true, email: user.email, role, stripeMode, stripeAccount: await stripeAccountInfo() });
 });
 
 app.get('/api/admin/orders', async (req, res) => {
