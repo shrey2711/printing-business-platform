@@ -765,6 +765,66 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
 // Re-prices server-side (never trust stored price), applies live pricing
 // overrides. Throws on failure. Used by auto-send on order placement AND the
 // admin re-send button. Idempotent-ish: skips if an invoice already exists.
+// A paid order's invoice: a document, never a demand.
+//
+// Issued for the amount that was ACTUALLY charged — not a re-price, which can
+// drift from what the customer paid — and settled with paid_out_of_band, so
+// Stripe records it as paid without creating a second charge and the hosted
+// page offers no way to pay again. Produces a hosted URL and a PDF that can be
+// sent straight to the customer.
+async function createPaidInvoiceRecord(order) {
+  const charged = Number(order.amount_total);
+  if (!Number.isFinite(charged) || charged <= 0) {
+    throw new Error(
+      `Order ${String(order.id).slice(0, 8)} is marked ${order.status} but has no recorded amount, ` +
+      'so there is nothing to make an invoice from. Check the payment in Stripe first.'
+    );
+  }
+  const cur = currencies[order.currency] || currencies[BASE_CURRENCY];
+  const amountCents = Math.round(charged * 100);
+
+  const { data: u } = await supabaseAdmin.auth.admin.getUserById(order.user_id);
+  const email = u?.user?.email || order.customer_email;
+  if (!email) throw new Error('No customer email on this order.');
+
+  const desc = `${order.product}${order.specs ? ' — ' + order.specs : ''}`;
+  const existing = await stripe.customers.list({ email, limit: 1 });
+  const customer = existing.data[0] || (await stripe.customers.create({ email }));
+
+  const invoice = await stripe.invoices.create({
+    customer: customer.id,
+    collection_method: 'send_invoice',
+    days_until_due: 1,
+    currency: cur.stripe,
+    metadata: { orderId: order.id, kind: 'paid_record' },
+    description: desc,
+    footer: 'Paid in full — this document is a receipt for your records.'
+  });
+  await stripe.invoiceItems.create({
+    customer: customer.id,
+    invoice: invoice.id,
+    amount: amountCents,
+    currency: cur.stripe,
+    description: `${desc} (qty ${order.quantity || 1})`
+  });
+  const finalized = await stripe.invoices.finalizeInvoice(invoice.id);
+  // Mark it settled WITHOUT taking money. Any other route here would charge the
+  // customer a second time for an order they have already paid.
+  const settled = await stripe.invoices.pay(finalized.id, { paid_out_of_band: true });
+
+  await supabaseAdmin
+    .from('orders')
+    .update({
+      stripe_invoice_id: settled.id,
+      invoice_url: settled.hosted_invoice_url,
+      invoice_pdf: settled.invoice_pdf,
+      invoice_status: settled.status
+    })
+    .eq('id', order.id);
+
+  return { invoiceUrl: settled.hosted_invoice_url, invoiceId: settled.id, paidRecord: true };
+}
+
 async function createInvoiceForOrder(order) {
   if (!stripe) throw new Error('Payments are not configured.');
   if (order.stripe_invoice_id) {
@@ -777,10 +837,11 @@ async function createInvoiceForOrder(order) {
   // already paid is the worst outcome this code can produce.
   const SETTLED = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'];
   if (SETTLED.includes(order.status) || order.invoice_status === 'paid') {
-    throw new Error(
-      `Order ${String(order.id).slice(0, 8)} is already ${order.status} — refusing to raise an ` +
-      'invoice against an order that has been paid.'
-    );
+    // A paid order still needs a document — customers ask for one and accounts
+    // departments require it. What it must NOT be is a fresh demand for money.
+    // So it is issued for the amount actually charged and settled out of band,
+    // which produces a real invoice PDF that cannot collect a second payment.
+    return createPaidInvoiceRecord(order);
   }
 
   let subtotal = 0;

@@ -36,6 +36,12 @@ function paymentNote(o) {
   return '';
 }
 
+// Money has arrived on this order, so an invoice for it can only ever be a
+// record of that — never a request for more.
+const isSettled = (o) =>
+  ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(o.status) ||
+  o.invoice_status === 'paid';
+
 const STATUSES = [
   'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
 ];
@@ -85,12 +91,24 @@ export default function OrdersTab({ onError, onFlash }) {
     }
   };
 
+  // Two different documents behind one button. On an unpaid order this raises a
+  // demand for payment; on a paid one it produces a receipt for what was
+  // already charged. Say which, so nobody bills a customer twice by reflex.
   const invoice = async (o) => {
-    if (!window.confirm(`Create & email a Stripe invoice to ${o.customer_email || 'the customer'} for order #${String(o.id).slice(0, 8)}?`)) return;
+    const settled = isSettled(o);
+    const who = o.customer_email || 'the customer';
+    const ask = settled
+      ? `Create a paid invoice (receipt) for order #${String(o.id).slice(0, 8)}, for the ${
+          o.amount_total != null ? formatCharged(o.amount_total, o.currency) : 'amount charged'
+        } already paid? It cannot take a second payment.`
+      : `Create & email a Stripe invoice to ${who} for order #${String(o.id).slice(0, 8)}?`;
+    if (!window.confirm(ask)) return;
     try {
       const { invoiceUrl } = await sendInvoice(o.id);
-      setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, invoice_url: invoiceUrl, invoice_status: 'open' } : x)));
-      onFlash('✓ Invoice sent to customer');
+      setOrders((prev) => prev.map((x) => (
+        x.id === o.id ? { ...x, invoice_url: invoiceUrl, invoice_status: settled ? 'paid' : 'open' } : x
+      )));
+      onFlash(settled ? '✓ Receipt created — open it to send to the customer' : '✓ Invoice sent to customer');
     } catch (e) {
       onError(e.message);
     }
@@ -194,7 +212,15 @@ export default function OrdersTab({ onError, onFlash }) {
               {o.invoice_url ? (
                 <a className="btn btn-outline btn-sm" href={o.invoice_url} target="_blank" rel="noreferrer" title="View invoice">📄</a>
               ) : (
-                <button className="btn btn-outline btn-sm" onClick={() => invoice(o)} title="Create & email invoice">Invoice</button>
+                <button
+                  className="btn btn-outline btn-sm"
+                  onClick={() => invoice(o)}
+                  title={isSettled(o)
+                    ? 'Create a paid invoice (receipt) for the amount already charged'
+                    : 'Create & email an invoice for payment'}
+                >
+                  {isSettled(o) ? 'Receipt' : 'Invoice'}
+                </button>
               )}
               <button className="btn btn-ghost-danger btn-sm" onClick={() => removeOrder(o)} title="Delete order">✕</button>
             </span>
