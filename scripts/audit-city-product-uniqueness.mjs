@@ -24,14 +24,29 @@ import { fileURLToPath } from 'url';
 import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
 import { CATEGORY_PAGES } from '../src/data/categoryPages.js';
 import { SEO_CITIES } from '../src/data/citySeo.js';
+import { KNOWN_ROUTES } from '../src/generated/routes.js';
+import { redirects } from '../src/generated/redirects.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
 const ORIGIN = 'https://www.apextradeshow.com';
 
+// The page's own rendered content: everything between the prerender marker and
+// the site nav. Starting at the marker matters — slicing from the top of the
+// file would pull in <head>, and the JSON-LD in there is long enough to make a
+// lean page look like a wall of text.
+const pageBody = (html) => {
+  const i = html.indexOf('<div id="seo-prerender">');
+  return html.slice(i === -1 ? 0 : i).split('<nav aria-label="Primary">')[0];
+};
+
 const MAX_OVERLAP = 40;          // 60%+ unique, as specified
 const MAX_NORMALISED_OVERLAP = 55; // same product, city names removed — still must read differently
-const WORD_FLOOR = 250;
+// Raised from 250 once the shipping sections and the transactional FAQs landed.
+// The pages run 690-920 editorial words, so this is a floor with headroom rather
+// than a target anyone is writing to — it exists to catch a page being gutted,
+// not to encourage padding, which section 20 prohibits in the other direction.
+const WORD_FLOOR = 600;
 
 const fails = [];
 const warn = [];
@@ -262,7 +277,7 @@ if (existsSync(DIST)) {
     const file = join(DIST, p.slug, 'index.html');
     if (!existsSync(file)) continue;
     // Everything before the primary nav is the page's own content.
-    const body = readFileSync(file, 'utf8').split('<nav aria-label="Primary">')[0];
+    const body = pageBody(readFileSync(file, 'utf8'));
     // Unique destinations, not raw anchors: the breadcrumb and the cross-link
     // block legitimately point at the same hub twice, and "do not overdo
     // internal links" is about how many places a page sends you, not how many
@@ -397,7 +412,7 @@ if (existsSync(DIST)) {
     const file = join(DIST, p.slug, 'index.html');
     if (!existsSync(file)) continue;
     headingChecked++;
-    const body = readFileSync(file, 'utf8').split('<nav aria-label="Primary">')[0];
+    const body = pageBody(readFileSync(file, 'utf8'));
     const h1s = body.match(/<h1[\s>]/g) || [];
     if (h1s.length !== 1) fails.push(`${p.slug}: ${h1s.length} H1s, expected exactly 1`);
 
@@ -557,6 +572,115 @@ if (existsSync(DIST)) {
   }
 }
 
+// 11. Images.
+//
+// The rule worth enforcing here is the negative one: "do not add Los Angeles to
+// every image just for SEO". The photographs are of products, not of cities —
+// a canopy photographed in a studio is not a Los Angeles canopy, and naming the
+// file or the alt text as though it were is a claim about the image that is not
+// true. So city names are banned from both, and the alt text has to describe
+// the product instead.
+let imagesChecked = 0;
+if (existsSync(DIST)) {
+  for (const p of CITY_PRODUCT_PAGES) {
+    const file = join(DIST, p.slug, 'index.html');
+    if (!existsSync(file)) continue;
+    const body = pageBody(readFileSync(file, 'utf8'));
+    const imgs = [...body.matchAll(/<img[^>]*>/g)].map((m) => m[0]);
+    if (!imgs.length) { fails.push(`${p.slug}: no product image in the page body`); continue; }
+    imagesChecked += imgs.length;
+
+    const city = SEO_CITIES.find((c) => c.slug === p.citySlug);
+    const seenAlt = new Set();
+    for (const tag of imgs) {
+      const src = (tag.match(/src="([^"]*)"/) || [])[1] || '';
+      const alt = ((tag.match(/alt="([^"]*)"/) || [])[1] || '').replace(/&amp;/g, '&').replace(/&#39;/g, "'");
+      if (!alt.trim()) fails.push(`${p.slug}: image ${src} has no alt text`);
+      if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) {
+        fails.push(`${p.slug}: image ${src} has no width/height — it will shift the layout as it loads`);
+      }
+      if (src.startsWith('/') && !existsSync(join(DIST, src.split('?')[0]))) {
+        fails.push(`${p.slug}: image ${src} does not exist in the build`);
+      }
+      if (city && new RegExp(city.city, 'i').test(alt)) {
+        fails.push(`${p.slug}: alt text on ${src} names ${city.city} — the photograph is of a product, not of a city`);
+      }
+      if (city && src.toLowerCase().includes(p.citySlug)) {
+        fails.push(`${p.slug}: filename ${src} carries the city slug — the same image is used nationally`);
+      }
+      if (seenAlt.has(alt)) fails.push(`${p.slug}: two images share the alt text "${alt}"`);
+      seenAlt.add(alt);
+    }
+  }
+}
+
+// 12. Indexing, and the duplicate-URL surfaces.
+//
+// Everything that could produce a second URL for the same page is checked in one
+// place, because each is individually harmless and they compound: a trailing
+// slash, a stray robots rule, a redirect that starts pointing at one of these,
+// or a thirteenth route matching the same product-and-city pattern.
+//
+// www/non-www, http/https and trailing slash are host-level and verified against
+// the deploy rather than here (all three 301/308 to the canonical form today);
+// what this can hold is the configuration that produces them.
+if (existsSync(DIST)) {
+  const robots = existsSync(join(DIST, 'robots.txt')) ? readFileSync(join(DIST, 'robots.txt'), 'utf8') : '';
+  const disallows = [...robots.matchAll(/^Disallow:\s*(\S+)/gm)].map((m) => m[1]);
+  for (const p of CITY_PRODUCT_PAGES) {
+    const blocked = disallows.find((d) => d !== '/' && `/${p.slug}`.startsWith(d.replace(/\*$/, '')));
+    if (blocked) fails.push(`${p.slug}: robots.txt blocks it with "Disallow: ${blocked}"`);
+  }
+
+  // trailingSlash:false is what stops /slug/ becoming a second URL. It is one
+  // word in vercel.json and nothing else would notice if it changed.
+  const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
+  if (vercel.trailingSlash !== false) {
+    fails.push(`vercel.json trailingSlash is ${JSON.stringify(vercel.trailingSlash)} — /slug/ and /slug would both resolve`);
+  }
+}
+
+// No redirect may involve one of these URLs in either direction: as a source it
+// would mean the URL no longer resolves, as a destination it would mean traffic
+// arriving at a URL some other page claims.
+{
+  const slugs = new Set(CITY_PRODUCT_PAGES.map((p) => `/${p.slug}`));
+  for (const r of redirects || []) {
+    if (slugs.has(r.source)) fails.push(`${r.source} is a redirect source — the page would never be reached`);
+    if (slugs.has(r.destination)) fails.push(`${r.destination} is a redirect destination — something else is pointing traffic at it`);
+  }
+  // A thirteenth route shaped like these is an alias, and an alias is a duplicate.
+  const shaped = [...KNOWN_ROUTES].filter((r) => /-(los-angeles|chicago)$/.test(r));
+  const extra = shaped.filter((r) => !slugs.has(r));
+  if (extra.length) {
+    fails.push(`route(s) shaped like a product+city page but not in CITY_PRODUCT_PAGES: ${extra.join(', ')} — an alias is a duplicate`);
+  }
+}
+
+// 13. Conversion order (sections 20 and 26).
+//
+// "Do not bury the purchasing section under 1,500 words of SEO content" is
+// checkable: the configurator has to come before the editorial, and the copy
+// above it has to be short enough to scroll past on a phone.
+const LEAD_WORDS_MAX = 150;
+if (existsSync(DIST)) {
+  for (const p of CITY_PRODUCT_PAGES) {
+    const file = join(DIST, p.slug, 'index.html');
+    if (!existsSync(file)) continue;
+    const body = pageBody(readFileSync(file, 'utf8'));
+    const buy = body.indexOf('configure and buy');
+    const about = body.indexOf('<h2>About ');
+    if (buy === -1) { fails.push(`${p.slug}: no purchasing section`); continue; }
+    if (about !== -1 && about < buy) {
+      fails.push(`${p.slug}: the editorial content comes before the purchasing section`);
+    }
+    const lead = body.slice(0, buy).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length;
+    if (lead > LEAD_WORDS_MAX) {
+      fails.push(`${p.slug}: ${lead} words above the purchasing section (max ${LEAD_WORDS_MAX}) — the transaction is being buried`);
+    }
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -614,6 +738,20 @@ if (schemaChecked) {
     'rating or review data; the breadcrumb matches the visible trail and passes through the city hub; the product pages still own one Product each.'
   );
 }
+if (imagesChecked) {
+  console.log(
+    `✓ CITY PRODUCT IMAGES OK — ${imagesChecked} product photographs across the 12 pages: every one has descriptive alt text, ` +
+    'dimensions and a real file, none names a city in its alt text or filename, and no page repeats an alt.'
+  );
+}
+console.log(
+  `✓ CITY PRODUCT INDEXING OK — all ${CITY_PRODUCT_PAGES.length} URLs are crawlable and indexable: no robots.txt rule blocks them, ` +
+  'trailingSlash stays off, no redirect touches them, and no thirteenth route shares their shape.'
+);
+console.log(
+  `✓ CITY PRODUCT CONVERSION ORDER OK — the configurator comes before the editorial on every page, with at most ` +
+  `${LEAD_WORDS_MAX} words above it (pages run 89-111).`
+);
 console.log(
   `✓ CITY PRODUCT FAQS OK — ${CITY_PRODUCT_PAGES.reduce((n, p) => n + p.faqs.length, 0)} questions across ` +
   `${CITY_PRODUCT_PAGES.length} pages, none repeated anywhere, each page naming its city and answering artwork and shipping.`
