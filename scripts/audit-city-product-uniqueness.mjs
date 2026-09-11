@@ -283,6 +283,37 @@ if (existsSync(DIST)) {
   }
 }
 
+// 6. Title tags.
+//
+// The rule that keeps these honest is that the title must be the page's own H1
+// plus the brand, nothing else. It makes every title unique for free (the H1
+// already names a product and a city), it makes keyword stuffing structurally
+// impossible — there is no room to append a second phrase — and it means the
+// search result promises exactly what the page's heading delivers.
+//
+// The single-separator check is not cosmetic. useDocumentMeta treats a title
+// that already contains " | " as complete and does NOT append the brand, so a
+// title with its own pipe renders one way in the prerendered HTML and a
+// different way after hydration. Two pages here used to do that.
+const TITLE_MAX = 62; // beyond this Google truncates in the result
+const seenTitle = new Map();
+if (existsSync(DIST)) {
+  for (const p of CITY_PRODUCT_PAGES) {
+    const file = join(DIST, p.slug, 'index.html');
+    if (!existsSync(file)) continue;
+    const raw = (readFileSync(file, 'utf8').match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+    const title = raw.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+    const want = `${p.h1} | Apex Trade Show`;
+    if (title !== want) fails.push(`${p.slug}: title "${title}" != "${want}" (the H1 plus the brand)`);
+    if ((title.match(/ \| /g) || []).length !== 1) {
+      fails.push(`${p.slug}: title has ${(title.match(/ \| /g) || []).length} " | " separators — the client hook skips the brand on a title that already contains one, so the prerendered and hydrated titles would differ`);
+    }
+    if (title.length > TITLE_MAX) fails.push(`${p.slug}: title is ${title.length} chars (max ${TITLE_MAX}) and would be truncated`);
+    if (seenTitle.has(title)) fails.push(`${p.slug}: shares its title with ${seenTitle.get(title)}`);
+    else seenTitle.set(title, p.slug);
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -324,5 +355,9 @@ if (canonChecked) {
   console.log(
     `✓ CITY PRODUCT NATIONAL LINKS OK — each page carries exactly one link to its national category page and no other, ` +
     `within a ${LINK_BUDGET}-link body budget.`
+  );
+  console.log(
+    `✓ CITY PRODUCT TITLES OK — ${seenTitle.size} unique titles, each its page's own H1 plus the brand, ` +
+    `all within ${TITLE_MAX} characters and carrying one separator.`
   );
 }

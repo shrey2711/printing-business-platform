@@ -26,7 +26,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'canopies',
     products: ['canopy-tent-10x10', 'canopy-tent-10x15', 'canopy-tent-10x20'],
     h1: 'Custom Canopy Tents in Los Angeles',
-    title: 'Custom Canopy Tents Los Angeles',
+    title: 'Custom Canopy Tents in Los Angeles',
     description:
       'Custom printed canopy tents for Los Angeles trade shows, festivals and outdoor activations. 10x10, 10x15 and 10x20 with up to three printed walls. Instant pricing.',
     primary: 'custom canopy tents Los Angeles',
@@ -67,7 +67,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'canopies',
     products: ['canopy-tent-10x10', 'canopy-tent-10x15', 'canopy-tent-10x20'],
     h1: 'Custom Canopy Tents in Chicago',
-    title: 'Custom Canopy Tents Chicago',
+    title: 'Custom Canopy Tents in Chicago',
     description:
       'Custom printed canopy tents for Chicago trade shows, festivals and outdoor events. 10x10, 10x15 and 10x20 with up to three printed walls. Instant online pricing.',
     primary: 'custom canopy tents Chicago',
@@ -110,7 +110,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'banner-stands',
     products: ['standard-retractable-banner', 'deluxe-retractable-banner', 'x-stand-banner'],
     h1: 'Retractable Banner Stands in Los Angeles',
-    title: 'Retractable Banner Stands Los Angeles',
+    title: 'Retractable Banner Stands in Los Angeles',
     description:
       'Custom retractable and roll-up banner stands for Los Angeles trade shows and events. Standard, deluxe and X-stand options, printed to order with instant pricing.',
     primary: 'retractable banner stands Los Angeles',
@@ -151,7 +151,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'banner-stands',
     products: ['standard-retractable-banner', 'deluxe-retractable-banner', 'x-stand-banner'],
     h1: 'Retractable Banner Stands in Chicago',
-    title: 'Retractable Banner Stands Chicago',
+    title: 'Retractable Banner Stands in Chicago',
     description:
       'Custom retractable and roll-up banner stands for Chicago trade shows and events. Standard, deluxe and X-stand options, printed to order with instant online pricing.',
     primary: 'retractable banner stands Chicago',
@@ -194,7 +194,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'table-covers',
     products: ['pleated-table-covers', 'stretch-table-covers'],
     h1: 'Custom Table Covers in Los Angeles',
-    title: 'Custom Table Covers Los Angeles',
+    title: 'Custom Table Covers in Los Angeles',
     description:
       'Custom printed table covers and throws for Los Angeles trade shows and events. Pleated and fitted stretch styles, closed back, dye-sublimated. Instant pricing.',
     primary: 'custom table covers Los Angeles',
@@ -234,7 +234,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'table-covers',
     products: ['pleated-table-covers', 'stretch-table-covers'],
     h1: 'Custom Table Covers in Chicago',
-    title: 'Custom Table Covers Chicago',
+    title: 'Custom Table Covers in Chicago',
     description:
       'Custom printed table covers and throws for Chicago trade shows and events. Pleated and fitted stretch styles, closed back and machine washable. Instant pricing.',
     primary: 'custom table covers Chicago',
@@ -276,7 +276,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'step-and-repeat',
     products: ['step-and-repeat-backdrop'],
     h1: 'Step & Repeat Backdrops in Los Angeles',
-    title: 'Step & Repeat Backdrop Los Angeles',
+    title: 'Step & Repeat Backdrops in Los Angeles',
     description:
       'Custom step and repeat backdrops for Los Angeles press events, premieres and activations. Repeating logo media walls on a portable adjustable frame. Instant pricing.',
     primary: 'step and repeat backdrop Los Angeles',
@@ -316,7 +316,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'step-and-repeat',
     products: ['step-and-repeat-backdrop'],
     h1: 'Step & Repeat Backdrops in Chicago',
-    title: 'Step & Repeat Backdrop Chicago',
+    title: 'Step & Repeat Backdrops in Chicago',
     description:
       'Custom step and repeat backdrops for Chicago events, galas and receptions. Repeating logo media walls on a portable adjustable frame. Instant pricing.',
     primary: 'step and repeat backdrop Chicago',
@@ -362,7 +362,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'tension-fabric',
     products: ['straight-tension-fabric-display'],
     h1: 'Tension Fabric Displays in Los Angeles',
-    title: 'Tension Fabric Display Los Angeles',
+    title: 'Tension Fabric Displays in Los Angeles',
     description:
       'Straight tension fabric displays for Los Angeles trade shows — a seamless printed booth back wall on a lightweight aluminium frame. Instant online pricing.',
     primary: 'tension fabric display Los Angeles',
@@ -402,7 +402,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'tension-fabric',
     products: ['straight-tension-fabric-display'],
     h1: 'Tension Fabric Displays in Chicago',
-    title: 'Tension Fabric Display Chicago',
+    title: 'Tension Fabric Displays in Chicago',
     description:
       'Straight tension fabric displays for Chicago trade shows — a seamless printed booth back wall on a lightweight aluminium frame. Instant online pricing.',
     primary: 'tension fabric display Chicago',
@@ -444,7 +444,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'banners',
     products: ['13oz-vinyl-banner', '18oz-blockout-banner', 'mesh-banner', 'fabric-banner-9oz-wrinkle-free'],
     h1: 'Custom Banners in Los Angeles',
-    title: 'Custom Banners Los Angeles | Vinyl & Mesh',
+    title: 'Custom Banners in Los Angeles',
     description:
       'Custom printed banners for Los Angeles events, storefronts and trade shows. 13oz vinyl, 18oz blockout, mesh and fabric, made to any size and priced by the sq ft.',
     primary: 'custom banners Los Angeles',
@@ -484,7 +484,7 @@ export const CITY_PRODUCT_PAGES = [
     group: 'banners',
     products: ['13oz-vinyl-banner', '18oz-blockout-banner', 'mesh-banner', 'fabric-banner-9oz-wrinkle-free'],
     h1: 'Custom Banners in Chicago',
-    title: 'Custom Banners Chicago | Vinyl & Mesh',
+    title: 'Custom Banners in Chicago',
     description:
       'Custom printed banners for Chicago events, storefronts and trade shows. 13oz vinyl, 18oz blockout, mesh and fabric, made to any size with per-square-foot pricing.',
     primary: 'custom banners Chicago',
