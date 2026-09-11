@@ -370,6 +370,54 @@ const COMMERCE = /pricing|priced|price|order online|ordered online|buy|checkout/
   }
 }
 
+// 8. Headings.
+//
+// The instruction is "do not force the exact keyword into every heading", which
+// is a ratio, not a rule about any single heading. So it is measured as one: the
+// product phrase may appear in a couple of headings (the buying section and the
+// product description legitimately name it) and the city in at most half, which
+// leaves the rest to say something. A page whose eight H2s all read "Custom
+// Canopy Tents in Los Angeles ..." is the failure this catches.
+//
+// The shipping heading is required because a transactional page that never says
+// how the thing reaches the buyer has left out the part they came to find.
+const H2_MIN = 6;
+const H2_MAX = 10;
+const PRODUCT_IN_H2_MAX = 3;
+let headingChecked = 0;
+if (existsSync(DIST)) {
+  const decode = (t) => t.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+  for (const p of CITY_PRODUCT_PAGES) {
+    const file = join(DIST, p.slug, 'index.html');
+    if (!existsSync(file)) continue;
+    headingChecked++;
+    const body = readFileSync(file, 'utf8').split('<nav aria-label="Primary">')[0];
+    const h1s = body.match(/<h1[\s>]/g) || [];
+    if (h1s.length !== 1) fails.push(`${p.slug}: ${h1s.length} H1s, expected exactly 1`);
+
+    const h2 = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => decode(m[1].replace(/<[^>]+>/g, '').trim()));
+    if (h2.length < H2_MIN || h2.length > H2_MAX) {
+      fails.push(`${p.slug}: ${h2.length} H2s (want ${H2_MIN}-${H2_MAX})`);
+    }
+    const city = SEO_CITIES.find((c) => c.slug === p.citySlug);
+    const product = city ? p.h1.replace(new RegExp(` in ${city.city}$`), '') : p.h1;
+
+    const withProduct = h2.filter((t) => t.includes(product)).length;
+    if (withProduct > PRODUCT_IN_H2_MAX) {
+      fails.push(`${p.slug}: "${product}" appears in ${withProduct} of ${h2.length} H2s (max ${PRODUCT_IN_H2_MAX}) — the keyword is being forced into the headings`);
+    }
+    if (city) {
+      const withCity = h2.filter((t) => t.includes(city.city)).length;
+      if (withCity > Math.ceil(h2.length / 2)) {
+        fails.push(`${p.slug}: ${city.city} appears in ${withCity} of ${h2.length} H2s — over half, which reads as optimisation rather than structure`);
+      }
+    }
+    if (!h2.some((t) => /shipping|getting .* to|ship/i.test(t))) {
+      fails.push(`${p.slug}: no heading covers shipping — a buying page has to say how the product reaches the customer`);
+    }
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -421,3 +469,9 @@ console.log(
   `✓ CITY PRODUCT DESCRIPTIONS OK — ${CITY_PRODUCT_PAGES.length} unique meta descriptions, each naming its city, ` +
   `its price/order path and a real Apex benefit, and none is another with the city swapped.`
 );
+if (headingChecked) {
+  console.log(
+    `✓ CITY PRODUCT HEADINGS OK — ${headingChecked} pages: one H1 each, ${H2_MIN}-${H2_MAX} H2s, the product phrase in at most ` +
+    `${PRODUCT_IN_H2_MAX} of them and the city in no more than half, and every page covers shipping.`
+  );
+}

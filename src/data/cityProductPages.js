@@ -52,6 +52,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'What to print if you are exhibiting outside a hall',
         p: 'Canopies in a sponsor village are read from further away than a booth inside. Put the brand on the valance where it sits at eye level from the aisle, and keep the back wall for the thing you want photographed. If the same tent travels to consumer events as well as trade shows, print the back wall and leave the sides plain so the space works as either a closed booth or an open shade structure.'
+      },
+      {
+        h2: "Shipping a canopy to a Los Angeles pitch",
+        p: "A canopy travels as one wheeled case with the frame folded inside, which makes it the rare display you can have delivered to a hotel or a business address and drive in yourself. That matters in Los Angeles, where the pitch is often a marked square of tarmac at a festival or a sponsor village with no receiving facility of any kind. Production time is listed on the product page above; transit is added on top and priced when you check out."
       }
     ],
     faqs: [
@@ -93,6 +97,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Outdoor space around the halls',
         p: 'McCormick Place is the largest convention centre in North America, and the outdoor activations attached to its bigger shows happen on hardstanding where staking is not an option. Order weights with the canopy. If the same tent is going to a summer street festival afterwards, print the back wall and one side rather than all three, so it still works as an open shade structure when you are not running a closed booth.'
+      },
+      {
+        h2: "Shipping into a Chicago summer",
+        p: "Chicago compresses its outdoor events into a few months, so a canopy ordered for a July date is shipping into the weeks when carriers and venues are both busiest. Leave room for that rather than for the production schedule alone. If the tent is going to a show at McCormick Place instead of a street festival, read the exhibitor kit first: large halls route freight through an advance warehouse or a marshalling yard, and a canopy case counts as freight."
       }
     ],
     faqs: [
@@ -136,6 +144,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Which stand for which job',
         p: 'The standard retractable is the everyday aisle display and the one to buy if you are buying one. The deluxe adds a heavier base and chrome end caps, which reads as more considered in a lobby or a press setting — a real distinction at LA media events. The X-stand is the lightest and cheapest, and it is the right answer when you need six of something for a conference corridor rather than one of something for a booth.'
+      },
+      {
+        h2: "Shipping to Los Angeles, and the trip from the car",
+        p: "A banner stand ships as a parcel rather than freight, so it can go to an office, a hotel or the venue address without a freight booking. In Los Angeles that is worth more than it sounds, because you are driving to the venue and the last hundred yards are the awkward part: one person can carry three stands from a parked car to the booth in a single trip. Production runs to the schedule on the product page, with transit added on top."
       }
     ],
     faqs: [
@@ -177,6 +189,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Winter is hard on graphics in transit',
         p: 'A banner that travels through a Chicago January goes from freezing outside to a heated hall in minutes, and condensation forms on a cold graphic every time. Let a stand acclimatise in its case for an hour before you pull it up, and never roll a damp graphic away at the end of a show — that is what leaves marks along the wind line.'
+      },
+      {
+        h2: "Getting banner stands to a Chicago show",
+        p: "Parcel, not freight, means a stand can be sent to your hotel or your own address and never touch the dock. At a large Chicago show that is the point: the marshalling process is built around pallets, and putting a single carry case through it costs more in time than the stand does. Check the production schedule on the product page and add transit on top when you are working backwards from your install date."
       }
     ],
     faqs: [
@@ -219,6 +235,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'One cover, a full season of events',
         p: 'Dye sublimation bonds the ink into the polyester rather than laying it on top, so a cover can be washed between shows without the colour cracking or lifting. For a team running the LA circuit — a convention downtown, a partner event on the Westside, a consumer show in Anaheim — that is what turns a table cover from a per-show expense into a season-long purchase.'
+      },
+      {
+        h2: "Shipping to Los Angeles",
+        p: "A table cover is the lightest thing in a booth: printed fabric, no frame, no case. It ships as a parcel to a Los Angeles office, hotel or venue receiving address, and it is light enough that delivery rarely changes the shape of the order. Everything is printed to order, so the production time on the product page above is the figure to plan around, with transit added to it."
       }
     ],
     faqs: [
@@ -259,6 +279,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Closed back, because the table is also your store room',
         p: 'Both styles close on all four sides. Over a multi-day Chicago show that under-table space fills with cases, coats and literature boxes, and a cover that only faces forward puts all of it in view from the aisle. Closed back is what keeps the booth looking the same on day three as it did on day one.'
+      },
+      {
+        h2: "Getting a cover to a Chicago booth late",
+        p: "Because there is no frame, a cover packs flat and travels in a suitcase after it arrives. That is the practical answer when your Chicago freight has already shipped and you have realised the rented table in the booth is bare — the cover can follow you as a parcel instead of being added to a pallet that has left. Production time is on the product page; transit is added on top."
       }
     ],
     faqs: [
@@ -301,6 +325,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'One frame, many campaigns',
         p: 'The frame is adjustable and the printed graphic is separate, so a production company or agency running several events a year buys the hardware once and reprints per campaign. That is usually the deciding factor in LA, where the same team may need a different sponsor set every few weeks.'
+      },
+      {
+        h2: "Shipping a backdrop to a Los Angeles venue",
+        p: "Frame and printed graphic travel together in one carry case, so a step and repeat can be delivered to a production office or a hotel rather than a loading dock. That suits how they are used here — premieres, press calls and brand activations at venues that are not exhibition halls and have no freight process to book. Production time is shown on the product page above and transit is added on top."
       }
     ],
     faqs: [
@@ -341,6 +369,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'It travels as a case, not as freight',
         p: 'The frame is adjustable and tool free, and the whole wall packs into a case that goes in a car. For an event team running receptions in several venues across a week, that matters more than it sounds: nothing needs a dock, a crew or a handling charge to get into the room.'
+      },
+      {
+        h2: "Shipping to Chicago, and who signs for it",
+        p: "A media wall for a Chicago gala or reception usually goes to a hotel or an event space rather than a convention centre, which means the delivery address is a front desk. Name the person receiving it. A case that arrives the day before an evening event and sits unclaimed behind a desk is the most common way one of these goes missing, and it is a scheduling problem rather than a shipping one. Production time is on the product page."
       }
     ],
     faqs: [
@@ -387,6 +419,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Washable, which matters over a season',
         p: 'The graphic comes off the frame and can be washed, so a wall that has been packed, unpacked and handled across a run of West Coast shows does not carry the marks of it. Reprint when the message changes rather than when the fabric gets tired.'
+      },
+      {
+        h2: "Shipping a booth wall to Los Angeles",
+        p: "Frame and graphic ship together in a single carry bag, and the whole wall is light enough that getting it to Los Angeles is rarely the expensive part of the order. It can go to a business address and travel to the venue in a car rather than being committed to show freight weeks ahead. Printed to order: use the production time on the product page above as your planning figure and add transit to it."
       }
     ],
     faqs: [
@@ -427,6 +463,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Set up without a crew or a call',
         p: 'The frame pushes together without tools and the graphic zips over it, so two people put up a 10 ft wall in minutes. At a venue where installation labour is a scheduled, billable service, a display your own team can legitimately stand up is worth more than the print quality difference alone.'
+      },
+      {
+        h2: "Shipping to Chicago and building it on site",
+        p: "What arrives in Chicago is a bag one person can carry, and the frame goes together without tools, so nothing about the install needs a crew or a lift. That is the difference between this and a hard panel backwall at a large Chicago show, where installation labour is normally ordered through the official show contractor. Production runs to the schedule on the product page, and transit is added on top of it."
       }
     ],
     faqs: [
@@ -469,6 +509,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Indoors and on camera, use fabric',
         p: 'Under the lighting rigs at an LA event or on a set, vinyl throws glare straight back into the lens. The 9oz polyester is dye sublimated for a matte finish that photographs cleanly, which is why it is worth the difference for anything that will appear in content rather than just be walked past.'
+      },
+      {
+        h2: "Shipping banners to Los Angeles",
+        p: "A banner folds, so even a large one arrives as a box rather than as freight. For Los Angeles storefronts and outdoor events that usually means sending it straight to the address that is going to hang it, with nobody needing to be at a dock. Banners are made to order at the size you enter above, so the production time on the product page is what to plan around, with transit on top."
       }
     ],
     faqs: [
@@ -509,6 +553,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: 'Inside the halls, weight and glare change the answer',
         p: 'For a banner hanging inside McCormick Place, wind is irrelevant and lighting is the problem. The 9oz dye-sublimated fabric reads matte under the hall rig where vinyl bounces the light back, and it folds into a case rather than shipping as a roll — which on a floor that bills by weight and handling is worth more than the material difference.'
+      },
+      {
+        h2: "Shipping to Chicago",
+        p: "Banners ship folded as a parcel, so going from a 6 ft banner to a 12 ft one changes the weight rather than the shipping method. Order the exact size the wall or fence needs rather than rounding up to a stock size — it is priced by the square foot, so the size you actually want is usually the cheaper one anyway. Production time is on the product page and transit is added to it."
       }
     ],
     faqs: [
