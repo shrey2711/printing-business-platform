@@ -176,6 +176,60 @@ for (const p of PRIVATE) {
   if (sitemapPaths.some((x) => x.path === p)) fail(p, 'private/transactional route present in a sitemap');
 }
 
+// ---- Configuration parameters must not become indexable URLs ----------------
+// The product configurator holds size, colour, quantity and finishing in React
+// state, so a configuration never reaches the URL and there is nothing to
+// duplicate. These checks keep it that way, and cover the parameters that do
+// exist (/products?category=…) or that get appended by someone else (utm_,
+// gclid, a shared link).
+//
+// Deliberately NOT solved with a robots.txt Disallow on parameters: blocking a
+// parameter URL from being crawled also blocks the canonical tag on it from
+// being read, so the duplicate stays in the index with no signal attached to
+// it. The canonical is the fix; robots.txt would hide the fix.
+const CONFIG_PARAMS = /^(size|width|height|color|colour|quantity|qty|material|finish|finishing|sides|grommets|pole|option|options|variant|sku|config|price)$/i;
+
+// 1. No parameterised URL in a sitemap. A sitemap entry is a request to index
+// that exact string, which is the opposite of consolidating it away.
+for (const { sm, path } of sitemapPaths) {
+  if (path.includes('?')) fail(`${sm}:${path}`, 'sitemap URL carries a query string — a parameterised URL must never be submitted for indexing');
+}
+
+// 2. No internal link carries a configuration parameter. Links are how a
+// parameter URL gets discovered in the first place; a configuration that can
+// only be produced by using the page cannot be crawled into existence.
+for (const { path } of sitemapPaths) {
+  const file = fileFor(path);
+  if (!existsSync(file)) continue;
+  for (const m of readFileSync(file, 'utf8').matchAll(/href="(\/[^"]*\?[^"]*)"/g)) {
+    // Decode first: in HTML the separator is written &amp;, and parsing that raw
+    // turns every parameter after the first into "amp;color" — which would read
+    // as clean and let a real configuration link through.
+    const qs = decodeEntities(m[1]).split('?')[1] || '';
+    const offenders = [...new URLSearchParams(qs).keys()].filter((k) => CONFIG_PARAMS.test(k));
+    if (offenders.length) {
+      fail(path, `internal link configures the product in the URL: ${m[1]} (${offenders.join(', ')})`);
+    } else {
+      warning(path, `internal link with a query string: ${m[1]}`);
+    }
+  }
+}
+
+// 3. The canonical must be derived from the PATH, never from the full URL. This
+// is the single line that decides whether ?size=10x10 is a duplicate or a view
+// of the clean page, and it lives in the client hook that runs after hydration —
+// so a crawler that executes JavaScript gets its answer from here, not from the
+// prerendered tag.
+{
+  const hook = readFileSync(join(DIST, '..', 'src', 'hooks', 'useDocumentMeta.js'), 'utf8');
+  if (!/window\.location\.origin \+ pathname/.test(hook)) {
+    fail('src/hooks/useDocumentMeta.js', 'the canonical/og:url is no longer built from the pathname — query parameters could now reach the canonical');
+  }
+  if (/location\.search|location\.href/.test(hook)) {
+    fail('src/hooks/useDocumentMeta.js', 'the meta hook reads the query string — a parameterised URL would canonicalise to itself');
+  }
+}
+
 // ---- Report -----------------------------------------------------------------
 console.log(`\nSEO audit — ${sitemapPaths.length} sitemap URLs, ${titles.size} unique titles, ${descs.size} unique descriptions.`);
 if (warn.length) {
@@ -196,5 +250,5 @@ if (crit.length) {
   console.error('\nNote: live checks (HTTP status, real 3xx, unknown-route 404, Lighthouse) run against the deploy, not this static audit.');
   process.exit(1);
 }
-console.log('\n✓ SEO AUDIT PASSED — no critical defects (exactly one head tag each, self-canonical, lang, indexable, valid JSON-LD, no nested meta, no placeholder brand, no broken/redirected internal links, no private route in sitemaps).');
+console.log('\n✓ SEO AUDIT PASSED — no critical defects (exactly one head tag each, self-canonical, lang, indexable, valid JSON-LD, no nested meta, no placeholder brand, no broken/redirected internal links, no private route in sitemaps, no configuration parameter in a link or a sitemap, canonical built from the path).');
 console.log('Live-only checks to run against the deploy: HTTP 200 per URL, single-hop redirects, unknown-route 404, Lighthouse.');

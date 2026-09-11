@@ -37,7 +37,8 @@
     "test": "npm run build && node scripts/verify-tension-podium-pricing.mjs && npm run audit:seo && npm run audit:locations && npm run test:seo && npm run test:products && npm run test:cms-pricing && npm run test:payments && npm run test:artwork && npm run test:contact && npm run test:cms-content && npm run test:seo-manager && npm run test:cms-services && npm run test:migrate && npm run test:media && npm run test:roles && npm run test:locations && npm run test:links && npm run test:images && npm run test:city-products && npm run test:cities",
     "preview": "vite preview",
     "start": "node backend/server.js",
-    "test:city-products": "node scripts/audit-city-product-uniqueness.mjs"
+    "test:city-products": "node scripts/audit-city-product-uniqueness.mjs",
+    "check:params": "node scripts/live-check-params.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
