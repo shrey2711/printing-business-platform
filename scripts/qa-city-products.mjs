@@ -85,7 +85,10 @@ for (const p of PAGES) {
   if (!/\$|quote/i.test(price1)) F(p.slug, `no price rendered (got "${price1}")`);
 
   // Options: change the quantity and the price must move.
-  const qty = page.locator('input[type=number]').first();
+  // By aria-label, not the first number input: on made-to-size products the
+  // first two number fields are width and height, so "the first one" was
+  // silently resizing the banner and calling it a quantity change.
+  const qty = page.locator('input[aria-label="Quantity"]').first();
   if (await qty.count()) {
     await qty.fill('25');
     await qty.dispatchEvent('change');
@@ -158,14 +161,29 @@ for (const p of PAGES) {
 
   // --- images -------------------------------------------------------------
   await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
-  const imgs = await page.$$eval('main img', (els) => els.map((e) => ({
-    src: e.getAttribute('src') || '', alt: e.getAttribute('alt') || '', w: e.naturalWidth
-  })));
+  // alt="" is CORRECT on a gallery thumbnail: the button around it carries the
+  // accessible name (aria-label), and repeating it on the image would make a
+  // screen reader announce the same photo twice. So the test is that the
+  // attribute exists, and that an empty one is inside something labelled —
+  // an image with no alt attribute at all is the actual defect.
+  const imgs = await page.$$eval('main img', (els) => els.map((e) => {
+    const labelled = e.closest('[aria-label],[aria-labelledby],button,a');
+    return {
+      src: e.getAttribute('src') || '',
+      alt: e.getAttribute('alt'),
+      w: e.naturalWidth,
+      labelledBy: labelled ? (labelled.getAttribute('aria-label') || labelled.textContent.trim()) : ''
+    };
+  }));
   row.images = imgs.length;
+  row.decorative = imgs.filter((i) => i.alt === '').length;
   if (!imgs.length) F(p.slug, 'no images rendered in main');
   for (const im of imgs) {
     if (!im.w) F(p.slug, `image failed to load: ${im.src}`);
-    if (!im.alt.trim()) F(p.slug, `image has no alt: ${im.src}`);
+    if (im.alt === null) F(p.slug, `image has no alt attribute: ${im.src}`);
+    else if (!im.alt.trim() && !im.labelledBy) {
+      F(p.slug, `image has empty alt and sits in nothing that names it: ${im.src}`);
+    }
   }
 
   // --- internal links resolve --------------------------------------------
