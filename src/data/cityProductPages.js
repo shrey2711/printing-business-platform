@@ -34,6 +34,8 @@ export const CITY_PRODUCT_PAGES = [
       'branded canopy tent Los Angeles', 'custom pop up tent Los Angeles',
       'trade show canopy tent Los Angeles'
     ],
+    productIntro:
+      "A printed canopy is the only display that creates a booth where there is no hall. It carries its own roof, its own walls and its own branding, so a bare pitch on tarmac becomes a stand with shade, a back wall to photograph against and somewhere for staff to work. That is why it appears at brand activations, sponsor villages, product sampling and consumer festivals as often as at trade shows — anywhere the venue gives you a marked square of ground and nothing else. Between the Los Angeles Convention Center downtown and the Anaheim Convention Center down the freeway, most of the Southern California event calendar has an outdoor component that needs exactly this.",
     intro:
       'Southern California runs outdoor events all year, which is why a canopy does more work in Los Angeles than it does almost anywhere else. Sponsor villages in the lots around the Los Angeles Convention Center, activations along the coast, street festivals and farmers markets all put your brand outdoors for a full day of sun. Configure a 10x10, 10x15 or 10x20 below, choose how many walls to print, and see the price as you build it.',
     local: [
@@ -72,6 +74,8 @@ export const CITY_PRODUCT_PAGES = [
       'branded canopy tent Chicago', 'custom pop up tent Chicago',
       'trade show canopy tent Chicago'
     ],
+    productIntro:
+      "A canopy is a booth you bring with you. Where an exhibition hall supplies walls, lighting and a carpeted floor, an outdoor pitch supplies a rectangle of ground, and the canopy has to be all three. Printed on the top, the valance and up to three walls, it gives an outdoor stand the same branded presence an inline booth has indoors — which is why it turns up at festivals, sponsor activations and expo overflow space as much as at trade shows proper. In a market whose venues run from McCormick Place on the lakefront to the Donald E. Stephens Convention Center out at Rosemont, one canopy covers a lot of different events.",
     intro:
       'Chicago packs its outdoor calendar into a short, intense season. Between the summer street festivals, the lakefront events and the activations that spill outside McCormick Place, a branded canopy has a few months to earn its keep and then goes back in the case. Configure a 10x10, 10x15 or 10x20 below, pick your printed walls, and price it as you build.',
     local: [
@@ -112,6 +116,8 @@ export const CITY_PRODUCT_PAGES = [
       'custom retractable banner Los Angeles', 'retractable banner printing Los Angeles',
       'roll up banner printing Los Angeles'
     ],
+    productIntro:
+      "A retractable banner stand is the smallest thing that still reads as a professional exhibit. The graphic winds into its own weighted base, so there is nothing to assemble, nothing to rig and nothing to ship as freight — one case, one hand, up in under a minute. That is why it is the display teams buy first and use most: aisle presence at a trade show, a branded backdrop at a conference session, a lobby sign at a client office, a registration marker at an activation. For a market as spread out as greater Los Angeles, from the Convention Center downtown to events at the Anaheim Convention Center, it is the display that actually travels between all of them.",
     intro:
       'A retractable banner is the cheapest thing that still stops someone walking past, which is why it is usually the first display a team buys and the one that travels most. For Los Angeles events it has a second advantage: it collapses into a case that fits a car boot or checks as luggage, so the same stand covers a downtown convention, a client office in Century City and an activation in Santa Monica. Configure and price yours below.',
     local: [
@@ -150,6 +156,8 @@ export const CITY_PRODUCT_PAGES = [
       'custom retractable banner Chicago', 'retractable banner printing Chicago',
       'roll up banner printing Chicago'
     ],
+    productIntro:
+      "A retractable banner stand does the job of a small exhibit without any of the logistics. The printed graphic rolls into a weighted base, stands up in under a minute with no tools, and packs back into a shoulder case at the end of the day. For exhibitions and corporate events that means a display you carry in yourself rather than consign to freight — the difference between setting up when you arrive and waiting on a delivery window. It works as aisle presence in a McCormick Place hall, a speaker backdrop at a conference, or a wayfinding marker at a reception near the Donald E. Stephens Convention Center, which is why most teams own several and retire only the graphic.",
     intro:
       'At a McCormick Place show, anything that arrives on a pallet gets handled by the venue and billed accordingly. A retractable banner stand avoids that entirely: it travels as a case you carry in yourself, sets up in under a minute, and packs down at the end of the show without a crew. Configure and price yours below.',
     local: [
@@ -189,6 +197,8 @@ export const CITY_PRODUCT_PAGES = [
       'printed table covers Los Angeles', 'branded table covers Los Angeles',
       'trade show tablecloth Los Angeles', 'custom table throws Los Angeles'
     ],
+    productIntro:
+      "A printed table cover is the highest-value square footage in any booth, because the table is already there. Venues rent you a bare trestle; the cover turns that into the front of your stand, at eye level for anyone walking the aisle, for a fraction of what any other branded surface costs. It also solves a problem nobody plans for: everything you brought has to live somewhere, and a closed-back cover turns the space under the table into storage the aisle cannot see. For trade shows, conferences, sampling tables and registration desks, it is the cheapest thing that makes a stand look finished.",
     intro:
       'Almost every booth has a table, and almost every venue rents you a bare one. A printed cover is the cheapest way to turn that rented table into brand space, and it packs flatter than anything else in the booth. Choose a draped pleated throw or a fitted stretch cover below and price it as you configure.',
     local: [
@@ -226,6 +236,8 @@ export const CITY_PRODUCT_PAGES = [
       'printed table covers Chicago', 'branded table covers Chicago',
       'trade show tablecloth Chicago', 'custom table throws Chicago'
     ],
+    productIntro:
+      "Every exhibition booth has a table and almost every venue supplies it bare. A printed cover turns that rented trestle into branded frontage at exactly the height people look, and it is the one display element that weighs nothing and folds into a corner of a case. For corporate events, association conferences and consumer shows it does double duty: brand surface at the front, hidden storage underneath for the cases and literature that otherwise sit in view. Dye sublimation means it washes between events rather than being replaced, so one cover lasts a season of shows.",
     intro:
       'A table cover is the highest return per dollar in a Chicago booth: it weighs almost nothing, folds into a corner of a case, and turns the venue\'s rented table into the front of your stand. Choose a draped pleated throw or a fitted stretch cover below and see the price as you configure it.',
     local: [
@@ -265,6 +277,8 @@ export const CITY_PRODUCT_PAGES = [
       'custom step and repeat Los Angeles', 'step and repeat backdrop printing Los Angeles',
       'logo backdrop Los Angeles', 'event backdrop Los Angeles'
     ],
+    productIntro:
+      "A step and repeat backdrop exists to survive a photograph. The logo tiles across the surface so that however the shot is framed or cropped — a full-length portrait, a tight headshot, a group of five — at least one complete mark is in the picture. That is the whole job, and it is why the format belongs at press events, premieres, award nights, product launches and influencer activations rather than in a booth. A single large logo is out of frame the moment someone stands in front of it; a repeating grid is the only layout that cannot be cropped out.",
     intro:
       'Los Angeles runs more photographed events than anywhere else in the country, and the step and repeat is the reason a brand survives the photograph. Premieres, press junkets, launches and influencer activations all end with a wall of tiled logos and someone standing in front of it. Configure your size and kit below and see the price as you build it.',
     local: [
@@ -302,6 +316,8 @@ export const CITY_PRODUCT_PAGES = [
       'custom step and repeat Chicago', 'step and repeat backdrop printing Chicago',
       'logo backdrop Chicago', 'event backdrop Chicago'
     ],
+    productIntro:
+      "A step and repeat backdrop turns every photograph taken in front of it into brand coverage. The repeating grid means no crop can remove the logo, which is precisely what a single centred mark cannot promise once a person is standing there. For corporate events, association galas, sponsor receptions and awards nights it is the piece that makes a room's photography work for the people who funded it — and the reason sponsorship packages so often specify one. It goes up on an adjustable, tool-free frame, so a venue with no rigging and no crew is not an obstacle.",
     intro:
       'Chicago\'s photographed events lean corporate: association galas, awards nights, sponsor receptions and the hospitality suites attached to the big McCormick Place shows. In all of them the step and repeat is what puts the sponsor set into every photograph that leaves the room. Configure your size and kit below and price it as you build.',
     local: [
@@ -345,6 +361,8 @@ export const CITY_PRODUCT_PAGES = [
       'custom trade show backdrop Los Angeles', 'seamless fabric display Los Angeles',
       'backdrop printing Los Angeles', 'exhibition backdrop Los Angeles'
     ],
+    productIntro:
+      "A tension fabric display is a booth back wall as one uninterrupted image. The printed fabric zips over an aluminium tube frame and pulls taut from both sides, which removes the two things that make a display look temporary: the seam down the middle and the hardware around the edge. For exhibitions and trade shows that matters because the back wall is the only surface a visitor sees from down the aisle, before they can read anything else. It is also the cheapest way to change what a booth says — the graphic unzips and a new one goes on the same frame.",
     intro:
       'Where a step and repeat tiles a logo for photographs, a tension fabric display is one seamless image across the back of your booth. The graphic zips over an aluminium tube frame like a pillowcase, which is what removes the seams and the hardware from the sightline. Configure yours below and price it as you build.',
     local: [
@@ -382,6 +400,8 @@ export const CITY_PRODUCT_PAGES = [
       'custom trade show backdrop Chicago', 'seamless fabric display Chicago',
       'backdrop printing Chicago', 'exhibition backdrop Chicago'
     ],
+    productIntro:
+      "A tension fabric display gives a booth a full-width branded wall that weighs almost nothing. An aluminium tube frame pushes together without tools and a printed fabric skin zips over it, stretched tight so there is no seam and no visible frame — the difference between a stand that reads as built and one that reads as assembled. For exhibitions, conferences and corporate showcases it is the practical choice as much as the aesthetic one: it is the only full-size back wall a two-person team can carry in, put up and take down inside a session break.",
     intro:
       'A tension fabric display is a single seamless graphic stretched over an aluminium frame — the back wall of a booth without the seams, panels or visible hardware. For a McCormick Place stand it has a second argument in its favour: it weighs almost nothing and packs into a case. Configure yours below and see the price as you build.',
     local: [
@@ -421,6 +441,8 @@ export const CITY_PRODUCT_PAGES = [
       'trade show banners Los Angeles', 'printed banners Los Angeles',
       'vinyl banners Los Angeles', 'event banners Los Angeles'
     ],
+    productIntro:
+      "A banner is the most flexible signage there is, because nothing about it is fixed — you choose the material, the size to the inch and how it hangs. That makes it the answer to problems other displays cannot solve: a 20-foot span above a booth, a fence line at an outdoor activation, a queue marker at a sampling event, a storefront promotion for a local business. Priced by the square foot rather than by format, it is usually the cheapest way to put a brand across a large surface, whether that is inside a convention hall or on a barrier outside it.",
     intro:
       'Banners are priced by the square foot and made to the inch, so the size is yours to choose rather than a stock format to work around. Enter your width and height on any of the four materials below and the price updates as you type. Which material you want depends almost entirely on where it is going to hang.',
     local: [
@@ -458,6 +480,8 @@ export const CITY_PRODUCT_PAGES = [
       'trade show banners Chicago', 'printed banners Chicago',
       'vinyl banners Chicago', 'event banners Chicago'
     ],
+    productIntro:
+      "A banner solves the signage problems that fixed-format displays cannot. You pick the material, the exact size and the way it attaches, which is why one product covers a booth header at an exhibition, a fence wrap at an outdoor event, a stage backdrop at a corporate function and a storefront promotion. Four materials cover the range: scrim vinyl for general use, blockout for true double-sided printing, mesh for anywhere the wind gets at it, and dye-sublimated fabric for indoor halls where lighting would glare off vinyl. Pricing is by the square foot, so the size is a decision rather than a constraint.",
     intro:
       'Banners are made to the inch and priced by the square foot, so you specify the space rather than pick from stock sizes. Enter a width and height on any of the four materials below and watch the price update. In Chicago the material decision is usually made by the weather rather than the budget.',
     local: [

@@ -580,8 +580,10 @@ for (const cp of CITY_PRODUCT_PAGES) {
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.h1)}</span></nav>
       <h1>${esc(cp.h1)}</h1>
       <p>${esc(cp.intro)}</p>
-      <h2>${esc(cp.h1)} — configure and price</h2>
+      <h2>${esc(cp.h1)} — configure and buy</h2>
       <ul>${items.map(productLi).join('')}</ul>
+      <h2>About ${esc(cp.h1.replace(/ in .*$/, ''))}</h2>
+      <p>${esc(cp.productIntro)}</p>
       ${cp.local.map((sec) => `<h2>${esc(sec.h2)}</h2><p>${esc(sec.p)}</p>`).join('')}
       <h2>Frequently asked questions</h2>
       ${cp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}

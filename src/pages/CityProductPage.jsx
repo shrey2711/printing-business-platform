@@ -133,6 +133,13 @@ export default function CityProductPage({ slug }) {
         )}
       </section>
 
+      {/* Product description: what this product is for, before the city
+          content explains what the city does to it. */}
+      <section className="section-block">
+        <h2>About {page.h1.replace(/ in .*$/, '')}</h2>
+        <p>{page.productIntro}</p>
+      </section>
+
       {page.local.map((s) => (
         <section className="section-block" key={s.h2}>
           <h2>{s.h2}</h2>

@@ -768,7 +768,11 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
         />
       )}
 
-      {related.length > 0 && (
+      {/* Embedded, the host page has its own onward links and its own job to
+          do. Related products here would send a visitor to a different
+          product page in the middle of a purchase and push the city content
+          below it. */}
+      {!embedded && related.length > 0 && (
         <section className="related-section">
           <div className="section-head">
             <h2>Related products</h2>
