@@ -21,7 +21,8 @@
 import { existsSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
+import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
+import { CATEGORY_PAGES } from '../src/data/categoryPages.js';
 import { SEO_CITIES } from '../src/data/citySeo.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -243,6 +244,45 @@ if (existsSync(DIST)) {
   }
 }
 
+// 5. The national catalog link — exactly one, and the right one.
+//
+// Two failures matter here and they pull in opposite directions. Linking to no
+// national category strands the page at the bottom of the hierarchy with
+// nowhere to send someone still choosing a model. Linking to all of them turns
+// the page into a link dump: the brief's "do not overdo internal links", and
+// the reason there is a budget below rather than only a minimum.
+//
+// Measured on the page body only — the site nav and footer link to every
+// category on every page, and counting chrome would make every page look like
+// a link dump and hide a real one.
+const NATIONAL = new Set(CATEGORY_PAGES.map((c) => `/${c.slug}`));
+const LINK_BUDGET = 14;
+if (existsSync(DIST)) {
+  for (const p of CITY_PRODUCT_PAGES) {
+    const file = join(DIST, p.slug, 'index.html');
+    if (!existsSync(file)) continue;
+    // Everything before the primary nav is the page's own content.
+    const body = readFileSync(file, 'utf8').split('<nav aria-label="Primary">')[0];
+    const links = [...body.matchAll(/href="(\/[^"#?]*)"/g)].map((m) => m[1].replace(/\/$/, '') || '/');
+    const want = nationalCategoryFor(p.group);
+    if (!want) {
+      fails.push(`${p.slug}: group "${p.group}" has no national category mapped — the page has nowhere to send a reader still choosing a model`);
+      continue;
+    }
+    const toWanted = links.filter((l) => l === want.to).length;
+    if (toWanted !== 1) {
+      fails.push(`${p.slug}: links to ${want.to} ${toWanted} time(s), expected exactly 1`);
+    }
+    const strays = [...new Set(links.filter((l) => NATIONAL.has(l) && l !== want.to))];
+    if (strays.length) {
+      fails.push(`${p.slug}: also links to ${strays.join(', ')} — one product group, one national category, or the page is a link dump`);
+    }
+    if (links.length > LINK_BUDGET) {
+      fails.push(`${p.slug}: ${links.length} internal links in the page body (budget ${LINK_BUDGET}) — "do not overdo internal links"`);
+    }
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -280,5 +320,9 @@ if (canonChecked) {
   console.log(
     `✓ CITY PRODUCT HIERARCHY OK — ${cities.length} city hubs link down to all ${CITY_PRODUCT_PAGES.length} ` +
     'product+city pages, and every one of them links back up to its /trade-show-displays/{city} hub.'
+  );
+  console.log(
+    `✓ CITY PRODUCT NATIONAL LINKS OK — each page carries exactly one link to its national category page and no other, ` +
+    `within a ${LINK_BUDGET}-link body budget.`
   );
 }

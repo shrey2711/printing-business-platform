@@ -4,7 +4,7 @@ import { list as getProducts } from '../services/cms/productService';
 import ProductConfigurator from './ProductConfigurator';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { getCityProductPage } from '../data/cityProductPages';
+import { getCityProductPage, nationalCategoryFor } from '../data/cityProductPages';
 import { SEO_CITIES, LOCAL_CATEGORIES } from '../data/citySeo';
 
 // Transactional product + city page.
@@ -33,6 +33,7 @@ export default function CityProductPage({ slug }) {
     return () => { alive = false; };
   }, []);
 
+  const national = page ? nationalCategoryFor(page.group) : null;
   const origin = typeof window !== 'undefined' ? window.location.origin : brand.origin;
   const items = page ? page.products.map((s) => products.find((p) => p.slug === s)).filter(Boolean) : [];
 
@@ -150,6 +151,16 @@ export default function CityProductPage({ slug }) {
       <section className="section-block">
         <h2>About {page.h1.replace(/ in .*$/, '')}</h2>
         <p>{page.productIntro}</p>
+        {/* The one link up to the national catalog. Placed here, at the end of
+            the product description, because that is where "is this the right
+            model?" actually occurs to a reader — not in a block of links at the
+            bottom that nobody reads. */}
+        {national && (
+          <p>
+            Comparing models? The <Link to={national.to}>{national.label}</Link> category page
+            puts every option we print side by side.
+          </p>
+        )}
       </section>
 
       {page.local.map((s) => (

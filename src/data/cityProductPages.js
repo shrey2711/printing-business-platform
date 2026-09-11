@@ -16,6 +16,8 @@
 // Apex has no premises in either city and test-location-quality.mjs fails the
 // build on any phrasing that implies otherwise.
 
+import { CATEGORY_PAGES } from './categoryPages.js';
+
 export const CITY_PRODUCT_PAGES = [
   // ---------------------------------------------------------------- CANOPIES
   {
@@ -519,3 +521,31 @@ export const CITY_PRODUCT_PAGES = [
 ];
 
 export const getCityProductPage = (slug) => CITY_PRODUCT_PAGES.find((p) => p.slug === slug) || null;
+
+// The national category page behind each product group.
+//
+// One link per page, no more. A city page sells one product group into one
+// city; the category page is where someone compares every model we print. That
+// is a genuinely different job, so the link earns its place — but it is the
+// only national link added, because a page carrying a link to every category is
+// a page passing meaningful authority to none of them.
+//
+// Both step-and-repeat and tension fabric resolve to /backdrops on purpose:
+// that one category page covers both, and inventing a second destination to
+// make the mapping look tidier would link somewhere that does not exist.
+const GROUP_CATEGORY = {
+  canopies: 'custom-canopies',
+  'banner-stands': 'banner-stands',
+  'table-covers': 'table-covers',
+  'step-and-repeat': 'backdrops',
+  'tension-fabric': 'backdrops',
+  banners: 'banners'
+};
+
+// Label comes from the category page itself rather than being repeated here, so
+// renaming a category cannot leave twelve pages pointing at it by its old name.
+export const nationalCategoryFor = (group) => {
+  const slug = GROUP_CATEGORY[group];
+  const cp = slug ? CATEGORY_PAGES.find((c) => c.slug === slug) : null;
+  return cp ? { to: `/${cp.slug}`, label: cp.nav } : null;
+};

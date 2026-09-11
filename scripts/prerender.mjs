@@ -23,7 +23,7 @@ import {
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
 import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../src/data/citySeo.js';
-import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
+import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
   PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS,
@@ -576,6 +576,8 @@ for (const cp of CITY_PRODUCT_PAGES) {
     const city = SEO_CITIES.find((c) => c.slug === cp.citySlug);
     const items = cp.products.map((sl) => productList.find((p) => p.slug === sl)).filter(Boolean);
     const lane = LOCAL_CATEGORIES.find((l) => (l.productCats || []).some((c) => items.some((p) => p.category === c)));
+    // The single national category link (see nationalCategoryFor).
+    const national = nationalCategoryFor(cp.group);
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.h1)}</span></nav>
       <h1>${esc(cp.h1)}</h1>
@@ -584,6 +586,8 @@ for (const cp of CITY_PRODUCT_PAGES) {
       <ul>${items.map(productLi).join('')}</ul>
       <h2>About ${esc(cp.h1.replace(/ in .*$/, ''))}</h2>
       <p>${esc(cp.productIntro)}</p>
+      ${national ? `<p>Comparing models? The <a href="${national.to}">${esc(national.label)}</a>
+        category page puts every option we print side by side.</p>` : ''}
       ${cp.local.map((sec) => `<h2>${esc(sec.h2)}</h2><p>${esc(sec.p)}</p>`).join('')}
       <h2>Frequently asked questions</h2>
       ${cp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
