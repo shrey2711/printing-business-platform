@@ -18,8 +18,15 @@
 //
 // Run after the data changes: node scripts/audit-city-product-uniqueness.mjs
 
+import { existsSync, readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
 import { SEO_CITIES } from '../src/data/citySeo.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const DIST = join(ROOT, 'dist');
+const ORIGIN = 'https://www.apextradeshow.com';
 
 const MAX_OVERLAP = 40;          // 60%+ unique, as specified
 const MAX_NORMALISED_OVERLAP = 55; // same product, city names removed — still must read differently
@@ -137,6 +144,77 @@ for (let i = 0; i < pages.length; i++) {
   }
 }
 
+// 3. Canonical. Every one of these URLs must self-canonicalise.
+//
+// The named failure is consolidating a city page into the national product page
+// (/custom-canopy-tents-los-angeles → /products/custom-canopy-tents). That is a
+// plausible-looking "fix" for duplicate content, and it would be wrong here: the
+// city page targets a different intent, and canonicalising it away deletes that
+// intent from the index while leaving the page online.
+//
+// Checked in the built HTML, not in the source, because the canonical a crawler
+// sees can come from three places — the route, a dashboard SEO override, or the
+// template — and only the output knows which one won.
+let canonChecked = 0;
+if (!existsSync(DIST)) {
+  warn.push('dist/ is missing — the canonical checks did not run. Build first: npm run build');
+} else {
+  // Each page appears in exactly one sitemap, exactly once. A canonical that
+  // points at a URL the sitemap never lists is a page with no way in.
+  const sitemapLocs = [];
+  for (const sm of ['sitemap-pages', 'sitemap-categories', 'sitemap-products', 'sitemap-blog', 'sitemap-locations']) {
+    const f = join(DIST, `${sm}.xml`);
+    if (!existsSync(f)) continue;
+    for (const m of readFileSync(f, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) sitemapLocs.push(m[1]);
+  }
+
+  for (const p of CITY_PRODUCT_PAGES) {
+    const self = `${ORIGIN}/${p.slug}`;
+    const file = join(DIST, p.slug, 'index.html');
+    if (!existsSync(file)) {
+      fails.push(`${p.slug}: no prerendered HTML — the URL would 404`);
+      continue;
+    }
+    canonChecked++;
+    const html = readFileSync(file, 'utf8');
+
+    const tags = (html.match(/rel="canonical"/g) || []).length;
+    if (tags !== 1) {
+      fails.push(`${p.slug}: ${tags} canonical tag(s), expected exactly 1`);
+      continue;
+    }
+    const href = (html.match(/<link rel="canonical" href="([^"]*)"/) || [])[1] || '';
+    if (href !== self) {
+      // Name the specific prohibited move when that is what happened, so the
+      // message reads as a rule being broken rather than a string mismatch.
+      const toNational = /^https?:\/\/[^/]+\/products\//.test(href);
+      fails.push(
+        `${p.slug}: canonical is ${href || '(empty)'}, not ${self}` +
+        (toNational
+          ? ' — this consolidates the city page into the national product page, which removes the local intent from the index'
+          : '')
+      );
+    }
+    if (/<meta name="robots"[^>]*noindex/i.test(html)) {
+      fails.push(`${p.slug}: self-canonical but noindex — the canonical points at a page that cannot be indexed`);
+    }
+    const listed = sitemapLocs.filter((l) => l.replace(/\/$/, '') === self).length;
+    if (listed !== 1) fails.push(`${p.slug}: appears ${listed} time(s) in the sitemaps, expected exactly 1`);
+  }
+}
+
+// The client mirror has to agree with the prerendered HTML. React rewrites the
+// canonical on hydration, so a component that let it default to the browser's
+// pathname would hand a rendering crawler a different answer for /slug/ than
+// for /slug.
+{
+  const src = readFileSync(join(ROOT, 'src', 'pages', 'CityProductPage.jsx'), 'utf8');
+  const call = (src.match(/useDocumentMeta\(([\s\S]{0,400}?)\);/) || [])[1] || '';
+  if (!/page\.slug/.test(call)) {
+    fails.push('CityProductPage.jsx does not pin its canonical to the page slug — hydration could overwrite the prerendered canonical');
+  }
+}
+
 if (warn.length) {
   console.warn('\n! CITY PRODUCT UNIQUENESS — approaching the limit:');
   warn.forEach((w) => console.warn(`  ! ${w}`));
@@ -150,4 +228,10 @@ console.log(
   `✓ CITY PRODUCT UNIQUENESS OK — ${pages.length} pages, ${pages.length * (pages.length - 1) / 2} pairs: ` +
   `worst overlap ${worstRaw.v.toFixed(1)}% (${(100 - worstRaw.v).toFixed(1)}% unique), and ` +
   `${worstPlain.v.toFixed(1)}% with city names stripped — no page is another with the city swapped.`
+);
+console.log(
+  canonChecked
+    ? `✓ CITY PRODUCT CANONICALS OK — ${canonChecked}/${CITY_PRODUCT_PAGES.length} built pages self-canonicalise, ` +
+      'are indexable, and are listed once in the sitemaps — none consolidates into a national product page.'
+    : '! CITY PRODUCT CANONICALS SKIPPED — no dist/ to read.'
 );

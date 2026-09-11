@@ -65,7 +65,19 @@ export default function CityProductPage({ slug }) {
       ]
     : null;
 
-  useDocumentMeta(page ? page.title : 'Not found', page ? page.description : undefined, jsonLd);
+  // Self-referencing canonical, pinned to the slug rather than left to default
+  // to the browser's pathname. These pages target a different intent from the
+  // national product page and must never be consolidated into it; pinning also
+  // means a trailing slash or a stray ?utm= cannot produce a canonical that
+  // disagrees with the sitemap. The prerendered HTML says the same thing, so
+  // hydration does not change the answer a crawler gets.
+  useDocumentMeta(
+    page ? page.title : 'Not found',
+    page ? page.description : undefined,
+    jsonLd,
+    undefined,
+    page ? `/${page.slug}` : undefined
+  );
 
   if (!page) {
     return (
