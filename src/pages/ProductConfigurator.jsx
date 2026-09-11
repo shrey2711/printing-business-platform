@@ -381,7 +381,14 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
           </div>
           <div className="config-info">
             <span className="eyebrow">{product.badge}</span>
-            <h1>{product.name}</h1>
+            {/* The product name is this page's H1 at /products/{slug}. Embedded
+                in a product+city page it is a section inside that page, and a
+                second H1 would leave the document with two competing subjects —
+                so it steps down to an H3 under the "configure and buy" H2 that
+                already introduces it. Styling follows the element it replaces. */}
+            {embedded
+              ? <h3 className="config-title">{product.name}</h3>
+              : <h1>{product.name}</h1>}
             <p className="lead">{product.description}</p>
             <ul className="feature-list">
               {product.features.map((f) => (

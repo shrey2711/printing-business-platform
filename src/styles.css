@@ -731,7 +731,10 @@ a.frame-card:hover, a.solution-card:hover { border-color: var(--blue); box-shado
 .pgallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pgallery-thumb:hover { border-color: var(--muted); }
 .pgallery-thumb.is-active { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
-.config-info h1 { margin: 0.3rem 0 0.5rem; font-size: 1.7rem; font-weight: 700; }
+.config-info h1,
+/* Embedded in a product+city page the product name is an H3 rather than a
+   second H1. It is the same thing on the screen, so it keeps the same look. */
+.config-info .config-title { margin: 0.3rem 0 0.5rem; font-size: 1.7rem; font-weight: 700; }
 .lead { color: var(--muted); }
 .feature-list { list-style: none; padding: 0; margin: 0.8rem 0; display: grid; gap: 0.4rem; }
 .feature-list li { position: relative; padding-left: 1.4rem; font-size: 0.9rem; }
