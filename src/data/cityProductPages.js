@@ -28,7 +28,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Custom Canopy Tents in Los Angeles',
     title: 'Custom Canopy Tents in Los Angeles',
     description:
-      'Custom printed canopy tents for Los Angeles trade shows, festivals and outdoor activations. 10x10, 10x15 and 10x20 with up to three printed walls. Instant pricing.',
+      "Print a 10x10, 10x15 or 10x20 canopy tent for Los Angeles events — up to three branded walls, instant online pricing and a free artwork proof before it prints.",
     primary: 'custom canopy tents Los Angeles',
     secondary: [
       'custom canopy tent Los Angeles', 'printed canopy tent Los Angeles',
@@ -69,7 +69,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Custom Canopy Tents in Chicago',
     title: 'Custom Canopy Tents in Chicago',
     description:
-      'Custom printed canopy tents for Chicago trade shows, festivals and outdoor events. 10x10, 10x15 and 10x20 with up to three printed walls. Instant online pricing.',
+      "Branded canopy tents for Chicago's short outdoor season. Dye-sublimated tops and walls in 10x10, 10x15 and 10x20, priced online, free proof, shipped to Chicago.",
     primary: 'custom canopy tents Chicago',
     secondary: [
       'custom canopy tent Chicago', 'printed canopy tent Chicago',
@@ -112,7 +112,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Retractable Banner Stands in Los Angeles',
     title: 'Retractable Banner Stands in Los Angeles',
     description:
-      'Custom retractable and roll-up banner stands for Los Angeles trade shows and events. Standard, deluxe and X-stand options, printed to order with instant pricing.',
+      "Custom retractable banner stands printed for Los Angeles trade shows. Standard, deluxe or X-stand, your artwork edge to edge, priced instantly with a free proof.",
     primary: 'retractable banner stands Los Angeles',
     secondary: [
       'roll up banner Los Angeles', 'roll up banner stands Los Angeles',
@@ -153,7 +153,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Retractable Banner Stands in Chicago',
     title: 'Retractable Banner Stands in Chicago',
     description:
-      'Custom retractable and roll-up banner stands for Chicago trade shows and events. Standard, deluxe and X-stand options, printed to order with instant online pricing.',
+      "Roll-up banner stands for Chicago shows at McCormick Place and beyond. Three stand grades, custom-printed graphics, live online pricing and a free artwork proof.",
     primary: 'retractable banner stands Chicago',
     secondary: [
       'roll up banner Chicago', 'roll up banner stands Chicago',
@@ -196,7 +196,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Custom Table Covers in Los Angeles',
     title: 'Custom Table Covers in Los Angeles',
     description:
-      'Custom printed table covers and throws for Los Angeles trade shows and events. Pleated and fitted stretch styles, closed back, dye-sublimated. Instant pricing.',
+      "Dye-sublimated table covers and throws for Los Angeles trade shows — pleated or fitted stretch, 4 to 8 ft, printed in your brand. Instant pricing, free proof.",
     primary: 'custom table covers Los Angeles',
     secondary: [
       'trade show table covers Los Angeles', 'custom table cover printing Los Angeles',
@@ -236,7 +236,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Custom Table Covers in Chicago',
     title: 'Custom Table Covers in Chicago',
     description:
-      'Custom printed table covers and throws for Chicago trade shows and events. Pleated and fitted stretch styles, closed back and machine washable. Instant pricing.',
+      "Custom table throws for Chicago exhibitors: the print goes into the fabric, closed back, machine washable, 4-8 ft. Order online with a free proof before printing.",
     primary: 'custom table covers Chicago',
     secondary: [
       'trade show table covers Chicago', 'custom table cover printing Chicago',
@@ -278,7 +278,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Step & Repeat Backdrops in Los Angeles',
     title: 'Step & Repeat Backdrops in Los Angeles',
     description:
-      'Custom step and repeat backdrops for Los Angeles press events, premieres and activations. Repeating logo media walls on a portable adjustable frame. Instant pricing.',
+      "Custom step and repeat backdrops for Los Angeles premieres, press walls and activations. Your repeating logo on an adjustable frame, priced online, free proof.",
     primary: 'step and repeat backdrop Los Angeles',
     secondary: [
       'step and repeat banner Los Angeles', 'step and repeat printing Los Angeles',
@@ -318,7 +318,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Step & Repeat Backdrops in Chicago',
     title: 'Step & Repeat Backdrops in Chicago',
     description:
-      'Custom step and repeat backdrops for Chicago events, galas and receptions. Repeating logo media walls on a portable adjustable frame. Instant pricing.',
+      "Custom media walls for Chicago galas, receptions and press calls. Repeating logo artwork on an adjustable frame that packs into a case. Instant pricing, free proof.",
     primary: 'step and repeat backdrop Chicago',
     secondary: [
       'step and repeat banner Chicago', 'step and repeat printing Chicago',
@@ -364,7 +364,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Tension Fabric Displays in Los Angeles',
     title: 'Tension Fabric Displays in Los Angeles',
     description:
-      'Straight tension fabric displays for Los Angeles trade shows — a seamless printed booth back wall on a lightweight aluminium frame. Instant online pricing.',
+      "Seamless tension fabric back walls for Los Angeles booths — one printed graphic over an aluminum frame, tool-free setup. Priced online with a free artwork proof.",
     primary: 'tension fabric display Los Angeles',
     secondary: [
       'fabric trade show backdrop Los Angeles', 'trade show booth backdrop Los Angeles',
@@ -404,7 +404,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Tension Fabric Displays in Chicago',
     title: 'Tension Fabric Displays in Chicago',
     description:
-      'Straight tension fabric displays for Chicago trade shows — a seamless printed booth back wall on a lightweight aluminium frame. Instant online pricing.',
+      "Straight tension fabric displays for Chicago trade shows: an edge-to-edge printed booth wall, 8 to 20 ft, packing into a carry bag. Live pricing, free proof.",
     primary: 'tension fabric display Chicago',
     secondary: [
       'fabric trade show backdrop Chicago', 'trade show booth backdrop Chicago',
@@ -446,7 +446,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Custom Banners in Los Angeles',
     title: 'Custom Banners in Los Angeles',
     description:
-      'Custom printed banners for Los Angeles events, storefronts and trade shows. 13oz vinyl, 18oz blockout, mesh and fabric, made to any size and priced by the sq ft.',
+      "Custom banners printed to any size for Los Angeles trade shows and storefronts. 13oz vinyl, 18oz blockout, mesh or fabric, priced by the square foot, free proof.",
     primary: 'custom banners Los Angeles',
     secondary: [
       'banner printing Los Angeles', 'custom banner printing Los Angeles',
@@ -486,7 +486,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Custom Banners in Chicago',
     title: 'Custom Banners in Chicago',
     description:
-      'Custom printed banners for Chicago events, storefronts and trade shows. 13oz vinyl, 18oz blockout, mesh and fabric, made to any size with per-square-foot pricing.',
+      "Printed vinyl, mesh and fabric banners made to the inch for Chicago trade shows and storefronts. Per-square-foot pricing online, with a free artwork proof.",
     primary: 'custom banners Chicago',
     secondary: [
       'banner printing Chicago', 'custom banner printing Chicago',

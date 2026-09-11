@@ -314,6 +314,62 @@ if (existsSync(DIST)) {
   }
 }
 
+// 7. Meta descriptions.
+//
+// Uniqueness as a string is the easy half and not the interesting one: two
+// descriptions identical apart from the city name are technically unique and
+// are still the find-and-replace pattern this pilot is not allowed to use. So
+// the pair check runs with city names stripped, the same way the body copy is
+// measured.
+//
+// The rest is content: every description has to name its city, say something
+// about buying (this is a transactional page, not an article), and carry a real
+// Apex benefit. Before this, none of the twelve mentioned a benefit at all.
+const DESC_MIN = 120;
+const DESC_MAX = 165;   // hard cap — audit-seo fails the build past this
+const DESC_MAX_ALIKE = 60; // %, with city names removed
+const BENEFIT = /free (artwork )?proof|ships? to|shipped to|one supplier/i;
+const COMMERCE = /pricing|priced|price|order online|ordered online|buy|checkout/i;
+{
+  const descs = CITY_PRODUCT_PAGES.map((p) => ({
+    slug: p.slug,
+    citySlug: p.citySlug,
+    group: p.group,
+    text: p.description,
+    plain: new Set(deplace(words(p.description)).split(' ').filter(Boolean))
+  }));
+
+  const seenDesc = new Map();
+  for (const d of descs) {
+    const city = SEO_CITIES.find((c) => c.slug === d.citySlug);
+    if (d.text.length < DESC_MIN || d.text.length > DESC_MAX) {
+      fails.push(`${d.slug}: description is ${d.text.length} chars (want ${DESC_MIN}-${DESC_MAX})`);
+    }
+    if (city && !d.text.includes(city.city)) fails.push(`${d.slug}: description never names ${city.city}`);
+    if (!COMMERCE.test(d.text)) fails.push(`${d.slug}: description says nothing about price or ordering — this is a transactional page`);
+    if (!BENEFIT.test(d.text)) fails.push(`${d.slug}: description carries no Apex benefit (free proof, shipping)`);
+    if (seenDesc.has(d.text)) fails.push(`${d.slug}: identical description to ${seenDesc.get(d.text)}`);
+    else seenDesc.set(d.text, d.slug);
+  }
+
+  // Pairwise, city names removed — catches the twin written by find-replace.
+  for (let i = 0; i < descs.length; i++) {
+    for (let j = i + 1; j < descs.length; j++) {
+      const a = descs[i];
+      const b = descs[j];
+      let hits = 0;
+      a.plain.forEach((w) => { if (b.plain.has(w)) hits++; });
+      const alike = (hits / (a.plain.size + b.plain.size - hits)) * 100;
+      if (alike > DESC_MAX_ALIKE) {
+        fails.push(
+          `${a.slug} and ${b.slug}: descriptions are ${alike.toFixed(0)}% the same words once city names are removed ` +
+          `(max ${DESC_MAX_ALIKE}%)${a.group === b.group ? ' — one city\'s description with the name swapped' : ''}`
+        );
+      }
+    }
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -361,3 +417,7 @@ if (canonChecked) {
     `all within ${TITLE_MAX} characters and carrying one separator.`
   );
 }
+console.log(
+  `✓ CITY PRODUCT DESCRIPTIONS OK — ${CITY_PRODUCT_PAGES.length} unique meta descriptions, each naming its city, ` +
+  `its price/order path and a real Apex benefit, and none is another with the city swapped.`
+);
