@@ -77,6 +77,37 @@ for (const p of pages) {
   }
 }
 
+// 1b. One product + one city = one indexable URL, and every keyword variation
+// lives on that URL rather than on a page of its own. Two pages targeting the
+// same product in the same city would split the signal between them, which is
+// the cannibalisation this pilot is supposed to avoid.
+const seenPair = new Map();
+for (const p of pages) {
+  const key = `${p.group}|${p.citySlug}`;
+  if (seenPair.has(key)) {
+    fails.push(`${p.slug} and ${seenPair.get(key)} both target ${p.group} in ${p.citySlug} — one product and one city must be one URL`);
+  } else {
+    seenPair.set(key, p.slug);
+  }
+}
+
+// 1c. Each page must actually carry its own keyword variations. A variation
+// with no home on the page is a page waiting to be created for it, which is how
+// a clean set of URLs turns into a cannibalising one.
+const STOP = new Set(['los', 'angeles', 'chicago', 'the', 'a', 'in', 'for', 'and', 'of']);
+for (const p of CITY_PRODUCT_PAGES) {
+  const text = words(
+    [p.title, p.description, p.h1, p.productIntro, p.intro,
+     ...p.local.map((l) => `${l.h2} ${l.p}`), ...p.faqs.map((f) => `${f.q} ${f.a}`)].join(' ')
+  ).replace(/[^a-z0-9 -]/g, ' ');
+  const uncovered = (p.secondary || []).filter((kw) => !kw.toLowerCase().split(' ')
+    .filter((w) => !STOP.has(w))
+    .every((t) => text.includes(t) || text.includes(t.replace('up', '-up')) || text.includes(`${t}s`)));
+  if (uncovered.length) {
+    fails.push(`${p.slug}: ${uncovered.length} keyword variation(s) have no home on the page — ${uncovered.join('; ')}`);
+  }
+}
+
 // 2. Pairwise, both raw and with place names removed.
 let worstRaw = { v: 0 };
 let worstPlain = { v: 0 };
