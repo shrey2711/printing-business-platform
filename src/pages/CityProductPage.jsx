@@ -173,13 +173,24 @@ export default function CityProductPage({ slug }) {
 
       {/* Sends the local-research visitor to the page written for them, and
           keeps the two layers pointing at each other rather than apart. */}
-      {city && lane && (
+      {city && (
         <section className="section-block-bare">
           <h2 className="section-title">Exhibiting in {city.city}?</h2>
           <div className="loc-grid">
-            <Link className="loc-chip" to={`/${lane.slug}/${city.slug}`}>
-              <span>{lane.label} in {city.city}</span>
+            {/* The city hub, always first. This page sits UNDER it in the
+                hierarchy — the hub covers exhibiting in the city, this page
+                sells one product into it — and the hub links back down here.
+                Gated on `city` rather than on `lane`: a product with no local
+                category (banners) used to lose the whole section, which left
+                the page with no route back up at all. */}
+            <Link className="loc-chip" to={`/trade-show-displays/${city.slug}`}>
+              <span>Trade Show Displays in {city.city}</span>
             </Link>
+            {lane && lane.slug !== 'trade-show-displays' && (
+              <Link className="loc-chip" to={`/${lane.slug}/${city.slug}`}>
+                <span>{lane.label} in {city.city}</span>
+              </Link>
+            )}
             <Link className="loc-chip" to="/products"><span>All Apex products</span></Link>
             <Link className="loc-chip" to="/trade-show-booth-packages"><span>Complete booth packages</span></Link>
           </div>

@@ -587,8 +587,11 @@ for (const cp of CITY_PRODUCT_PAGES) {
       ${cp.local.map((sec) => `<h2>${esc(sec.h2)}</h2><p>${esc(sec.p)}</p>`).join('')}
       <h2>Frequently asked questions</h2>
       ${cp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
-      ${city && lane ? `<h2>Exhibiting in ${esc(city.city)}?</h2><ul>
-        <li><a href="/${lane.slug}/${city.slug}">${esc(lane.label)} in ${esc(city.city)}</a></li>
+      ${city ? `<h2>Exhibiting in ${esc(city.city)}?</h2><ul>
+        <li><a href="/trade-show-displays/${city.slug}">Trade Show Displays in ${esc(city.city)}</a></li>
+        ${lane && lane.slug !== 'trade-show-displays'
+          ? `<li><a href="/${lane.slug}/${city.slug}">${esc(lane.label)} in ${esc(city.city)}</a></li>`
+          : ''}
         <li><a href="/products">All Apex products</a></li>
         <li><a href="/trade-show-booth-packages">Complete booth packages</a></li>
       </ul>` : ''}`;
@@ -800,6 +803,18 @@ for (const lc of LOCAL_CATEGORIES) {
         ? `<h2>${esc(city.city)} FAQ</h2>${cityFaqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
         : '';
       const boothLinks = `<p>Complete your ${esc(city.city)} booth: <a href="/custom-canopies">canopy tents</a> · <a href="/banner-stands">banner stands</a> · <a href="/backdrops">backdrops</a> · <a href="/table-covers">table covers</a> · <a href="/trade-show-displays">all trade show displays</a>.</p>`;
+      // The city hub points DOWN at its product + city pages, and each of those
+      // points back UP here — hub above, transactional pages below it.
+      //
+      // Only on the displays hub, and only where the pages exist: the pilot
+      // covers Los Angeles and Chicago, so every other city renders nothing
+      // rather than an empty heading. The link text is each page's own H1, so
+      // the anchor says exactly what the destination says it is.
+      const cityBuy = CITY_PRODUCT_PAGES.filter((p) => p.citySlug === city.slug);
+      const cityBuyHtml = (lc.slug === 'trade-show-displays' && cityBuy.length)
+        ? `<h2>Order by product in ${esc(city.city)}</h2>
+           <ul>${cityBuy.map((p) => `<li><a href="/${p.slug}">${esc(p.h1)}</a></li>`).join('')}</ul>`
+        : '';
       // Dedicated contextual product H2 sections — displays (hub) page only, when
       // the city supplies them (see cityDetail.productSections).
       // The five per-city product sections are written one per product family.
@@ -854,6 +869,7 @@ for (const lc of LOCAL_CATEGORIES) {
         <h2>${esc(lc.label)} for ${esc(city.city)} events</h2>
         <ul>${productLis}</ul>
         ${boothLinks}
+        ${cityBuyHtml}
         ${productSectionsHtml}
         ${categoryLocalHtml}
         ${planningHtml}

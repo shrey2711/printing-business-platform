@@ -203,6 +203,46 @@ if (!existsSync(DIST)) {
   }
 }
 
+// 4. Topical hierarchy: the generic city page is the hub, these pages sit under
+// it, and the two link both ways. One-way linking is the failure worth catching
+// — a hub that lists pages which never acknowledge it, or transactional pages
+// orphaned from the city hub that should be passing authority to them.
+//
+// The generic city pages are load-bearing here and must keep existing: they are
+// the broader "exhibiting in this city" pages, and these product pages are not
+// a replacement for them.
+if (existsSync(DIST)) {
+  const linksIn = (file) => {
+    if (!existsSync(file)) return null;
+    return new Set([...readFileSync(file, 'utf8').matchAll(/href="(\/[^"#?]*)"/g)].map((m) => m[1].replace(/\/$/, '')));
+  };
+  const byCity = new Map();
+  for (const p of CITY_PRODUCT_PAGES) {
+    if (!byCity.has(p.citySlug)) byCity.set(p.citySlug, []);
+    byCity.get(p.citySlug).push(p);
+  }
+
+  for (const [citySlug, pagesForCity] of byCity) {
+    const hubPath = `/trade-show-displays/${citySlug}`;
+    const hubLinks = linksIn(join(DIST, 'trade-show-displays', citySlug, 'index.html'));
+    if (!hubLinks) {
+      fails.push(`${hubPath} does not exist — the generic city page is the hub these pages hang from and must remain`);
+      continue;
+    }
+    for (const p of pagesForCity) {
+      // Hub → product page.
+      if (!hubLinks.has(`/${p.slug}`)) {
+        fails.push(`${hubPath} does not link down to /${p.slug} — the hub must list the product pages beneath it`);
+      }
+      // Product page → hub.
+      const own = linksIn(join(DIST, p.slug, 'index.html'));
+      if (own && !own.has(hubPath)) {
+        fails.push(`${p.slug} does not link back up to ${hubPath} — every product+city page needs its route back to the city hub`);
+      }
+    }
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -235,3 +275,10 @@ console.log(
       'are indexable, and are listed once in the sitemaps — none consolidates into a national product page.'
     : '! CITY PRODUCT CANONICALS SKIPPED — no dist/ to read.'
 );
+if (canonChecked) {
+  const cities = [...new Set(CITY_PRODUCT_PAGES.map((p) => p.citySlug))];
+  console.log(
+    `✓ CITY PRODUCT HIERARCHY OK — ${cities.length} city hubs link down to all ${CITY_PRODUCT_PAGES.length} ` +
+    'product+city pages, and every one of them links back up to its /trade-show-displays/{city} hub.'
+  );
+}

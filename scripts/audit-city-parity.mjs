@@ -17,6 +17,17 @@
 import { readFileSync, existsSync } from 'fs';
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
+
+// The one heading a city page may carry that the master does not: the link
+// block down to that city's product + city pages. It exists exactly where those
+// pages exist, which today is the Los Angeles and Chicago pilot. Removing it
+// before the H2 sequence is compared keeps the architecture check strict — a
+// second extra heading still fails — while the presence rule below makes the
+// exception enforceable in both directions: a pilot city without the section
+// fails, and a non-pilot city that grows one fails too.
+const PILOT_H2 = 'Order by product in {city}';
+const pilotCities = new Set(CITY_PRODUCT_PAGES.map((p) => p.citySlug));
 
 const DIST = 'dist';
 const MASTER = 'seattle';
@@ -114,9 +125,20 @@ for (const city of rolled) {
   if (S.h1.length !== 1) F(`${S.h1.length} H1s (want exactly 1)`);
   else if (S.h1[0] !== M.h1[0]) F(`H1 shape "${S.h1[0]}" != master "${M.h1[0]}"`);
 
-  // 2. H2 hierarchy — same headings in the same order.
-  if (S.h2.length !== M.h2.length) F(`${S.h2.length} H2s vs master ${M.h2.length}`);
-  S.h2.forEach((t, i) => { if (M.h2[i] && t !== M.h2[i]) F(`H2 #${i + 1} "${t}" != master "${M.h2[i]}"`); });
+  // 2. H2 hierarchy — same headings in the same order, with the pilot section
+  // accounted for rather than ignored: it must be present exactly when this
+  // city has product + city pages, and everything else must still match.
+  const isPilot = pilotCities.has(city.slug);
+  const hasPilotH2 = S.h2.filter((t) => t === PILOT_H2).length;
+  if (isPilot && hasPilotH2 !== 1) {
+    F(`${hasPilotH2} "${PILOT_H2}" section(s) — a city with product+city pages must link down to them exactly once`);
+  }
+  if (!isPilot && hasPilotH2) {
+    F(`carries "${PILOT_H2}" but has no product+city pages to link to`);
+  }
+  const core = S.h2.filter((t) => t !== PILOT_H2);
+  if (core.length !== M.h2.length) F(`${core.length} H2s vs master ${M.h2.length} (excluding the pilot section)`);
+  core.forEach((t, i) => { if (M.h2[i] && t !== M.h2[i]) F(`H2 #${i + 1} "${t}" != master "${M.h2[i]}"`); });
 
   // 3. Breadcrumb — Home / Locations / State / current, all real URLs.
   for (const need of ['/', '/locations']) {

@@ -6,6 +6,7 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../data/citySeo';
 import { CITY_BOOTH_GUIDES } from '../data/internalLinks';
+import { CITY_PRODUCT_PAGES } from '../data/cityProductPages';
 import { cityDetailFor } from '../data/cityDetail';
 
 const sizeKey = (s) => s.replace('canopy-tent-', '');
@@ -70,6 +71,8 @@ export default function CityCategoryPage({ categoryKey }) {
   const shownSections = (Array.isArray(detail?.productSections) && cat)
     ? (SECTION_FOR[cat.slug] || []).map((i) => detail.productSections[i]).filter(Boolean)
     : [];
+  // Product + city pages for THIS city, if the pilot covers it.
+  const cityBuy = CITY_PRODUCT_PAGES.filter((p) => p.citySlug === citySlug);
   const showClimate = cat && (cat.slug === 'trade-show-displays' || cat.slug === 'trade-show-canopies');
   const showBestDisplays = cat && cat.slug === 'trade-show-displays';
   const [products, setProducts] = useState([]);
@@ -236,6 +239,21 @@ export default function CityCategoryPage({ categoryKey }) {
           </div>
         )}
       </section>
+
+      {/* The city hub points DOWN at its product + city pages, which point back
+          UP here. Displays hub only, and only where those pages exist — the
+          pilot is Los Angeles and Chicago, so every other city renders nothing
+          rather than an empty heading. Mirrors scripts/prerender.mjs. */}
+      {cat.slug === 'trade-show-displays' && cityBuy.length > 0 && (
+        <section className="section-block-bare">
+          <h2 className="section-title">Order by product in {city.city}</h2>
+          <div className="loc-grid">
+            {cityBuy.map((p) => (
+              <Link className="loc-chip" to={`/${p.slug}`} key={p.slug}><span>{p.h1}</span></Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {detail?.categoryLocal?.[cat.slug] && CATEGORY_LOCAL_H2[cat.slug] && (
         <section className="section-block">
