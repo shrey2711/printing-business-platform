@@ -418,6 +418,55 @@ if (existsSync(DIST)) {
   }
 }
 
+// 9. FAQs.
+//
+// "Do NOT duplicate the exact same FAQ set across all 12 pages" is checked as
+// no question repeating anywhere across the twelve, which is the stricter and
+// more useful reading: one shared question is how a set starts converging.
+//
+// Two of the required subjects were missing from every page before this —
+// artwork and shipping — which on a page whose job is completing a purchase are
+// the two questions most likely to stop someone ordering.
+//
+// The schema count is checked against the visible count because an FAQPage
+// block that claims questions the page does not show is the structured-data
+// failure that gets manual actions, not just a mismatch.
+const FAQ_MIN = 5;
+const FAQ_CITY_MIN = 2;
+{
+  const seenQ = new Map();
+  for (const p of CITY_PRODUCT_PAGES) {
+    const city = SEO_CITIES.find((c) => c.slug === p.citySlug);
+    if (p.faqs.length < FAQ_MIN) fails.push(`${p.slug}: ${p.faqs.length} FAQs (want at least ${FAQ_MIN})`);
+
+    for (const f of p.faqs) {
+      if (seenQ.has(f.q)) fails.push(`${p.slug}: FAQ "${f.q}" also appears on ${seenQ.get(f.q)} — the sets must not converge`);
+      else seenQ.set(f.q, p.slug);
+    }
+
+    const blob = p.faqs.map((f) => `${f.q} ${f.a}`).join(' ');
+    if (city) {
+      const named = p.faqs.filter((f) => `${f.q} ${f.a}`.includes(city.city)).length;
+      if (named < FAQ_CITY_MIN) {
+        fails.push(`${p.slug}: only ${named} FAQ(s) mention ${city.city} (want ${FAQ_CITY_MIN}) — the set is generic to the product, not to the city`);
+      }
+    }
+    if (!/artwork|PDF|JPEG/i.test(blob)) fails.push(`${p.slug}: no FAQ covers artwork — a buying page has to answer "can I upload my own file?"`);
+    if (!/ship|deliver/i.test(blob)) fails.push(`${p.slug}: no FAQ covers shipping to the city`);
+
+    // Visible FAQs and FAQPage schema are generated from the same array, so a
+    // mismatch means the rendering diverged. Checked in the built HTML.
+    const file = existsSync(DIST) ? join(DIST, p.slug, 'index.html') : null;
+    if (file && existsSync(file)) {
+      const html = readFileSync(file, 'utf8');
+      const schemaCount = (html.match(/"@type":"Question"/g) || []).length;
+      if (schemaCount !== p.faqs.length) {
+        fails.push(`${p.slug}: FAQPage schema has ${schemaCount} questions, the page shows ${p.faqs.length}`);
+      }
+    }
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -468,6 +517,10 @@ if (canonChecked) {
 console.log(
   `✓ CITY PRODUCT DESCRIPTIONS OK — ${CITY_PRODUCT_PAGES.length} unique meta descriptions, each naming its city, ` +
   `its price/order path and a real Apex benefit, and none is another with the city swapped.`
+);
+console.log(
+  `✓ CITY PRODUCT FAQS OK — ${CITY_PRODUCT_PAGES.reduce((n, p) => n + p.faqs.length, 0)} questions across ` +
+  `${CITY_PRODUCT_PAGES.length} pages, none repeated anywhere, each page naming its city and answering artwork and shipping.`
 );
 if (headingChecked) {
   console.log(
