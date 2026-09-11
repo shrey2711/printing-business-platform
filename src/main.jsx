@@ -5,6 +5,7 @@ import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { CurrencyProvider } from './context/CurrencyContext';
 import { ContentProvider } from './context/ContentContext';
+import { CartProvider } from './context/CartContext';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <CurrencyProvider>
           <ContentProvider>
-            <App />
+            <CartProvider>
+              <App />
+            </CartProvider>
           </ContentProvider>
         </CurrencyProvider>
       </AuthProvider>

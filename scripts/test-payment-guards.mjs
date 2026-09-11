@@ -66,10 +66,21 @@ check('a genuinely free order can still be invoiced', () => {
 });
 
 check('a paid checkout records the amount, not just the status', () => {
-  const b = block("if (event.type === 'checkout.session.completed')", 1200);
+  // 2000, not 1200: the handler grew when carts made it settle several
+  // orders, and a scan window too small to reach the amount reports a
+  // missing amount that is actually there — a false alarm on the money path
+  // is as corrosive as a missed one.
+  const b = block("if (event.type === 'checkout.session.completed')", 2000);
   if (!b) return 'the checkout webhook is gone';
-  if (!/amount_total: \(session\.amount_total \|\| 0\) \/ 100/.test(b)) {
+  // The amount must be WRITTEN, and must be derived from Stripe's own figure.
+  // Checked as two facts rather than one exact expression, because a cart
+  // splits session.amount_total across its orders and still satisfies the rule
+  // this guard exists to enforce: never a paid status with no money recorded.
+  if (!/amount_total:/.test(b)) {
     return 'it records a status without an amount, which looks identical to an order marked paid in error';
+  }
+  if (!/session\.amount_total/.test(b)) {
+    return 'the recorded amount does not come from the Stripe session';
   }
   return null;
 });

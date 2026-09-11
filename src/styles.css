@@ -1392,3 +1392,27 @@ img { max-width: 100%; }
    only needs the vertical rhythm the page section would otherwise give it. */
 .config-embedded { margin-top: 0.2rem; }
 .config-embedded .config-layout { margin-top: 0; }
+
+/* ---------- Cart ---------- */
+.cart-link { white-space: nowrap; }
+.add-to-cart { margin-top: 0.5rem; }
+.cart-table { padding: 0; overflow: hidden; }
+.cart-row {
+  display: grid; grid-template-columns: 1fr auto auto auto; gap: 1rem;
+  align-items: center; padding: 1rem 1.1rem; border-bottom: 1px solid var(--line-soft);
+}
+.cart-row:last-child { border-bottom: 0; }
+.cart-specs { font-size: 0.82rem; line-height: 1.45; margin-top: 0.2rem; }
+.cart-qty { display: flex; align-items: center; gap: 0.4rem; }
+.cart-qty input { width: 68px; }
+.cart-price { font-weight: 700; min-width: 90px; text-align: right; }
+.cart-foot { margin-top: 1rem; }
+.cart-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin: 1rem 0 0.2rem; padding-top: 0.9rem; border-top: 1px solid var(--line-soft);
+}
+.cart-total strong { font-size: 1.3rem; color: var(--navy); }
+@media (max-width: 620px) {
+  .cart-row { grid-template-columns: 1fr auto; row-gap: 0.5rem; }
+  .cart-price { text-align: left; }
+}

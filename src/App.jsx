@@ -27,12 +27,14 @@ const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const BoothPackagesPage = lazy(() => import('./pages/BoothPackagesPage'));
 const CityCategoryPage = lazy(() => import('./pages/CityCategoryPage'));
 const CityProductPage = lazy(() => import('./pages/CityProductPage'));
+const CartPage = lazy(() => import('./pages/CartPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 import Logo from './components/Logo';
 import ChunkErrorBoundary from './components/ChunkErrorBoundary';
 import { brand, currencyCodes } from './config/brand';
 import { CITY_PRODUCT_PAGES } from './data/cityProductPages';
 import { useCurrency } from './context/CurrencyContext';
+import { useCart } from './context/CartContext';
 import { useContentResolver, useListResolver } from './context/ContentContext';
 
 // Shop menu — grouped by the real categories, one level deep, every link a real
@@ -224,6 +226,17 @@ function MobileAuthLinks({ onNavigate }) {
   );
 }
 
+// Cart indicator. Hidden entirely when the cart is empty: an always-visible
+// empty cart is noise on a site where most visitors buy a single item and never
+// touch it.
+function CartLink({ mobile = false }) {
+  const { count } = useCart();
+  if (!count) return null;
+  return mobile
+    ? <Link className="m-link" to="/cart">🛒 Cart ({count})</Link>
+    : <Link className="btn btn-outline btn-sm cart-link" to="/cart" aria-label={`Cart, ${count} items`}>🛒 {count}</Link>;
+}
+
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -311,6 +324,7 @@ function HeaderNav() {
         <Link to="/trade-show-booth-packages">Booth Packages</Link>
         <Link to="/blog">Blog</Link>
         <span className="nav-spacer" />
+        <CartLink />
         <Link className="btn btn-outline btn-sm" to="/products">Shop All</Link>
         <Link className="btn btn-red btn-sm" to="/quote">Get a Quote</Link>
       </nav>
@@ -354,6 +368,7 @@ function HeaderNav() {
           <Link className="m-link" to="/trade-show-booth-packages">Booth Packages</Link>
           <Link className="m-link" to="/locations">Locations</Link>
           <Link className="m-link" to="/blog">Blog</Link>
+          <CartLink mobile />
           {/* Account access. The inline sign-in form is display:none below
               820px and this menu carried no auth links at all, so on a phone
               there was no way to sign in, register, or reach an order. */}
@@ -483,6 +498,7 @@ function App() {
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/order" element={<PlaceOrderPage />} />
         <Route path="/quote" element={<QuotePage />} />
         <Route path="/login" element={<LoginPage />} />

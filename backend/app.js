@@ -82,19 +82,29 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    const orderId = session.metadata?.orderId;
+    // A cart pays for several orders in one session. Settle all of them, not
+    // just the first — otherwise the rest of the cart stays "submitted" and
+    // gets chased as unpaid while the customer has already been charged.
+    const orderIds = String(session.metadata?.orderIds || session.metadata?.orderId || '')
+      .split(',').map((x) => x.trim()).filter(Boolean);
+    const orderId = orderIds[0];
     if (orderId && session.payment_status === 'paid') {
       // Record the amount as well as the status. Without it a genuinely paid
       // checkout order shows an amount of 0, which is indistinguishable from an
       // order marked paid in error.
+      // The session total covers the whole cart, so splitting it across the
+      // orders keeps each row's amount honest rather than recording the full
+      // basket against every line.
+      const paidTotal = (session.amount_total || 0) / 100;
+      const perOrder = orderIds.length ? paidTotal / orderIds.length : paidTotal;
       const { data: moved } = await supabaseAdmin
         .from('orders')
         .update({
           status: 'paid',
-          amount_total: (session.amount_total || 0) / 100,
+          amount_total: Math.round(perOrder * 100) / 100,
           currency: (session.currency || 'usd').toUpperCase()
         })
-        .eq('id', orderId)
+        .in('id', orderIds)
         .eq('status', 'submitted') // don't downgrade later statuses
         .select('id');
 
@@ -382,6 +392,117 @@ app.post('/api/subscribe', writeLimiter, async (req, res) => {
 // ============================================================================
 
 // Create a Stripe Checkout Session for an existing order the caller owns.
+// Cart checkout: several configured products in one payment.
+//
+// Every line is re-priced here from the config the browser sent, through the
+// same computePrice + pricing-override path the single-item checkout uses. The
+// prices the cart shows are display only and are never read back — a tampered
+// localStorage can change what a customer sees, not what they are charged.
+//
+// The orders table is one product per row and there is no migration in this
+// change, so a cart becomes N linked orders rather than one order with items.
+// Every downstream thing — artwork, proofs, status, emails, the admin list —
+// keeps working unchanged, and the link is a cartId carried inside config.
+app.post('/api/checkout/cart', writeLimiter, async (req, res) => {
+  if (!stripe || !supabaseAdmin) return res.status(503).json({ error: 'Payments are not configured.' });
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Not signed in.' });
+
+  const { lines, coupon, currency: requestedCurrency, contact } = req.body || {};
+  if (!Array.isArray(lines) || lines.length === 0) return res.status(400).json({ error: 'Your cart is empty.' });
+  if (lines.length > 20) return res.status(400).json({ error: 'A cart can hold up to 20 lines. Split the order or ask us to quote it.' });
+
+  // 1. Re-price every line before anything is written or charged.
+  const priced = [];
+  for (const line of lines) {
+    const cfg = line && line.config;
+    if (!cfg || !cfg.slug) return res.status(400).json({ error: 'A line in your cart is missing its configuration.' });
+    const product = getProduct(cfg.slug);
+    if (!product) return res.status(400).json({ error: `We no longer carry ${cfg.slug}.` });
+    const override = await getPricingOverride(cfg.slug);
+    const result = computePrice(cfg, override ? { pricing: override } : {});
+    if (!result.ok || !(result.total > 0)) {
+      return res.status(400).json({
+        error: `${product.name} needs a manual quote rather than checkout. Remove it and request a quote for that item.`
+      });
+    }
+    priced.push({ product, config: cfg, total: result.total, specs: line.specs || '' });
+  }
+
+  const subtotal = priced.reduce((n, l) => n + l.total, 0);
+  const { discount, total, coupon: applied } = applyCoupon(subtotal, coupon);
+  const cur = currencies[requestedCurrency] || currencies[BASE_CURRENCY];
+  const fxRate = await getRate(cur.code);
+
+  // 2. One order row per line, sharing a cartId so they can be found together.
+  const cartId = crypto.randomUUID();
+  const created = [];
+  for (const l of priced) {
+    const { data, error } = await supabaseAdmin
+      .from('orders')
+      .insert({
+        user_id: user.id,
+        product: l.product.name,
+        specs: l.specs,
+        quantity: l.config.quantity || 1,
+        estimated_price: `${cur.code} ${(l.total * fxRate).toFixed(2)}`,
+        status: 'submitted',
+        config: { ...l.config, cartId },
+        currency: cur.code,
+        artwork_choice: 'email_later',
+        payment_choice: 'pay_now',
+        ...(contact && typeof contact === 'object'
+          ? {
+              customer_name: contact.name || null,
+              customer_phone: contact.phone || null,
+              shipping_address: contact.address || null,
+              shipping_country: contact.country || null
+            }
+          : {})
+      })
+      .select()
+      .single();
+    if (error) {
+      // Roll back the rows already written rather than leaving half a cart as
+      // orphan orders nobody placed.
+      if (created.length) await supabaseAdmin.from('orders').delete().in('id', created.map((c) => c.id));
+      return res.status(500).json({ error: error.message });
+    }
+    created.push(data);
+  }
+
+  // 3. One Stripe session, one line item per order, so the customer sees what
+  //    they are paying for rather than a single opaque total.
+  const discountShare = discount > 0 ? discount / priced.length : 0;
+  const session = await stripe.checkout.sessions.create({
+    mode: 'payment',
+    line_items: priced.map((l, i) => ({
+      quantity: 1,
+      price_data: {
+        currency: cur.stripe,
+        unit_amount: Math.max(0, Math.round((l.total - discountShare) * fxRate * 100)),
+        product_data: {
+          name: l.product.name,
+          description: [l.specs, applied ? `Coupon ${applied.code}` : null].filter(Boolean).join(' — ') || undefined
+        }
+      }
+    })),
+    customer_email: user.email,
+    // Both keys: `orderIds` is what a cart payment settles, `orderId` keeps the
+    // session readable by anything that only knows about single orders.
+    metadata: { orderIds: created.map((o) => o.id).join(','), orderId: created[0].id, cartId },
+    success_url: `${baseUrl(req)}/account?checkout=success&cart=${cartId}`,
+    cancel_url: `${baseUrl(req)}/cart?checkout=canceled`
+  });
+
+  await supabaseAdmin
+    .from('orders')
+    .update({ stripe_session_id: session.id, coupon_code: applied?.code || null })
+    .in('id', created.map((o) => o.id));
+
+  res.json({ url: session.url, orderIds: created.map((o) => o.id), cartId, total: total * fxRate, currency: cur.code });
+});
+
 app.post('/api/checkout', writeLimiter, async (req, res) => {
   if (!stripe || !supabaseAdmin) {
     return res.status(503).json({ error: 'Payments are not configured.' });

@@ -52,3 +52,20 @@ export async function validateCoupon(code) {
   if (!res.ok) return { valid: false };
   return res.json();
 }
+
+// Cart checkout: several configured products in one payment. Only the configs
+// are sent — the server re-prices every line, so nothing the browser stores can
+// change what is charged.
+export async function startCartCheckout({ lines, coupon, currency, contact }) {
+  const res = await fetch('/api/checkout/cart', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+    body: JSON.stringify({ lines, coupon, currency, contact })
+  });
+  if (res.status === 503) return { unavailable: true };
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error || 'Could not start checkout.');
+  }
+  return res.json();
+}

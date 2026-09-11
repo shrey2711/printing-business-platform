@@ -14,6 +14,7 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getCategoryForProduct } from '../data/categoryPages';
 import ColorwayStrip from '../components/ColorwayStrip';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
+import { useCart } from '../context/CartContext';
 
 // `slug` and `embedded` let the product + city pages mount this exact
 // configurator inside their own page. Reused rather than reimplemented on
@@ -29,6 +30,7 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
   const navigate = useNavigate();
   const money = useMoney();
   const { currency } = useCurrency();
+  const cart = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -37,6 +39,7 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
   const [price, setPrice] = useState(null);
   const [pricing, setPricing] = useState(false);
   const [sizeTouched, setSizeTouched] = useState(false); // show size error on blur/submit
+  const [added, setAdded] = useState(false); // brief confirmation after adding to the cart
   const debounceRef = useRef(null);
 
   // Commercial-intent title for canopy sizes (matches the prerendered title).
@@ -188,6 +191,25 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
       return;
     }
     navigate('/order', { state: orderState() });
+  };
+
+  // Add to cart stores the CONFIG, not the price. The server re-prices every
+  // line at checkout from this same object, so what is shown here can never
+  // become what is charged.
+  const addToCart = () => {
+    if (sizeError) { setSizeTouched(true); return; }
+    if (!price) return;
+    cart.add({
+      slug,
+      name: product.name,
+      specs: describeConfig(product, config),
+      image: product.gallery?.[0]?.src || product.gallery?.[0] || null,
+      config: { slug, ...config },
+      quantity: config.quantity || 1,
+      unitPrice: price.total,
+      currency
+    });
+    setAdded(true);
   };
 
   // Quote-only / unpriced products route to the existing quote + artwork flow.
@@ -709,6 +731,20 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
           <button className="btn btn-red btn-block" onClick={requestOrder} disabled={!price || !!sizeError}>
             Order &amp; upload artwork
           </button>
+          {/* Second path, same configuration. Buy Now goes straight to artwork
+              and payment; Add to cart keeps building a booth. */}
+          <button
+            className="btn btn-outline btn-block add-to-cart"
+            onClick={addToCart}
+            disabled={!price || !!sizeError}
+          >
+            {added ? '✓ Added to cart' : 'Add to cart'}
+          </button>
+          {added && (
+            <p className="panel-foot">
+              <Link to="/cart">View cart ({cart.count})</Link> or keep configuring.
+            </p>
+          )}
           <p className="panel-foot">
             We send a free artwork proof for your approval before anything goes to production.
           </p>
