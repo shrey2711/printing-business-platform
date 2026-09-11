@@ -263,7 +263,13 @@ if (existsSync(DIST)) {
     if (!existsSync(file)) continue;
     // Everything before the primary nav is the page's own content.
     const body = readFileSync(file, 'utf8').split('<nav aria-label="Primary">')[0];
-    const links = [...body.matchAll(/href="(\/[^"#?]*)"/g)].map((m) => m[1].replace(/\/$/, '') || '/');
+    // Unique destinations, not raw anchors: the breadcrumb and the cross-link
+    // block legitimately point at the same hub twice, and "do not overdo
+    // internal links" is about how many places a page sends you, not how many
+    // times it offers the same one.
+    const links = [...new Set(
+      [...body.matchAll(/href="(\/[^"#?]*)"/g)].map((m) => m[1].replace(/\/$/, '') || '/')
+    )];
     const want = nationalCategoryFor(p.group);
     if (!want) {
       fails.push(`${p.slug}: group "${p.group}" has no national category mapped — the page has nowhere to send a reader still choosing a model`);
@@ -467,6 +473,90 @@ const FAQ_CITY_MIN = 2;
   }
 }
 
+// 10. Structured data and breadcrumbs.
+//
+// These pages deliberately do NOT emit Product or Offer schema. Every product
+// they sell already has a Product entity on its own /products/{slug} page, with
+// an AggregateOffer built from the live pricing engine. Emitting a second
+// Product for the same sku at a different URL is the conflicting duplicate the
+// brief rules out, and it would be worse than useless: two entities for one
+// product, with the city page's copy unable to state a single price because the
+// price depends on the configuration.
+//
+// What they carry instead is the honest description of what the page is — an
+// ItemList of the products, a BreadcrumbList of where it sits, and the FAQPage
+// for the questions actually visible on it.
+let schemaChecked = 0;
+if (existsSync(DIST)) {
+  const ldBlocks = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .flatMap((m) => { try { const j = JSON.parse(m[1]); return Array.isArray(j) ? j : [j]; } catch { return []; } });
+
+  for (const p of CITY_PRODUCT_PAGES) {
+    const file = join(DIST, p.slug, 'index.html');
+    if (!existsSync(file)) continue;
+    schemaChecked++;
+    const html = readFileSync(file, 'utf8');
+    const nodes = ldBlocks(html);
+    const types = nodes.map((n) => n['@type']);
+
+    for (const need of ['BreadcrumbList', 'ItemList', 'FAQPage']) {
+      if (!types.includes(need)) fails.push(`${p.slug}: no ${need} schema`);
+    }
+    // Nothing invented, and nothing that fights the product pages.
+    for (const banned of ['Product', 'Offer', 'AggregateOffer', 'Review', 'AggregateRating', 'LocalBusiness']) {
+      if (types.includes(banned)) {
+        fails.push(`${p.slug}: emits ${banned} schema — the product pages own the Product/Offer entity, and this page has no rating or premises to describe`);
+      }
+    }
+    if (/"aggregateRating"|"reviewCount"|"ratingValue"/.test(html)) {
+      fails.push(`${p.slug}: rating or review data in the structured data, which is not something this page has`);
+    }
+
+    // ItemList must name this page's actual products, and each must resolve.
+    const list = nodes.find((n) => n['@type'] === 'ItemList');
+    if (list) {
+      const urls = (list.itemListElement || []).map((e) => e.url || (e.item && e.item['@id']) || '');
+      const slugs = urls.map((u) => String(u).replace(/.*\/products\//, '').replace(/\/$/, ''));
+      for (const s of slugs) {
+        if (!existsSync(join(DIST, 'products', s, 'index.html'))) {
+          fails.push(`${p.slug}: ItemList points at /products/${s}, which has no built page`);
+        }
+      }
+      const missing = p.products.filter((s) => !slugs.includes(s));
+      if (missing.length) fails.push(`${p.slug}: ItemList omits ${missing.join(', ')} — the schema must describe what the page sells`);
+    }
+
+    // Breadcrumb: the visible trail and the schema must be the same trail, and
+    // it must pass through the city hub this page sits under.
+    const crumb = nodes.find((n) => n['@type'] === 'BreadcrumbList');
+    const nav = (html.match(/<nav aria-label="Breadcrumb">([\s\S]*?)<\/nav>/) || [])[1] || '';
+    if (!crumb) continue;
+    const names = (crumb.itemListElement || []).map((e) => e.name);
+    const visible = [...nav.matchAll(/>([^<>]+)</g)].map((m) => m[1].trim()).filter((t) => t && t !== '/');
+    const decodeT = (t) => t.replace(/&amp;/g, '&').replace(/&#39;/g, "'");
+    if (names.map(decodeT).join(' > ') !== visible.map(decodeT).join(' > ')) {
+      fails.push(`${p.slug}: breadcrumb schema "${names.join(' > ')}" does not match the visible trail "${visible.join(' > ')}"`);
+    }
+    if (names[names.length - 1] !== p.h1) {
+      fails.push(`${p.slug}: breadcrumb does not end at this page ("${names[names.length - 1]}")`);
+    }
+    const hub = `${ORIGIN}/trade-show-displays/${p.citySlug}`;
+    if (!(crumb.itemListElement || []).some((e) => e.item === hub)) {
+      fails.push(`${p.slug}: breadcrumb never passes through ${hub} — the trail should state the hierarchy the links do`);
+    }
+  }
+
+  // The existing architecture must be intact: each product page still owns
+  // exactly one Product entity. A city page that started emitting one would show
+  // up above; this catches the other direction, a product page losing its own.
+  for (const slug of [...new Set(CITY_PRODUCT_PAGES.flatMap((p) => p.products))]) {
+    const f = join(DIST, 'products', slug, 'index.html');
+    if (!existsSync(f)) { fails.push(`/products/${slug} has no built page`); continue; }
+    const n = ldBlocks(readFileSync(f, 'utf8')).filter((x) => x['@type'] === 'Product').length;
+    if (n !== 1) fails.push(`/products/${slug}: ${n} Product schema blocks, expected exactly 1`);
+  }
+}
+
 // The client mirror has to agree with the prerendered HTML. React rewrites the
 // canonical on hydration, so a component that let it default to the browser's
 // pathname would hand a rendering crawler a different answer for /slug/ than
@@ -518,6 +608,12 @@ console.log(
   `✓ CITY PRODUCT DESCRIPTIONS OK — ${CITY_PRODUCT_PAGES.length} unique meta descriptions, each naming its city, ` +
   `its price/order path and a real Apex benefit, and none is another with the city swapped.`
 );
+if (schemaChecked) {
+  console.log(
+    `✓ CITY PRODUCT SCHEMA OK — ${schemaChecked} pages carry BreadcrumbList + ItemList + FAQPage and no Product, Offer, ` +
+    'rating or review data; the breadcrumb matches the visible trail and passes through the city hub; the product pages still own one Product each.'
+  );
+}
 console.log(
   `✓ CITY PRODUCT FAQS OK — ${CITY_PRODUCT_PAGES.reduce((n, p) => n + p.faqs.length, 0)} questions across ` +
   `${CITY_PRODUCT_PAGES.length} pages, none repeated anywhere, each page naming its city and answering artwork and shipping.`

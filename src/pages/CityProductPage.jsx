@@ -5,7 +5,7 @@ import ProductConfigurator from './ProductConfigurator';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { getCityProductPage, nationalCategoryFor } from '../data/cityProductPages';
-import { SEO_CITIES, LOCAL_CATEGORIES } from '../data/citySeo';
+import { SEO_CITIES, LOCAL_CATEGORIES, cityBreadcrumb } from '../data/citySeo';
 
 // Transactional product + city page.
 //
@@ -34,6 +34,13 @@ export default function CityProductPage({ slug }) {
   }, []);
 
   const national = page ? nationalCategoryFor(page.group) : null;
+  // Breadcrumb: the site's existing city taxonomy with this page appended
+  // beneath its city hub, so the trail states the same hierarchy as the links.
+  const crumbs = page
+    ? (city
+        ? [...cityBreadcrumb('Trade Show Displays', 'trade-show-displays', city), { name: page.h1, url: `/${page.slug}` }]
+        : [{ name: 'Home', url: '/' }, { name: page.h1, url: `/${page.slug}` }])
+    : [];
   const origin = typeof window !== 'undefined' ? window.location.origin : brand.origin;
   const items = page ? page.products.map((s) => products.find((p) => p.slug === s)).filter(Boolean) : [];
 
@@ -42,10 +49,9 @@ export default function CityProductPage({ slug }) {
         {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
-            { '@type': 'ListItem', position: 2, name: page.h1, item: `${origin}/${page.slug}` }
-          ]
+          itemListElement: crumbs.map((c, i) => ({
+            '@type': 'ListItem', position: i + 1, name: c.name, item: origin + c.url
+          }))
         },
         ...(items.length
           ? [{
@@ -96,8 +102,13 @@ export default function CityProductPage({ slug }) {
 
   return (
     <main className="page">
-      <nav className="crumbs">
-        <Link to="/">Home</Link> / <span>{page.h1}</span>
+      <nav className="crumbs" aria-label="Breadcrumb">
+        {crumbs.map((c, i) => (
+          <span key={c.url}>
+            {i > 0 ? ' / ' : ''}
+            {i === crumbs.length - 1 ? <span>{c.name}</span> : <Link to={c.url}>{c.name}</Link>}
+          </span>
+        ))}
       </nav>
 
       <section className="loc-hero">

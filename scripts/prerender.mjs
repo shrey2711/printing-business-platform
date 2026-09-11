@@ -578,8 +578,17 @@ for (const cp of CITY_PRODUCT_PAGES) {
     const lane = LOCAL_CATEGORIES.find((l) => (l.productCats || []).some((c) => items.some((p) => p.category === c)));
     // The single national category link (see nationalCategoryFor).
     const national = nationalCategoryFor(cp.group);
+    // Breadcrumb: the site's existing city taxonomy (Home / Locations / State /
+    // city hub) with this page appended beneath its hub, so the trail states the
+    // same hierarchy the links do rather than inventing a second one.
+    const cpCrumbs = city
+      ? [...cityBreadcrumb('Trade Show Displays', 'trade-show-displays', city), { name: cp.h1, url: `/${cp.slug}` }]
+      : [{ name: 'Home', url: '/' }, { name: cp.h1, url: `/${cp.slug}` }];
+    const cpCrumbNav = cpCrumbs.map((c, i) => i === cpCrumbs.length - 1
+      ? `<span>${esc(c.name)}</span>`
+      : `<a href="${c.url}">${esc(c.name)}</a>`).join(' / ');
     const body = `
-      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>${esc(cp.h1)}</span></nav>
+      <nav aria-label="Breadcrumb">${cpCrumbNav}</nav>
       <h1>${esc(cp.h1)}</h1>
       <p>${esc(cp.intro)}</p>
       <h2>${esc(cp.h1)} — configure and buy</h2>
@@ -610,10 +619,9 @@ for (const cp of CITY_PRODUCT_PAGES) {
         {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-            { '@type': 'ListItem', position: 2, name: cp.h1, item: `${ORIGIN}/${cp.slug}` }
-          ]
+          itemListElement: cpCrumbs.map((c, i) => ({
+            '@type': 'ListItem', position: i + 1, name: c.name, item: ORIGIN + c.url
+          }))
         },
         ...(items.length
           ? [{
