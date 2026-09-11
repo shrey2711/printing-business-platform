@@ -39,7 +39,8 @@
     "start": "node backend/server.js",
     "test:city-products": "node scripts/audit-city-product-uniqueness.mjs",
     "check:params": "node scripts/live-check-params.mjs",
-    "qa:city-products": "node scripts/qa-city-products.mjs"
+    "qa:city-products": "node scripts/qa-city-products.mjs",
+    "report:city-products": "node scripts/report-city-products.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
