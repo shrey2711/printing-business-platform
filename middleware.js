@@ -10,11 +10,22 @@
 
 import { redirects } from './src/generated/redirects.js';
 import { SEO_CITIES } from './src/data/citySeo.js';
-import { KNOWN_ROUTES } from './src/generated/routes.js';
+import { KNOWN_ROUTES, STATIC_FILES } from './src/generated/routes.js';
 
-// Skip assets and API — only page routes should be considered for redirects.
+// Skip the API and the three directories that hold real static files:
+// /assets (hashed build output), /images and /templates.
+//
+// This used to exclude every path ending in a file extension, which was a hole:
+// an unknown /anything.html never reached the 404 below, fell through to the SPA
+// rewrite, and came back HTTP 200 with the full homepage. Google calls that a
+// soft 404. It mattered here because this domain had a previous life as an
+// affiliate site whose URLs all ended in .html — every one of those was
+// answering 200 instead of telling Google it was gone.
+//
+// Extensions now reach the middleware, and STATIC_FILES (generated from the
+// build) says which root-level files are real.
 export const config = {
-  matcher: ['/((?!api/|assets/|favicon|robots.txt|sitemap.xml|.*\\.[a-zA-Z0-9]+$).*)']
+  matcher: ['/((?!api/|assets/|images/|templates/|\\.well-known/).*)']
 };
 
 // Built-in permanent redirects for removed routes, independent of the DB table
@@ -90,9 +101,20 @@ export default function middleware(request) {
     return Response.redirect(destination, rule.code || 301);
   }
 
-  // 2) Real 404 for unknown page routes. Without this the SPA rewrite serves
+  // 2) A path carrying a file extension is either a real root-level file
+  //    (favicon, robots.txt, a sitemap, feed.xml) or it is junk. Serve the
+  //    first, 404 the second. Asset directories never get here — the matcher
+  //    excludes them — so this list only has to cover the root of the build.
+  if (/\.[A-Za-z0-9]+$/.test(path)) {
+    if (STATIC_FILES.has(path)) return;
+    return new Response(notFoundHtml(url.origin), {
+      status: 404,
+      headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex, follow' }
+    });
+  }
+
+  // 3) Real 404 for unknown page routes. Without this the SPA rewrite serves
   //    index.html (HTTP 200) for every path — a soft-404 that hurts SEO.
-  //    (Assets, /api, sitemaps and files with extensions are excluded by config.)
   if (!KNOWN_ROUTES.has(path)) {
     return new Response(notFoundHtml(url.origin), {
       status: 404,
@@ -100,6 +122,6 @@ export default function middleware(request) {
     });
   }
 
-  // 3) Known route → continue to normal routing (prerendered HTML + SPA).
+  // 4) Known route → continue to normal routing (prerendered HTML + SPA).
   return;
 }
