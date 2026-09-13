@@ -201,7 +201,18 @@ const designGroup = {
   ]
 };
 
-const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) => ({
+// One factory, three sizes — which is exactly why the three canopy pages read
+// as the same page. Google confirmed it: /products/canopy-tent-10x15 and
+// /products/canopy-tent-10x20 were both reported as "Duplicate, Google chose a
+// different canonical than user", and measured 77% identical to the 10x10.
+//
+// Everything mechanical stays shared, because it genuinely is shared: the same
+// frame, the same 600D top, the same printing, the same walls, the same
+// production schedule. What differs is what the size is FOR, so `blurb`,
+// `applications` and one FAQ are written per size and passed in. No invented
+// specifications — the square footage and booth equivalence come from the
+// comparison table the category page already publishes.
+const canopyProduct = ({ slug, size, sqft, booth, blurb, apps, sizeFaq, related, full1, full3, canopy1, canopy3, wallPer }) => ({
   slug,
   active: true,
   name: `${size} Canopy Tent`,
@@ -209,10 +220,7 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
   badge: 'Custom Printed',
   emoji: '⛺',
   tagline: `Custom printed ${size} pop-up canopy tent, full-color dye sublimation.`,
-  description:
-    `A commercial-grade ${size} pop-up canopy printed edge to edge in full color. Add printed full ` +
-    `or half walls. Dye sublimation bonds the ink into the fabric, so graphics will not crack, peel ` +
-    `or fade. Order 3 or more and the per-tent price drops.`,
+  description: blurb,
   features: [
     'Dye-sublimated full-bleed printing',
     'Add up to 3 printed walls total — any mix of full and half height',
@@ -221,6 +229,7 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
   ],
   specs: [
     ['Footprint', size],
+    ['Coverage', `${sqft} sq ft — ${booth}`],
     ['Top material', '600D polyester'],
     ['Frame', 'Heavy-duty aluminum hex frame with telescopic legs'],
     ['Printing', 'Dye-sublimated full-bleed'],
@@ -228,12 +237,7 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
     ['Included', 'Carry bag with the complete set'],
     ['Production', '6–8 business days standard, 2–3 day rush (production time, not delivery)']
   ],
-  applications: [
-    'Outdoor trade shows and expos',
-    'Farmers markets and street festivals',
-    'Brand activations and sampling',
-    'Sports, community and campus events'
-  ],
+  applications: apps,
   // Config-aware: the kit choice (full set vs graphic-only) changes what ships.
   whatsIncluded: [
     'Complete set (frame + graphic): your custom-printed canopy top, a heavy-duty aluminum hex frame with telescopic legs, and a carry bag.',
@@ -243,7 +247,9 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
   // Production time (after proof approval) — shipping/transit is additional.
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush (+50%). Shipping is calculated separately at checkout.',
   // Cross-sell the rest of the booth (complete-solution internal linking).
-  related: ['pleated-table-covers', 'standard-retractable-banner', 'step-and-repeat-backdrop'],
+  // Chosen per size rather than shared: a double booth pairs with a backwall,
+  // a single pitch with a counter and a stand.
+  related,
   // AEO/GEO: concise factual answers, using this product's own explicit prices.
   faqs: [
     { q: `What does the $${canopy1.toLocaleString('en-US')} ${size} canopy price include?`, a: `The $${canopy1.toLocaleString('en-US')} starting price is for the custom-printed ${size} canopy top only. It does not include the aluminum frame or carry bag.` },
@@ -251,7 +257,7 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
     { q: 'Can I purchase only the printed canopy top?', a: 'Yes. Customers who already have a compatible frame can order the printed canopy top on its own — choose "Printed Canopy Top Only" on the product page.' },
     { q: 'How long does production take?', a: 'Standard production is 6–8 business days after you approve your free proof; rush production is 2–3 business days. Shipping/transit time is additional and depends on your destination.' },
     { q: 'How many walls can I add?', a: 'Up to 3 printed walls total, in any combination of full-height and half-height walls.' },
-    { q: 'What sizes are available?', a: 'Custom canopy tents come in three sizes: 10×10, 10×15 and 10×20.' }
+    sizeFaq
   ],
   pricing: {
     model: 'configured',
@@ -280,9 +286,89 @@ const canopyProduct = ({ slug, size, full1, full3, canopy1, canopy3, wallPer }) 
 
 const canopyTents = [
   // From the supplied rate card. full = Frame + Graphic; canopy = Graphic Only.
-  canopyProduct({ slug: 'canopy-tent-10x10', size: "10' × 10'", full1: 835, full3: 799, canopy1: 510, canopy3: 485, wallPer: 275 }),
-  canopyProduct({ slug: 'canopy-tent-10x15', size: "10' × 15'", full1: 1375, full3: 1250, canopy1: 545, canopy3: 540, wallPer: 365 }),
-  canopyProduct({ slug: 'canopy-tent-10x20', size: "10' × 20'", full1: 1635, full3: 1445, canopy1: 915, canopy3: 805, wallPer: 365 })
+  canopyProduct({
+    slug: 'canopy-tent-10x10',
+    size: "10' × 10'",
+    sqft: 100,
+    booth: 'a single booth space',
+    blurb:
+      'The 10 × 10 is the standard trade show pitch: 100 square feet, the size most expos, ' +
+      'markets and street festivals sell as one booth space. The top is printed edge to edge by ' +
+      'dye sublimation, which bonds the ink into the 600D polyester rather than laying it on the ' +
+      'surface, so the graphics do not crack, peel or fade over a season of events. Add up to ' +
+      'three printed walls in any mix of full and half height and the same frame becomes a closed ' +
+      'booth rather than an open shade structure. Order three or more and the per-tent price drops.',
+    apps: [
+      'Single-space expo and trade show pitches',
+      'Farmers markets and street festivals',
+      'Sampling and brand activations',
+      'Sports, community and campus events'
+    ],
+    sizeFaq: {
+      q: 'Is a 10 × 10 big enough for a trade show booth?',
+      a: 'For most shows, yes — 100 square feet is the single booth space the majority of expos sell, ' +
+         'and it holds a counter or a 6 ft table across the front with staff working behind it. Move up ' +
+         'to the 10 × 15 if people queue at the front of your stand, or the 10 × 20 if you have bought ' +
+         'two adjacent spaces.'
+    },
+    related: ['standard-retractable-banner', 'pleated-table-covers', 'teardrop-flag'],
+    full1: 835, full3: 799, canopy1: 510, canopy3: 485, wallPer: 275
+  }),
+  canopyProduct({
+    slug: 'canopy-tent-10x15',
+    size: "10' × 15'",
+    sqft: 150,
+    booth: 'a booth and a half',
+    blurb:
+      'Half a booth wider than the standard pitch — 150 square feet where a 10 × 10 gives you 100. ' +
+      'The extra five feet buys frontage rather than depth, which is the difference that matters when ' +
+      'a queue forms at the front of the stand, or when a demo needs its own table beside the product ' +
+      'instead of behind it. Everything else is the commercial-grade build shared across the range: ' +
+      'the aluminum hex frame, the dye-sublimated 600D top, and up to three printed walls in any mix ' +
+      'of full and half height. Order three or more and the per-tent price drops.',
+    apps: [
+      'Booth-and-a-half expo pitches',
+      'Stands that queue at the front',
+      'Demonstrations running beside the product',
+      'Festival vendors showing more stock'
+    ],
+    sizeFaq: {
+      q: 'What does the 10 × 15 give me that a 10 × 10 does not?',
+      a: 'Fifty square feet, and all of it across the front. That is the right trade when the constraint ' +
+         'is people rather than product — a wider opening moves a queue past the stand instead of into ' +
+         'the aisle. If you need the depth rather than the width, two adjacent spaces and a 10 × 20 is ' +
+         'the better buy.'
+    },
+    related: ['pleated-table-covers', 'step-and-repeat-backdrop', 'deluxe-retractable-banner'],
+    full1: 1375, full3: 1250, canopy1: 545, canopy3: 540, wallPer: 365
+  }),
+  canopyProduct({
+    slug: 'canopy-tent-10x20',
+    size: "10' × 20'",
+    sqft: 200,
+    booth: 'a double booth',
+    blurb:
+      'Two hundred square feet under one roof — a double booth, and the only size in the range wide ' +
+      'enough to run people through the stand rather than past it. Product at one end and seating or ' +
+      'a demo at the other, or two brands sharing a single frame. The long side is twice that of a ' +
+      '10 × 10, so a printed wall along it reads from across a hall or a parking lot rather than only ' +
+      'from the aisle in front. Same aluminum hex frame and dye-sublimated 600D top as the smaller ' +
+      'sizes. Order three or more and the per-tent price drops.',
+    apps: [
+      'Double-booth trade show pitches',
+      'Walk-through brand activations',
+      'Two brands sharing one frame',
+      'Hospitality and seating at outdoor events'
+    ],
+    sizeFaq: {
+      q: 'Do I need two booth spaces to use a 10 × 20?',
+      a: 'Yes — 200 square feet is two standard pitches, so buy the space before the tent. It is worth ' +
+         'confirming with the show that the two spaces are adjacent and in line rather than back to back, ' +
+         'because the frame needs a single 20 ft run.'
+    },
+    related: ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'stretch-table-covers'],
+    full1: 1635, full3: 1445, canopy1: 915, canopy3: 805, wallPer: 365
+  })
 ];
 
 const pleatedCovers = {
@@ -835,7 +921,10 @@ const FLAG_SHARED_FIGURES = [
   { src: '/images/flags/flag-kit-in-bag-portable.webp', alt: 'Flag kit packed in its carry bag — portable, easy to transport' }
 ];
 
-const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro, active = false, gallery }) => ({
+const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro,
+  apps = ['Storefronts and grand openings', 'Trade shows and events', 'Roadside and parking-lot promotion', 'Marking a booth alongside a canopy'],
+  related = ['custom-canopies', 'standard-retractable-banner', 'x-stand-banner'],
+  shapeFaq = null, shapeFeature = 'Bold vertical format that reads from a distance', active = false, gallery }) => ({
   slug,
   active,
   name,
@@ -846,6 +935,9 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   tagline: `Custom printed ${shape} advertising flag — full-color dye sublimation, pole + base or graphic only.`,
   description: intro,
   features: [
+    // The shape is the only real difference between the three flags, so it
+    // leads. The rest is shared because the hardware genuinely is shared.
+    shapeFeature,
     'Full-color dye-sublimated print',
     'Single- or double-sided printing',
     'Lightweight portable pole hardware, tool-free assembly',
@@ -853,7 +945,10 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
     'Replaceable graphic — reuse the hardware',
     'Indoor or outdoor advertising'
   ],
-  applications: ['Storefronts and grand openings', 'Trade shows and events', 'Roadside and parking-lot promotion', 'Marking a booth alongside a canopy'],
+  // Per shape, not shared: the three flags differ in height and silhouette,
+  // so they suit different sites. Identical lists were part of why Google
+  // read these as one page and never crawled two of them.
+  applications: apps,
   specs: [
     ['Shape', `${shape} flag`],
     ['Sizes', sizes.map((s) => s.label).join(', ')],
@@ -868,10 +963,11 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
     'Graphic only: the printed flag on its own, to fit compatible hardware you already own.'
   ],
   turnaround: 'Production: 6–8 business days standard, 2–3 days rush. Shipping is calculated separately at checkout.',
-  related: ['custom-canopies', 'standard-retractable-banner', 'x-stand-banner'],
+  related,
   seoTitle,
   seoDescription,
   faqs: [
+    ...(shapeFaq ? [shapeFaq] : []),
     { q: 'What is the difference between "with hardware" and "graphic only"?', a: 'With hardware includes the flexible pole kit and a base so the flag is ready to fly. Graphic only is the printed flag on its own — for customers who already own compatible hardware.' },
     { q: 'Single-sided or double-sided?', a: 'Single-sided prints the front in full color; the reverse shows a mirrored print-through. Double-sided prints two separate faces with a blockout layer between them so each side reads correctly.' },
     { q: 'Which base should I choose?', a: 'A spike base (included) pushes into grass for outdoor use. A cross base or metal plate base (small upcharge) weighs the flag down on hard floors indoors. A water bag (+$20) adds ballast for outdoor hard surfaces where you cannot drive a spike — fill it on site and empty it before transport.' },
@@ -922,6 +1018,10 @@ const teardropSizes = [
 const flagProducts = [
   flagProduct({
     slug: 'feather-angled-flag', name: 'Feather Angled Flag', shape: 'angled feather', sizes: featherSizes,
+    apps: ['Roadside and forecourt promotion', 'Event entrances and car parks', 'Grand openings that need height', 'Marking a booth from across a field'],
+    related: ['teardrop-flag', 'canopy-tent-10x10', 'standard-retractable-banner'],
+    shapeFeature: 'Forward-angled top edge holds the print flat in still air',
+    shapeFaq: { q: 'Which flag shape stays readable when there is no wind?', a: 'The angled feather. Its top edge runs forward over the pole, so the printed area hangs closer to flat on a still day rather than collapsing against the pole. The large size is 14 ft, the tallest of the three shapes, which is why it is the usual pick for roadside and car-park siting.' },
     active: true,
     gallery: [
       { src: '/images/flags/feather_angled_flag_taco_vista_large_cross_base.webp', alt: 'Apex angled feather flag with a custom printed graphic on a cross base' },
@@ -942,6 +1042,10 @@ const flagProducts = [
   }),
   flagProduct({
     slug: 'feather-convex-flag', name: 'Feather Convex Flag', shape: 'convex feather', sizes: featherSizes,
+    apps: ['Retail storefronts and shopping centres', 'Indoor showrooms and foyers', 'Conference and exhibition aisles', 'Brand work where the silhouette matters'],
+    related: ['feather-angled-flag', 'standard-retractable-banner', 'pleated-table-covers'],
+    shapeFeature: 'Gently convex top edge for a rounded, softer silhouette',
+    shapeFaq: { q: 'How is a convex feather different from an angled one?', a: 'Only the top edge. The convex curves gently where the angled runs forward, giving a softer, rounded silhouette and slightly less print area at the top. Both use the same pole kit, the same bases and the same 9, 10.5 and 14 ft sizes, so the choice is how the flag should look rather than what it can do.' },
     active: true,
     gallery: [
       { src: '/images/flags/feather_convex_flag_solis_spa_large_cross_base.webp', alt: 'Apex convex feather flag with a rounded convex top edge, custom printed on a cross base' },
@@ -955,6 +1059,10 @@ const flagProducts = [
   }),
   flagProduct({
     slug: 'teardrop-flag', name: 'Teardrop Flag', shape: 'teardrop', sizes: teardropSizes,
+    apps: ['Exposed and coastal sites', 'Narrow walkways and aisle ends', 'Indoor use under a low ceiling', 'Markets and pop-ups with little ground space'],
+    related: ['feather-angled-flag', 'canopy-tent-10x10', 'x-stand-banner'],
+    shapeFeature: 'Closed teardrop profile that keeps its shape in wind',
+    shapeFaq: { q: 'Why choose a teardrop over a feather flag?', a: 'Wind and headroom. The teardrop profile wraps back to the pole so it holds its shape instead of streaming out, and its sizes run shorter — 7, 9 and 11.2 ft against the feather range of 9 to 14 ft. That makes it the one for an exposed site, or indoors where 14 ft will not fit.' },
     active: true,
     gallery: [
       { src: '/images/flags/teardrop_flag_summit_coffee_large_cross_base.webp', alt: 'Apex teardrop flag with a custom printed graphic on a cross base' },
@@ -1172,7 +1280,10 @@ const segMockupGroup = {
   ]
 };
 
-const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, config, counter, weight, bag, seoTitle, seoDescription }) => ({
+const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, config, counter, weight, bag, seoTitle, seoDescription,
+  apps = ['Trade shows and exhibitions', 'Conventions and conferences', 'Corporate events and product launches', 'Retail activations and branded environments'],
+  related = ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'custom-canopies', 'standard-retractable-banner', 'hard-case-podium'],
+  shapeFaq = null }) => ({
   slug,
   active: true,
   name,
@@ -1191,7 +1302,9 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
     'Reusable frame — update graphics for future events',
     'Display counter integration'
   ],
-  applications: ['Trade shows and exhibitions', 'Conventions and conferences', 'Corporate events and product launches', 'Retail activations and branded environments'],
+  // Per configuration: A, B and C are different booth shapes, so what each
+  // one suits differs even though the frame system is shared.
+  applications: apps,
   specs: [
     ['Model', name],
     ['Available overall sizes', `${SEG_WIDTHS.map((w) => w.w + "' W").join(', ')} × ${heights.map((h) => h.h + "' H").join(' / ')}`],
@@ -1208,11 +1321,12 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
     ['Configuration', config]
   ],
   turnaround: 'Production and delivery timing are confirmed with your custom quote.',
-  related: ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'custom-canopies', 'standard-retractable-banner', 'hard-case-podium'],
+  related,
   seoTitle,
   seoDescription,
   whatsIncluded,
   faqs: [
+    ...(shapeFaq ? [shapeFaq] : []),
     { q: 'What is an SEG trade show display?', a: 'SEG stands for Silicone Edge Graphics — a sewn silicone strip on the edge of the fabric presses into a channel on the frame, so the graphic sits smooth, tensioned and nearly frameless. These kits add integrated LED backlighting for illuminated graphics.' },
     { q: 'Are the graphics illuminated?', a: 'Yes — the frame is a lightbox with integrated LED illumination, so the backlit fabric graphics glow evenly for strong trade-show visibility.' },
     { q: 'Can the graphics be replaced later?', a: 'Yes. The frame is reusable — you can print new SEG fabric graphics for future events and reuse the same modular hardware.' },
@@ -1237,6 +1351,9 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
 const segKits = [
   segKit({
     slug: 'seg-modular-trade-show-kit-a', name: 'Trade Show SEG Modular Kit A', letter: 'A', heights: SEG_H3,
+    apps: ['Inline booths with one open side', 'First illuminated booth for a growing stand', 'Shows where the lightest kit wins', 'Roadshows repeating across several cities'],
+    related: ['seg-modular-trade-show-kit-b', 'straight-tension-fabric-display', 'step-and-repeat-backdrop'],
+    shapeFaq: { q: 'Which SEG kit is the simplest to travel with?', a: 'Kit A. It is the lightest of the three at 72-80 lb with graphics and packs into the smallest bag, roughly 43 by 14 by 8 inches, because its layout is a backdrop, one illuminated archway return and the counter. If the booth has one open side and the stand travels often, this is the configuration to start from.' },
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-a-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit A — illuminated backlit booth with backdrop, archway return and counter' },
       { src: '/images/seg-kits/apex-seg-modular-kit-a-structure.webp', alt: 'Kit A structure — backdrop, single archway/return and display counter' },
@@ -1254,6 +1371,9 @@ const segKits = [
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-b', name: 'Trade Show SEG Modular Kit B', letter: 'B', heights: SEG_H3,
+    apps: ['Corner booths seen from two aisles', 'Stands that want an overhead branded band', 'Product launches needing a framed entrance', 'Halls where height carries further than width'],
+    related: ['seg-modular-trade-show-kit-a', 'seg-modular-trade-show-kit-c', 'straight-tension-fabric-display'],
+    shapeFaq: { q: 'What does the overhead arch on Kit B actually buy?', a: 'Sightlines above the crowd. Kit B is the only one of the three with an illuminated overhead arch section, so the brand reads over the heads of people standing in the aisle rather than only at eye level. It costs weight for that: 68-110 lb with graphics against Kit A at 72-80 lb.' },
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-b-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit B — illuminated booth with backdrop, side panel, overhead arch and counter' },
       { src: '/images/seg-kits/apex-seg-modular-kit-b-structure.webp', alt: 'Kit B structure — backdrop, side panel/arch front, overhead arch section and counter' },
@@ -1270,6 +1390,9 @@ const segKits = [
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-c', name: 'Trade Show SEG Modular Kit C', letter: 'C', heights: SEG_H2,
+    apps: ['Island and peninsula stands', 'Booths needing a room rather than a wall', 'Halls with a height restriction', 'Demonstrations that want enclosed sides'],
+    related: ['seg-modular-trade-show-kit-b', 'seg-modular-trade-show-kit-a', 'stretch-table-covers'],
+    shapeFaq: { q: 'Why does Kit C have no overhead arch?', a: 'Because it spends the structure on the sides instead. Kit C is a backdrop with left and right illuminated side panels, which encloses the stand into three walls rather than framing an entrance. It is also the only kit without the 6.6 ft height option, so check the hall rules before choosing it.' },
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit C — illuminated booth with backdrop, left and right side panels and counter' },
       { src: '/images/seg-kits/apex-seg-modular-kit-c-structure.webp', alt: 'Kit C structure — backdrop with left and right illuminated side panels and a counter, no overhead arch' },
