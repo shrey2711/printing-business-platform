@@ -1945,15 +1945,33 @@ const sitemapFiles = {
   'sitemap-locations.xml': smLocations
 };
 let smTotal = 0;
+// Newest lastmod inside each child sitemap, for the index below.
+const smNewest = {};
 for (const [name, rows] of Object.entries(sitemapFiles)) {
   const clean = rows.filter(Boolean);
   smTotal += clean.length;
   writeFileSync(join(DIST, name), buildUrlset(clean));
+  const dates = clean
+    .map((r) => (r.match(/<lastmod>(\d{4}-\d{2}-\d{2})/) || [])[1])
+    .filter(Boolean)
+    .sort();
+  if (dates.length) smNewest[name] = dates[dates.length - 1];
 }
 // Sitemap index at /sitemap.xml (referenced by robots.txt).
+//
+// Each entry carries the newest lastmod in that child sitemap. Without it the
+// index says only "here are five files" and a crawler has to fetch all five to
+// find out whether anything changed; with it, it can skip the ones that have
+// not. That matters on a site where Search Console reports ~150 URLs as
+// "Discovered - currently not indexed": every fetch we do not waste is one
+// available for a URL that has never been crawled.
 const sitemapIndex =
   `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  Object.keys(sitemapFiles).map((n) => `  <sitemap><loc>${ORIGIN}/${n}</loc></sitemap>`).join('\n') +
+  Object.keys(sitemapFiles).map((n) => (
+    smNewest[n]
+      ? `  <sitemap><loc>${ORIGIN}/${n}</loc><lastmod>${smNewest[n]}</lastmod></sitemap>`
+      : `  <sitemap><loc>${ORIGIN}/${n}</loc></sitemap>`
+  )).join('\n') +
   `\n</sitemapindex>\n`;
 writeFileSync(join(DIST, 'sitemap.xml'), sitemapIndex);
 console.log(`Sitemap: ${smTotal} indexable URLs across ${Object.keys(sitemapFiles).length} sitemaps (index at /sitemap.xml).`);
