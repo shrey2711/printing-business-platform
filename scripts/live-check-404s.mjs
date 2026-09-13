@@ -33,7 +33,17 @@ const fails = [];
 const get = async (path) => {
   const res = await fetch(BASE + path, { redirect: 'manual' });
   const body = res.status === 200 ? await res.text() : '';
-  return { status: res.status, bytes: body.length, body };
+  // Vercel's firewall denies some probe extensions (.php) at the edge, before
+  // the middleware runs. That is a 403 rather than a 404, and it is fine for
+  // this purpose: it is not a soft 404, and Google drops a 403 from the index.
+  // Accepted only when Vercel says it did it — a 403 from our own code would
+  // still be a failure.
+  return {
+    status: res.status,
+    bytes: body.length,
+    body,
+    mitigated: (res.headers.get('x-vercel-mitigated') || '') !== ''
+  };
 };
 
 console.log(`Checking ${BASE}\n`);
@@ -42,8 +52,12 @@ console.log('Must 404:');
 for (const path of MUST_404) {
   const r = await get(path);
   const soft = r.status === 200 && /Trade Show Displays, Canopies/.test(r.body);
-  console.log(`  ${String(r.status).padEnd(4)} ${path}${soft ? '   <-- SOFT 404: served the homepage' : ''}`);
-  if (r.status !== 404) {
+  const ok = r.status === 404 || (r.status === 403 && r.mitigated);
+  const note = soft ? '   <-- SOFT 404: served the homepage'
+    : (r.status === 403 && r.mitigated) ? '   (blocked by the Vercel firewall, never reaches the app)'
+    : '';
+  console.log(`  ${String(r.status).padEnd(4)} ${path}${note}`);
+  if (!ok) {
     fails.push(`${path} returned ${r.status}${soft ? ' with the homepage body — a soft 404' : ''}`);
   }
 }
