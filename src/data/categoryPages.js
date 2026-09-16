@@ -232,7 +232,7 @@ export const CATEGORY_PAGES = [
     h1: 'Step & Repeat Backdrops',
     title: 'Step & Repeat Backdrops',
     description:
-      'Custom step & repeat backdrops — large-format fabric media walls with repeating logo branding on a portable adjustable frame. Instant online pricing, free proof.',
+      'Custom step & repeat backdrops — large-format fabric media walls with repeating logo branding on a portable adjustable frame. Instant pricing, free proof.',
     intro:
       'Step & repeat backdrops are the branded media wall behind press, red-carpet and event photos. Print repeating logos across a large-format fabric on an adjustable, portable frame so your branding reads in every shot.',
     points: [
@@ -298,38 +298,43 @@ export const CATEGORY_PAGES = [
   {
     slug: 'marketing-essentials',
     guide: [
-      { h2: 'The half of the booth that leaves with the visitor', p: 'A display works for the length of the show; a printed piece works after it. Every real conversation at the aisle ends with something going into a hand or a bag, and that piece is what gets read on the flight home, weeks after the booth has been packed into its case. Budget for it as part of the booth rather than as an afterthought, because a booth with nothing to hand out puts the entire cost of the show on whether the visitor remembers a name.' },
+      { h2: 'The half of the booth that leaves with the visitor', p: 'A display works for the length of the show; a printed piece works after it. Every real conversation at the aisle ends with something going into a hand, a pocket or onto a wrist, and that piece is what gets read — or worn — on the flight home, weeks after the booth has been packed into its case. Budget for it as part of the booth rather than as an afterthought, because a booth with nothing to hand out puts the entire cost of the show on whether the visitor remembers a name.' },
       { h2: 'Cards, flyers and brochures — what each one is for', p: 'They are not interchangeable. A business card exists to survive a pocket and produce a phone number later, which is why weight matters more than design surface: 16pt matte is thick enough not to soften and matte enough to write on. A flyer is a single sheet doing one job — one offer, one show, one deadline — and it is the piece you print in quantity and expect to be discarded. A brochure folds, which buys the space to explain something the flyer cannot, and it is the piece a serious enquiry takes away.' },
-      { h2: 'Matching print to your booth graphics', p: 'Colour is the thing that gives away collateral ordered somewhere else. Large format graphics and small format collateral are printed by different processes, on different stock, and a brand blue set on a fabric backdrop rarely lands the same way on an uncoated card unless the two are produced together. Ordering both here puts them on the same trade print network, which is the practical way to keep a booth looking like one brand rather than several. Supply CMYK artwork, not Pantones, and check the proof against your display files.' }
+      { h2: 'Lanyards and wristbands — the piece someone wears, not carries', p: 'A card can be filed away and forgotten; a lanyard or wristband is worn for as long as it is on, which is why it works differently from anything printed on paper. A lanyard carries the badge or ID that gets someone into the show in the first place, so the logo is in front of them — and everyone who scans their badge — for the full length of the event. A silicone wristband survives the show and keeps going afterward, which makes it one of the cheaper ways to buy attention that lasts past the last day of the floor.' },
+      { h2: 'Matching print to your booth graphics', p: 'Colour is the thing that gives away collateral ordered somewhere else. Large format graphics and small format collateral are printed by different processes, on different stock, and a brand blue set on a fabric backdrop rarely lands the same way on an uncoated card — or a dye-sublimated lanyard — unless the two are produced together. Ordering it all here puts it on the same trade print network, which is the practical way to keep a booth looking like one brand rather than several. Supply CMYK artwork, not Pantones, and check the proof against your display files.' }
     ],
     category: 'marketing-essentials',
     nav: 'Marketing Essentials',
-    h1: 'Business Cards, Flyers & Brochures',
+    h1: 'Business Cards, Lanyards, Wristbands & Brochures',
     title: 'Marketing & Business Essentials',
     description:
-      'Business cards, flyers and brochures printed on the same trade network as our large format work — 16pt matte cards, 80lb uncoated stock. Free artwork proof.',
+      'Business cards, lanyards, silicone wristbands, flyers and brochures — printed on the same trade network as our large format work. Free artwork proof.',
     intro:
-      'Print collateral is the half of a booth that leaves with the visitor. A conversation at the aisle ends with something in a hand — a card, a flyer, a folded brochure — and that piece is what gets read on the flight home, long after the display has been packed away. We produce all of it on the same trade print network as our large format work, so the colour on a business card matches the colour on the backdrop standing behind you. 16pt matte business cards, 80lb uncoated flyers and 80lb uncoated brochures, printed to order and proofed before they run.',
+      'Print collateral is the half of a booth that leaves with the visitor — in a hand, a pocket or on a wrist. We produce all of it on the same trade print network as our large format work, so the colour on a business card or a dye-sublimated lanyard matches the colour on the backdrop standing behind you. 16pt matte business cards, custom lanyards, silicone wristbands, 80lb uncoated flyers and 80lb uncoated brochures, printed to order and proofed before they run.',
     points: [
       '16pt matte business cards.',
-      '80lb uncoated flyers.',
-      '80lb uncoated folded brochures.',
+      'Custom lanyards in polyester, nylon, woven or dye sublimation.',
+      'Silicone wristbands, screen printed, debossed or embossed.',
+      '80lb uncoated flyers and folded brochures.',
       'Printed alongside your large format booth graphics.'
     ],
     answer:
-      'Marketing essentials are the printed collateral a visitor takes away from your booth — business cards, flyers and brochures. Apex produces them on the same trade print network as its large format displays, so the colour on a 16pt matte card matches the backdrop behind it.',
+      'Marketing essentials are the printed and wearable collateral a visitor takes away from your booth — business cards, lanyards, silicone wristbands, flyers and brochures. Apex produces them on the same trade print network as its large format displays, so the colour on a 16pt matte card or a lanyard matches the backdrop behind it.',
     compareCols: ['Stock', 'Best for', 'From'],
     compare: [
       { slug: 'business-cards-16pt-matte', name: 'Business Cards, 16pt Matte', to: '/products/business-cards-16pt-matte', cells: ['16pt gloss C2S, matte coated', 'Handing over in a conversation'] },
+      { slug: 'custom-lanyards', name: 'Custom Lanyards', to: '/products/custom-lanyards', cells: ['Polyester, nylon, woven, tubular or dye sublimation', 'Badges and ID worn all day on the floor'] },
+      { slug: 'silicone-wristbands', name: 'Silicone Wristbands', to: '/products/silicone-wristbands', cells: ['100% silicone, matte finish', 'A branded takeaway that lasts past the show'] },
       { slug: 'flyers-80lb-uncoated', name: 'Flyers, 80lb Enviro Uncoated', to: '/products/flyers-80lb-uncoated', cells: ['80lb uncoated, 30% recycled', 'One offer, printed in quantity'] },
       { slug: 'brochures-80lb-uncoated', name: 'Brochures, 80lb Enviro Uncoated', to: '/products/brochures-80lb-uncoated', cells: ['80lb uncoated, 30% recycled', 'Detail a qualified visitor takes away'] }
     ],
     faqs: [
       { q: 'What does 16pt matte mean on a business card?', a: '16pt is the thickness of the card stock — noticeably heavier than the 14pt most desktop print shops run, which is what stops a card softening in a pocket. Matte is the finish: no gloss, no glare under booth lighting, and a surface you can actually write a note on.' },
       { q: 'What is 80lb uncoated stock?', a: 'A weight and a finish. 80lb is a text-weight paper with enough body that a flyer does not feel flimsy in the hand. Uncoated means no gloss layer, so the sheet takes a pen, reads without glare, and looks closer to stationery than to a supermarket leaflet.' },
-      { q: 'Will the colour match my booth graphics?', a: 'That is the reason to order both from one supplier. Large format and small format are printed by different processes on different stock, so an exact match is never automatic — but producing them on the same network, from the same CMYK artwork, is what keeps a booth looking like one brand. Check the free proof against your display files before approving.' },
-      { q: 'How should I supply artwork for print collateral?', a: 'A single-page PDF or JPEG per piece, built to the finished size at 150dpi, in CMYK with no Pantones or spot colours, fonts converted to outlines, and no crop marks or bleeds. The artwork guidelines cover the full specification, and every order is proofed before it runs.' },
-      { q: 'Can I order collateral without ordering a display?', a: 'Yes. Cards, flyers and brochures are ordered on their own like anything else in the catalogue. Most customers order them alongside a booth because of the colour matching, but there is no requirement to.' }
+      { q: 'Should I order lanyards or wristbands for a trade show?', a: 'They do different jobs. A lanyard carries the badge that gets someone onto the floor, so order those for staff and registered attendees. A wristband is a giveaway — something handed out that keeps the logo visible after the show, on a table or a booth that is not gated by a badge.' },
+      { q: 'Will the colour match my booth graphics?', a: 'That is the reason to order it all from one supplier. Large format and small format are printed by different processes on different stock, so an exact match is never automatic — but producing them on the same network, from the same CMYK artwork, is what keeps a booth looking like one brand. Check the free proof against your display files before approving.' },
+      { q: 'How should I supply artwork for print collateral?', a: 'A single-page PDF or JPEG per piece for paper collateral, built to the finished size at 150dpi in CMYK with no Pantones or spot colours, fonts converted to outlines, and no crop marks or bleeds. Lanyards and wristbands take a print-ready vector file with fonts outlined instead. The artwork guidelines cover the full specification, and every order is proofed before it runs.' },
+      { q: 'Can I order collateral without ordering a display?', a: 'Yes. Cards, lanyards, wristbands, flyers and brochures are ordered on their own like anything else in the catalogue. Most customers order them alongside a booth because of the colour matching, but there is no requirement to.' }
     ]
   }
 ];

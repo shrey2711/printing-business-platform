@@ -257,6 +257,43 @@ function TableTop() {
   );
 }
 
+// Lanyard hanging from a neck loop, ending in a printed ID badge card.
+function Lanyard() {
+  return (
+    <Frame>
+      <path d="M100 28 Q120 8 140 28" fill="none" stroke="#16233b" strokeWidth="4" strokeLinecap="round" />
+      <rect x="107" y="24" width="26" height="90" fill="#1f5fe0" />
+      <rect x="117" y="24" width="6" height="90" fill="#ffffff" opacity="0.85" />
+      {/* woven texture */}
+      <g stroke="#16233b" strokeOpacity="0.12">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <line key={i} x1="107" y1={30 + i * 7} x2="133" y2={30 + i * 7} />
+        ))}
+      </g>
+      {/* clip */}
+      <rect x="112" y="110" width="16" height="10" rx="2" fill="#9aa4b2" stroke="#8b95a6" />
+      {/* badge card */}
+      <rect x="76" y="118" width="88" height="56" rx="6" fill="#fff" stroke="#c7cfdb" />
+      <path d="M76 124 a6 6 0 0 1 6-6 h76 a6 6 0 0 1 6 6 v10 h-88 Z" fill="#c8102e" />
+      <circle cx="96" cy="152" r="12" fill="#e0e5ec" stroke="#c7cfdb" />
+      <rect x="114" y="145" width="38" height="5" rx="2" fill="#16233b" />
+      <rect x="114" y="155" width="26" height="5" rx="2" fill="#c9d2e0" />
+    </Frame>
+  );
+}
+
+// Silicone wristband: a thick flattened ring with a debossed logo on the front band.
+function Wristband() {
+  return (
+    <Frame>
+      <ellipse cx="120" cy="96" rx="82" ry="36" fill="none" stroke="#c8102e" strokeWidth="22" strokeLinecap="round" />
+      <ellipse cx="120" cy="90" rx="78" ry="30" fill="none" stroke="#ffffff" strokeWidth="3" opacity="0.3" />
+      <rect x="96" y="121" width="48" height="15" rx="7" fill="#16233b" opacity="0.18" />
+      <text x="120" y="132" textAnchor="middle" fontFamily="Arial" fontWeight="800" fontSize="10" fill="#ffffff">LOGO</text>
+    </Frame>
+  );
+}
+
 const MAP = {
   'vinyl-banners': <Banner />,
   'mesh-banners': <Banner mesh />,
@@ -274,7 +311,9 @@ const MAP = {
   'table-covers': <TableCover />,
   'pleated-table-covers': <TableCover />,
   'stretch-table-covers': <TableCover />,
-  'canopy-tents': <Tent />
+  'canopy-tents': <Tent />,
+  'custom-lanyards': <Lanyard />,
+  'silicone-wristbands': <Wristband />
 };
 
 export default function ProductArt({ slug }) {

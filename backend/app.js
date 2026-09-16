@@ -1,3 +1,4 @@
+import './env.js';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -678,25 +679,39 @@ app.post('/api/checkout/confirm', writeLimiter, async (req, res) => {
   const user = await getUserFromToken(req.headers.authorization);
   if (!user) return res.status(401).json({ error: 'Not signed in.' });
 
-  const { orderId } = req.body || {};
-  const { data: order } = await supabaseAdmin.from('orders').select('*').eq('id', orderId).single();
-  if (!order || order.user_id !== user.id) return res.status(404).json({ error: 'Order not found.' });
-  if (!order.stripe_session_id) return res.status(400).json({ error: 'No checkout session.' });
+  // A single-item checkout confirms by orderId; a cart checkout is N order
+  // rows sharing one Stripe session, so it confirms by the cartId every row
+  // was tagged with instead.
+  const { orderId, cartId } = req.body || {};
+  const { data: orders } = cartId
+    ? await supabaseAdmin.from('orders').select('*').eq('user_id', user.id).filter('config->>cartId', 'eq', cartId)
+    : await supabaseAdmin.from('orders').select('*').eq('id', orderId).eq('user_id', user.id);
+  if (!orders || !orders.length) return res.status(404).json({ error: 'Order not found.' });
+  const sessionId = orders[0].stripe_session_id;
+  if (!sessionId) return res.status(400).json({ error: 'No checkout session.' });
 
-  const session = await stripe.checkout.sessions.retrieve(order.stripe_session_id);
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
   if (session.payment_status === 'paid') {
-    if (order.status === 'submitted') {
+    const toMove = orders.filter((o) => o.status === 'submitted');
+    if (toMove.length) {
       // Same conditional update as the webhook, so whichever arrives second
       // moves no row and sends no duplicate email.
       const { data: moved } = await supabaseAdmin
         .from('orders')
         .update({ status: 'paid' })
-        .eq('id', order.id)
+        .in('id', toMove.map((o) => o.id))
         .eq('status', 'submitted')
         .select('id');
-      if ((moved || []).length) await announcePayment(order.id);
+      for (const m of moved || []) await announcePayment(m.id);
     }
-    return res.json({ paid: true });
+    // amount_total is Stripe's own settled total, in the smallest currency
+    // unit — the only number a GA4 purchase event should ever report, never
+    // a client-side estimate of what the cart thought it was charging.
+    return res.json({
+      paid: true,
+      amountTotal: session.amount_total != null ? session.amount_total / 100 : null,
+      currency: session.currency ? session.currency.toUpperCase() : null
+    });
   }
   res.json({ paid: false });
 });

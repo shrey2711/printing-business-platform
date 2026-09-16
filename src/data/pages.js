@@ -158,7 +158,7 @@ export const PAGES = [
     nav: 'Returns',
     title: 'Returns, Refunds & Reprints',
     description:
-      'How Apex Trade Show handles problems with a custom printed order — report within 5 business days, how defect claims work, rush charges, and how reprints are handled.',
+      'How Apex handles problems with a custom printed order — report within 5 business days, how defect claims work, rush charges, and how reprints are handled.',
     blocks: [
       { p: 'We want your order to arrive right. Because every item is custom printed to order from a proof you approve, returns work differently than they would for a stock item — there is nothing generic to resend. If something is wrong with your order, tell us within five (5) business days of delivery and we will sort it out.' },
       { h: 'After you approve your proof', p: 'Your order goes into production the moment you approve your proof. From that point the order cannot be canceled, and it is not refundable — production has already started on a one-off, made-for-you item.' },
@@ -191,7 +191,7 @@ export const PAGES = [
     nav: 'Privacy',
     title: 'Privacy Policy',
     description:
-      'How Apex Trade Show handles your information — what we collect to fulfil orders, the services we use (Stripe, Supabase), and how to reach us with privacy questions.',
+      'How Apex handles your information — what we collect to fulfil orders, the services we use (Stripe, Supabase), and how to reach us with privacy questions.',
     blocks: [
       { p: 'This page explains, in plain language, what information Apex Trade Show collects and why. It is a summary of our real practices — contact us with any privacy question.' },
       { h: 'What we collect', list: [

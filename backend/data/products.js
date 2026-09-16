@@ -106,7 +106,9 @@ export const navGroups = [
     items: [
       { name: 'Business Cards (16pt Matte)', slug: 'business-cards-16pt-matte' },
       { name: 'Flyers (80lb Uncoated)', slug: 'flyers-80lb-uncoated' },
-      { name: 'Brochures (80lb Uncoated)', slug: 'brochures-80lb-uncoated' }
+      { name: 'Brochures (80lb Uncoated)', slug: 'brochures-80lb-uncoated' },
+      { name: 'Custom Lanyards', slug: 'custom-lanyards' },
+      { name: 'Silicone Wristbands', slug: 'silicone-wristbands' }
     ]
   }
 ];
@@ -2111,7 +2113,7 @@ const products = [
     seoTitle: 'Business Cards | 16pt Matte',
     seoDescription:
       'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
-    related: ['flyers-80lb-uncoated', 'brochures-80lb-uncoated', 'standard-retractable-banner'],
+    related: ['flyers-80lb-uncoated', 'custom-lanyards', 'silicone-wristbands'],
     gallery: [
       { src: '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg', alt: '16pt matte business cards in an acrylic holder on a trade show booth counter' },
       { src: '/images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg', alt: 'Stacked edges of 16pt business cards showing the thickness of the stock' },
@@ -2347,6 +2349,229 @@ const products = [
           id: 'bundling', label: 'Bundling', type: 'select', choices: [
             { id: 'none', label: 'Loose in the box', default: true },
             { id: 'bundled', label: 'Bundled into counted stacks', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'custom-lanyards',
+    faqs: [
+      { q: 'What materials are the lanyards available in?', a: 'Polyester, nylon, woven and tubular, plus full-colour dye-sublimated printing for artwork with gradients or photography. Polyester and nylon take a clean one- or two-colour imprint; dye sublimation is the option to pick when the logo has more than a couple of colours in it.' },
+      { q: 'What widths and lengths can I order?', a: '5/8", 3/4" and 1" widths, each in a standard 36" loop length. Tell us if your badge holder needs a longer or shorter drop and we will confirm it on the proof.' },
+      { q: 'What attachment options are there?', a: 'Swivel hook, bulldog clip, split ring or a cell phone loop. A breakaway safety clasp can be added to any of them — worth considering for a staffed booth where a lanyard might catch on equipment.' },
+      { q: 'Can I print on both sides?', a: 'Yes. A single-side imprint is standard; a double-sided imprint repeats the design (or a second message) along the full length so it reads correctly no matter which way the lanyard twists.' },
+      { q: 'What is the minimum quantity?', a: '100 lanyards, and we print up to 10,000 in a single run.' },
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready vector file (AI, EPS or PDF) with fonts outlined. Dye-sublimated full-colour artwork can be supplied as high-resolution CMYK art instead. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Material', 'Polyester, nylon, woven, tubular, or full-colour dye sublimation'],
+      ['Width', '5/8", 3/4" or 1"'],
+      ['Length', '36" standard loop'],
+      ['Attachment', 'Swivel hook, bulldog clip, split ring or cell phone loop'],
+      ['Safety', 'Optional breakaway clasp'],
+      ['Printing', 'One or two sides, one to full colour'],
+      ['Quantities', '100 to 10,000']
+    ],
+    applications: [
+      'Badge and ID holders for staff working a booth over a multi-day show',
+      'Attendee credentials handed out at registration',
+      'A low-cost branded takeaway that keeps the logo visible on the floor all day',
+      'Ordered alongside a canopy or backdrop so booth staff match the branding behind them'
+    ],
+    active: true,
+    name: 'Custom Lanyards',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '🪪',
+    quoteOnly: true,
+    tagline: 'Custom printed lanyards in polyester, nylon, woven or full-colour dye sublimation, from 100 to 10,000.',
+    description:
+      'A lanyard is the thing every badge, ID card or exhibitor pass hangs from, and on a show floor it is worn all day — which makes it one of the cheapest ways to keep a logo in front of a crowd for hours at a time. Choose polyester or nylon for a clean one- or two-colour imprint, woven or tubular for a heavier feel, or full-colour dye sublimation for artwork with gradients or photography. Every lanyard is finished with the attachment style you pick — swivel hook, bulldog clip, split ring or cell phone loop — and a breakaway safety clasp can be added to any of them.',
+    features: [
+      'Polyester, nylon, woven, tubular or full-colour dye-sublimated printing',
+      '5/8", 3/4" or 1" widths, 36" standard loop length',
+      'Swivel hook, bulldog clip, split ring or cell phone loop attachment',
+      'Optional breakaway safety clasp',
+      'One- or two-sided imprint, from one colour up to full colour'
+    ],
+    whatsIncluded: [
+      'Your lanyards, printed and finished with the attachment style you chose.',
+      'A breakaway clasp only where you add one to the order.',
+      'No badge holder or ID card — see Custom Lanyards\' related products for those.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Custom Lanyards',
+    seoDescription:
+      'Custom printed lanyards in polyester, nylon, woven or dye sublimation. Choose width, attachment style and an optional breakaway clasp. Free artwork proof.',
+    related: ['silicone-wristbands', 'business-cards-16pt-matte', 'standard-retractable-banner'],
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
+      // the page, the Product schema and the Merchant feed from claiming a
+      // number. Add a quantityTiers price table and delete quoteOnly to publish.
+      quoteOnly: true,
+      baseLabel: 'Custom Lanyards',
+      optionGroups: [
+        {
+          id: 'style', label: 'Material', type: 'select', choices: [
+            { id: 'polyester', label: 'Polyester', default: true },
+            { id: 'nylon', label: 'Nylon', default: false },
+            { id: 'woven', label: 'Woven', default: false },
+            { id: 'tubular', label: 'Tubular', default: false },
+            { id: 'dye-sub', label: 'Full-Colour Dye Sublimation', default: false }
+          ]
+        },
+        {
+          id: 'width', label: 'Width', type: 'select', choices: [
+            { id: '5-8in', label: '5/8"', default: true },
+            { id: '3-4in', label: '3/4"', default: false },
+            { id: '1in', label: '1"', default: false }
+          ]
+        },
+        {
+          id: 'attachment', label: 'Attachment', type: 'select', choices: [
+            { id: 'swivel-hook', label: 'Swivel Hook', default: true },
+            { id: 'bulldog-clip', label: 'Bulldog Clip', default: false },
+            { id: 'split-ring', label: 'Split Ring', default: false },
+            { id: 'phone-loop', label: 'Cell Phone Loop', default: false }
+          ]
+        },
+        {
+          id: 'breakaway', label: 'Safety clasp', type: 'select', choices: [
+            { id: 'standard', label: 'Standard (no breakaway)', default: true },
+            { id: 'breakaway', label: 'Breakaway Safety Clasp', default: false }
+          ]
+        },
+        {
+          id: 'sides', label: 'Imprint', type: 'select', choices: [
+            { id: 'one-side', label: 'One side', default: true },
+            { id: 'two-sides', label: 'Both sides', default: false }
+          ]
+        },
+        {
+          id: 'quantity', label: 'Quantity', type: 'select', choices: [
+            { id: '100', label: '100', default: true },
+            { id: '250', label: '250', default: false },
+            { id: '500', label: '500', default: false },
+            { id: '1000', label: '1,000', default: false },
+            { id: '2500', label: '2,500', default: false },
+            { id: '5000', label: '5,000', default: false },
+            { id: '10000', label: '10,000', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'silicone-wristbands',
+    faqs: [
+      { q: 'What are the wristbands made of?', a: '100% silicone with a soft-touch, matte finish and rounded edges, sized to sit comfortably on an adult or youth wrist without a clasp or closure.' },
+      { q: 'What imprint styles are available?', a: 'Screen printed for a one- or two-colour logo, debossed for a recessed design pressed into the band, embossed for a raised design, or debossed with the recess colour-filled to match your logo. Screen printing is the fastest and least expensive of the four.' },
+      { q: 'What sizes and widths can I order?', a: 'Adult (8" / 202mm) and youth (7" / 180mm) circumference, in 1/2", 3/4" or 1" widths.' },
+      { q: 'What colours are available?', a: 'Solid colours from our standard range, or a custom PMS match for an exact brand colour. Segmented and swirl colour bands are available on request — ask when you request your quote.' },
+      { q: 'What is the minimum quantity?', a: '100 wristbands, and we print up to 10,000 in a single run.' },
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready vector file (AI, EPS or PDF) with fonts outlined, in the imprint colour(s) you have chosen. We check every file at no charge and send a free proof before printing.' }
+    ],
+    specs: [
+      ['Material', '100% silicone, matte finish, rounded edges'],
+      ['Size', 'Adult (8" / 202mm) or Youth (7" / 180mm)'],
+      ['Width', '1/2", 3/4" or 1"'],
+      ['Imprint', 'Screen printed, debossed, embossed, or debossed & colour-filled'],
+      ['Colour', 'Standard solid colours or custom PMS match'],
+      ['Quantities', '100 to 10,000']
+    ],
+    applications: [
+      'A giveaway at the booth that keeps the logo visible long after the show ends',
+      'Event or day-pass wristbands for staff and VIP access at a trade show',
+      'A low-cost branded item to pair with a bigger booth order',
+      'Fundraiser and awareness-campaign bands ordered in bulk'
+    ],
+    active: true,
+    name: 'Silicone Wristbands',
+    category: 'marketing-essentials',
+    badge: 'New',
+    emoji: '🎗️',
+    quoteOnly: true,
+    tagline: 'Custom silicone wristbands, screen printed, debossed or embossed, in adult and youth sizes, from 100 to 10,000.',
+    description:
+      'A silicone wristband is worn, not handed out and forgotten — which makes it one of the more durable branded takeaways for a show floor or a fundraiser table. Every band is 100% silicone with a soft matte finish and rounded edges, in adult or youth sizing and a choice of three widths. Pick a screen-printed imprint for a fast, low-cost one- or two-colour logo, or debossed and embossed styles for a design that is pressed into the band itself — debossed can also be colour-filled so the recessed design matches your logo exactly.',
+    features: [
+      '100% silicone with a soft matte finish and rounded edges',
+      'Adult (8") or youth (7") sizing',
+      '1/2", 3/4" or 1" widths',
+      'Screen printed, debossed, embossed, or debossed & colour-filled imprint',
+      'Standard solid colours or a custom PMS match'
+    ],
+    whatsIncluded: [
+      'Your wristbands, in the size, width and imprint style you chose.',
+      'A custom PMS colour match only where you request one.',
+      'No individual bagging unless you add it to your quote request.'
+    ],
+    // TODO_TURNAROUND — no confirmed production figure from the supplier for
+    // this item. Rather than publish a placeholder or invent days, the page
+    // says what is true: it is quoted. Replace this line with the real
+    // production time when the supplier gives one.
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Custom Silicone Wristbands',
+    seoDescription:
+      'Custom silicone wristbands, screen printed, debossed or embossed, in adult and youth sizes and a custom colour match. Free artwork proof, from 100 to 10,000.',
+    related: ['custom-lanyards', 'business-cards-16pt-matte', 'standard-retractable-banner'],
+    pricing: {
+      model: 'configured',
+      // TODO_PRICE — supplier pricing not set yet. quoteOnly keeps the card,
+      // the page, the Product schema and the Merchant feed from claiming a
+      // number. Add a quantityTiers price table and delete quoteOnly to publish.
+      quoteOnly: true,
+      baseLabel: 'Silicone Wristbands',
+      optionGroups: [
+        {
+          id: 'size', label: 'Size', type: 'select', choices: [
+            { id: 'adult', label: 'Adult (8")', default: true },
+            { id: 'youth', label: 'Youth (7")', default: false }
+          ]
+        },
+        {
+          id: 'width', label: 'Width', type: 'select', choices: [
+            { id: '1-2in', label: '1/2"', default: true },
+            { id: '3-4in', label: '3/4"', default: false },
+            { id: '1in', label: '1"', default: false }
+          ]
+        },
+        {
+          id: 'imprintStyle', label: 'Imprint style', type: 'select', choices: [
+            { id: 'screen-print', label: 'Screen Printed', default: true },
+            { id: 'debossed', label: 'Debossed', default: false },
+            { id: 'embossed', label: 'Embossed', default: false },
+            { id: 'debossed-color-filled', label: 'Debossed & Colour-Filled', default: false }
+          ]
+        },
+        {
+          id: 'color', label: 'Color', type: 'select', choices: [
+            { id: 'black', label: 'Black', default: true },
+            { id: 'white', label: 'White', default: false },
+            { id: 'red', label: 'Red', default: false },
+            { id: 'blue', label: 'Blue', default: false },
+            { id: 'green', label: 'Green', default: false },
+            { id: 'yellow', label: 'Yellow', default: false },
+            { id: 'orange', label: 'Orange', default: false },
+            { id: 'purple', label: 'Purple', default: false },
+            { id: 'custom-pms', label: 'Custom PMS Match', default: false }
+          ]
+        },
+        {
+          id: 'quantity', label: 'Quantity', type: 'select', choices: [
+            { id: '100', label: '100', default: true },
+            { id: '250', label: '250', default: false },
+            { id: '500', label: '500', default: false },
+            { id: '1000', label: '1,000', default: false },
+            { id: '2500', label: '2,500', default: false },
+            { id: '5000', label: '5,000', default: false },
+            { id: '10000', label: '10,000', default: false }
           ]
         }
       ]

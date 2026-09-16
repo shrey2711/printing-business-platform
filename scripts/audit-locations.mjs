@@ -98,7 +98,10 @@ for (const r of recs) {
 }
 
 const indexed = recs.filter((r) => !r.noindex);
-const flagged = indexed.filter((r) => r.flag.startsWith('REVIEW'));
+// Anything not "Keep/index" needs review. (This used to test for a 'REVIEW'
+// prefix that the flag taxonomy above no longer emits, so it always matched
+// nothing and the report claimed 0 flagged regardless of the measured dupPct.)
+const flagged = indexed.filter((r) => !r.flag.startsWith('Keep/index'));
 recs.sort((a, b) => Number(b.noindex) - Number(a.noindex) || b.dupPct - a.dupPct);
 
 const row = (r) => `| ${r.path} | ${r.words} | ${r.dupPct}% | ${r.uniqueHeadings} | ${r.noindex ? 'noindex' : 'index'} | ${r.inSitemap ? 'yes' : 'no'} | ${r.links} | ${r.flag} |`;

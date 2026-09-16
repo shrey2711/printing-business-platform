@@ -47,3 +47,6 @@ directus/*.txt
 .lh-*.json
 .acceptance-seo.json
 .seo-override-fixture.json
+.vercel
+.env*
+.claude/

@@ -4,7 +4,7 @@ import { list as getProducts } from '../services/cms/productService';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../data/citySeo';
+import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../data/citySeo';
 import { CITY_BOOTH_GUIDES } from '../data/internalLinks';
 import { CITY_PRODUCT_PAGES } from '../data/cityProductPages';
 import { cityDetailFor } from '../data/cityDetail';
@@ -88,7 +88,7 @@ export default function CityCategoryPage({ categoryKey }) {
   const indexed = city && city.tier <= 2;
   useDocumentMeta(
     city
-      ? (cat.slug === 'trade-show-displays' ? cityDisplaysTitle(city) : `${cat.label} in ${cityWithAbbr(city)}`)
+      ? (cat.slug === 'trade-show-displays' ? cityDisplaysTitle(city) : cityCatTitle(cat.label, city))
       : cat?.label || 'Location',
     city ? ((cat.slug === 'trade-show-displays' && detail?.metaDescription) ? detail.metaDescription : cityCatDescription(cat.label, city)) : undefined,
     city

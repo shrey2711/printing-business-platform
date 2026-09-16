@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { trackSignUp } from '../lib/analytics';
 
 export default function RegisterPage() {
   useDocumentMeta('Create Account', undefined, undefined, 'noindex, follow');
@@ -20,6 +21,7 @@ export default function RegisterPage() {
     setBusy(true);
     try {
       const data = await register(form);
+      trackSignUp();
       // If email confirmation is on, there is no active session yet.
       if (data?.session) {
         navigate('/account');

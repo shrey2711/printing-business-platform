@@ -19,14 +19,23 @@ const setAttr = (html, re, value) =>
 
 // Replace the single head tags with per-route values. Only fields that are
 // provided (non-null/undefined) are touched.
-export function applyMeta(html, { title, description, canonical, url } = {}) {
+// `socialTitle` is the og:/twitter: headline. It defaults to `title`, but the
+// caller passes the title WITHOUT the "| Brand" suffix: a share card already
+// shows the domain under the headline, so repeating the brand there only eats
+// into the ~88 characters the card will render.
+export function applyMeta(html, { title, description, canonical, url, socialTitle } = {}) {
   if (title != null) {
     html = html.replace(/<title>[\s\S]*?<\/title>/, () => `<title>${escAttr(title)}</title>`);
-    html = setAttr(html, /(<meta property="og:title" content=")[\s\S]*?(")/, title);
+    const social = socialTitle != null ? socialTitle : title;
+    html = setAttr(html, /(<meta property="og:title" content=")[\s\S]*?(")/, social);
+    // twitter:title/description were never rewritten per route, so every page
+    // shipped the homepage boilerplate on its X/Twitter card.
+    html = setAttr(html, /(<meta name="twitter:title" content=")[\s\S]*?(")/, social);
   }
   if (description != null) {
     html = setAttr(html, /(<meta name="description" content=")[\s\S]*?(")/, description);
     html = setAttr(html, /(<meta property="og:description" content=")[\s\S]*?(")/, description);
+    html = setAttr(html, /(<meta name="twitter:description" content=")[\s\S]*?(")/, description);
   }
   if (canonical != null) html = setAttr(html, /(<link rel="canonical" href=")[\s\S]*?(")/, canonical);
   if (url != null) html = setAttr(html, /(<meta property="og:url" content=")[\s\S]*?(")/, url);

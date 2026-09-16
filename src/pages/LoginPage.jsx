@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { trackLogin } from '../lib/analytics';
 
 export default function LoginPage() {
   useDocumentMeta('Sign In', undefined, undefined, 'noindex, follow');
@@ -20,6 +21,7 @@ export default function LoginPage() {
     setBusy(true);
     try {
       await login(form);
+      trackLogin();
       navigate(redirectTo);
     } catch (err) {
       setError(err.message || 'Could not sign in.');

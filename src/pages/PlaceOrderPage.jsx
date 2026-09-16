@@ -4,8 +4,9 @@ import { useAuth } from '../context/AuthContext';
 import { placeOrder, notifyOrderPlaced } from '../services/orders';
 import { startCheckout, validateCoupon } from '../services/checkout';
 import { getPrice } from '../services/api';
-import { useMoney } from '../context/CurrencyContext';
+import { useCurrency, useMoney } from '../context/CurrencyContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { trackBeginCheckout } from '../lib/analytics';
 import AddressAutocomplete from '../components/AddressAutocomplete';
 import { validateContact, formatAddress } from '../lib/contactValidation';
 import { countryOptions, POSTAL, NO_POSTAL } from '../data/countries';
@@ -16,6 +17,7 @@ export default function PlaceOrderPage() {
   useDocumentMeta('Place Your Order', undefined, undefined, 'noindex, follow');
   const { user, isAuthenticated, isSupabaseReady, loading } = useAuth();
   const money = useMoney();
+  const { currency } = useCurrency();
   const location = useLocation();
   const navigate = useNavigate();
   const incoming = location.state || {};
@@ -143,6 +145,12 @@ export default function PlaceOrderPage() {
       // Straight to payment, unless they asked to be invoiced instead.
       if (incoming.config?.slug && !payLater) {
         try {
+          trackBeginCheckout({
+            lines: [{ slug: incoming.config.slug, name: incoming.product, quantity: incoming.quantity || 1,
+              unitPrice: discounted?.total ?? null, currency }],
+            value: discounted?.total,
+            currency
+          });
           const checkout = await startCheckout(order.id, coupon?.code);
           if (checkout?.url) {
             window.location.href = checkout.url;

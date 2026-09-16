@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { trackAddToCart, trackRemoveFromCart } from '../lib/analytics';
 
 // The cart holds CONFIGURATIONS, not prices.
 //
@@ -43,6 +44,9 @@ export function CartProvider({ children }) {
 
   const value = useMemo(() => {
     const add = (line) => {
+      const quantity = Math.max(1, Number(line.quantity) || 1);
+      const unitPrice = Number.isFinite(line.unitPrice) ? line.unitPrice : null;
+      const currency = line.currency || 'USD';
       setLines((prev) => [
         ...prev,
         {
@@ -54,14 +58,21 @@ export function CartProvider({ children }) {
           specs: line.specs || '',
           image: line.image || null,
           config: line.config,
-          quantity: Math.max(1, Number(line.quantity) || 1),
-          unitPrice: Number.isFinite(line.unitPrice) ? line.unitPrice : null,
-          currency: line.currency || 'USD',
+          quantity,
+          unitPrice,
+          currency,
           addedAt: new Date().toISOString()
         }
       ]);
+      trackAddToCart({ slug: line.slug, name: line.name, quantity, unitPrice, currency });
     };
-    const remove = (lineId) => setLines((prev) => prev.filter((l) => l.lineId !== lineId));
+    const remove = (lineId) => {
+      // Read from `lines` (not inside the setLines updater) so the tracking
+      // call can't run twice under StrictMode's double-invoked updaters.
+      const line = lines.find((l) => l.lineId === lineId);
+      if (line) trackRemoveFromCart(line);
+      setLines((prev) => prev.filter((l) => l.lineId !== lineId));
+    };
     const setQuantity = (lineId, quantity) =>
       setLines((prev) => prev.map((l) => (
         l.lineId === lineId

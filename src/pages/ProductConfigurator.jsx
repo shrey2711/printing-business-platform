@@ -15,6 +15,7 @@ import { getCategoryForProduct } from '../data/categoryPages';
 import ColorwayStrip from '../components/ColorwayStrip';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
+import { trackViewItem } from '../lib/analytics';
 
 // `slug` and `embedded` let the product + city pages mount this exact
 // configurator inside their own page. Reused rather than reimplemented on
@@ -88,6 +89,7 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
         if (!alive) return;
         setProduct(p);
         setConfig(buildDefaultConfig(p));
+        trackViewItem({ slug, name: p?.name, price: p?.startingPrice, currency });
       })
       .catch(() => alive && setNotFound(true))
       .finally(() => alive && setLoading(false));

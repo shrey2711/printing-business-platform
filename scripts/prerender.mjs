@@ -2,9 +2,10 @@
 // get real content (H1, description, price, internal links) + unique meta +
 // JSON-LD in the initial HTML — without a full SSR framework. React still
 // hydrates on top for the interactive app.
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'fs';
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'path';
+import { ogVariantPath } from './lib/og-image.mjs';
 import { fileURLToPath } from 'url';
 
 import { listProducts, getProduct, startingPriceFor, priceDisplayFor } from '../backend/data/products.js';
@@ -22,7 +23,7 @@ import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
-import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../src/data/citySeo.js';
+import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../src/data/citySeo.js';
 import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
@@ -38,6 +39,7 @@ import { resolveContent, resolveList } from '../src/data/content.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
+const PUBLIC_DIR = join(__dirname, '..', 'public');
 const ORIGIN = brand.origin;
 const BRAND = brand.name;
 
@@ -49,11 +51,13 @@ const esc = (s = '') =>
 // Keep SEO titles within ~60 chars. Source strings hold raw "&", so .length
 // equals the rendered length. Drop the optional tail first, then the brand
 // suffix, so a long name (e.g. a long province) never overflows the title.
+// Fit to 60: Google cuts the SERP title around 600px / ~60 characters, so a
+// 62-char title reliably loses its last word.
 const fitTitle = (main, tail = '') => {
   const withAll = `${main}${tail} | ${BRAND}`;
-  if (withAll.length <= 62) return withAll;
+  if (withAll.length <= 60) return withAll;
   const withBrand = `${main} | ${BRAND}`;
-  return withBrand.length <= 62 ? withBrand : main;
+  return withBrand.length <= 60 ? withBrand : main;
 };
 
 // Shared crawlable navigation, on every prerendered page.
@@ -186,7 +190,13 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   const url = ORIGIN + path;
   // Function-replacer based tag rewriting (see scripts/lib/seo-meta.mjs) — never
   // `$1…$2` strings, so a "$140" in a value can't be read as a capture-group ref.
-  let html = applyMeta(template, { title, description, canonical, url });
+  let html = applyMeta(template, {
+    title,
+    description,
+    canonical,
+    url,
+    socialTitle: title.replace(new RegExp(`\\s*\\|\\s*${BRAND.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`), '')
+  });
   // Social titles default to the SEO title and description (applyMeta already
   // set them). These override only when the editor wants the share card to read
   // differently from the search result.
@@ -200,15 +210,37 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   }
 
   // Route-specific raster OG image (reuse real product/gallery photos). The
-  // template ships a generic 1200×630 SVG as the fallback; when a page supplies
-  // its own raster we swap og:image + twitter:image and drop the hardcoded
-  // 1200×630 dimensions (the real photo may be a different size).
+  // template ships a generic 1200×630 raster as the fallback; when a page
+  // supplies its own we swap og:image + twitter:image. The hardcoded 1200×630
+  // dimensions are kept only when the image really is that size — i.e. when a
+  // social variant was used — and dropped otherwise.
   if (image) {
+    // Prefer the 1200x630 social variant when one has been generated (see
+    // scripts/gen-og-images.mjs). Product photos are square, and a square image
+    // in a summary_large_image card gets centre-cropped to 1.91:1 — the variant
+    // letterboxes the whole photo instead. Falls back to the original when no
+    // variant exists, so a new image is never broken by this.
+    // Callers pass either a site-relative path or an already-absolute URL on
+    // our own origin (e.g. CANOPY_OG), so normalise before looking for a variant.
+    const localPath = image.startsWith(`${ORIGIN}/`)
+      ? image.slice(ORIGIN.length)
+      : (/^https?:/.test(image) ? null : image);
+    const variant = localPath && localPath.startsWith('/images/') && !localPath.startsWith('/images/og')
+      ? ogVariantPath(localPath)
+      : null;
+    const usedVariant = Boolean(variant && existsSync(join(PUBLIC_DIR, variant.replace(/^\//, ''))));
+    if (usedVariant) image = variant;
     const absImg = /^https?:/.test(image) ? image : ORIGIN + image;
     html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, (_m, a, b) => a + esc(absImg) + b);
     html = html.replace(/(<meta name="twitter:image" content=")[^"]*(")/, (_m, a, b) => a + esc(absImg) + b);
     if (imageAlt) html = html.replace(/(<meta property="og:image:alt" content=")[^"]*(")/, (_m, a, b) => a + esc(imageAlt) + b);
-    html = html.replace(/\s*<meta property="og:image:width"[^>]*>/, '').replace(/\s*<meta property="og:image:height"[^>]*>/, '');
+    // A social variant is exactly 1200×630, so the template's dimensions still
+    // hold and are worth keeping — they let a scraper lay the card out before
+    // it has fetched the image. Any other image may be a different size, so the
+    // honest move is to drop them rather than ship a wrong number.
+    if (!usedVariant) {
+      html = html.replace(/\s*<meta property="og:image:width"[^>]*>/, '').replace(/\s*<meta property="og:image:height"[^>]*>/, '');
+    }
   }
   // LCP preload: start fetching the above-the-fold hero image before the JS
   // bundle parses, so it isn't discovered late (only where a page sets it).
@@ -899,7 +931,7 @@ for (const lc of LOCAL_CATEGORIES) {
         path: `/${lc.slug}/${city.slug}`,
         title: lc.slug === 'trade-show-displays'
           ? cityDisplaysTitle(city)
-          : `${lc.label} in ${cityWithAbbr(city)} | ${BRAND}`,
+          : `${cityCatTitle(lc.label, city)} | ${BRAND}`,
         description: (lc.slug === 'trade-show-displays' && detail?.metaDescription) ? detail.metaDescription : cityCatDescription(lc.label, city),
         image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,
@@ -1417,8 +1449,12 @@ const stateDescription = (s, content, areaWord) => {
   // deterministic per state, so a rebuild never reshuffles descriptions
   const seed = [...s.slug].reduce((n, ch) => n + ch.charCodeAt(0), 0);
   const ordered = shapes.map((_, i) => shapes[(seed + i) % shapes.length]);
-  const candidates = ordered.map((b) => b()).filter((d) => d.length >= 140 && d.length <= 165);
-  return candidates[0] || ordered.map((b) => b()).sort((a, b) => Math.abs(152 - a.length) - Math.abs(152 - b.length))[0] || fallback;
+  const candidates = ordered.map((b) => b()).filter((d) => d.length >= 140 && d.length <= 160);
+  if (candidates[0]) return candidates[0];
+  // No shape landed in range — take the closest to 152, but never one that
+  // would truncate, so a short-event state still gets a clean snippet.
+  const rest = ordered.map((b) => b()).sort((a, b) => Math.abs(152 - a.length) - Math.abs(152 - b.length));
+  return rest.find((d) => d.length <= 160) || fallback;
 };
 
 // A product list item carrying the product's real photo. Category and landing
@@ -1584,7 +1620,7 @@ for (const s of territories) {
         path: `/locations/${s.slug}/${citySlug}`,
         canonical: canonicalCity ? `${ORIGIN}/trade-show-displays/${canonicalCity.slug}` : undefined,
         title: `Custom Canopy Tents in ${c}, ${s.abbr} | ${BRAND}`,
-        description: `Order custom printed canopy tents in ${c}, ${s.name} with instant online pricing and fast shipping.`,
+        description: `Custom printed canopy tents for ${c}, ${s.name} trade shows and outdoor events — configure size and printed walls online for an instant price.`,
         // Priority cities have unique content and are indexed; the rest stay
         // noindex to avoid doorway-page risk.
         robots: cityIsPriority ? undefined : 'noindex, follow',
@@ -1739,7 +1775,7 @@ routes.push(() => {
   ].map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('');
   return render({
     path: '/blog',
-    title: `Trade Show Display Guides & Buying Resources | ${BRAND}`,
+    title: `Trade Show Display Guides & Resources | ${BRAND}`,
     description:
       'Buying guides, size charts and setup tips for trade show displays — canopy tents, banner stands, table covers, backdrops, booth planning and artwork prep.',
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Resources</span></nav>

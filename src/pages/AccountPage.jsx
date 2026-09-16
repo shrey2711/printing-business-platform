@@ -7,6 +7,7 @@ import StatusTimeline from '../components/StatusTimeline';
 import { useCurrency } from '../context/CurrencyContext';
 import { formatCharged } from '../lib/money';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { trackPurchase } from '../lib/analytics';
 
 const statusColor = {
   submitted: 'st-blue',
@@ -57,9 +58,18 @@ export default function AccountPage() {
   useEffect(() => {
     if (!isAuthenticated) return;
     (async () => {
-      if (params.get('checkout') === 'success' && params.get('order')) {
-        const { paid } = await confirmCheckout(params.get('order')).catch(() => ({ paid: false }));
+      if (params.get('checkout') === 'success' && (params.get('order') || params.get('cart'))) {
+        const orderId = params.get('order');
+        const cartId = params.get('cart');
+        const { paid, amountTotal, currency } = await confirmCheckout({ orderId, cartId }).catch(() => ({ paid: false }));
         setPayMsg(paid ? 'Payment received — thank you! Your order is now paid.' : '');
+        // Dedupe: a StrictMode double-invoke or a repeat visit to this same
+        // success URL must never double-count revenue in GA4.
+        const seenKey = `apex.purchase-tracked.${orderId || cartId}`;
+        if (paid && amountTotal != null && !sessionStorage.getItem(seenKey)) {
+          trackPurchase({ transactionId: orderId || cartId, value: amountTotal, currency: currency || 'USD' });
+          try { sessionStorage.setItem(seenKey, '1'); } catch { /* private mode */ }
+        }
       } else if (params.get('checkout') === 'canceled') {
         setPayMsg('Checkout canceled. Your order was saved — you can pay any time below.');
       }

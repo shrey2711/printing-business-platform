@@ -5,6 +5,7 @@ import { ARTWORK_SPEC, MAX_LABEL, validateArtwork, validatePdfPages } from '../l
 import { validateContact, formatAddress } from '../lib/contactValidation';
 import { countryOptions, POSTAL, NO_POSTAL, DIAL } from '../data/countries';
 import AddressAutocomplete from '../components/AddressAutocomplete';
+import { trackGenerateLead } from '../lib/analytics';
 
 // Built once: 235 entries, and the list never changes while the page is open.
 const COUNTRIES = countryOptions();
@@ -125,6 +126,7 @@ export default function QuotePage() {
 
       const res = await submitQuote(payload);
       setReference(res.reference || '');
+      trackGenerateLead({ leadType: 'quote_request' });
       setStatus({ type: 'success', message: 'Quote request sent! Our team will reach out shortly.' });
       setFormData({ ...initialState, product: formData.product });
       setFile(null);

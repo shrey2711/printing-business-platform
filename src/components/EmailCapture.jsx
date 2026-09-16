@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { subscribeEmail } from '../services/api';
+import { trackGenerateLead } from '../lib/analytics';
 
 // Email capture, used in two places with different framing:
 //   variant="proof"  — inside the configurator, where the visitor is already
@@ -29,6 +30,7 @@ export default function EmailCapture({ variant = 'footer', source, city }) {
     setState('sending');
     try {
       await subscribeEmail({ email: value, source: source || variant, city });
+      trackGenerateLead({ leadType: proof ? 'free_proof_email' : 'newsletter_email' });
       setState('done');
       setMessage(proof
         ? 'Thanks — we’ll send artwork guidance and your proof details to that address.'

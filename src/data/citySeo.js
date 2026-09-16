@@ -1,3 +1,5 @@
+import { brand } from '../config/brand.js';
+
 // City × category local SEO landing pages (from Apex_Trade_Show_US_City_SEO_Keywords.xlsx).
 //
 // URL structure: /trade-show-canopies/[city], /trade-show-displays/[city],
@@ -107,10 +109,23 @@ export const SEO_CITIES = [
 export const cityDisplaysTitle = (city) => {
   // use the same display name as the H1 so the SERP title and the page agree
   const base = `Trade Show Displays in ${city.h1City || city.city}`;
-  for (const suffix of [' | Custom Booths & Event Displays', ' | Custom Booths & Displays', ' | Booths & Event Displays', ' | Booths & Displays']) {
-    if ((base + suffix).length <= 62) return base + suffix;
+  // Fit to 60, not 62: Google truncates the SERP title around 600px / ~60
+  // characters, so a 62-char title reliably loses its last word.
+  for (const suffix of [' | Custom Booths & Event Displays', ' | Custom Booths & Displays', ' | Booths & Event Displays', ' | Booths & Displays', ' | Custom Booths', ' | Booths']) {
+    if ((base + suffix).length <= 60) return base + suffix;
   }
   return base;
+};
+
+// Title for every OTHER city × category page (the displays one uses the
+// descriptive suffix above). Returns the title WITHOUT the brand — the
+// prerenderer appends it, and useDocumentMeta appends it on the client, so both
+// stay in parity. Long city names drop the state abbreviation rather than
+// letting the finished title run past the ~60-char SERP cut.
+export const cityCatTitle = (label, city) => {
+  const suffixLen = ` | ${brand.name}`.length;
+  const withAbbr = `${label} in ${cityWithAbbr(city)}`;
+  return withAbbr.length + suffixLen <= 60 ? withAbbr : `${label} in ${city.city}`;
 };
 
 // §8 meta description for a city × category page: unique per city, ~140–160
@@ -119,7 +134,7 @@ export const cityDisplaysTitle = (city) => {
 export const cityCatDescription = (label, city) => {
   const L = label.toLowerCase();
   const full = `Custom ${L} for ${city.city} trade shows and events — printed to order with instant online pricing, a free artwork proof, and US shipping.`;
-  if (full.length <= 165) return full;
+  if (full.length <= 160) return full;
   return `Custom ${L} for ${city.city} trade shows — printed to order with instant online pricing, a free artwork proof, and US shipping.`;
 };
 

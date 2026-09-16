@@ -883,7 +883,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'Canopy Print Coverage Explained',
       description:
-        'Understand canopy print coverage — the top, valance, walls and inside underside — and what to print on each surface for maximum branding, full-bleed dye sublimation.'
+        'Understand canopy print coverage — the top, valance, walls and inside underside — and what to print on each surface for maximum branding.'
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-05T12:00:00.000Z',
@@ -1059,7 +1059,7 @@ export const STATIC_ARTICLES = [
     seo: {
       title: 'Trade Show Display Setup & Care Guide',
       description:
-        'Step-by-step setup, teardown, cleaning and storage for canopies, banner stands, backdrops and table covers — keep your trade show displays looking new for years.'
+        'Step-by-step setup, teardown, cleaning and storage for canopies, banner stands, backdrops and table covers — keep your displays looking new for years.'
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-21T00:00:00.000Z',

@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { startCartCheckout, validateCoupon } from '../services/checkout';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { trackBeginCheckout } from '../lib/analytics';
 
 // The cart.
 //
@@ -43,6 +44,7 @@ export default function CartPage() {
     setError('');
     setBusy(true);
     try {
+      trackBeginCheckout({ lines, value: subtotal, currency });
       const res = await startCartCheckout({
         lines: lines.map((l) => ({ config: l.config, specs: l.specs })),
         coupon: coupon?.code,

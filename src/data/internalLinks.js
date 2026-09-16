@@ -9,10 +9,11 @@ export const CATEGORY_GUIDES = {
   tents: ['10x10-vs-10x15-vs-10x20-custom-canopy-tents', 'custom-canopy-tent-wall-options-explained', 'trade-show-display-cost'],
   'table-covers': ['pleated-vs-stretch-table-cover', '6ft-vs-8ft-table-cover', 'trade-show-display-setup-and-care-guide'],
   'banner-stands': ['standard-vs-deluxe-retractable-banner', 'x-stand-vs-retractable-banner', 'what-size-retractable-banner'],
-  backdrops: ['trade-show-backdrop-size-guide', 'trade-show-booth-design-guide', 'print-coverage-explained'],
+  backdrops: ['trade-show-backdrop-size-guide', 'step-and-repeat-vs-tension-fabric-backdrop', 'trade-show-booth-design-guide'],
   banners: ['banner-materials-explained', 'trade-show-display-setup-and-care-guide', 'trade-show-display-cost'],
   flags: ['feather-angled-vs-convex-vs-teardrop-flags', 'trade-show-booth-design-guide', 'trade-show-display-setup-and-care-guide'],
-  'seg-kits': ['seg-modular-kit-a-vs-b-vs-c', 'trade-show-booth-design-guide', 'trade-show-display-cost']
+  'seg-kits': ['seg-modular-kit-a-vs-b-vs-c', 'trade-show-booth-design-guide', 'trade-show-display-cost'],
+  'rigid-signs': ['coroplast-vs-pvc-vs-aluminum-signs', 'print-coverage-explained', 'trade-show-booth-checklist']
 };
 export const DEFAULT_GUIDES = ['trade-show-booth-checklist', 'trade-show-display-cost', 'trade-show-booth-design-guide'];
 
@@ -35,7 +36,9 @@ export const GUIDE_PRODUCTS = {
   'seg-modular-kit-a-vs-b-vs-c': ['seg-modular-trade-show-kit-a', 'seg-modular-trade-show-kit-b', 'seg-modular-trade-show-kit-c', 'step-and-repeat-backdrop'],
   'banner-materials-explained': ['13oz-vinyl-banner', '18oz-blockout-banner', 'mesh-banner', 'fabric-banner-9oz-wrinkle-free'],
   'trade-show-booth-design-guide': ['step-and-repeat-backdrop', 'standard-retractable-banner', 'canopy-tent-10x10', 'pleated-table-covers'],
-  'trade-show-display-setup-and-care-guide': ['canopy-tent-10x10', 'standard-retractable-banner', 'step-and-repeat-backdrop', 'pleated-table-covers']
+  'trade-show-display-setup-and-care-guide': ['canopy-tent-10x10', 'standard-retractable-banner', 'step-and-repeat-backdrop', 'pleated-table-covers'],
+  'coroplast-vs-pvc-vs-aluminum-signs': ['coroplast-signs', 'pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
+  'step-and-repeat-vs-tension-fabric-backdrop': ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'standard-retractable-banner', 'pleated-table-covers']
 };
 export const DEFAULT_PRODUCTS = ['canopy-tent-10x10', 'standard-retractable-banner', 'pleated-table-covers', 'step-and-repeat-backdrop'];
 

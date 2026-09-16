@@ -18,11 +18,13 @@ export async function startCheckout(orderId, coupon, currency) {
 }
 
 // Confirm payment after returning from Stripe; returns { paid: boolean }.
-export async function confirmCheckout(orderId) {
+// Pass whichever the redirect carried: a single orderId, or a cartId for a
+// multi-item cart checkout (those share one Stripe session across N orders).
+export async function confirmCheckout({ orderId, cartId } = {}) {
   const res = await fetch('/api/checkout/confirm', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
-    body: JSON.stringify({ orderId })
+    body: JSON.stringify({ orderId, cartId })
   });
   if (!res.ok) return { paid: false };
   return res.json();

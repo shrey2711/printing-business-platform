@@ -16,7 +16,7 @@ export const SIZES = [
     guide: {
       title: '10x10 Canopy Tent Size Guide',
       metaDescription:
-        '10x10 canopy tent size guide — 100 sq ft footprint, how many tables and people it fits, booth layout ideas, wall options, and how it compares to a 10x15 or 10x20.',
+        '10x10 canopy tent size guide — 100 sq ft footprint, how many tables and people it fits, booth layout ideas, and how it compares to a 10x15 or 10x20.',
       footprint: '100 sq ft — 10 ft wide × 10 ft deep, roughly 6.5–7 ft of clearance under the valance.',
       capacity: [
         'Seats 2–3 staff comfortably behind a counter or table.',
@@ -178,7 +178,7 @@ export const SOLUTIONS = [
     blurb: 'Menu on the valance, shade over the queue.',
     guide: {
       metaDescription:
-        'Custom printed food and concession canopy tents — menu and pricing on the printed valance, shade over the queue and seating, and an open layout for a service window.',
+        'Custom printed food and concession canopy tents — menu and pricing on the printed valance, shade over the queue, and an open layout for a service window.',
       intro:
         'For food and concession, the tent works your line for you. Print your menu and pricing on the valance so the queue reads it while they wait, keep customers and staff out of the sun, and leave the front open as a service window. It also sets up and breaks down fast between events.',
       focus: [
@@ -224,7 +224,7 @@ export const SOLUTIONS = [
     blurb: 'Shade and a visible company mark on active sites.',
     guide: {
       metaDescription:
-        'Custom printed job site and safety canopy tents — shade for breaks and briefings, a visible company mark on active sites, and weights or stakes for exposed ground.',
+        'Custom printed job site and safety canopy tents — shade for breaks and briefings, a visible company mark on active sites, and weights for exposed ground.',
       intro:
         'On an active site a printed tent marks your crew\'s area, shades breaks, briefings and a first-aid or sign-in point, and carries the company name where clients and the public can see it. It needs to stand up to sun and wind day after day and anchor securely on open ground.',
       focus: [
