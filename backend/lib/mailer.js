@@ -21,17 +21,41 @@ const CONTACT_PHONE_HREF = `tel:${(process.env.CONTACT_PHONE_HREF || CONTACT_PHO
 const CONTACT_HOURS = process.env.CONTACT_HOURS || 'Mon–Fri, 8am–6pm ET';
 
 // --- Brand palette (official brand colors) -------------------------------
+// Navy and red are the official brand colours, used exactly as given. The rest
+// is support, deliberately narrow: one paper tint behind data, one hairline,
+// and a status set that has to read as meaning rather than as decoration.
 const C = {
-  navy: '#0b1f4d',   // deep brand navy for headings
-  red: '#ED1C24',    // brand red  (C0 M100 Y100 K0)
-  green: '#2f9e44',
-  amber: '#e8590c',
-  blue: '#1f8fd6',
-  ink: '#2b323c',
-  muted: '#6b7480',
-  line: '#e4e9f2',
-  bg: '#f4f6f8'
+  navy: '#0b1f4d',    // brand navy — the docket head, headings, primary action
+  red: '#ED1C24',     // brand red (C0 M100 Y100 K0) — the rule under the logo
+  ink: '#141b2e',     // body copy
+  muted: '#69738a',   // labels and captions
+  line: '#dfe4ee',    // hairlines
+  stock: '#f7f9fc',   // the paper stock data sits on
+  bg: '#eceff5',      // the desk the ticket sits on
+  green: '#1a7a4a',
+  greenBg: '#e8f5ee',
+  amber: '#8a5200',
+  amberBg: '#fff4e2',
+  blue: '#1f6fd0',
+  blueBg: '#e9f2fd'
 };
+
+// Two voices, and the whole design rests on keeping them apart.
+//
+// Sans is for anything written to a person. Mono is for anything read off a
+// job ticket — order numbers, quantities, specifications, tracking, money. A
+// print shop reads dockets in mono, and at a glance it stops data being
+// mistaken for prose. Web fonts do not load in Outlook or Gmail's desktop
+// client, so the personality has to come from the pairing and the structure,
+// not from a typeface nobody will receive.
+const SANS = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
+const MONO = "ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono','Courier New',monospace";
+
+// Defined here rather than beside the quote templates because every block
+// below escapes what it renders. Order details come from a configurator and a
+// checkout form, and they are interpolated straight into HTML.
+const esc = (s) =>
+  String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 const STEPS = ['submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'];
 const STEP_LABEL = {
@@ -114,44 +138,56 @@ function getLogoAttachment() {
 }
 
 // --- Building blocks ------------------------------------------------------
+// The layout is a print job ticket: a docket head saying what is being made, a
+// band saying what is blocking it, and the specification set the way a print
+// job is actually specified. Everything is a table, because that is the only
+// layout primitive Outlook's Word rendering engine can be trusted with.
+
 function header() {
   // `cid:` resolves to the inline attachment added in send(); email clients that
   // block remote images still show it. src falls back to the URL if not inlined.
   return `
-  <tr><td align="center" style="background:#ffffff;padding:26px 28px 16px;text-align:center;">
+  <tr><td align="center" style="background:#ffffff;padding:24px 28px 18px;text-align:center;">
     <a href="${SITE_URL}" style="text-decoration:none;">
       <img src="cid:${LOGO_CID}" alt="${BRAND}" width="207" height="47" style="display:block;width:207px;height:47px;border:0;outline:none;margin:0 auto;" />
     </a>
   </td></tr>
-  <tr><td style="height:4px;line-height:4px;font-size:0;background:${C.red};">&nbsp;</td></tr>`;
+  <tr><td style="height:3px;line-height:3px;font-size:0;background:${C.red};">&nbsp;</td></tr>`;
 }
 
 function footer() {
   return `
-  <tr><td style="background:${C.bg};padding:22px 28px;border-top:1px solid ${C.line};font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.7;">
+  <tr><td class="gutter" style="background:${C.stock};padding:20px 28px;border-top:1px solid ${C.line};font-family:${SANS};font-size:12px;color:${C.muted};line-height:1.7;">
     <strong style="color:${C.navy};font-size:13px;">${BRAND}</strong><br/>
-    <a href="${CONTACT_PHONE_HREF}" style="color:${C.blue};text-decoration:none;font-weight:600;">${CONTACT_PHONE}</a> &nbsp;&middot;&nbsp;
-    <a href="mailto:${CONTACT_EMAIL}" style="color:${C.blue};text-decoration:none;font-weight:600;">${CONTACT_EMAIL}</a><br/>
-    <span style="color:#9aa3b0;">Questions? Call or reply to this email — we're happy to help.</span>
+    <a href="${CONTACT_PHONE_HREF}" style="color:${C.navy};text-decoration:none;font-weight:600;">${CONTACT_PHONE}</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:${CONTACT_EMAIL}" style="color:${C.navy};text-decoration:none;font-weight:600;">${CONTACT_EMAIL}</a><br/>
+    <span style="color:#8b94a6;">${CONTACT_HOURS} &middot; Reply to this email and a person will answer.</span>
   </td></tr>`;
 }
 
-// Bulletproof, centered CTA button.
-function button(url, label, color = C.red) {
+// Bulletproof CTA button, left-aligned. Left rather than centred because it
+// sits at the foot of a column of left-aligned facts, and a centred button in
+// that column reads as an advert dropped into a document.
+function button(url, label, color = C.navy) {
   if (!url) return '';
   return `
-  <table role="presentation" cellpadding="0" cellspacing="0" style="margin:22px 0;"><tr>
-    <td style="background:${color};border-radius:8px;">
-      <a href="${url}" style="display:inline-block;padding:13px 26px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;">${label}</a>
+  <table role="presentation" cellpadding="0" cellspacing="0" style="margin:22px 0 4px;"><tr>
+    <td style="background:${color};border-radius:6px;">
+      <a href="${url}" style="display:inline-block;padding:13px 24px;font-family:${SANS};font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;">${label}</a>
     </td>
   </tr></table>`;
 }
 
-// Horizontal 4-step progress tracker.
+// A small-caps rule that opens a section of the ticket.
+function sectionLabel(text, topPad = 22) {
+  return `<div style="font-family:${MONO};font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:${C.muted};padding:${topPad}px 0 9px;">${esc(text)}</div>`;
+}
+
+// Horizontal progress tracker.
 function progress(status) {
   if (status === 'canceled') {
-    return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;"><tr>
-      <td style="background:#fdeef0;color:${C.red};font-family:Arial,sans-serif;font-size:13px;font-weight:700;padding:12px 14px;border-radius:8px;">This order was canceled.</td></tr></table>`;
+    return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 2px;"><tr>
+      <td style="background:#fdeef0;color:${C.red};font-family:${SANS};font-size:13px;font-weight:700;padding:12px 14px;border-radius:6px;">This order was canceled.</td></tr></table>`;
   }
   // Six labelled dots in one row cannot fit a phone. Each label sat under a
   // 26px cell, so "Proof sent" and "In production" wrapped and ran into their
@@ -164,14 +200,14 @@ function progress(status) {
   const segments = STEPS.map((_, i) => {
     const done = i <= current;
     return `<td style="padding:0 2px;">
-      <div style="height:6px;border-radius:3px;background:${done ? C.green : '#e3e8ef'};font-size:0;line-height:0;">&nbsp;</div>
+      <div style="height:5px;border-radius:2px;background:${done ? C.navy : '#dbe2ee'};font-size:0;line-height:0;">&nbsp;</div>
     </td>`;
   }).join('');
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:18px 0 6px;">
-    <tr><td style="padding:0 0 7px;font-family:Arial,sans-serif;font-size:13px;color:${C.muted};">
-      Step ${current + 1} of ${STEPS.length}
-      <span style="color:${C.navy};font-weight:700;">&nbsp;&bull;&nbsp;${STEP_LABEL[STEPS[current]] || ''}</span>
-      <span style="color:${C.muted};">&nbsp;&rarr;&nbsp;next: ${current + 1 < STEPS.length ? STEP_LABEL[STEPS[current + 1]] : 'complete'}</span>
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 2px;">
+    <tr><td style="padding:0 0 8px;font-family:${MONO};font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${C.muted};">
+      Step ${current + 1}/${STEPS.length}
+      <span style="color:${C.navy};font-weight:700;">&nbsp;&middot;&nbsp;${STEP_LABEL[STEPS[current]] || ''}</span>
+      <span style="color:${C.muted};">&nbsp;&rarr;&nbsp;${current + 1 < STEPS.length ? STEP_LABEL[STEPS[current + 1]] : 'complete'}</span>
     </td></tr>
     <tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>${segments}</tr></table></td></tr>
   </table>`;
@@ -186,80 +222,153 @@ function orderDate(order) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-// The configurator packs every choice into one "•"-separated string. Right
-// aligned in a narrow table cell that becomes an unreadable wall on a phone.
-// Split it back into lines so each choice reads on its own.
-function specsList(specs) {
-  const parts = String(specs || '').split('•').map((s) => s.trim()).filter(Boolean);
-  if (parts.length < 2) return null;
-  return parts
-    .map((p) => `<div style="font-family:Arial,sans-serif;font-size:13px;line-height:1.5;color:${C.ink};padding:1px 0;">&bull;&nbsp;${p}</div>`)
-    .join('');
+// The docket head: what this email is about, stated before anything is said
+// about it. Navy, so it reads as the ticket itself rather than as more page
+// furniture, and the product is the largest thing in the email because the
+// product is the subject — of the order, of the alert, and of the question the
+// reader is about to ask.
+function ticketHead(order, eyebrow) {
+  const meta = [
+    `Qty ${esc(order.quantity || 1)}`,
+    orderDate(order) ? `Placed ${esc(orderDate(order))}` : null
+  ].filter(Boolean).join(' &nbsp;&middot;&nbsp; ');
+  return `
+  <tr><td class="gutter" style="background:${C.navy};padding:22px 28px 24px;">
+    <div style="font-family:${MONO};font-size:11px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase;color:#93a7cd;padding-bottom:10px;">
+      ${esc(eyebrow)} &nbsp;${shortId(order.id)}
+    </div>
+    <div class="head-title" style="font-family:${SANS};font-size:23px;line-height:1.25;font-weight:700;color:#ffffff;">${esc(order.product || 'Custom order')}</div>
+    ${meta ? `<div style="font-family:${SANS};font-size:13px;color:#b3c2e2;padding-top:8px;">${meta}</div>` : ''}
+  </td></tr>`;
 }
 
-// Order detail rows.
-function detailsCard(order, { showAmount = true } = {}) {
-  const rows = [];
-  rows.push(['Order', shortId(order.id)]);
-  const placed = orderDate(order);
-  if (placed) rows.push(['Order date', placed]);
-  rows.push(['Product', order.product || '—']);
-  rows.push(['Quantity', String(order.quantity || 1)]);
-  if (showAmount) {
-    const paid = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status);
-    if (paid && order.amount_total != null) rows.push(['Total paid', money(order.amount_total, order.currency)]);
-    // "Estimated" is the quote before any discount and in the currency the
-    // customer was browsing in, so it can differ sharply from what is actually
-    // charged — a 99% code turns a CAD 227.61 estimate into USD 1.65. Label it
-    // as a pre-discount quote rather than letting it read as the amount owed.
-    else if (order.estimated_price) rows.push(['Estimated (before any discount)', order.estimated_price]);
-  }
-  if (order.tracking_number) {
-    // Make the number itself the link where we know the carrier. A tracking
-    // number with no link asks the customer to work out who has their parcel
-    // and find the right site.
-    const url = trackingUrl(order.carrier, order.tracking_number);
-    const name = carrierName(order.carrier, order.tracking_number);
-    const label = `${name ? name + ' ' : ''}${order.tracking_number}`;
-    rows.push([
-      'Tracking',
-      url ? `<a href="${url}" style="color:${C.blue};text-decoration:none;font-weight:700;">${label}</a>` : label
-    ]);
-  }
+// The one fact that decides what happens next, given a band of its own rather
+// than a pill floating between paragraphs: the state on the left, the money on
+// the right, both read in a single glance.
+function statusBand({ tone, label, note, amount, amountNote }) {
+  const tones = {
+    green: [C.green, C.greenBg],
+    amber: [C.amber, C.amberBg],
+    blue: [C.blue, C.blueBg],
+    red: [C.red, '#fdeef0']
+  };
+  const [fg, bg] = tones[tone] || tones.blue;
+  return `
+  <tr><td style="padding:0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${bg};border-left:4px solid ${fg};border-bottom:1px solid ${C.line};">
+      <tr>
+        <td class="gutter" style="padding:14px 12px 14px 24px;font-family:${MONO};font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${fg};">
+          ${esc(label)}
+          ${note ? `<div style="font-family:${SANS};font-size:12px;font-weight:400;letter-spacing:0;text-transform:none;color:${C.muted};padding-top:5px;">${esc(note)}</div>` : ''}
+        </td>
+        ${amount ? `<td align="right" class="gutter" style="padding:14px 24px 14px 8px;font-family:${MONO};font-size:18px;font-weight:700;color:${C.navy};white-space:nowrap;">
+          ${esc(amount)}
+          ${amountNote ? `<div style="font-family:${SANS};font-size:11px;font-weight:400;color:${C.muted};padding-top:5px;white-space:normal;">${esc(amountNote)}</div>` : ''}
+        </td>` : ''}
+      </tr>
+    </table>
+  </td></tr>`;
+}
 
-  const body = rows
-    .map(
-      ([k, v], i) => `<tr>
-        <td style="padding:10px 0;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};white-space:nowrap;${i ? `border-top:1px solid ${C.line};` : ''}">${k}</td>
-        <td align="right" style="padding:10px 0;font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:${C.navy};${i ? `border-top:1px solid ${C.line};` : ''}">${v}</td>
-      </tr>`
-    )
-    .join('');
+// The specification, set the way a print job is actually specified.
+//
+// The configurator packs every choice into one bullet-separated string, and
+// each choice already has a "Label: value" shape. Splitting on the bullet and
+// again on the first colon turns it into a real two-column spec. Right-aligned
+// in a narrow cell it used to become an unreadable wall on a phone; as a flat
+// bullet list it read as prose. Anything that does not split keeps its own
+// full-width line rather than being forced into a column it does not fit.
+function specTable(specs) {
+  const parts = String(specs || '')
+    .split('\u2022')
+    .map((x) => x.trim())
+    // The docket head already states the quantity. Left in, it arrives here
+    // without a label and orphans as a full-width line under the spec.
+    .filter((x) => x && !/^qty\b/i.test(x));
+  if (!parts.length) return '';
+  const rows = parts.map((part, i) => {
+    const top = i ? `border-top:1px solid ${C.line};` : '';
+    const m = part.match(/^([^:]{1,30}):\s*([\s\S]+)$/);
+    if (!m) {
+      return `<tr><td colspan="2" style="padding:7px 0;${top}font-family:${SANS};font-size:13px;line-height:1.5;color:${C.ink};">${esc(part)}</td></tr>`;
+    }
+    return `<tr>
+      <td width="40%" style="padding:7px 14px 7px 0;${top}font-family:${SANS};font-size:13px;line-height:1.5;color:${C.muted};vertical-align:top;">${esc(m[1])}</td>
+      <td style="padding:7px 0;${top}font-family:${MONO};font-size:13px;line-height:1.5;font-weight:600;color:${C.ink};">${esc(m[2])}</td>
+    </tr>`;
+  }).join('');
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}</table>`;
+}
 
-  // Specs get their own full-width block under the table. Squeezed into a
-  // right-aligned cell they became a ragged wall of text on a phone.
-  const list = order.specs ? specsList(order.specs) : null;
-  const specsBlock = !order.specs
-    ? ''
-    : `<tr><td colspan="2" style="padding:12px 0 2px;border-top:1px solid ${C.line};">
-        <div style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:${C.muted};padding-bottom:6px;">What you ordered</div>
-        ${list || `<div style="font-family:Arial,sans-serif;font-size:13px;line-height:1.5;color:${C.ink};">${order.specs}</div>`}
-      </td></tr>`;
+// A postal address set as a postal address, not as five key/value rows.
+//
+// Street, city, region, postcode and country arrived right-aligned in separate
+// rows, which is not how anyone reads an address or copies one onto a label.
+// The linking is deliberate too: iOS and Gmail detect addresses and phone
+// numbers and restyle them as underlined blue whatever we do, so owning the
+// link makes it useful — it opens the map — instead of merely ugly.
+function addressBlock(order, customerEmail) {
+  const addr = String(order.shipping_address || '').trim();
+  const mapHref = `https://maps.google.com/?q=${encodeURIComponent(addr)}`;
+  const link = (href, text, weight) =>
+    `<a href="${href}" style="color:${C.navy};text-decoration:none;font-weight:${weight};">${esc(text)}</a>`;
 
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:14px 0;">${body}${specsBlock}</table>`;
+  const addrLines = addr
+    .split(',')
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .map((line) => link(mapHref, line, 400))
+    .join('<br/>');
+
+  const country = order.shipping_country;
+  const showCountry = country && !addr.toLowerCase().includes(String(country).toLowerCase());
+
+  const contact = [
+    order.customer_phone
+      ? link(`tel:${String(order.customer_phone).replace(/[^+\d]/g, '')}`, order.customer_phone, 600)
+      : '',
+    customerEmail ? link(`mailto:${customerEmail}`, customerEmail, 600) : ''
+  ].filter(Boolean).join(' &nbsp;&middot;&nbsp; ');
+
+  return `
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.stock};border:1px solid ${C.line};border-radius:8px;">
+    <tr><td style="padding:16px 18px;">
+      ${order.customer_name ? `<div style="font-family:${SANS};font-size:15px;font-weight:700;color:${C.navy};padding-bottom:5px;">${esc(order.customer_name)}</div>` : ''}
+      ${addrLines ? `<div style="font-family:${SANS};font-size:14px;line-height:1.65;color:${C.ink};">${addrLines}</div>` : ''}
+      ${showCountry ? `<div style="font-family:${SANS};font-size:14px;line-height:1.65;color:${C.ink};">${esc(country)}</div>` : ''}
+      ${contact ? `<div style="font-family:${SANS};font-size:13px;line-height:1.6;color:${C.muted};padding-top:11px;margin-top:11px;border-top:1px solid ${C.line};">${contact}</div>` : ''}
+    </td></tr>
+  </table>`;
 }
 
 function shell(innerHtml, preheader = '') {
-  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+  return `<!doctype html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <style>
+    /* iOS and Gmail detect phone numbers, dates and addresses and restyle them
+       as underlined blue links, overriding whatever the markup said. Where we
+       have linked them ourselves this puts our own styling back. */
+    a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important;font-size:inherit!important;font-family:inherit!important;font-weight:inherit!important;line-height:inherit!important;}
+    /* Progressive enhancement only — the base padding already works on a
+       phone, because Gmail strips this block in some contexts. */
+    @media only screen and (max-width:620px){
+      .gutter{padding-left:18px!important;padding-right:18px!important;}
+      .head-title{font-size:20px!important;}
+    }
+  </style>
+  </head>
   <body style="margin:0;padding:0;background:${C.bg};">
-    <span style="display:none;visibility:hidden;opacity:0;height:0;width:0;overflow:hidden;">${preheader}</span>
+    <span data-preheader style="display:none;visibility:hidden;opacity:0;height:0;width:0;overflow:hidden;">${esc(preheader)}</span>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.bg};padding:28px 12px;">
       <tr><td align="center">
-        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid ${C.line};">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid ${C.line};">
           ${innerHtml}
         </table>
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;"><tr>
-          <td align="center" style="padding:16px;font-family:Arial,sans-serif;font-size:11px;color:#9aa3b0;">© ${new Date().getFullYear()} ${BRAND} &bull; Complete trade show displays &amp; event branding &bull; US &amp; Canada</td>
+          <td align="center" style="padding:16px;font-family:${SANS};font-size:11px;line-height:1.6;color:#8b94a6;">&copy; ${new Date().getFullYear()} ${BRAND} &middot; Complete trade show displays &amp; event branding &middot; US &amp; Canada</td>
         </tr></table>
       </td></tr>
     </table>
@@ -289,6 +398,9 @@ function getSmtp() {
 function htmlToText(html) {
   return String(html || '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
+    // The preheader is hidden in the HTML but tag-stripping brings it back, so
+    // the plaintext version opened with a duplicate of the heading below it.
+    .replace(/<span data-preheader[\s\S]*?<\/span>/gi, '')
     .replace(/<a [^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, '$2 ($1)')
     .replace(/<\/(p|div|tr|h1|h2|h3|li|table)>/gi, '\n')
     .replace(/<br\s*\/?>/gi, '\n')
@@ -352,25 +464,57 @@ async function send({ to, subject, html, text, attachments = [] }) {
 // --- Public API -----------------------------------------------------------
 function customerEmailHtml(order, status, appUrl, invoiceUrl) {
   const meta = STATUS_META[status] || STATUS_META.submitted;
-  const accent = meta.color;
+  const tone = { submitted: 'blue', paid: 'green', proof_ready: 'amber', proof_approved: 'blue',
+    in_production: 'amber', shipped: 'green', canceled: 'red' }[status] || 'blue';
+
+  // What the band says about money depends on whether any has arrived. An
+  // estimate is the quote before any discount and in the currency the customer
+  // was browsing in, so it can differ sharply from what is actually charged —
+  // a 99% code turns a CAD 227.61 estimate into USD 1.65. It is labelled as a
+  // pre-discount quote rather than left to read as the amount owed.
+  const settled = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status);
+  const band = settled && order.amount_total != null
+    ? { amount: money(order.amount_total, order.currency), amountNote: 'Paid' }
+    : order.estimated_price
+      ? { amount: String(order.estimated_price), amountNote: 'Estimated, before any discount' }
+      : {};
+
   const invoiceBlock = invoiceUrl
-    ? `<p style="margin:14px 0 0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">Your invoice is ready — pay securely online:</p>
+    ? `${sectionLabel('Payment')}
+       <p style="margin:0;font-family:${SANS};font-size:15px;line-height:1.6;color:${C.ink};">Your invoice is ready. You can pay it securely online.</p>
        ${button(invoiceUrl, 'Pay your invoice', C.red)}`
     : '';
+
+  const spec = specTable(order.specs);
+  const tracking = order.tracking_number ? trackingRow(order) : '';
+
   const inner = `
     ${header()}
-    <tr><td style="height:5px;background:${accent};"></td></tr>
-    <tr><td style="padding:28px 28px 8px;">
-      <div style="display:inline-block;background:${accent}1a;color:${accent};font-family:Arial,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:5px 12px;border-radius:999px;">${STEP_LABEL[status] || 'Update'}</div>
-      <h1 style="margin:14px 0 8px;font-family:Arial,sans-serif;font-size:22px;color:${C.navy};">${meta.heading}</h1>
-      <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">${meta.body}</p>
+    ${ticketHead(order, 'Order')}
+    ${statusBand({ tone, label: STEP_LABEL[status] || 'Update', ...band })}
+    <tr><td class="gutter" style="padding:26px 28px 6px;">
+      <h1 style="margin:0 0 9px;font-family:${SANS};font-size:20px;line-height:1.3;color:${C.navy};">${meta.heading}</h1>
+      <p style="margin:0 0 20px;font-family:${SANS};font-size:15px;line-height:1.65;color:${C.ink};">${meta.body}</p>
       ${progress(status)}
-      ${detailsCard(order)}
+      ${spec ? sectionLabel('What you ordered') + spec : ''}
+      ${tracking}
       ${invoiceBlock}
-      ${invoiceUrl ? '' : button(appUrl ? `${appUrl}/account` : '', status === 'shipped' ? 'Track your order' : 'View your order', accent)}
+      ${invoiceUrl ? '' : button(appUrl ? `${appUrl}/account` : '', status === 'shipped' ? 'Track your order' : 'View your order', C.navy)}
     </td></tr>
     ${footer()}`;
   return shell(inner, meta.heading);
+}
+
+// The tracking number, and a link to it wherever the carrier is known. A
+// tracking number with no link asks the customer to work out who has their
+// parcel and find the right site.
+function trackingRow(order) {
+  const url = trackingUrl(order.carrier, order.tracking_number);
+  const name = carrierName(order.carrier, order.tracking_number);
+  return `${sectionLabel(name ? `${name} tracking` : 'Tracking')}
+    <div style="font-family:${MONO};font-size:17px;font-weight:700;color:${C.navy};word-break:break-all;">
+      ${url ? `<a href="${url}" style="color:${C.navy};text-decoration:none;">${esc(order.tracking_number)}</a>` : esc(order.tracking_number)}
+    </div>`;
 }
 
 // Sent when a tracking number is added or changed without the status moving.
@@ -378,32 +522,39 @@ function customerEmailHtml(order, status, appUrl, invoiceUrl) {
 // and the customer never told.
 export async function sendTrackingEmail({ to, order, appUrl = DEFAULT_APP_URL }) {
   if (!to || !order?.tracking_number) return { sent: false, reason: 'no recipient or tracking number' };
+  return send({
+    to,
+    subject: `${BRAND} — tracking for order ${shortId(order.id)}`,
+    html: trackingEmailHtml(order, appUrl)
+  });
+}
+
+// Exported so the preview harness and the template tests can render it the
+// same way the send path does, rather than re-implementing it and drifting.
+export function trackingEmailHtml(order, appUrl = DEFAULT_APP_URL) {
   const url = trackingUrl(order.carrier, order.tracking_number);
   const name = carrierName(order.carrier, order.tracking_number);
+  const spec = specTable(order.specs);
   const inner = `
     ${header()}
-    <tr><td style="height:5px;background:${C.green};"></td></tr>
-    <tr><td style="padding:28px 28px 8px;">
-      <div style="display:inline-block;background:${C.green}1a;color:${C.green};font-family:Arial,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:5px 12px;border-radius:999px;">Tracking</div>
-      <h1 style="margin:14px 0 8px;font-family:Arial,sans-serif;font-size:22px;color:${C.navy};">Your order is on its way 🚚</h1>
-      <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:${C.ink};">
-        ${name ? `Your parcel is with ${name}.` : 'Your parcel is on its way.'}
-        Track it any time with the button below.
+    ${ticketHead(order, 'Shipment')}
+    ${statusBand({
+      tone: 'green',
+      label: 'Shipped',
+      note: name ? `In transit with ${name}` : 'In transit'
+    })}
+    <tr><td class="gutter" style="padding:26px 28px 6px;">
+      <h1 style="margin:0 0 9px;font-family:${SANS};font-size:20px;line-height:1.3;color:${C.navy};">Your order is on its way</h1>
+      <p style="margin:0 0 4px;font-family:${SANS};font-size:15px;line-height:1.65;color:${C.ink};">
+        ${name ? `Your parcel is with ${name}.` : 'Your parcel is on its way.'} Track it any time with the button below.
       </p>
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:14px 16px;margin:16px 0;">
-        <tr><td style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:${C.muted};padding-bottom:6px;">
-          ${name ? name + ' tracking number' : 'Tracking number'}
-        </td></tr>
-        <tr><td style="font-family:'Courier New',monospace;font-size:19px;font-weight:700;color:${C.navy};word-break:break-all;">
-          ${order.tracking_number}
-        </td></tr>
-      </table>
-      ${url ? button(url, 'Track your parcel', C.green) : ''}
-      ${detailsCard(order, { showAmount: false })}
+      ${sectionLabel(name ? `${name} tracking number` : 'Tracking number', 18)}
+      <div style="font-family:${MONO};font-size:19px;font-weight:700;color:${C.navy};word-break:break-all;">${esc(order.tracking_number)}</div>
+      ${url ? button(url, 'Track your parcel', C.navy) : ''}
       ${/* Orders ship from China direct, so the first scan is days rather than
             hours and the carrier changes hands on arrival. Saying so up front
             saves the "my tracking hasn't moved" email three days later. */ ''}
-      <p style="margin:6px 0 0;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;color:${C.muted};">
+      <p style="margin:14px 0 0;font-family:${SANS};font-size:13px;line-height:1.65;color:${C.muted};">
         Your order ships direct from our production facility, so tracking can take a few days to show
         its first scan, and it may go quiet in transit before customs clearance. It is normal for the
         parcel to be passed to a local carrier for final delivery${
@@ -412,14 +563,13 @@ export async function sendTrackingEmail({ to, order, appUrl = DEFAULT_APP_URL })
             : '.'
         }
       </p>
-      ${button(appUrl ? `${appUrl}/account` : '', 'View your order', C.navy)}
+      ${spec ? sectionLabel('What is on its way') + spec : ''}
+      <div style="padding-top:18px;"></div>
+      <a href="${appUrl ? `${appUrl}/account` : '#'}" style="font-family:${SANS};font-size:14px;font-weight:600;color:${C.navy};text-decoration:none;border-bottom:2px solid ${C.line};padding-bottom:2px;">View your order &rarr;</a>
+      <div style="padding-bottom:8px;"></div>
     </td></tr>
     ${footer()}`;
-  return send({
-    to,
-    subject: `${BRAND} — tracking for order ${shortId(order.id)}`,
-    html: shell(inner, `Tracking for order ${shortId(order.id)}: ${order.tracking_number}`)
-  });
+  return shell(inner, `Tracking for order ${shortId(order.id)}: ${order.tracking_number}`);
 }
 
 export async function sendOrderStatusEmail({ to, order, status, appUrl = DEFAULT_APP_URL }) {
@@ -432,65 +582,66 @@ export async function sendOrderConfirmationEmail({ to, order, appUrl = DEFAULT_A
 }
 
 export function adminAlertHtml(order, customerEmail, appUrl) {
+  // Whether money has actually arrived is the first thing staff need, and the
+  // last thing that should be guessed at from a status word. It gets the band.
+  const paid = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status);
+
+  // This alert is sent the moment the order is placed, before the customer has
+  // reached the payment page, so "awaiting payment" and the estimate are a
+  // snapshot rather than the final word. Say so, instead of leaving staff to
+  // wonder why a paid order arrived marked unpaid.
+  const band = paid
+    ? statusBand({
+        tone: 'green',
+        label: 'Paid',
+        amount: order.amount_total != null ? money(order.amount_total, order.currency) : null,
+        amountNote: order.amount_total != null ? 'Collected' : null
+      })
+    : statusBand({
+        tone: 'amber',
+        label: 'Awaiting payment',
+        note: order.payment_choice === 'invoice_later'
+          ? 'Customer asked to be invoiced'
+          : 'Sent as the order was placed — they may be paying right now',
+        amount: order.estimated_price ? String(order.estimated_price) : null,
+        amountNote: order.estimated_price ? 'Estimated, before any discount' : null
+      });
+
+  const artwork = order.design_path
+    ? 'Uploaded'
+    : order.artwork_choice === 'email_later'
+      ? 'Customer will email it'
+      : order.artwork_choice === 'design_service'
+        ? 'Design service'
+        : 'None supplied';
+
+  const spec = specTable(order.specs);
+
   const inner = `
     ${header()}
-    <tr><td style="height:5px;background:${C.red};"></td></tr>
-    <tr><td style="padding:26px 28px 8px;">
-      <h1 style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:20px;color:${C.navy};">🖨️ New order ${shortId(order.id)}</h1>
-      <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:14px;color:${C.muted};">
-        A new order just came in — review the artwork and update its status.${orderDate(order) ? ` Placed ${orderDate(order)}.` : ''}
+    ${ticketHead(order, 'Job ticket')}
+    ${band}
+    <tr><td class="gutter" style="padding:24px 28px 6px;">
+      <p style="margin:0;font-family:${SANS};font-size:15px;line-height:1.6;color:${C.ink};">
+        A new order came in. Review the artwork and move it along in the dashboard.
       </p>
-      ${/* Whether money has actually arrived is the first thing staff need and
-            the last thing that should be guessed at from a status word. */ ''}
-      <div style="display:inline-block;margin-top:10px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;${
-        ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status)
-          ? `background:#e8f6ee;color:${C.green};`
-          : `background:#fff4e5;color:#a15c00;`
-      }">${
-        ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status)
-          ? `PAID${order.amount_total != null ? ' — ' + money(order.amount_total, order.currency) : ''}`
-          : order.payment_choice === 'invoice_later' ? 'AWAITING PAYMENT — asked to be invoiced' : 'AWAITING PAYMENT'
-      }</div>
-      ${/* This alert is sent the moment the order is placed, before the
-            customer has reached Stripe, so "awaiting payment" and the estimate
-            are a snapshot rather than the final word. Say so, instead of
-            leaving staff to wonder why a paid order arrived marked unpaid. */ ''}
-      ${['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(order.status)
-        ? ''
-        : `<p style="margin:8px 0 0;font-family:Arial,sans-serif;font-size:12px;color:${C.muted};line-height:1.5;">
-             Sent when the order was placed — the customer may be paying right now. A second
-             email follows once payment clears, and the dashboard always shows the live status.
-           </p>`}
-      ${/* The order's real state. This used to be hardcoded to 'paid', which
-            made every new-order alert look like money had arrived. */ ''}
-      ${detailsCard(order)}
-      <div style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:${C.muted};padding:18px 0 2px;">Ship to</div>
-      ${/* quoteRows returns bare <tr>s. Dropped straight into a <td> they are
-            invalid HTML, and every mail client hoists them out of the cell —
-            which is why these rows rendered outside the card, running off the
-            right edge. They need their own table, exactly as the quote emails
-            already do. */ ''}
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafbfc;border:1px solid ${C.line};border-radius:10px;padding:6px 16px;margin:6px 0 4px;">${quoteRows([
-        ['Customer', order.customer_name],
-        ['Email', customerEmail],
-        ['Phone', order.customer_phone],
-        ['Address', order.shipping_address],
-        ['Country', order.shipping_country],
-        // What the customer said they would do, so an order waiting on us is
-        // not chased like one waiting on them.
-        ['Artwork', order.design_path
-          ? 'Uploaded'
-          : order.artwork_choice === 'email_later'
-            ? 'Customer will email it'
-            : order.artwork_choice === 'design_service'
-              ? 'Design service'
-              : 'None supplied'],
-        ['Payment', order.payment_choice === 'invoice_later' ? 'Asked to be invoiced' : null]
-      ])}</table>
+      ${spec ? sectionLabel('Specification') + spec : ''}
+      ${sectionLabel('Ship to')}
+      ${addressBlock(order, customerEmail)}
+      ${sectionLabel('Artwork')}
+      ${/* One line, not a table. Payment and order status were in it too, and
+            both are the band's whole job. Its artwork row also contradicted
+            the specification above — "I'll upload my artwork" is what the
+            customer configured, this is what they chose at checkout — and only
+            this one tells staff whether they are waiting on a file. */ ''}
+      <div style="font-family:${MONO};font-size:14px;font-weight:600;color:${C.ink};">${esc(artwork)}</div>
       ${button(appUrl ? `${appUrl}/admin` : '', 'Open admin dashboard', C.navy)}
+      ${paid ? '' : `<p style="margin:10px 0 0;font-family:${SANS};font-size:12px;line-height:1.6;color:${C.muted};">
+        A second email follows once payment clears, and the dashboard always shows the live status.
+      </p>`}
     </td></tr>
     ${footer()}`;
-  return shell(inner, `New order ${shortId(order.id)}`);
+  return shell(inner, `New order ${shortId(order.id)} — ${order.product || ''}`);
 }
 
 export async function sendNewOrderAlert({ to, order, customerEmail, appUrl = DEFAULT_APP_URL }) {
@@ -502,10 +653,7 @@ export async function sendNewOrderAlert({ to, order, customerEmail, appUrl = DEF
 }
 
 // --- Quote request emails -------------------------------------------------
-const esc = (s) =>
-  String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-
-function quoteRows(pairs) {
+function factRows(pairs) {
   const rows = pairs.filter(([, v]) => v != null && String(v).trim() !== '');
   return rows
     .map(
@@ -523,7 +671,7 @@ function quoteRows(pairs) {
 }
 
 function quoteStaffHtml(q) {
-  const table = quoteRows([
+  const table = factRows([
     ['Reference', q.reference], ['Name', q.name], ['Email', q.email], ['Phone', q.phone],
     // Address and country decide shipping cost and lead time, so they belong in
     // the notification rather than in a follow-up email asking for them.
@@ -548,7 +696,7 @@ function quoteStaffHtml(q) {
 }
 
 function quoteClientHtml(q) {
-  const table = quoteRows([
+  const table = factRows([
     ['Reference', q.reference], ['Product', q.product], ['Quantity', q.quantity],
     ['Specs', q.specs], ['Artwork', q.fileName]
   ]);

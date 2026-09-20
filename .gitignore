@@ -50,3 +50,6 @@ directus/*.txt
 .vercel
 .env*
 .claude/
+
+# Rendered email previews (scripts/preview-emails.mjs) — screenshots, not source
+.preview/
