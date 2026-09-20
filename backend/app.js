@@ -597,14 +597,37 @@ app.post('/api/checkout/cart', writeLimiter, async (req, res) => {
 // SANDBOX ONLY for now. The guard is not ceremony — until a sandbox payment has
 // been taken and a webhook has settled the order, this route has never charged
 // anybody, and the first time it does should not be a customer.
+// Which processor takes the money. One variable, so switching back is a deploy
+// rather than a revert — and the default stays Stripe, which is the one that has
+// taken every real payment this business has had.
+//
+// Going live on Airwallex therefore needs TWO deliberate settings, not one:
+// AIRWALLEX_ENV=live to point at the live API, and PAYMENT_PROVIDER=airwallex to
+// route customers to it. Neither alone does anything.
+const PAYMENT_PROVIDER = process.env.PAYMENT_PROVIDER === 'airwallex' ? 'airwallex' : 'stripe';
+
+// Public, and deliberately says nothing a competitor could not learn by paying:
+// which processor the checkout button should call. The cart needs it to pick a
+// path without shipping a build for every switch.
+app.get('/api/payment-config', (_req, res) => {
+  res.json({ provider: PAYMENT_PROVIDER, airwallexEnv: airwallexMode });
+});
+
 app.post('/api/checkout/airwallex', writeLimiter, async (req, res) => {
   if (!airwallexConfigured || !supabaseAdmin) {
     return res.status(503).json({ error: 'Airwallex is not configured.' });
   }
-  if (airwallexMode !== 'sandbox') {
+  // Sandbox is always allowed — that is how this gets tested. Live is allowed
+  // only once PAYMENT_PROVIDER says Airwallex is the chosen processor, so
+  // pointing production at the live Airwallex API is not by itself enough to
+  // start charging customers through an untested path.
+  if (airwallexMode === 'live' && PAYMENT_PROVIDER !== 'airwallex') {
     return res.status(503).json({
-      error: 'The Airwallex path is sandbox-only until it has been tested end to end.'
+      error: 'Airwallex is live but not the selected processor. Set PAYMENT_PROVIDER=airwallex to switch.'
     });
+  }
+  if (airwallexMode === 'unconfigured') {
+    return res.status(503).json({ error: 'Airwallex is not configured.' });
   }
   const user = await getUserFromToken(req.headers.authorization);
   if (!user) return res.status(401).json({ error: 'Not signed in.' });

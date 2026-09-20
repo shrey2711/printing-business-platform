@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -30,6 +30,18 @@ export default function CartPage() {
   // drops the query string, so the button vanishes exactly when it is wanted.
   // sessionStorage, not localStorage: it should expire with the tab rather than
   // leave a tester's browser permanently showing a payment path nobody else has.
+  // Which processor the server says is in charge. Fetched rather than built in,
+  // so switching is a deploy of one env var instead of a frontend release.
+  const [provider, setProvider] = useState('stripe');
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/payment-config')
+      .then((r) => r.json())
+      .then((c) => alive && c?.provider && setProvider(c.provider))
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   const [params] = useSearchParams();
   const airwallexOptIn = (() => {
     try {
@@ -195,10 +207,14 @@ export default function CartPage() {
           </>
         ) : (
           <>
-            <button className="btn btn-red btn-block" onClick={checkout} disabled={busy || anyUnpriced}>
+            <button
+              className="btn btn-red btn-block"
+              onClick={provider === 'airwallex' ? payWithAirwallex : checkout}
+              disabled={busy || anyUnpriced}
+            >
               {busy ? 'Starting checkout…' : `Check out — ${money(subtotal)}`}
             </button>
-            {airwallexOptIn && (
+            {airwallexOptIn && provider !== 'airwallex' && (
               <>
                 <button
                   className="btn btn-outline btn-block"
