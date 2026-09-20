@@ -713,7 +713,11 @@ app.post('/api/checkout/airwallex', writeLimiter, async (req, res) => {
   } catch (err) {
     // Never leave orders behind for a payment that was never set up.
     await supabaseAdmin.from('orders').delete().in('id', created.map((o) => o.id));
-    return res.status(502).json({ error: `Airwallex refused the payment: ${err.message}` });
+    // Logged in full, shown in summary. The raw text is an API diagnostic —
+    // "The request ID ... has been used previously" told a customer nothing and
+    // named our internals. A 502 also lets the client fall back to Stripe.
+    console.error(`[airwallex] intent failed: ${err.message}`);
+    return res.status(502).json({ error: 'We could not start the payment. Your order is saved — please try again.' });
   }
 
   await supabaseAdmin
@@ -815,21 +819,52 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
   if (useAirwallex) {
     let intent;
     try {
-      intent = await createPaymentIntent({
-        amountMinor: Math.round(chargeAmount * 100),
-        currency: cur.code,
-        merchantOrderId: order.id,
-        // The order id as the idempotency key: paying the same order twice
-        // cannot create two intents, and therefore cannot charge twice.
-        requestId: order.id,
-        returnUrl: `${baseUrl(req)}/account?checkout=success&order=${order.id}`,
-        email: user.email,
-        metadata: { orderId: order.id }
-      });
+      // Reuse the order's existing intent when it is still payable.
+      //
+      // This replaces using the order id as the request_id, which was wrong:
+      // Airwallex REJECTS a reused request_id rather than replaying the
+      // original intent ("The request ID ... has been used previously"), so the
+      // first attempt burned the key and "Pay now" was permanently dead for
+      // that order. Retry mattered more than the duplicate it was preventing.
+      //
+      // Reusing the intent is the better answer anyway: one order has one
+      // intent, an abandoned checkout can be resumed, and there is no second
+      // intent that could also be paid.
+      const existingId = order.stripe_session_id;
+      if (existingId && String(existingId).startsWith('int_')) {
+        const found = await retrievePaymentIntent(existingId).catch(() => null);
+        const status = String(found?.status || '').toUpperCase();
+        // Only states where the customer can still pay. A SUCCEEDED or
+        // CANCELLED intent must not be handed back — the first would invite a
+        // second payment, the second cannot take one.
+        if (found && ['REQUIRES_PAYMENT_METHOD', 'REQUIRES_CUSTOMER_ACTION', 'PENDING'].includes(status)) {
+          intent = { id: found.id, clientSecret: found.client_secret };
+        } else if (status === 'SUCCEEDED') {
+          return res.status(409).json({ error: 'This order has already been paid.' });
+        }
+      }
+      if (!intent) {
+        intent = await createPaymentIntent({
+          amountMinor: Math.round(chargeAmount * 100),
+          currency: cur.code,
+          merchantOrderId: order.id,
+          // Fresh per attempt. The duplicate-intent risk is handled above by
+          // reusing a payable one, and by the webhook settling only rows still
+          // in "submitted" — a second intent cannot settle the order twice.
+          requestId: crypto.randomUUID(),
+          returnUrl: `${baseUrl(req)}/account?checkout=success&order=${order.id}`,
+          email: user.email,
+          metadata: { orderId: order.id }
+        });
+      }
     } catch (err) {
       // No rollback here: unlike the cart route this order already existed
       // before checkout, so deleting it would destroy the customer's work.
-      return res.status(502).json({ error: `Airwallex refused the payment: ${err.message}` });
+      // Logged in full, shown in summary. The raw text is an API diagnostic —
+    // "The request ID ... has been used previously" told a customer nothing and
+    // named our internals. A 502 also lets the client fall back to Stripe.
+    console.error(`[airwallex] intent failed: ${err.message}`);
+    return res.status(502).json({ error: 'We could not start the payment. Your order is saved — please try again.' });
     }
     await supabaseAdmin
       .from('orders')

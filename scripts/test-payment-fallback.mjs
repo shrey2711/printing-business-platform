@@ -93,12 +93,26 @@ check('the SDK failure discards its orders before falling back', () => {
   return null;
 });
 
-check('the intent-creation failure rolls its orders back server-side', () => {
-  const i = app.indexOf('Airwallex refused the payment');
-  if (i === -1) return 'the 502 path is gone';
-  const before = app.slice(Math.max(0, i - 400), i);
-  return /from\('orders'\)\s*\.delete\(\)/.test(before)
-    ? null : 'the 502 path does not delete the orders it wrote';
+check('the cart route rolls its orders back when the intent fails', () => {
+  // Anchored on the rollback's own comment rather than on the customer-facing
+  // error text, which moved once already when that message was rewritten and
+  // took this assertion with it.
+  const i = app.indexOf('Never leave orders behind for a payment that was never set up');
+  if (i === -1) return 'the cart rollback is gone';
+  const region = app.slice(i, i + 500);
+  if (!/from\('orders'\)\s*\.delete\(\)/.test(region)) {
+    return 'the rollback does not delete the orders it wrote';
+  }
+  return /status\(502\)/.test(region) ? null : 'the failure is not a 502, so the client cannot fall back';
+});
+
+check('the single-order route does NOT delete the order on failure', () => {
+  // The opposite rule, and worth pinning: that order existed before checkout,
+  // so deleting it would destroy the customer's work rather than undo a write.
+  const i = app.indexOf('No rollback here');
+  return i === -1
+    ? 'the single-order failure path no longer explains why it keeps the order'
+    : null;
 });
 
 // ----------------------------------------------- the cleanup cannot overreach
