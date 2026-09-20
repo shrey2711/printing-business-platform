@@ -59,6 +59,26 @@ export const airwallexBase = LIVE
 export const airwallexMode = (CLIENT_ID && API_KEY) ? (LIVE ? 'live' : 'sandbox') : 'unconfigured';
 export const airwallexConfigured = airwallexMode !== 'unconfigured';
 
+// Production running on sandbox credentials is the trap this flag exists for.
+// Uploading both key sets to the same Vercel project is the natural thing to do,
+// and because sandbox is the safe default, the live site then quietly points at
+// the sandbox API. Harmless while nothing calls Airwallex — and the moment
+// checkout is wired it means customers complete a fake payment and no money is
+// collected. That is the "paid with nothing collected" incident wearing a
+// different hat.
+//
+// The fix is one variable: AIRWALLEX_ENV=live on the Production environment
+// only, with the sandbox keys scoped to Preview and Development.
+export const airwallexEnvMismatch =
+  process.env.NODE_ENV === 'production' && airwallexMode === 'sandbox';
+
+if (airwallexEnvMismatch) {
+  console.warn(
+    '[airwallex] PRODUCTION IS USING SANDBOX CREDENTIALS. No real money can be ' +
+    'taken. Set AIRWALLEX_ENV=live on the Production environment before wiring checkout.'
+  );
+}
+
 /** Which pieces are missing, for the admin diagnostics panel. Never values. */
 export function airwallexMissing() {
   const p = LIVE ? 'AIRWALLEX_' : 'AIRWALLEX_SANDBOX_';
