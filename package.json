@@ -47,7 +47,8 @@
     "audit:dupes": "node scripts/audit-product-duplication.mjs",
     "test:airwallex": "node scripts/test-airwallex.mjs",
     "check:airwallex-invoice": "node scripts/check-airwallex-invoice.mjs",
-    "test:fallback": "node scripts/test-payment-fallback.mjs"
+    "test:fallback": "node scripts/test-payment-fallback.mjs",
+    "check:pages": "node scripts/live-check-pages.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

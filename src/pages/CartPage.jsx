@@ -23,6 +23,13 @@ export default function CartPage() {
   const { currency } = useCurrency();
   const money = useMoney();
   const navigate = useNavigate();
+  // Collected here, not left to the payment page. A cart order used to reach
+  // the workshop with an email address and nothing to ship to, while the same
+  // item ordered singly arrived complete — the processor only collects an
+  // address if the customer gets that far, and an unpaid order still needs one.
+  const [contact, setContact] = useState(emptyContact);
+  const contactCheck = validateContact(contact);
+
   // Which processor the server says is in charge, and whether a failure to
   // START a payment may quietly retry on the other one. Fetched rather than
   // built in, so switching either is a deploy of one env var.
