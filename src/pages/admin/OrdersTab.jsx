@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { getAllOrders, getAdminSession, updateOrder, deleteOrder, sendInvoice } from '../../services/admin';
 import { formatCharged } from '../../lib/money';
 import { CARRIERS } from '../../lib/tracking';
+import {
+  ORDER_STATUSES, SETTLED_STATUSES, isOrderPaid,
+  statusBlockedReason, needsOfflineConfirmation
+} from '../../lib/orderStatus';
 
 // What an unpaid order is actually waiting on, so a serious customer who asked
 // to be invoiced is not chased the same way as one who submitted and vanished.
@@ -9,7 +13,7 @@ import { CARRIERS } from '../../lib/tracking';
 // The distinction only exists for orders placed after artwork_choice and
 // payment_choice were recorded; older orders show nothing rather than a guess.
 function waitingOn(o) {
-  if (['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(o.status)) return '';
+  if (SETTLED_STATUSES.includes(o.status)) return '';
   const wants = [];
   if (o.payment_choice === 'invoice_later') wants.push('asked to be invoiced');
   if (o.artwork_choice === 'email_later') wants.push('sending artwork by email');
@@ -30,8 +34,7 @@ function waitingOn(o) {
 function paymentNote(o) {
   const id = o.stripe_session_id || '';
   if (id.startsWith('cs_test_')) return '⚠ TEST payment — no money was taken';
-  if (['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(o.status)
-      && !id && o.invoice_status !== 'paid') {
+  if (SETTLED_STATUSES.includes(o.status) && !id && o.invoice_status !== 'paid') {
     return '⚠ marked paid with no Stripe session';
   }
   return '';
@@ -39,13 +42,8 @@ function paymentNote(o) {
 
 // Money has arrived on this order, so an invoice for it can only ever be a
 // record of that — never a request for more.
-const isSettled = (o) =>
-  ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'].includes(o.status) ||
-  o.invoice_status === 'paid';
+const isSettled = isOrderPaid;
 
-const STATUSES = [
-  'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
-];
 const statusColor = {
   submitted: 'st-blue', paid: 'st-green', proof_ready: 'st-amber', proof_approved: 'st-blue',
   in_production: 'st-amber', shipped: 'st-green', canceled: 'st-red'
@@ -67,9 +65,29 @@ export default function OrdersTab({ onError, onFlash }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Nothing downstream of payment can be set on an unpaid order — the options
+  // are disabled below and the server refuses them regardless. The one status
+  // staff may set by hand is `paid`, for money that arrived by bank transfer or
+  // cheque, and that is asked for explicitly rather than picked from a list.
   const changeStatus = async (o, status) => {
+    const blocked = statusBlockedReason(o, status);
+    if (blocked) return onError(blocked);
+
+    let offlinePayment = false;
+    if (needsOfflineConfirmation(o, status)) {
+      const ok = window.confirm(
+        `No payment is on record for order #${String(o.id).slice(0, 8)}.\n\n` +
+        'Only mark it paid if the money has actually arrived some other way — a ' +
+        'bank transfer or a cheque. This unlocks production and shipping, and it ' +
+        'emails the customer to say their payment was received.\n\n' +
+        'Confirm the payment was received?'
+      );
+      if (!ok) return;
+      offlinePayment = true;
+    }
+
     try {
-      const { order, email } = await updateOrder(o.id, { status });
+      const { order, email } = await updateOrder(o.id, { status, offline_payment: offlinePayment });
       setOrders((prev) => prev.map((x) => (x.id === o.id ? { ...x, status: order.status } : x)));
       onFlash(
         email?.sent
@@ -190,10 +208,22 @@ export default function OrdersTab({ onError, onFlash }) {
                 value={o.status}
                 onChange={(e) => changeStatus(o, e.target.value)}
               >
-                {STATUSES.map((s) => (
-                  <option key={s} value={s}>{s.replace('_', ' ')}</option>
-                ))}
+                {/* Fulfilment is greyed out until the order is paid for, with
+                    the reason in the option's own title so hovering explains
+                    it. The server refuses these too — this is the courtesy,
+                    not the control. */}
+                {ORDER_STATUSES.map((s) => {
+                  const blocked = statusBlockedReason(o, s);
+                  return (
+                    <option key={s} value={s} disabled={Boolean(blocked)} title={blocked || undefined}>
+                      {s.replace(/_/g, ' ')}{blocked ? ' — needs payment' : ''}
+                    </option>
+                  );
+                })}
               </select>
+              {!isSettled(o) ? (
+                <><br /><small className="order-flag">🔒 unpaid — production locked</small></>
+              ) : null}
             </span>
             <span className="track-cell">
               <input

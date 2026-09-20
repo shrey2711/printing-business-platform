@@ -13,6 +13,9 @@ import { STATIC_ARTICLES, getStaticArticle } from './data/staticArticles.js';
 import { stripe, stripeMode, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest, sendTrackingEmail } from './lib/mailer.js';
 import { CARRIERS } from '../src/lib/tracking.js';
+import {
+  ORDER_STATUSES, SETTLED_STATUSES, statusBlockedReason, needsOfflineConfirmation
+} from '../src/lib/orderStatus.js';
 import { findCoupon, applyCoupon } from './data/coupons.js';
 import { currencies, BASE_CURRENCY, brand } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
@@ -1229,27 +1232,43 @@ app.delete('/api/admin/orders/:id', async (req, res) => {
 app.patch('/api/admin/orders/:id', async (req, res) => {
   const admin = await requireOrderAccess(req, res);
   if (!admin) return;
-  const allowed = [
-    'submitted', 'paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped', 'canceled'
-  ];
-  const { status, tracking_number, carrier } = req.body || {};
+  const { status, tracking_number, carrier, offline_payment } = req.body || {};
+
+  // Read the row first, for two reasons: a tracking edit is compared against
+  // what was there so re-saving the same number does not email the customer
+  // again, and the payment gate below depends on what the order already is.
+  const { data: before } = await supabaseAdmin
+    .from('orders')
+    .select('status, invoice_status, tracking_number, carrier')
+    .eq('id', req.params.id)
+    .single();
+  if (!before) return res.status(404).json({ error: 'Order not found.' });
 
   const patch = {};
   if (status !== undefined) {
-    if (!allowed.includes(status)) return res.status(400).json({ error: 'Invalid status.' });
+    if (!ORDER_STATUSES.includes(status)) return res.status(400).json({ error: 'Invalid status.' });
+
+    // An unpaid order must not enter fulfilment. Enforced here and not only in
+    // the dashboard's dropdown, because a disabled <option> prevents a misclick
+    // and nothing else — the request behind it is trivial to send.
+    const blocked = statusBlockedReason(before, status);
+    if (blocked) return res.status(409).json({ error: blocked });
+
+    // Marking an order paid by hand is how a bank transfer or a cheque gets
+    // recorded, and it is also exactly how an unpaid order would slip past the
+    // gate above. So it stays possible, but only when it was asked for
+    // deliberately rather than picked from a list.
+    if (needsOfflineConfirmation(before, status) && offline_payment !== true) {
+      return res.status(409).json({
+        error: 'No payment is on record for this order. Confirm the money was received ' +
+          'outside the website before marking it paid.'
+      });
+    }
     patch.status = status;
   }
   if (tracking_number !== undefined) patch.tracking_number = tracking_number || null;
   if (carrier !== undefined) patch.carrier = carrier || null;
   if (!Object.keys(patch).length) return res.status(400).json({ error: 'Nothing to update.' });
-
-  // Read the row first so a tracking edit can be compared against what was
-  // there. Re-saving the same number must not email the customer again.
-  const { data: before } = await supabaseAdmin
-    .from('orders')
-    .select('tracking_number, carrier')
-    .eq('id', req.params.id)
-    .single();
 
   const { data, error } = await supabaseAdmin
     .from('orders')
@@ -1369,8 +1388,7 @@ async function createInvoiceForOrder(order) {
   // $1.65 through checkout, and invoicing it would have raised a fresh demand
   // for the full re-priced amount. A second charge against a customer who has
   // already paid is the worst outcome this code can produce.
-  const SETTLED = ['paid', 'proof_ready', 'proof_approved', 'in_production', 'shipped'];
-  if (SETTLED.includes(order.status) || order.invoice_status === 'paid') {
+  if (SETTLED_STATUSES.includes(order.status) || order.invoice_status === 'paid') {
     // A paid order still needs a document — customers ask for one and accounts
     // departments require it. What it must NOT be is a fresh demand for money.
     // So it is issued for the amount actually charged and settled out of band,

@@ -40,7 +40,7 @@ async function uploadDesign(userId, source) {
 }
 
 // Place an order: optionally upload a design, then insert the order row.
-export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey, artworkChoice, paymentChoice, contact }) {
+export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey, artworkChoice, paymentChoice, contact, couponCode }) {
   if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
 
   // Idempotency: if this exact attempt already created an order (retry / double
@@ -73,6 +73,15 @@ export async function placeOrder({ user, product, specs, quantity, estimatedPric
       // invoiced — without this the two look identical.
       artwork_choice: artworkChoice || (design ? 'uploaded' : null),
       payment_choice: paymentChoice || null,
+      // The coupon the customer was quoted with, recorded at order time rather
+      // than only at checkout. Checkout wrote it; "send me an invoice instead"
+      // never reaches checkout, so an order placed with a discount arrived with
+      // coupon_code null and was invoiced at full price.
+      //
+      // This is what the customer was SHOWN, not an authority on the discount:
+      // the invoice re-runs applyCoupon server-side, so an unknown or withdrawn
+      // code simply yields no discount.
+      coupon_code: couponCode || null,
       // Captured at order time rather than at checkout: an unpaid order needs a
       // contact and an address too, and Stripe only collects one if the customer
       // gets that far.

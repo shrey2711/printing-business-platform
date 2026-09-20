@@ -29,7 +29,13 @@ export async function updateOrder(id, patch) {
     headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
     body: JSON.stringify(patch)
   });
-  if (!res.ok) throw new Error('Could not update the order.');
+  // Surface what the server said. It refuses some status changes on purpose —
+  // an unpaid order cannot enter production — and a flat "could not update the
+  // order" turns a deliberate, explained refusal into what looks like a bug.
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error || 'Could not update the order.');
+  }
   return res.json();
 }
 

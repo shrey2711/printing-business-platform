@@ -60,10 +60,17 @@ alter table public.orders add column if not exists proof_sent_at timestamptz;
 alter table public.orders add column if not exists proof_approved_at timestamptz;
 alter table public.orders add column if not exists proof_feedback text;  -- customer change request
 
+-- Both spellings of cancelled are accepted. The application has always written
+-- the American 'canceled' — the admin dropdown, the status colours, every list
+-- in the code — while this constraint only allowed the British 'cancelled', so
+-- choosing "canceled" in the dashboard failed with a constraint violation and
+-- the order could not be cancelled at all. 'cancelled' stays permitted so that
+-- any row already written with it remains valid.
 alter table public.orders drop constraint if exists orders_status_check;
 alter table public.orders add constraint orders_status_check
   check (status in (
-    'submitted','paid','proof_ready','proof_approved','in_production','shipped','cancelled'
+    'submitted','paid','proof_ready','proof_approved','in_production','shipped',
+    'canceled','cancelled'
   ));
 
 -- 2) Row Level Security: users only see/manage their own orders -----------------

@@ -124,7 +124,11 @@ export default function PlaceOrderPage() {
         idempotencyKey,
         artworkChoice,
         paymentChoice: payLater ? 'invoice_later' : 'pay_now',
-        contact: { ...contact, address: formatAddress(contact) }
+        contact: { ...contact, address: formatAddress(contact) },
+        // Must be recorded here, not only at checkout: `startCheckout` below is
+        // the only other place the code was sent, and it does not run when the
+        // customer asks to be invoiced instead.
+        couponCode: coupon?.code || null
       });
 
       // Fire confirmation + staff alert emails (best-effort).
