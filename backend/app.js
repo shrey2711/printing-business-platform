@@ -18,6 +18,7 @@ import { currencies, BASE_CURRENCY, brand } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
 import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
 import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
+import { verifyWebhook as verifyAirwallex, collectedMinor, airwallexMode, airwallexMissing } from './lib/airwallex.js';
 import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
 import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from './lib/pricingOverrides.js';
 import { subscribeContact, brevoConfigured, isEmail } from './lib/brevo.js';
@@ -58,6 +59,43 @@ async function announcePayment(orderId) {
     console.error(`[payment] announce failed for ${orderId}: ${e.message}`);
   }
 }
+
+// Airwallex webhook. Mounted BEFORE the JSON body parser, like the Stripe one,
+// because the signature covers the exact bytes Airwallex sent — a parsed and
+// re-serialised body produces a different digest and every event fails.
+//
+// This exists ahead of the Airwallex checkout path on purpose: the notification
+// URL is already live in their dashboard, and a URL that 404s gets retried and
+// eventually disabled. Right now it verifies, logs and acknowledges. It does
+// NOT settle orders yet — nothing pays through Airwallex until a sandbox
+// payment has been taken and checked end to end.
+app.post('/api/airwallex/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  let event;
+  try {
+    event = verifyAirwallex({
+      rawBody: req.body,
+      signature: req.headers['x-signature'],
+      timestamp: req.headers['x-timestamp']
+    });
+  } catch (err) {
+    // No unsigned fallback, in any environment. Stripe's had one guarded to
+    // non-production and it was still the most dangerous line in this file:
+    // an unsigned webhook endpoint marks any order paid for anyone with the URL.
+    console.error(`[airwallex] rejected: ${err.message}`);
+    return res.status(400).send('Signature verification failed');
+  }
+
+  const name = event.name || event.type || 'unknown';
+  const collected = collectedMinor(event);
+  const merchantOrderId = event?.data?.object?.merchant_order_id || null;
+  console.log(`[airwallex] ${name} order=${merchantOrderId || '-'} collected=${collected} minor units`);
+
+  // Acknowledged, deliberately without settling anything. When the checkout
+  // path lands this becomes the same shape as the Stripe handler: advance only
+  // on payment_intent.succeeded, only when `collected` covers what is owed, and
+  // only for a row still in "submitted".
+  return res.json({ received: true, handled: false });
+});
 
 app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   if (!stripe || !supabaseAdmin) return res.status(503).end();
@@ -797,7 +835,18 @@ app.get('/api/me', async (req, res) => {
   // takings were landing in a different Stripe account than the one being
   // checked. Naming the destination account here makes that a two-second look
   // rather than an investigation.
-  res.json({ authenticated: true, email: user.email, role, stripeMode, stripeAccount: await stripeAccountInfo() });
+  //
+  // airwallex reports whether the new processor's credentials actually reached
+  // the deploy, and whether it is pointed at sandbox or live. Names only, never
+  // values — "configured" here means the variable is present, not that it works.
+  res.json({
+    authenticated: true,
+    email: user.email,
+    role,
+    stripeMode,
+    stripeAccount: await stripeAccountInfo(),
+    airwallex: { mode: airwallexMode, missing: airwallexMissing() }
+  });
 });
 
 app.get('/api/admin/orders', async (req, res) => {
