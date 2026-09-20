@@ -69,6 +69,27 @@ export const airwallexConfigured = airwallexMode !== 'unconfigured';
 //
 // The fix is one variable: AIRWALLEX_ENV=live on the Production environment
 // only, with the sandbox keys scoped to Preview and Development.
+// Which variable set actually supplied the credentials. Worth reporting because
+// the two can be crossed: with AIRWALLEX_ENV unset but the sandbox variables
+// absent (the state right after scoping them to Preview only), the fallback
+// below hands LIVE credentials to the SANDBOX base URL, and Airwallex answers
+// 401 credentials_invalid. Harmless but baffling without this line.
+export const airwallexCredentialSource =
+  !CLIENT_ID ? 'none'
+  : (!LIVE && process.env.AIRWALLEX_SANDBOX_CLIENT_ID) ? 'AIRWALLEX_SANDBOX_*'
+  : 'AIRWALLEX_*';
+
+// True when the credentials and the API they are being sent to disagree.
+export const airwallexCrossedWires =
+  airwallexConfigured && !LIVE && airwallexCredentialSource === 'AIRWALLEX_*';
+
+if (airwallexCrossedWires) {
+  console.warn(
+    '[airwallex] Sandbox API with AIRWALLEX_* credentials. If those are live keys ' +
+    'every call returns 401. Set AIRWALLEX_ENV=live, or supply AIRWALLEX_SANDBOX_*.'
+  );
+}
+
 export const airwallexEnvMismatch =
   process.env.NODE_ENV === 'production' && airwallexMode === 'sandbox';
 

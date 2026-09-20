@@ -18,7 +18,7 @@ import { currencies, BASE_CURRENCY, brand } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
 import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
 import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
-import { verifyWebhook as verifyAirwallex, collectedMinor, airwallexMode, airwallexMissing, airwallexEnvMismatch } from './lib/airwallex.js';
+import { verifyWebhook as verifyAirwallex, collectedMinor, airwallexMode, airwallexMissing, airwallexEnvMismatch, airwallexCredentialSource, airwallexCrossedWires } from './lib/airwallex.js';
 import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
 import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from './lib/pricingOverrides.js';
 import { subscribeContact, brevoConfigured, isEmail } from './lib/brevo.js';
@@ -845,7 +845,13 @@ app.get('/api/me', async (req, res) => {
     role,
     stripeMode,
     stripeAccount: await stripeAccountInfo(),
-    airwallex: { mode: airwallexMode, missing: airwallexMissing(), envMismatch: airwallexEnvMismatch }
+    airwallex: {
+      mode: airwallexMode,
+      missing: airwallexMissing(),
+      envMismatch: airwallexEnvMismatch,
+      credentials: airwallexCredentialSource,
+      crossedWires: airwallexCrossedWires
+    }
   });
 });
 
