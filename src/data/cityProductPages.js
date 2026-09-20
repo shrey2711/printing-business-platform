@@ -506,7 +506,7 @@ export const CITY_PRODUCT_PAGES = [
     h1: 'Custom Banners in Los Angeles',
     title: 'Custom Banners in Los Angeles',
     description:
-      "Custom banners printed to any size for Los Angeles trade shows and storefronts. 13oz vinyl, 18oz blockout, mesh or fabric, priced by the square foot.",
+      "Custom banners printed to any size for Los Angeles trade shows and storefronts. 13oz vinyl, 18oz blockout, mesh or fabric, priced by the square foot, free proof.",
     primary: 'custom banners Los Angeles',
     secondary: [
       'banner printing Los Angeles', 'custom banner printing Los Angeles',

@@ -236,10 +236,19 @@ check('a percentage change reaches the real price of every priced product', () =
     'acp-aluminum-signs',
     'business-cards-16pt-matte',
     'flyers-80lb-uncoated',
-    'brochures-80lb-uncoated'
+    'brochures-80lb-uncoated',
+    // Marketing essentials added later, same state as the three above:
+    // quoteOnly with a TODO_PRICE comment, waiting on supplier pricing.
+    'custom-lanyards',
+    'silicone-wristbands'
   ]);
   const surprise = unsupported.filter((s) => !EXPECTED_UNPRICED.has(s));
-  if (surprise.length) return `${surprise.length} priced product(s) cannot be bulk-priced: ${surprise.join(', ')}`;
+  if (surprise.length) {
+    return `${surprise.length} priced product(s) cannot be bulk-priced: ${surprise.join(', ')}. ` +
+      'If that is deliberate (quoteOnly, awaiting supplier pricing), add the slug to EXPECTED_UNPRICED ' +
+      'in this file — the list is manual on purpose, so shipping a product without a price is a decision ' +
+      'someone recorded rather than something the build let through.';
+  }
   return null;
 });
 

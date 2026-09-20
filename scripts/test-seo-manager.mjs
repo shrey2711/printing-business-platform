@@ -40,7 +40,10 @@ const OVERRIDE = {
     canonical: 'https://www.apextradeshow.com/fixture-canonical',
     og_title: 'FIXTURE OG TITLE',
     og_description: 'FIXTURE OG DESCRIPTION.',
-    og_image_path: '/images/tents/10x10-1wall.webp',
+    // Deliberately an image this page would NEVER choose on its own. It used
+    // to be the canopy photo /custom-canopies already uses, so the assertion
+    // below passed with the override disabled — it was testing nothing.
+    og_image_path: '/images/table-covers/fitted.webp',
     breadcrumb_title: 'FIXTURE CRUMB',
     schema_type: 'CollectionPage',
     robots: 'noindex, follow',
@@ -98,8 +101,24 @@ check('OG title overrides independently of the SEO title', () =>
 check('OG description overrides independently of the meta description', () =>
   /<meta property="og:description" content="FIXTURE OG DESCRIPTION\."/.test(html) ? null : 'og:description not overridden');
 
+// Either the override's own path or the 1200x630 social variant generated from
+// it (scripts/gen-og-images.mjs). Product photos are square, and a square image
+// in a summary_large_image card gets centre-cropped, so prerender prefers the
+// variant when one exists — correct behaviour, and this assertion was written
+// before it and pinned the original .webp. What matters is unchanged: the
+// override reached og:image, and it did so as an absolute URL.
 check('OG image reaches og:image as an absolute URL', () =>
-  /<meta property="og:image" content="https?:\/\/[^"]*10x10-1wall\.webp"/.test(html) ? null : 'og:image not overridden');
+  /<meta property="og:image" content="https?:\/\/[^"]*fitted\.(webp|jpg)"/.test(html)
+    ? null
+    : 'og:image not overridden');
+
+// The canopy page's own photo must be GONE from og:image. Without this the
+// assertion above can pass on the page's natural image and report a working
+// override that is not working.
+check('the page default no longer wins over the override', () =>
+  /<meta property="og:image" content="[^"]*10x10-1wall/.test(html)
+    ? 'og:image still shows the page default, so the override did not apply'
+    : null);
 
 check('breadcrumb title replaces the last crumb only', () => {
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
