@@ -33,11 +33,17 @@ export default function CartPage() {
   // Which processor the server says is in charge. Fetched rather than built in,
   // so switching is a deploy of one env var instead of a frontend release.
   const [provider, setProvider] = useState('stripe');
+  // Off unless the server says otherwise — see PAYMENT_FALLBACK in app.js.
+  const [fallback, setFallback] = useState('off');
   useEffect(() => {
     let alive = true;
     fetch('/api/payment-config')
       .then((r) => r.json())
-      .then((c) => alive && c?.provider && setProvider(c.provider))
+      .then((c) => {
+        if (!alive || !c) return;
+        if (c.provider) setProvider(c.provider);
+        if (c.fallback) setFallback(c.fallback);
+      })
       .catch(() => {});
     return () => { alive = false; };
   }, []);
@@ -97,7 +103,7 @@ export default function CartPage() {
       });
       // Reached only if the redirect did not happen.
     } catch (e) {
-      if (allowFallback && e.canFallBack) {
+      if (allowFallback && fallback === 'stripe' && e.canFallBack) {
         // Silent to the customer on purpose: which processor took the payment
         // is our problem, not theirs. It is logged so a pattern of fallbacks is
         // visible rather than invisible.

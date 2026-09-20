@@ -606,11 +606,23 @@ app.post('/api/checkout/cart', writeLimiter, async (req, res) => {
 // route customers to it. Neither alone does anything.
 const PAYMENT_PROVIDER = process.env.PAYMENT_PROVIDER === 'airwallex' ? 'airwallex' : 'stripe';
 
+// Whether a failure to START an Airwallex payment silently retries on Stripe.
+//
+// Default OFF, which is a change of mind worth recording. Falling back protects
+// revenue during an outage, but it also hid a real bug: a reused request_id made
+// every retry 502, the fallback caught it, and the customer landed on Stripe —
+// so the symptom reported was "it is going to Stripe" rather than "Airwallex is
+// erroring", and the actual fault stayed invisible.
+//
+// While Airwallex is being proven, a visible failure is worth more than a
+// silent recovery. Set PAYMENT_FALLBACK=stripe to turn it back on once it is.
+const PAYMENT_FALLBACK = process.env.PAYMENT_FALLBACK === 'stripe' ? 'stripe' : 'off';
+
 // Public, and deliberately says nothing a competitor could not learn by paying:
 // which processor the checkout button should call. The cart needs it to pick a
 // path without shipping a build for every switch.
 app.get('/api/payment-config', (_req, res) => {
-  res.json({ provider: PAYMENT_PROVIDER, airwallexEnv: airwallexMode });
+  res.json({ provider: PAYMENT_PROVIDER, fallback: PAYMENT_FALLBACK, airwallexEnv: airwallexMode });
 });
 
 app.post('/api/checkout/airwallex', writeLimiter, async (req, res) => {

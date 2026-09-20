@@ -132,9 +132,16 @@ check('abandon only deletes the caller\'s own unpaid orders', () => {
 
 // -------------------------------------------------------------- the cart side
 check('the cart falls back only when the error says it is safe', () => (
-  /allowFallback\s*&&\s*e\.canFallBack/.test(cart)
-    ? null : 'the cart does not check canFallBack before retrying on Stripe'
+  /allowFallback\s*&&\s*fallback === 'stripe'\s*&&\s*e\.canFallBack/.test(cart)
+    ? null : 'the cart does not require both the flag and canFallBack before retrying on Stripe'
 ));
+
+check('fallback is off unless the server turns it on', () => {
+  if (!/PAYMENT_FALLBACK === 'stripe' \? 'stripe' : 'off'/.test(app)) {
+    return 'the server default is not off — a silent Stripe payment can hide an Airwallex fault';
+  }
+  return /useState\('off'\)/.test(cart) ? null : 'the client defaults to falling back';
+});
 
 check('the sandbox test button does not fall back', () => (
   /allowFallback:\s*false/.test(cart)
