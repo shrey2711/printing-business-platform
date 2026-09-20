@@ -174,8 +174,11 @@ check('address search never blocks a manual entry', () => {
 
 check('a suggestion never blanks a field it has no value for', () => {
   // A partial result must not wipe a city or postal code already typed.
-  for (const page of ['QuotePage.jsx', 'PlaceOrderPage.jsx']) {
-    const src = readFileSync(new URL('../src/pages/' + page, import.meta.url), 'utf8');
+  // PlaceOrderPage's copy moved into components/ContactFields.jsx, which the
+  // cart now shares — so the rule is checked where the code is, and the cart
+  // inherits it rather than needing its own duplicate of this assertion.
+  for (const page of ['../src/pages/QuotePage.jsx', '../src/components/ContactFields.jsx']) {
+    const src = readFileSync(new URL(page, import.meta.url), 'utf8');
     const i = src.indexOf('applyAddress');
     if (i === -1) return page + ' does not apply a chosen address';
     const block = src.slice(i, i + 500);

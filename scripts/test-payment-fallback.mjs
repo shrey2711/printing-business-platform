@@ -132,7 +132,7 @@ check('abandon only deletes the caller\'s own unpaid orders', () => {
 
 // -------------------------------------------------------------- the cart side
 check('the cart falls back only when the error says it is safe', () => (
-  /allowFallback\s*&&\s*fallback === 'stripe'\s*&&\s*e\.canFallBack/.test(cart)
+  /fallback === 'stripe'\s*&&\s*e\.canFallBack/.test(cart)
     ? null : 'the cart does not require both the flag and canFallBack before retrying on Stripe'
 ));
 
@@ -140,13 +140,20 @@ check('fallback is off unless the server turns it on', () => {
   if (!/PAYMENT_FALLBACK === 'stripe' \? 'stripe' : 'off'/.test(app)) {
     return 'the server default is not off — a silent Stripe payment can hide an Airwallex fault';
   }
-  return /useState\('off'\)/.test(cart) ? null : 'the client defaults to falling back';
+  return /setFallback\]\s*=\s*useState\('off'\)/.test(cart)
+    ? null : 'the client does not default the fallback to off';
 });
 
-check('the sandbox test button does not fall back', () => (
-  /allowFallback:\s*false/.test(cart)
-    ? null : 'the test button would fall back, hiding the failure it exists to surface'
-));
+check('the sandbox test button is gone from the live cart', () => {
+  // It was scaffolding: a second checkout button, labelled "sandbox test", that
+  // reached a real customer's cart on the live site. Deleted rather than hidden
+  // more carefully — sandbox testing now goes through the normal Check out
+  // button on a preview deployment, which is the same path customers take.
+  for (const bad of ['sandbox test', 'Sandbox only', 'pay=airwallex']) {
+    if (cart.includes(bad)) return `the cart still contains "${bad}"`;
+  }
+  return null;
+});
 
 if (fails.length) {
   console.error(`\n✗ PAYMENT FALLBACK FAILED — ${fails.length}/${ran}:`);

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { startCartCheckout, validateCoupon } from '../services/checkout';
 import { startAirwallexCheckout } from '../services/airwallex';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import ContactFields, { emptyContact } from '../components/ContactFields';
+import { validateContact, formatAddress } from '../lib/contactValidation';
 import { trackBeginCheckout } from '../lib/analytics';
 
 // The cart.
@@ -21,19 +23,10 @@ export default function CartPage() {
   const { currency } = useCurrency();
   const money = useMoney();
   const navigate = useNavigate();
-  // Airwallex is opt-in by URL while it is sandbox-only: /cart?pay=airwallex.
-  // A second checkout button on the live cart would be a second way for a real
-  // customer to pay, through a path that has never taken a real payment.
-  //
-  // Remembered for the session once seen, because the testing route is
-  // "add to cart, then go to the cart" — and reaching the cart through the nav
-  // drops the query string, so the button vanishes exactly when it is wanted.
-  // sessionStorage, not localStorage: it should expire with the tab rather than
-  // leave a tester's browser permanently showing a payment path nobody else has.
-  // Which processor the server says is in charge. Fetched rather than built in,
-  // so switching is a deploy of one env var instead of a frontend release.
+  // Which processor the server says is in charge, and whether a failure to
+  // START a payment may quietly retry on the other one. Fetched rather than
+  // built in, so switching either is a deploy of one env var.
   const [provider, setProvider] = useState('stripe');
-  // Off unless the server says otherwise — see PAYMENT_FALLBACK in app.js.
   const [fallback, setFallback] = useState('off');
   useEffect(() => {
     let alive = true;
@@ -47,20 +40,6 @@ export default function CartPage() {
       .catch(() => {});
     return () => { alive = false; };
   }, []);
-
-  const [params] = useSearchParams();
-  const airwallexOptIn = (() => {
-    try {
-      if (params.get('pay') === 'airwallex') {
-        sessionStorage.setItem('apex.pay.airwallex', '1');
-        return true;
-      }
-      return sessionStorage.getItem('apex.pay.airwallex') === '1';
-    } catch {
-      // Private mode: fall back to the URL alone rather than breaking the cart.
-      return params.get('pay') === 'airwallex';
-    }
-  })();
 
   const [couponInput, setCouponInput] = useState('');
   const [coupon, setCoupon] = useState(null);
@@ -92,18 +71,20 @@ export default function CartPage() {
   // A cart problem (an item needing a quote) is not a fallback case either.
   // Stripe would refuse it for the same reason, and the message has to reach
   // the customer rather than being swallowed by a retry.
-  const payWithAirwallex = async ({ allowFallback = true } = {}) => {
+  const payWithAirwallex = async () => {
     setError('');
     setBusy(true);
     try {
       await startAirwallexCheckout({
         lines: lines.map((l) => ({ config: l.config, specs: l.specs })),
         coupon: coupon?.code,
-        currency
+        currency,
+        contact: { ...contact, address: formatAddress(contact) },
+        countryCode: contact.country || 'US'
       });
       // Reached only if the redirect did not happen.
     } catch (e) {
-      if (allowFallback && fallback === 'stripe' && e.canFallBack) {
+      if (fallback === 'stripe' && e.canFallBack) {
         // Silent to the customer on purpose: which processor took the payment
         // is our problem, not theirs. It is logged so a pattern of fallbacks is
         // visible rather than invisible.
@@ -125,7 +106,8 @@ export default function CartPage() {
       const res = await startCartCheckout({
         lines: lines.map((l) => ({ config: l.config, specs: l.specs })),
         coupon: coupon?.code,
-        currency
+        currency,
+        contact: { ...contact, address: formatAddress(contact) }
       });
       if (res?.unavailable) {
         setError('Payments are not configured yet. Please request a quote and we will follow up.');
@@ -197,6 +179,9 @@ export default function CartPage() {
       </div>
 
       <div className="cart-foot card">
+        <h2 className="section-title">Delivery details</h2>
+        <ContactFields value={contact} onChange={setContact} idPrefix="cart-" />
+
         <div className="field">
           <label htmlFor="cart-coupon">Coupon code</label>
           <div className="coupon-row">
@@ -235,25 +220,14 @@ export default function CartPage() {
             <button
               className="btn btn-red btn-block"
               onClick={provider === 'airwallex' ? payWithAirwallex : checkout}
-              disabled={busy || anyUnpriced}
+              disabled={busy || anyUnpriced || !contactCheck.ok}
             >
               {busy ? 'Starting checkout…' : `Check out — ${money(subtotal)}`}
             </button>
-            {airwallexOptIn && provider !== 'airwallex' && (
-              <>
-                <button
-                  className="btn btn-outline btn-block"
-                  onClick={() => payWithAirwallex({ allowFallback: false })}
-                  disabled={busy || anyUnpriced}
-                >
-                  {busy ? 'Starting…' : 'Pay with Airwallex (sandbox test)'}
-                </button>
-                <p className="panel-foot">
-                  Sandbox only — no real money moves. Reached via ?pay=airwallex.
-                </p>
-              </>
-            )}
           </>
+        )}
+        {!contactCheck.ok && (
+          <p className="panel-foot">Add your contact and delivery details above to check out.</p>
         )}
         <p className="panel-foot">
           Artwork is uploaded per item after payment, and we send a free proof before anything prints.

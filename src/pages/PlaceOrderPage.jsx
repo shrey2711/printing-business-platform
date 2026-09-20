@@ -8,11 +8,9 @@ import { getPrice } from '../services/api';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { trackBeginCheckout } from '../lib/analytics';
-import AddressAutocomplete from '../components/AddressAutocomplete';
+import ContactFields from '../components/ContactFields';
 import { validateContact, formatAddress } from '../lib/contactValidation';
-import { countryOptions, POSTAL, NO_POSTAL } from '../data/countries';
 
-const COUNTRIES = countryOptions();
 
 export default function PlaceOrderPage() {
   useDocumentMeta('Place Your Order', undefined, undefined, 'noindex, follow');
@@ -37,17 +35,6 @@ export default function PlaceOrderPage() {
   const [contact, setContact] = useState({
     name: '', phone: '', street: '', city: '', state: '', postal: '', country: ''
   });
-  const setField = (k) => (e) => setContact((c) => ({ ...c, [k]: e.target.value }));
-  // A chosen suggestion fills the rest; anything it does not supply keeps what
-  // was already typed rather than being blanked.
-  const applyAddress = (a) => setContact((c) => ({
-    ...c,
-    street: a.street || c.street,
-    city: a.city || c.city,
-    state: a.state || c.state,
-    postal: a.postal || c.postal,
-    country: a.country || c.country
-  }));
   const contactCheck = validateContact(contact);
   const contactReady = contactCheck.ok;
   const [error, setError] = useState('');
@@ -209,64 +196,7 @@ export default function PlaceOrderPage() {
             </small>
           </div>
 
-          <div className="field-row">
-            <div className="field">
-              <label htmlFor="cname">Contact name *</label>
-              <input id="cname" value={contact.name} onChange={setField('name')} required />
-            </div>
-            <div className="field">
-              <label htmlFor="cphone">Phone *</label>
-              <input id="cphone" type="tel" value={contact.phone} onChange={setField('phone')} required />
-            </div>
-          </div>
-
-          <div className="field">
-            <label htmlFor="ccountry">Country *</label>
-            <select id="ccountry" value={contact.country} onChange={setField('country')} required>
-              <option value="">Select a country…</option>
-              {COUNTRIES.map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
-            </select>
-            <small className="muted">Shipping cost and transit time depend on where this is going.</small>
-          </div>
-
-          <div className="field">
-            <label htmlFor="cstreet">Street address *</label>
-            <AddressAutocomplete
-              id="cstreet"
-              name="street"
-              value={contact.street}
-              country={contact.country}
-              onChange={(v) => setContact((c) => ({ ...c, street: v }))}
-              onSelect={applyAddress}
-              required
-            />
-          </div>
-
-          <div className="three-col">
-            <div className="field">
-              <label htmlFor="ccity">City *</label>
-              <input id="ccity" value={contact.city} onChange={setField('city')} required />
-            </div>
-            <div className="field">
-              <label htmlFor="cstate">State / province</label>
-              <input id="cstate" value={contact.state} onChange={setField('state')} />
-            </div>
-            <div className="field">
-              <label htmlFor="cpostal">
-                {NO_POSTAL.has(contact.country) ? 'Postal code (not used here)' : 'Postal code *'}
-              </label>
-              <input
-                id="cpostal"
-                value={contact.postal}
-                onChange={setField('postal')}
-                placeholder={POSTAL[contact.country] ? `e.g. ${POSTAL[contact.country].hint}` : ''}
-              />
-            </div>
-          </div>
-
-          {!contactCheck.ok && (contact.name || contact.street) ? (
-            <p className="field-error">{Object.values(contactCheck.errors)[0]}</p>
-          ) : null}
+          <ContactFields value={contact} onChange={setContact} />
 
           {needsArtwork && !file ? (
             <div className="field artwork-gate">
