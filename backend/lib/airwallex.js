@@ -187,3 +187,92 @@ export function collectedMinor(event) {
   const amount = d.captured_amount ?? d.amount ?? 0;
   return Math.round(Number(amount) * 100) || 0;
 }
+
+// ------------------------------------------------------------- invoices
+// Endpoints confirmed from the Airwallex Invoice API reference:
+//
+//   create        POST /api/v1/billing/invoices/create
+//   line items    POST /api/v1/billing/invoices/{id}/add_line_items
+//   finalise      POST /api/v1/billing/invoices/{id}/finalize
+//   mark paid     POST /api/v1/billing/invoices/{id}/mark_as_paid
+//
+// A finalised invoice exposes hosted_url and pdf_url. Those two fields are the
+// whole reason this maps cleanly: Stripe never emailed our invoices either —
+// app.js deliberately skips sendInvoice and the mailer puts the link in our own
+// email. So only the URL has to survive the migration, not the delivery.
+//
+// The customer endpoint is the one piece NOT confirmed from the reference; the
+// sandbox script prints what comes back so it can be settled by observation
+// rather than assumption.
+
+export async function createCustomer({ email, name, merchantCustomerId }) {
+  return call('/api/v1/pa/customers/create', {
+    body: {
+      request_id: crypto.randomUUID(),
+      email,
+      ...(name ? { first_name: name } : {}),
+      ...(merchantCustomerId ? { merchant_customer_id: merchantCustomerId } : {})
+    }
+  });
+}
+
+export async function createInvoice({ customerId, currency, orderId, description }) {
+  return call('/api/v1/billing/invoices/create', {
+    body: {
+      request_id: crypto.randomUUID(),
+      customer_id: customerId,
+      currency: String(currency).toUpperCase(),
+      // Lets the hosted page take the payment, rather than being a record only.
+      collection_method: 'CHARGE_ON_CHECKOUT',
+      ...(description ? { description } : {}),
+      ...(orderId ? { metadata: { orderId } } : {})
+    }
+  });
+}
+
+export async function addInvoiceLineItems(invoiceId, items) {
+  return call(`/api/v1/billing/invoices/${encodeURIComponent(invoiceId)}/add_line_items`, {
+    body: {
+      request_id: crypto.randomUUID(),
+      items: items.map((i) => ({
+        // Major units, like payment intents — the conversion stays in this file.
+        amount: Number((i.amountMinor / 100).toFixed(2)),
+        quantity: i.quantity || 1,
+        description: i.description
+      }))
+    }
+  });
+}
+
+export async function finalizeInvoice(invoiceId) {
+  return call(`/api/v1/billing/invoices/${encodeURIComponent(invoiceId)}/finalize`, {
+    body: { request_id: crypto.randomUUID() }
+  });
+}
+
+/**
+ * Mark an invoice paid outside Airwallex — the paid_out_of_band equivalent, for
+ * an order already settled elsewhere.
+ *
+ * IRREVERSIBLE. Airwallex offers no undo, so the amount guard below is not
+ * belt-and-braces: it is the only check there is. It refuses a zero invoice
+ * against a real quote, which is the exact shape of the bug that once left a
+ * $285 order carrying a $0.00 invoice marked paid.
+ */
+export async function markInvoicePaid(invoiceId, { quotedMinor } = {}) {
+  const before = await retrieveInvoice(invoiceId);
+  const totalMinor = Math.round(Number(before?.total_amount ?? before?.amount ?? 0) * 100);
+  if (Number.isFinite(quotedMinor) && quotedMinor > 0 && totalMinor === 0) {
+    throw new Error(
+      `Airwallex: refusing to mark invoice ${invoiceId} paid — it totals 0 against a quote of ` +
+      `${(quotedMinor / 100).toFixed(2)}. Marking paid cannot be undone.`
+    );
+  }
+  return call(`/api/v1/billing/invoices/${encodeURIComponent(invoiceId)}/mark_as_paid`, {
+    body: { request_id: crypto.randomUUID() }
+  });
+}
+
+export async function retrieveInvoice(invoiceId) {
+  return call(`/api/v1/billing/invoices/${encodeURIComponent(invoiceId)}`, { method: 'GET' });
+}

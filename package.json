@@ -45,7 +45,8 @@
     "test:middleware": "node scripts/test-middleware.mjs",
     "check:404s": "node scripts/live-check-404s.mjs",
     "audit:dupes": "node scripts/audit-product-duplication.mjs",
-    "test:airwallex": "node scripts/test-airwallex.mjs"
+    "test:airwallex": "node scripts/test-airwallex.mjs",
+    "check:airwallex-invoice": "node scripts/check-airwallex-invoice.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
