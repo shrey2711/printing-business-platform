@@ -75,7 +75,18 @@ export default function CartPage() {
     }
   };
 
-  const payWithAirwallex = async () => {
+  // Airwallex first, Stripe if it cannot even start.
+  //
+  // The fallback is deliberately limited to failures BEFORE the customer sees a
+  // payment form — Airwallex unreachable, refusing the intent, or its script
+  // blocked. Once they have been handed to Airwallex's page the attempt is
+  // theirs to finish or abandon: retrying on Stripe from there is how someone
+  // gets charged twice.
+  //
+  // A cart problem (an item needing a quote) is not a fallback case either.
+  // Stripe would refuse it for the same reason, and the message has to reach
+  // the customer rather than being swallowed by a retry.
+  const payWithAirwallex = async ({ allowFallback = true } = {}) => {
     setError('');
     setBusy(true);
     try {
@@ -86,6 +97,14 @@ export default function CartPage() {
       });
       // Reached only if the redirect did not happen.
     } catch (e) {
+      if (allowFallback && e.canFallBack) {
+        // Silent to the customer on purpose: which processor took the payment
+        // is our problem, not theirs. It is logged so a pattern of fallbacks is
+        // visible rather than invisible.
+        console.warn('[checkout] Airwallex could not start, falling back to Stripe:', e.message);
+        setBusy(false);
+        return checkout();
+      }
       setError(e.message || 'Could not start the Airwallex checkout.');
     } finally {
       setBusy(false);
@@ -218,7 +237,7 @@ export default function CartPage() {
               <>
                 <button
                   className="btn btn-outline btn-block"
-                  onClick={payWithAirwallex}
+                  onClick={() => payWithAirwallex({ allowFallback: false })}
                   disabled={busy || anyUnpriced}
                 >
                   {busy ? 'Starting…' : 'Pay with Airwallex (sandbox test)'}

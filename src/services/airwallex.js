@@ -57,12 +57,46 @@ export async function startAirwallexCheckout({ lines, coupon, currency, contact,
   if (res.status === 401) throw new Error('Please sign in to check out.');
 
   const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(body.error || 'Could not start checkout.');
+
+  // WHERE FALLBACK IS SAFE, AND WHERE IT IS NOT.
+  //
+  // Everything up to the redirect happens before the customer has seen a
+  // payment form, so no money can have moved and another processor can be
+  // tried. After redirectToCheckout the customer may be entering a card on
+  // Airwallex's page, and retrying on Stripe from there is how a double charge
+  // happens. So `canFallBack` is set here and cleared the moment we hand off.
+  //
+  // A business error (an item needing a quote, an empty cart) is NOT a fallback
+  // case either: Stripe would refuse it for the same reason, and swallowing the
+  // message would leave the customer staring at a failure with no explanation.
+  if (!res.ok) {
+    const err = new Error(body.error || 'Could not start checkout.');
+    // 502/503 are ours: Airwallex refused or is not configured. 4xx is the
+    // customer's cart being wrong, which changing processor cannot fix.
+    err.canFallBack = res.status >= 500;
+    throw err;
+  }
   if (!body.clientSecret || !body.intentId) {
-    throw new Error('Airwallex did not return a payment intent.');
+    const err = new Error('Airwallex did not return a payment intent.');
+    err.canFallBack = true;
+    throw err;
   }
 
-  const Airwallex = await loadSdk();
+  let Airwallex;
+  try {
+    Airwallex = await loadSdk();
+  } catch (e) {
+    // The script was blocked or the network failed. Nothing has been charged,
+    // but the orders already exist — so discard them before Stripe writes its
+    // own, or one basket becomes two sets of orders.
+    await fetch('/api/checkout/airwallex/abandon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ cartId: body.cartId })
+    }).catch(() => { /* best effort — never block the fallback on cleanup */ });
+    e.canFallBack = true;
+    throw e;
+  }
   await Airwallex.init({
     // The SDK's environment has to match the keys the server used, or the
     // redirect lands on a page that cannot find the intent. The server reports
@@ -71,8 +105,10 @@ export async function startAirwallexCheckout({ lines, coupon, currency, contact,
     origin: window.location.origin
   });
 
-  // Navigates away. The orders already exist and stay "submitted" until the
-  // webhook settles them, so an abandoned payment loses nothing.
+  // The point of no return. From here the customer may be on Airwallex's
+  // payment page, so a failure after this must NOT be retried on Stripe: the
+  // first payment may yet succeed, and the second would be a double charge.
+  // Anything thrown below is surfaced as-is, without canFallBack.
   await Airwallex.redirectToCheckout({
     intent_id: body.intentId,
     client_secret: body.clientSecret,

@@ -733,6 +733,36 @@ app.post('/api/checkout/airwallex', writeLimiter, async (req, res) => {
   });
 });
 
+// Discard the orders from an Airwallex attempt that never reached the payment
+// page, so falling back to Stripe does not leave the customer with two sets of
+// orders for one basket.
+//
+// Deliberately narrow. It deletes only rows that are the caller's own, still
+// "submitted", and carry the cartId from this attempt — so it can never remove
+// a paid order, someone else's order, or anything from a different basket. The
+// rollback inside the checkout route covers the case where the intent itself
+// failed; this covers the case where the intent succeeded but the browser could
+// not hand off to it.
+app.post('/api/checkout/airwallex/abandon', writeLimiter, async (req, res) => {
+  if (!supabaseAdmin) return res.status(503).json({ error: 'Not configured.' });
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Not signed in.' });
+
+  const { cartId } = req.body || {};
+  if (!cartId) return res.status(400).json({ error: 'cartId is required.' });
+
+  const { data, error } = await supabaseAdmin
+    .from('orders')
+    .delete()
+    .eq('user_id', user.id)
+    .eq('status', 'submitted')
+    .contains('config', { cartId })
+    .select('id');
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ discarded: (data || []).length });
+});
+
 app.post('/api/checkout', writeLimiter, async (req, res) => {
   if (!stripe || !supabaseAdmin) {
     return res.status(503).json({ error: 'Payments are not configured.' });
