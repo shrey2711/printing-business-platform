@@ -278,7 +278,7 @@ export async function createCustomer({ email, name, merchantCustomerId }) {
   });
 }
 
-export async function createInvoice({ customerId, currency, orderId, description }) {
+export async function createInvoice({ customerId, currency, orderId, description, daysUntilDue = 14 }) {
   return call('/api/v1/billing/invoices/create', {
     body: {
       request_id: crypto.randomUUID(),
@@ -287,7 +287,11 @@ export async function createInvoice({ customerId, currency, orderId, description
       billing_customer_id: customerId,
       currency: String(currency).toUpperCase(),
       // Lets the hosted page take the payment, rather than being a record only.
+      // Both of these are required BEFORE finalize, not on it: finalize refuses
+      // with "collection method must be set" and "either due_at or
+      // days_until_due must be provided" if they are missing here.
       collection_method: 'CHARGE_ON_CHECKOUT',
+      days_until_due: daysUntilDue,
       ...(description ? { description } : {}),
       ...(orderId ? { metadata: { orderId } } : {})
     }
@@ -295,19 +299,43 @@ export async function createInvoice({ customerId, currency, orderId, description
 }
 
 export async function addInvoiceLineItems(invoiceId, items) {
+  // Airwallex Billing is subscription-shaped, so a line is not an amount: it is
+  // a price attached to a product. Discovered by probing the sandbox, each error
+  // naming the next missing piece:
+  //
+  //   items                  -> "'line_items' is mandatory"
+  //   amount                 -> "should only contain either price or priceId"
+  //   price.amount           -> "should have 'pricing_model' of one of FLAT, ..."
+  //   pricing_model FLAT     -> "Exactly one of 'product_id' or 'product'"
+  //   product {name}         -> "'flat_amount' is required when 'pricing_model' is FLAT"
+  //
+  // FLAT with quantity 1 is the honest mapping for a printed order: one line,
+  // one total, no per-unit arithmetic Airwallex would redo differently from the
+  // pricing engine that produced the figure.
   return call(`/api/v1/billing/invoices/${encodeURIComponent(invoiceId)}/add_line_items`, {
     body: {
       request_id: crypto.randomUUID(),
-      items: items.map((i) => ({
-        // Major units, like payment intents — the conversion stays in this file.
-        amount: Number((i.amountMinor / 100).toFixed(2)),
+      line_items: items.map((i) => ({
         quantity: i.quantity || 1,
-        description: i.description
+        price: {
+          currency: String(i.currency || 'USD').toUpperCase(),
+          pricing_model: 'FLAT',
+          // Major units, like payment intents — the conversion stays in this file.
+          flat_amount: Number((i.amountMinor / 100).toFixed(2)),
+          product: { name: i.description }
+        }
       }))
     }
   });
 }
 
+/**
+ * Finalise an invoice, which is what produces hosted_url and makes it payable.
+ *
+ * Everything it needs — collection method and due date — has to be set when the
+ * invoice is CREATED. Airwallex refuses a finalize that is missing either, which
+ * is the safer behaviour of the two on offer.
+ */
 export async function finalizeInvoice(invoiceId) {
   return call(`/api/v1/billing/invoices/${encodeURIComponent(invoiceId)}/finalize`, {
     body: { request_id: crypto.randomUUID() }

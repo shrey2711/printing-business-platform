@@ -94,7 +94,7 @@ try {
   note(`id: ${invoice.id}   status: ${invoice.status || '(none)'}`);
 
   await addInvoiceLineItems(invoice.id, [
-    { amountMinor: 12345, quantity: 1, description: '10ft x 10ft canopy tent — TEST LINE, do not fulfil' }
+    { amountMinor: 12345, quantity: 1, currency: 'USD', description: '10ft x 10ft canopy tent — TEST LINE, do not fulfil' }
   ]);
   note('line item added: $123.45');
 
