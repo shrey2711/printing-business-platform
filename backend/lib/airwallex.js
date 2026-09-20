@@ -24,14 +24,34 @@
 
 import crypto from 'crypto';
 
-const CLIENT_ID = process.env.AIRWALLEX_CLIENT_ID;
-const API_KEY = process.env.AIRWALLEX_API_KEY;
-const WEBHOOK_SECRET = process.env.AIRWALLEX_WEBHOOK_SECRET;
-
 // Sandbox unless explicitly told otherwise, so a missing env var can never
 // mean "charge real cards" — the same failure mode the Stripe test/live badge
 // exists to prevent.
 const LIVE = process.env.AIRWALLEX_ENV === 'live';
+
+// Airwallex sandbox and live are separate environments with separate
+// credentials: a live key returns 401 credentials_invalid against sandbox and
+// vice versa. Both sets therefore have to be able to coexist, with the
+// environment choosing between them — otherwise switching means editing the
+// same variables back and forth, and the day that goes wrong is the day a test
+// runs against real money.
+//
+// The AIRWALLEX_SANDBOX_* names are preferred in sandbox and simply ignored in
+// live, so there is no combination of variables that sends a sandbox intent to
+// the live API.
+const CLIENT_ID = LIVE
+  ? process.env.AIRWALLEX_CLIENT_ID
+  : (process.env.AIRWALLEX_SANDBOX_CLIENT_ID || process.env.AIRWALLEX_CLIENT_ID);
+const API_KEY = LIVE
+  ? process.env.AIRWALLEX_API_KEY
+  : (process.env.AIRWALLEX_SANDBOX_API_KEY || process.env.AIRWALLEX_API_KEY);
+// Each webhook has its own signing secret, and the sandbox webhook is a
+// different webhook from the live one.
+const WEBHOOK_SECRET = LIVE
+  ? process.env.AIRWALLEX_WEBHOOK_SECRET
+  : (process.env.AIRWALLEX_SANDBOX_WEBHOOK_SECRET
+     || process.env.AIRWALLEX_SANDBOX_SECRET_KEY
+     || process.env.AIRWALLEX_WEBHOOK_SECRET);
 export const airwallexBase = LIVE
   ? 'https://api.airwallex.com'
   : 'https://api.sandbox.airwallex.com';
@@ -41,10 +61,11 @@ export const airwallexConfigured = airwallexMode !== 'unconfigured';
 
 /** Which pieces are missing, for the admin diagnostics panel. Never values. */
 export function airwallexMissing() {
+  const p = LIVE ? 'AIRWALLEX_' : 'AIRWALLEX_SANDBOX_';
   return [
-    !CLIENT_ID && 'AIRWALLEX_CLIENT_ID',
-    !API_KEY && 'AIRWALLEX_API_KEY',
-    !WEBHOOK_SECRET && 'AIRWALLEX_WEBHOOK_SECRET'
+    !CLIENT_ID && `${p}CLIENT_ID`,
+    !API_KEY && `${p}API_KEY`,
+    !WEBHOOK_SECRET && `${p}WEBHOOK_SECRET`
   ].filter(Boolean);
 }
 
@@ -220,7 +241,9 @@ export async function createInvoice({ customerId, currency, orderId, description
   return call('/api/v1/billing/invoices/create', {
     body: {
       request_id: crypto.randomUUID(),
-      customer_id: customerId,
+      // Billing calls it billing_customer_id, not customer_id — the sandbox
+      // rejects the latter with "'billing_customer_id' is mandatory".
+      billing_customer_id: customerId,
       currency: String(currency).toUpperCase(),
       // Lets the hosted page take the payment, rather than being a record only.
       collection_method: 'CHARGE_ON_CHECKOUT',
