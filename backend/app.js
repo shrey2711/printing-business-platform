@@ -18,7 +18,8 @@ import { currencies, BASE_CURRENCY, brand } from '../src/config/brand.js';
 import { getRates, getRate } from './lib/fx.js';
 import { renderMarkdown, excerptFromMarkdown } from './lib/markdown.js';
 import { triggerRebuild, rebuildConfigured } from './lib/rebuild.js';
-import { verifyWebhook as verifyAirwallex, collectedMinor, airwallexMode, airwallexMissing, airwallexEnvMismatch, airwallexCredentialSource, airwallexCrossedWires } from './lib/airwallex.js';
+import { verifyWebhook as verifyAirwallex, collectedMinor, airwallexMode, airwallexMissing, airwallexEnvMismatch, airwallexCredentialSource, airwallexCrossedWires,
+  airwallexConfigured, createPaymentIntent, retrievePaymentIntent } from './lib/airwallex.js';
 import { getContentMap, getSeoMap, invalidateContentCache } from './lib/content.js';
 import { getPricingOverride, getPricingOverrides, invalidatePricingCache } from './lib/pricingOverrides.js';
 import { subscribeContact, brevoConfigured, isEmail } from './lib/brevo.js';
@@ -90,10 +91,54 @@ app.post('/api/airwallex/webhook', express.raw({ type: 'application/json' }), as
   const merchantOrderId = event?.data?.object?.merchant_order_id || null;
   console.log(`[airwallex] ${name} order=${merchantOrderId || '-'} collected=${collected} minor units`);
 
-  // Acknowledged, deliberately without settling anything. When the checkout
-  // path lands this becomes the same shape as the Stripe handler: advance only
-  // on payment_intent.succeeded, only when `collected` covers what is owed, and
-  // only for a row still in "submitted".
+  // Settlement. Same rules as the Stripe handler, for the same reason: this
+  // project has had an order reach "paid" with nothing collected.
+  //
+  //   - only on a success event
+  //   - only when money was actually collected
+  //   - only for rows still in "submitted", so a later status is never
+  //     downgraded by a replayed event
+  //   - the amount is RECORDED, not just the status, because a paid order
+  //     showing 0 is indistinguishable from one marked paid in error
+  if (name === 'payment_intent.succeeded' && supabaseAdmin) {
+    const md = event?.data?.object?.metadata || {};
+    const orderIds = String(md.orderIds || md.orderId || '')
+      .split(',').map((x) => x.trim()).filter(Boolean);
+
+    if (!orderIds.length) {
+      console.error(`[airwallex] ${name} carried no order ids — nothing settled.`);
+    } else if (collected > 0) {
+      // Written as a positive `collected > 0` around the update rather than an
+      // early return on `collected <= 0`. Both are correct; only this one is
+      // legible to test-payment-guards, which scans for proof of payment
+      // immediately before any status:'paid'. It caught this code when it was
+      // written the other way round, which is exactly its job — so the code
+      // moved to meet the check rather than the check being widened.
+      const paidTotal = collected / 100;
+      const perOrder = paidTotal / orderIds.length;
+      const { data: moved } = await supabaseAdmin
+        .from('orders')
+        .update({
+          status: 'paid',
+          amount_total: Math.round(perOrder * 100) / 100,
+          currency: (event?.data?.object?.currency || 'USD').toUpperCase()
+        })
+        .in('id', orderIds)
+        .eq('status', 'submitted')
+        .select('id');
+
+      // Only the path that actually moved a row emails anyone, so a replayed
+      // event cannot send a second "payment received".
+      if ((moved || []).length) {
+        await announcePayment(orderIds[0]);
+        console.log(`[airwallex] settled ${moved.length} order(s) for ${paidTotal}`);
+        return res.json({ received: true, handled: true, settled: moved.length });
+      }
+    } else {
+      console.error(`[airwallex] ${name} for ${orderIds.join(',')} collected 0 — not marking it paid.`);
+    }
+  }
+
   return res.json({ received: true, handled: false });
 });
 
@@ -540,6 +585,129 @@ app.post('/api/checkout/cart', writeLimiter, async (req, res) => {
     .in('id', created.map((o) => o.id));
 
   res.json({ url: session.url, orderIds: created.map((o) => o.id), cartId, total: total * fxRate, currency: cur.code });
+});
+
+// Airwallex checkout — the same re-pricing and order creation as the Stripe
+// cart route above, then an Airwallex PaymentIntent instead of a Stripe session.
+//
+// It returns { intentId, clientSecret } rather than a URL, because Airwallex has
+// no hosted checkout URL: the BROWSER performs the redirect with Airwallex.js.
+// That is the one structural difference between the two processors.
+//
+// SANDBOX ONLY for now. The guard is not ceremony — until a sandbox payment has
+// been taken and a webhook has settled the order, this route has never charged
+// anybody, and the first time it does should not be a customer.
+app.post('/api/checkout/airwallex', writeLimiter, async (req, res) => {
+  if (!airwallexConfigured || !supabaseAdmin) {
+    return res.status(503).json({ error: 'Airwallex is not configured.' });
+  }
+  if (airwallexMode !== 'sandbox') {
+    return res.status(503).json({
+      error: 'The Airwallex path is sandbox-only until it has been tested end to end.'
+    });
+  }
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Not signed in.' });
+
+  const { lines, coupon, currency: requestedCurrency, contact } = req.body || {};
+  if (!Array.isArray(lines) || lines.length === 0) return res.status(400).json({ error: 'Your cart is empty.' });
+  if (lines.length > 20) return res.status(400).json({ error: 'A cart can hold up to 20 lines.' });
+
+  // 1. Re-price server-side. The client's figure is display only, exactly as on
+  //    the Stripe path — a cart in localStorage is editable by anyone.
+  const priced = [];
+  for (const line of lines) {
+    const cfg = line && line.config;
+    if (!cfg || !cfg.slug) return res.status(400).json({ error: 'A line in your cart is missing its configuration.' });
+    const product = getProduct(cfg.slug);
+    if (!product) return res.status(400).json({ error: `We no longer carry ${cfg.slug}.` });
+    const override = await getPricingOverride(cfg.slug);
+    const result = computePrice(cfg, override ? { pricing: override } : {});
+    if (!result.ok || !(result.total > 0)) {
+      return res.status(400).json({ error: `${product.name} needs a manual quote rather than checkout.` });
+    }
+    priced.push({ product, config: cfg, total: result.total, specs: line.specs || '' });
+  }
+
+  const subtotal = priced.reduce((n, l) => n + l.total, 0);
+  const { discount, total, coupon: applied } = applyCoupon(subtotal, coupon);
+  const cur = currencies[requestedCurrency] || currencies[BASE_CURRENCY];
+  const fxRate = await getRate(cur.code);
+  const amountMinor = Math.round(total * fxRate * 100);
+  if (!(amountMinor > 0)) {
+    return res.status(400).json({ error: 'That total is zero. Ask us to invoice it instead.' });
+  }
+
+  // 2. Orders first, payment second — same order as the Stripe path, so a
+  //    payment can always be traced back to rows that already exist.
+  const cartId = crypto.randomUUID();
+  const created = [];
+  for (const l of priced) {
+    const { data, error } = await supabaseAdmin
+      .from('orders')
+      .insert({
+        user_id: user.id,
+        product: l.product.name,
+        specs: l.specs,
+        quantity: l.config.quantity || 1,
+        estimated_price: `${cur.code} ${(l.total * fxRate).toFixed(2)}`,
+        status: 'submitted',
+        config: { ...l.config, cartId, processor: 'airwallex' },
+        currency: cur.code,
+        artwork_choice: 'email_later',
+        payment_choice: 'pay_now',
+        ...(contact && typeof contact === 'object'
+          ? {
+              customer_name: contact.name || null,
+              customer_phone: contact.phone || null,
+              shipping_address: contact.address || null,
+              shipping_country: contact.country || null
+            }
+          : {})
+      })
+      .select()
+      .single();
+    if (error) {
+      if (created.length) await supabaseAdmin.from('orders').delete().in('id', created.map((c) => c.id));
+      return res.status(500).json({ error: error.message });
+    }
+    created.push(data);
+  }
+
+  // 3. One intent for the cart. request_id is the cartId, so a retried request
+  //    cannot create a second intent and therefore cannot double-charge.
+  let intent;
+  try {
+    intent = await createPaymentIntent({
+      amountMinor,
+      currency: cur.code,
+      merchantOrderId: created[0].id,
+      requestId: cartId,
+      returnUrl: `${baseUrl(req)}/account?checkout=success&cart=${cartId}`,
+      email: user.email,
+      metadata: { orderIds: created.map((o) => o.id).join(','), orderId: created[0].id, cartId }
+    });
+  } catch (err) {
+    // Never leave orders behind for a payment that was never set up.
+    await supabaseAdmin.from('orders').delete().in('id', created.map((o) => o.id));
+    return res.status(502).json({ error: `Airwallex refused the payment: ${err.message}` });
+  }
+
+  await supabaseAdmin
+    .from('orders')
+    .update({ stripe_session_id: intent.id, coupon_code: applied?.code || null })
+    .in('id', created.map((o) => o.id));
+
+  res.json({
+    provider: 'airwallex',
+    env: airwallexMode,
+    intentId: intent.id,
+    clientSecret: intent.clientSecret,
+    currency: cur.code,
+    amount: total * fxRate,
+    orderIds: created.map((o) => o.id),
+    cartId
+  });
 });
 
 app.post('/api/checkout', writeLimiter, async (req, res) => {

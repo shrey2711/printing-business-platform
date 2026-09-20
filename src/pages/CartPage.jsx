@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { startCartCheckout, validateCoupon } from '../services/checkout';
+import { startAirwallexCheckout } from '../services/airwallex';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { trackBeginCheckout } from '../lib/analytics';
 
@@ -20,6 +21,11 @@ export default function CartPage() {
   const { currency } = useCurrency();
   const money = useMoney();
   const navigate = useNavigate();
+  // Airwallex is opt-in by URL while it is sandbox-only: /cart?pay=airwallex.
+  // A second checkout button on the live cart would be a second way for a real
+  // customer to pay, through a path that has never taken a real payment.
+  const [params] = useSearchParams();
+  const airwallexOptIn = params.get('pay') === 'airwallex';
 
   const [couponInput, setCouponInput] = useState('');
   const [coupon, setCoupon] = useState(null);
@@ -37,6 +43,23 @@ export default function CartPage() {
     } else {
       setCoupon(null);
       setCouponMsg('Invalid or expired code.');
+    }
+  };
+
+  const payWithAirwallex = async () => {
+    setError('');
+    setBusy(true);
+    try {
+      await startAirwallexCheckout({
+        lines: lines.map((l) => ({ config: l.config, specs: l.specs })),
+        coupon: coupon?.code,
+        currency
+      });
+      // Reached only if the redirect did not happen.
+    } catch (e) {
+      setError(e.message || 'Could not start the Airwallex checkout.');
+    } finally {
+      setBusy(false);
     }
   };
 
@@ -154,9 +177,25 @@ export default function CartPage() {
             <p className="panel-foot">Your cart is saved while you sign in.</p>
           </>
         ) : (
-          <button className="btn btn-red btn-block" onClick={checkout} disabled={busy || anyUnpriced}>
-            {busy ? 'Starting checkout…' : `Check out — ${money(subtotal)}`}
-          </button>
+          <>
+            <button className="btn btn-red btn-block" onClick={checkout} disabled={busy || anyUnpriced}>
+              {busy ? 'Starting checkout…' : `Check out — ${money(subtotal)}`}
+            </button>
+            {airwallexOptIn && (
+              <>
+                <button
+                  className="btn btn-outline btn-block"
+                  onClick={payWithAirwallex}
+                  disabled={busy || anyUnpriced}
+                >
+                  {busy ? 'Starting…' : 'Pay with Airwallex (sandbox test)'}
+                </button>
+                <p className="panel-foot">
+                  Sandbox only — no real money moves. Reached via ?pay=airwallex.
+                </p>
+              </>
+            )}
+          </>
         )}
         <p className="panel-foot">
           Artwork is uploaded per item after payment, and we send a free proof before anything prints.
