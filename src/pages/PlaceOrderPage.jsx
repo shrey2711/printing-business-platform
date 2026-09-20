@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { placeOrder, notifyOrderPlaced } from '../services/orders';
 import { startCheckout, validateCoupon } from '../services/checkout';
+import { redirectToAirwallex } from '../services/airwallex';
 import { getPrice } from '../services/api';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
@@ -152,8 +153,15 @@ export default function PlaceOrderPage() {
             currency
           });
           const checkout = await startCheckout(order.id, coupon?.code);
+          // Stripe hands back a URL to navigate to. Airwallex hands back an
+          // intent for the browser to redirect with, so the two are not
+          // interchangeable and the response says which it is.
           if (checkout?.url) {
             window.location.href = checkout.url;
+            return;
+          }
+          if (checkout?.provider === 'airwallex' && checkout.clientSecret) {
+            await redirectToAirwallex(checkout);
             return;
           }
         } catch {
@@ -349,8 +357,12 @@ export default function PlaceOrderPage() {
           ) : !artworkReady ? (
             <p className="panel-foot">Add your artwork, or tick the box above, to continue.</p>
           ) : null}
+          {/* Deliberately does not name the processor. Which one takes the
+              money is a single environment variable now, so copy naming one is
+              wrong the day it changes — which it already was. What the customer
+              needs to know is that the page is secure and the order survives. */}
           {incoming.config?.slug && (
-            <p className="panel-foot">You'll be taken to secure Stripe checkout. If payment isn't set up yet,
+            <p className="panel-foot">You'll be taken to a secure checkout page. If payment isn't set up yet,
               your order is still saved and we'll follow up.</p>
           )}
         </form>

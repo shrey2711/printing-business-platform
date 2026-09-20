@@ -118,3 +118,21 @@ export async function startAirwallexCheckout({ lines, coupon, currency, contact,
 
   return body;
 }
+
+/**
+ * Hand an already-created intent to Airwallex.
+ *
+ * Split out of startAirwallexCheckout so the single-order path can reuse the
+ * redirect without going through the cart route. Same point of no return: once
+ * this is called the customer may be on Airwallex's page.
+ */
+export async function redirectToAirwallex({ intentId, clientSecret, currency, env, countryCode = 'US' }) {
+  const Airwallex = await loadSdk();
+  await Airwallex.init({ env: env === 'live' ? 'prod' : 'demo', origin: window.location.origin });
+  await Airwallex.redirectToCheckout({
+    intent_id: intentId,
+    client_secret: clientSecret,
+    currency,
+    country_code: countryCode
+  });
+}

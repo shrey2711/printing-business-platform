@@ -764,7 +764,15 @@ app.post('/api/checkout/airwallex/abandon', writeLimiter, async (req, res) => {
 });
 
 app.post('/api/checkout', writeLimiter, async (req, res) => {
-  if (!stripe || !supabaseAdmin) {
+  // This is the single-order path (Buy Now / pay from the account page), as
+  // opposed to /api/checkout/cart. It has to follow the same PAYMENT_PROVIDER
+  // switch as the cart, or the two routes charge through different processors
+  // and the copy on the page is wrong for one of them.
+  const useAirwallex = PAYMENT_PROVIDER === 'airwallex' && airwallexConfigured;
+  if (!useAirwallex && (!stripe || !supabaseAdmin)) {
+    return res.status(503).json({ error: 'Payments are not configured.' });
+  }
+  if (useAirwallex && !supabaseAdmin) {
     return res.status(503).json({ error: 'Payments are not configured.' });
   }
   const user = await getUserFromToken(req.headers.authorization);
@@ -801,6 +809,42 @@ app.post('/api/checkout', writeLimiter, async (req, res) => {
   const fxRate = await getRate(cur.code);
   const chargeAmount = total * fxRate;
   const chargeDiscount = discount * fxRate;
+
+  // Airwallex returns an intent for the browser to redirect with; Stripe
+  // returns a hosted URL. The caller is told which it got.
+  if (useAirwallex) {
+    let intent;
+    try {
+      intent = await createPaymentIntent({
+        amountMinor: Math.round(chargeAmount * 100),
+        currency: cur.code,
+        merchantOrderId: order.id,
+        // The order id as the idempotency key: paying the same order twice
+        // cannot create two intents, and therefore cannot charge twice.
+        requestId: order.id,
+        returnUrl: `${baseUrl(req)}/account?checkout=success&order=${order.id}`,
+        email: user.email,
+        metadata: { orderId: order.id }
+      });
+    } catch (err) {
+      // No rollback here: unlike the cart route this order already existed
+      // before checkout, so deleting it would destroy the customer's work.
+      return res.status(502).json({ error: `Airwallex refused the payment: ${err.message}` });
+    }
+    await supabaseAdmin
+      .from('orders')
+      .update({ stripe_session_id: intent.id, coupon_code: applied?.code || null, currency: cur.code })
+      .eq('id', order.id);
+    return res.json({
+      provider: 'airwallex',
+      env: airwallexMode,
+      intentId: intent.id,
+      clientSecret: intent.clientSecret,
+      currency: cur.code,
+      amount: chargeAmount,
+      orderIds: [order.id]
+    });
+  }
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
