@@ -32,6 +32,13 @@ const arg = (name, fallback) => {
   return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : fallback;
 };
 const EMAIL = arg('email', process.env.AIRWALLEX_TEST_EMAIL || '');
+// A billing customer id (bcus_...) created by hand in the dashboard. Billing
+// keeps its own customer namespace and creating one needs a permission the
+// scoped key may not carry — "Admin permissions required" — which would
+// otherwise block the whole walkthrough at step 1. Passing an existing id
+// skips that step and still exercises everything the migration depends on:
+// invoice, line items, finalise, hosted_url, mark paid, and the zero guard.
+const BILLING_CUSTOMER = arg('customer', process.env.AIRWALLEX_BILLING_CUSTOMER_ID || '');
 const LIVE_OVERRIDE = process.argv.includes('--i-know-this-is-live');
 
 const fails = [];
@@ -64,10 +71,17 @@ const REF = `apex-invoice-check-${stamp}`;
 
 try {
   // ------------------------------------------------------------ 1. customer
-  step(1, 'Create a customer');
-  const customer = await createCustomer({ email: EMAIL, name: 'Apex Invoice Check', merchantCustomerId: REF });
-  note(`id: ${customer.id}`);
-  if (!customer.id) fails.push('the customer came back without an id');
+  step(1, 'Billing customer');
+  let customer;
+  if (BILLING_CUSTOMER) {
+    customer = { id: BILLING_CUSTOMER };
+    note(`using the id supplied: ${customer.id}`);
+    note('(skipping creation — pass no --customer once the key can create one)');
+  } else {
+    customer = await createCustomer({ email: EMAIL, name: 'Apex Invoice Check', merchantCustomerId: REF });
+    note(`id: ${customer.id}`);
+    if (!customer.id) fails.push('the customer came back without an id');
+  }
 
   // ------------------------------------------------------------- 2. invoice
   step(2, 'Create the invoice, add line items, finalise');
