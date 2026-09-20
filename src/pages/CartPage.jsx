@@ -24,8 +24,25 @@ export default function CartPage() {
   // Airwallex is opt-in by URL while it is sandbox-only: /cart?pay=airwallex.
   // A second checkout button on the live cart would be a second way for a real
   // customer to pay, through a path that has never taken a real payment.
+  //
+  // Remembered for the session once seen, because the testing route is
+  // "add to cart, then go to the cart" — and reaching the cart through the nav
+  // drops the query string, so the button vanishes exactly when it is wanted.
+  // sessionStorage, not localStorage: it should expire with the tab rather than
+  // leave a tester's browser permanently showing a payment path nobody else has.
   const [params] = useSearchParams();
-  const airwallexOptIn = params.get('pay') === 'airwallex';
+  const airwallexOptIn = (() => {
+    try {
+      if (params.get('pay') === 'airwallex') {
+        sessionStorage.setItem('apex.pay.airwallex', '1');
+        return true;
+      }
+      return sessionStorage.getItem('apex.pay.airwallex') === '1';
+    } catch {
+      // Private mode: fall back to the URL alone rather than breaking the cart.
+      return params.get('pay') === 'airwallex';
+    }
+  })();
 
   const [couponInput, setCouponInput] = useState('');
   const [coupon, setCoupon] = useState(null);
