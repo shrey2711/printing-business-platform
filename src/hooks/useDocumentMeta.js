@@ -22,6 +22,13 @@ function upsertLink(rel, href) {
   el.setAttribute('href', href);
 }
 
+// Track the initial page path so hydration never overwrites server-rendered
+// <title>, <meta description> or duplicates the server-rendered JSON-LD graph.
+let initialPath =
+  typeof window !== 'undefined'
+    ? window.location.pathname.replace(/\/$/, '') || '/'
+    : null;
+
 // Per-page SEO: sets a unique <title>, description, canonical URL, Open Graph /
 // Twitter tags, and optional JSON-LD structured data. Canonical/OG URLs use the
 // live origin so they stay correct on any custom domain.
@@ -29,6 +36,24 @@ export default function useDocumentMeta(title, description, jsonLd, robots, cano
   const { pathname } = useLocation();
 
   useEffect(() => {
+    const currentPath = pathname.replace(/\/$/, '') || '/';
+
+    // On initial page load/hydration, the server/prerendered HTML already has the
+    // authoritative, audited <title>, <meta description>, canonical, and JSON-LD.
+    // Overwriting them on mount introduces a hydration race where client fallbacks
+    // undo server fixes, and appending JSON-LD duplicates the entire graph.
+    if (initialPath && currentPath === initialPath) {
+      // If robots is explicitly noindex (e.g. auth/cart pages), ensure it's honored.
+      if (robots) {
+        upsertMeta('name', 'robots', robots);
+      }
+      return;
+    }
+
+    // Once the user navigates away from the initial landing page, all subsequent
+    // route changes are client navigations that need document updates.
+    initialPath = null;
+
     // `title === false` means "this component is embedded in a page that owns
     // the document head". Not the same as no title: passing null still resets
     // the title to the brand default, which would wipe the host page's.

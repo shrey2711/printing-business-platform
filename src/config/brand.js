@@ -20,10 +20,7 @@ export const brand = {
 
   tagline: 'Complete trade show displays & event branding',
   description:
-    'Everything you need to build a professional trade show booth from one supplier — custom ' +
-    'canopy tents, retractable banner stands, step & repeat backdrops, table covers and event ' +
-    'branding accessories. Instant online pricing on canopies, a free artwork proof on every ' +
-    'order, shipped across the US and Canada.',
+    'Custom trade show displays from one supplier: canopy tents, banner stands, backdrops, table covers, flags. Instant pricing, free artwork proof, US & Canada.',
 
   origin: 'https://www.apextradeshow.com',
 

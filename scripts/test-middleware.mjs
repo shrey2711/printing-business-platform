@@ -114,6 +114,16 @@ check('non-www still redirects to www', () => {
   return null;
 });
 
+check('uppercase path redirects 301 to lowercase', () => {
+  const res = call('/PRODUCTS/canopy-tent-10x10');
+  if (res === undefined) return '/PRODUCTS/canopy-tent-10x10 was not intercepted';
+  if (res.status !== 301) return `returned ${res.status}, expected 301`;
+  if (!res.headers.get('location')?.endsWith('/products/canopy-tent-10x10')) {
+    return `redirected to ${res.headers.get('location')}, expected /products/canopy-tent-10x10`;
+  }
+  return null;
+});
+
 check('a trailing slash resolves to the same decision', () => {
   const a = call('/custom-canopy-tents-los-angeles');
   const b = call('/custom-canopy-tents-los-angeles/');

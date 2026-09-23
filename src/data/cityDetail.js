@@ -39,6 +39,12 @@ export const CITY_DETAIL = {
       'trade-show-backdrops': 'Las Vegas is where products get announced, so the wall behind you is doing press duty whether you planned it or not. CES press days, SEMA reveals and Strip launch parties all generate photography that outlives the show itself, which is the argument for a step & repeat rather than a plain backdrop: a logo grid survives cropping, a single centred logo does not. For booths in the LVCC halls, a tension-fabric wall is the quieter choice — one seamless graphic that reads down a very long aisle without competing with the noise around it.',
       'table-covers': 'A Las Vegas booth almost always includes a rented six or eight foot table, and at CES or MAGIC that table is where the actual qualifying happens — badges scanned, specs discussed, samples handled. Bare or draped in house linen it undercuts everything else you shipped. Because so many exhibitors here work multiple shows a year across the Strip properties, a washable printed cover earns its cost quickly: it packs flat in the case that already holds your banner, and it comes out of a January CES looking the same as it did the previous November.'
     },
+    categoryMeta: {
+      'trade-show-canopies': 'Custom canopy tents for Las Vegas outdoor expos and SEMA lots. UV-stable dye-sub tops, weighted legs, instant online pricing and a free artwork proof.',
+      'banner-stands': 'Retractable banner stands for Las Vegas trade shows. Portable, quick-setup aisle displays that fit rideshares, printed to order with a free artwork proof.',
+      'trade-show-backdrops': 'Step & repeat and tension fabric backdrops for Las Vegas press events, CES and SEMA booths. Seamless non-glare media walls with a free artwork proof.',
+      'table-covers': 'Custom printed table covers for Las Vegas trade show booths. Fitted and pleated covers for 6ft and 8ft tables, machine-washable with instant pricing.'
+    },
     // Las Vegas-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Las Vegas — banner stands, backdrops and table covers for CES, SEMA and MAGIC booths, with a free artwork proof and US shipping.',
@@ -120,6 +126,12 @@ export const CITY_DETAIL = {
       'trade-show-backdrops': 'Orlando\'s convention business is association-heavy, and association events photograph constantly: award presentations, board recognitions, speaker headshots and sponsor step-offs. A step & repeat backdrop is what makes those photos carry the organisation\'s brand rather than the venue\'s carpet. Inside the OCCC halls the same frame does different work — a straight tension-fabric wall gives the booth a clean back under bright hall lighting, which matters more here than in smaller venues because the OCCC\'s lighting is unforgiving of wrinkled or seamed graphics.',
       'table-covers': 'Orlando booths lean on the table more than most, because so much of the show floor here is medical, education and hospitality exhibitors handing over literature and running short demos rather than displaying large equipment. That makes the table the primary surface a visitor sees. A fitted or pleated printed cover puts brand colour at the height people look while they talk, hides the boxes underneath, and — given Florida humidity and a long convention week — washes clean between shows rather than going home creased and stained.'
     },
+    categoryMeta: {
+      'trade-show-canopies': 'Custom pop-up canopy tents for Orlando outdoor events and OCCC lots. Heavy-duty frames, weather-resistant dye sublimation, instant pricing & free proof.',
+      'banner-stands': 'Retractable banner stands for Orange County Convention Center halls and I-Drive meetings. Portable aisle displays, printed to order with a free proof.',
+      'trade-show-backdrops': 'Custom step & repeat backdrops and tension fabric walls for Orlando association conferences and expos. Non-glare photo backdrops with a free proof.',
+      'table-covers': 'Dye-sublimated table covers for Orlando trade show booths and registration tables. Fitted and pleated styles, stain-resistant with instant online pricing.'
+    },
     // Orlando-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Orlando — canopies, banner stands, backdrops and table covers for OCCC and I-Drive, printed to order with a free artwork proof.',
@@ -197,6 +209,12 @@ export const CITY_DETAIL = {
       'banner-stands': 'McCormick Place is the largest convention centre in North America, and that scale is the whole banner-stand argument: attendees walk miles a day past hundreds of booths, deciding in a second or two whether to stop. A retractable stand at the aisle line carries the one sentence that earns that stop. The other Chicago factor is freight — McCormick\'s official contractor and drayage charges make a case that checks as luggage genuinely cheaper than shipping, which is why banner stands travel to this city more than any other display we ship.',
       'trade-show-backdrops': 'Chicago\'s flagship shows are technical — IMTS, RSNA, the Restaurant Show — and their exhibitors photograph everything for trade press and internal reporting. A step & repeat wall gives those photos a branded background; a tension-fabric wall gives a machine-tool or device demo a clean backdrop that hides the pipe and drape behind it. In a hall with 2.6 million square feet of exhibit space, the seamless option matters: a wrinkled or panelled backdrop reads as improvised from thirty feet away, which is the distance most people judge your booth from.',
       'table-covers': 'Chicago shows are working shows. At IMTS or the Restaurant Show the table holds equipment, samples and paperwork, and it stays busy for four days straight — which is exactly why a rented table with a house drape looks wrong beside a serious exhibit. A closed-back printed cover keeps crates and coats out of sight through a long move-in and gives the demo surface the same brand colour as the backdrop behind it. It also washes, which after a foodservice show is not a small consideration.'
+    },
+    categoryMeta: {
+      'trade-show-canopies': 'Custom canopy tents for Chicago summer festivals and outdoor expos. Wind-resistant hex frames, dye-sublimated graphics, instant pricing and a free proof.',
+      'banner-stands': 'Retractable banner stands for McCormick Place and Rosemont expos. Hand-carried displays that bypass loading dock drayage, with a free artwork proof.',
+      'trade-show-backdrops': 'Tension fabric displays and step & repeat backdrops for Chicago conventions and galas. Seamless edge-to-edge booth walls with free artwork proofs.',
+      'table-covers': 'Custom table throws and fitted covers for Chicago trade show booths. Packs flat to save drayage fees, machine-washable with instant online pricing.'
     },
     // Chicago-specific meta description for the /trade-show-displays page.
     metaDescription:
@@ -276,6 +294,12 @@ export const CITY_DETAIL = {
       'trade-show-backdrops': 'Atlanta is a production town, and that shapes what gets ordered. Step & repeat walls go up behind premieres, screenings, sponsor step-offs and award nights as often as behind trade show booths, and the film and music sectors here treat the backdrop as part of the shot rather than as booth furniture. For GWCC exhibitors the calculation is different: across 1.5 million square feet of exhibit space, a seamless tension-fabric wall is what makes a modest booth read as intentional from down the aisle.',
       'table-covers': 'Poultry, foodservice, logistics and gift shows all run on table conversations — buyers stop, handle a sample, take a card and move on. In that pattern the table is the booth, and an Atlanta exhibitor working AmericasMart markets uses the same cover across several buying weeks a year. Closed-back on all four sides matters here more than most places, because showroom and booth storage tends to live under the table in full view of the aisle. Washable polyester survives a humid Georgia week without going home stained.'
     },
+    categoryMeta: {
+      'trade-show-canopies': 'Custom canopy tents for Atlanta outdoor markets, festivals and tailgates. UV and humidity-resistant dye-sublimated tops with instant pricing & free proof.',
+      'banner-stands': 'Retractable banner stands for the Georgia World Congress Center and AmericasMart. Lightweight aisle displays, printed to order with a free artwork proof.',
+      'trade-show-backdrops': 'Step & repeat backdrops and tension fabric display walls for Atlanta conventions and press events. Seamless, photo-ready walls with a free artwork proof.',
+      'table-covers': 'Custom trade show table covers for Atlanta showroom and expo booths. Closed-back fitted and pleated styles, machine-washable with instant online pricing.'
+    },
     // Atlanta-specific meta description for the /trade-show-displays page.
     metaDescription:
       'Custom trade show displays in Atlanta — banner stands, backdrops and table covers for GWCC and AmericasMart booths, with a free artwork proof and US shipping.',
@@ -353,6 +377,12 @@ export const CITY_DETAIL = {
       'banner-stands': 'Dallas exhibitors typically work two circuits — the downtown convention centre and the Dallas Market Center\'s year-round wholesale floors — and the second one is what makes banner stands so useful here. Market showrooms are fixed spaces that reset between market weeks, so displays that go up in seconds and store flat beat anything that needs assembly or installation labour. With DFW an hour from most of the country, a padded case that checks as luggage covers both circuits without a freight booking.',
       'trade-show-backdrops': 'Dallas backdrops do two different jobs depending on the circuit. At a downtown convention centre booth, a straight tension-fabric wall gives a technical exhibitor — energy, medical device, aerospace — a clean surface big enough for a schematic or a product line at a size people read from the aisle. At Market Center showrooms and corporate events, a step & repeat carries the brand through press and recognition photography. Both use a replaceable graphic, which suits exhibitors who return to the same market several times a year.',
       'table-covers': 'Energy, healthcare and wholesale buyers all end up at the table with a spec sheet, a rate card or a catalogue between them, so a Dallas booth spends most of its selling time seated. That makes the table cover the piece a buyer looks at longest. Fitted stretch reads as engineered, which suits technical exhibitors; pleated reads as traditional, which suits market showrooms and association events. Both hide the cases underneath — worth having in a Market Center showroom where storage and selling space are the same square footage.'
+    },
+    categoryMeta: {
+      'trade-show-canopies': 'Heavy-duty custom canopy tents for Dallas outdoor expos and fairgrounds. Sun-durable dye-sublimated tops and walls, instant pricing and a free artwork proof.',
+      'banner-stands': 'Retractable banner stands for Dallas Market Center and convention booths. Portable roll-up displays for wide aisles, printed to order with a free proof.',
+      'trade-show-backdrops': 'Seamless tension fabric walls and step & repeat backdrops for Dallas corporate expos and summits. Photo-ready non-glare printing with a free artwork proof.',
+      'table-covers': 'Fitted and pleated table covers for Dallas trade show and order-writing booths. Closed-back stain-resistant polyester with instant online pricing.'
     },
     // Dallas-specific meta description for the /trade-show-displays page.
     metaDescription:
@@ -587,6 +617,12 @@ export const CITY_DETAIL = {
       'banner-stands': 'LA activations move. A brand runs a pop-up in Venice on Saturday, a studio event downtown on Monday and a Long Beach booth on Thursday, and the display kit has to survive being loaded into a car boot three times. Retractable stands go up in seconds without tools, X-stands weigh almost nothing and fit behind a seat, and tabletop banners brand a check-in counter without using floor space. Nothing here needs a crew, drayage or an install window — which is why LA teams buy more stands than structures.',
       'trade-show-backdrops': 'Nowhere orders more step & repeat backdrops than Los Angeles, and the reason is simple: the wall behind a person is the frame every photo travels in. Premieres, junkets, launch parties, influencer events and sponsor step-offs all run on a logo grid sized to stay readable when a photo is cropped for a feed. For the LA Convention Center and Long Beach booths, a seamless tension-fabric wall does the other job — a clean, photogenic background that reads as designed rather than assembled.',
       'table-covers': 'Whether it is a beauty sampling table, a pop-up checkout, a festival merch stand or a convention booth, the table is the surface people stand closest to in LA — and it is the surface that ends up in their photos. A fitted stretch cover pulls taut for a sharp face that photographs without wrinkles; a pleated throw suits the more formal association events downtown. Both close on all four sides to hide stock, pack flat into a car, and wash between activations, which matters when the same cover works four events a month.'
+    },
+    categoryMeta: {
+      'trade-show-canopies': 'Custom pop-up canopies for Los Angeles outdoor festivals, markets and beach activations. UV-resistant dye sublimation, instant pricing and a free proof.',
+      'banner-stands': 'Retractable banner stands for Los Angeles Convention Center and Anaheim expos. Compact, portable aisle displays, printed to order with a free artwork proof.',
+      'trade-show-backdrops': 'Step & repeat backdrops and tension fabric displays for LA premieres, press junkets and expo booths. Non-glare photo-ready walls with a free artwork proof.',
+      'table-covers': 'Dye-sublimated table covers for Los Angeles trade show and sampling tables. Fitted and pleated covers with closed-back storage and instant online pricing.'
     },
     // Los Angeles-specific meta description for the /trade-show-displays page.
     metaDescription:

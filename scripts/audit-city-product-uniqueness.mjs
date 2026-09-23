@@ -63,7 +63,11 @@ const PLACES = [
   ...SEO_CITIES.flatMap((c) => [c.city, c.abbr, c.venue].filter(Boolean)),
   'Los Angeles', 'LA', 'Chicago', 'California', 'Illinois', 'Southern California',
   'Anaheim', 'McCormick Place', 'Donald E. Stephens', 'Rosemont', 'Lake Michigan',
-  'Michigan Avenue', 'Santa Monica', 'Century City', 'Westside', 'Coachella'
+  'Michigan Avenue', 'Santa Monica', 'Century City', 'Westside', 'Coachella',
+  'Las Vegas', 'Vegas', 'Nevada', 'LVCC', 'Las Vegas Convention Center', 'Mandalay Bay', 'Venetian Expo', 'Sands',
+  'Orlando', 'Florida', 'Central Florida', 'OCCC', 'Orange County Convention Center', 'Rosen', 'International Drive',
+  'Dallas', 'Texas', 'North Texas', 'KBHCC', 'KBHCCD', 'Kay Bailey Hutchison', 'Dallas Market Center', 'Market Hall', 'Omni Dallas', 'Fort Worth', 'DFW',
+  'Atlanta', 'Georgia', 'GWCC', 'Georgia World Congress Center', 'AmericasMart', 'Midtown', 'Buckhead', 'Peachtree'
 ];
 const deplace = (t) => {
   let out = t;
@@ -117,7 +121,7 @@ for (const p of pages) {
 // 1c. Each page must actually carry its own keyword variations. A variation
 // with no home on the page is a page waiting to be created for it, which is how
 // a clean set of URLs turns into a cannibalising one.
-const STOP = new Set(['los', 'angeles', 'chicago', 'the', 'a', 'in', 'for', 'and', 'of']);
+const STOP = new Set(['los', 'angeles', 'chicago', 'las', 'vegas', 'orlando', 'dallas', 'atlanta', 'the', 'a', 'in', 'for', 'and', 'of']);
 for (const p of CITY_PRODUCT_PAGES) {
   const text = words(
     [p.title, p.description, p.h1, p.productIntro, p.intro,
@@ -649,8 +653,8 @@ if (existsSync(DIST)) {
     if (slugs.has(r.source)) fails.push(`${r.source} is a redirect source — the page would never be reached`);
     if (slugs.has(r.destination)) fails.push(`${r.destination} is a redirect destination — something else is pointing traffic at it`);
   }
-  // A thirteenth route shaped like these is an alias, and an alias is a duplicate.
-  const shaped = [...KNOWN_ROUTES].filter((r) => /-(los-angeles|chicago)$/.test(r));
+  // A thirty-seventh route shaped like these is an alias, and an alias is a duplicate.
+  const shaped = [...KNOWN_ROUTES].filter((r) => /-(los-angeles|chicago|las-vegas|orlando|dallas|atlanta)$/.test(r));
   const extra = shaped.filter((r) => !slugs.has(r));
   if (extra.length) {
     fails.push(`route(s) shaped like a product+city page but not in CITY_PRODUCT_PAGES: ${extra.join(', ')} — an alias is a duplicate`);

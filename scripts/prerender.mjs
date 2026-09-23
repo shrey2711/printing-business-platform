@@ -927,12 +927,15 @@ for (const lc of LOCAL_CATEGORIES) {
         ${cityFaqHtml}
         <h2>${esc(lc.label)} in other cities</h2>
         <ul>${otherLis}</ul>`;
+      const catMetaDesc = (lc.slug === 'trade-show-displays' && detail?.metaDescription)
+        ? detail.metaDescription
+        : (detail?.categoryMeta?.[lc.slug] || cityCatDescription(lc.label, city));
       return render({
         path: `/${lc.slug}/${city.slug}`,
         title: lc.slug === 'trade-show-displays'
           ? cityDisplaysTitle(city)
           : `${cityCatTitle(lc.label, city)} | ${BRAND}`,
-        description: (lc.slug === 'trade-show-displays' && detail?.metaDescription) ? detail.metaDescription : cityCatDescription(lc.label, city),
+        description: catMetaDesc,
         image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,
         robots: city.tier > 2 ? 'noindex, follow' : undefined,
@@ -952,7 +955,7 @@ for (const lc of LOCAL_CATEGORIES) {
             '@id': `${ORIGIN}/${lc.slug}/${city.slug}#webpage`,
             url: `${ORIGIN}/${lc.slug}/${city.slug}`,
             name: `${lc.label} in ${cityWithAbbr(city)}`,
-            description: cityCatDescription(lc.label, city),
+            description: catMetaDesc,
             isPartOf: { '@id': `${ORIGIN}/#website` },
             about: { '@id': `${ORIGIN}/#organization` }
           },
@@ -967,7 +970,7 @@ for (const lc of LOCAL_CATEGORIES) {
             serviceType: `Custom ${lc.label.toLowerCase()} printing`,
             provider: { '@id': `${ORIGIN}/#organization` },
             areaServed: { '@type': 'City', name: city.city },
-            description: cityCatDescription(lc.label, city)
+            description: catMetaDesc
           },
           ...(cityFaqs.length
             ? [{
@@ -1336,29 +1339,62 @@ for (const summary of productList) {
           // floor price represents the complete product.
           ...(startingPrice != null
             ? {
-                offers: priceDisp.full
-                  ? {
-                      '@type': 'AggregateOffer',
-                      priceCurrency: 'USD',
-                      lowPrice: String(startingPrice),
-                      highPrice: String(priceDisp.full.price),
-                      offerCount: 2,
-                      // Every item is custom printed to order — not held in stock.
-                      availability: 'https://schema.org/MadeToOrder',
-                      itemCondition: 'https://schema.org/NewCondition',
-                      url: `${ORIGIN}/products/${product.slug}`,
-                      // Connect the offer to the central OnlineStore/Organization.
-                      seller: { '@id': `${ORIGIN}/#organization` }
+                offers: (() => {
+                  const priceValidUntil = new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10);
+                  const merchantProps = {
+                    priceValidUntil,
+                    shippingDetails: {
+                      '@type': 'OfferShippingDetails',
+                      shippingRate: {
+                        '@type': 'MonetaryAmount',
+                        value: '0',
+                        currency: 'USD'
+                      },
+                      shippingDestination: [
+                        { '@type': 'DefinedRegion', addressCountry: 'US' },
+                        { '@type': 'DefinedRegion', addressCountry: 'CA' }
+                      ],
+                      deliveryTime: {
+                        '@type': 'ShippingDeliveryTime',
+                        handlingTime: { '@type': 'QuantitativeValue', minValue: 2, maxValue: 4, unitCode: 'DAY' },
+                        transitTime: { '@type': 'QuantitativeValue', minValue: 2, maxValue: 5, unitCode: 'DAY' }
+                      }
+                    },
+                    hasMerchantReturnPolicy: {
+                      '@type': 'MerchantReturnPolicy',
+                      applicableCountry: ['US', 'CA'],
+                      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                      merchantReturnDays: 30,
+                      returnMethod: 'https://schema.org/ReturnByMail',
+                      returnFees: 'https://schema.org/FreeReturn'
                     }
-                  : {
-                      '@type': 'Offer',
-                      priceCurrency: 'USD',
-                      price: String(startingPrice),
-                      availability: 'https://schema.org/MadeToOrder',
-                      itemCondition: 'https://schema.org/NewCondition',
-                      url: `${ORIGIN}/products/${product.slug}`,
-                      seller: { '@id': `${ORIGIN}/#organization` }
-                    }
+                  };
+                  return priceDisp.full
+                    ? {
+                        '@type': 'AggregateOffer',
+                        priceCurrency: 'USD',
+                        lowPrice: String(startingPrice),
+                        highPrice: String(priceDisp.full.price),
+                        offerCount: 2,
+                        // Every item is custom printed to order — not held in stock.
+                        availability: 'https://schema.org/MadeToOrder',
+                        itemCondition: 'https://schema.org/NewCondition',
+                        url: `${ORIGIN}/products/${product.slug}`,
+                        // Connect the offer to the central OnlineStore/Organization.
+                        seller: { '@id': `${ORIGIN}/#organization` },
+                        ...merchantProps
+                      }
+                    : {
+                        '@type': 'Offer',
+                        priceCurrency: 'USD',
+                        price: String(startingPrice),
+                        availability: 'https://schema.org/MadeToOrder',
+                        itemCondition: 'https://schema.org/NewCondition',
+                        url: `${ORIGIN}/products/${product.slug}`,
+                        seller: { '@id': `${ORIGIN}/#organization` },
+                        ...merchantProps
+                      };
+                })()
               }
             : {})
         },

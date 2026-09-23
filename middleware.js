@@ -101,6 +101,16 @@ export default function middleware(request) {
     return Response.redirect(destination, rule.code || 301);
   }
 
+  // 1.5) Case normalisation: uppercase or mixed-case URLs redirect 301 to lowercase
+  // if the lowercase route or a redirect exists, preserving link equity.
+  if (/[A-Z]/.test(path)) {
+    const lower = path.toLowerCase();
+    if (KNOWN_ROUTES.has(lower) || bySource.has(lower)) {
+      url.pathname = lower;
+      return Response.redirect(url.toString(), 301);
+    }
+  }
+
   // 2) A path carrying a file extension is either a real root-level file
   //    (favicon, robots.txt, a sitemap, feed.xml) or it is junk. Serve the
   //    first, 404 the second. Asset directories never get here — the matcher

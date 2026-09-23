@@ -46,6 +46,9 @@ for (const p of listProducts()) {
       if (!(o.seller && o.seller['@id'] === `${ORIGIN}/#organization`)) fails.push(`${p.slug}: Offer seller not linked to central #organization`);
       if (o.availability !== 'https://schema.org/MadeToOrder') fails.push(`${p.slug}: Offer availability "${o.availability}" != MadeToOrder`);
       if (o.itemCondition !== 'https://schema.org/NewCondition') fails.push(`${p.slug}: Offer itemCondition != NewCondition`);
+      if (!o.priceValidUntil) fails.push(`${p.slug}: Offer missing priceValidUntil`);
+      if (!o.shippingDetails) fails.push(`${p.slug}: Offer missing shippingDetails`);
+      if (!o.hasMerchantReturnPolicy) fails.push(`${p.slug}: Offer missing hasMerchantReturnPolicy`);
       if (o['@type'] === 'AggregateOffer' && Number(o.lowPrice) > Number(o.highPrice)) fails.push(`${p.slug}: AggregateOffer lowPrice > highPrice`);
     }
   }

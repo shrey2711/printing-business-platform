@@ -42,6 +42,14 @@ app.set('trust proxy', 1); // behind Vercel's proxy — needed for correct clien
 
 app.use(cors());
 
+// Core security headers on all API responses
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 // The Stripe webhook needs the RAW request body for signature verification,
 // so it must be registered BEFORE the JSON body parser.
 // One announcement per payment: the customer's single confirmation, and the

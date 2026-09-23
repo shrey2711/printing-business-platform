@@ -86,11 +86,15 @@ export default function CityCategoryPage({ categoryKey }) {
   // Tier 1 + 2 are indexed (each carries unique local content); Tier 3 stays
   // noindex until it earns depth.
   const indexed = city && city.tier <= 2;
+  const metaDesc = (cat.slug === 'trade-show-displays' && detail?.metaDescription)
+    ? detail.metaDescription
+    : (detail?.categoryMeta?.[cat.slug] || cityCatDescription(cat.label, city));
+
   useDocumentMeta(
     city
       ? (cat.slug === 'trade-show-displays' ? cityDisplaysTitle(city) : cityCatTitle(cat.label, city))
       : cat?.label || 'Location',
-    city ? ((cat.slug === 'trade-show-displays' && detail?.metaDescription) ? detail.metaDescription : cityCatDescription(cat.label, city)) : undefined,
+    city ? metaDesc : undefined,
     city
       ? [
           {
@@ -106,7 +110,7 @@ export default function CityCategoryPage({ categoryKey }) {
             '@id': `${brand.origin}/${cat.slug}/${city.slug}#webpage`,
             url: `${brand.origin}/${cat.slug}/${city.slug}`,
             name: `${cat.label} in ${cityWithAbbr(city)}`,
-            description: cityCatDescription(cat.label, city),
+            description: metaDesc,
             isPartOf: { '@id': `${brand.origin}/#website` },
             about: { '@id': `${brand.origin}/#organization` }
           },
@@ -118,7 +122,7 @@ export default function CityCategoryPage({ categoryKey }) {
             serviceType: `Custom ${cat.label.toLowerCase()} printing`,
             provider: { '@id': `${brand.origin}/#organization` },
             areaServed: { '@type': 'City', name: city.city },
-            description: cityCatDescription(cat.label, city)
+            description: metaDesc
           },
           ...(shownFaqs.length
             ? [{
