@@ -4,7 +4,7 @@ import { list as getProducts } from '../services/cms/productService';
 import ProductConfigurator from './ProductConfigurator';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { getCityProductPage, nationalCategoryFor } from '../data/cityProductPages';
+import { CITY_PRODUCT_PAGES, getCityProductPage, nationalCategoryFor } from '../data/cityProductPages';
 import { SEO_CITIES, LOCAL_CATEGORIES, cityBreadcrumb } from '../data/citySeo';
 
 // Transactional product + city page.
@@ -34,6 +34,7 @@ export default function CityProductPage({ slug }) {
   }, []);
 
   const national = page ? nationalCategoryFor(page.group) : null;
+  const siblings = city ? CITY_PRODUCT_PAGES.filter((p) => p.citySlug === city.slug && p.slug !== page.slug) : [];
   // Breadcrumb: the site's existing city taxonomy with this page appended
   // beneath its city hub, so the trail states the same hierarchy as the links.
   const crumbs = page
@@ -215,6 +216,19 @@ export default function CityProductPage({ slug }) {
             )}
             <Link className="loc-chip" to="/products"><span>All Apex products</span></Link>
             <Link className="loc-chip" to="/trade-show-booth-packages"><span>Complete booth packages</span></Link>
+          </div>
+        </section>
+      )}
+
+      {/* Sibling product pages for the same city. Without these each page had
+          only two inbound links, too few for Google to discover and index it. */}
+      {city && siblings.length > 0 && (
+        <section className="section-block-bare">
+          <h2 className="section-title">More for your {city.city} booth</h2>
+          <div className="loc-grid">
+            {siblings.map((s) => (
+              <Link key={s.slug} className="loc-chip" to={`/${s.slug}`}><span>{s.h1}</span></Link>
+            ))}
           </div>
         </section>
       )}

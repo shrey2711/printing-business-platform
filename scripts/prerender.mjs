@@ -610,6 +610,7 @@ for (const cp of CITY_PRODUCT_PAGES) {
     const lane = LOCAL_CATEGORIES.find((l) => (l.productCats || []).some((c) => items.some((p) => p.category === c)));
     // The single national category link (see nationalCategoryFor).
     const national = nationalCategoryFor(cp.group);
+    const siblings = city ? CITY_PRODUCT_PAGES.filter((p) => p.citySlug === city.slug && p.slug !== cp.slug) : [];
     // Breadcrumb: the site's existing city taxonomy (Home / Locations / State /
     // city hub) with this page appended beneath its hub, so the trail states the
     // same hierarchy the links do rather than inventing a second one.
@@ -639,6 +640,9 @@ for (const cp of CITY_PRODUCT_PAGES) {
           : ''}
         <li><a href="/products">All Apex products</a></li>
         <li><a href="/trade-show-booth-packages">Complete booth packages</a></li>
+      </ul>` : ''}
+      ${siblings.length ? `<h2>More for your ${esc(city.city)} booth</h2><ul>
+        ${siblings.map((s) => `<li><a href="/${s.slug}">${esc(s.h1)}</a></li>`).join('')}
       </ul>` : ''}`;
     return render({
       path: `/${cp.slug}`,
