@@ -33,6 +33,8 @@ export const config = {
 // removed — /design must not serve a duplicate of the homepage.
 const BUILT_IN = [
   { source: '/design', destination: '/artwork-guidelines', code: 301 },
+  // Google has /index.html indexed as a separate URL; fold it into the homepage.
+  { source: '/index.html', destination: '/', code: 301 },
   // Table covers split into Pleated + Stretch products; send the old single
   // product URL to the category page that lists both.
   { source: '/products/table-covers', destination: '/table-covers', code: 301 },

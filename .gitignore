@@ -48,6 +48,9 @@ directus/*.txt
 .acceptance-seo.json
 .seo-override-fixture.json
 .vercel
+
+# GSC keyword ranking reports (local data pulls, not source)
+reports/
 .env*
 .claude/
 
