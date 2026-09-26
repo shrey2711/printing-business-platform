@@ -54,3 +54,16 @@ export const submitQuote = async (formData) => {
 // request itself failed, not that the address was refused.
 export const subscribeEmail = async ({ email, source, city }) =>
   api.post('/subscribe', { email, source, city }).then((r) => r.data);
+
+// Reviews ------------------------------------------------------------------
+export const getReviews = async (slug) =>
+  api.get(`/reviews/${slug}`).then((r) => r.data).catch(() => ({ reviews: [], summary: { count: 0, average: null } }));
+
+// Resolves to { state, product, suggestedName }; state is 'ok' | 'used' | 'expired' | 'missing'.
+export const getReviewInvite = async (token) =>
+  api.get(`/review-invites/${encodeURIComponent(token)}`)
+    .then((r) => r.data)
+    .catch((e) => ({ state: e.response?.data?.state || 'missing' }));
+
+export const submitReview = async (token, review) =>
+  api.post(`/review-invites/${encodeURIComponent(token)}`, review).then((r) => r.data);

@@ -11,7 +11,8 @@ import { computePrice } from './data/pricing.js';
 import { getProductFaqs } from './data/faqs.js';
 import { STATIC_ARTICLES, getStaticArticle } from './data/staticArticles.js';
 import { stripe, stripeMode, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
-import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest, sendTrackingEmail } from './lib/mailer.js';
+import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest, sendTrackingEmail, sendReviewRequestEmail } from './lib/mailer.js';
+import { validateReviewInput, inviteState, newReviewToken, slugForProductName, displayName, ratingSummary, toPublicReview } from './lib/reviews.js';
 import { CARRIERS } from '../src/lib/tracking.js';
 import {
   ORDER_STATUSES, SETTLED_STATUSES, statusBlockedReason, needsOfflineConfirmation
@@ -1273,6 +1274,7 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
       });
     }
     patch.status = status;
+    if (status === 'shipped' && before.status !== 'shipped') patch.shipped_at = new Date().toISOString();
   }
   if (tracking_number !== undefined) patch.tracking_number = tracking_number || null;
   if (carrier !== undefined) patch.carrier = carrier || null;
@@ -1320,6 +1322,166 @@ app.patch('/api/admin/orders/:id', async (req, res) => {
   }
 
   res.json({ order: data, email });
+});
+
+// Reviews -----------------------------------------------------------------
+// Customers review through a one-time link tied to their shipped order; staff
+// approve before anything is public. Admins can also enter a review a customer
+// gave elsewhere, but only with the customer's permission recorded.
+
+app.get('/api/reviews/:slug', async (req, res) => {
+  if (!supabaseAdmin) return res.json({ reviews: [], summary: ratingSummary([]) });
+  const { data, error } = await supabaseAdmin
+    .from('product_reviews')
+    .select('*')
+    .eq('product_slug', req.params.slug)
+    .eq('status', 'approved')
+    .order('approved_at', { ascending: false });
+  // Reviews are an optional extra on a product page; a missing table (migration
+  // not yet run) or a DB hiccup must not surface as an error there.
+  if (error) {
+    console.warn('[reviews] could not load:', error.message);
+    return res.json({ reviews: [], summary: ratingSummary([]) });
+  }
+  res.json({ reviews: data.map(toPublicReview), summary: ratingSummary(data) });
+});
+
+async function loadInvite(token) {
+  if (!supabaseAdmin || typeof token !== 'string' || token.length < 20) return null;
+  const { data } = await supabaseAdmin.from('review_invites').select('*').eq('token', token).maybeSingle();
+  return data;
+}
+
+app.get('/api/review-invites/:token', async (req, res) => {
+  const invite = await loadInvite(req.params.token);
+  const state = inviteState(invite);
+  if (state !== 'ok') return res.status(state === 'missing' ? 404 : 410).json({ state });
+  const product = getProduct(invite.product_slug);
+  res.json({
+    state,
+    product: product ? { slug: product.slug, name: product.name } : { slug: invite.product_slug, name: invite.product_slug },
+    suggestedName: displayName(invite.customer_name || '')
+  });
+});
+
+app.post('/api/review-invites/:token', writeLimiter, async (req, res) => {
+  const invite = await loadInvite(req.params.token);
+  const state = inviteState(invite);
+  if (state !== 'ok') return res.status(state === 'missing' ? 404 : 410).json({ state });
+  const { errors, value } = validateReviewInput(req.body);
+  if (errors.length) return res.status(400).json({ errors });
+
+  // Claim the invite first so a double-submit cannot create two reviews.
+  const { data: claimed } = await supabaseAdmin
+    .from('review_invites')
+    .update({ used_at: new Date().toISOString() })
+    .eq('id', invite.id)
+    .is('used_at', null)
+    .select()
+    .maybeSingle();
+  if (!claimed) return res.status(410).json({ state: 'used' });
+
+  const { error } = await supabaseAdmin.from('product_reviews').insert({
+    ...value,
+    product_slug: invite.product_slug,
+    order_id: invite.order_id,
+    verified_purchase: true,
+    source: 'order',
+    status: 'pending'
+  });
+  if (error) {
+    await supabaseAdmin.from('review_invites').update({ used_at: null }).eq('id', invite.id);
+    return res.status(500).json({ error: 'Could not save your review. Please try again.' });
+  }
+  res.json({ ok: true });
+});
+
+app.get('/api/admin/reviews', async (req, res) => {
+  if (!(await requireOrderAccess(req, res))) return;
+  let q = supabaseAdmin.from('product_reviews').select('*').order('created_at', { ascending: false }).limit(500);
+  if (['pending', 'approved', 'rejected'].includes(req.query.status)) q = q.eq('status', req.query.status);
+  const { data, error } = await q;
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ reviews: data });
+});
+
+app.patch('/api/admin/reviews/:id', async (req, res) => {
+  if (!(await requireOrderAccess(req, res))) return;
+  const { status } = req.body || {};
+  if (!['pending', 'approved', 'rejected'].includes(status)) return res.status(400).json({ error: 'Invalid status.' });
+  const { data: before } = await supabaseAdmin.from('product_reviews').select('status').eq('id', req.params.id).maybeSingle();
+  if (!before) return res.status(404).json({ error: 'Review not found.' });
+  const { data, error } = await supabaseAdmin
+    .from('product_reviews')
+    .update({ status, approved_at: status === 'approved' ? new Date().toISOString() : null, updated_at: new Date().toISOString() })
+    .eq('id', req.params.id)
+    .select()
+    .single();
+  if (error) return res.status(500).json({ error: error.message });
+  // Approved reviews are baked into product pages' HTML and schema at build.
+  const rebuild = (before.status === 'approved') !== (status === 'approved') ? await triggerRebuild() : { triggered: false };
+  res.json({ review: data, rebuild });
+});
+
+// Enter a review the customer gave elsewhere (email, Google, in person). The
+// permission flag is required: publishing someone's words needs their consent.
+app.post('/api/admin/reviews', async (req, res) => {
+  if (!(await requireOrderAccess(req, res))) return;
+  const { productSlug, permission, sourceNote } = req.body || {};
+  if (!getProduct(productSlug)) return res.status(400).json({ errors: ['Choose a product.'] });
+  if (permission !== true) return res.status(400).json({ errors: ['Confirm the customer agreed to have this review published.'] });
+  if (!sourceNote || !String(sourceNote).trim()) return res.status(400).json({ errors: ['Say where this review came from.'] });
+  const { errors, value } = validateReviewInput(req.body);
+  if (errors.length) return res.status(400).json({ errors });
+  const { data, error } = await supabaseAdmin
+    .from('product_reviews')
+    .insert({ ...value, product_slug: productSlug, source: 'imported', source_note: String(sourceNote).trim().slice(0, 200), verified_purchase: false, status: 'pending' })
+    .select()
+    .single();
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ review: data });
+});
+
+// Shipped orders not yet asked for a review, oldest shipment first.
+app.get('/api/admin/review-requests', async (req, res) => {
+  if (!(await requireOrderAccess(req, res))) return;
+  const { data: orders, error } = await supabaseAdmin
+    .from('orders')
+    .select('id, product, customer_name, shipped_at, created_at, status')
+    .eq('status', 'shipped')
+    .order('shipped_at', { ascending: true, nullsFirst: true })
+    .limit(200);
+  if (error) return res.status(500).json({ error: error.message });
+  const { data: invites } = await supabaseAdmin.from('review_invites').select('order_id').in('order_id', orders.map((o) => o.id));
+  const asked = new Set((invites || []).map((i) => i.order_id));
+  res.json({ orders: orders.filter((o) => !asked.has(o.id)) });
+});
+
+app.post('/api/admin/review-requests/:orderId', async (req, res) => {
+  if (!(await requireOrderAccess(req, res))) return;
+  const { data: order } = await supabaseAdmin.from('orders').select('*').eq('id', req.params.orderId).single();
+  if (!order) return res.status(404).json({ error: 'Order not found.' });
+  if (order.status !== 'shipped') return res.status(409).json({ error: 'Only shipped orders can be asked for a review.' });
+  const productSlug = slugForProductName(order.product, listProducts());
+  if (!productSlug) return res.status(422).json({ error: `No product page matches "${order.product}".` });
+
+  let email = null;
+  try {
+    const { data: u } = await supabaseAdmin.auth.admin.getUserById(order.user_id);
+    email = u?.user?.email || null;
+  } catch { /* fall through to the no-email error */ }
+  if (!email) return res.status(422).json({ error: 'This order has no customer email.' });
+
+  const token = newReviewToken();
+  const { error } = await supabaseAdmin.from('review_invites').insert({
+    token, order_id: order.id, product_slug: productSlug, customer_name: order.customer_name, email
+  });
+  if (error) return res.status(error.code === '23505' ? 409 : 500).json({ error: error.code === '23505' ? 'A review request was already sent for this order.' : error.message });
+
+  const reviewUrl = `${baseUrl(req)}/review?token=${encodeURIComponent(token)}`;
+  const sent = await sendReviewRequestEmail({ to: email, order, reviewUrl });
+  if (sent.sent) await supabaseAdmin.from('review_invites').update({ sent_at: new Date().toISOString() }).eq('token', token);
+  res.json({ email: sent });
 });
 
 // Shared: create + finalize + email a Stripe invoice for an order, record it.

@@ -28,6 +28,7 @@ const BoothPackagesPage = lazy(() => import('./pages/BoothPackagesPage'));
 const CityCategoryPage = lazy(() => import('./pages/CityCategoryPage'));
 const CityProductPage = lazy(() => import('./pages/CityProductPage'));
 const CartPage = lazy(() => import('./pages/CartPage'));
+const ReviewPage = lazy(() => import('./pages/ReviewPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 import Logo from './components/Logo';
 import ChunkErrorBoundary from './components/ChunkErrorBoundary';
@@ -505,6 +506,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/review" element={<ReviewPage />} />
         <Route path="/locations" element={<LocationsPage />} />
         <Route path="/locations/:stateSlug" element={<LocationPage />} />
         <Route path="/locations/:stateSlug/:citySlug" element={<CityPage />} />

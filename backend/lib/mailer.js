@@ -572,6 +572,37 @@ export function trackingEmailHtml(order, appUrl = DEFAULT_APP_URL) {
   return shell(inner, `Tracking for order ${shortId(order.id)}: ${order.tracking_number}`);
 }
 
+export async function sendReviewRequestEmail({ to, order, reviewUrl }) {
+  if (!to || !reviewUrl) return { sent: false, reason: 'no recipient or review link' };
+  return send({
+    to,
+    subject: `How did your ${order.product} turn out?`,
+    html: reviewRequestEmailHtml(order, reviewUrl)
+  });
+}
+
+export function reviewRequestEmailHtml(order, reviewUrl) {
+  const first = (order.customer_name || '').trim().split(/\s+/)[0];
+  const inner = `
+    ${header()}
+    ${ticketHead(order, 'Feedback')}
+    <tr><td class="gutter" style="padding:26px 28px 6px;">
+      <h1 style="margin:0 0 9px;font-family:${SANS};font-size:20px;line-height:1.3;color:${C.navy};">How did it turn out${first ? `, ${esc(first)}` : ''}?</h1>
+      <p style="margin:0 0 4px;font-family:${SANS};font-size:15px;line-height:1.65;color:${C.ink};">
+        Your ${esc(order.product)} should have arrived by now. If you have a minute, tell other exhibitors
+        what it was like — the print, the setup, how it looked at your event. Honest reviews, good or bad,
+        help us and help the next customer choose.
+      </p>
+      ${button(reviewUrl, 'Write a review', C.navy)}
+      <p style="margin:14px 0 0;font-family:${SANS};font-size:13px;line-height:1.65;color:${C.muted};">
+        This link is just for your order. If anything went wrong, reply to this email and we will make it right.
+      </p>
+      <div style="padding-bottom:8px;"></div>
+    </td></tr>
+    ${footer()}`;
+  return shell(inner, `Tell us how your ${order.product} turned out`);
+}
+
 export async function sendOrderStatusEmail({ to, order, status, appUrl = DEFAULT_APP_URL }) {
   const meta = STATUS_META[status] || STATUS_META.submitted;
   return send({ to, subject: `Your ${BRAND} order ${shortId(order.id)} ${meta.subject}`, html: customerEmailHtml(order, status, appUrl) });

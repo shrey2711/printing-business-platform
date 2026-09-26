@@ -7,11 +7,13 @@ import ContentTab from './admin/ContentTab';
 import SeoTab from './admin/SeoTab';
 import PricingTab from './admin/PricingTab';
 import UsersTab from './admin/UsersTab';
+import ReviewsTab from './admin/ReviewsTab';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 // Dashboard tabs. `roles` lists who may see each; admins see everything.
 const TABS = [
   { id: 'orders', label: 'Orders', roles: ['admin'], Comp: OrdersTab },
+  { id: 'reviews', label: 'Reviews', roles: ['admin', 'staff'], Comp: ReviewsTab },
   { id: 'blog', label: 'Blog', roles: ['admin', 'editor'], Comp: BlogTab },
   { id: 'content', label: 'Content', roles: ['admin', 'editor'], Comp: ContentTab },
   { id: 'seo', label: 'SEO', roles: ['admin', 'editor'], Comp: SeoTab },

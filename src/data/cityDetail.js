@@ -1549,6 +1549,81 @@ export const CITY_DETAIL = {
     ]
   },
 
+  'vancouver': {
+    categoryLocal: {
+      'trade-show-canopies': 'Vancouver canopies work hardest between May and September, when the rain eases and the calendar fills with beach-side activations, night markets, community festivals and the summer fair at Hastings Park. Outside those months a printed top is less about sun and more about keeping a sampling table dry through a grey, drizzly afternoon. Sites along False Creek, English Bay and the North Shore catch wind off the water, so ballast every leg even on a calm-looking morning.',
+      'banner-stands': 'Most Vancouver exhibitors reach the Vancouver Convention Centre by SkyTrain, cab or on foot from a downtown hotel, and a banner stand in a padded case makes that trip without a van. Retractable stands hold the aisle edge of a 10×10 or 10×20 booth, and a lightweight X-stand covers the breakout rooms and hotel ballrooms that ring Coal Harbour and the West End, where a second small display is often needed for a side session.',
+      'trade-show-backdrops': 'Vancouver is Canada’s screen-production capital, and that shows in how events here are photographed: launches, premieres and conference receptions all end up on social feeds, so the step & repeat behind the speaker matters. For the show floor, a seamless tension-fabric wall gives a technology or clean-energy booth a clean surface for a product image or diagram under the Convention Centre’s bright exhibit-hall lighting, with no seams crossing the artwork.',
+      'table-covers': 'A printed table cover gives a Vancouver exhibitor branded surface on a rented registration or sampling table, which at a busy consumer show is where most conversations start. Fitted covers stay tidy under demo laptops and product samples, fold into a carry-on, and go through a washer between shows — handy for exhibitors who work the spring home show, a summer festival and an autumn conference in the same year.'
+    },
+    metaDescription:
+      'Custom trade show displays in Vancouver, BC — canopies, banner stands, backdrops and table covers, printed to order with a free proof and CAD pricing.',
+    specTable: specTableFor('Vancouver'),
+    answer:
+      'Vancouver is Canada’s West Coast convention centre, hosting Web Summit Vancouver, the Vancouver International Auto Show and the BC Home + Garden Show at the Vancouver Convention Centre on Coal Harbour. Apex prints custom trade show displays and ships them to Vancouver, with pricing in Canadian dollars.',
+    overview: [
+      'The Vancouver Convention Centre’s two waterfront buildings — the West building with its living green roof and the East building beside the Canada Place cruise terminal — anchor a convention calendar spanning technology, film and screen production, mining, clean energy, tourism and the Port of Vancouver’s shipping and logistics trade. Consumer shows fill the halls in spring, and international conferences arrive through the rest of the year.',
+      'Exhibitors here range from local start-ups to global brands flying in for a single show, so displays need to look finished, travel light and set up quickly. Apex prints canopies, banner stands, backdrops and table covers to order and ships them to your Vancouver hotel, the Convention Centre’s receiving dock or a business address anywhere in Metro Vancouver, priced in CAD if you prefer.'
+    ],
+    whyExhibit:
+      'Vancouver gives exhibitors access to Canadian and Asia-Pacific buyers in one place: the city is Canada’s gateway to the Pacific, headquarters to many mining and resource companies, and a major centre for film, visual effects and software. Large technology and consumer shows draw tens of thousands of visitors to the waterfront halls, while the surrounding hotels host a steady run of association meetings and industry conferences. A coordinated set of displays — backdrop, banner stands, table cover and a canopy for summer outdoor events — lets a small team present like a large one.',
+    conventionCenters: [
+      { name: 'Vancouver Convention Centre', desc: 'Two connected waterfront buildings on Coal Harbour — the West building, known for its living roof, and the East building beside Canada Place — hosting the city’s largest trade shows and conferences.' },
+      { name: 'PNE Forum & Pacific Coliseum', desc: 'Event halls on the Hastings Park fairgrounds in East Vancouver, used for consumer shows, sales and community expos.' },
+      { name: 'Downtown hotel ballrooms', desc: 'Hotels around Coal Harbour and the downtown core host association meetings, breakout sessions and smaller industry conferences within walking distance of the Convention Centre.' }
+    ],
+    industries: [
+      ['Technology & software', 'A large start-up and software sector, and a flagship Web Summit event, bring international technology audiences to the city.'],
+      ['Film, TV & visual effects', 'One of North America’s busiest screen-production centres, supporting media, animation and visual-effects events.'],
+      ['Mining & natural resources', 'Many mining and exploration companies are headquartered here, driving resource-sector conferences.'],
+      ['Ports, shipping & logistics', 'The Port of Vancouver is Canada’s largest, making trade, freight and logistics a steady conference theme.'],
+      ['Tourism, food & hospitality', 'A major cruise and tourism hub, with food, beverage and hospitality trade events throughout the year.']
+    ],
+    climate:
+      'Vancouver has a mild coastal climate: winters rarely freeze, but October through April brings long spells of rain and low cloud, while July and August are usually dry, sunny and comfortable. For outdoor events that means planning around rain for much of the year — a printed canopy doubles as shelter — and weighting legs against the breezes off English Bay and Burrard Inlet. Indoors, fabric displays that pack in a sealed case arrive dry and crease-free after a wet-weather journey.',
+    planning:
+      'Large shows at the Vancouver Convention Centre are managed through each show’s general contractor, usually with an advance warehouse and scheduled move-in times — check whether your booth is in the West or East building and confirm the receiving address and labelling with show management before you ship. Portable displays set up without tools, so most exhibitors skip installation labour. Production is 6–8 business days after proof approval (2–3 with rush) before transit, so for spring shows like the BC Home + Garden Show, approve artwork well ahead of your ship-by date.',
+    bestDisplays:
+      'Inside the Vancouver Convention Centre, build the booth around a tension-fabric backdrop or step & repeat wall, add retractable banner stands at the aisle, and cover the demo or registration table with a fitted printed cover. For summer festivals, night markets and beach-side activations, add a weighted canopy for shade and rain cover. For hotel breakout rooms and smaller meetings, an X-stand or tabletop banner is quick to carry and set up.',
+    faqs: [
+      { q: 'Do you ship trade show displays to Vancouver?', a: 'Yes. Apex ships custom-printed trade show displays to Vancouver and across British Columbia — to the Vancouver Convention Centre, a downtown hotel or your business address. Every order includes a free artwork proof, and production takes 6–8 business days (2–3 with rush) before transit.' },
+      { q: 'Can I pay in Canadian dollars?', a: 'Yes. Prices can be shown and paid in CAD using the currency switch at the top of the site, so Vancouver exhibitors see their cost in Canadian dollars before ordering.' },
+      { q: 'Do you print step & repeat backdrops in Vancouver?', a: 'Yes — we print step & repeat backdrops and tension-fabric walls for Vancouver trade shows, launches and media events, made to order and shipped to your venue or business address. See our Vancouver trade show backdrops for sizes and options.' },
+      { q: 'How early should I order for a Vancouver show like Web Summit Vancouver?', a: 'Production is 6–8 business days after proof approval, or 2–3 with rush, plus transit to your Vancouver address. For major shows, leave time for artwork approval and any advance-warehouse deadline rather than ordering in the final week.' },
+      { q: 'Do canopy tents work for Vancouver outdoor events?', a: 'Yes. A printed pop-up canopy suits Vancouver festivals, night markets and waterfront activations: the top keeps rain off through the wet months and gives shade in summer, and weighting each leg handles wind coming off the water. Half-walls add a printed backdrop while leaving the front open.' },
+      { q: 'Which displays work best inside the Vancouver Convention Centre?', a: 'Fabric backdrops, retractable banner stands and fitted table covers work best inside the Vancouver Convention Centre because they are portable and set up without tools. Use a tension-fabric wall or step & repeat as the booth back, banners at the aisle, and a printed cover on the demo table; keep canopies for outdoor events.' },
+      { q: 'Can displays be shipped straight to the Vancouver Convention Centre?', a: 'Yes. Apex ships to any Vancouver address you provide, including the Convention Centre. We have no special delivery arrangement with the venue, so give us the exact receiving address — including West or East building — and follow the Convention Centre’s current freight, labeling and delivery-window requirements, or route the shipment through the show’s advance warehouse.' },
+      { q: 'Is rush production available for Vancouver exhibitors?', a: 'Yes — a 2–3 business day rush is available on most instant-priced products, with transit to Vancouver added on top.' }
+    ],
+    productSections: [
+      {
+        h2: 'Trade Show Booth Displays in Vancouver',
+        body: 'A strong Vancouver booth is usually a handful of coordinated exhibition displays rather than a custom-built structure, which suits the 10×10 and 10×20 spaces most exhibitors book at the Vancouver Convention Centre. Start with a step & repeat or tension-fabric backdrop as the booth wall, add one or two retractable banner stands at the aisle, dress the demo table with a printed table cover, and bring a canopy for summer outdoor events — together they work as custom trade show displays built around your brand. Ordering the set from one supplier keeps colours matched across every piece, so a compact booth looks deliberate and complete. Everything travels in cases that fit a car or a checked bag, and each item is printed to order with a free artwork proof before it ships to Vancouver.',
+        links: [{ label: 'Shop all trade show displays', to: '/trade-show-displays' }, { label: 'Trade show booth packages', to: '/trade-show-booth-packages' }]
+      },
+      {
+        h2: 'Custom Canopy Tents in Vancouver',
+        body: 'Custom canopy tents come into their own during Vancouver’s summer event season — night markets, neighbourhood street festivals, beach-side sampling on English Bay, community fairs and outdoor brand activations. For the rest of the year the same canopy is rain cover, which in a city with a long wet season can decide whether an outdoor booth is worth running at all. Ballast each leg for wind off the water, and add printed half-walls for a backdrop and some shelter while keeping the front open to visitors. Configure a 10×10, 10×15 or 10×20 custom canopy with printed walls for instant pricing; dye-sublimated graphics keep their colour through repeated outdoor use.',
+        links: [{ label: 'Custom canopy tents', to: '/custom-canopies' }, { label: '10×10 canopy tent', to: '/products/canopy-tent-10x10' }, { label: '10×15 canopy tent', to: '/products/canopy-tent-10x15' }, { label: '10×20 canopy tent', to: '/products/canopy-tent-10x20' }]
+      },
+      {
+        h2: 'Trade Show Backdrops & Backdrop Printing in Vancouver',
+        body: 'Vancouver events are photographed constantly, so a backdrop often does two jobs: booth wall on the show floor and photo background at the evening reception. A step-and-repeat backdrop repeats your logo for press, sponsor and social photos, while a straight tension-fabric wall gives one seamless graphic zipped over an aluminium frame for a clean booth back. Both are printed to order, pack into a case for the trip to Coal Harbour or a downtown hotel, and take replaceable graphics, so next season’s campaign needs a new print rather than a new frame.',
+        links: [{ label: 'Trade show backdrops', to: '/backdrops' }, { label: 'Step & repeat backdrop', to: '/products/step-and-repeat-backdrop' }, { label: 'Tension fabric display', to: '/products/straight-tension-fabric-display' }]
+      },
+      {
+        h2: 'Banner Stands & Retractable Banner Stands in Vancouver',
+        body: 'Banner stands are the easiest pieces to move around Vancouver’s compact downtown, whether that means rolling a case from a hotel to the Convention Centre or carrying one onto SkyTrain. Retractable banner stands store the graphic in a weighted base for steady, aisle-facing messaging; X-stand banners are the light, low-cost option for extra branding; and a tabletop banner suits a registration desk or breakout room. None need tools, all three pack into slim cases that fit a car boot or ship ahead to your hotel, and each takes a replaceable graphic, so the hardware carries over from one Vancouver show to the next.',
+        links: [{ label: 'Banner stands', to: '/banner-stands' }, { label: 'Standard retractable', to: '/products/standard-retractable-banner' }, { label: 'X-stand banner', to: '/products/x-stand-banner' }, { label: 'Table top banner', to: '/products/table-top-banner-stand' }]
+      },
+      {
+        h2: 'Custom Trade Show Table Covers in Vancouver',
+        body: 'Custom table covers are the fastest way to turn a rented table at a Vancouver consumer show or conference into branded space — the registration desk, a demo station for laptops, or a sampling table at a food and beverage show, which is often the surface visitors stand closest to. Pick a fitted stretch cover for a tight, modern finish or a pleated cover for a classic draped look; both close on all four sides so boxes and bags stay out of sight, and both print full-colour in your brand palette. Covers fold flat, weigh very little, and are machine washable, so one cover lasts through a full season of Vancouver shows. Pair it with a matching banner stand and backdrop and the whole booth reads as one design.',
+        links: [{ label: 'Table covers', to: '/table-covers' }, { label: 'Pleated table covers', to: '/products/pleated-table-covers' }, { label: 'Stretch table covers', to: '/products/stretch-table-covers' }]
+      }
+    ]
+  },
+
   'nashville': {
     // Per-category local paragraph, rendered on that category's city page.
     categoryLocal: {

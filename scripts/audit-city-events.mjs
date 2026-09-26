@@ -41,7 +41,9 @@ const EVENT_CITY = {
   'Gen Con': 'indianapolis', 'PRI Show': 'indianapolis', 'FFA Convention': 'indianapolis',
   'Dreamforce': 'san-francisco', 'GDC': 'san-francisco', 'Game Developers Conference': 'san-francisco',
   'RSA Conference': 'san-francisco', 'JPMorgan Healthcare Conference': 'san-francisco',
-  'PAX West': 'seattle', 'Pacific Marine Expo': 'seattle'
+  'PAX West': 'seattle', 'Pacific Marine Expo': 'seattle',
+  // All three held at the Vancouver Convention Centre (confirmed 2026 listings).
+  'Web Summit Vancouver': 'vancouver', 'Vancouver International Auto Show': 'vancouver', 'BC Home + Garden Show': 'vancouver'
 };
 
 // Events that no longer run — naming one dates the page.

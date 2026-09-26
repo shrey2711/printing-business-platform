@@ -10,8 +10,10 @@ import DisplayPhoto from '../components/DisplayPhoto';
 import ProductGallery from '../components/ProductGallery';
 import AccessoriesSection, { BANNER_ACCESSORIES } from '../components/AccessoriesSection';
 import EmailCapture from '../components/EmailCapture';
+import ProductReviews from '../components/ProductReviews';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getCategoryForProduct } from '../data/categoryPages';
+import { guidesForCategory, GUIDE_TITLES } from '../data/internalLinks';
 import ColorwayStrip from '../components/ColorwayStrip';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
@@ -789,6 +791,21 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
           <div className="pcard-grid">
             {related.map((r) => (
               <ProductCard key={r.slug} product={r} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {!embedded && product?.slug && <ProductReviews slug={product.slug} />}
+
+      {/* Mirrors the prerendered "Guides for your booth" list, so the links
+          survive hydration instead of existing only in the raw HTML. */}
+      {!embedded && product?.category && (
+        <section className="section-block-bare">
+          <h2 className="section-title">Guides for your booth</h2>
+          <div className="loc-grid">
+            {guidesForCategory(product.category).filter((s) => GUIDE_TITLES[s]).map((s) => (
+              <Link className="loc-chip" to={`/blog/${s}`} key={s}><span>{GUIDE_TITLES[s]}</span></Link>
             ))}
           </div>
         </section>

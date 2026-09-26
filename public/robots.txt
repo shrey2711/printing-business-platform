@@ -12,6 +12,7 @@ Disallow: /login
 Disallow: /register
 Disallow: /reset-password
 Disallow: /forgot-password
+Disallow: /review
 Disallow: /api/
 
 # OpenAI ChatGPT SEARCH crawler — controls visibility in ChatGPT search/answers.
@@ -28,6 +29,7 @@ Disallow: /login
 Disallow: /register
 Disallow: /reset-password
 Disallow: /forgot-password
+Disallow: /review
 Disallow: /api/
 
 # AI crawlers — explicitly permitted for discovery and answering, with the same
@@ -52,6 +54,7 @@ Disallow: /login
 Disallow: /register
 Disallow: /reset-password
 Disallow: /forgot-password
+Disallow: /review
 Disallow: /api/
 
 Sitemap: https://www.apextradeshow.com/sitemap.xml

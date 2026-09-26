@@ -9,6 +9,7 @@
     "audit:seo": "node scripts/audit-seo.mjs",
     "seo:rankings": "node scripts/gsc-keyword-rankings.mjs",
     "seo:index-status": "node scripts/gsc-index-status.mjs",
+    "test:reviews": "node scripts/test-reviews.mjs",
     "audit:locations": "node scripts/audit-locations.mjs",
     "test:seo": "node scripts/test-seo-invariants.mjs",
     "test:products": "node scripts/test-product-consistency.mjs",

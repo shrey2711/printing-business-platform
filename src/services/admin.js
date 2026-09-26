@@ -58,3 +58,29 @@ export async function sendInvoice(id) {
   if (!res.ok) throw new Error(data.error || 'Could not create the invoice.');
   return data;
 }
+
+// Reviews ------------------------------------------------------------------
+async function adminJson(path, options = {}) {
+  const res = await fetch(path, {
+    ...options,
+    headers: { 'Content-Type': 'application/json', ...(await authHeader()), ...(options.headers || {}) }
+  });
+  const body = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(body?.errors?.join(' ') || body?.error || 'Request failed.');
+  return body;
+}
+
+export const listReviews = (status) =>
+  adminJson(`/api/admin/reviews${status ? `?status=${status}` : ''}`).then((b) => b.reviews);
+
+export const setReviewStatus = (id, status) =>
+  adminJson(`/api/admin/reviews/${id}`, { method: 'PATCH', body: JSON.stringify({ status }) });
+
+export const addReceivedReview = (review) =>
+  adminJson('/api/admin/reviews', { method: 'POST', body: JSON.stringify(review) });
+
+export const listReviewRequests = () =>
+  adminJson('/api/admin/review-requests').then((b) => b.orders);
+
+export const sendReviewRequest = (orderId) =>
+  adminJson(`/api/admin/review-requests/${orderId}`, { method: 'POST' });

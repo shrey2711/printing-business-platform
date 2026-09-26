@@ -50,6 +50,24 @@ export async function loadPublishedPosts() {
   }));
 }
 
+// Approved product reviews grouped by product slug. Empty when the DB is
+// unconfigured or the table does not exist yet, so builds never depend on it.
+export async function loadApprovedReviews() {
+  if (!client) return {};
+  const { data, error } = await client
+    .from('product_reviews')
+    .select('*')
+    .eq('status', 'approved')
+    .order('approved_at', { ascending: false });
+  if (error) {
+    console.warn(`[build] could not load reviews: ${error.message}`);
+    return {};
+  }
+  const bySlug = {};
+  for (const r of data || []) (bySlug[r.product_slug] ||= []).push(r);
+  return bySlug;
+}
+
 // Content overrides as { key: value }, for baking edited copy into prerendered
 // HTML. Empty if the DB is unconfigured/unreachable — the code defaults apply.
 export async function loadContentMap() {

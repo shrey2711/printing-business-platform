@@ -34,7 +34,8 @@ import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
 import { guidesForCategory, productsForGuide, CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
-import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides } from './buildData.mjs';
+import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides, loadApprovedReviews } from './buildData.mjs';
+import { ratingSummary } from '../backend/lib/reviews.js';
 import { resolveContent, resolveList } from '../src/data/content.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -340,7 +341,7 @@ const HOME_GUIDES = [
   { title: 'Pleated vs stretch table covers', to: '/blog/pleated-vs-stretch-table-cover' }
 ];
 const HOME_CITIES = [
-  ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
+  ['Vancouver', 'vancouver'], ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
   ['Atlanta', 'atlanta'], ['Dallas', 'dallas'], ['New York', 'new-york'],
   ['Houston', 'houston'], ['Los Angeles', 'los-angeles'], ['Miami', 'miami'],
   ['San Diego', 'san-diego'], ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
@@ -1250,6 +1251,12 @@ for (const summary of productList) {
       .map((s) => productList.find((x) => x.slug === s))
       .filter(Boolean);
     const faqs = getProductFaqs(product);
+    const productReviews = reviewsBySlug[product.slug] || [];
+    const reviewSummary = ratingSummary(productReviews);
+    const reviewsHtml = reviewSummary.count
+      ? `<h2>Customer reviews</h2><p>${reviewSummary.average.toFixed(1)} out of 5 from ${reviewSummary.count} review${reviewSummary.count === 1 ? '' : 's'}.</p>
+      ${productReviews.slice(0, 10).map((r) => `<blockquote><p>${'★'.repeat(r.rating)} ${r.title ? `<strong>${esc(r.title)}</strong> — ` : ''}${esc(r.body)}</p><cite>${esc(r.author_name)}${r.author_location ? `, ${esc(r.author_location)}` : ''}${r.verified_purchase ? ' · Verified purchase' : ''}</cite></blockquote>`).join('')}`
+      : '';
     const seoTitle = productSeoTitle(product);
     // Real product images (dye-sub photos we actually ship), absolute URLs for
     // Product schema. Derived from the size in the slug.
@@ -1309,6 +1316,7 @@ for (const summary of productList) {
       <p><a href="/products/${product.slug}">${startingPrice != null ? `Configure your ${esc(product.name)} and get an instant price →` : `Configure your ${esc(product.name)} and request a quote →`}</a></p>
       <h2>Frequently asked questions</h2>
       ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>${faqLinksHtml(f)}`).join('')}
+      ${reviewsHtml}
       <h2>Related products</h2>
       <ul>${related.map((r) => `<li><a href="/products/${r.slug}">${esc(r.name)}</a></li>`).join('')}</ul>
       <h2>Guides for your booth</h2>
@@ -1339,6 +1347,20 @@ for (const summary of productList) {
           sku: product.slug,
           category: cat ? cat.nav : product.category,
           brand: { '@type': 'Brand', name: BRAND },
+          // Rating markup only from real, approved reviews — never a default.
+          ...(reviewSummary.count
+            ? {
+                aggregateRating: { '@type': 'AggregateRating', ratingValue: String(reviewSummary.average), reviewCount: reviewSummary.count, bestRating: '5', worstRating: '1' },
+                review: productReviews.slice(0, 5).map((r) => ({
+                  '@type': 'Review',
+                  reviewRating: { '@type': 'Rating', ratingValue: String(r.rating), bestRating: '5', worstRating: '1' },
+                  author: { '@type': 'Person', name: r.author_name },
+                  ...(r.title ? { name: r.title } : {}),
+                  reviewBody: r.body,
+                  datePublished: (r.approved_at || r.created_at).slice(0, 10)
+                }))
+              }
+            : {}),
           // Offer only when there is a real price — no fake price on quote
           // products. When the "from" floor is a cheaper configuration than the
           // default build (canopy: graphic-only vs full set), emit an
@@ -1745,6 +1767,7 @@ const PRIVATE_ROUTES = [
   { path: '/register', title: 'Create Account', h1: 'Create an account' },
   { path: '/account', title: 'My Account', h1: 'My account' },
   { path: '/admin', title: 'Admin', h1: 'Admin' },
+  { path: '/review', title: 'Write a Review', h1: 'Write a review' },
   { path: '/order', title: 'Place Your Order', h1: 'Place your order' },
   // Defensive noindex stubs for private/transactional paths that are not React
   // routes today — without a stub the SPA rewrite would serve HOME content at
@@ -1768,6 +1791,7 @@ for (const r of PRIVATE_ROUTES) {
 
 // ---- Load dashboard-authored content from Supabase at build time ----
 const supabasePosts = await loadPublishedPosts();
+const reviewsBySlug = await loadApprovedReviews();
 // Merge in-repo static articles (static wins on slug clash), newest first.
 const postBySlug = new Map();
 for (const p of supabasePosts) postBySlug.set(p.slug, p);

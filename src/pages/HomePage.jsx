@@ -78,9 +78,17 @@ const boothSetups = [
 
 // Shop-by-industry browse aid. Industries link to the full trade show display
 // range (no per-industry pages are invented).
+// Shop-by-industry — each maps to the category that industry most often buys,
+// rather than every chip repeating the same /trade-show-displays link.
 const industries = [
-  'Technology', 'Healthcare', 'Construction', 'Food & Beverage',
-  'Manufacturing', 'Beauty & Wellness', 'Automotive', 'Education'
+  { label: 'Technology', to: '/tension-fabric-displays' },
+  { label: 'Healthcare', to: '/banner-stands' },
+  { label: 'Construction', to: '/custom-canopies' },
+  { label: 'Food & Beverage', to: '/table-covers' },
+  { label: 'Manufacturing', to: '/seg-displays' },
+  { label: 'Beauty & Wellness', to: '/backdrops' },
+  { label: 'Automotive', to: '/flags' },
+  { label: 'Education', to: '/trade-show-booth-packages' }
 ];
 
 // Shop-by-event-type — maps an event to the most relevant category.
@@ -95,7 +103,7 @@ const eventTypes = [
 
 // Popular cities — links to the enriched local landing pages.
 const popularCities = [
-  ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
+  ['Vancouver', 'vancouver'], ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
   ['Atlanta', 'atlanta'], ['Dallas', 'dallas'], ['New York', 'new-york'],
   ['Houston', 'houston'], ['Los Angeles', 'los-angeles'], ['Miami', 'miami'],
   ['San Diego', 'san-diego'], ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
@@ -264,7 +272,7 @@ export default function HomePage() {
         </div>
         <div className="chip-row">
           {industries.map((i) => (
-            <Link className="browse-chip" to="/trade-show-displays" key={i}>{i}</Link>
+            <Link className="browse-chip" to={i.to} key={i.label}>{i.label}</Link>
           ))}
         </div>
         <div className="section-head browse-subhead">

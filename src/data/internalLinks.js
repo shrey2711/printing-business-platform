@@ -6,7 +6,9 @@
 
 // Product category -> most relevant guide article slugs (first 3 are used).
 export const CATEGORY_GUIDES = {
-  tents: ['10x10-vs-10x15-vs-10x20-custom-canopy-tents', 'custom-canopy-tent-wall-options-explained', 'trade-show-display-cost'],
+  // All five canopy guides: the buying, artwork and print-coverage guides had no
+  // product page linking to them, and Google had them clustered as duplicates.
+  tents: ['10x10-vs-10x15-vs-10x20-custom-canopy-tents', 'custom-canopy-tent-buying-guide', 'custom-canopy-tent-wall-options-explained', 'how-to-prepare-artwork-for-a-custom-canopy-tent', 'print-coverage-explained'],
   'table-covers': ['pleated-vs-stretch-table-cover', '6ft-vs-8ft-table-cover', 'trade-show-display-setup-and-care-guide'],
   'banner-stands': ['standard-vs-deluxe-retractable-banner', 'x-stand-vs-retractable-banner', 'what-size-retractable-banner'],
   backdrops: ['trade-show-backdrop-size-guide', 'step-and-repeat-vs-tension-fabric-backdrop', 'trade-show-booth-design-guide'],
@@ -42,7 +44,32 @@ export const GUIDE_PRODUCTS = {
 };
 export const DEFAULT_PRODUCTS = ['canopy-tent-10x10', 'standard-retractable-banner', 'pleated-table-covers', 'step-and-repeat-backdrop'];
 
-export const guidesForCategory = (cat) => (CATEGORY_GUIDES[cat] || DEFAULT_GUIDES).slice(0, 3);
+// Titles for the guides above, so the client product page can render the same
+// "Guides for your booth" links as the prerendered HTML without loading articles.
+export const GUIDE_TITLES = {
+  '10x10-vs-10x15-vs-10x20-custom-canopy-tents': '10x10 vs 10x15 vs 10x20 Custom Canopy Tents',
+  'custom-canopy-tent-buying-guide': 'Custom Canopy Tent Buying Guide',
+  'custom-canopy-tent-wall-options-explained': 'Custom Canopy Tent Wall Options Explained',
+  'how-to-prepare-artwork-for-a-custom-canopy-tent': 'How to Prepare Canopy Tent Artwork',
+  'print-coverage-explained': 'Canopy Print Coverage Explained: Top, Valance, Walls & Inside',
+  'pleated-vs-stretch-table-cover': 'Pleated vs Stretch Table Covers: Which Look Is Right for Your Booth?',
+  '6ft-vs-8ft-table-cover': '6 ft vs 8 ft Table Cover: Which Size Do You Need?',
+  'trade-show-display-setup-and-care-guide': 'Trade Show Display Setup & Care Guide',
+  'standard-vs-deluxe-retractable-banner': 'Standard Retractable Banner vs Deluxe Retractable Banner: Which Should You Choose?',
+  'x-stand-vs-retractable-banner': 'X-Stand vs Retractable Banner: Which Banner Stand Is Right for You?',
+  'what-size-retractable-banner': 'What Size Retractable Banner Should I Buy?',
+  'trade-show-backdrop-size-guide': 'Trade Show Backdrop Size Guide: Choosing a Step & Repeat',
+  'step-and-repeat-vs-tension-fabric-backdrop': 'Step & Repeat Backdrop vs Tension Fabric Display: Which Backdrop Fits Your Booth?',
+  'trade-show-booth-design-guide': 'Trade Show Booth Design: Layout & Branding',
+  'banner-materials-explained': 'Banner Materials: Vinyl, Blockout, Mesh & Fabric',
+  'trade-show-display-cost': 'How Much Does a Trade Show Display Cost?',
+  'feather-angled-vs-convex-vs-teardrop-flags': 'Feather Angled vs Convex vs Teardrop Flags',
+  'seg-modular-kit-a-vs-b-vs-c': 'SEG Modular Kit A vs B vs C',
+  'coroplast-vs-pvc-vs-aluminum-signs': 'Coroplast vs PVC vs Aluminum Signs: Which Rigid Sign Should You Choose?',
+  'trade-show-booth-checklist': 'The Complete Trade Show Booth Checklist'
+};
+
+export const guidesForCategory = (cat) => (CATEGORY_GUIDES[cat] || DEFAULT_GUIDES).slice(0, 5);
 export const productsForGuide = (slug) => (GUIDE_PRODUCTS[slug] || DEFAULT_PRODUCTS).slice(0, 4);
 
 // Learning Center guides linked from every city page (§17 item 7) — descriptive,
