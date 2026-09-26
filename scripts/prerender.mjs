@@ -394,10 +394,13 @@ routes.push(() => {
     ${HOME_FAQS.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
   return render({
     path: '/',
-    title: `Trade Show Displays, Canopies & Banners | ${BRAND}`,
+    // Leads with "custom" and "booths": the homepage's top Search Console queries
+    // are "custom trade show builds", "trade show booth builders" and
+    // "custom exhibit displays".
+    title: `Custom Trade Show Displays & Booths | ${BRAND}`,
     // Concise <meta> description (the long brand.description still feeds schema).
     description:
-      'Custom trade show displays from one supplier: canopy tents, banner stands, backdrops, table covers, flags. Instant pricing, free artwork proof, US & Canada.',
+      'Custom trade show displays and booths from one supplier: canopy tents, banner stands, backdrops, table covers, flags. Instant pricing, free proof, US & Canada.',
     body,
     // Preload the home hero LCP image (matches the eager/fetchpriority tile in HomePage.jsx).
     // Preload the LCP image: the CMS hero image when one is set, otherwise the

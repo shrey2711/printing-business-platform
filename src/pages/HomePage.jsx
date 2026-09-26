@@ -131,7 +131,7 @@ const cardPreview = {
 };
 
 export default function HomePage() {
-  useDocumentMeta('Trade Show Displays, Canopies, Banners & Backdrops', brand.description);
+  useDocumentMeta('Custom Trade Show Displays & Booths', brand.description);
   const c = useContentResolver();
   const list = useListResolver();
   const [products, setProducts] = useState([]);
