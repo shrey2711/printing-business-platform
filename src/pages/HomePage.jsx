@@ -217,6 +217,10 @@ export default function HomePage() {
               <div className="hc-tile"><img src="/images/showcase/tablecover-corner-cafe.webp" alt="Custom printed table cover for a customer's brand" loading="eager" fetchpriority="high" decoding="async" width="600" height="450" /></div>
               <div className="hc-tile"><img src="/images/showcase/xstand-sunset-yoga.webp" alt="Custom printed banner for a customer's brand" loading="eager" decoding="async" width="600" height="450" /></div>
               <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Custom step & repeat backdrop" loading="eager" decoding="async" width="600" height="450" /></div>
+              <div className="hero-badge" aria-hidden="true">
+                <strong>Free artwork proof</strong>
+                <span>Approve it before anything prints</span>
+              </div>
             </div>
           )}
         </div>
@@ -232,6 +236,20 @@ export default function HomePage() {
           )}
         </section>
       )}
+
+      {/* Trust strip — directly under the hero, where it answers "can I rely on
+          these people" before the first scroll. */}
+      <section className="trust-row">
+        {list('home.why.items').map((b) => (
+          <div className="trust-badge" key={b.title}>
+            <span className="trust-icon" aria-hidden="true">{b.icon}</span>
+            <div>
+              <strong>{b.title}</strong>
+              <p>{b.description || b.copy}</p>
+            </div>
+          </div>
+        ))}
+      </section>
 
       {/* Shop by category — signals the full range in the first screenful */}
       <section className="cat-cards-section">
@@ -401,19 +419,6 @@ export default function HomePage() {
         <div className="section-more">
           <Link className="btn btn-outline" to="/products?category=tents">All canopy sizes &amp; walls</Link>
         </div>
-      </section>
-
-      {/* Trust badges */}
-      <section className="trust-row">
-        {list('home.why.items').map((b) => (
-          <div className="trust-badge" key={b.title}>
-            <span className="trust-icon" aria-hidden="true">{b.icon}</span>
-            <div>
-              <strong>{b.title}</strong>
-              <p>{b.description || b.copy}</p>
-            </div>
-          </div>
-        ))}
       </section>
 
       {/* Use cases */}
