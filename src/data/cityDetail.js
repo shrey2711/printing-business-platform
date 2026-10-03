@@ -40,14 +40,14 @@ export const CITY_DETAIL = {
       'table-covers': 'A Las Vegas booth almost always includes a rented six or eight foot table, and at CES or MAGIC that table is where the actual qualifying happens — badges scanned, specs discussed, samples handled. Bare or draped in house linen it undercuts everything else you shipped. Because so many exhibitors here work multiple shows a year across the Strip properties, a washable printed cover earns its cost quickly: it packs flat in the case that already holds your banner, and it comes out of a January CES looking the same as it did the previous November.'
     },
     categoryMeta: {
-      'trade-show-canopies': 'Custom canopy tents for Las Vegas outdoor expos and SEMA lots. UV-stable dye-sub tops, weighted legs, instant online pricing and a free artwork proof.',
-      'banner-stands': 'Retractable banner stands for Las Vegas trade shows. Portable, quick-setup aisle displays that fit rideshares, printed to order with a free artwork proof.',
-      'trade-show-backdrops': 'Step & repeat and tension fabric backdrops for Las Vegas press events, CES and SEMA booths. Seamless non-glare media walls with a free artwork proof.',
-      'table-covers': 'Custom printed table covers for Las Vegas trade show booths. Fitted and pleated covers for 6ft and 8ft tables, machine-washable with instant pricing.'
+      'trade-show-canopies': 'Custom canopy tents for LVCC outdoor lots, SEMA and Las Vegas expos. UV-stable dye-sub tops, weighted legs, instant online pricing and a free artwork proof.',
+      'banner-stands': 'Retractable banner stands for LVCC and Las Vegas trade shows. Portable, quick-setup aisle displays that fit rideshares, printed to order with a free proof.',
+      'trade-show-backdrops': 'Step & repeat and tension fabric backdrops for LVCC booths, CES and Las Vegas press events. Seamless non-glare media walls with a free artwork proof.',
+      'table-covers': 'Custom printed table covers for LVCC and Las Vegas trade show booths. Fitted and pleated covers for 6ft and 8ft tables, machine-washable with instant pricing.'
     },
     // Las Vegas-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Las Vegas — banner stands, backdrops and table covers for CES, SEMA and MAGIC booths, with a free artwork proof and US shipping.',
+      'Custom trade show displays for LVCC booths in Las Vegas — banner stands, backdrops and table covers for CES, SEMA and MAGIC, with a free proof and US shipping.',
     specTable: specTableFor('Las Vegas'),
     // ~40-word answer-first summary (also used for the AEO answer block).
     answer:
@@ -129,8 +129,8 @@ export const CITY_DETAIL = {
     categoryMeta: {
       'trade-show-canopies': 'Custom pop-up canopy tents for Orlando outdoor events and OCCC lots. Heavy-duty frames, weather-resistant dye sublimation, instant pricing & free proof.',
       'banner-stands': 'Retractable banner stands for Orange County Convention Center halls and I-Drive meetings. Portable aisle displays, printed to order with a free proof.',
-      'trade-show-backdrops': 'Custom step & repeat backdrops and tension fabric walls for Orlando association conferences and expos. Non-glare photo backdrops with a free proof.',
-      'table-covers': 'Dye-sublimated table covers for Orlando trade show booths and registration tables. Fitted and pleated styles, stain-resistant with instant online pricing.'
+      'trade-show-backdrops': 'Custom step & repeat backdrops and tension fabric walls for OCCC and Orlando association conferences. Non-glare photo backdrops with a free proof.',
+      'table-covers': 'Dye-sublimated table covers for OCCC booths and Orlando registration tables. Fitted and pleated styles, stain-resistant with instant online pricing.'
     },
     // Orlando-specific meta description for the /trade-show-displays page.
     metaDescription:
@@ -211,10 +211,10 @@ export const CITY_DETAIL = {
       'table-covers': 'Chicago shows are working shows. At IMTS or the Restaurant Show the table holds equipment, samples and paperwork, and it stays busy for four days straight — which is exactly why a rented table with a house drape looks wrong beside a serious exhibit. A closed-back printed cover keeps crates and coats out of sight through a long move-in and gives the demo surface the same brand colour as the backdrop behind it. It also washes, which after a foodservice show is not a small consideration.'
     },
     categoryMeta: {
-      'trade-show-canopies': 'Custom canopy tents for Chicago summer festivals and outdoor expos. Wind-resistant hex frames, dye-sublimated graphics, instant pricing and a free proof.',
+      'trade-show-canopies': 'Custom canopy tents for Chicago festivals and outdoor expos near McCormick Place. Wind-resistant hex frames, dye-sub graphics, instant pricing and a free proof.',
       'banner-stands': 'Retractable banner stands for McCormick Place and Rosemont expos. Hand-carried displays that bypass loading dock drayage, with a free artwork proof.',
-      'trade-show-backdrops': 'Tension fabric displays and step & repeat backdrops for Chicago conventions and galas. Seamless edge-to-edge booth walls with free artwork proofs.',
-      'table-covers': 'Custom table throws and fitted covers for Chicago trade show booths. Packs flat to save drayage fees, machine-washable with instant online pricing.'
+      'trade-show-backdrops': 'Tension fabric displays and step & repeat backdrops for McCormick Place booths and Chicago galas. Seamless edge-to-edge walls with free artwork proofs.',
+      'table-covers': 'Custom table throws and fitted covers for McCormick Place booths in Chicago. Packs flat to save drayage fees, machine-washable with instant online pricing.'
     },
     // Chicago-specific meta description for the /trade-show-displays page.
     metaDescription:
@@ -295,10 +295,10 @@ export const CITY_DETAIL = {
       'table-covers': 'Poultry, foodservice, logistics and gift shows all run on table conversations — buyers stop, handle a sample, take a card and move on. In that pattern the table is the booth, and an Atlanta exhibitor working AmericasMart markets uses the same cover across several buying weeks a year. Closed-back on all four sides matters here more than most places, because showroom and booth storage tends to live under the table in full view of the aisle. Washable polyester survives a humid Georgia week without going home stained.'
     },
     categoryMeta: {
-      'trade-show-canopies': 'Custom canopy tents for Atlanta outdoor markets, festivals and tailgates. UV and humidity-resistant dye-sublimated tops with instant pricing & free proof.',
+      'trade-show-canopies': 'Custom canopy tents for Atlanta outdoor markets, festivals and GWCC events. UV and humidity-resistant dye-sublimated tops with instant pricing & free proof.',
       'banner-stands': 'Retractable banner stands for the Georgia World Congress Center and AmericasMart. Lightweight aisle displays, printed to order with a free artwork proof.',
-      'trade-show-backdrops': 'Step & repeat backdrops and tension fabric display walls for Atlanta conventions and press events. Seamless, photo-ready walls with a free artwork proof.',
-      'table-covers': 'Custom trade show table covers for Atlanta showroom and expo booths. Closed-back fitted and pleated styles, machine-washable with instant online pricing.'
+      'trade-show-backdrops': 'Step & repeat backdrops and tension fabric display walls for GWCC booths and Atlanta press events. Seamless, photo-ready walls with a free artwork proof.',
+      'table-covers': 'Custom trade show table covers for GWCC, AmericasMart and Atlanta expo booths. Closed-back fitted and pleated styles, machine-washable with instant pricing.'
     },
     // Atlanta-specific meta description for the /trade-show-displays page.
     metaDescription:
@@ -379,14 +379,14 @@ export const CITY_DETAIL = {
       'table-covers': 'Energy, healthcare and wholesale buyers all end up at the table with a spec sheet, a rate card or a catalogue between them, so a Dallas booth spends most of its selling time seated. That makes the table cover the piece a buyer looks at longest. Fitted stretch reads as engineered, which suits technical exhibitors; pleated reads as traditional, which suits market showrooms and association events. Both hide the cases underneath — worth having in a Market Center showroom where storage and selling space are the same square footage.'
     },
     categoryMeta: {
-      'trade-show-canopies': 'Heavy-duty custom canopy tents for Dallas outdoor expos and fairgrounds. Sun-durable dye-sublimated tops and walls, instant pricing and a free artwork proof.',
-      'banner-stands': 'Retractable banner stands for Dallas Market Center and convention booths. Portable roll-up displays for wide aisles, printed to order with a free proof.',
-      'trade-show-backdrops': 'Seamless tension fabric walls and step & repeat backdrops for Dallas corporate expos and summits. Photo-ready non-glare printing with a free artwork proof.',
-      'table-covers': 'Fitted and pleated table covers for Dallas trade show and order-writing booths. Closed-back stain-resistant polyester with instant online pricing.'
+      'trade-show-canopies': 'Heavy-duty custom canopy tents for Dallas outdoor expos, fairgrounds and KBHCC events. Sun-durable dye-sublimated tops, instant pricing and a free proof.',
+      'banner-stands': 'Retractable banner stands for KBHCC and Dallas Market Center booths. Portable roll-up displays for wide aisles, printed to order with a free proof.',
+      'trade-show-backdrops': 'Seamless tension fabric walls and step & repeat backdrops for KBHCC expos and Dallas summits. Photo-ready non-glare printing with a free artwork proof.',
+      'table-covers': 'Fitted and pleated table covers for KBHCC and Dallas order-writing booths. Closed-back stain-resistant polyester with instant online pricing.'
     },
     // Dallas-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Dallas — canopies, banner stands, backdrops and table covers for downtown and Market Center, with a free proof, shipped to you.',
+      'Custom trade show displays for KBHCC and Dallas Market Center booths — canopies, banner stands, backdrops and table covers, with a free proof, shipped to you.',
     specTable: specTableFor('Dallas'),
     answer:
       'Dallas is a leading Texas convention city, anchored by the Kay Bailey Hutchison Convention Center and the huge Dallas Market Center. Apex prints custom trade show displays and ships them to Dallas for energy, technology, healthcare and wholesale exhibitors.',
@@ -619,10 +619,10 @@ export const CITY_DETAIL = {
       'table-covers': 'Whether it is a beauty sampling table, a pop-up checkout, a festival merch stand or a convention booth, the table is the surface people stand closest to in LA — and it is the surface that ends up in their photos. A fitted stretch cover pulls taut for a sharp face that photographs without wrinkles; a pleated throw suits the more formal association events downtown. Both close on all four sides to hide stock, pack flat into a car, and wash between activations, which matters when the same cover works four events a month.'
     },
     categoryMeta: {
-      'trade-show-canopies': 'Custom pop-up canopies for Los Angeles outdoor festivals, markets and beach activations. UV-resistant dye sublimation, instant pricing and a free proof.',
+      'trade-show-canopies': 'Custom pop-up canopies for LA Convention Center events, festivals, markets and beach activations. UV-resistant dye sublimation, instant pricing, free proof.',
       'banner-stands': 'Retractable banner stands for Los Angeles Convention Center and Anaheim expos. Compact, portable aisle displays, printed to order with a free artwork proof.',
-      'trade-show-backdrops': 'Step & repeat backdrops and tension fabric displays for LA premieres, press junkets and expo booths. Non-glare photo-ready walls with a free artwork proof.',
-      'table-covers': 'Dye-sublimated table covers for Los Angeles trade show and sampling tables. Fitted and pleated covers with closed-back storage and instant online pricing.'
+      'trade-show-backdrops': 'Step & repeat backdrops and tension fabric displays for LA Convention Center booths and premieres. Non-glare photo-ready walls with a free artwork proof.',
+      'table-covers': 'Dye-sublimated table covers for LA Convention Center booths and sampling tables. Fitted and pleated covers with closed-back storage and instant pricing.'
     },
     // Los Angeles-specific meta description for the /trade-show-displays page.
     metaDescription:
@@ -704,7 +704,7 @@ export const CITY_DETAIL = {
     },
     // Miami-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Miami — banner stands, backdrops, table covers and canopies, printed to order with a free artwork proof and US shipping.',
+      'Custom trade show displays for Miami Beach Convention Center booths — banner stands, backdrops, table covers and canopies, with a free proof and US shipping.',
     specTable: specTableFor('Miami'),
     answer:
       'Miami is the US gateway to Latin America and host of Art Basel, eMerge Americas and the Miami International Boat Show at the Miami Beach Convention Center. Apex prints custom trade show displays and ships them to Miami.',
@@ -1243,7 +1243,7 @@ export const CITY_DETAIL = {
     },
     // San Diego-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in San Diego — canopies, banner stands, backdrops and table covers for bayfront booths, printed to order with a free artwork proof.',
+      'Custom trade show displays for San Diego Convention Center booths — canopies, banner stands, backdrops and table covers, printed to order with a free proof.',
     specTable: specTableFor('San Diego'),
     answer:
       'San Diego’s waterfront convention center hosts Comic-Con International plus major biotech and defense shows. Apex prints custom trade show displays for San Diego exhibitions and consumer events and ships them out.',
@@ -1321,7 +1321,7 @@ export const CITY_DETAIL = {
     },
     // Washington, D.C.-specific meta description for the /trade-show-displays page.
     metaDescription:
-      'Custom trade show displays in Washington, D.C. — canopies, banner stands, backdrops and table covers for D.C. association, with a free proof, shipped to you.',
+      'Trade show displays for Walter E. Washington Convention Center booths in D.C. — banner stands, backdrops and table covers, made to order with a free proof.',
     specTable: specTableFor('Washington, D.C.'),
     answer:
       'Washington, D.C. is the association and government capital, host to major policy, defense and education shows at the Walter E. Washington Convention Center. Apex prints custom trade show displays and ships them to Washington.',
@@ -1478,7 +1478,7 @@ export const CITY_DETAIL = {
     // Seattle-specific meta description (overrides the generic template on the
     // /trade-show-displays/{city} page). ~150 chars; names the product range.
     metaDescription:
-      'Custom trade show displays in Seattle — canopies, banner stands, backdrops & table covers, printed to order with a free artwork proof and US shipping.',
+      'Custom trade show displays for Seattle Convention Center booths — canopies, banner stands, backdrops & table covers, with a free artwork proof and US shipping.',
     // §22 GEO/AEO: concise, extractable spec table (verified specs only — from
     // products.js + productFacts). Rendered under the "Best displays" H2, no new
     // heading, so the §24 hierarchy is unchanged.
@@ -1557,7 +1557,7 @@ export const CITY_DETAIL = {
       'table-covers': 'A printed table cover gives a Vancouver exhibitor branded surface on a rented registration or sampling table, which at a busy consumer show is where most conversations start. Fitted covers stay tidy under demo laptops and product samples, fold into a carry-on, and go through a washer between shows — handy for exhibitors who work the spring home show, a summer festival and an autumn conference in the same year.'
     },
     metaDescription:
-      'Custom trade show displays in Vancouver, BC — canopies, banner stands, backdrops and table covers, printed to order with a free proof and CAD pricing.',
+      'Custom trade show displays for Vancouver Convention Centre booths — canopies, banner stands, backdrops and table covers, made to order with a free proof.',
     specTable: specTableFor('Vancouver'),
     answer:
       'Vancouver is Canada’s West Coast convention centre, hosting Web Summit Vancouver, the Vancouver International Auto Show and the BC Home + Garden Show at the Vancouver Convention Centre on Coal Harbour. Apex prints custom trade show displays and ships them to Vancouver, with pricing in Canadian dollars.',
