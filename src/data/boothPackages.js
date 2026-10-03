@@ -84,6 +84,14 @@ export const BOOTH_FAQS = [
     a: 'Yes. Use a package as a starting point, then swap any item — a larger canopy, a stretch cover instead of pleated, an extra banner — by configuring each product on its own page.'
   },
   {
+    q: 'What goes into a 10x10 trade show booth?',
+    a: 'A 10x10 trade show booth usually needs a 10x10 canopy tent if the event is outdoors (or a backdrop if it is indoors), a 6 ft table cover and one retractable banner stand at the aisle. The Starter, Popular and Indoor Expo packages are all sized for a 10x10 space.'
+  },
+  {
+    q: 'What do I need for a 10x20 trade show booth?',
+    a: 'A 10x20 booth has room for a 10x20 canopy tent or a wider backdrop, an 8 ft table cover and two banner stands, one at each end of the aisle. The Complete Event Booth package uses the 10x20 canopy for exactly this footprint.'
+  },
+  {
     q: 'How do I order a complete booth?',
     a: 'Add each product to your cart from its own page, or request a quote listing everything you need and we will put together pricing and a free artwork proof for the whole booth.'
   }
