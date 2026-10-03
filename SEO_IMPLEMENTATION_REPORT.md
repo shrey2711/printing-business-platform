@@ -57,5 +57,5 @@ Business name, description, canonical URL and contact are consistent across: hom
 1. **Bare-domain DNS:** `apextradeshow.com` (non-www) must 301 → www (Vercel + DNS). Only real technical gap.
 2. **GSC:** re-submit/refresh the sitemap (it grew: priority states, cities, guides).
 3. **AI training opt-out:** decide whether to keep Google-Extended/GPTBot allowed (currently allowed).
-4. **Phone:** now `+1 672-514-7587`. **Email:** `info@apextradeshow.com`.
+4. **Phone:** now `+1 650-419-1073` (changed from +1 672-514-7587, Oct 2026). **Email:** `info@apextradeshow.com`.
 5. Optional: About/Shipping/Returns/Warranty pages don't exist — add later if you want them in llms.txt Company section.

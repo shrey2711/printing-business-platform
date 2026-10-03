@@ -16,7 +16,7 @@ const LOGO_URL = `${SITE_URL}/images/logo.png`;
 // renders when a client blocks remote images (the usual cause of a broken logo).
 const LOGO_CID = 'apexlogo';
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'info@apextradeshow.com';
-const CONTACT_PHONE = process.env.CONTACT_PHONE || '+1 672-514-7587';
+const CONTACT_PHONE = process.env.CONTACT_PHONE || '+1 650-419-1073';
 const CONTACT_PHONE_HREF = `tel:${(process.env.CONTACT_PHONE_HREF || CONTACT_PHONE).replace(/[^+\d]/g, '')}`;
 const CONTACT_HOURS = process.env.CONTACT_HOURS || 'Mon–Fri, 8am–6pm ET';
 

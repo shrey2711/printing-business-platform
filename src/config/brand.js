@@ -25,8 +25,8 @@ export const brand = {
   origin: 'https://www.apextradeshow.com',
 
   email: 'info@apextradeshow.com',
-  phone: '+1 672-514-7587',
-  phoneHref: '+16725147587',
+  phone: '+1 650-419-1073',
+  phoneHref: '+16504191073',
   hours: 'Mon – Fri: 8:00am – 6:00pm ET',
 
   // Both markets are served; used for shipping copy and location SEO.
