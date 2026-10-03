@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { list as getBlogPosts } from '../services/cms/blogService';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import '../styles/blog.css';
 
 const TOPICS = [
   { to: '/trade-show-displays', label: 'All trade show displays' },

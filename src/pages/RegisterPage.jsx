@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { trackSignUp } from '../lib/analytics';
+import '../styles/commerce.css';
 
 export default function RegisterPage() {
   useDocumentMeta('Create Account', undefined, undefined, 'noindex, follow');

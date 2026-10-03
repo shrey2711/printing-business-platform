@@ -10,6 +10,7 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 import ContactFields, { emptyContact } from '../components/ContactFields';
 import { validateContact, formatAddress } from '../lib/contactValidation';
 import { trackBeginCheckout } from '../lib/analytics';
+import '../styles/commerce.css';
 
 // The cart.
 //

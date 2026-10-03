@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getReviewInvite, submitReview } from '../services/api';
 import { brand } from '../config/brand';
+import '../styles/commerce.css';
 
 const STATE_COPY = {
   used: 'A review has already been submitted with this link. Thank you!',

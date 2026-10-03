@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { bySlug as getBlogPost } from '../services/cms/blogService';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import '../styles/blog.css';
 
 export default function BlogPost() {
   const { slug } = useParams();

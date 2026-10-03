@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { trackLogin } from '../lib/analytics';
+import '../styles/commerce.css';
 
 export default function LoginPage() {
   useDocumentMeta('Sign In', undefined, undefined, 'noindex, follow');

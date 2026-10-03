@@ -8,6 +8,7 @@ import { useCurrency } from '../context/CurrencyContext';
 import { formatCharged } from '../lib/money';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { trackPurchase } from '../lib/analytics';
+import '../styles/commerce.css';
 
 const statusColor = {
   submitted: 'st-blue',

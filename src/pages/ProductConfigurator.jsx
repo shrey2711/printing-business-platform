@@ -19,6 +19,7 @@ import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
 import { trackViewItem } from '../lib/analytics';
 import { brand } from '../config/brand';
+import '../styles/configurator.css';
 
 // `slug` and `embedded` let the product + city pages mount this exact
 // configurator inside their own page. Reused rather than reimplemented on

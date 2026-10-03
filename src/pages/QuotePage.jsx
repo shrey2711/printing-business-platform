@@ -6,6 +6,7 @@ import { validateContact, formatAddress } from '../lib/contactValidation';
 import { countryOptions, POSTAL, NO_POSTAL, DIAL } from '../data/countries';
 import AddressAutocomplete from '../components/AddressAutocomplete';
 import { trackGenerateLead } from '../lib/analytics';
+import '../styles/commerce.css';
 
 // Built once: 235 entries, and the list never changes while the page is open.
 const COUNTRIES = countryOptions();

@@ -11,6 +11,7 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 import { trackBeginCheckout } from '../lib/analytics';
 import ContactFields from '../components/ContactFields';
 import { validateContact, formatAddress } from '../lib/contactValidation';
+import '../styles/commerce.css';
 
 
 export default function PlaceOrderPage() {
