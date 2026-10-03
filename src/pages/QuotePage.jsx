@@ -234,15 +234,11 @@ export default function QuotePage() {
             </div>
           </div>
 
-          <div className="field-row">
-            <div className="field">
-              <label htmlFor="country">Country *</label>
-              <input id="country" name="country" value={formData.country} onChange={handleChange} required />
-            </div>
-            <div className="field">
-              <label htmlFor="quantity">Quantity</label>
-              <input id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} required />
-            </div>
+          {/* Country is chosen once, in the select above; a second free-text
+              Country input here shared its id and its state. */}
+          <div className="field">
+            <label htmlFor="quantity">Quantity</label>
+            <input id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} required />
           </div>
 
           <div className="field">

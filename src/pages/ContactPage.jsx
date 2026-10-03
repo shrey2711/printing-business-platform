@@ -15,27 +15,27 @@ export default function ContactPage() {
 
         <div className="contact-grid">
           <article className="contact-item">
-            <h3>📧 Email</h3>
+            <h3>Email</h3>
             <p><a href={`mailto:${brand.email}`}>{brand.email}</a></p>
           </article>
           <article className="contact-item">
-            <h3>📞 Phone</h3>
+            <h3>Phone</h3>
             <p><a href={`tel:${brand.phoneHref}`}>{brand.phone}</a></p>
           </article>
           <article className="contact-item">
-            <h3>🕒 Hours</h3>
+            <h3>Hours</h3>
             <p>{brand.hours}</p>
           </article>
           <article className="contact-item">
-            <h3>🚚 Shipping</h3>
+            <h3>Shipping</h3>
             <p>{brand.shippingBlurb}</p>
           </article>
           <article className="contact-item">
-            <h3>🎨 Artwork help</h3>
+            <h3>Artwork help</h3>
             <p>Free file checks &amp; design assistance</p>
           </article>
           <article className="contact-item">
-            <h3>🤝 Wholesale</h3>
+            <h3>Wholesale</h3>
             <p>Reseller &amp; trade pricing on request</p>
           </article>
         </div>
