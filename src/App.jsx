@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import EmailCapture from './components/EmailCapture';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage'; // eager — the landing page / LCP route
@@ -149,51 +149,51 @@ function CurrencySwitch() {
   );
 }
 
+// Compact account links for the header bar. Signing in happens on /login: an
+// inline email + password form in the header was the busiest thing on every
+// page and was hidden on phones anyway.
 function HeaderAuth() {
-  const { isAuthenticated, canSeeAdmin, displayName, login, logout, isSupabaseReady } = useAuth();
+  const { isAuthenticated, canSeeAdmin, displayName, logout } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [err, setErr] = useState(false);
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return (
-      <div className="header-account">
-        <Link to="/account" className="acct-link">👤 {displayName?.split(' ')[0] || 'Account'}</Link>
-        {canSeeAdmin && <Link to="/admin" className="btn btn-outline btn-sm">Dashboard</Link>}
-        <Link to="/account" className="btn btn-blue btn-sm">My Orders</Link>
-        <button className="btn btn-outline btn-sm" onClick={async () => { await logout(); navigate('/'); }}>
-          Sign out
-        </button>
-      </div>
+      <Link to="/login" className="header-link">
+        <UserIcon /> <span>Sign in</span>
+      </Link>
     );
   }
-
-  const doLogin = async (e) => {
-    e.preventDefault();
-    setErr(false);
-    try {
-      await login(form);
-      navigate('/account');
-    } catch {
-      setErr(true);
-    }
-  };
-
   return (
-    <form className="login-inline" onSubmit={doLogin}>
-      <input type="email" placeholder="Email" aria-label="Email" value={form.email}
-        onChange={(e) => setForm({ ...form, email: e.target.value })} />
-      <div className="pw-wrap">
-        <input type="password" placeholder="Password" aria-label="Password" value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          className={err ? 'input-err' : ''} />
-        <Link to="/login">Forgot?</Link>
-      </div>
-      <button type="submit" className="btn btn-blue btn-sm" disabled={!isSupabaseReady}>Sign In</button>
-      <Link to="/register" className="btn btn-red btn-sm">Register</Link>
-    </form>
+    <>
+      {canSeeAdmin && <Link to="/admin" className="header-link">Dashboard</Link>}
+      <Link to="/account" className="header-link">
+        <UserIcon /> <span>{displayName?.split(' ')[0] || 'Account'}</span>
+      </Link>
+      <button
+        type="button"
+        className="header-link header-link-btn"
+        onClick={async () => { await logout(); navigate('/'); }}
+      >
+        Sign out
+      </button>
+    </>
   );
 }
+
+// Inline SVG icons: a few hundred bytes, no icon font, and they take
+// currentColor so hover and active states need no extra rules.
+const iconProps = { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true };
+const UserIcon = () => (
+  <svg {...iconProps}><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" /></svg>
+);
+const CartIcon = () => (
+  <svg {...iconProps}><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2" /><circle cx="9" cy="20" r="1.2" /><circle cx="17" cy="20" r="1.2" /></svg>
+);
+const MenuIcon = ({ open }) => (
+  <svg {...iconProps} width={22} height={22}>
+    {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+  </svg>
+);
 
 // Account links for the mobile menu. The desktop header shows an inline
 // sign-in form, which is hidden below 820px, so these are the only way in on a
@@ -205,7 +205,7 @@ function MobileAuthLinks({ onNavigate }) {
     return (
       <>
         <Link className="m-link" to="/account" onClick={onNavigate}>
-          👤 {displayName?.split(' ')[0] || 'My account'}
+          {displayName?.split(' ')[0] || 'My account'}
         </Link>
         <Link className="m-link" to="/account" onClick={onNavigate}>My orders</Link>
         {canSeeAdmin && <Link className="m-link" to="/admin" onClick={onNavigate}>Dashboard</Link>}
@@ -234,9 +234,24 @@ function CartLink({ mobile = false }) {
   const { count } = useCart();
   if (!count) return null;
   return mobile
-    ? <Link className="m-link" to="/cart">🛒 Cart ({count})</Link>
-    : <Link className="btn btn-outline btn-sm cart-link" to="/cart" aria-label={`Cart, ${count} items`}>🛒 {count}</Link>;
+    ? <Link className="m-link" to="/cart">Cart ({count})</Link>
+    : (
+      <Link className="header-icon cart-link" to="/cart" aria-label={`Cart, ${count} items`}>
+        <CartIcon /><span className="cart-count">{count}</span>
+      </Link>
+    );
 }
+
+// Top-level links beside the Shop menu: the categories people come for most,
+// plus the two ways in that are not a product. Everything else is one level
+// down in the Shop menu, so the bar stays a single calm row.
+const primaryNav = [
+  { label: 'Canopies', to: '/custom-canopies' },
+  { label: 'Displays', to: '/trade-show-displays' },
+  { label: 'Banner Stands', to: '/banner-stands' },
+  { label: 'Booth Packages', to: '/trade-show-booth-packages' },
+  { label: 'Guides', to: '/resources' }
+];
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -248,23 +263,20 @@ function Header() {
   }, []);
   return (
     <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
-      <div className="header-top">
+      <div className="header-bar">
         <Link className="logo" to="/" aria-label={brand.name}>
           <Logo />
         </Link>
-        <span className="wl-badge">{brand.tagline}</span>
-        <div className="header-spacer" />
-        <CurrencySwitch />
-        <HeaderAuth />
+        <HeaderNav />
       </div>
-      <HeaderNav />
     </header>
   );
 }
 
-// Desktop: a "Shop" mega-dropdown (CSS hover/focus) plus quick links + a
-// prominent quote CTA. Mobile: a hamburger that opens an accordion with large
-// tap targets, one level deep. Both reuse `shopMenu`.
+// Desktop: a "Shop" mega-menu (CSS hover/focus) plus a few direct links, then
+// account, cart and the quote CTA on the right. Mobile: the same bar collapses
+// to cart, quote and a menu button that opens a full-height accordion, one
+// level deep. Both reuse `shopMenu`.
 function HeaderNav() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -286,7 +298,7 @@ function HeaderNav() {
   useEffect(() => {
     document.body.classList.toggle('menu-open', mobileOpen);
     if (mobileOpen) {
-      const h = document.querySelector('.site-header')?.getBoundingClientRect().bottom || 120;
+      const h = document.querySelector('.site-header')?.getBoundingClientRect().bottom || 64;
       document.documentElement.style.setProperty('--m-menu-top', `${Math.max(0, Math.round(h))}px`);
     }
     return () => document.body.classList.remove('menu-open');
@@ -301,48 +313,44 @@ function HeaderNav() {
           onMouseLeave={() => setShopClosed(false)}
         >
           <Link className="shop-dd-trigger" to="/products" onClick={closeShop}>
-            Shop <span aria-hidden="true">▾</span>
+            Shop <span className="caret" aria-hidden="true" />
           </Link>
           <div className="shop-menu">
-            {shopMenu.map((g) => (
-              <div className="shop-col" key={g.label}>
-                <Link className="shop-col-head" to={g.to} onClick={closeShop}>{g.label}</Link>
-                {g.items.map((it) => (
-                  <Link key={it.to} to={it.to} onClick={closeShop}>{it.label}</Link>
-                ))}
-              </div>
-            ))}
-            <Link className="shop-all" to="/products" onClick={closeShop}>Shop all products →</Link>
+            <div className="shop-menu-inner">
+              {shopMenu.map((g) => (
+                <div className="shop-col" key={g.label}>
+                  <Link className="shop-col-head" to={g.to} onClick={closeShop}>{g.label}</Link>
+                  {g.items.map((it) => (
+                    <Link key={it.to} to={it.to} onClick={closeShop}>{it.label}</Link>
+                  ))}
+                </div>
+              ))}
+              <Link className="shop-all" to="/products" onClick={closeShop}>Shop all products →</Link>
+            </div>
           </div>
         </div>
-        <Link to="/trade-show-displays">Displays</Link>
-        <Link to="/custom-canopies">Canopies</Link>
-        <Link to="/banners">Banners</Link>
-        <Link to="/rigid-signs">Rigid Signs</Link>
-        <Link to="/marketing-essentials">Marketing Essentials</Link>
-        <Link to="/products?category=flags">Flags</Link>
-        <Link to="/products?category=seg-kits">SEG Kits</Link>
-        <Link to="/trade-show-booth-packages">Booth Packages</Link>
-        <Link to="/blog">Blog</Link>
-        <span className="nav-spacer" />
-        <CartLink />
-        <Link className="btn btn-outline btn-sm" to="/products">Shop All</Link>
-        <Link className="btn btn-red btn-sm" to="/quote">Get a Quote</Link>
+        {primaryNav.map((l) => (
+          <NavLink key={l.to} to={l.to}>{l.label}</NavLink>
+        ))}
       </nav>
 
-      {/* Mobile navigation */}
-      <div className="header-nav-m">
+      <div className="header-actions">
+        <CurrencySwitch />
+        <HeaderAuth />
+        <CartLink />
+        <Link className="btn btn-red btn-sm header-cta" to="/quote">Get a quote</Link>
         <button
           type="button"
-          className="nav-toggle"
+          className="header-icon nav-toggle"
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((o) => !o)}
         >
-          <span aria-hidden="true">{mobileOpen ? '✕' : '☰'}</span> Menu
+          <MenuIcon open={mobileOpen} />
         </button>
-        <Link className="btn btn-red btn-sm" to="/quote">Get a Quote</Link>
       </div>
+
       {mobileOpen && (
         <div className="m-menu" id="mobile-menu">
           <Link className="m-all" to="/products">Shop all products</Link>
@@ -367,13 +375,16 @@ function HeaderNav() {
             </div>
           ))}
           <Link className="m-link" to="/trade-show-booth-packages">Booth Packages</Link>
-          <Link className="m-link" to="/locations">Locations</Link>
+          <Link className="m-link" to="/resources">Guides</Link>
           <Link className="m-link" to="/blog">Blog</Link>
+          <Link className="m-link" to="/locations">Locations</Link>
+          <Link className="m-link" to="/contact">Contact</Link>
           <CartLink mobile />
-          {/* Account access. The inline sign-in form is display:none below
-              820px and this menu carried no auth links at all, so on a phone
-              there was no way to sign in, register, or reach an order. */}
           <MobileAuthLinks onNavigate={() => setMobileOpen(false)} />
+          <div className="m-foot">
+            <span>Currency</span>
+            <CurrencySwitch />
+          </div>
         </div>
       )}
     </>
@@ -390,7 +401,6 @@ function Footer() {
   const email = c('footer.email') || brand.email;
   return (
     <footer className="site-footer">
-      <div className="footer-rainbow" />
       <div className="footer-grid">
         <div>
           <span className="ft-logo">
