@@ -191,6 +191,11 @@ if (!existsSync(robotsPath)) {
       const assetPath = `${DIST}${m[1].replace(ORIGIN, '')}`;
       if (!existsSync(assetPath)) failures.push(`home LCP preload points at a missing asset: ${m[1]}`);
       if (!/fetchpriority="high"/.test(m[0])) failures.push('home LCP preload lacks fetchpriority="high"');
+      // A responsive preload must point at files that exist, every width.
+      const set = (m[0].match(/imagesrcset="([^"]+)"/) || [])[1];
+      for (const url of set ? set.split(',').map((c) => c.trim().split(/\s+/)[0]) : []) {
+        if (!existsSync(`${DIST}${url.replace(ORIGIN, '')}`)) failures.push(`home LCP preload srcset points at a missing asset: ${url}`);
+      }
     }
   }
 }

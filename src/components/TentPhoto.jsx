@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
-import CanopyPreview from './CanopyPreview';
+import { useState, useEffect, lazy, Suspense } from 'react';
+
+// The drawn fallback only renders when the photo fails to load, so it is
+// fetched on that path instead of riding in every page's first load.
+const CanopyPreview = lazy(() => import('./CanopyPreview'));
 
 // Real product photo, chosen by size + the ACTUAL wall configuration.
 //
@@ -50,7 +53,7 @@ export default function TentPhoto({ size, walls = 1, fullWalls, halfWalls, sandb
   useEffect(() => setIdx(0), [key]);
 
   if (!size || idx >= candidates.length) {
-    return <CanopyPreview size={size} print="top" walls={total} label={label} />;
+    return <Suspense fallback={null}><CanopyPreview size={size} print="top" walls={total} label={label} /></Suspense>;
   }
 
   const wallText = total === 0 ? 'no walls' : total > 1 ? `${total} printed walls` : '1 printed wall';

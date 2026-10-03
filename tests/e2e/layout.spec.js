@@ -27,6 +27,8 @@ const PAGES = [
 for (const path of PAGES) {
   test(`layout: ${path}`, async ({ page }) => {
     await page.goto(path, { waitUntil: 'networkidle' });
+    // A page that failed to render (e.g. its lazy chunk threw) has no heading.
+    await expect(page.locator('h1').first()).toBeVisible();
     const problems = await page.evaluate(() => {
       const out = [];
       const W = window.innerWidth;

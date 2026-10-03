@@ -245,7 +245,12 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   }
   // LCP preload: start fetching the above-the-fold hero image before the JS
   // bundle parses, so it isn't discovered late (only where a page sets it).
-  if (preloadImage) {
+  // A string preloads one URL; an object preloads a responsive set
+  // ({ srcset, sizes, type }) so phones fetch the small file.
+  if (preloadImage && typeof preloadImage === 'object') {
+    // href is the fallback for browsers without imagesrcset support.
+    html = html.replace('</head>', `<link rel="preload" as="image" href="${esc(preloadImage.href)}" type="${esc(preloadImage.type)}" imagesrcset="${esc(preloadImage.srcset)}" imagesizes="${esc(preloadImage.sizes)}" fetchpriority="high">\n</head>`);
+  } else if (preloadImage) {
     html = html.replace('</head>', `<link rel="preload" as="image" href="${esc(preloadImage)}" fetchpriority="high">\n</head>`);
   }
   if (robots) {
@@ -410,7 +415,13 @@ routes.push(() => {
     // the unsized original would download a second, larger file for nothing.
     preloadImage: cms('home.hero.image')
       ? `${cms('home.hero.image')}${cms('home.hero.image').includes('?') ? '&' : '?'}key=hero`
-      : '/images/showcase/tablecover-corner-cafe.webp',
+      : {
+          // The default hero: BoothScene "booth-indoor" (sizes must match HomePage.jsx).
+          type: 'image/avif',
+          href: '/images/booth/booth-indoor-1600.avif',
+          srcset: '/images/booth/booth-indoor-960.avif 960w, /images/booth/booth-indoor-1600.avif 1600w',
+          sizes: '(max-width: 1080px) 100vw, 600px'
+        },
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',

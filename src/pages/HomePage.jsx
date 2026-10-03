@@ -4,7 +4,7 @@ import { list as getProducts } from '../services/cms/productService';
 import ProductCard from '../components/ProductCard';
 import CmsImage from '../components/CmsImage';
 import DisplayPhoto from '../components/DisplayPhoto';
-import TentPhoto from '../components/TentPhoto';
+import BoothScene from '../components/BoothScene';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useContentResolver, useListResolver } from '../context/ContentContext';
 import { brand } from '../config/brand';
@@ -211,12 +211,10 @@ export default function HomePage() {
               />
             </div>
           ) : (
-            // Booth collage — displays we print, in a range of customer brands
-            <div className="hero-collage" aria-label="Trade show displays Apex prints in any brand: canopy, table cover, banner and backdrop">
-              <div className="hc-tile hc-canopy"><TentPhoto size="10x20" walls={3} label="Custom printed canopy tent" /></div>
-              <div className="hc-tile"><img src="/images/showcase/tablecover-corner-cafe.webp" alt="Custom printed table cover for a customer's brand" loading="eager" fetchpriority="high" decoding="async" width="600" height="450" /></div>
-              <div className="hc-tile"><img src="/images/showcase/xstand-sunset-yoga.webp" alt="Custom printed banner for a customer's brand" loading="eager" decoding="async" width="600" height="450" /></div>
-              <div className="hc-tile"><img src="/images/colorways/backdrop-red.webp" alt="Custom step & repeat backdrop" loading="eager" decoding="async" width="600" height="450" /></div>
+            // Default hero: a complete Apex-branded booth (product renders staged as
+            // one set). A hero image set in the CMS replaces it.
+            <div className="hero-scene">
+              <BoothScene scene="booth-indoor" eager sizes="(max-width: 1080px) 100vw, 600px" />
               <div className="hero-badge" aria-hidden="true">
                 <strong>Free artwork proof</strong>
                 <span>Approve it before anything prints</span>
@@ -305,7 +303,8 @@ export default function HomePage() {
 
       {/* One brand, one booth — the complete-solution message */}
       <section className="booth-band">
-        <div className="booth-band-inner">
+        <div className="booth-band-inner has-scene">
+          <div className="booth-band-copy">
           <h2>One brand. One booth. Everything you need.</h2>
           <p>
             Apex prints every branded piece of your trade show booth — canopy, banner stands, backdrop,
@@ -316,6 +315,8 @@ export default function HomePage() {
             <Link className="btn btn-red" to="/products">Shop trade show displays</Link>
             <Link className="btn btn-outline" to="/quote">Plan a complete booth</Link>
           </div>
+          </div>
+          <BoothScene scene="booth-outdoor" className="booth-band-scene" sizes="(max-width: 900px) 100vw, 640px" />
         </div>
       </section>
 

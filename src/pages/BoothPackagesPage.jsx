@@ -4,6 +4,7 @@ import { list as getProducts } from '../services/cms/productService';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useMoney } from '../context/CurrencyContext';
 import { brand } from '../config/brand';
+import BoothScene from '../components/BoothScene';
 import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
@@ -81,6 +82,8 @@ export default function BoothPackagesPage() {
           <Link className="btn btn-outline" to="/quote">Request a booth quote</Link>
         </div>
       </section>
+
+      <BoothScene scene="booth-indoor" className="page-scene" sizes="(max-width: 1240px) 100vw, 1200px" />
 
       <section className="section-block card">
         <h2>Buy the whole booth, or any single product</h2>

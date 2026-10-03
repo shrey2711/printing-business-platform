@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
-import ProductArt from './ProductArt';
+import { useState, useEffect, lazy, Suspense } from 'react';
+
+// The drawn fallback only renders when the photo fails to load, so it is
+// fetched on that path instead of riding in every page's first load.
+const ProductArt = lazy(() => import('./ProductArt'));
 
 // Real photo for banner stands / backdrops / tabletop displays. Files live in
 // public/images/displays/<slug>.webp. Falls back to the ProductArt illustration
@@ -9,7 +12,7 @@ export default function DisplayPhoto({ slug, label }) {
   const [broken, setBroken] = useState(false);
   useEffect(() => setBroken(false), [src]);
 
-  if (broken) return <ProductArt slug={slug} />;
+  if (broken) return <Suspense fallback={null}><ProductArt slug={slug} /></Suspense>;
   return (
     <img
       className="display-photo"

@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
-import ProductArt from './ProductArt';
+import { useState, useEffect, lazy, Suspense } from 'react';
+
+// The drawn fallback only renders when the photo fails to load, so it is
+// fetched on that path instead of riding in every page's first load.
+const ProductArt = lazy(() => import('./ProductArt'));
 
 // Table-cover product photo, chosen by fabric style. Files live in
 // public/images/table-covers/. Falls back to the generic ProductArt drawing if
@@ -13,7 +16,7 @@ export default function TableCoverPhoto({ style, label }) {
   const [broken, setBroken] = useState(false);
   useEffect(() => setBroken(false), [src]);
 
-  if (broken) return <ProductArt slug="table-covers" />;
+  if (broken) return <Suspense fallback={null}><ProductArt slug="table-covers" /></Suspense>;
 
   return (
     <img

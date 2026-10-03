@@ -5,7 +5,7 @@
 // own per-chunk limit. See docs/UI_REVAMP_PLAN.md §2.
 //
 //   node scripts/check-budget.mjs [distDir]
-import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 
@@ -44,9 +44,22 @@ while (queue.length) {
   }
 }
 
+// Preloaded fonts are fetched on the critical path too. woff2 is already
+// compressed, so it is counted at its file size, not gzipped again.
+let fonts = 0;
+for (const tag of html.match(/<link\b[^>]*>/g) || []) {
+  if (!/rel="preload"/.test(tag) || !/as="font"/.test(tag)) continue;
+  const href = (tag.match(/href="\/([^"]+)"/) || [])[1];
+  if (!href) continue;
+  const size = statSync(join(DIST, href)).size;
+  fonts += size;
+  total += size;
+  rows.push([href, size]);
+}
+
 console.log('Homepage critical path (gzip):');
 for (const [f, s] of rows) console.log(`  ${kb(s).padStart(9)}  ${f}`);
-console.log(`  ${kb(total).padStart(9)}  TOTAL (budget ${kb(BUDGET.total)}), CSS ${kb(css)} (budget ${kb(BUDGET.css)})`);
+console.log(`  ${kb(total).padStart(9)}  TOTAL (budget ${kb(BUDGET.total)}), CSS ${kb(css)} (budget ${kb(BUDGET.css)}), fonts ${kb(fonts)}`);
 
 const failures = [];
 if (total > BUDGET.total) failures.push(`first load ${kb(total)} > ${kb(BUDGET.total)}`);
