@@ -232,3 +232,79 @@ These templates serve hundreds of pages, so each fix scales.
 | 7 | Auth/admin/cleanup | 2d | final audit |
 
 Total: roughly 3–4 weeks of focused work.
+
+## 7. Next level: making it more appealing (proposed, Oct 2026)
+
+Phases 0–7 are done: new design system, header, every page restyled,
+FREESHIP promotion, layout tests. Current weight: **89.0 / 100 KB**
+(CSS 14.0 / 15 KB). Anything below that adds bytes has to be paid for, so
+each item lists its cost.
+
+### Phase A: Free up budget (≈1 day, saves ~4–6 KB)
+- Move admin, blog-editor and account-table CSS (~25% of `styles.css`)
+  into CSS imported by those lazy pages, so the public first load stops
+  paying for it.
+- Delete dead selectors left from the old design (`.facilities`,
+  `.pickup`, `.ft-btn`, `.logo-mark`, old size-picker rules) after a usage
+  check.
+- **Exit:** CSS ≤ 10 KB on first load, which is the headroom for B–E.
+
+### Phase B: Imagery, the biggest lever (needs assets from you)
+- Today the hero and cards use product renders on mixed backgrounds, and
+  several category tiles have no image at all. A premium store is mostly
+  photography.
+- **Hero:** one wide photo of a real Apex booth at a show (people, a busy
+  aisle) in place of the 4-tile collage, preloaded as AVIF ≤ 60 KB.
+- **Category tiles:** one consistent shot per category, same angle and
+  backdrop and a soft grey seamless background.
+- **"What we print":** real customer installs rather than renders.
+- **Customer logo strip** (5–8 logos, monochrome SVG, ~3 KB) under the
+  trust row, if customers agree.
+- Cost: images only (not counted in the 100 KB); `optimize-images`
+  already exists.
+
+### Phase C: Brand typography (≈0.5 day, ~15–20 KB)
+- A display face for headings only (e.g. Inter Tight, Manrope or
+  Plus Jakarta Sans), subset to Latin, one variable woff2,
+  `font-display: swap`, preloaded. Body text stays on the system font.
+- Only fits after Phase A. Needs your pick from 2–3 options shown on the
+  real homepage.
+
+### Phase D: Homepage storytelling (≈1–2 days, needs your sign-off)
+- 15 sections is too many; premium homepages tell one story in about 8:
+  Hero → Trust/logos → Categories → Build your booth → Real work →
+  Best sellers → Reviews → FAQ → CTA.
+- Merge industry, event and city chips into one compact "Browse by"
+  block; move the buying guides into the FAQ area as "Learn more".
+- **SEO note:** every link that leaves the homepage keeps a home (footer,
+  Browse block or Guides), so internal links are preserved rather than
+  dropped.
+
+### Phase E: Motion and polish (≈1 day, ~1 KB)
+- Gentle reveal-on-scroll for sections and cards (one
+  IntersectionObserver, CSS transitions, off under
+  `prefers-reduced-motion`).
+- Images fade in on load instead of popping; skeleton shimmer while
+  products load.
+- One consistent inline-SVG line-icon set for the trust strip, use cases
+  and contact tiles (replacing the hidden emoji).
+- A branded 404 page and better empty states (cart, orders).
+
+### Phase F: Conversion details on the product page (≈2 days, ~2 KB)
+- **Sticky price and CTA bar on mobile**, so the price and "Order" are
+  always one tap away while scrolling options.
+- **Estimated delivery date** ("Order today, arrives by Oct 21"), computed
+  from production days plus a transit window, beside the price.
+- **Review stars** on product cards and under the product title once
+  reviews exist (the reviews feature is live).
+- **Gallery:** larger main image, swipe on mobile, click to zoom.
+
+### Phase G: Social proof once it exists
+- Show the aggregate rating in the hero badge ("4.9 · 120 reviews") and a
+  testimonial band on the homepage, only from genuine published reviews
+  (the rule in `src/data/socialProof.js` stands).
+
+### Suggested order
+A → E → F first: no assets or decisions needed and visible on every page.
+Then B, C and D as you supply photos, pick a font and approve the leaner
+homepage. G follows reviews.
