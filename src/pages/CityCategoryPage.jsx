@@ -4,7 +4,7 @@ import { list as getProducts } from '../services/cms/productService';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../data/citySeo';
+import { SEO_CITIES, LOCAL_CATEGORIES, getSeoCity, getLocalCategory, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr, cityVenueName, cityVenueWithAbbr } from '../data/citySeo';
 import { CITY_BOOTH_GUIDES } from '../data/internalLinks';
 import { CITY_PRODUCT_PAGES } from '../data/cityProductPages';
 import { cityDetailFor } from '../data/cityDetail';
@@ -188,7 +188,7 @@ export default function CityCategoryPage({ categoryKey }) {
             <p>{detail.whyExhibit}</p>
           </section>
           <section className="section-block">
-            <h2>Top convention centers in {city.city}</h2>
+            <h2>{cityVenueName(city)} and other {city.city} venues</h2>
             <ul>{detail.conventionCenters.map((v) => (<li key={v.name}><strong>{v.name}</strong> — {v.desc}</li>))}</ul>
           </section>
           <section className="section-block">
@@ -197,7 +197,7 @@ export default function CityCategoryPage({ categoryKey }) {
           </section>
           <section className="section-block">
             <h2>Shipping to {city.city}</h2>
-            <p>Apex prints to order and ships to {city.city}, {city.stateName}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address.</p>
+            <p>Apex prints to order and ships to {city.city}, {city.stateName}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address. Exhibiting at {cityVenueWithAbbr(city)}? Ship to its receiving dock, the advance warehouse named in your exhibitor kit, or your business address.</p>
           </section>
           {showClimate && (
             <section className="section-block">
@@ -285,7 +285,7 @@ export default function CityCategoryPage({ categoryKey }) {
       )}
 
       <section className="section-block card">
-        <h2>Trade shows in {city.city}</h2>
+        <h2>{cat.label} for {cityVenueName(city)} trade shows</h2>
         <p>
           {city.city} hosts {city.scene}. Whether you're exhibiting at {city.venue} or running an
           outdoor activation nearby, Apex prints your {cat.label.toLowerCase()} in your brand and ships
