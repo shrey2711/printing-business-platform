@@ -12,8 +12,8 @@ export const LANDING_PAGES = [
   {
     slug: 'seg-displays',
     nav: 'SEG Displays',
-    title: 'SEG Displays | Silicone Edge Graphics',
-    h1: 'SEG Displays (Silicone Edge Graphics)',
+    title: 'SEG Displays & Backlit Display Walls',
+    h1: 'SEG Displays & Backlit Display Walls',
     description:
       'Custom SEG displays — silicone-edge-graphic fabric on a rigid aluminum frame for a seamless, frameless finish. Backlit options, quoted per order.',
     intro:
@@ -32,7 +32,8 @@ export const LANDING_PAGES = [
     ,
       { h2: 'Choosing an SEG size and configuration', p: 'The modular kits come in 10 ft, 13 ft, 16.4 ft and 20 ft widths at 6.6, 7.4 or 8.2 ft tall, so the wall can match a 10x10, a 10x20 or an island footprint. Configuration matters as much as width: a backdrop alone reads as a clean brand wall, while adding the illuminated archway or return section gives the booth depth and a defined entrance. The display counter runs 2.8 ft wide on the 10 and 13 ft kits and 3.3 ft wide on the larger two.' },
       { h2: 'What you get and how it goes up', p: 'Each kit ships with the illuminated SEG backdrop, its archway or return section, an illuminated counter, custom backlit fabric graphics for every panel, the modular PVC lightbox frame and the integrated LED system with your choice of US, EU or AU plug. Assembly is modular snap-fit and needs no tools. A complete kit with graphics weighs roughly 72 to 80 lb, so it ships as freight rather than luggage.' },
-      { h2: 'Why the silicone edge matters', p: 'SEG stands for Silicone Edge Graphic: a thin silicone strip is sewn around the fabric edge and pressed into a groove in the aluminum frame. The graphic sits flat and tension-held with no visible frame, no glare band and no seam, which is the difference between a booth that looks bought and one that looks built. The graphic pulls out and swaps in minutes, so the frame carries across campaigns.' }
+      { h2: 'Why the silicone edge matters', p: 'SEG stands for Silicone Edge Graphic: a thin silicone strip is sewn around the fabric edge and pressed into a groove in the aluminum frame. The graphic sits flat and tension-held with no visible frame, no glare band and no seam, which is the difference between a booth that looks bought and one that looks built. The graphic pulls out and swaps in minutes, so the frame carries across campaigns.' },
+      { h2: 'Backlit displays: when lighting the wall is worth it', p: 'A backlit display puts LEDs behind the fabric, so the whole graphic glows instead of relying on the hall lighting. That matters in dim convention halls, at evening events and in any aisle where neighbours have bright walls. Every SEG modular kit here is a backlit display, with integrated LED lighting and an illuminated counter. Design the artwork for light: saturated colours look stronger when backlit, while large solid dark areas stay dark and thin reversed type can blur, so check the proof before you approve it.' }
     ],
     faqs: [
       { q: 'What does SEG stand for?', a: 'Silicone Edge Graphic — a fabric print with a silicone strip on the edge that pushes into a groove on an aluminum frame for a flat, frameless look.' },
@@ -144,8 +145,8 @@ export const LANDING_PAGES = [
   {
     slug: 'flags',
     nav: 'Flags',
-    title: 'Custom Flags | Feather & Teardrop',
-    h1: 'Custom Flags',
+    title: 'Custom Feather Flags & Teardrop Flags',
+    h1: 'Custom Feather Flags & Teardrop Flags',
     description:
       'Custom feather and teardrop advertising flags on a flexible pole with ground stake or cross base. Configure for instant pricing from $140.',
     intro:

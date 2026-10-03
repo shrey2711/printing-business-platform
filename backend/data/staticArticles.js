@@ -1310,6 +1310,139 @@ export const STATIC_ARTICLES = [
       { q: 'What’s the difference between grommets and pole pockets?', a: 'Grommets are metal eyelets you tie or hook through; pole pockets are sewn sleeves (usually 2") that a pole slides into for a clean hanging look. Choose based on how you’ll mount the banner.' },
       { q: 'Are banners printed to a custom size?', a: 'Yes — banners are made to size to the inch and priced by the square foot, so measure your space and order to fit rather than trimming later.' }
     ]
+  },
+  {
+    slug: 'trade-show-booth-ideas',
+    title: 'Trade Show Booth Ideas: 14 Ideas That Pull People In',
+    excerpt:
+      'Practical trade show booth ideas for 10x10 and 10x20 spaces, indoors and outdoors: getting noticed from the aisle, an open layout, conversation starters, photo walls and booths on a budget.',
+    tags: ['Booth Design', 'Ideas'],
+    seo: {
+      title: 'Trade Show Booth Ideas for 10x10 Booths',
+      description:
+        '14 trade show booth ideas for 10x10 and 10x20 booths — get noticed from the aisle, open up the layout, start conversations and build a booth on a budget.'
+    },
+    coverUrl: '/images/showcase/backdrop-greenleaf.webp',
+    publishedAt: '2026-10-03T00:00:00.000Z',
+    updatedAt: '2026-10-03T00:00:00.000Z',
+    html: `
+<p><strong>Short answer:</strong> the booth ideas that work do one of three things. They get you noticed from the aisle, they make it easy for people to step in, or they give people a reason to start talking. Below are 14 ideas grouped by the job they do, each built from displays you can reuse show after show. For the layout and branding rules behind them, see our <a href="/blog/trade-show-booth-design-guide">trade show booth design guide</a>.</p>
+
+<h2>Ideas to get noticed from the aisle</h2>
+<h3>1. Put one sentence at the top of your back wall</h3>
+<p>Your backdrop is the largest graphic you own, and the top third is the only part nobody stands in front of. Use it for your name and one line about what you do, big enough to read from 20 ft away. A <a href="/backdrops">trade show backdrop</a> or a <a href="/tension-fabric-displays">tension fabric display</a> gives you a full 8 ft of height to work with.</p>
+<h3>2. Add height at the corner with a flag</h3>
+<p>Most booths stop at about 8 ft. A <a href="/flags">feather flag</a> at the front corner of your space puts your logo above the crowd, which is how people find you from the far end of a hall or an outdoor site.</p>
+<h3>3. Put a banner stand right at the aisle edge</h3>
+<p>A <a href="/banner-stands">retractable banner stand</a> placed at the edge of your space, facing the traffic, catches people before they reach you. Use it for a question or an offer, not your logo again. "Still printing booth graphics twice a year?" makes people slow down. A second logo doesn't.</p>
+<h3>4. Light the wall</h3>
+<p>Convention-hall lighting is flat. A backlit display, such as an <a href="/seg-displays">SEG lightbox wall</a>, glows instead of relying on the ceiling lights, and stands out most in a dim hall or at an evening event.</p>
+
+<h2>Ideas that make it easy to walk in</h2>
+<h3>5. Move the table to the side</h3>
+<p>A table across the front of a 10x10 is a wall between you and every visitor. Turn it sideways along one edge so the front of the booth is open, and stand beside the table rather than behind it.</p>
+<h3>6. Use half walls on an outdoor canopy</h3>
+<p>On a <a href="/custom-canopies">custom canopy tent</a>, a full back wall plus half-height side walls gives you a branded booth that still feels open. Full walls on three sides close it in. Save those for storage or bad weather.</p>
+<h3>7. Hide everything that isn't for sale</h3>
+<p>Boxes, bags and coats make a booth look like a storeroom. A closed-back <a href="/table-covers">table cover</a> covers all four sides, so everything under the table stays out of sight.</p>
+
+<h2>Ideas that start conversations</h2>
+<h3>8. Run a live demo</h3>
+<p>Movement draws people in. If your product can be shown working in under a minute, show it, on loop, at the front of the booth.</p>
+<h3>9. Ask a question on the banner</h3>
+<p>A question on your banner stand gives staff an easy way to open: "What did you think when you read that?" is easier to say than a cold hello.</p>
+<h3>10. Run a quick game</h3>
+<p>A short, well-designed game brings people to a stop and gives you a reason to collect their details. Our guide to <a href="/blog/trade-show-games">trade show games</a> covers which ones work and which ones block the aisle.</p>
+
+<h2>Ideas for photos and social</h2>
+<h3>11. Build a photo wall people want to stand in front of</h3>
+<p>A <a href="/products/step-and-repeat-backdrop">step and repeat backdrop</a> tiles your logo so every photo taken in front of it carries your brand, even when it's cropped. Leave 8–10 ft of clear floor in front so people can step back and take the shot.</p>
+<h3>12. Make the table work in photos too</h3>
+<p>Put your logo on the front panel of the table cover, centred and high enough to clear the knees of whoever is standing behind it. It's often the only branding in a close-up photo.</p>
+
+<h2>Ideas for a booth on a budget</h2>
+<h3>13. Buy in the right order</h3>
+<p>If you can only buy one piece, buy the <a href="/products/standard-retractable-banner">retractable banner stand</a>. It is the cheapest thing that still stops people. Add a table cover second and a backdrop third. Our <a href="/trade-show-booth-packages">booth packages</a> group the pieces by budget, and every item can still be bought on its own.</p>
+<h3>14. Reuse frames, reprint graphics</h3>
+<p>Every display here takes a replaceable graphic on a reusable frame. Next year's new message is a reprint, not a new booth. Plan your campaign so the frame is a one-time cost.</p>
+
+<h2>Ideas for a 10x20 booth</h2>
+<p>A 10x20 gives you room to split the space. Put the back wall and demo at one end and a conversation area at the other, with a banner stand at each end of the aisle. A <a href="/products/canopy-tent-10x20">10x20 canopy tent</a> covers it outdoors. Indoors, a 20 ft tension fabric wall or an SEG kit spans the whole back as one graphic.</p>
+
+<p>Ready to build yours? Browse all <a href="/trade-show-displays">trade show displays</a>, or send us your booth size and we'll send a free proof of how your artwork will look.</p>
+`,
+    faqs: [
+      { q: 'What makes a trade show booth stand out?', a: 'One clear message at the top of the back wall, height at the corner from a flag, and an open front. Booths stand out when people can tell what you do from across the aisle in a few seconds.' },
+      { q: 'How do I make a 10x10 booth look bigger?', a: 'Keep the front open by moving the table to one side, use a full-height backdrop so the space reads as a room, and hide storage under a closed-back table cover. Clutter is what makes small booths feel smaller.' },
+      { q: 'What is the cheapest way to improve a trade show booth?', a: 'A retractable banner stand at the aisle edge with a question or offer on it. It is the lowest-cost display that still slows people down, and the graphic can be reprinted for the next show.' },
+      { q: 'What are good outdoor booth ideas?', a: 'A custom canopy tent with a printed back wall and half side walls, a feather flag at the front corner for height, and a weight on every canopy leg. Outdoors, the flag is how people find you from across the site.' }
+    ]
+  },
+  {
+    slug: 'trade-show-games',
+    title: 'Trade Show Games That Bring People to Your Booth',
+    excerpt:
+      'Trade show games that draw a crowd without blocking the aisle — what makes a booth game work, eight game ideas, prizes, and how to turn players into leads.',
+    tags: ['Booth Design', 'Ideas'],
+    seo: {
+      title: 'Trade Show Games to Draw Booth Traffic',
+      description:
+        'Trade show games that bring people to your booth — what makes a booth game work, 8 game ideas, prize tips and how to turn players into qualified leads.'
+    },
+    coverUrl: '/images/showcase/banner-apex.webp',
+    publishedAt: '2026-10-03T00:00:00.000Z',
+    updatedAt: '2026-10-03T00:00:00.000Z',
+    html: `
+<p><strong>Short answer:</strong> the best trade show games take under a minute to play, connect to what you sell, and end with a natural reason to swap contact details. A game that draws a crowd but gives you nothing to talk about afterwards just costs you prizes.</p>
+
+<h2>What makes a trade show game work</h2>
+<ul>
+  <li><strong>It's fast.</strong> Thirty to sixty seconds per player. A longer game builds a queue that blocks the aisle and annoys your neighbours.</li>
+  <li><strong>It's relevant.</strong> The best games teach the player something about your product or the problem it solves, so the conversation afterwards starts halfway there.</li>
+  <li><strong>It captures a lead.</strong> Scanning a badge or entering an email to play, or to claim the prize, is fair exchange. Keep it to one step.</li>
+  <li><strong>It's visible from the aisle.</strong> People join a game they can see others playing. Put it at the front edge of the booth, not at the back.</li>
+</ul>
+
+<h2>8 trade show game ideas</h2>
+<h3>1. Spin the prize wheel</h3>
+<p>The classic, because it works: one spin, an instant result, and a natural moment to ask a question while the wheel slows down. Put mostly small prizes on the wheel and one big one people will talk about.</p>
+<h3>2. Industry trivia</h3>
+<p>Three quick questions about your industry, on a tablet or cards. Write questions whose answers point to the problem you solve. Then the answer is your opener.</p>
+<h3>3. Guess the number</h3>
+<p>A jar of items, a stack of products or a "how many hours does the average team spend on X" question. Entries require contact details, and you announce the winner after the show, which gives you a reason to follow up.</p>
+<h3>4. Photo challenge at your backdrop</h3>
+<p>Ask visitors to take a photo in front of your <a href="/products/step-and-repeat-backdrop">step and repeat backdrop</a> and post it with the show hashtag to enter a draw. It spreads your logo further than the show floor. Leave 8–10 ft of clear floor in front of the backdrop so there's room to take the shot.</p>
+<h3>5. Target toss or mini putting green</h3>
+<p>Physical games draw a crowd because people stop to watch. Keep the game inside your booth footprint and set a strict one-attempt rule so the line keeps moving.</p>
+<h3>6. Scratch cards</h3>
+<p>Hand them out at the aisle and redeem them at the table. The visitor has to step into the booth to find out what they won, which is the step most booths struggle to get.</p>
+<h3>7. Beat the clock</h3>
+<p>A timed challenge that uses your product, such as assembling, finding or sorting something, with a leaderboard on display. A leaderboard brings people back to check their rank, and gives you a second conversation.</p>
+<h3>8. Booth-to-booth passport</h3>
+<p>If the organiser runs a passport or stamp card across exhibitors, sign up for it. It sends traffic to your booth that you don't have to pull in yourself.</p>
+
+<h2>Make the game visible</h2>
+<p>A game only draws people if they can see it from the aisle. Use a <a href="/products/standard-retractable-banner">retractable banner stand</a> at the edge of your space to announce the game and the top prize in a few words, like "Spin to win — every spin wins." Keep your main message on the back wall, and put your logo on the front of the <a href="/table-covers">table cover</a> where the game is played, so it shows in every photo.</p>
+
+<h2>Prizes that keep working after the show</h2>
+<p>Small prizes should be things people keep and use. Branded <a href="/products/silicone-wristbands">silicone wristbands</a> and <a href="/products/custom-lanyards">custom lanyards</a> are cheap enough to give away all day and carry your logo long after the last day of the show. Save the big prize for something relevant to your buyers, so the people who play are the people you want to talk to.</p>
+
+<h2>Mistakes to avoid</h2>
+<ul>
+  <li><strong>A queue across the aisle.</strong> Most shows don't allow it, and your neighbours won't thank you. Keep play inside your space.</li>
+  <li><strong>Games that need explaining.</strong> If staff spend a minute on the rules, the game is too complicated.</li>
+  <li><strong>No follow-up plan.</strong> Decide before the show what each player receives afterwards, and tag leads by how qualified they seemed.</li>
+  <li><strong>Ignoring the rules.</strong> Raffles and prize draws can be regulated where you exhibit. Check the show's exhibitor rules and local requirements before offering a game of chance.</li>
+</ul>
+
+<p>Planning the rest of the booth? See our <a href="/blog/trade-show-booth-ideas">trade show booth ideas</a>, or browse all <a href="/trade-show-displays">trade show displays</a>.</p>
+`,
+    faqs: [
+      { q: 'What are the best trade show games?', a: 'Games that take under a minute, connect to what you sell and include a one-step lead capture: a prize wheel, short industry trivia, a guess-the-number contest or a photo challenge at your backdrop.' },
+      { q: 'Do trade show games actually generate leads?', a: 'They do when playing requires a badge scan or email, and when the game relates to your product so the conversation afterwards is about the visitor\'s needs, not just the prize.' },
+      { q: 'What prizes work best at a trade show?', a: 'Cheap, useful items for everyone, such as branded wristbands or lanyards, plus one prize relevant to your buyers. A relevant top prize attracts the people you actually want to talk to.' },
+      { q: 'Are raffles allowed at trade shows?', a: 'It depends on the show and the location. Many shows have rules on raffles and games of chance, and some places regulate prize draws, so check the exhibitor manual and local requirements first.' }
+    ]
   }
 ];
 

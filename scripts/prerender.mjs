@@ -23,7 +23,7 @@ import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
-import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr } from '../src/data/citySeo.js';
+import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr, cityVenueName, cityVenueWithAbbr } from '../src/data/citySeo.js';
 import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
@@ -840,12 +840,12 @@ for (const lc of LOCAL_CATEGORIES) {
         <h2>Why exhibit in ${esc(city.city)}?</h2>
         ${detail.overview.map((t) => `<p>${esc(t)}</p>`).join('')}
         <p>${esc(detail.whyExhibit)}</p>
-        <h2>Top convention centers in ${esc(city.city)}</h2>
+        <h2>${esc(cityVenueName(city))} and other ${esc(city.city)} venues</h2>
         <ul>${detail.conventionCenters.map((v) => `<li><strong>${esc(v.name)}</strong> — ${esc(v.desc)}</li>`).join('')}</ul>
         <h2>Popular trade show industries in ${esc(city.city)}</h2>
         <ul>${detail.industries.map(([n, d]) => `<li><strong>${esc(n)}</strong> — ${esc(d)}</li>`).join('')}</ul>
         <h2>Shipping to ${esc(city.city)}</h2>
-        <p>${esc(BRAND)} prints to order and ships to ${esc(city.city)}, ${esc(city.stateName)}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address. Ship to your venue's receiving dock, an advance warehouse, or your business address.</p>
+        <p>${esc(BRAND)} prints to order and ships to ${esc(city.city)}, ${esc(city.stateName)}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address. Exhibiting at ${esc(cityVenueWithAbbr(city))}? Ship to its receiving dock, the advance warehouse named in your exhibitor kit, or your business address.</p>
         ${showClimate ? `<h2>Outdoor &amp; climate tips for ${esc(city.city)}</h2><p>${esc(detail.climate)}</p>` : ''}
         ${showBestDisplays && detail.bestDisplays ? `<h2>Best displays for ${esc(city.city)} trade shows</h2><p>${esc(detail.bestDisplays)}</p>` : ''}
         ${specTableHtml}`
@@ -939,7 +939,7 @@ for (const lc of LOCAL_CATEGORIES) {
         ${productSectionsHtml}
         ${categoryLocalHtml}
         ${planningHtml}
-        <h2>Trade shows in ${esc(city.city)}</h2>
+        <h2>${esc(lc.label)} for ${esc(cityVenueName(city))} trade shows</h2>
         <p>${esc(city.city)} hosts ${esc(city.scene)}. Whether you're exhibiting at ${esc(city.venue)} or
         running an outdoor activation nearby, ${esc(BRAND)} prints your ${esc(lc.label.toLowerCase())} in your
         brand and ships them to ${esc(city.city)}, ${esc(city.stateName)}.</p>
@@ -956,7 +956,7 @@ for (const lc of LOCAL_CATEGORIES) {
         path: `/${lc.slug}/${city.slug}`,
         title: lc.slug === 'trade-show-displays'
           ? cityDisplaysTitle(city)
-          : `${cityCatTitle(lc.label, city)} | ${BRAND}`,
+          : (() => { const t = cityCatTitle(lc.label, city); return t.includes(' | ') ? t : `${t} | ${BRAND}`; })(),
         description: catMetaDesc,
         image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,

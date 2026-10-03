@@ -18,15 +18,17 @@ export const CATEGORY_PAGES = [
     guide: [
       { h2: 'Building a booth from one supplier', p: 'A booth is rarely one product. The usual combination is a backdrop or fabric wall for the back of the space, one or two retractable banner stands at the aisle, a printed table cover on the demo or registration table, and a canopy if any part of the event happens outdoors. Ordering the set from one place is not just convenience: it is the only reliable way to get the same brand colour across fabric, vinyl and polyester, which are printed by different processes.' },
       { h2: 'What to buy first on a limited budget', p: 'If you can only buy one piece, buy the thing at eye level in the aisle — a retractable banner stand. It is the cheapest item that still stops someone walking past. Second is a table cover, because almost every booth has a rented table and a bare one undoes the rest. A full backdrop comes third: it makes the biggest visual difference but only once the first two are working. Canopies matter only if you exhibit outdoors.' },
-      { h2: 'Reusing a booth across shows', p: 'Every display here uses a replaceable graphic on a reusable frame, which is what separates a booth kit from a per-show expense. Frames, bases and canopy hardware carry across years; graphics get reprinted when the message changes. Production runs 6-8 business days after proof approval with a 2-3 day rush available, and transit is added on top by destination — so plan a reprint as weeks, not days.' }
+      { h2: 'Reusing a booth across shows', p: 'Every display here uses a replaceable graphic on a reusable frame, which is what separates a booth kit from a per-show expense. Frames, bases and canopy hardware carry across years; graphics get reprinted when the message changes. Production runs 6-8 business days after proof approval with a 2-3 day rush available, and transit is added on top by destination — so plan a reprint as weeks, not days.' },
+      { h2: 'Trade show banners: which format goes where', p: 'A trade show banner is not one product. A retractable banner stand stands on the floor at the aisle and carries your headline at eye level. A vinyl or fabric banner hangs from the booth frame, a table or the back of a canopy, at any size you need. A step & repeat banner on a backdrop frame is the wall people get photographed in front of. Most booths use two of the three: a stand at the aisle, plus either a hanging banner or a backdrop behind the table. Pick the format by where it goes first, then size the artwork to that spot.' },
+      { h2: 'Booth display checklist for a 10x10 space', p: 'A 10x10 booth display needs four things. It needs a back wall that reads from across the hall (a backdrop or tension fabric display), something at the aisle that stops people walking past (a banner stand or flag), a branded surface where the conversation happens (a table cover), and somewhere to keep stock and bags out of sight (the closed back of that table cover). Add a canopy only if the event is outdoors. Our booth packages group these by budget, and every piece can still be bought on its own.' }
     ],
     hub: true,
     category: null,
     nav: 'Trade Show Displays',
-    h1: 'Trade Show Displays & Event Branding',
-    title: 'Trade Show Displays & Event Branding',
+    h1: 'Trade Show Displays & Booth Displays',
+    title: 'Trade Show Displays & Booth Displays',
     description:
-      'Shop the complete trade show booth — canopy tents, banner stands, backdrops, table covers and flags, printed in your brand. Instant pricing, free proof.',
+      'Custom trade show displays and booth displays — banner stands, trade show banners, backdrops, canopy tents and table covers, printed in your brand. Free proof.',
     intro:
       'Apex supplies every branded piece of a professional trade show booth from one place — canopy tents, banner stands, backdrops, table covers, flags and accessories, all printed in your brand so the whole booth matches. Canopy tents, banner stands, backdrops, table covers and flags are priced instantly online; larger custom displays (SEG modular kits, tension fabric and pop-up) are quoted per order.',
     points: [
@@ -62,14 +64,15 @@ export const CATEGORY_PAGES = [
     guide: [
       { h2: 'Which canopy size fits your space?', p: 'Canopies come in 10x10, 10x15 and 10x20. A 10x10 is the standard single booth or market pitch and the one most events sell by default. A 10x15 buys shade for a longer table or a queue. A 10x20 covers a double booth or lets you run product one end and seating the other. All three use the same heavy-duty aluminium hex frame and 600D polyester top, so the choice is footprint, not quality.' },
       { h2: 'Printed walls change what the canopy does', p: 'You can add up to three printed walls in any mix of full and half height. A canopy with no walls is shade; add a back wall and it becomes a booth with a branded backdrop; add half walls at the sides and you have a counter line that still lets people walk in from the front. Full walls on three sides close the space for storage or weather. Decide the layout before you print — the walls are ordered with the top.' },
-      { h2: 'Weighting is not optional outdoors', p: 'Most outdoor sites are pavement or hardstanding, where a stake cannot be driven, and an unweighted canopy is the single most common failure at an outdoor event. Put a weight on every leg, every time. Dye sublimation bonds the ink into the fabric so the print itself resists sun and repeated packing, but no print survives the frame going over in a gust.' }
+      { h2: 'Weighting is not optional outdoors', p: 'Most outdoor sites are pavement or hardstanding, where a stake cannot be driven, and an unweighted canopy is the single most common failure at an outdoor event. Put a weight on every leg, every time. Dye sublimation bonds the ink into the fabric so the print itself resists sun and repeated packing, but no print survives the frame going over in a gust.' },
+      { h2: 'Branded event tents for festivals, markets and sponsors', p: 'An event tent does two jobs: it gives you shade, and it marks your spot in a field of identical white tents. That second job is why the canopy is printed. Festival vendors, sponsors and sports clubs use a branded event tent so people can find them from across a site and recognise them in photos. Pair the canopy with a feather flag at the front corner for height. A flag carries your name above the crowd in a way a canopy valance cannot.' }
     ],
     category: 'tents',
     nav: 'Custom Canopies',
-    h1: 'Custom Canopy Tents',
-    title: 'Custom Canopy Tents — 10x10, 10x15 & 10x20',
+    h1: 'Custom Canopy Tents & Pop Up Tents With Your Logo',
+    title: 'Custom Pop Up Canopy Tents With Logo',
     description:
-      'Custom printed pop-up canopy tents in 10x10, 10x15 and 10x20 with up to 3 printed walls. Instant online pricing, free artwork proof, US & Canada.',
+      'Custom canopy tents and pop up tents with your logo in 10x10, 10x15 and 10x20 — branded event tents with up to 3 printed walls. Instant pricing, free proof.',
     intro:
       'Custom printed pop-up canopy tents — the branded roof over your booth. Choose 10x10, 10x15 or 10x20, add full or half printed walls, and see the price update live. Dye sublimation bonds the ink into 600D polyester over a heavy-duty aluminum hex frame, so colors will not crack, peel or fade.',
     points: [
@@ -107,14 +110,15 @@ export const CATEGORY_PAGES = [
     guide: [
       { h2: 'Retractable, X-stand or tabletop?', p: 'Three formats, three jobs. A retractable banner stand rolls its graphic into a weighted aluminium base — 33" x 81" or 47" x 81" on the standard, 33" x 81" on the deluxe with a heavier base and chrome-style end caps — and it is the workhorse for aisle-facing messaging. An X-stand is a collapsible lightweight frame at 24" x 63" or 32" x 71", cheaper and lighter, ideal when you need several around a venue. A tabletop stand at 11.5" x 17.5" brands a counter or registration desk without using floor space.' },
       { h2: 'Standard or deluxe retractable?', p: 'The difference is the base and the pole, not the print. The standard has a compact aluminium base with two stabilising feet, which is fine on carpet and in low-traffic aisles. The deluxe has a heavier base with an adjustable support pole, so it stands more solidly in a busy hall and survives being knocked. If the stand lives in one booth a few times a year, standard is enough; if it travels weekly, the deluxe base pays for itself.' },
-      { h2: 'Graphics are replaceable', p: 'Every stand here takes a replaceable printed graphic, so the hardware is the durable purchase and the message is the consumable. That is the practical case for buying a stand rather than a disposable print: a new campaign, a new product or a rebrand means ordering a graphic, not another base. All set up tool-free in seconds, and all pack into a slim case that checks as luggage.' }
+      { h2: 'Graphics are replaceable', p: 'Every stand here takes a replaceable printed graphic, so the hardware is the durable purchase and the message is the consumable. That is the practical case for buying a stand rather than a disposable print: a new campaign, a new product or a rebrand means ordering a graphic, not another base. All set up tool-free in seconds, and all pack into a slim case that checks as luggage.' },
+      { h2: 'Roll up banner, pull up banner or retractable banner?', p: 'They are three names for the same display. "Retractable banner" is the usual term in North America, "roll up banner" and "pull up banner" are common in the UK, Australia and Canada, and all three describe a printed graphic that rolls down into a weighted base and pulls up onto a support pole. When a supplier quotes a roll up banner stand, compare it against our standard and deluxe retractable stands. The specifications that matter are the same: graphic size, base weight, pole type and whether the graphic can be replaced.' }
     ],
     category: 'banner-stands',
     nav: 'Banner Stands',
-    h1: 'Retractable & X-Stand Banner Stands',
-    title: 'Retractable & X-Stand Banner Stands',
+    h1: 'Retractable Banner Stands & Roll Up Banners',
+    title: 'Retractable & Roll Up Banner Stands',
     description:
-      'Custom printed banner stands — standard & deluxe retractable, X-stand and tabletop — for trade shows, lobbies and counters. Instant online pricing, free proof.',
+      'Custom retractable banner stands, roll up and pull up banners, X-stands and tabletop stands for trade shows and lobbies. Instant pricing, free proof.',
     intro:
       'Portable printed banner stands for aisles, entrances, counters and events. Retractable stands roll the graphic into the base for travel; the X-stand uses a lightweight X-frame; the tabletop version sits on a counter. All use a replaceable printed graphic.',
     points: [
@@ -139,7 +143,8 @@ export const CATEGORY_PAGES = [
     ,
       { q: 'What size is a retractable banner stand?', a: 'The standard retractable prints at 33" x 81" or 47" x 81"; the deluxe at 33" x 81" on a heavier base. X-stands are 24" x 63" or 32" x 71", and the tabletop stand is 11.5" x 17.5".' },
       { q: 'What is the difference between the standard and deluxe retractable?', a: 'The base and pole, not the print. The standard uses a compact aluminium base with two stabilising feet; the deluxe uses a heavier base with an adjustable support pole, which stands up better to a busy hall and frequent travel.' },
-      { q: 'Can I change the graphic without buying a new stand?', a: 'Yes — every stand takes a replaceable printed graphic, so the hardware carries across campaigns and only the printed banner is reordered.' }
+      { q: 'Can I change the graphic without buying a new stand?', a: 'Yes — every stand takes a replaceable printed graphic, so the hardware carries across campaigns and only the printed banner is reordered.' },
+      { q: 'Is a roll up banner the same as a retractable banner stand?', a: 'Yes. Roll up banner, pull up banner and retractable banner stand all describe a printed graphic that rolls into a base and pulls up onto a pole. Our standard and deluxe retractable stands are roll up banners.' }
     ]
   },
   {
@@ -147,14 +152,15 @@ export const CATEGORY_PAGES = [
     guide: [
       { h2: 'Which banner material should you choose?', p: 'Four materials cover almost every job. 13oz matte scrim vinyl is the default — indoor and outdoor rated with UV-stable ink, and the right pick for most storefront and event banners. 18oz blockout adds an opaque grey centre layer so two different prints never show through each other, which is what makes a true double-sided banner possible. Mesh is perforated to let roughly 30% of wind pass through, cutting the load that makes solid banners flap and tear on a fence. 9oz polyester fabric is dye-sublimated for a no-glare matte finish that photographs cleanly under lights.' },
       { h2: 'Sizing, hems and grommets', p: 'Vinyl banners print to any size you enter, up to 50 ft on one side; the fabric banner runs up to 8 ft on one side. Vinyl comes with a welded hem and grommets every 2 ft as standard, so it is ready to tie off out of the box. The fabric banner has sewn hemmed edges instead, which suits indoor hanging and travel. Price is by the square foot, so the configurator quotes the exact size rather than rounding you up to a stock format.' },
-      { h2: 'Indoor, outdoor and wind', p: 'Outdoors, the failure point is almost never the print — it is the wind. A solid banner on an exposed fence acts like a sail, which is why mesh exists. For long outdoor runs choose 18oz for its weight or mesh for airflow, and tie off every grommet rather than just the corners. Indoors, where wind is irrelevant and lighting is the enemy, the dye-sublimated fabric banner avoids the glare that vinyl throws under spotlights.' }
+      { h2: 'Indoor, outdoor and wind', p: 'Outdoors, the failure point is almost never the print — it is the wind. A solid banner on an exposed fence acts like a sail, which is why mesh exists. For long outdoor runs choose 18oz for its weight or mesh for airflow, and tie off every grommet rather than just the corners. Indoors, where wind is irrelevant and lighting is the enemy, the dye-sublimated fabric banner avoids the glare that vinyl throws under spotlights.' },
+      { h2: 'How our vinyl banner printing works', p: 'Vinyl banners are printed to the exact width and height you enter, in full color with UV-stable inks, and then finished with a welded hem and grommets every 2 ft. That means the banner arrives ready to tie off. Upload your artwork with the order and approve the free proof. Artwork approved before 12pm PST goes into production the same business day, and before 4pm PST the next business day. Price is by the square foot, so a custom banner at an odd size costs the same rate as a stock one.' }
     ],
     category: 'banners',
     nav: 'Banners',
-    h1: 'Custom Vinyl, Mesh & Fabric Banners',
-    title: 'Custom Banners — Vinyl, Mesh & Fabric',
+    h1: 'Custom Banners & Vinyl Banner Printing',
+    title: 'Custom Banners & Vinyl Banner Printing',
     description:
-      'Made-to-size 13oz vinyl, 18oz blockout, mesh and 9oz fabric banners — enter width and height for instant per-square-foot pricing. Hem and grommets included.',
+      'Custom banners printed to any size — 13oz and 18oz vinyl banner printing, mesh and 9oz fabric. Instant per-square-foot pricing, hem and grommets included.',
     intro:
       'Full-color banners printed to any size you enter, priced by the square foot. Choose economical 13oz scrim vinyl, opaque 18oz blockout for double-sided prints, wind-friendly perforated mesh, or premium wrinkle-free fabric — each finished ready to hang.',
     points: [
@@ -187,14 +193,15 @@ export const CATEGORY_PAGES = [
     guide: [
       { h2: 'Pleated or stretch — which fits your table?', p: 'The two styles behave differently. A pleated throw drapes over the table with rounded corners for a traditional, formal look, and comes in 4 ft, 6 ft and 8 ft. A fitted stretch cover pulls tight to the table for a sharp modern face, and comes in 6 ft and 8 ft. Both are closed-back on all four sides, so whatever you store underneath stays out of sight from the aisle — which matters more than people expect at a busy show.' },
       { h2: 'Fabric and care', p: 'Pleated covers are wrinkle-resistant polyester; stretch covers are stretch polyester. Both are dye-sublimated, meaning the ink is bonded into the fibre rather than sitting on top, so the colour will not crack or peel and the cover can be washed between shows. That is what makes a table cover a multi-season purchase: it packs flat, travels in the show case, and comes out looking the same as it did the first time.' },
-      { h2: 'Measure before you order', p: 'Table sizes at shows are quoted by length — a 6 ft or 8 ft rectangular table is the standard rental. Order the cover to match the table length, not the booth width. If you are not sure what the venue supplies, ask the show\'s exhibitor services before you print: a stretch cover sized for the wrong table will not fit at all, where a pleated throw is more forgiving.' }
+      { h2: 'Measure before you order', p: 'Table sizes at shows are quoted by length — a 6 ft or 8 ft rectangular table is the standard rental. Order the cover to match the table length, not the booth width. If you are not sure what the venue supplies, ask the show\'s exhibitor services before you print: a stretch cover sized for the wrong table will not fit at all, where a pleated throw is more forgiving.' },
+      { h2: 'Table throw, tablecloth or table cover with logo?', p: 'Exhibitors use all three names for the same thing: a printed fabric cover that turns a rented table into part of your booth. A table throw usually means the draped style, which is our pleated cover. A custom tablecloth or table cover with logo can mean either style. What matters when you order is the fit (draped or fitted), the table length (4, 6 or 8 ft) and where the logo sits. Put it on the front panel, centred and high enough to clear the knees of anyone standing behind the table.' }
     ],
     category: 'table-covers',
     nav: 'Table Covers',
-    h1: 'Custom Table Covers',
-    title: 'Custom Table Covers — Pleated & Stretch',
+    h1: 'Custom Table Covers & Table Throws With Your Logo',
+    title: 'Custom Table Covers & Table Throws',
     description:
-      'Custom printed table covers — pleated throws and fitted stretch covers, closed back, for trade show tables and counters. Instant online pricing, free proof.',
+      'Custom table covers, table throws and tablecloths with your logo — pleated or fitted stretch, closed back, for trade show tables. Instant pricing, free proof.',
     intro:
       'Custom printed table covers that turn a plain table into a branded surface. Choose a pleated throw that drapes with rounded corners, or a fitted stretch cover for a tight, modern look — both closed-back (4-sided) and printed in full color.',
     points: [
@@ -217,7 +224,8 @@ export const CATEGORY_PAGES = [
     ,
       { q: 'What size table cover do I need?', a: 'Order to the table length, not the booth. Pleated throws come in 4 ft, 6 ft and 8 ft; fitted stretch covers in 6 ft and 8 ft. Trade show rentals are usually 6 ft or 8 ft rectangular tables — confirm with the show\'s exhibitor services before printing, because a stretch cover sized wrong will not fit.' },
       { q: 'Are table covers machine washable?', a: 'Yes. Both styles are dye-sublimated polyester, so the ink is bonded into the fibre and will not crack or peel in the wash. That is what lets one cover work across a full season of shows.' },
-      { q: 'Do the covers cover all four sides?', a: 'Yes — both the pleated throw and the fitted stretch cover are closed-back on all four sides, so cases and stock stored under the table stay hidden from the aisle.' }
+      { q: 'Do the covers cover all four sides?', a: 'Yes — both the pleated throw and the fitted stretch cover are closed-back on all four sides, so cases and stock stored under the table stay hidden from the aisle.' },
+      { q: 'What is the difference between a table throw and a table cover?', a: 'A table throw is the draped style, which is our pleated cover with rounded corners. "Table cover" and "custom tablecloth" cover both the draped and the fitted stretch style. All of them are printed with your logo and closed on all four sides.' }
     ]
   },
   {
@@ -225,14 +233,16 @@ export const CATEGORY_PAGES = [
     guide: [
       { h2: 'Step & repeat or tension fabric?', p: 'They solve different problems. A step & repeat backdrop tiles your logo across the surface so every photo taken in front of it carries the brand — it is a media wall, sized 8\' x 8\' or 10\' x 8\' on an adjustable portable frame. A straight tension fabric display is a single seamless graphic over a lightweight aluminium tube frame, 8, 10 or 20 ft wide at roughly 8 ft tall, and it is the better choice as a booth back wall where you want one image rather than a repeating pattern.' },
       { h2: 'Designing a step & repeat that photographs well', p: 'The logo grid is the whole design. Too large and only two logos land in a cropped shot; too small and the brand disappears at distance. Stagger the rows so a person standing centre never blocks a whole column, and keep the pattern away from the extreme edges where the frame wraps. Both backdrop types use a replaceable printed graphic, so the frame is a one-time purchase and each campaign is a reprint.' },
-      { h2: 'Setting up in a venue', p: 'Both frames are portable and assemble without tools, and both pack into a case that fits a car boot or a hotel service elevator. For press and red-carpet use, allow enough clear floor in front for a photographer to step back — a 10 ft wall needs roughly 8 to 10 ft of space to shoot properly. Check ceiling height too: at about 8 ft tall these clear most rooms but not every low-ceilinged hotel suite.' }
+      { h2: 'Setting up in a venue', p: 'Both frames are portable and assemble without tools, and both pack into a case that fits a car boot or a hotel service elevator. For press and red-carpet use, allow enough clear floor in front for a photographer to step back — a 10 ft wall needs roughly 8 to 10 ft of space to shoot properly. Check ceiling height too: at about 8 ft tall these clear most rooms but not every low-ceilinged hotel suite.' },
+      { h2: 'Trade show backdrops for the back of your booth', p: 'At a trade show the backdrop is the largest graphic you own and the first thing people see from the aisle. Treat it as a sign, not a wallpaper. Put your name and one line about what you do in the top third, where it clears the heads of people standing in the booth. Keep the bottom third quiet, because a table and staff will cover it. For a 10x10 booth, a 10 ft wide backdrop fills the back wall; for a 10x20, use a 20 ft tension fabric display or two walls side by side.' },
+      { h2: 'Step and repeat banner, backdrop or media wall?', p: 'The names overlap. A step and repeat banner is the printed graphic with your logos tiled across it. A step and repeat backdrop is that banner on its frame, ready to stand up. A media wall is the same thing at a press event, sponsor launch or red carpet. Whichever term your event uses, you are ordering the same product: a printed graphic, sized 8\' x 8\' or 10\' x 8\', on a portable adjustable frame.' }
     ],
     category: 'backdrops',
     nav: 'Backdrops',
-    h1: 'Step & Repeat Backdrops',
-    title: 'Step & Repeat Backdrops',
+    h1: 'Trade Show Backdrops & Step and Repeat Banners',
+    title: 'Step & Repeat & Trade Show Backdrops',
     description:
-      'Custom step & repeat backdrops — large-format fabric media walls with repeating logo branding on a portable adjustable frame. Instant pricing, free proof.',
+      'Custom trade show backdrops and step and repeat banners — media wall backdrops with repeating logos on a portable adjustable frame. Instant pricing, free proof.',
     intro:
       'Step & repeat backdrops are the branded media wall behind press, red-carpet and event photos. Print repeating logos across a large-format fabric on an adjustable, portable frame so your branding reads in every shot.',
     points: [
@@ -255,7 +265,8 @@ export const CATEGORY_PAGES = [
     ,
       { q: 'What size is a step & repeat backdrop?', a: '8\' x 8\' or 10\' x 8\', up to 120" x 96", on an adjustable portable frame. Allow 8 to 10 ft of clear floor in front of a 10 ft wall so a photographer can step back far enough to shoot it properly.' },
       { q: 'Should I choose a step & repeat or a tension fabric wall?', a: 'Choose step & repeat when the wall exists to be photographed — the tiled logo is what makes the brand survive a cropped shot. Choose a straight tension fabric display when it is your booth back wall and you want one seamless image rather than a repeating pattern.' },
-      { q: 'Can I reprint the graphic later?', a: 'Yes. Both backdrop types use a replaceable printed graphic on a reusable frame, so a new campaign is a reprint rather than a new display.' }
+      { q: 'Can I reprint the graphic later?', a: 'Yes. Both backdrop types use a replaceable printed graphic on a reusable frame, so a new campaign is a reprint rather than a new display.' },
+      { q: 'Is a step and repeat banner the same as a media wall backdrop?', a: 'Yes. A step and repeat banner is the printed logo graphic, and a media wall or step and repeat backdrop is that banner on its frame. You order one product: the printed graphic plus the portable frame.' }
     ]
   },
   {

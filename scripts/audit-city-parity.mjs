@@ -15,7 +15,7 @@
 // Usage: node scripts/audit-city-parity.mjs   (after a build)
 
 import { readFileSync, existsSync } from 'fs';
-import { SEO_CITIES } from '../src/data/citySeo.js';
+import { SEO_CITIES, cityVenueName } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
 import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
 
@@ -63,12 +63,14 @@ const ALIASES = {
   'washington-dc': ['Washington, D.C.', 'Washington, DC', 'Washington']
 };
 
-// A page's structural signature, with the city's own name/state removed so two
+// A page's structural signature, with the city's own name/state/venue removed so two
 // cities are comparable.
 const signature = (h, city) => {
   const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const names = ALIASES[city.slug] || [city.city];
+  const venue = cityVenueName(city);
   const strip = (s) => {
+    s = s.replace(new RegExp(esc(venue), 'g'), '{venue}');
     for (const n of names) s = s.replace(new RegExp(esc(n), 'g'), '{city}');
     return s
       .replace(new RegExp(city.stateName, 'g'), '{state}')
