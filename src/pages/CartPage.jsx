@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { startCartCheckout, validateCoupon } from '../services/checkout';
+import { brand } from '../config/brand';
 import { startAirwallexCheckout } from '../services/airwallex';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import ContactFields, { emptyContact } from '../components/ContactFields';
@@ -54,10 +55,12 @@ export default function CartPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
-  const applyCouponCode = async () => {
+  // Takes an explicit code (the one-tap promo button) or reads the input.
+  const applyCouponCode = async (codeArg) => {
     setCouponMsg('');
-    if (!couponInput.trim()) return;
-    const res = await validateCoupon(couponInput.trim());
+    const code = (typeof codeArg === 'string' ? codeArg : couponInput).trim();
+    if (!code) return;
+    const res = await validateCoupon(code);
     if (res.valid) {
       setCoupon({ code: res.code, label: res.label });
       setCouponMsg(`✓ ${res.label} applied — the exact total is confirmed at checkout`);
@@ -192,9 +195,18 @@ export default function CartPage() {
         <div className="field">
           <label htmlFor="cart-coupon">Coupon code</label>
           <div className="coupon-row">
-            <input id="cart-coupon" value={couponInput} onChange={(e) => setCouponInput(e.target.value)} placeholder="e.g. WELCOME10" />
+            <input id="cart-coupon" value={couponInput} onChange={(e) => setCouponInput(e.target.value)} placeholder={brand.shippingPromo ? `e.g. ${brand.shippingPromo.code}` : 'e.g. WELCOME10'} />
             <button type="button" className="btn btn-outline" onClick={applyCouponCode}>Apply</button>
           </div>
+          {brand.shippingPromo && !coupon && (
+            <button
+              type="button"
+              className="promo-apply"
+              onClick={() => { setCouponInput(brand.shippingPromo.code); applyCouponCode(brand.shippingPromo.code); }}
+            >
+              Free shipping credit: apply <strong>{brand.shippingPromo.code}</strong> for ${brand.shippingPromo.amount} off
+            </button>
+          )}
           {couponMsg && <small className={coupon ? 'coupon-ok' : 'coupon-bad'}>{couponMsg}</small>}
         </div>
 
@@ -204,7 +216,8 @@ export default function CartPage() {
         </div>
         <p className="panel-foot">
           Every item is re-priced when you check out, so this is an estimate until then.
-          Shipping is calculated separately.
+          Shipping is calculated separately
+          {brand.shippingPromo ? ` — code ${brand.shippingPromo.code} takes $${brand.shippingPromo.amount} off it` : ''}.
         </p>
 
         {anyUnpriced && (

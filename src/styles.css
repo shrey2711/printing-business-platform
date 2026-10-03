@@ -1538,3 +1538,18 @@ img { max-width: 100%; }
 }
 .section-block details[open]:not(.faq-item) > summary::after, .section-block-bare details[open]:not(.faq-item) > summary::after { transform: rotate(-135deg); margin-top: -2px; }
 .section-block details:not(.faq-item) > :not(summary), .section-block-bare details:not(.faq-item) > :not(summary) { color: var(--muted); margin: 0 0 1rem; }
+
+/* ---------- Shipping promotion ---------- */
+.announce {
+  background: var(--navy); color: #d6dae1; text-align: center; font-size: 0.82rem;
+  padding: 0.55rem 1rem; line-height: 1.4;
+}
+.announce strong { color: #fff; letter-spacing: 0.04em; }
+.announce a { color: #fff; text-decoration: underline; text-underline-offset: 3px; margin-left: 0.25rem; white-space: nowrap; }
+.ship-promo { display: block; margin-top: 0.45rem; padding-top: 0.45rem; border-top: 1px solid var(--line); color: var(--navy); }
+.promo-apply {
+  display: inline-flex; gap: 0.3rem; margin-top: 0.6rem; padding: 0.45rem 0.8rem; border: 1px dashed #c4c8cf;
+  border-radius: var(--r); background: var(--panel); color: var(--navy); font-size: 0.85rem; cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.promo-apply:hover { border-color: var(--navy); }

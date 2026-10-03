@@ -18,6 +18,7 @@ import ColorwayStrip from '../components/ColorwayStrip';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
 import { trackViewItem } from '../lib/analytics';
+import { brand } from '../config/brand';
 
 // `slug` and `embedded` let the product + city pages mount this exact
 // configurator inside their own page. Reused rather than reimplemented on
@@ -732,6 +733,11 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
               <div className="ship-note">
                 Ships across the US &amp; Canada after proof approval — see the{' '}
                 <Link to="/shipping">Shipping page</Link> for details.
+                {brand.shippingPromo && (
+                  <span className="ship-promo">
+                    Use code <strong>{brand.shippingPromo.code}</strong> at checkout for ${brand.shippingPromo.amount} off shipping.
+                  </span>
+                )}
               </div>
             </>
           )}

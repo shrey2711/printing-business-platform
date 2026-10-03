@@ -31,7 +31,13 @@ export const brand = {
 
   // Both markets are served; used for shipping copy and location SEO.
   markets: ['US', 'CA'],
-  shippingBlurb: 'Ships across the United States and Canada'
+  shippingBlurb: 'Ships across the United States and Canada',
+
+  // Shipping promotion shown in the announcement bar, the price panel and the
+  // cart. It advertises a REAL coupon: the code and amount must match the
+  // entry in backend/data/coupons.js (scripts/test-shipping-promo.mjs fails
+  // the build if they drift). Set to null to hide the promotion everywhere.
+  shippingPromo: { code: 'FREESHIP', amount: 15 }
 };
 
 // ─── Currency ────────────────────────────────────────────────────────────────

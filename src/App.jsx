@@ -253,6 +253,21 @@ const primaryNav = [
   { label: 'Guides', to: '/resources' }
 ];
 
+// Thin site-wide bar above the (sticky) header. It scrolls away with the page,
+// so it is seen on arrival without costing height while browsing.
+function AnnouncementBar() {
+  const promo = brand.shippingPromo;
+  if (!promo) return null;
+  return (
+    <div className="announce">
+      <span>
+        Free shipping credit: use code <strong>{promo.code}</strong> at checkout for ${promo.amount} off.
+      </span>{' '}
+      <Link to="/shipping">Shipping details</Link>
+    </div>
+  );
+}
+
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -497,6 +512,7 @@ function App() {
   return (
     <div className="app-shell">
       <ScrollToTop />
+      <AnnouncementBar />
       <Header />
       <ChunkErrorBoundary resetKey={pathname}>
       <Suspense fallback={<main className="page"><p className="muted">Loading…</p></main>}>

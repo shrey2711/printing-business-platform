@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { placeOrder, notifyOrderPlaced } from '../services/orders';
 import { startCheckout, validateCoupon } from '../services/checkout';
+import { brand } from '../config/brand';
 import { redirectToAirwallex } from '../services/airwallex';
 import { getPrice } from '../services/api';
 import { useCurrency, useMoney } from '../context/CurrencyContext';
@@ -49,10 +50,12 @@ export default function PlaceOrderPage() {
     (crypto?.randomUUID?.() || `k-${Date.now()}-${Math.random().toString(36).slice(2)}`)
   );
 
-  const applyCouponCode = async () => {
+  // Takes an explicit code (the one-tap promo button) or reads the input.
+  const applyCouponCode = async (codeArg) => {
     setCouponMsg('');
-    if (!couponInput.trim()) return;
-    const res = await validateCoupon(couponInput.trim());
+    const code = (typeof codeArg === 'string' ? codeArg : couponInput).trim();
+    if (!code) return;
+    const res = await validateCoupon(code);
     if (!res.valid) {
       setCoupon(null);
       setDiscounted(null);
@@ -239,9 +242,18 @@ export default function PlaceOrderPage() {
               <div className="coupon-row">
                 <input id="coupon" value={couponInput}
                   onChange={(e) => setCouponInput(e.target.value)}
-                  placeholder="e.g. WELCOME10" />
+                  placeholder={brand.shippingPromo ? `e.g. ${brand.shippingPromo.code}` : 'e.g. WELCOME10'} />
                 <button type="button" className="btn btn-outline" onClick={applyCouponCode}>Apply</button>
               </div>
+              {brand.shippingPromo && !coupon && (
+                <button
+                  type="button"
+                  className="promo-apply"
+                  onClick={() => { setCouponInput(brand.shippingPromo.code); applyCouponCode(brand.shippingPromo.code); }}
+                >
+                  Free shipping credit: apply <strong>{brand.shippingPromo.code}</strong> for ${brand.shippingPromo.amount} off
+                </button>
+              )}
               {couponMsg && (
                 <small className={coupon ? 'coupon-ok' : 'coupon-bad'}>{couponMsg}</small>
               )}
