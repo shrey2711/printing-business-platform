@@ -21,7 +21,10 @@ const PAGES = [
   '/blog',
   '/blog/trade-show-display-cost',
   '/trade-show-booth-packages',
-  '/sizes/10x10'
+  '/sizes/10x10',
+  '/channel-letters',
+  '/products/front-lit-channel-letters',
+  '/products/custom-lanyards'
 ];
 
 for (const path of PAGES) {

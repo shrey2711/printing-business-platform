@@ -30,7 +30,12 @@ export const PRODUCT_CARD_IMAGE = {
   'acp-aluminum-signs': '/images/signs/acp-aluminum-signs-fascia-panel.jpeg',
   'business-cards-16pt-matte': '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg',
   'flyers-80lb-uncoated': '/images/marketing/flyers-80lb-uncoated-booth-handout.jpeg',
-  'brochures-80lb-uncoated': '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg'
+  'brochures-80lb-uncoated': '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg',
+  // Channel letters: drawn illustrations of each illumination type.
+  'front-lit-channel-letters': '/images/channel-letters/front-lit-channel-letters.webp',
+  'halo-lit-channel-letters': '/images/channel-letters/halo-lit-channel-letters.webp',
+  'front-and-back-lit-channel-letters': '/images/channel-letters/front-and-back-lit-channel-letters.webp',
+  'non-illuminated-channel-letters': '/images/channel-letters/non-illuminated-channel-letters.webp'
 };
 
 export const getProductBrandImage = (slug) => PRODUCT_CARD_IMAGE[slug] || null;

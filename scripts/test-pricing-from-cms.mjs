@@ -240,7 +240,13 @@ check('a percentage change reaches the real price of every priced product', () =
     // Marketing essentials added later, same state as the three above:
     // quoteOnly with a TODO_PRICE comment, waiting on supplier pricing.
     'custom-lanyards',
-    'silicone-wristbands'
+    'silicone-wristbands',
+    // Channel letters: quoted from the customer's artwork by design — the
+    // price depends on letter count, height, illumination and mounting.
+    'front-lit-channel-letters',
+    'halo-lit-channel-letters',
+    'front-and-back-lit-channel-letters',
+    'non-illuminated-channel-letters'
   ]);
   const surprise = unsupported.filter((s) => !EXPECTED_UNPRICED.has(s));
   if (surprise.length) {

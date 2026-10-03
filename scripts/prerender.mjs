@@ -72,6 +72,7 @@ const NAV = `<nav aria-label="Primary">
   <a href="/table-covers">Table Covers</a>
   <a href="/rigid-signs">Rigid Signs</a>
   <a href="/marketing-essentials">Marketing Essentials</a>
+  <a href="/channel-letters">Channel Letters</a>
   <a href="/trade-show-booth-packages">Booth Packages</a>
   <a href="/locations">Locations</a>
   <a href="/resources">Learning Center</a>
@@ -323,6 +324,7 @@ const flagProductsList = productList.filter((p) => p.category === 'flags');
 const segProductsList = productList.filter((p) => p.category === 'seg-kits');
 const rigidSignsList = productList.filter((p) => p.category === 'rigid-signs');
 const marketingList = productList.filter((p) => p.category === 'marketing-essentials');
+const channelLettersList = productList.filter((p) => p.category === 'channel-letters');
 // Render a heading + crawlable product link list (used across hub pages).
 const productSection = (heading, list) =>
   list.length
@@ -487,7 +489,8 @@ routes.push(() => {
     ${productSection('Flags', flagProductsList)}
     ${productSection('SEG modular kits', segProductsList)}
     ${productSection('Rigid signs', rigidSignsList)}
-    ${productSection('Marketing essentials', marketingList)}`;
+    ${productSection('Marketing essentials', marketingList)}
+    ${productSection('Channel letters', channelLettersList)}`;
   return render({
     path: '/products',
     title: `Shop All Products | ${BRAND}`,

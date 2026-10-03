@@ -294,6 +294,35 @@ function Wristband() {
   );
 }
 
+// Channel letters on a fascia. The variant decides where the light goes:
+// front-lit faces glow, halo-lit letters are dark metal with light on the wall
+// behind, combination does both, and non-lit letters are painted aluminum on a
+// daytime wall.
+function ChannelLetters({ variant }) {
+  const lit = variant !== 'non-lit';
+  const halo = variant === 'halo' || variant === 'both';
+  const text = { x: 120, y: 112, textAnchor: 'middle', fontFamily: 'Arial', fontWeight: 900, fontSize: 60, letterSpacing: 4 };
+  const face = { front: '#ffffff', halo: '#1b2638', both: '#fff4dc', 'non-lit': '#c8102e' }[variant];
+  return (
+    <Frame>
+      <rect x="0" y="0" width="240" height="180" fill={lit ? '#141d2e' : '#dfe3ea'} />
+      <rect x="0" y="146" width="240" height="34" fill={lit ? '#0d1422' : '#c9ced8'} />
+      {variant === 'front' && <rect x="34" y="104" width="172" height="12" rx="2" fill="#2b3a55" />}
+      {halo && (
+        <g fill="none" stroke="#ffd98a" strokeLinejoin="round">
+          <text {...text} strokeWidth="16" opacity="0.18">SHOP</text>
+          <text {...text} strokeWidth="8" opacity="0.35">SHOP</text>
+        </g>
+      )}
+      {variant !== 'halo' && lit && (
+        <text {...text} fill="none" stroke={variant === 'both' ? '#ffe7b0' : '#ffffff'} strokeWidth="6" opacity="0.25" strokeLinejoin="round">SHOP</text>
+      )}
+      <text {...text} x="123" y="115" fill={lit ? '#0a0f1a' : '#8b95a6'}>SHOP</text>
+      <text {...text} fill={face} stroke={variant === 'halo' ? '#3a4a66' : 'none'} strokeWidth="1">SHOP</text>
+    </Frame>
+  );
+}
+
 const MAP = {
   'vinyl-banners': <Banner />,
   'mesh-banners': <Banner mesh />,
@@ -313,7 +342,11 @@ const MAP = {
   'stretch-table-covers': <TableCover />,
   'canopy-tents': <Tent />,
   'custom-lanyards': <Lanyard />,
-  'silicone-wristbands': <Wristband />
+  'silicone-wristbands': <Wristband />,
+  'front-lit-channel-letters': <ChannelLetters variant="front" />,
+  'halo-lit-channel-letters': <ChannelLetters variant="halo" />,
+  'front-and-back-lit-channel-letters': <ChannelLetters variant="both" />,
+  'non-illuminated-channel-letters': <ChannelLetters variant="non-lit" />
 };
 
 export default function ProductArt({ slug }) {

@@ -125,7 +125,19 @@ const shopMenu = [
     items: [
       { label: 'Business Cards (16pt Matte)', to: '/products/business-cards-16pt-matte' },
       { label: 'Flyers (80lb Uncoated)', to: '/products/flyers-80lb-uncoated' },
-      { label: 'Brochures (80lb Uncoated)', to: '/products/brochures-80lb-uncoated' }
+      { label: 'Brochures (80lb Uncoated)', to: '/products/brochures-80lb-uncoated' },
+      { label: 'Custom Lanyards', to: '/products/custom-lanyards' },
+      { label: 'Silicone Wristbands', to: '/products/silicone-wristbands' }
+    ]
+  },
+  {
+    label: 'Channel Letters',
+    to: '/channel-letters',
+    items: [
+      { label: 'Front-Lit Channel Letters', to: '/products/front-lit-channel-letters' },
+      { label: 'Halo-Lit (Back-Lit) Letters', to: '/products/halo-lit-channel-letters' },
+      { label: 'Front & Back-Lit Letters', to: '/products/front-and-back-lit-channel-letters' },
+      { label: 'Non-Illuminated Letters', to: '/products/non-illuminated-channel-letters' }
     ]
   }
 ];
@@ -435,6 +447,7 @@ function Footer() {
             <Link to="/table-covers">Table Covers</Link>
             <Link to="/rigid-signs">Rigid Signs</Link>
             <Link to="/marketing-essentials">Marketing Essentials</Link>
+            <Link to="/channel-letters">Channel Letters</Link>
             <Link to="/seg-displays">SEG Displays</Link>
             <Link to="/tension-fabric-displays">Tension Fabric Displays</Link>
             <Link to="/pop-up-displays">Pop-Up Displays</Link>
@@ -544,6 +557,7 @@ function App() {
         <Route path="/table-covers" element={<CategoryPage slug="table-covers" />} />
         <Route path="/backdrops" element={<CategoryPage slug="backdrops" />} />
         <Route path="/rigid-signs" element={<CategoryPage slug="rigid-signs" />} />
+        <Route path="/channel-letters" element={<CategoryPage slug="channel-letters" />} />
         <Route path="/marketing-essentials" element={<CategoryPage slug="marketing-essentials" />} />
         <Route path="/trade-show-booth-packages" element={<BoothPackagesPage />} />
         {/* Display-type SEO landing pages (quote-based, no invented pricing) */}

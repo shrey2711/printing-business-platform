@@ -53,6 +53,7 @@ const BUILT_IN = [
   { source: '/products/fabric-banners', destination: '/products', code: 301 },
   { source: '/products/yard-signs', destination: '/products', code: 301 },
   { source: '/products/rigid-signs', destination: '/products', code: 301 },
+  { source: '/products/channel-letters', destination: '/channel-letters', code: 301 },
   { source: '/products/decals-stickers', destination: '/products', code: 301 },
   { source: '/products/feather-flags', destination: '/products', code: 301 }
 ];

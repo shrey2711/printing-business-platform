@@ -21,7 +21,8 @@ export const categories = [
   // added. The filter chip and the category grid populate themselves from
   // `products` below, so nothing here changes when the first SKU lands.
   { id: 'rigid-signs', name: 'Rigid Signs' },
-  { id: 'marketing-essentials', name: 'Marketing Essentials' }
+  { id: 'marketing-essentials', name: 'Marketing Essentials' },
+  { id: 'channel-letters', name: 'Channel Letters' }
 ];
 
 // Categories belonging to the dormant full-print catalog. Restore these into
@@ -75,7 +76,10 @@ export const navGroups = [
   },
   {
     name: 'Backdrops',
-    items: [{ name: 'Step and Repeat Backdrop', slug: 'step-and-repeat-backdrop' }]
+    items: [
+      { name: 'Step and Repeat Backdrop', slug: 'step-and-repeat-backdrop' },
+      { name: 'Straight Tension Fabric Display', slug: 'straight-tension-fabric-display' }
+    ]
   },
   {
     name: 'Flags',
@@ -109,6 +113,15 @@ export const navGroups = [
       { name: 'Brochures (80lb Uncoated)', slug: 'brochures-80lb-uncoated' },
       { name: 'Custom Lanyards', slug: 'custom-lanyards' },
       { name: 'Silicone Wristbands', slug: 'silicone-wristbands' }
+    ]
+  },
+  {
+    name: 'Channel Letters',
+    items: [
+      { name: 'Front-Lit Channel Letters', slug: 'front-lit-channel-letters' },
+      { name: 'Halo-Lit (Back-Lit) Channel Letters', slug: 'halo-lit-channel-letters' },
+      { name: 'Front & Back-Lit Channel Letters', slug: 'front-and-back-lit-channel-letters' },
+      { name: 'Non-Illuminated Channel Letters', slug: 'non-illuminated-channel-letters' }
     ]
   }
 ];
@@ -1509,6 +1522,346 @@ const ACP_FINISHING_GROUPS = [
   ] }
 ];
 
+// Channel letters: fabricated, dimensional letters for storefronts, lobbies and
+// exhibit walls. Each set is built to the customer's own lettering, height and
+// mounting, so they are quote-only — no published price, nothing in the feed
+// claims one. The four illumination types share these option groups.
+const choice = (id, label, isDefault = false) => ({ id, label, default: isDefault });
+const letterHeightGroup = {
+  id: 'height', label: 'Letter height', type: 'select', choices: [
+    choice('8in', '8"'),
+    choice('12in', '12"', true),
+    choice('18in', '18"'),
+    choice('24in', '24"'),
+    choice('30in', '30"'),
+    choice('36in', '36"'),
+    choice('custom', 'Custom height')
+  ]
+};
+const letterCountGroup = {
+  id: 'letters', label: 'Number of letters', type: 'select', choices: [
+    choice('1-5', '1–5', true),
+    choice('6-10', '6–10'),
+    choice('11-15', '11–15'),
+    choice('16-20', '16–20'),
+    choice('21-plus', '21 or more')
+  ]
+};
+const ledColorGroup = {
+  id: 'led', label: 'LED colour', type: 'select', choices: [
+    choice('white', 'White', true),
+    choice('warm-white', 'Warm white'),
+    choice('red', 'Red'),
+    choice('blue', 'Blue'),
+    choice('green', 'Green')
+  ]
+};
+const returnColorGroup = {
+  id: 'returns', label: 'Return (side) colour', type: 'select', choices: [
+    choice('black', 'Black', true),
+    choice('white', 'White'),
+    choice('bronze', 'Bronze'),
+    choice('brushed', 'Brushed aluminum'),
+    choice('custom', 'Custom paint match')
+  ]
+};
+const mountingGroup = (choices) => ({ id: 'mounting', label: 'Mounting', type: 'select', choices });
+const FLUSH = choice('flush', 'Flush mount (direct to wall)', true);
+const RACEWAY = choice('raceway', 'Raceway (letters on a painted rail)');
+const BACKER = choice('backer', 'Backer panel (letters on a cut panel)');
+
+const channelLetterProduct = ({ slug, name, badge, tagline, description, features, specs, applications, faqs, whatsIncluded, seoTitle, seoDescription, related, optionGroups, galleryAlt }) => ({
+  slug,
+  // Drawn illustrations (scripts/gen-channel-letter-art.mjs), not install
+  // photos — the alt text says so. Swap in real photography when available.
+  gallery: [{ src: `/images/channel-letters/${slug}.webp`, alt: galleryAlt }],
+  faqs,
+  specs,
+  applications,
+  active: true,
+  name,
+  category: 'channel-letters',
+  badge,
+  emoji: '🔠',
+  quoteOnly: true,
+  tagline,
+  description,
+  features,
+  whatsIncluded,
+  // TODO_TURNAROUND — fabrication time depends on letter count, height and
+  // illumination, and no supplier figure is confirmed. The page says what is
+  // true: it is quoted. Replace with the real lead time when one is agreed.
+  turnaround: 'Fabrication and delivery timing are confirmed with your quote.',
+  seoTitle,
+  seoDescription,
+  related,
+  pricing: {
+    model: 'configured',
+    // TODO_PRICE — no published price; every set is quoted from the artwork.
+    quoteOnly: true,
+    baseLabel: name,
+    optionGroups
+  }
+});
+
+const SHARED_CHANNEL_FAQS = [
+  { q: 'What do you need from me to quote channel letters?', a: 'Your logo or lettering as a vector file (AI, EPS or PDF), the wording, the letter height or the overall width you have to fill, and a photo of the wall or fascia with its measurements. If a landlord has sign criteria for the building, send those too — they often fix the height, colours and mounting style.' },
+  { q: 'Do channel letters need a permit?', a: 'Exterior signs usually do, and the rules are set by your city and often by your landlord as well. Check both before ordering. Your quote comes with a dimensioned proof, which is the drawing most permit offices and landlords ask to see.' },
+  { q: 'Is installation included?', a: 'No. Letters are built and shipped ready to mount; installation is done on site by your sign installer, and illuminated letters must be connected to power by a licensed electrician.' }
+];
+
+const channelLetters = [
+  channelLetterProduct({
+    slug: 'front-lit-channel-letters',
+    galleryAlt: 'Illustration of front-lit channel letters on a storefront fascia at night, the letter faces glowing white on a raceway',
+    name: 'Front-Lit Channel Letters',
+    badge: 'New',
+    tagline: 'Illuminated letters whose acrylic faces glow — the classic storefront sign, readable from across the street at night.',
+    description:
+      'Front-lit channel letters are the storefront sign most people picture: each letter is a fabricated aluminum can with LED modules inside and a translucent acrylic face that lights up from behind. The face carries the colour, either as coloured acrylic or as a translucent vinyl matched to your brand, and the aluminum sides — the returns — are painted to frame it. In daylight they read as solid dimensional lettering; after dark the whole face of every letter glows, which is why they are the default choice for a business that needs to be found at night.',
+    features: [
+      'Aluminum returns with LED modules inside each letter',
+      'Translucent acrylic faces in a stock colour or brand-matched vinyl',
+      'Trim cap or trimless face edge',
+      'Flush, raceway or backer-panel mounting',
+      'Any typeface or logo shape, from 8" letters upward'
+    ],
+    specs: [
+      ['Construction', 'Fabricated aluminum returns, acrylic face'],
+      ['Illumination', 'LED modules, face lit'],
+      ['Face', 'Translucent acrylic, coloured or vinyl-overlaid'],
+      ['Face edge', 'Trim cap or trimless'],
+      ['Letter height', '8" to 36" standard, custom on request'],
+      ['Mounting', 'Flush to wall, raceway, or backer panel'],
+      ['Power', 'Low-voltage LED with remote power supply']
+    ],
+    applications: [
+      'Storefront and fascia signs that have to work after dark',
+      'Shopping-centre units where the landlord specifies lit letters',
+      'Restaurant, salon and retail frontages on a busy street',
+      'Lobby and reception signage where the brand needs to stand out'
+    ],
+    faqs: [
+      { q: 'What is a front-lit channel letter?', a: 'A dimensional letter built as a shallow aluminum can, with LEDs inside and a translucent acrylic face on the front. When it is switched on, the face of the letter glows — so the letter itself is the light, which is what makes it readable from a distance at night.' },
+      { q: 'What is the difference between trim cap and trimless?', a: 'Trim cap is the plastic edging that holds the acrylic face to the aluminum return — practical, durable and the standard finish. Trimless letters hold the face without a visible cap, for a cleaner, more architectural edge. Trimless suits thin strokes and modern typefaces; trim cap is the dependable default.' },
+      { q: 'Can the faces match my brand colour?', a: 'Yes. Faces can be a stock coloured acrylic or white acrylic with a translucent vinyl applied over it to match a specific brand colour. Some colours lose depth when lit from behind, so the proof notes how each colour reads at night as well as by day.' },
+      ...SHARED_CHANNEL_FAQS
+    ],
+    whatsIncluded: [
+      'Your letters, built to the approved proof with LED modules installed.',
+      'The power supply for the set.',
+      'A raceway or backer panel only where you choose that mounting.',
+      'Installation and electrical hookup are not included.'
+    ],
+    seoTitle: 'Front-Lit Channel Letters',
+    seoDescription:
+      'Custom front-lit channel letters with LED-lit acrylic faces, aluminum returns and flush, raceway or backer mounting. Built to your logo — request a quote.',
+    related: ['halo-lit-channel-letters', 'front-and-back-lit-channel-letters', 'acp-aluminum-signs'],
+    optionGroups: [
+      letterHeightGroup,
+      letterCountGroup,
+      {
+        id: 'face', label: 'Face colour', type: 'select', choices: [
+          choice('white', 'White acrylic', true),
+          choice('red', 'Red acrylic'),
+          choice('blue', 'Blue acrylic'),
+          choice('vinyl-match', 'Brand-matched translucent vinyl')
+        ]
+      },
+      ledColorGroup,
+      returnColorGroup,
+      {
+        id: 'trim', label: 'Face edge', type: 'select', choices: [
+          choice('trim-cap', 'Trim cap', true),
+          choice('trimless', 'Trimless')
+        ]
+      },
+      mountingGroup([FLUSH, RACEWAY, BACKER])
+    ]
+  }),
+  channelLetterProduct({
+    slug: 'halo-lit-channel-letters',
+    galleryAlt: 'Illustration of halo-lit channel letters at night: dark metal letters with a warm glow on the wall behind them',
+    name: 'Halo-Lit (Back-Lit) Channel Letters',
+    badge: 'New',
+    tagline: 'Solid metal letters that throw a soft glow onto the wall behind them — the understated, upscale look.',
+    description:
+      'Halo-lit channel letters — also called back-lit or reverse-lit — turn the classic channel letter around. The face and sides are solid aluminum, so the letter itself stays opaque, and the LEDs shine backward through a clear back onto the wall. Each letter is mounted on standoffs a short distance from the surface, and the light spills out around its edges as a soft halo. By day they read as crisp metal lettering; at night the letters sit in silhouette against their own glow. It is the look hotels, offices, clinics and boutiques choose when a fully lit face would feel too loud.',
+    features: [
+      'Solid aluminum faces and returns, painted or brushed',
+      'LEDs shine backward for a soft halo on the wall',
+      'Mounted on standoffs so the light can spread',
+      'Works best on a smooth, light or mid-tone wall',
+      'Any typeface or logo shape, from 8" letters upward'
+    ],
+    specs: [
+      ['Construction', 'Fabricated aluminum face and returns'],
+      ['Illumination', 'LED modules, lit from the back'],
+      ['Back', 'Clear back so the light reaches the wall'],
+      ['Finish', 'Painted, brushed or brand-colour match'],
+      ['Letter height', '8" to 36" standard, custom on request'],
+      ['Mounting', 'Standoffs from the wall, or on a backer panel'],
+      ['Power', 'Low-voltage LED with remote power supply']
+    ],
+    applications: [
+      'Reception and lobby walls where the logo should feel premium',
+      'Hotel, restaurant and boutique frontages',
+      'Office, clinic and professional-services signage',
+      'Feature walls in a showroom or a permanent exhibit space'
+    ],
+    faqs: [
+      { q: 'What does halo-lit mean?', a: 'The letters are lit from behind rather than through their faces. The face is solid metal and stays dark; the LEDs face the wall, and because each letter stands off the surface on spacers, the light spreads out around it as a glowing outline — the halo.' },
+      { q: 'What wall works best for halo-lit letters?', a: 'A smooth surface in a light or mid tone. The halo is light reflected off the wall, so a dark, glossy or heavily textured surface swallows or breaks it up. On a difficult wall, mount the letters on a backer panel in a colour that reflects well.' },
+      { q: 'Are halo-lit letters readable from a distance at night?', a: 'They are readable, but softer than front-lit letters, because you see the outline of each letter rather than a lit face. For a sign that has to be read from a moving car across a wide road, front-lit or front-and-back-lit letters are the stronger choice.' },
+      ...SHARED_CHANNEL_FAQS
+    ],
+    whatsIncluded: [
+      'Your letters, built to the approved proof with LED modules installed.',
+      'Standoffs for spacing each letter off the wall, and the power supply.',
+      'A backer panel only where you choose that mounting.',
+      'Installation and electrical hookup are not included.'
+    ],
+    seoTitle: 'Halo-Lit Back-Lit Channel Letters',
+    seoDescription:
+      'Halo-lit (back-lit) channel letters: solid aluminum letters that glow onto the wall behind them. Painted or brushed, built to your logo — request a quote.',
+    related: ['front-lit-channel-letters', 'non-illuminated-channel-letters', 'acp-aluminum-signs'],
+    optionGroups: [
+      letterHeightGroup,
+      letterCountGroup,
+      {
+        id: 'finish', label: 'Letter finish', type: 'select', choices: [
+          choice('black', 'Painted black', true),
+          choice('white', 'Painted white'),
+          choice('brushed', 'Brushed aluminum'),
+          choice('gold', 'Gold-tone finish'),
+          choice('custom', 'Custom paint match')
+        ]
+      },
+      ledColorGroup,
+      mountingGroup([choice('standoffs', 'Standoffs (spaced off the wall)', true), BACKER])
+    ]
+  }),
+  channelLetterProduct({
+    slug: 'front-and-back-lit-channel-letters',
+    galleryAlt: 'Illustration of front and back-lit channel letters at night, with glowing faces and a warm halo on the wall',
+    name: 'Front & Back-Lit Channel Letters',
+    badge: 'New',
+    tagline: 'Glowing faces and a halo on the wall at the same time — the most visible channel letter at night.',
+    description:
+      'Front and back-lit channel letters — sometimes called combination-lit or dual-lit — light the acrylic face like a front-lit letter and throw a halo onto the wall like a back-lit one. Each letter is built with a translucent face, aluminum returns and a clear back, then mounted on standoffs so the rear light has room to spread. The result is the brightest, most dimensional channel letter there is: the lettering glows and also appears to float off the building. It is the one to choose when a sign has to compete with a busy street at night.',
+    features: [
+      'Lit translucent faces plus a halo on the wall behind',
+      'Aluminum returns, painted to your choice',
+      'Mounted on standoffs so the rear light can spread',
+      'The most visible channel letter after dark',
+      'Any typeface or logo shape, from 8" letters upward'
+    ],
+    specs: [
+      ['Construction', 'Fabricated aluminum returns, acrylic face, clear back'],
+      ['Illumination', 'LED modules, face and back lit'],
+      ['Face', 'Translucent acrylic, coloured or vinyl-overlaid'],
+      ['Letter height', '8" to 36" standard, custom on request'],
+      ['Mounting', 'Standoffs from the wall, or on a backer panel'],
+      ['Power', 'Low-voltage LED with remote power supply']
+    ],
+    applications: [
+      'Storefronts on busy streets that compete with other lit signs',
+      'Entertainment, dining and nightlife venues',
+      'Feature signage on a building facade',
+      'Showroom walls where the logo is the centrepiece'
+    ],
+    faqs: [
+      { q: 'How is a front and back-lit letter different from front-lit?', a: 'A front-lit letter only lights its face. A front and back-lit letter also has a clear back and stands off the wall, so it lights the face and throws a halo onto the surface behind it. You get the readability of a lit face plus the depth of a halo.' },
+      { q: 'Can the face and the halo be different colours?', a: 'Often, yes — for example a red face with a white halo. Ask for it when you request a quote and the proof will show both colours; some combinations need separate LED runs, which is reflected in the quote.' },
+      { q: 'When is this worth choosing over front-lit?', a: 'When the sign sits among other lit signs, on a dark facade, or anywhere the business needs to stand out at night. If daytime visibility matters most, or a landlord limits illumination, front-lit or halo-lit alone is usually enough.' },
+      ...SHARED_CHANNEL_FAQS
+    ],
+    whatsIncluded: [
+      'Your letters, built to the approved proof with face and back LEDs installed.',
+      'Standoffs for spacing each letter off the wall, and the power supply.',
+      'A backer panel only where you choose that mounting.',
+      'Installation and electrical hookup are not included.'
+    ],
+    seoTitle: 'Front and Back-Lit Channel Letters',
+    seoDescription:
+      'Custom front and back-lit channel letters: lit acrylic faces plus a halo on the wall behind. The most visible channel letter at night — request a quote.',
+    related: ['front-lit-channel-letters', 'halo-lit-channel-letters', 'acp-aluminum-signs'],
+    optionGroups: [
+      letterHeightGroup,
+      letterCountGroup,
+      {
+        id: 'face', label: 'Face colour', type: 'select', choices: [
+          choice('white', 'White acrylic', true),
+          choice('red', 'Red acrylic'),
+          choice('blue', 'Blue acrylic'),
+          choice('vinyl-match', 'Brand-matched translucent vinyl')
+        ]
+      },
+      ledColorGroup,
+      returnColorGroup,
+      mountingGroup([choice('standoffs', 'Standoffs (spaced off the wall)', true), BACKER])
+    ]
+  }),
+  channelLetterProduct({
+    slug: 'non-illuminated-channel-letters',
+    galleryAlt: 'Illustration of non-illuminated red aluminum channel letters on a storefront fascia in daylight',
+    name: 'Non-Illuminated Channel Letters',
+    badge: 'New',
+    tagline: 'Dimensional aluminum letters with no wiring — clean, solid lettering for daytime and well-lit walls.',
+    description:
+      'Non-illuminated channel letters are built the same way as lit ones — fabricated aluminum faces and returns — but without LEDs or a power supply. That leaves solid, dimensional lettering that casts its own shadow and reads clearly in daylight or under existing lighting, without an electrician or a power run to the wall. They suit interior lobbies, office suites and facades that are already lit, and a set can be upgraded in look with a brushed or brand-colour finish.',
+    features: [
+      'Fabricated aluminum faces and returns',
+      'No wiring, power supply or electrician needed',
+      'Painted, brushed or brand-colour finishes',
+      'Flush, standoff or backer-panel mounting',
+      'Any typeface or logo shape, from 8" letters upward'
+    ],
+    specs: [
+      ['Construction', 'Fabricated aluminum face and returns'],
+      ['Illumination', 'None'],
+      ['Finish', 'Painted, brushed or brand-colour match'],
+      ['Letter height', '8" to 36" standard, custom on request'],
+      ['Mounting', 'Flush to wall, standoffs, or backer panel']
+    ],
+    applications: [
+      'Lobby and reception walls with good ambient lighting',
+      'Office suites, clinics and studios',
+      'Facades that are already floodlit at night',
+      'Permanent exhibit and showroom walls'
+    ],
+    faqs: [
+      { q: 'Why choose non-illuminated channel letters?', a: 'They give the depth and presence of a fabricated sign without wiring, a power supply or an electrician. Indoors, or on a wall that is already lit, there is no reason to pay for illumination you will not see.' },
+      { q: 'Can non-illuminated letters be lit later?', a: 'Not by adding LEDs to the same letters — a lit letter is built with a translucent face or a clear back from the start. If you may want illumination later, choose halo-lit letters now; they look very similar to solid metal letters by day.' },
+      { q: 'How are they mounted?', a: 'Flush to the wall for a clean, flat look; on standoffs so each letter floats off the surface and casts a shadow; or on a cut backer panel when the wall itself is uneven or cannot be drilled in many places.' },
+      ...SHARED_CHANNEL_FAQS
+    ],
+    whatsIncluded: [
+      'Your letters, built to the approved proof.',
+      'Standoffs or a backer panel only where you choose that mounting.',
+      'Installation is not included.'
+    ],
+    seoTitle: 'Non-Illuminated Channel Letters',
+    seoDescription:
+      'Custom non-illuminated channel letters in fabricated aluminum: painted, brushed or brand-colour finishes, flush or standoff mounted. Request a quote.',
+    related: ['halo-lit-channel-letters', 'front-lit-channel-letters', 'pvc-board-signs'],
+    optionGroups: [
+      letterHeightGroup,
+      letterCountGroup,
+      {
+        id: 'finish', label: 'Letter finish', type: 'select', choices: [
+          choice('black', 'Painted black', true),
+          choice('white', 'Painted white'),
+          choice('brushed', 'Brushed aluminum'),
+          choice('gold', 'Gold-tone finish'),
+          choice('custom', 'Custom paint match')
+        ]
+      },
+      mountingGroup([FLUSH, choice('standoffs', 'Standoffs (spaced off the wall)'), BACKER])
+    ]
+  })
+];
+
 const products = [
   ...canopyTents,
   pleatedCovers,
@@ -2577,6 +2930,11 @@ const products = [
       ]
     }
   },
+  // ---- Channel letters ------------------------------------------------------
+  // Quote-only: every set is built to the customer's lettering, height and
+  // mounting, so there is no stock price to publish. The four illumination
+  // types share their option groups through channelLetterProduct() below.
+  ...channelLetters,
   {
     slug: 'vinyl-banners',
     active: false,

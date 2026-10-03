@@ -336,6 +336,46 @@ export const CATEGORY_PAGES = [
       { q: 'How should I supply artwork for print collateral?', a: 'A single-page PDF or JPEG per piece for paper collateral, built to the finished size at 150dpi in CMYK with no Pantones or spot colours, fonts converted to outlines, and no crop marks or bleeds. Lanyards and wristbands take a print-ready vector file with fonts outlined instead. The artwork guidelines cover the full specification, and every order is proofed before it runs.' },
       { q: 'Can I order collateral without ordering a display?', a: 'Yes. Cards, lanyards, wristbands, flyers and brochures are ordered on their own like anything else in the catalogue. Most customers order them alongside a booth because of the colour matching, but there is no requirement to.' }
     ]
+  },
+  {
+    slug: 'channel-letters',
+    guide: [
+      { h2: 'Front-lit, halo-lit or both?', p: 'The choice is about where the light goes. Front-lit letters glow through a translucent acrylic face, so the letter itself is the light and it reads from the furthest distance at night — the default for a storefront on a street. Halo-lit letters have solid metal faces and shine backward onto the wall, so they sit in silhouette inside a soft outline of light; they read as quieter and more upscale, and suit lobbies, offices and boutiques. Front and back-lit letters do both at once and are the most visible option after dark. Non-illuminated letters skip the electrics entirely, for walls that are indoors or already well lit.' },
+      { h2: 'Sizing letters for the distance they are read from', p: 'Letter height is set by how far away the reader is, not by how big the wall is. A sign read from the far side of a road needs much taller letters than one read across a lobby, and letters sized only to fill a wall often end up too small to read from the road. Measure the space the sign has to fill and the distance it will be read from, and send both with your quote request — the proof is drawn to scale so you can see the result on your own frontage before anything is fabricated.' },
+      { h2: 'Mounting, landlords and permits', p: 'Flush-mounted letters are fixed straight to the wall, each with its own fixings and, when lit, its own wiring through the wall. A raceway is a slim painted rail that holds the letters and hides the power supply, so only one opening is needed — the usual choice on leased storefronts. A backer panel does the same job with a cut shape behind the letters. Many shopping centres publish sign criteria that fix the height, colours and mounting style, and most cities require a permit for an exterior sign, so check both before ordering and use the dimensioned proof as your drawing.' }
+    ],
+    category: 'channel-letters',
+    nav: 'Channel Letters',
+    // Hero kicker (defaults to "Trade show displays" on the other pages).
+    eyebrow: 'Storefront & building signage',
+    h1: 'Channel Letters — Front-Lit, Halo-Lit & Non-Lit',
+    title: 'Custom Channel Letters',
+    description:
+      'Custom channel letters: front-lit, halo-lit (back-lit), front and back-lit and non-illuminated, built to your logo with flush, raceway or backer mounting.',
+    intro:
+      'Channel letters are the dimensional, individually fabricated letters you see on storefronts and lobby walls — each one a shaped aluminum can that can be lit from the inside, lit from behind, or left solid. They are built to your exact lettering and logo rather than chosen from a stock size, which is why every set is quoted from your artwork. Pick the illumination, the height and the mounting, and the quote comes back with a dimensioned proof drawn to scale.',
+    points: [
+      'Front-lit, halo-lit, front and back-lit, or non-illuminated.',
+      'Built to your logo and lettering, from 8" letters upward.',
+      'Flush, raceway, standoff or backer-panel mounting.',
+      'Every set quoted with a dimensioned proof drawn to scale.'
+    ],
+    answer:
+      'Channel letters are individually fabricated, dimensional letters for storefronts and interior walls. Apex quotes four types — front-lit letters with glowing acrylic faces, halo-lit letters that glow onto the wall behind, front and back-lit letters that do both, and non-illuminated aluminum letters — each built to your logo with flush, raceway or backer mounting.',
+    compareCols: ['Illumination', 'Best for', 'From'],
+    compare: [
+      { slug: 'front-lit-channel-letters', name: 'Front-Lit Channel Letters', to: '/products/front-lit-channel-letters', cells: ['Lit acrylic faces', 'Storefronts that must read at night'] },
+      { slug: 'halo-lit-channel-letters', name: 'Halo-Lit (Back-Lit) Channel Letters', to: '/products/halo-lit-channel-letters', cells: ['Soft glow on the wall behind', 'Lobbies, offices and boutiques'] },
+      { slug: 'front-and-back-lit-channel-letters', name: 'Front & Back-Lit Channel Letters', to: '/products/front-and-back-lit-channel-letters', cells: ['Lit faces plus a halo', 'Busy streets and dark facades'] },
+      { slug: 'non-illuminated-channel-letters', name: 'Non-Illuminated Channel Letters', to: '/products/non-illuminated-channel-letters', cells: ['None — solid aluminum', 'Well-lit interiors and facades'] }
+    ],
+    faqs: [
+      { q: 'What are channel letters?', a: 'Three-dimensional letters fabricated one by one, usually from aluminum, with a face on the front and sides called returns. Lit versions hold LED modules inside the letter; non-lit versions are solid. They are the standard build for storefront and building signage because each letter can be shaped to any typeface or logo.' },
+      { q: 'Which type of channel letter should I choose?', a: 'Front-lit for a storefront that needs to be read from a distance at night. Halo-lit for a quieter, premium look on a lobby or a boutique frontage. Front and back-lit when the sign competes with a busy, brightly lit street. Non-illuminated indoors or on a wall that is already lit.' },
+      { q: 'Why are channel letters quoted rather than priced online?', a: 'Because every set is different. The cost depends on how many letters there are, how tall they are, the illumination and the mounting, so a set is quoted from your artwork rather than from a size chart. Send your logo and the wall measurements and the quote comes back with a dimensioned proof.' },
+      { q: 'What is a raceway?', a: 'A slim painted aluminum rail the letters are mounted on. It houses the power supply and wiring, so only one opening goes through the wall rather than one per letter — which is why landlords of leased storefronts often require it.' },
+      { q: 'Is installation included?', a: 'No. Letters are built and shipped ready to mount, and installation is done on site by your sign installer. Illuminated letters must be connected to power by a licensed electrician, and exterior signs usually need a permit from your city.' }
+    ]
   }
 ];
 

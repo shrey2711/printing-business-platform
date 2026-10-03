@@ -89,7 +89,7 @@ export default function CategoryPage({ slug }) {
       <nav className="crumbs"><Link to="/">Home</Link> / <span>{page.nav}</span></nav>
 
       <section className="loc-hero">
-        <span className="eyebrow">Trade show displays</span>
+        <span className="eyebrow">{page.eyebrow || 'Trade show displays'}</span>
         <h1>{page.h1}</h1>
         <p className="lead">{page.intro}</p>
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem' }}>
