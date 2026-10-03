@@ -33,7 +33,7 @@ const LandingPage = lazy(() => import('./pages/LandingPage'));
 import Logo from './components/Logo';
 import ChunkErrorBoundary from './components/ChunkErrorBoundary';
 import { brand, currencyCodes } from './config/brand';
-import { CITY_PRODUCT_PAGES } from './data/cityProductPages';
+import { CITY_PRODUCT_SLUGS } from './generated/cityProductSlugs';
 import { useCurrency } from './context/CurrencyContext';
 import { useCart } from './context/CartContext';
 import { useContentResolver, useListResolver } from './context/ContentContext';
@@ -529,8 +529,8 @@ function App() {
         {/* Transactional product + city pages. Generated from the data so
             adding one is a single edit, and so the router and the
             prerenderer can never disagree about which exist. */}
-        {CITY_PRODUCT_PAGES.map((p) => (
-          <Route key={p.slug} path={`/${p.slug}`} element={<CityProductPage slug={p.slug} />} />
+        {CITY_PRODUCT_SLUGS.map((slug) => (
+          <Route key={slug} path={`/${slug}`} element={<CityProductPage slug={slug} />} />
         ))}
         <Route path="/trade-show-canopies/:city" element={<CityCategoryPage categoryKey="canopies" />} />
         <Route path="/trade-show-displays/:city" element={<CityCategoryPage categoryKey="displays" />} />

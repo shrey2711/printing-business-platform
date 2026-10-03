@@ -1,8 +1,36 @@
-import axios from 'axios';
+// Minimal fetch client for /api. It keeps the axios-shaped surface the
+// callers were written against — `{ data }` on success, and an Error carrying
+// `response: { status, data }` on a non-2xx — without axios's ~13 KB in the
+// entry bundle.
+async function request(method, path, { params, body } = {}) {
+  const qs = params && Object.keys(params).length ? `?${new URLSearchParams(params)}` : '';
+  const init = { method };
+  if (body instanceof FormData) {
+    init.body = body;
+  } else if (body !== undefined) {
+    init.headers = { 'Content-Type': 'application/json' };
+    init.body = JSON.stringify(body);
+  }
+  const res = await fetch(`/api${path}${qs}`, init);
+  const text = await res.text();
+  let data = text;
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    /* non-JSON body: keep the text */
+  }
+  if (!res.ok) {
+    const err = new Error(data?.error || `Request failed with status code ${res.status}`);
+    err.response = { status: res.status, data };
+    throw err;
+  }
+  return { data, status: res.status };
+}
 
-const api = axios.create({
-  baseURL: '/api'
-});
+const api = {
+  get: (path, opts) => request('GET', path, opts),
+  post: (path, body) => request('POST', path, { body })
+};
 
 export const healthCheck = async () => api.get('/health');
 

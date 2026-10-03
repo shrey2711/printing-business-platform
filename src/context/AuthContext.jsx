@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase, isSupabaseReady, adminEmails, authHeader } from '../lib/supabase';
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { getSupabase, needsSupabaseOnLoad, isSupabaseReady, adminEmails, authHeader } from '../lib/supabase';
 
 const AuthContext = createContext(null);
 
@@ -8,21 +8,43 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState(null);
 
-  useEffect(() => {
-    if (!isSupabaseReady) {
-      setLoading(false);
-      return;
+  // The Supabase client is loaded lazily (see lib/supabase). Once it is, load
+  // any existing session and subscribe to auth changes — exactly once.
+  const subRef = useRef(null);
+  const client = useCallback(async () => {
+    const supabase = await getSupabase();
+    if (supabase && !subRef.current) {
+      const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+        setUser(session?.user ?? null);
+      });
+      subRef.current = sub.subscription;
     }
-    // Load any existing session, then subscribe to auth changes.
-    supabase.auth.getSession().then(({ data }) => {
-      setUser(data.session?.user ?? null);
-      setLoading(false);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-    return () => sub.subscription.unsubscribe();
+    return supabase;
   }, []);
+
+  useEffect(() => {
+    let alive = true;
+    // A guest with no stored session has nothing to restore: skip the
+    // download entirely until they sign in or register.
+    if (!needsSupabaseOnLoad()) {
+      setLoading(false);
+    } else {
+      client()
+        .then((supabase) => supabase.auth.getSession())
+        .then(({ data }) => {
+          if (alive) setUser(data.session?.user ?? null);
+        })
+        .catch(() => {})
+        .finally(() => {
+          if (alive) setLoading(false);
+        });
+    }
+    return () => {
+      alive = false;
+      subRef.current?.unsubscribe();
+      subRef.current = null;
+    };
+  }, [client]);
 
   // Resolve the DB-backed role whenever the user changes. The email allowlist
   // is only a client-side hint for showing the Admin link; the server is
@@ -49,6 +71,7 @@ export function AuthProvider({ children }) {
 
   const register = async ({ name, company, email, password }) => {
     if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
+    const supabase = await client();
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -60,6 +83,7 @@ export function AuthProvider({ children }) {
 
   const login = async ({ email, password }) => {
     if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
+    const supabase = await client();
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
     return data;
@@ -67,6 +91,7 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     if (!isSupabaseReady) return;
+    const supabase = await client();
     await supabase.auth.signOut();
     setUser(null);
   };

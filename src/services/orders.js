@@ -1,4 +1,4 @@
-import { supabase, isSupabaseReady, DESIGN_BUCKET, authHeader } from '../lib/supabase';
+import { getSupabase, isSupabaseReady, DESIGN_BUCKET, authHeader } from '../lib/supabase';
 import { validateArtwork, validatePdfPages } from '../lib/artworkSpec';
 
 // Convert a dataURL into a File for upload (kept as a generic helper).
@@ -31,6 +31,7 @@ async function uploadDesign(userId, source) {
   }
   const ext = (file.name.split('.').pop() || 'png').toLowerCase();
   const path = `${userId}/${Date.now()}-${Math.round(performance.now())}.${ext}`;
+  const supabase = await getSupabase();
   const { error } = await supabase.storage.from(DESIGN_BUCKET).upload(path, file, {
     cacheControl: '3600',
     upsert: false
@@ -42,6 +43,7 @@ async function uploadDesign(userId, source) {
 // Place an order: optionally upload a design, then insert the order row.
 export async function placeOrder({ user, product, specs, quantity, estimatedPrice, notes, design, config, idempotencyKey, artworkChoice, paymentChoice, contact, couponCode }) {
   if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
+  const supabase = await getSupabase();
 
   // Idempotency: if this exact attempt already created an order (retry / double
   // submit), return the existing one instead of creating a duplicate.
@@ -124,6 +126,7 @@ export async function notifyOrderPlaced(orderId) {
 
 export async function getMyOrders() {
   if (!isSupabaseReady) return [];
+  const supabase = await getSupabase();
   const { data, error } = await supabase
     .from('orders')
     .select('*')
@@ -136,6 +139,7 @@ export async function getMyOrders() {
 // delete their own orders.
 export async function deleteOrder(order) {
   if (!isSupabaseReady) throw new Error('Supabase is not configured yet.');
+  const supabase = await getSupabase();
   if (order.design_path) {
     await supabase.storage.from(DESIGN_BUCKET).remove([order.design_path]).catch(() => {});
   }
@@ -146,6 +150,7 @@ export async function deleteOrder(order) {
 // Signed URL so a user can view their submitted artwork.
 export async function getDesignUrl(path) {
   if (!isSupabaseReady || !path) return null;
+  const supabase = await getSupabase();
   const { data, error } = await supabase.storage.from(DESIGN_BUCKET).createSignedUrl(path, 3600);
   if (error) return null;
   return data.signedUrl;

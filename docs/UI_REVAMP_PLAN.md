@@ -39,6 +39,13 @@ What is in the entry chunk (raw source size):
 | `react-router-dom` + `@remix-run/router` | needed | Keep it (~20 KB gz) |
 | `react-dom` | needed | Keep it (~42 KB gz); Preact/compat is the last-resort lever |
 
+### Progress
+- **Phases 0–1 done:** homepage first load went from 221 KB to **86.8 KB** gzipped
+  (JS 74.4 KB + CSS 12.4 KB). Supabase is now lazy (a separate `supabase-*`
+  chunk, loaded only with a stored session or on sign-in), the router uses a
+  generated slug list instead of `cityProductPages.js`, axios is gone, and
+  GA/Clarity load after `load` + idle. Enforced by `npm run check:budget`.
+
 ## 2. The budget (definition)
 
 > **Homepage first load: ≤ 100 KB gzipped for all first-party JS, CSS and

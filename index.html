@@ -10,22 +10,33 @@
     <meta name="msvalidate.01" content="3A3309EBDB57DEEEC2479D9848DD8CF1" />
     <meta name="p:domain_verify" content="c12bc09f913965b2075c56a669f4e5a1" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8G72T46VX"></script>
+    <!-- Analytics: GA4 + Microsoft Clarity. The gtag() queue exists from the
+         start so events fired early (src/lib/analytics.js) are kept, but both
+         scripts are fetched only after the page has loaded and gone idle, so
+         neither competes with the first paint. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-D8G72T46VX');
-    </script>
-
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "ykrq3aiyzz");
+      (function(c,l,a){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};})(window, document, "clarity");
+      (function () {
+        function inject(src) {
+          var s = document.createElement('script');
+          s.async = true; s.src = src;
+          document.head.appendChild(s);
+        }
+        function load() {
+          inject('https://www.googletagmanager.com/gtag/js?id=G-D8G72T46VX');
+          inject('https://www.clarity.ms/tag/ykrq3aiyzz');
+        }
+        function idle() {
+          if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 3000 });
+          else setTimeout(load, 1500);
+        }
+        if (document.readyState === 'complete') idle();
+        else window.addEventListener('load', idle, { once: true });
+      })();
     </script>
 
     <title>Custom Trade Show Displays & Booths | Apex Trade Show</title>
