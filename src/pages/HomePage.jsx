@@ -211,29 +211,35 @@ export default function HomePage() {
               />
             </div>
           ) : (
-            // Default hero: a complete Apex-branded booth (product renders staged as
-            // one set). A hero image set in the CMS replaces it.
+            // Default hero: a complete Apex-branded booth on a dark stage (product
+            // renders staged as one set). A hero image set in the CMS replaces it.
             <div className="hero-scene">
-              <BoothScene scene="booth-indoor" eager sizes="(max-width: 1080px) 100vw, 600px" />
+              <BoothScene scene="booth-stage" eager sizes="(max-width: 1240px) 100vw, 1180px" />
               <div className="hero-badge" aria-hidden="true">
                 <strong>Free artwork proof</strong>
                 <span>Approve it before anything prints</span>
               </div>
+              <div className="hero-badge hero-badge--alt" aria-hidden="true">
+                <strong>Instant online pricing</strong>
+                <span>Configure it and see the price live</span>
+              </div>
             </div>
           )}
         </div>
+        {/* Decorative ticker of the range; the same categories are links in the
+            grid just below, so it is hidden from assistive tech. */}
+        <div className="hero-marquee" aria-hidden="true">
+          <div className="hero-marquee-track">
+            {[0, 1].map((copy) => (
+              <span key={copy}>
+                {list('home.featured.items').map((cat) => (
+                  <span className="marquee-item" key={cat.title}>{cat.title}</span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
       </section>
-
-      {/* Promotional strip. Empty message = no strip at all, rather than an
-          empty band taking up the fold. */}
-      {c('home.promo.message') && (
-        <section className="promo-strip">
-          <p>{c('home.promo.message')}</p>
-          {c('home.promo.href') && c('home.promo.cta') && (
-            <Link className="btn btn-light btn-sm" to={c('home.promo.href')}>{c('home.promo.cta')}</Link>
-          )}
-        </section>
-      )}
 
       {/* Trust strip — directly under the hero, where it answers "can I rely on
           these people" before the first scroll. */}
@@ -249,9 +255,21 @@ export default function HomePage() {
         ))}
       </section>
 
+      {/* Promotional strip. Empty message = no strip at all, rather than an
+          empty band taking up the fold. */}
+      {c('home.promo.message') && (
+        <section className="promo-strip">
+          <p>{c('home.promo.message')}</p>
+          {c('home.promo.href') && c('home.promo.cta') && (
+            <Link className="btn btn-light btn-sm" to={c('home.promo.href')}>{c('home.promo.cta')}</Link>
+          )}
+        </section>
+      )}
+
       {/* Shop by category — signals the full range in the first screenful */}
       <section className="cat-cards-section">
         <div className="section-head">
+          <span className="kicker">The range</span>
           <h2>{c('home.featured.title')}</h2>
           <p>Everything you need to build a professional trade show booth, from one supplier.</p>
         </div>
@@ -283,6 +301,7 @@ export default function HomePage() {
       {/* Shop by industry / event type */}
       <section className="browse-band">
         <div className="section-head">
+          <span className="kicker">Industries &amp; events</span>
           <h2>Shop by industry</h2>
           <p>Custom booth displays for every kind of exhibitor.</p>
         </div>
@@ -305,6 +324,7 @@ export default function HomePage() {
       <section className="booth-band">
         <div className="booth-band-inner has-scene">
           <div className="booth-band-copy">
+          <span className="kicker">Complete booths</span>
           <h2>One brand. One booth. Everything you need.</h2>
           <p>
             Apex prints every branded piece of your trade show booth — canopy, banner stands, backdrop,
@@ -323,6 +343,7 @@ export default function HomePage() {
       {/* Build your booth — merchandising examples (no fixed packages) */}
       <section className="booth-builder">
         <div className="section-head">
+          <span className="kicker">Booth packages</span>
           <h2>Build your trade show booth</h2>
           <p>Coordinate Apex products into one branded booth. Examples to start from — mix and match.</p>
           <p><Link className="link-arrow" to="/trade-show-booth-packages">See all booth packages →</Link></p>
@@ -357,6 +378,7 @@ export default function HomePage() {
       {/* What we print — sample booths in a range of customer brands */}
       <section className="showcase-section">
         <div className="section-head">
+          <span className="kicker">Our work</span>
           <h2>What we print for our customers</h2>
           <p>Every booth is printed in the customer's own brand — a few examples across canopies, banners, backdrops and table covers.</p>
         </div>
@@ -373,6 +395,7 @@ export default function HomePage() {
       {/* Product discovery — a mix across categories */}
       <section className="size-section">
         <div className="section-head">
+          <span className="kicker">Best sellers</span>
           <h2>{c('home.bestsellers.title')}</h2>
           <p>{c('home.bestsellers.subtitle')}</p>
         </div>
@@ -398,6 +421,7 @@ export default function HomePage() {
       {/* Custom canopies — still an important, dedicated category */}
       <section className="size-section">
         <div className="section-head">
+          <span className="kicker">Custom canopies</span>
           <h2>{c('home.sizes.title')}</h2>
           <p>{c('home.sizes.subtitle')}</p>
         </div>
@@ -425,6 +449,7 @@ export default function HomePage() {
       {/* Use cases */}
       <section className="solutions-section">
         <div className="section-head">
+          <span className="kicker">Use cases</span>
           <h2>Built for the way you use it</h2>
         </div>
         <div className="solutions-grid">
@@ -441,6 +466,7 @@ export default function HomePage() {
       {/* Trade show buying guides */}
       <section className="guides-section">
         <div className="section-head">
+          <span className="kicker">Learn</span>
           <h2>Trade show buying guides</h2>
           <p>Practical, no-jargon guides to help you choose and print your booth.</p>
         </div>
@@ -460,6 +486,7 @@ export default function HomePage() {
       {/* Popular cities */}
       <section className="cities-section">
         <div className="section-head">
+          <span className="kicker">Locations</span>
           <h2>Trade show displays by city</h2>
           <p>Printed to order and shipped across the US &amp; Canada.</p>
         </div>
@@ -473,6 +500,7 @@ export default function HomePage() {
       {/* FAQ */}
       <section className="faq-section">
         <div className="section-head">
+          <span className="kicker">FAQ</span>
           <h2>Frequently asked questions</h2>
         </div>
         <div className="faq-list">

@@ -46,6 +46,14 @@ What is in the entry chunk (raw source size):
   generated slug list instead of `cityProductPages.js`, axios is gone, and
   GA/Clarity load after `load` + idle. Enforced by `npm run check:budget`.
 
+- **Glamour pass (Oct 2026):** dark cinematic hero with the booth on a
+  glossy stage (scripts/gen-booth-scenes.mjs, `booth-stage`), glass badges,
+  category ticker and an overlapping trust card; bento category grid;
+  product photos floating on gradient tiles; dark "stage" heroes on every
+  category/city/landing page; dark footer; pill buttons; scroll-reveal
+  (CSS scroll-driven, motion-safe). Page-specific CSS moved to lazy chunks
+  to pay for it: first load 96.0 KB.
+
 ## 2. The budget (definition)
 
 > **Homepage first load: ≤ 100 KB gzipped for all first-party JS, CSS and

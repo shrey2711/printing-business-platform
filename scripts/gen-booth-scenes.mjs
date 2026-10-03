@@ -101,6 +101,31 @@ async function cutout(file) {
     }
   }
 
+  // Defringe: the product's outermost pixels are anti-aliased against the white
+  // studio background. Invisible on a light scene, they read as a white outline
+  // on a dark one. Recolour that 1px ring from the product pixels just inside it
+  // and soften it.
+  const isEdge = new Uint8Array(w * h);
+  for (let p = 0; p < w * h; p++) {
+    if (seen[p]) continue;
+    const x = p % w, y = (p - x) / w;
+    if ((x > 0 && seen[p - 1]) || (x < w - 1 && seen[p + 1]) || (y > 0 && seen[p - w]) || (y < h - 1 && seen[p + w])) isEdge[p] = 1;
+  }
+  for (let p = 0; p < w * h; p++) {
+    if (!isEdge[p]) continue;
+    const x = p % w, y = (p - x) / w;
+    let r = 0, g = 0, b = 0, n = 0;
+    for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
+      const xx = x + dx, yy = y + dy;
+      if (xx < 0 || yy < 0 || xx >= w || yy >= h) continue;
+      const q = yy * w + xx;
+      if (seen[q] || isEdge[q]) continue;
+      r += data[q * 4]; g += data[q * 4 + 1]; b += data[q * 4 + 2]; n++;
+    }
+    if (n) { data[p * 4] = r / n; data[p * 4 + 1] = g / n; data[p * 4 + 2] = b / n; }
+    data[p * 4 + 3] = 150;
+  }
+
   // The product's own base (lowest row of real product pixels), so an item is
   // placed by its feet, not by the bottom of its baked-in shadow.
   let top = h, bottom = 0, left = w, right = 0;
@@ -133,19 +158,36 @@ async function cutout(file) {
     height: Math.min(h, bottom + pad) - Math.max(0, top - 2)
   };
   const buf = await sharp(data, { raw: { width: w, height: h, channels: 4 } }).extract(crop).png().toBuffer();
-  return { data: buf, productHeight: bottom - top, footY: bottom - crop.top };
+  // Product only (no shadow), for floor reflections.
+  const solo = Buffer.from(data);
+  for (let p = 0; p < w * h; p++) if (seen[p]) solo[p * 4 + 3] = 0;
+  const productOnly = await sharp(solo, { raw: { width: w, height: h, channels: 4 } }).extract(crop).png().toBuffer();
+  return { data: buf, productOnly, productHeight: bottom - top, footY: bottom - crop.top };
 }
 
 // A placed item: scaled to a target height, anchored at its bottom-centre.
 // `height` is the PRODUCT's height (shadow excluded); `bottom` is where its
 // feet stand.
-async function place(file, { height, cx, bottom, edit }) {
-  const { data, productHeight, footY } = await cutout(edit ? await edit(file) : file);
+async function place(file, { height, cx, bottom, edit, reflect = 0, fade = 0.3 }) {
+  const { data, productOnly, productHeight, footY } = await cutout(edit ? await edit(file) : file);
   const k = height / productHeight;
   const meta0 = await sharp(data).metadata();
-  const buf = await sharp(data).resize({ height: Math.round(meta0.height * k) }).png().toBuffer();
+  const H2 = Math.round(meta0.height * k);
+  const buf = await sharp(reflect ? productOnly : data).resize({ height: H2 }).png().toBuffer();
   const meta = await sharp(buf).metadata();
-  return { input: buf, left: Math.round(cx - meta.width / 2), top: Math.round(bottom - footY * k) };
+  const layer = { input: buf, left: Math.round(cx - meta.width / 2), top: Math.round(bottom - footY * k) };
+  if (!reflect) return [layer];
+  // Glossy floor: the product mirrored below its base, fading out quickly.
+  const fadeH = Math.round(productHeight * k * fade);
+  const mask = Buffer.from(`<svg width="${meta.width}" height="${meta.height}" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="${reflect}"/>
+      <stop offset="${Math.min(1, fadeH / meta.height)}" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient></defs>
+    <rect width="100%" height="100%" fill="url(#f)"/></svg>`);
+  const mirrored = await sharp(buf).flip().composite([{ input: mask, blend: 'dest-in' }]).png().toBuffer();
+  const reflTop = Math.round(bottom - (meta0.height - 1 - footY) * k);
+  return [{ input: mirrored, left: layer.left, top: reflTop }, layer];
 }
 
 // A soft contact shadow ellipse under an item.
@@ -218,7 +260,30 @@ const plaza = Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.
   <rect y="718" width="${W}" height="2" fill="#c9c5bd" opacity="0.7"/>
 </svg>`);
 
+// Transparent stage: no wall or floor, so the booth stands directly on the
+// homepage's dark hero. A faint light pool grounds it; reflections suggest a
+// glossy floor.
+const STAGE_W = 1600, STAGE_H = 1000;
+const lightPool = Buffer.from(`<svg width="${STAGE_W}" height="${STAGE_H}" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="g" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient></defs>
+  <ellipse cx="800" cy="860" rx="720" ry="95" fill="url(#g)"/>
+</svg>`);
+
 const scenes = {
+  // The indoor set on a transparent stage, with reflections, for the dark hero.
+  'booth-stage': {
+    transparent: true,
+    pre: [lightPool],
+    crop: { left: 60, top: 140, width: 1480, height: 860 },
+    items: [
+      { file: 'public/images/colorways/backdrop-red.webp', height: 600, cx: 800, bottom: 770, reflect: 0.18 },
+      { file: 'public/images/colorways/banner-red.webp', edit: (f) => bannerCopy(f), height: 540, cx: 255, bottom: 850, reflect: 0.22, fade: 0.24 },
+      { file: 'public/images/colorways/banner-red.webp', edit: (f) => bannerCopy(f), height: 540, cx: 1345, bottom: 850, reflect: 0.22, fade: 0.24 },
+      { file: 'public/images/colorways/tablecover-charcoal.webp', height: 260, cx: 800, bottom: 920, reflect: 0.2 }
+    ]
+  },
   // Red + charcoal Apex set: backdrop behind, banners either side, table in front.
   'booth-indoor': {
     bg: hall,
@@ -242,17 +307,20 @@ const scenes = {
 };
 
 for (const [name, scene] of Object.entries(scenes)) {
-  const layers = [];
+  const layers = (scene.pre || []).map((input) => ({ input, left: 0, top: 0 }));
   for (const it of scene.items) {
     if (it.shadow) layers.push(shadow({ cx: it.cx, y: it.bottom, ...it.shadow }, W, H));
-    layers.push(await place(it.file, it));
+    layers.push(...(await place(it.file, it)));
   }
-  let composed = await sharp(scene.bg).composite(layers).png().toBuffer();
+  const base = scene.transparent
+    ? sharp({ create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    : sharp(scene.bg);
+  let composed = await base.composite(layers).png().toBuffer();
   if (scene.crop) composed = await sharp(composed).extract(scene.crop).png().toBuffer();
   for (const width of [1600, 960]) {
-    const base = sharp(composed).resize({ width });
-    await base.clone().webp({ quality: 80, effort: 6 }).toFile(`${OUT}/${name}-${width}.webp`);
-    await base.clone().avif({ quality: 55, effort: 6 }).toFile(`${OUT}/${name}-${width}.avif`);
+    const img = sharp(composed).resize({ width });
+    await img.clone().webp({ quality: 80, alphaQuality: 90, effort: 6 }).toFile(`${OUT}/${name}-${width}.webp`);
+    await img.clone().avif({ quality: 55, effort: 6 }).toFile(`${OUT}/${name}-${width}.avif`);
   }
   console.log('wrote', name);
 }

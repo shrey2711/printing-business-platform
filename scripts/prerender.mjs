@@ -416,11 +416,11 @@ routes.push(() => {
     preloadImage: cms('home.hero.image')
       ? `${cms('home.hero.image')}${cms('home.hero.image').includes('?') ? '&' : '?'}key=hero`
       : {
-          // The default hero: BoothScene "booth-indoor" (sizes must match HomePage.jsx).
+          // The default hero: BoothScene "booth-stage" (sizes must match HomePage.jsx).
           type: 'image/avif',
-          href: '/images/booth/booth-indoor-1600.avif',
-          srcset: '/images/booth/booth-indoor-960.avif 960w, /images/booth/booth-indoor-1600.avif 1600w',
-          sizes: '(max-width: 1080px) 100vw, 600px'
+          href: '/images/booth/booth-stage-1600.avif',
+          srcset: '/images/booth/booth-stage-960.avif 960w, /images/booth/booth-stage-1600.avif 1600w',
+          sizes: '(max-width: 1240px) 100vw, 1180px'
         },
     jsonLd: {
       '@context': 'https://schema.org',
