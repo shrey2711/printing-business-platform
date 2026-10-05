@@ -2399,7 +2399,9 @@ const products = [
     related: ['pvc-board-signs', 'coroplast-signs', 'seg-modular-trade-show-kit-a'],
     gallery: [
       { src: '/images/signs/acp-aluminum-signs-fascia-panel.jpeg', alt: 'Aluminium composite panel sign on the fascia above a building entrance' },
-      { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'ACP sign bolted through its corner holes to a steel post frame at a yard entrance' }
+      { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'ACP sign bolted through its corner holes to a steel post frame at a yard entrance' },
+      { src: '/images/signs/acp-aluminum-signs-panel-edge-layers.webp', alt: 'Two white aluminum composite panels stacked, showing the aluminum skins and the core along the cut edge' },
+      { src: '/images/signs/acp-aluminum-signs-printed-corner.webp', alt: 'Corner of a printed 1/8 inch aluminum sandwich board sign with sample artwork, showing the thin panel edge' }
     ],
     pricing: {
       model: 'area',
