@@ -1411,6 +1411,7 @@ const segKits = [
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit C — illuminated booth with backdrop, left and right side panels and counter' },
       { src: '/images/seg-kits/apex-seg-modular-kit-c-structure.webp', alt: 'Kit C structure — backdrop with left and right illuminated side panels and a counter, no overhead arch' },
+      { src: '/images/seg-kits/apex-seg-light-box-components.webp', alt: 'Apex Trade Show SEG light box components: banner stand, display counter and backdrop, each with a printed graphic' },
       { src: '/images/seg-kits/apex-seg-modular-kit-c-sizes.png', alt: 'Kit C size matrix and component measurements' }
     ],
     config: 'Backdrop + left & right illuminated side panels + illuminated counter (no overhead arch)',
