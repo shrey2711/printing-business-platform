@@ -1570,11 +1570,16 @@ const FLUSH = choice('flush', 'Flush mount (direct to wall)', true);
 const RACEWAY = choice('raceway', 'Raceway (letters on a painted rail)');
 const BACKER = choice('backer', 'Backer panel (letters on a cut panel)');
 
-const channelLetterProduct = ({ slug, name, badge, tagline, description, features, specs, applications, faqs, whatsIncluded, seoTitle, seoDescription, related, optionGroups, galleryAlt }) => ({
+const channelLetterProduct = ({ slug, name, badge, tagline, description, features, specs, applications, faqs, whatsIncluded, seoTitle, seoDescription, related, optionGroups, galleryAlt, galleryNoun, galleryLight, galleryScene = 'daytime', galleryDayAlt }) => ({
   slug,
   // Drawn illustrations (scripts/gen-channel-letter-art.mjs), not install
   // photos — the alt text says so. Swap in real photography when available.
-  gallery: [{ src: `/images/channel-letters/${slug}.webp`, alt: galleryAlt }],
+  gallery: [
+    { src: `/images/channel-letters/${slug}.webp`, alt: galleryAlt },
+    { src: `/images/channel-letters/${slug}-single-letter.webp`, alt: `Illustration of a single ${galleryNoun} letter close up, showing the face, the aluminum return and ${galleryLight}` },
+    { src: `/images/channel-letters/${slug}-${galleryScene}.webp`, alt: galleryDayAlt },
+    { src: `/images/channel-letters/${slug}-cutaway.webp`, alt: `Labelled side-section illustration of a ${galleryNoun} letter showing how it is built` }
+  ],
   faqs,
   specs,
   applications,
@@ -1614,6 +1619,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'front-lit-channel-letters',
     galleryAlt: 'Illustration of front-lit channel letters on a storefront fascia at night, the letter faces glowing white on a raceway',
+    galleryNoun: 'front-lit channel',
+    galleryLight: 'the lit acrylic face',
+    galleryScene: 'daytime',
+    galleryDayAlt: 'Illustration of front-lit channel letters on a storefront fascia by day, mounted on a raceway',
     name: 'Front-Lit Channel Letters',
     badge: 'New',
     tagline: 'Illuminated letters whose acrylic faces glow — the classic storefront sign, readable from across the street at night.',
@@ -1682,6 +1691,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'halo-lit-channel-letters',
     galleryAlt: 'Illustration of halo-lit channel letters at night: dark metal letters with a warm glow on the wall behind them',
+    galleryNoun: 'halo-lit (back-lit) channel',
+    galleryLight: 'the glow thrown onto the wall behind it',
+    galleryScene: 'daytime',
+    galleryDayAlt: 'Illustration of halo-lit channel letters by day, solid dark metal letters on a storefront fascia',
     name: 'Halo-Lit (Back-Lit) Channel Letters',
     badge: 'New',
     tagline: 'Solid metal letters that throw a soft glow onto the wall behind them — the understated, upscale look.',
@@ -1744,6 +1757,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'front-and-back-lit-channel-letters',
     galleryAlt: 'Illustration of front and back-lit channel letters at night, with glowing faces and a warm halo on the wall',
+    galleryNoun: 'front and back-lit channel',
+    galleryLight: 'the lit face and the halo on the wall',
+    galleryScene: 'daytime',
+    galleryDayAlt: 'Illustration of front and back-lit channel letters by day, cream-faced letters on a storefront fascia',
     name: 'Front & Back-Lit Channel Letters',
     badge: 'New',
     tagline: 'Glowing faces and a halo on the wall at the same time — the most visible channel letter at night.',
@@ -1805,6 +1822,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'non-illuminated-channel-letters',
     galleryAlt: 'Illustration of non-illuminated red aluminum channel letters on a storefront fascia in daylight',
+    galleryNoun: 'non-illuminated channel',
+    galleryLight: 'the painted aluminum face and return',
+    galleryScene: 'lobby',
+    galleryDayAlt: 'Illustration of non-illuminated brushed aluminum channel letters mounted on a lobby wall behind a reception desk',
     name: 'Non-Illuminated Channel Letters',
     badge: 'New',
     tagline: 'Dimensional aluminum letters with no wiring — clean, solid lettering for daytime and well-lit walls.',
