@@ -2233,7 +2233,9 @@ const products = [
     related: ['pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
     gallery: [
       { src: '/images/signs/coroplast-signs-booth-directional.jpeg', alt: 'Coroplast booth directional sign zip-tied to an exhibition booth upright' },
-      { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker hung between trade show aisles' }
+      { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker hung between trade show aisles' },
+      { src: '/images/signs/coroplast-signs-yard-sign-h-stake.webp', alt: 'Printed coroplast yard sign on a wire H-stake in a front lawn, shown with sample real estate artwork' },
+      { src: '/images/signs/coroplast-signs-4mm-flute-edge.webp', alt: 'Corner of a printed 4mm white coroplast sign showing the corrugated flutes along the cut edge, with sample artwork' }
     ],
     pricing: {
       model: 'area',
