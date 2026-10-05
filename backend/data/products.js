@@ -2490,6 +2490,7 @@ const products = [
       'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
     related: ['flyers-80lb-uncoated', 'custom-lanyards', 'silicone-wristbands'],
     gallery: [
+      { src: '/images/marketing/business-cards-16pt-matte-mockup.webp', alt: 'Business cards mockup showing the front and back of a printed card and a stack of cards' },
       { src: '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg', alt: '16pt matte business cards in an acrylic holder on a trade show booth counter' },
       { src: '/images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg', alt: 'Stacked edges of 16pt business cards showing the thickness of the stock' },
       { src: '/images/marketing/business-cards-16pt-matte-rounded-corners.webp', alt: '16pt matte business cards fanned to show the rounded corner option' }
