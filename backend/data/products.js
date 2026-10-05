@@ -1411,6 +1411,7 @@ const segKits = [
     gallery: [
       { src: '/images/seg-kits/apex-seg-modular-kit-c-main.jpeg', alt: 'Apex Trade Show SEG Modular Kit C — illuminated booth with backdrop, left and right side panels and counter' },
       { src: '/images/seg-kits/apex-seg-modular-kit-c-structure.webp', alt: 'Kit C structure — backdrop with left and right illuminated side panels and a counter, no overhead arch' },
+      { src: '/images/seg-kits/apex-seg-light-box-components.webp', alt: 'Apex Trade Show SEG light box components: banner stand, display counter and backdrop, each with a printed graphic' },
       { src: '/images/seg-kits/apex-seg-modular-kit-c-sizes.png', alt: 'Kit C size matrix and component measurements' }
     ],
     config: 'Backdrop + left & right illuminated side panels + illuminated counter (no overhead arch)',
@@ -1570,11 +1571,16 @@ const FLUSH = choice('flush', 'Flush mount (direct to wall)', true);
 const RACEWAY = choice('raceway', 'Raceway (letters on a painted rail)');
 const BACKER = choice('backer', 'Backer panel (letters on a cut panel)');
 
-const channelLetterProduct = ({ slug, name, badge, tagline, description, features, specs, applications, faqs, whatsIncluded, seoTitle, seoDescription, related, optionGroups, galleryAlt }) => ({
+const channelLetterProduct = ({ slug, name, badge, tagline, description, features, specs, applications, faqs, whatsIncluded, seoTitle, seoDescription, related, optionGroups, galleryAlt, galleryNoun, galleryLight, galleryScene = 'daytime', galleryDayAlt }) => ({
   slug,
   // Drawn illustrations (scripts/gen-channel-letter-art.mjs), not install
   // photos — the alt text says so. Swap in real photography when available.
-  gallery: [{ src: `/images/channel-letters/${slug}.webp`, alt: galleryAlt }],
+  gallery: [
+    { src: `/images/channel-letters/${slug}.webp`, alt: galleryAlt },
+    { src: `/images/channel-letters/${slug}-single-letter.webp`, alt: `Illustration of a single ${galleryNoun} letter close up, showing the face, the aluminum return and ${galleryLight}` },
+    { src: `/images/channel-letters/${slug}-${galleryScene}.webp`, alt: galleryDayAlt },
+    { src: `/images/channel-letters/${slug}-cutaway.webp`, alt: `Labelled side-section illustration of a ${galleryNoun} letter showing how it is built` }
+  ],
   faqs,
   specs,
   applications,
@@ -1614,6 +1620,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'front-lit-channel-letters',
     galleryAlt: 'Illustration of front-lit channel letters on a storefront fascia at night, the letter faces glowing white on a raceway',
+    galleryNoun: 'front-lit channel',
+    galleryLight: 'the lit acrylic face',
+    galleryScene: 'daytime',
+    galleryDayAlt: 'Illustration of front-lit channel letters on a storefront fascia by day, mounted on a raceway',
     name: 'Front-Lit Channel Letters',
     badge: 'New',
     tagline: 'Illuminated letters whose acrylic faces glow — the classic storefront sign, readable from across the street at night.',
@@ -1682,6 +1692,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'halo-lit-channel-letters',
     galleryAlt: 'Illustration of halo-lit channel letters at night: dark metal letters with a warm glow on the wall behind them',
+    galleryNoun: 'halo-lit (back-lit) channel',
+    galleryLight: 'the glow thrown onto the wall behind it',
+    galleryScene: 'daytime',
+    galleryDayAlt: 'Illustration of halo-lit channel letters by day, solid dark metal letters on a storefront fascia',
     name: 'Halo-Lit (Back-Lit) Channel Letters',
     badge: 'New',
     tagline: 'Solid metal letters that throw a soft glow onto the wall behind them — the understated, upscale look.',
@@ -1744,6 +1758,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'front-and-back-lit-channel-letters',
     galleryAlt: 'Illustration of front and back-lit channel letters at night, with glowing faces and a warm halo on the wall',
+    galleryNoun: 'front and back-lit channel',
+    galleryLight: 'the lit face and the halo on the wall',
+    galleryScene: 'daytime',
+    galleryDayAlt: 'Illustration of front and back-lit channel letters by day, cream-faced letters on a storefront fascia',
     name: 'Front & Back-Lit Channel Letters',
     badge: 'New',
     tagline: 'Glowing faces and a halo on the wall at the same time — the most visible channel letter at night.',
@@ -1805,6 +1823,10 @@ const channelLetters = [
   channelLetterProduct({
     slug: 'non-illuminated-channel-letters',
     galleryAlt: 'Illustration of non-illuminated red aluminum channel letters on a storefront fascia in daylight',
+    galleryNoun: 'non-illuminated channel',
+    galleryLight: 'the painted aluminum face and return',
+    galleryScene: 'lobby',
+    galleryDayAlt: 'Illustration of non-illuminated brushed aluminum channel letters mounted on a lobby wall behind a reception desk',
     name: 'Non-Illuminated Channel Letters',
     badge: 'New',
     tagline: 'Dimensional aluminum letters with no wiring — clean, solid lettering for daytime and well-lit walls.',
@@ -2212,7 +2234,8 @@ const products = [
     gallery: [
       { src: '/images/signs/coroplast-signs-booth-directional.jpeg', alt: 'Coroplast booth directional sign zip-tied to an exhibition booth upright' },
       { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker hung between trade show aisles' },
-      { src: '/images/signs/coroplast-signs-grommets-h-stake.webp', alt: 'Cut edge of a coroplast panel showing the internal flutes and a brass grommet' }
+      { src: '/images/signs/coroplast-signs-yard-sign-h-stake.webp', alt: 'Printed coroplast yard sign on a wire H-stake in a front lawn, shown with sample real estate artwork' },
+      { src: '/images/signs/coroplast-signs-4mm-flute-edge.webp', alt: 'Corner of a printed 4mm white coroplast sign showing the corrugated flutes along the cut edge, with sample artwork' }
     ],
     pricing: {
       model: 'area',
@@ -2296,8 +2319,7 @@ const products = [
     related: ['coroplast-signs', 'acp-aluminum-signs', 'fabric-banner-9oz-wrinkle-free'],
     gallery: [
       { src: '/images/signs/pvc-board-signs-booth-panel.jpeg', alt: 'Rigid PVC board panel mounted flush on a trade show booth wall' },
-      { src: '/images/signs/pvc-board-signs-retail-counter-display.jpeg', alt: 'PVC board wayfinding panel on the wall of a retail store' },
-      { src: '/images/signs/pvc-board-signs-grommets-edge-detail.webp', alt: 'Close view of a PVC board corner showing the solid core and the square cut edge' }
+      { src: '/images/signs/pvc-board-signs-retail-counter-display.jpeg', alt: 'PVC board wayfinding panel on the wall of a retail store' }
     ],
     pricing: {
       model: 'area',
@@ -2378,7 +2400,8 @@ const products = [
     gallery: [
       { src: '/images/signs/acp-aluminum-signs-fascia-panel.jpeg', alt: 'Aluminium composite panel sign on the fascia above a building entrance' },
       { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'ACP sign bolted through its corner holes to a steel post frame at a yard entrance' },
-      { src: '/images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp', alt: 'Cut edge of an aluminium composite panel showing both aluminium skins over the core, with a rounded corner and a punched mounting hole' }
+      { src: '/images/signs/acp-aluminum-signs-panel-edge-layers.webp', alt: 'Two white aluminum composite panels stacked, showing the aluminum skins and the core along the cut edge' },
+      { src: '/images/signs/acp-aluminum-signs-printed-corner.webp', alt: 'Corner of a printed 1/8 inch aluminum sandwich board sign with sample artwork, showing the thin panel edge' }
     ],
     pricing: {
       model: 'area',
@@ -2468,6 +2491,7 @@ const products = [
       'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
     related: ['flyers-80lb-uncoated', 'custom-lanyards', 'silicone-wristbands'],
     gallery: [
+      { src: '/images/marketing/business-cards-16pt-matte-mockup.webp', alt: 'Business cards mockup showing the front and back of a printed card and a stack of cards' },
       { src: '/images/marketing/business-cards-16pt-matte-booth-handout.jpeg', alt: '16pt matte business cards in an acrylic holder on a trade show booth counter' },
       { src: '/images/marketing/business-cards-16pt-matte-stack-edge-thickness.jpeg', alt: 'Stacked edges of 16pt business cards showing the thickness of the stock' },
       { src: '/images/marketing/business-cards-16pt-matte-rounded-corners.webp', alt: '16pt matte business cards fanned to show the rounded corner option' }
