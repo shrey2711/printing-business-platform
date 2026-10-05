@@ -85,7 +85,8 @@ const shopMenu = [
     to: '/table-covers',
     items: [
       { label: 'Pleated Table Covers', to: '/products/pleated-table-covers' },
-      { label: 'Stretch Table Covers', to: '/products/stretch-table-covers' }
+      { label: 'Stretch Table Covers', to: '/products/stretch-table-covers' },
+      { label: 'Custom Table Runner', to: '/products/custom-table-runner' }
     ]
   },
   {
@@ -116,7 +117,9 @@ const shopMenu = [
     items: [
       { label: 'Coroplast Signs (4mm)', to: '/products/coroplast-signs' },
       { label: 'PVC Board (1/8")', to: '/products/pvc-board-signs' },
-      { label: 'ACP Aluminum Sandwich Board', to: '/products/acp-aluminum-signs' }
+      { label: 'ACP Aluminum Sandwich Board', to: '/products/acp-aluminum-signs' },
+      { label: 'A-Frame Sign', to: '/products/a-frame-sign' },
+      { label: 'Sandwich Board Sign', to: '/products/sandwich-board-sign' }
     ]
   },
   {

@@ -246,7 +246,12 @@ check('a percentage change reaches the real price of every priced product', () =
     'front-lit-channel-letters',
     'halo-lit-channel-letters',
     'front-and-back-lit-channel-letters',
-    'non-illuminated-channel-letters'
+    'non-illuminated-channel-letters',
+    // A-frame, sandwich board and table runner: quote-only, sized and
+    // specified per order, so there is no list price to bulk-adjust.
+    'a-frame-sign',
+    'sandwich-board-sign',
+    'custom-table-runner'
   ]);
   const surprise = unsupported.filter((s) => !EXPECTED_UNPRICED.has(s));
   if (surprise.length) {

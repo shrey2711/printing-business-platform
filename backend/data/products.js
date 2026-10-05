@@ -53,7 +53,8 @@ export const navGroups = [
     name: 'Table Covers',
     items: [
       { name: 'Pleated Table Covers', slug: 'pleated-table-covers' },
-      { name: 'Stretch Table Covers', slug: 'stretch-table-covers' }
+      { name: 'Stretch Table Covers', slug: 'stretch-table-covers' },
+      { name: 'Custom Table Runner', slug: 'custom-table-runner' }
     ]
   },
   {
@@ -102,7 +103,9 @@ export const navGroups = [
     items: [
       { name: 'Coroplast Signs (4mm)', slug: 'coroplast-signs' },
       { name: 'PVC Board (1/8")', slug: 'pvc-board-signs' },
-      { name: 'ACP Aluminum Sandwich Board', slug: 'acp-aluminum-signs' }
+      { name: 'ACP Aluminum Sandwich Board', slug: 'acp-aluminum-signs' },
+      { name: 'A-Frame Sign', slug: 'a-frame-sign' },
+      { name: 'Sandwich Board Sign', slug: 'sandwich-board-sign' }
     ]
   },
   {
@@ -2756,6 +2759,12 @@ const products = [
       'A low-cost branded takeaway that keeps the logo visible on the floor all day',
       'Ordered alongside a canopy or backdrop so booth staff match the branding behind them'
     ],
+    gallery: [
+      { src: '/images/marketing/custom-lanyards-printed.webp', alt: 'Illustration of a custom printed lanyard with a repeated logo, holding an exhibitor badge' },
+      { src: '/images/marketing/custom-lanyards-materials.webp', alt: 'Illustration of the five lanyard materials: polyester, nylon, woven, tubular and dye sublimation' },
+      { src: '/images/marketing/custom-lanyards-attachments.webp', alt: 'Illustration of the four lanyard attachments: swivel hook, bulldog clip, split ring and cell phone loop' },
+      { src: '/images/marketing/custom-lanyards-widths.webp', alt: 'Illustration of the three lanyard widths, 5/8, 3/4 and 1 inch, drawn to scale' }
+    ],
     active: true,
     name: 'Custom Lanyards',
     category: 'marketing-essentials',
@@ -2868,6 +2877,12 @@ const products = [
       'A low-cost branded item to pair with a bigger booth order',
       'Fundraiser and awareness-campaign bands ordered in bulk'
     ],
+    gallery: [
+      { src: '/images/marketing/silicone-wristbands-colours-hero.webp', alt: 'Illustration of three silicone wristbands in red, blue and navy with debossed, screen printed and embossed logos' },
+      { src: '/images/marketing/silicone-wristbands-imprint-styles.webp', alt: 'Illustration of the four silicone wristband imprint styles: screen printed, debossed, embossed and colour-filled' },
+      { src: '/images/marketing/silicone-wristbands-sizes-widths.webp', alt: 'Illustration of silicone wristband widths of 1/2, 3/4 and 1 inch and adult and youth sizes' },
+      { src: '/images/marketing/silicone-wristbands-colour-range.webp', alt: 'Illustration of eight standard silicone wristband colours with a custom colour match option' }
+    ],
     active: true,
     name: 'Silicone Wristbands',
     category: 'marketing-essentials',
@@ -2959,6 +2974,306 @@ const products = [
   // mounting, so there is no stock price to publish. The four illumination
   // types share their option groups through channelLetterProduct() below.
   ...channelLetters,
+  // ---- A-frame, sandwich board and table runner (quote-only) ----------------
+  // Keywords come from reports/apextradeshow-keyword-research.xlsx: "a frame
+  // sign", "sandwich board signs", "sidewalk signs" and the 18 x 24 / 24 x 36
+  // sizes people search for; "custom table runner", "table runner with logo".
+  // No price is published and no production time is claimed — both are
+  // confirmed with the quote. TODO_PRICE / TODO_TURNAROUND apply to all three.
+  {
+    slug: 'a-frame-sign',
+    faqs: [
+      { q: 'What is an A-frame sign?', a: 'A free-standing sign made of two panels hinged at the top, so it stands in an A shape and can be read from both sides. It folds flat for carrying and storage, which is why shops, cafés and event teams set one out on the pavement outside the door and bring it in at closing time. It is also called a sidewalk sign or a sandwich board.' },
+      { q: 'What size A-frame sign should I order?', a: '24" x 36" is the size most businesses choose for a sign that has to be read from a few steps away on the pavement; 18" x 24" suits a smaller counter, doorway or event-table sign. Choose Custom if your frame or space needs something else, and tell us the size on the quote request.' },
+      { q: 'Can I change the graphics later?', a: 'Yes. The panels are printed inserts that sit in the frame, so a new offer, event or season means printing new panels rather than buying a new sign. Order spare panels with the first set if you rotate messages.' },
+      { q: 'What is the difference between an A-frame sign and a sandwich board?', a: 'In everyday use they are the same shape, and people search for both names. In our range, the A-frame sign is the frame with replaceable printed panels, so the message can change. The sandwich board sign has the artwork printed directly onto the boards for a fixed, longer-lasting message. Both are quoted from your artwork and size.' },
+      { q: 'Can an A-frame sign be used outdoors?', a: 'Yes, that is what it is made for. Place it where it cannot be knocked into foot traffic, and bring it in during strong wind. Tell us if it will stay out overnight or in a wet climate so the quote can recommend the right frame and panel material.' },
+      { q: 'What artwork file format do you accept?', a: 'A single-page PDF or JPEG built to the finished panel size at 150dpi in CMYK, with fonts converted to outlines and no crop marks. We check every file at no charge and send a free proof before anything is printed.' },
+      { q: 'Do you ship A-frame signs to Canada and the US?', a: 'Yes. We ship across the United States and Canada. Delivery cost and timing are confirmed with your quote.' }
+    ],
+    specs: [
+      ['Type', 'Folding two-panel A-frame (sidewalk sign)'],
+      ['Panel size', '18" x 24", 24" x 36", or custom'],
+      ['Graphics', 'Printed panels that sit in the frame, replaceable'],
+      ['Sides', 'Both faces printed, same or different artwork'],
+      ['Frame', 'Material and finish confirmed with your quote'],
+      ['Use', 'Indoor and outdoor, pavement and event placement'],
+      ['Storage', 'Folds flat']
+    ],
+    applications: [
+      'A sidewalk sign outside a shop, café or salon announcing today\'s offer',
+      'Directional and welcome signs at an event, open house or registration table',
+      'Open-house and real estate signs that move between properties',
+      'Trade show and venue wayfinding that folds flat in the show case'
+    ],
+    gallery: [
+      { src: '/images/signs/a-frame-sign-sidewalk.webp', alt: 'Illustration of a printed A-frame sidewalk sign standing on the pavement outside a café' },
+      { src: '/images/signs/a-frame-sign-sizes.webp', alt: 'Illustration comparing the 18 by 24 inch and 24 by 36 inch A-frame sign panel sizes' },
+      { src: '/images/signs/a-frame-sign-folds-flat.webp', alt: 'Illustration of an A-frame sign in side view, standing open and folded flat' }
+    ],
+    active: true,
+    name: 'A-Frame Sign',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🪧',
+    quoteOnly: true,
+    tagline: 'Custom A-frame signs: a folding sidewalk sign frame with replaceable printed panels, in 18" x 24" and 24" x 36".',
+    description:
+      'An A-frame sign is the sidewalk sign you set outside your door: two printed panels on a hinged frame that stand in an A shape, read from both sides, and fold flat when you bring them in. Ours is the frame with replaceable printed panels, so when the offer, the event or the season changes you print new panels rather than buying a new sign. Choose 18" x 24" for a counter or doorway, 24" x 36" for a pavement sign that has to be read from a few steps away, or a custom size, and print the same artwork on both faces or a different message on each.',
+    features: [
+      'Folding A-frame that stands on its own and folds flat for storage',
+      'Replaceable printed panels, so the message can change without a new sign',
+      '18" x 24", 24" x 36" or a custom panel size',
+      'Both faces printed, with the same or different artwork',
+      'Indoor or outdoor use, from a shop pavement to an event entrance'
+    ],
+    whatsIncluded: [
+      'Your A-frame, with printed panels in the size you chose.',
+      'Spare panels only where you add them to the order.',
+      'No weights, anchors or lock — tell us if you need them and we will quote them.'
+    ],
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Custom A-Frame Signs | Sidewalk Sign Stands',
+    seoDescription:
+      'Custom A-frame signs: folding sidewalk sign frames with printed 18 x 24 or 24 x 36 panels, outdoor-ready and replaceable. Free artwork proof. Request a quote.',
+    related: ['sandwich-board-sign', 'coroplast-signs', 'acp-aluminum-signs'],
+    pricing: {
+      model: 'configured',
+      quoteOnly: true,
+      baseLabel: 'A-Frame Sign',
+      optionGroups: [
+        {
+          id: 'size', label: 'Panel size', type: 'select', choices: [
+            { id: '18x24', label: '18" x 24"', default: false },
+            { id: '24x36', label: '24" x 36"', default: true },
+            { id: 'custom', label: 'Custom size', default: false }
+          ]
+        },
+        {
+          id: 'frame', label: 'Frame', type: 'select', choices: [
+            { id: 'metal', label: 'Metal frame', default: true },
+            { id: 'plastic', label: 'Plastic frame', default: false },
+            { id: 'wood', label: 'Wood frame', default: false },
+            { id: 'advise', label: 'Not sure — recommend one', default: false }
+          ]
+        },
+        {
+          id: 'sides', label: 'Printing', type: 'select', choices: [
+            { id: 'two-same', label: 'Both faces, same artwork', default: true },
+            { id: 'two-different', label: 'Both faces, different artwork', default: false },
+            { id: 'one', label: 'One face only', default: false }
+          ]
+        },
+        {
+          id: 'spares', label: 'Spare panels', type: 'select', choices: [
+            { id: 'none', label: 'None', default: true },
+            { id: 'one-set', label: 'One spare set', default: false },
+            { id: 'two-sets', label: 'Two spare sets', default: false }
+          ]
+        },
+        {
+          id: 'quantity', label: 'Quantity', type: 'select', choices: [
+            { id: '1', label: '1', default: true },
+            { id: '2-5', label: '2–5', default: false },
+            { id: '6-10', label: '6–10', default: false },
+            { id: '11-25', label: '11–25', default: false },
+            { id: '26-plus', label: '26 or more', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'sandwich-board-sign',
+    faqs: [
+      { q: 'What is a sandwich board sign?', a: 'A free-standing sign made of two boards hinged at the top, so it stands up in an A shape with a message on each face. It is called a sandwich board because the two boards look like the slices of a sandwich, and a sidewalk sign or A-frame sign because of where it goes and its shape. It folds flat, so it is easy to carry in at night.' },
+      { q: 'Is a sandwich board the same as an A-frame sign?', a: 'The shape is the same and customers use both names. We split them by how the graphic is carried: the A-frame sign is a frame with replaceable printed panels, and the sandwich board sign has the artwork printed directly onto the boards, for a fixed message that stays on the sign for a long time.' },
+      { q: 'What can I put on a sandwich board sign?', a: 'Anything that prints: a logo, an offer, opening hours, a menu, a directional arrow, an event name. Both faces can carry the same artwork, so it reads from either direction of foot traffic, or a different message on each side.' },
+      { q: 'What size sandwich board should I choose?', a: 'Choose the size by where it stands and how far away the reader is. Smaller boards suit a counter, a doorway or an event table, and larger ones suit a pavement where people read from a few steps away. Pick the closest size, or Custom, and the quote comes back with a proof drawn to scale.' },
+      { q: 'Are sandwich boards good for outdoor use?', a: 'Yes, they are made for sidewalks and entrances. Set it where it cannot be knocked into foot traffic and bring it in during strong wind. Say on the quote request if it will be left out overnight so the right board material is recommended.' },
+      { q: 'How do I send my artwork?', a: 'Send a single-page PDF or JPEG built to the finished board size at 150dpi in CMYK, with fonts converted to outlines and no crop marks. Every file is checked at no charge and you receive a free proof before anything is printed.' }
+    ],
+    specs: [
+      ['Type', 'Hinged two-board sandwich board (sidewalk sign)'],
+      ['Size', 'Small, medium, large or custom — confirmed on the proof'],
+      ['Graphics', 'Printed directly onto the boards'],
+      ['Sides', 'Both faces printed, same or different artwork'],
+      ['Board', 'Material and finish confirmed with your quote'],
+      ['Use', 'Indoor and outdoor, pavement and entrance placement'],
+      ['Storage', 'Folds flat']
+    ],
+    applications: [
+      'A permanent pavement sign for a restaurant, shop or clinic',
+      'Menu, special-of-the-day and opening-hours boards',
+      'Event entrance and registration signs',
+      'Wayfinding in a lobby, hotel or exhibition hall'
+    ],
+    gallery: [
+      { src: '/images/signs/sandwich-board-sign-pavement.webp', alt: 'Illustration of a sandwich board sign with a printed menu standing on the pavement outside a restaurant' },
+      { src: '/images/signs/sandwich-board-sign-both-faces.webp', alt: 'Illustration of a sandwich board sign showing different artwork on its front and back faces' },
+      { src: '/images/signs/sandwich-board-sign-uses.webp', alt: 'Illustration of three sandwich board signs used as a restaurant menu, a shop sign and an event entrance sign' }
+    ],
+    active: true,
+    name: 'Sandwich Board Sign',
+    category: 'rigid-signs',
+    badge: 'New',
+    emoji: '🪧',
+    quoteOnly: true,
+    tagline: 'Custom sandwich board signs: hinged two-board sidewalk signs with your artwork printed on both faces.',
+    description:
+      'A sandwich board sign is two boards hinged at the top that stand in an A shape on the pavement and fold flat when the shop closes. With ours the artwork is printed directly onto the boards, so the message is fixed and the sign looks like a permanent part of your frontage, not a poster in a holder. Print the same artwork on both faces so it reads from either direction of foot traffic, or a different message on each side. Pick a size for the distance people read it from, send your logo, and the quote comes back with a proof drawn to scale.',
+    features: [
+      'Hinged two-board sandwich board that stands on its own and folds flat',
+      'Artwork printed directly onto the boards for a fixed, lasting message',
+      'Both faces printed, with the same or different artwork',
+      'Sized to the space and reading distance, or a custom size',
+      'Indoor or outdoor use, from a restaurant pavement to a hotel lobby'
+    ],
+    whatsIncluded: [
+      'Your sandwich board, with artwork printed on the faces you chose.',
+      'No weights, anchors or lock — tell us if you need them and we will quote them.',
+      'Replacement boards are quoted separately if you change the message later.'
+    ],
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Custom Sandwich Board Signs | Sidewalk Signs',
+    seoDescription:
+      'Custom sandwich board signs: hinged, two-sided sidewalk signs with your artwork printed on both faces. Free artwork proof. Request a quote.',
+    related: ['a-frame-sign', 'coroplast-signs', 'pvc-board-signs'],
+    pricing: {
+      model: 'configured',
+      quoteOnly: true,
+      baseLabel: 'Sandwich Board Sign',
+      optionGroups: [
+        {
+          id: 'size', label: 'Board size', type: 'select', choices: [
+            { id: 'small', label: 'Small (counter, doorway)', default: false },
+            { id: 'medium', label: 'Medium (pavement)', default: true },
+            { id: 'large', label: 'Large (street frontage)', default: false },
+            { id: 'custom', label: 'Custom size', default: false }
+          ]
+        },
+        {
+          id: 'board', label: 'Board', type: 'select', choices: [
+            { id: 'advise', label: 'Recommend one for me', default: true },
+            { id: 'wood-look', label: 'Wood-look board', default: false },
+            { id: 'plastic', label: 'Plastic board', default: false },
+            { id: 'metal', label: 'Metal board', default: false }
+          ]
+        },
+        {
+          id: 'sides', label: 'Printing', type: 'select', choices: [
+            { id: 'two-same', label: 'Both faces, same artwork', default: true },
+            { id: 'two-different', label: 'Both faces, different artwork', default: false },
+            { id: 'one', label: 'One face only', default: false }
+          ]
+        },
+        {
+          id: 'quantity', label: 'Quantity', type: 'select', choices: [
+            { id: '1', label: '1', default: true },
+            { id: '2-5', label: '2–5', default: false },
+            { id: '6-10', label: '6–10', default: false },
+            { id: '11-plus', label: '11 or more', default: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    slug: 'custom-table-runner',
+    faqs: [
+      { q: 'What is a custom table runner?', a: 'A long, narrow strip of fabric laid along the length of a table, printed with your logo or design. Unlike a table cover it does not hide the whole table: it adds a branded band of colour down the middle and leaves the edges clear. At a trade show it keeps the table looking branded at a lower cost than a full cover, and it sits neatly under products or a brochure display.' },
+      { q: 'Can I get a table runner with my logo?', a: 'Yes. Send your logo as a vector file (AI, EPS or PDF) and we print it full colour on the runner. You can repeat the logo along the length, place it once at the front of the table, or print a full design edge to edge. The free proof shows exactly where it will land.' },
+      { q: 'What is the difference between a table runner and a table cover?', a: 'A table cover (a throw or a fitted stretch cover) goes over the whole table and hangs down the sides, closing off the front and back. A table runner is a strip laid along the top. Choose a cover to hide storage and brand the whole table; choose a runner to add a branded accent and keep the table visible.' },
+      { q: 'What size table runner do I need?', a: 'Match the length to the table: 72" suits a 6 ft table and 96" an 8 ft table, and the width sets how much of the table top it covers. Choose a width from 14" to 30" or ask for a custom size. If you are not sure which table the venue supplies, ask the show\'s exhibitor services before printing.' },
+      { q: 'Is it suitable for trade shows and events?', a: 'Yes, that is what it is most often ordered for. It folds small and travels in the show case, and it brands the table for conferences, vendor markets, expos, weddings and corporate events. Order it with a matching banner stand or table cover so the booth reads as one brand.' },
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready vector file (AI, EPS or PDF) with fonts converted to outlines. A high-resolution CMYK image works for a photographic design. We check every file at no charge and send a free proof before anything is printed.' },
+      { q: 'Do you ship custom table runners to Canada and the US?', a: 'Yes. We ship across the United States and Canada. Delivery cost and timing are confirmed with your quote.' }
+    ],
+    specs: [
+      ['Product', 'Printed fabric table runner'],
+      ['Length', '72" (6 ft table), 96" (8 ft table), or custom'],
+      ['Width', '14", 18", 24", 30", or custom'],
+      ['Printing', 'Full colour, your logo or an edge-to-edge design'],
+      ['Fabric and finish', 'Confirmed with your quote'],
+      ['Use', 'Trade show, event, retail and hospitality tables']
+    ],
+    applications: [
+      'A branded accent on a trade show table, with products or a brochure holder on top',
+      'Vendor and craft-fair tables that need a logo without a full cover',
+      'Conference, registration and sponsor tables',
+      'Restaurant, wedding and corporate event tables'
+    ],
+    gallery: [
+      { src: '/images/table-covers/custom-table-runner-trade-show.webp', alt: 'Illustration of a custom printed table runner with a repeated logo laid along a trade show table' },
+      { src: '/images/table-covers/custom-table-runner-designs.webp', alt: 'Illustration of three table runner designs: logo once, logo repeated, and an edge-to-edge design' },
+      { src: '/images/table-covers/custom-table-runner-vs-cover.webp', alt: 'Illustration comparing a table runner, which leaves the table visible, with a full table cover' }
+    ],
+    active: true,
+    name: 'Custom Table Runner',
+    category: 'table-covers',
+    badge: 'New',
+    emoji: '🎀',
+    quoteOnly: true,
+    tagline: 'Custom printed table runners with your logo, for trade show and event tables, in 6 ft and 8 ft lengths.',
+    description:
+      'A custom table runner is a strip of printed fabric laid along the length of a table — a branded band of colour and your logo without covering the whole surface. It is the lighter way to brand a trade show table: it folds small in the show case, sits under your products, and works on its own or on top of a table cover. Choose a length for a 6 ft or 8 ft table, a width from 14" to 30" or a custom size, and print your logo once, repeated along the length, or as a full design edge to edge. Send your artwork, and the quote comes back with a proof showing where the logo lands.',
+    features: [
+      'Printed table runner with your logo or an edge-to-edge design',
+      '72" and 96" lengths for 6 ft and 8 ft tables, or a custom length',
+      'Widths from 14" to 30", or a custom width',
+      'Full-colour print',
+      'Folds small for the show case; works alone or over a table cover'
+    ],
+    whatsIncluded: [
+      'Your table runner, printed in the length and width you chose.',
+      'A free artwork proof before printing.',
+      'No table, no table cover — see Table Covers for a full cover.'
+    ],
+    turnaround: 'Production and delivery timing are confirmed with your quote.',
+    seoTitle: 'Custom Table Runners with Your Logo',
+    seoDescription:
+      'Custom table runners with your logo for trade show and event tables. 6 ft and 8 ft lengths, full-colour print, free artwork proof. Request a quote.',
+    related: ['pleated-table-covers', 'stretch-table-covers', 'standard-retractable-banner'],
+    pricing: {
+      model: 'configured',
+      quoteOnly: true,
+      baseLabel: 'Custom Table Runner',
+      optionGroups: [
+        {
+          id: 'length', label: 'Length', type: 'select', choices: [
+            { id: '72in', label: '72" (6 ft table)', default: true },
+            { id: '96in', label: '96" (8 ft table)', default: false },
+            { id: 'custom', label: 'Custom length', default: false }
+          ]
+        },
+        {
+          id: 'width', label: 'Width', type: 'select', choices: [
+            { id: '14in', label: '14"', default: false },
+            { id: '18in', label: '18"', default: false },
+            { id: '24in', label: '24"', default: true },
+            { id: '30in', label: '30"', default: false },
+            { id: 'custom', label: 'Custom width', default: false }
+          ]
+        },
+        {
+          id: 'design', label: 'Design', type: 'select', choices: [
+            { id: 'logo-once', label: 'Logo once, at the front', default: true },
+            { id: 'logo-repeat', label: 'Logo repeated along the length', default: false },
+            { id: 'full', label: 'Full design, edge to edge', default: false }
+          ]
+        },
+        {
+          id: 'quantity', label: 'Quantity', type: 'select', choices: [
+            { id: '1', label: '1', default: true },
+            { id: '2-5', label: '2–5', default: false },
+            { id: '6-10', label: '6–10', default: false },
+            { id: '11-25', label: '11–25', default: false },
+            { id: '26-plus', label: '26 or more', default: false }
+          ]
+        }
+      ]
+    }
+  },
   {
     slug: 'vinyl-banners',
     active: false,

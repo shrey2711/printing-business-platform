@@ -31,6 +31,12 @@ export const PRODUCT_CARD_IMAGE = {
   'business-cards-16pt-matte': '/images/marketing/business-cards-16pt-matte-mockup.webp',
   'flyers-80lb-uncoated': '/images/marketing/flyers-80lb-uncoated-booth-handout.jpeg',
   'brochures-80lb-uncoated': '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg',
+  // Drawn illustrations for the quote-only items added from the keyword research.
+  'a-frame-sign': '/images/signs/a-frame-sign-sidewalk.webp',
+  'sandwich-board-sign': '/images/signs/sandwich-board-sign-pavement.webp',
+  'custom-table-runner': '/images/table-covers/custom-table-runner-trade-show.webp',
+  'custom-lanyards': '/images/marketing/custom-lanyards-printed.webp',
+  'silicone-wristbands': '/images/marketing/silicone-wristbands-colours-hero.webp',
   // Channel letters: drawn illustrations of each illumination type.
   'front-lit-channel-letters': '/images/channel-letters/front-lit-channel-letters.webp',
   'halo-lit-channel-letters': '/images/channel-letters/halo-lit-channel-letters.webp',

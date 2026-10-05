@@ -24,7 +24,9 @@ const PAGES = [
   '/sizes/10x10',
   '/channel-letters',
   '/products/front-lit-channel-letters',
-  '/products/custom-lanyards'
+  '/products/custom-lanyards',
+  '/products/a-frame-sign',
+  '/products/custom-table-runner'
 ];
 
 for (const path of PAGES) {

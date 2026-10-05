@@ -207,6 +207,7 @@ export const CATEGORY_PAGES = [
     points: [
       'Pleated throws in 4, 6 and 8 ft.',
       'Fitted stretch covers in 6 and 8 ft.',
+      'Custom table runners with your logo, quoted to your table.',
       'Closed back — covers all four sides.',
       'Wrinkle-resistant, machine washable.'
     ],
@@ -215,7 +216,8 @@ export const CATEGORY_PAGES = [
     compareCols: ['Fit', 'Sizes', 'From'],
     compare: [
       { slug: 'pleated-table-covers', name: 'Pleated Table Cover', to: '/products/pleated-table-covers', cells: ['Draped throw, rounded corners', '4, 6 and 8 ft'] },
-      { slug: 'stretch-table-covers', name: 'Stretch Table Cover', to: '/products/stretch-table-covers', cells: ['Fitted, tight modern look', '6 and 8 ft'] }
+      { slug: 'stretch-table-covers', name: 'Stretch Table Cover', to: '/products/stretch-table-covers', cells: ['Fitted, tight modern look', '6 and 8 ft'] },
+      { slug: 'custom-table-runner', name: 'Custom Table Runner', to: '/products/custom-table-runner', cells: ['A branded strip along the table top', '72" and 96" lengths, or custom'] }
     ],
     faqs: [
       { q: 'Pleated or stretch — which should I choose?', a: 'A pleated cover is a classic draped throw with rounded corners and a relaxed look; a stretch cover is a fitted, wrinkle-free skin for a sleek modern booth. Both are closed-back (all four sides) and printed full-color.' },
@@ -225,6 +227,7 @@ export const CATEGORY_PAGES = [
       { q: 'What size table cover do I need?', a: 'Order to the table length, not the booth. Pleated throws come in 4 ft, 6 ft and 8 ft; fitted stretch covers in 6 ft and 8 ft. Trade show rentals are usually 6 ft or 8 ft rectangular tables — confirm with the show\'s exhibitor services before printing, because a stretch cover sized wrong will not fit.' },
       { q: 'Are table covers machine washable?', a: 'Yes. Both styles are dye-sublimated polyester, so the ink is bonded into the fibre and will not crack or peel in the wash. That is what lets one cover work across a full season of shows.' },
       { q: 'Do the covers cover all four sides?', a: 'Yes — both the pleated throw and the fitted stretch cover are closed-back on all four sides, so cases and stock stored under the table stay hidden from the aisle.' },
+      { q: 'Do you make custom table runners with a logo?', a: 'Yes. A custom table runner is a printed strip of fabric laid along the table, which brands the table without covering it. Choose a length for a 6 ft or 8 ft table and a width, send your logo, and we quote it with a free proof. Pair it with a pleated or stretch cover when you also want the front and sides of the table branded.' },
       { q: 'What is the difference between a table throw and a table cover?', a: 'A table throw is the draped style, which is our pleated cover with rounded corners. "Table cover" and "custom tablecloth" cover both the draped and the fitted stretch style. All of them are printed with your logo and closed on all four sides.' }
     ]
   },
@@ -288,7 +291,8 @@ export const CATEGORY_PAGES = [
       'Printed direct to substrate — no laminated skin to lift or peel.',
       'Coroplast, PVC board and ACP aluminum composite.',
       'Cut to any size up to 48" x 96".',
-      'Booth signage, wayfinding, and outdoor promotion.'
+      'Booth signage, wayfinding, and outdoor promotion.',
+      'A-frame and sandwich board sidewalk signs, quoted to your size.'
     ],
     answer:
       'Rigid signs are flat panel signage printed direct to substrate and cut to size up to 48" x 96". Apex prints lightweight coroplast for short-run directional and event signs, solid PVC board for lasting indoor signage, and ACP aluminum composite for panels that stay flat outdoors.',
@@ -296,13 +300,17 @@ export const CATEGORY_PAGES = [
     compare: [
       { slug: 'coroplast-signs', name: 'Coroplast Signs', to: '/products/coroplast-signs', cells: ['4mm corrugated plastic', 'Short-run event and directional signs'] },
       { slug: 'pvc-board-signs', name: 'PVC Board Signs', to: '/products/pvc-board-signs', cells: ['1/8" expanded PVC sheet', 'Indoor panels reused between shows'] },
-      { slug: 'acp-aluminum-signs', name: 'ACP Signs (Aluminum Composite)', to: '/products/acp-aluminum-signs', cells: ['3mm aluminum composite panel', 'Exterior signage that stays mounted'] }
+      { slug: 'acp-aluminum-signs', name: 'ACP Signs (Aluminum Composite)', to: '/products/acp-aluminum-signs', cells: ['3mm aluminum composite panel', 'Exterior signage that stays mounted'] },
+      { slug: 'a-frame-sign', name: 'A-Frame Sign', to: '/products/a-frame-sign', cells: ['Folding frame, replaceable printed panels', 'Sidewalk signs whose message changes'] },
+      { slug: 'sandwich-board-sign', name: 'Sandwich Board Sign', to: '/products/sandwich-board-sign', cells: ['Hinged boards, artwork printed on', 'Pavement signs with a fixed message'] }
     ],
     faqs: [
       { q: 'What is the difference between coroplast, PVC and aluminum signs?', a: 'Density, and therefore lifespan. Coroplast is corrugated plastic — light and inexpensive, right for short-run directional and event signage. PVC board is solid and smooth, which suits indoor signs meant to last a season or more. ACP aluminum composite is two aluminum skins over a plastic core, and it is the one that stays flat outdoors where the others would bow.' },
       { q: 'How large can a rigid sign be printed?', a: 'Up to 48" x 96" on a single panel, cut to any size within that. Larger installations are usually split across several panels and butted together on the wall — send the wall dimensions with your quote request and we will advise on the split.' },
       { q: 'What does printing direct to substrate mean?', a: 'The ink is applied to the board itself rather than to a vinyl film that is then laminated on top. There is no separate surface layer, so there is no edge for weather or handling to lift — which is where laminated signage usually starts to fail.' },
       { q: 'Which rigid sign works outdoors?', a: 'ACP aluminum composite for anything mounted permanently outdoors, because it holds its shape through heat and damp. Coroplast is outdoor-capable for short runs — a weekend event, a real estate or election period — but it is corrugated plastic and will eventually flex and fade.' },
+      { q: 'What is the difference between an A-frame sign and a sandwich board?', a: 'They are the same shape — two panels hinged at the top, standing in an A, readable from both sides, folding flat. We offer the A-frame sign as a frame with replaceable printed panels, so the message can change, and the sandwich board sign with the artwork printed directly on the boards, for a fixed message. Both are quoted from your artwork and size.' },
+      { q: 'What size A-frame sign should I order?', a: '24" x 36" is the common size for a pavement sign read from a few steps away, and 18" x 24" suits a counter, doorway or event table. Choose Custom for anything else and the quote comes back with a proof drawn to scale.' },
       { q: 'How should I set up artwork for a rigid sign?', a: 'Build it to the finished panel size at 150dpi in CMYK, as a single-page PDF or JPEG, with no crop marks or bleeds and fonts converted to outlines. The full artwork guidelines cover colour space, resolution and file setup, and every order gets a free proof before anything is cut.' }
     ]
   },
