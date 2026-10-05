@@ -2233,8 +2233,7 @@ const products = [
     related: ['pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
     gallery: [
       { src: '/images/signs/coroplast-signs-booth-directional.jpeg', alt: 'Coroplast booth directional sign zip-tied to an exhibition booth upright' },
-      { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker hung between trade show aisles' },
-      { src: '/images/signs/coroplast-signs-grommets-h-stake.webp', alt: 'Cut edge of a coroplast panel showing the internal flutes and a brass grommet' }
+      { src: '/images/signs/coroplast-signs-double-sided-aisle-marker.jpeg', alt: 'Double sided coroplast aisle marker hung between trade show aisles' }
     ],
     pricing: {
       model: 'area',
@@ -2318,8 +2317,7 @@ const products = [
     related: ['coroplast-signs', 'acp-aluminum-signs', 'fabric-banner-9oz-wrinkle-free'],
     gallery: [
       { src: '/images/signs/pvc-board-signs-booth-panel.jpeg', alt: 'Rigid PVC board panel mounted flush on a trade show booth wall' },
-      { src: '/images/signs/pvc-board-signs-retail-counter-display.jpeg', alt: 'PVC board wayfinding panel on the wall of a retail store' },
-      { src: '/images/signs/pvc-board-signs-grommets-edge-detail.webp', alt: 'Close view of a PVC board corner showing the solid core and the square cut edge' }
+      { src: '/images/signs/pvc-board-signs-retail-counter-display.jpeg', alt: 'PVC board wayfinding panel on the wall of a retail store' }
     ],
     pricing: {
       model: 'area',
@@ -2399,8 +2397,7 @@ const products = [
     related: ['pvc-board-signs', 'coroplast-signs', 'seg-modular-trade-show-kit-a'],
     gallery: [
       { src: '/images/signs/acp-aluminum-signs-fascia-panel.jpeg', alt: 'Aluminium composite panel sign on the fascia above a building entrance' },
-      { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'ACP sign bolted through its corner holes to a steel post frame at a yard entrance' },
-      { src: '/images/signs/acp-aluminum-signs-corner-radius-mounting-holes.webp', alt: 'Cut edge of an aluminium composite panel showing both aluminium skins over the core, with a rounded corner and a punched mounting hole' }
+      { src: '/images/signs/acp-aluminum-signs-exterior-mounted.jpeg', alt: 'ACP sign bolted through its corner holes to a steel post frame at a yard entrance' }
     ],
     pricing: {
       model: 'area',
