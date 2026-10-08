@@ -4,8 +4,9 @@
 //
 // RULE: no invented policy. Shipping/Returns/Warranty carry only facts that are
 // actually true today (real production times, custom-print nature, contact) and
-// are clearly marked as being finalised — they are stubs until the owner
-// provides real terms. About / Artwork / Privacy / Terms describe the real
+// the terms the owner has set (src/data/warranty.js: 5-year frames, 1 year on
+// everything else, 1-year reprint guarantee, no refunds, transit damage reported
+// within 3 days is reshipped). A page without real terms stays a `stub`. About / Artwork / Privacy / Terms describe the real
 // business and stack.
 //
 // A block is { h?, p?, list?, links? }: h => <h2>, p => <p>, list => <ul>,
@@ -145,9 +146,9 @@ export const PAGES = [
       { h: 'Rush is faster production — not faster shipping', p: 'A rush option speeds up production (for example, 2–3 business days instead of 6–8 on canopy tents and table covers). It does not shorten courier transit time. If your event is close, rush production gets your order printed sooner, but you still need to allow for the courier to deliver — so factor transit into a tight deadline as well.' },
       { h: 'Where we ship', p: 'We ship across the United States and Canada, to your business, venue or hotel address. Apex is online-only — there is no storefront or will-call pickup — so every order is shipped to the address you provide at checkout. Canopy pricing is available in USD or CAD.' },
       { h: 'Shipping cost and a delivery estimate', p: 'Shipping cost depends on the destination, size and weight of your order. If you’d like a delivery estimate — production plus transit — to a specific city or by a specific event date before you order, contact us with your address and in-hands date and we’ll confirm what’s achievable.' },
-      { h: 'When your order arrives', p: 'Check your order on delivery. If anything is damaged in transit or not right, tell us within five (5) business days so we can help — see our Returns, Refunds & Reprints page for how that works.' },
+      { h: 'When your order arrives', p: 'Check your order on delivery. If anything is damaged in transit, tell us within three (3) days of delivery and we will reship it — see our Returns, Reprints & Reships page for how that works.' },
       { links: [
-        { label: 'Returns, Refunds & Reprints', to: '/returns' },
+        { label: 'Returns, Reprints & Reships', to: '/returns' },
         { label: 'How the free artwork proof works', to: '/free-artwork-proof' },
         { label: 'Request a delivery estimate', to: '/quote' }
       ] }
@@ -156,34 +157,60 @@ export const PAGES = [
   {
     slug: 'returns',
     nav: 'Returns',
-    title: 'Returns, Refunds & Reprints',
+    title: 'Returns, Reprints & Reships',
     description:
-      'How Apex handles problems with a custom printed order — report within 5 business days, how defect claims work, rush charges, and how reprints are handled.',
+      'Report transit damage within 3 days for a reship. Print defects get a free reprint for 1 year. How Apex handles problems with a custom printed order; no refunds.',
     blocks: [
-      { p: 'We want your order to arrive right. Because every item is custom printed to order from a proof you approve, returns work differently than they would for a stock item — there is nothing generic to resend. If something is wrong with your order, tell us within five (5) business days of delivery and we will sort it out.' },
+      { p: 'We want your order to arrive right. Because every item is custom printed to order from a proof you approve, returns work differently than they would for a stock item — there is nothing generic to resend. If something is wrong, we fix it by reshipping or reprinting. We do not offer refunds.' },
       { h: 'After you approve your proof', p: 'Your order goes into production the moment you approve your proof. From that point the order cannot be canceled, and it is not refundable — production has already started on a one-off, made-for-you item.' },
-      { h: 'If something is wrong with your order', list: [
-        `Contact us within five (5) business days of delivery — email ${brand.email} or call ${brand.phone}.`,
-        'We log your issue and open a claim for your reference while we work out the best fix.',
-        'We will usually ask for a few photos showing the problem so we can see what happened.',
-        'If we need the item back to inspect it, we will arrange that with you within a reasonable time. If the fault is confirmed to be ours, we cover your return shipping.'
+      { h: 'Damaged in transit: tell us within 3 days', list: [
+        `Contact us within three (3) days of delivery — email ${brand.email} or call ${brand.phone}.`,
+        'Send your order number and a few photos of the damage, including the packaging.',
+        'If the damage happened in transit, we reship the item.',
+        'Damage reported after three days is not covered by the reship.'
       ] },
-      { h: 'Rush charges', p: 'Rush printing and rush shipping fees are not refundable unless the item is defective or the courier could not deliver it.' },
-      { h: 'Reprints', p: 'When a reprint is the right fix, we decide between a refund or a rework and set the turnaround and shipping based on current production capacity. Reprint turnaround starts from your written proof approval — we only take written approval as final, never verbal.' },
+      { h: 'Print defects: a free reprint for 1 year', p: 'If an item has a printing defect — for example, wrong colors against the approved proof, banding or missing print — we reprint it at no charge. The reprint guarantee lasts one (1) year from delivery. Contact us with your order number and photos, and we may ask for the item back to inspect it.' },
+      { h: 'What we do not do', p: 'We do not refund orders. The remedy for a confirmed problem is a reship or a reprint. Rush printing and rush shipping fees are not refundable.' },
+      { h: 'Reprints', p: 'Reprint turnaround starts from your written proof approval — we only take written approval as final, never verbal. Production time and shipping for the reprint are confirmed when we accept the claim.' },
       { h: 'A note on color', p: 'Screen and printed colors can vary slightly. A proof is produced differently from the final press print, so it will not match the finished item exactly — if precise color matters, tell us in your order notes and we will confirm on the proof.' },
+      { h: 'Frames and hardware', p: 'For a faulty frame or other hardware, see our Warranty page.' },
+      { links: [{ label: 'Warranty', to: '/warranty' }] },
       { h: 'Questions', p: `Reach us any time at ${brand.email} or ${brand.phone}.` }
     ]
   },
   {
     slug: 'warranty',
     nav: 'Warranty',
-    title: 'Warranty',
-    stub: true,
+    title: 'Limited Warranty',
     description:
-      'Apex Trade Show displays are built for repeated event use — aluminum hardware and dye-sublimated graphics. Full warranty terms are being finalised — contact us with any concern.',
+      'Apex warranty: 5 years on frames, 1 year on everything else, a 1-year reprint guarantee for print defects, a reship for transit damage reported in 3 days.',
     blocks: [
-      { p: 'Our displays are built for repeated event use. Canopy tents use heavy-duty aluminum hex frames and dye-sublimated 600D polyester tops; banner stands and backdrops use aluminum hardware with replaceable dye-sublimated printed graphics.' },
-      { h: 'Our full warranty terms are being finalised', p: 'The written warranty terms for this store are still being finalised. If you have a concern about a frame, hardware or print defect, contact us and we will help.' }
+      { p: 'Our displays are built for repeated event use. This page sets out what we warrant, for how long, and what we do when something is wrong. It is a limited warranty: it covers defects in materials and workmanship, not every kind of damage.' },
+      { h: 'How long each part is covered', list: [
+        'Frames — 5 years. This covers the frame of canopy tents, banner stands, tension fabric and step & repeat backdrops, SEG modular kits and A-frame signs.',
+        'Everything else — 1 year. This covers printed graphics and fabrics, flags, signs, table covers and runners, lanyards, wristbands, print collateral, channel letters, and parts other than the frame, including LEDs and electrical components.',
+        'We do not offer lifetime warranties.'
+      ] },
+      { h: 'Print defects: a free reprint for 1 year', p: 'If an item has a printing defect, we reprint it at no charge. The reprint guarantee lasts one (1) year from delivery. We do not offer refunds — a confirmed problem is fixed by a reprint or a reship.' },
+      { h: 'Damaged in transit: tell us within 3 days', p: 'If an order arrives damaged, contact us within three (3) days of delivery with your order number and photos, and we reship it. Damage reported after three days is not covered by the reship.' },
+      { h: 'What is not covered', list: [
+        'Wind, storm and weather damage — canopies and signs should be staked, weighted or taken down in strong wind.',
+        'Misuse, accidents and normal wear and tear.',
+        'Fading from long exposure to sunlight.',
+        'Mistakes in artwork that you approved on the proof.',
+        'Changes or repairs made by anyone other than Apex.',
+        'Installation and electrical hookup. Illuminated signs must be connected by a licensed electrician.'
+      ] },
+      { h: 'How to make a claim', list: [
+        `Email ${brand.email} or call ${brand.phone}.`,
+        'Give your order number and a few clear photos of the problem.',
+        'We may ask for the item back to inspect it. If the fault is confirmed to be ours, we cover the return shipping.'
+      ] },
+      { p: 'This warranty gives you specific legal rights, and you may also have other rights that vary by state or province.' },
+      { links: [
+        { label: 'Returns, Reprints & Reships', to: '/returns' },
+        { label: 'Shipping', to: '/shipping' }
+      ] }
     ]
   },
   {
@@ -315,11 +342,11 @@ export const PAGES = [
       ] },
       { p: 'Deposits and payments may be non-refundable to the extent they relate to work already performed or costs already incurred.' },
 
-      { h: '24. Returns & Refunds', p: 'Apex Trade Show aims to provide products free from manufacturing defects. Customers must report any apparent defect, damage or material production error within five (5) business days of delivery, unless a different period is expressly provided in writing. Customers may be required to provide photographs, videos or other information to assist with evaluation. Apex Trade Show may require defective products to be returned for inspection. Where Apex Trade Show determines that a product contains a manufacturing defect attributable to Apex Trade Show, we may, at our discretion:' },
+      { h: '24. Returns, Reprints & Reships', p: 'Apex Trade Show aims to provide products free from manufacturing defects. Damage in transit must be reported within three (3) days of delivery, and we will reship the affected item. Printing defects are covered by a reprint guarantee for one (1) year from delivery, and defects in materials and workmanship by the limited warranty on our Warranty page (5 years on frames, 1 year on everything else). Customers may be required to provide photographs, videos or other information to assist with evaluation. Apex Trade Show may require defective products to be returned for inspection. Where Apex Trade Show determines that a product contains a defect attributable to Apex Trade Show, we will, at our discretion:' },
       { list: [
-        'Repair the product', 'Replace the product', 'Reprint the affected product', 'Provide store credit', 'Refund the affected product amount'
+        'Repair the product', 'Replace the product', 'Reprint the affected product', 'Reship the affected product'
       ] },
-      { p: 'Refunds, where approved, will generally be made using the original payment method unless otherwise agreed. Shipping charges are generally non-refundable unless the issue is determined to be attributable to Apex Trade Show or otherwise required by applicable law. Custom products are generally not returnable solely because the customer changes their mind, changes their requirements or is dissatisfied with customer-approved artwork or specifications.' },
+      { p: 'Apex Trade Show does not offer refunds. Custom products are not returnable because the customer changes their mind, changes their requirements or is dissatisfied with customer-approved artwork or specifications.' },
 
       { h: '25. Manufacturing Defects', p: 'A manufacturing defect does not include:' },
       { list: [

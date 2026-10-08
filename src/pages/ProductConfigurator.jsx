@@ -20,6 +20,7 @@ import { useCart } from '../context/CartContext';
 import { trackViewItem } from '../lib/analytics';
 import { brand } from '../config/brand';
 import '../styles/configurator.css';
+import { warrantyHeadline, WARRANTY } from '../data/warranty';
 
 // `slug` and `embedded` let the product + city pages mount this exact
 // configurator inside their own page. Reused rather than reimplemented on
@@ -768,6 +769,10 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
           </p>
           </>
           )}
+          <p className="panel-foot warranty-note">
+            {warrantyHeadline(product)} Damaged in transit? Tell us within {WARRANTY.transitDamageDays} days for a reship.{' '}
+            <Link to="/warranty">Warranty details</Link>
+          </p>
         </aside>
       </div>
 
