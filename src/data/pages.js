@@ -18,19 +18,20 @@ export const PAGES = [
   {
     slug: 'about',
     nav: 'About',
-    title: 'About Apex — Trade Show Displays',
+    title: 'About Apex — Vancouver Trade Show Displays',
     description:
-      'Apex Trade Show is a complete trade show display supplier serving the US and Canada — custom canopy tents, banner stands, backdrops, table covers and flags.',
+      'Apex Trade Show: a Vancouver team of 15 with 12 years in printing and 900+ booth setups, producing in US cities and shipping across the US and Canada.',
     blocks: [
-      { p: 'Apex Trade Show is a complete trade show display and event branding supplier serving the United States and Canada. We print your brand across a full booth — custom canopy tents, retractable and X-stand banner stands, step & repeat backdrops and table covers — with a free artwork proof on every order.' },
-      { h: 'What we do', p: 'We help businesses, vendors, teams and event organizers show up looking professional. From one supplier you can order every branded piece of a trade show booth and have it all match, instead of piecing it together from several vendors. Canopies, banner stands, backdrops, table covers and flags all configure for instant online pricing; larger custom display types (SEG modular kits, tension fabric and pop-up displays) are quoted per order.' },
-      { h: 'Why order from Apex', list: [
-        'One supplier for the whole booth — canopy, banners, backdrop, table cover and flags, all printed to match from a single logo file.',
-        'Instant online pricing on most products, so you see the cost as you configure size, walls and finishing — no waiting on a quote for standard items.',
-        'A free artwork proof on every order — nothing prints until you approve it in writing, which protects you from surprises.',
-        'Dye-sublimation printing that bonds ink into the fabric, so colors stay sharp and won’t crack, peel or fade with repeated event use.',
-        'Made to order and shipped across the US and Canada, priced in USD or CAD.',
-        'An in-house design service if you don’t have a print-ready file — send your logo and direction and we build the artwork.'
+      { p: 'Apex Trade Show prints and ships custom canopy tents, banner stands, backdrops, table covers, signs and more to businesses across the United States and Canada. We started with canopies and grew into the whole booth, so you can order every branded piece from one supplier and have it all match. Every order comes with a free artwork proof.' },
+      { h: 'Trade show printing, built by a team that has set up the booth', p: 'Apex is a two-year-old company built by a team with 12 years of experience in printing. We are a team of 15 based in Vancouver, Canada: industrial printers, marketers and brand builders. The printers know what a file does on press, the marketers know what a booth has to achieve on the show floor, and the brand builders make sure your logo and colors look the same on every piece.' },
+      { p: 'We have supported 900+ booth setups. That experience shapes how we work: we check your artwork before it prints, we send a proof for approval, and we plan around the date your event starts.' },
+      { h: 'How we work: online, with production houses across the US', p: 'Apex is an online business. There is no storefront, and every order is placed on our website. Our team is in Vancouver, and we produce through production houses in popular US trade show cities, including Las Vegas, Chicago, Dallas, Atlanta, Los Angeles, Orlando and New York. Each order goes to the production house best placed to produce it and get it to your address, which keeps delivery times down and means your order is printed close to the event. We ship across the United States and Canada, and pricing is available in USD or CAD.' },
+      { h: 'What we make', list: [
+        'Canopy tents — 10×10, 10×15 and 10×20, with full or half printed walls. Canopies are where Apex started.',
+        'Displays — retractable and X-stand banner stands, step & repeat and tension fabric backdrops, and SEG modular kits.',
+        'Tables and flags — table covers and runners, and flags.',
+        'Signs — rigid signs, A-frame and sandwich board signs, and channel letters.',
+        'Marketing print — business cards, flyers, brochures, lanyards and wristbands.'
       ] },
       { links: [
         { label: 'Trade Show Displays', to: '/trade-show-displays' },
@@ -39,22 +40,24 @@ export const PAGES = [
         { label: 'Backdrops', to: '/backdrops' },
         { label: 'Table Covers', to: '/table-covers' }
       ] },
-      { h: 'Custom canopy tents — where we built our name', p: 'Canopies remain our most popular category and where Apex started. We print pop-up tents in 10×10, 10×15 and 10×20 with full or half printed walls and instant online pricing. Dye sublimation bonds the ink into 600D polyester over a heavy-duty aluminum hex frame, so colors stay sharp and will not crack, peel or fade with repeated outdoor use.' },
-      { links: [{ label: 'Shop custom canopy tents', to: '/custom-canopies' }] },
-      { h: 'The rest of your booth', p: 'Alongside canopies we print the displays that finish a professional booth: standard and deluxe retractable banner stands and lightweight X-stands for aisles and counters, large-format step & repeat backdrops for event photography, and pleated or stretch table covers. Send your logo once and we coordinate the whole set on-brand.' },
+      { h: 'How an order works', list: [
+        'Configure and see the price. Most products price instantly online; larger or custom items are quoted.',
+        'Send your artwork, or let us design it. We check every file at no charge.',
+        'Approve a free proof. Nothing prints until you say yes, in writing.',
+        'We print and ship. You get tracking, and we ship across the US and Canada.'
+      ] },
+      { h: 'What we stand behind', list: [
+        'A free artwork proof on every order.',
+        'A 5-year limited warranty on frames, and 1 year on everything else.',
+        'A free reprint for print defects for 1 year.',
+        'A reship if your order arrives damaged and you tell us within 3 days.'
+      ] },
       { links: [
-        { label: 'Banner Stands', to: '/banner-stands' },
-        { label: 'Backdrops', to: '/backdrops' },
-        { label: 'Table Covers', to: '/table-covers' }
+        { label: 'Warranty', to: '/warranty' },
+        { label: 'Returns, Reprints & Reships', to: '/returns' },
+        { label: 'Shipping', to: '/shipping' }
       ] },
-      { h: 'How we work', list: [
-        'Configure any canopy, banner stand, backdrop or table cover for instant online pricing — or request a quote for bulk and non-standard orders.',
-        'Upload your artwork or logo, or add our design service.',
-        'Approve the free visual proof we send — nothing prints until you say yes.',
-        'We print with dye sublimation and ship across the US and Canada.'
-      ] },
-      { h: 'Where we ship', p: 'Apex ships custom trade show displays across the United States and Canada. We are online-only — there is no storefront to visit — so you order, approve your proof, and receive your booth wherever your event is.' },
-      { h: 'Contact', p: 'Questions before you order? Email or call us — see the Contact page for details and hours.' }
+      { h: 'Talk to a person', p: `Questions before you order? Email ${brand.email} or call ${brand.phone}. The Contact page has our hours.` }
     ]
   },
   {
