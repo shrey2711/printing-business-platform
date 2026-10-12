@@ -2,16 +2,23 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { bySlug as getBlogPost } from '../services/cms/blogService';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { readSeed } from '../lib/seed';
 import '../styles/blog.css';
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const [post, setPost] = useState(undefined); // undefined = loading, null = not found
+  // The prerendered page embeds this post, so the article is on screen on first
+  // paint even if /api is slow. undefined = loading, null = not found.
+  const [seed] = useState(() => readSeed('post', slug));
+  const [post, setPost] = useState(seed || undefined);
 
   useEffect(() => {
     let alive = true;
-    setPost(undefined);
-    getBlogPost(slug).then((p) => alive && setPost(p)).catch(() => alive && setPost(null));
+    const seeded = !!seed && seed.slug === slug;
+    if (!seeded) setPost(undefined);
+    getBlogPost(slug)
+      .then((p) => alive && (p || !seeded) && setPost(p))
+      .catch(() => alive && !seeded && setPost(null));
     return () => {
       alive = false;
     };

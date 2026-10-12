@@ -9,10 +9,10 @@
 export const TENT_RULES_PATH = '/resources/tent-weight-rules';
 
 export const TENT_RULES_META = {
-  title: 'Canopy Tent Weight Rules for Vendors (2026 Guide)',
+  title: 'Canopy Tent Weight Rules for Vendors',
   h1: 'Canopy Tent Weight Rules for Vendors: 2026 Guide',
   description:
-    'How much weight per tent leg do markets, craft shows and art fairs require? Real 2025–2026 vendor rules from 30+ events, plus a weight planner and printable checklist.',
+    'How much weight per tent leg do markets, craft shows and art fairs require? Real 2025–2026 vendor rules from 30+ events, plus a weight planner and checklist.',
   updated: '2026-10-12',
   intro:
     'Most outdoor events now check tent weights at setup, and a tent without the right weight can be sent home. We read the vendor rules that 30+ farmers markets, craft shows, street festivals and art fairs published for their 2025–2026 seasons and summarized what they actually ask for. Every rule below links to the organizer’s own page.'

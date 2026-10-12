@@ -139,7 +139,7 @@ function jsonLdSafe(obj) {
     .replace(/\u2029/g, '\\u2029');
 }
 
-function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt, preloadImage }) {
+function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt, preloadImage, seed }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
   const o = seoMap[path];
   if (o) {
@@ -286,6 +286,12 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   }
   // Prerendered content lives inside #root; React replaces it on hydration.
   html = html.replace('<div id="root"></div>', `<div id="root"><div id="seo-prerender">${body}${NAV}${FOOTER}</div></div>`);
+  // First-paint data for the client (see src/lib/seed.js). `<` is escaped so the
+  // JSON can never close the script element early.
+  if (seed) {
+    const json = JSON.stringify({ ...seed, path }).replace(/</g, '\\u003c').replace(/\u2028|\u2029/g, '');
+    html = html.replace('</body>', `<script type="application/json" id="seo-seed">${json}</script>\n</body>`);
+  }
   // Prepend an explicit write-path marker so a custom canonical override can't
   // confuse where the file is written. Stripped before writing.
   return `<!--PP:${path}-->${html}`;
@@ -1412,6 +1418,7 @@ for (const summary of productList) {
         })
         .join('')}</ul>`;
     return render({
+      seed: { kind: 'product', slug: product.slug, data: { ...product, faqs: getProductFaqs(product) } },
       path: `/products/${product.slug}`,
       title: `${seoTitle.title} | ${BRAND}`,
       description: seoTitle.description(startingPrice, product),
@@ -2003,6 +2010,7 @@ for (const p of posts) {
         : [])
     ];
     return render({
+      seed: { kind: 'post', slug: p.slug, data: p },
       path: `/blog/${p.slug}`,
       title: `${p.seo?.title || p.title} | ${BRAND}`,
       description: p.seo?.description || p.excerpt,

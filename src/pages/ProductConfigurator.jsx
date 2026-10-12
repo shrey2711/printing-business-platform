@@ -21,6 +21,7 @@ import { trackViewItem } from '../lib/analytics';
 import { brand } from '../config/brand';
 import '../styles/configurator.css';
 import { warrantyHeadline, WARRANTY } from '../data/warranty';
+import { readSeed } from '../lib/seed';
 
 // `slug` and `embedded` let the product + city pages mount this exact
 // configurator inside their own page. Reused rather than reimplemented on
@@ -37,11 +38,15 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
   const money = useMoney();
   const { currency } = useCurrency();
   const cart = useCart();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // The prerendered page embeds this product, so a crawler (or a slow API) sees
+  // the real page on first paint rather than "Loading…". Not used when embedded
+  // in a product + city page, which has its own seed or none.
+  const [seed] = useState(() => (embedded ? null : readSeed('product', slug)));
+  const [product, setProduct] = useState(seed);
+  const [loading, setLoading] = useState(!seed);
   const [notFound, setNotFound] = useState(false);
 
-  const [config, setConfig] = useState(null);
+  const [config, setConfig] = useState(() => (seed ? buildDefaultConfig(seed) : null));
   const [price, setPrice] = useState(null);
   const [pricing, setPricing] = useState(false);
   const [sizeTouched, setSizeTouched] = useState(false); // show size error on blur/submit
@@ -87,16 +92,21 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
   // Load the product and seed default configuration.
   useEffect(() => {
     let alive = true;
-    setLoading(true);
-    setNotFound(false);
+    // Already showing the seeded product for this slug: refresh quietly, without
+    // a loading state, and without resetting what the visitor has chosen.
+    const seeded = !!seed && seed.slug === slug;
+    if (!seeded) {
+      setLoading(true);
+      setNotFound(false);
+    }
     getProduct(slug)
       .then((p) => {
         if (!alive) return;
         setProduct(p);
-        setConfig(buildDefaultConfig(p));
+        if (!seeded) setConfig(buildDefaultConfig(p));
         trackViewItem({ slug, name: p?.name, price: p?.startingPrice, currency });
       })
-      .catch(() => alive && setNotFound(true))
+      .catch(() => alive && !seeded && setNotFound(true))
       .finally(() => alive && setLoading(false));
     return () => {
       alive = false;
