@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getBlogPosts } from '../services/blog';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../data/resources';
+import { TENT_RULES_PATH, TENT_RULES_META } from '../data/tentRules';
 
 // Learning Center hub — organizes the guide articles into topic categories.
 // Article titles/excerpts come from the live blog list so they never drift.
@@ -27,6 +28,20 @@ export default function ResourcesPage() {
         <h1>{RESOURCES_META.h1}</h1>
         <p>{RESOURCES_META.intro}</p>
       </div>
+
+      <section className="resource-cat">
+        <div className="resource-cat-head">
+          <h2>Featured guide</h2>
+          <p>Real vendor rules from 30+ markets, craft shows and art fairs.</p>
+        </div>
+        <div className="resource-grid">
+          <Link className="resource-card" to={TENT_RULES_PATH}>
+            <strong>{TENT_RULES_META.h1}</strong>
+            <span>{TENT_RULES_META.description}</span>
+            <span className="resource-arrow" aria-hidden="true">Read the guide →</span>
+          </Link>
+        </div>
+      </section>
 
       {RESOURCE_CATEGORIES.map((cat) => (
         <section className="resource-cat" key={cat.key}>

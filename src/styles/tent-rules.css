@@ -1,0 +1,53 @@
+/* Canopy tent weight rules guide (/resources/tent-weight-rules) */
+.tent-rules .tr-updated { color: #6b7280; font-size: .9rem; margin: -.25rem 0 .75rem; }
+.tent-rules .tr-block { margin: 2.25rem 0; }
+.tent-rules .tr-block h2 { margin-bottom: .75rem; }
+.tent-rules .tr-findings li { margin: .45rem 0; line-height: 1.55; }
+
+.tent-rules .tr-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tent-rules .tr-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.tent-rules .tr-table th,
+.tent-rules .tr-table td { text-align: left; vertical-align: top; padding: .65rem .75rem; border-bottom: 1px solid #e5e7eb; }
+.tent-rules .tr-table thead th { background: #f3f4f6; font-weight: 600; white-space: nowrap; }
+.tent-rules .tr-rules td:first-child { min-width: 12rem; }
+.tent-rules .tr-rules td:last-child { min-width: 18rem; }
+.tent-rules .tr-place { display: block; color: #6b7280; font-size: .85rem; margin-top: .15rem; }
+
+.tent-rules .tr-planner { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.25rem; }
+.tent-rules .tr-planner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.tent-rules .tr-planner-grid label { display: flex; flex-direction: column; gap: .35rem; font-weight: 600; font-size: .9rem; }
+.tent-rules .tr-planner-grid select,
+.tent-rules .tr-planner-grid input[type='number'] { padding: .55rem .6rem; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; font-weight: 400; }
+.tent-rules .tr-planner-grid .tr-check { flex-direction: row; align-items: center; gap: .5rem; align-self: end; padding-bottom: .55rem; }
+.tent-rules .tr-result { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+.tent-rules .tr-result div { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: .75rem; text-align: center; }
+.tent-rules .tr-result span { display: block; color: #6b7280; font-size: .85rem; }
+.tent-rules .tr-result strong { font-size: 1.4rem; }
+
+.tent-rules .tr-checklist-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.tent-rules .tr-checklist li { margin: .45rem 0; line-height: 1.5; }
+.tent-rules .tr-print-foot { display: none; }
+.tent-rules .tr-faq h3 { font-size: 1.05rem; margin: 1rem 0 .35rem; }
+.tent-rules .tr-note { background: #f8fafc; border-left: 4px solid #1f4e78; padding: 1rem 1.25rem; border-radius: 6px; }
+
+@media (max-width: 560px) {
+  .tent-rules .tr-result { grid-template-columns: 1fr; }
+}
+
+/* Phones: show each event rule as a stacked card instead of a wide table. */
+@media (max-width: 640px) {
+  .tent-rules .tr-rules thead { display: none; }
+  .tent-rules .tr-rules, .tent-rules .tr-rules tbody, .tent-rules .tr-rules tr, .tent-rules .tr-rules td { display: block; width: 100%; }
+  .tent-rules .tr-rules tr { border: 1px solid #e5e7eb; border-radius: 10px; padding: .5rem .75rem; margin-bottom: .75rem; }
+  .tent-rules .tr-rules td { border: 0; padding: .25rem 0; min-width: 0 !important; }
+  .tent-rules .tr-rules td[data-label]::before { content: attr(data-label) ': '; font-weight: 600; color: #374151; }
+}
+
+/* Print only the checklist. */
+@media print {
+  body * { visibility: hidden; }
+  .tent-rules .tr-checklist, .tent-rules .tr-checklist * { visibility: visible; }
+  .tent-rules .tr-checklist { position: absolute; left: 0; top: 0; width: 100%; }
+  .tent-rules .tr-print { display: none; }
+  .tent-rules .tr-print-foot { display: block; margin-top: 1.5rem; font-size: .85rem; }
+}

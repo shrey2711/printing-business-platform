@@ -21,6 +21,7 @@ const SizePage = lazy(() => import('./pages/SizePage'));
 const SolutionPage = lazy(() => import('./pages/SolutionPage'));
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
 const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
+const TentRulesPage = lazy(() => import('./pages/TentRulesPage'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const InfoPage = lazy(() => import('./pages/InfoPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
@@ -539,6 +540,7 @@ function App() {
         <Route path="/sizes/:size" element={<SizePage />} />
         <Route path="/solutions/:useCase" element={<SolutionPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/resources/tent-weight-rules" element={<TentRulesPage />} />
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/cart" element={<CartPage />} />

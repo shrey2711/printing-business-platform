@@ -33,6 +33,10 @@ import {
 import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
+import {
+  TENT_RULES_PATH, TENT_RULES_META, TENT_RULES_FINDINGS, TENT_RULES_BANDS,
+  TENT_RULES, TENT_CHECKLIST, TENT_RULES_FAQ
+} from '../src/data/tentRules.js';
 import { guidesForCategory, productsForGuide, CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides, loadApprovedReviews } from './buildData.mjs';
 import { ratingSummary } from '../backend/lib/reviews.js';
@@ -455,6 +459,8 @@ routes.push(() => {
     body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Learning Center</span></nav>
       <h1>${esc(RESOURCES_META.h1)}</h1>
       <p>${esc(RESOURCES_META.intro)}</p>
+      <h2>Featured guide</h2>
+      <ul><li><a href="${TENT_RULES_PATH}">${esc(TENT_RULES_META.h1)}</a> — ${esc(TENT_RULES_META.description)}</li></ul>
       ${cats}
       <p><a href="/products">Shop all trade show displays</a> · <a href="/quote">Request a quote</a></p>`,
     jsonLd: {
@@ -465,6 +471,71 @@ routes.push(() => {
         { '@type': 'ListItem', position: 2, name: 'Learning Center', item: `${ORIGIN}/resources` }
       ]
     }
+  });
+});
+
+// ---- Canopy tent weight rules guide (/resources/tent-weight-rules) ----
+// Mirrors TentRulesPage.jsx (minus the interactive planner) so crawlers and
+// organizers who link to it see the full cited rule table.
+routes.push(() => {
+  const bands = TENT_RULES_BANDS.map((b) =>
+    `<tr><td>${esc(b.type)}</td><td>${esc(b.perLeg)}</td><td>${esc(b.note)}</td></tr>`).join('');
+  const rules = TENT_RULES.map((r) =>
+    `<tr><td><a href="${esc(r.url)}" rel="noopener">${esc(r.event)}</a> (${esc(r.place)})</td><td>${esc(r.type)}</td><td>${esc(r.season)}</td><td>${esc(r.rule)}</td></tr>`).join('');
+  return render({
+    path: TENT_RULES_PATH,
+    title: `${TENT_RULES_META.title} | ${BRAND}`,
+    description: TENT_RULES_META.description,
+    image: CANOPY_OG,
+    imageAlt: TENT_RULES_META.h1,
+    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/resources">Learning Center</a> / <span>Tent weight rules</span></nav>
+      <article>
+      <h1>${esc(TENT_RULES_META.h1)}</h1>
+      <p>Updated ${esc(TENT_RULES_META.updated)}</p>
+      <p>${esc(TENT_RULES_META.intro)}</p>
+      <h2>Key findings</h2>
+      <ul>${TENT_RULES_FINDINGS.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+      <h2>Typical weight per leg by event type</h2>
+      <table><thead><tr><th>Event type</th><th>Weight per leg</th><th>Notes</th></tr></thead><tbody>${bands}</tbody></table>
+      <h2>Tent weight planner</h2>
+      <p>Pick your event type and tent size to estimate weight per leg, total weight and sandbags. Your event’s published rule always comes first.</p>
+      <h2>The rules, event by event</h2>
+      <p>Rules as published by each organizer for the season shown. Check the source before your event, because rules change.</p>
+      <table><thead><tr><th>Event</th><th>Type</th><th>Season</th><th>Tent rule</th></tr></thead><tbody>${rules}</tbody></table>
+      <h2>Vendor tent checklist</h2>
+      <ul>${TENT_CHECKLIST.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+      <h2>Frequently asked questions</h2>
+      ${TENT_RULES_FAQ.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
+      <h2>Organizers: use or correct this guide</h2>
+      <p>You’re welcome to link to this page or the checklist from your vendor information. If your event is listed and a rule has changed, email marketing@apextradeshow.com and we’ll update it.</p>
+      <p>Need a tent that meets your event’s rules? See our <a href="/custom-canopies">custom canopy tents</a>, side walls and weight bags.</p>
+      </article>`,
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: TENT_RULES_META.h1,
+        description: TENT_RULES_META.description,
+        dateModified: TENT_RULES_META.updated,
+        author: { '@type': 'Organization', name: BRAND },
+        publisher: { '@type': 'Organization', name: BRAND },
+        mainEntityOfPage: `${ORIGIN}${TENT_RULES_PATH}`
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: TENT_RULES_FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Learning Center', item: `${ORIGIN}/resources` },
+          { '@type': 'ListItem', position: 3, name: 'Tent weight rules', item: `${ORIGIN}${TENT_RULES_PATH}` }
+        ]
+      }
+    ]
   });
 });
 
@@ -2009,6 +2080,7 @@ const buildUrlset = (rows) =>
 const smPages = [
   smUrl('/', '1.0', 'weekly', LMOD.home),
   smUrl('/resources', '0.7', 'weekly', gitLastMod('src/data/resources.js')),
+  smUrl(TENT_RULES_PATH, '0.7', 'monthly', TENT_RULES_META.updated),
   smUrl('/quote', '0.4', undefined, LMOD.pages),
   smUrl('/contact', '0.4', undefined, LMOD.pages),
   ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7', undefined, LMOD.canopy)),
