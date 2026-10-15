@@ -13,6 +13,14 @@ Disallow: /register
 Disallow: /reset-password
 Disallow: /forgot-password
 Disallow: /review
+# Public, read-only data the pages render from. Crawlers render pages with
+# JavaScript, so blocking these left product lists and prices on "Loading".
+Allow: /api/products
+Allow: /api/categories
+Allow: /api/blog
+Allow: /api/content
+Allow: /api/rates
+Allow: /api/reviews/
 Disallow: /api/
 
 # OpenAI ChatGPT SEARCH crawler — controls visibility in ChatGPT search/answers.
@@ -30,6 +38,14 @@ Disallow: /register
 Disallow: /reset-password
 Disallow: /forgot-password
 Disallow: /review
+# Public, read-only data the pages render from. Crawlers render pages with
+# JavaScript, so blocking these left product lists and prices on "Loading".
+Allow: /api/products
+Allow: /api/categories
+Allow: /api/blog
+Allow: /api/content
+Allow: /api/rates
+Allow: /api/reviews/
 Disallow: /api/
 
 # AI crawlers — explicitly permitted for discovery and answering, with the same
@@ -55,6 +71,14 @@ Disallow: /register
 Disallow: /reset-password
 Disallow: /forgot-password
 Disallow: /review
+# Public, read-only data the pages render from. Crawlers render pages with
+# JavaScript, so blocking these left product lists and prices on "Loading".
+Allow: /api/products
+Allow: /api/categories
+Allow: /api/blog
+Allow: /api/content
+Allow: /api/rates
+Allow: /api/reviews/
 Disallow: /api/
 
 Sitemap: https://www.apextradeshow.com/sitemap.xml
