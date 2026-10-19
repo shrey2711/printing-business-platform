@@ -20,6 +20,7 @@ import { readFileSync } from 'fs';
 import { listProducts } from '../backend/data/products.js';
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL, DISPLAY_SPEC_ROWS } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const showCorpus = process.argv.includes('--corpus');
 const fails = [];
@@ -82,7 +83,7 @@ const FORBIDDEN = [
   [/\btear[- ]proof\b|\bindestructible\b|\bunbreakable\b/i, 'absolute durability claim']
 ];
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 // The shared spec table is the densest specification block on the page.
 for (const row of DISPLAY_SPEC_ROWS) {

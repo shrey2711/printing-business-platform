@@ -1,4 +1,5 @@
 import { brand } from '../config/brand.js';
+import { INDEXED_STATES } from './stateContent.js';
 
 // City × category local SEO landing pages (from Apex_Trade_Show_US_City_SEO_Keywords.xlsx).
 //
@@ -175,13 +176,14 @@ export const cityCatDescription = (label, city) => {
 // §23 breadcrumb: Home → Locations → State → {label} in {City} (location
 // hierarchy). All URLs are real (/locations, /locations/{state} state pages).
 // Returns [{ name, url }] with RELATIVE urls; callers make them absolute. DC has
-// no stateSlug, so the state level is omitted for it.
+// no stateSlug, so the state level is omitted for it (as it is for any state whose page was removed).
 export const cityBreadcrumb = (label, slug, city) => {
   const crumbs = [
     { name: 'Home', url: '/' },
     { name: 'Locations', url: '/locations' }
   ];
-  if (city.stateSlug) crumbs.push({ name: city.stateName, url: `/locations/${city.stateSlug}` });
+  // State pages without verified local facts are removed, so the trail skips them.
+  if (city.stateSlug && INDEXED_STATES.has(city.stateSlug)) crumbs.push({ name: city.stateName, url: `/locations/${city.stateSlug}` });
   crumbs.push({ name: `${label} in ${city.city}`, url: `/${slug}/${city.slug}` });
   return crumbs;
 };

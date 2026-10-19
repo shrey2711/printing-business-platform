@@ -13,6 +13,7 @@
 
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const list = process.argv.includes('--list');
 const MAX_EVENTS = 6;
@@ -58,7 +59,7 @@ const CLAIMS = [
 ];
 
 const names = Object.keys(EVENT_CITY).sort((a, b) => b.length - a.length);
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 for (const city of rolled) {
   const d = CITY_DETAIL[city.slug];

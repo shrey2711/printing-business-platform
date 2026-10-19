@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
+import { isCategoryCityLive } from '../data/removedLocations';
 import { list as getProducts } from '../services/cms/productService';
 import { getState, slugify } from '../data/states';
 import { SEO_CITIES } from '../data/citySeo';
 import {
-  PRIORITY_STATES, stateContent, ORDERING_STEPS,
+  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS, LOCAL_FACTS, BUYING_GUIDE_NOTE, STATE_OUTDOOR, distinctIntro,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
@@ -16,8 +17,9 @@ export default function LocationPage() {
   const [products, setProducts] = useState([]);
   const priority = state && PRIORITY_STATES.has(state.slug);
   const content = state && stateContent[state.slug];
+  const local = state && LOCAL_FACTS[state.slug];
   // SEO cities in this state → their canonical /trade-show-displays/{city} pages (§27 State→City).
-  const seoInState = state ? SEO_CITIES.filter((c) => c.stateSlug === state.slug) : [];
+  const seoInState = state ? SEO_CITIES.filter((c) => c.stateSlug === state.slug && isCategoryCityLive('trade-show-displays', c.slug)) : [];
 
   useDocumentMeta(
     state ? `Custom Printed Canopy Tents in ${state.name}` : 'Location',
@@ -26,7 +28,7 @@ export default function LocationPage() {
       : '',
     undefined,
     // Templated long-tail states are noindex until they earn unique content.
-    state && !priority ? 'noindex, follow' : undefined
+    state && !INDEXED_STATES.has(state.slug) ? 'noindex, follow' : undefined
   );
 
   useEffect(() => {
@@ -34,6 +36,9 @@ export default function LocationPage() {
     getProducts().then((p) => alive && setProducts(p.slice(0, 6))).catch(() => {});
     return () => { alive = false; };
   }, []);
+
+  // Regions without verified local facts have no page; they 301 to /locations.
+  if (state && !INDEXED_STATES.has(state.slug)) return <Navigate to="/locations" replace />;
 
   if (!state) {
     return (
@@ -79,14 +84,37 @@ export default function LocationPage() {
       </section>
 
       <section className="section-block card loc-content">
-        <h2>Custom canopy tents in {state.name}</h2>
+        {!local && <h2>Custom canopy tents in {state.name}</h2>}
         {priority && content ? (
           <>
-            <p>{content.intro}</p>
-            <h3>Popular event uses in {state.name}</h3>
-            <ul className="feature-list">
-              {content.events.map((e) => <li key={e}>{e}</li>)}
-            </ul>
+            <p>{local ? distinctIntro(state.slug) : content.intro}</p>
+            {!local && (<>
+              <h3>Popular event uses in {state.name}</h3>
+              <ul className="feature-list">
+                {content.events.map((e) => <li key={e}>{e}</li>)}
+              </ul>
+            </>)}
+            {local ? (
+              <>
+                <h3>Events and venues in {state.name}</h3>
+                <ul className="feature-list">
+                  {content.events.map((e) => <li key={e}>{e}</li>)}
+                  {local.venues.map((v) => <li key={v}>{v}</li>)}
+                  {local.events.map(([n, when, where]) => <li key={n}>{n} — {when}, {where}</li>)}
+                </ul>
+                {STATE_OUTDOOR[state.slug] && (<>
+                  <h3>Setting up outdoors in {state.name}</h3>
+                  <p>{STATE_OUTDOOR[state.slug]}</p>
+                </>)}
+                <p>
+                  {BUYING_GUIDE_NOTE}{' '}
+                  {SIZE_COMPARISON.map(([sz], i) => (
+                    <span key={sz}>{i > 0 && ', '}<Link to={`/sizes/${sz}`}>{sz} canopy tent</Link></span>
+                  ))}.
+                </p>
+              </>
+            ) : (
+              <>
             <h3>Choosing a canopy size for {state.name} events</h3>
             <ul className="feature-list">
               {SIZE_COMPARISON.map(([sz, txt]) => (
@@ -109,6 +137,8 @@ export default function LocationPage() {
             {STATE_FAQS.map(([q, a]) => (
               <details key={q}><summary>{q}</summary><p>{a}</p></details>
             ))}
+              </>
+            )}
           </>
         ) : (
           <p className="muted">
@@ -138,10 +168,13 @@ export default function LocationPage() {
           {state.cities.map((c) => {
             const cs = slugify(c);
             const seo = seoInState.find((x) => x.slug === cs);
-            return (
-              <Link className="loc-chip" to={seo ? `/trade-show-displays/${cs}` : `/locations/${state.slug}/${cs}`} key={c}>
+            // City pages are removed: link only a live city hub, else plain text.
+            return seo && isCategoryCityLive('trade-show-displays', cs) ? (
+              <Link className="loc-chip" to={`/trade-show-displays/${cs}`} key={c}>
                 <span className="loc-abbr">{state.abbr}</span><span>{c}</span>
               </Link>
+            ) : (
+              <span className="loc-chip" key={c}><span className="loc-abbr">{state.abbr}</span><span>{c}</span></span>
             );
           })}
         </div>

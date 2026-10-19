@@ -12,6 +12,7 @@
 import { readdirSync, existsSync } from 'fs';
 import { SEO_CITIES, cityWithAbbr } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const verbose = process.argv.includes('--verbose');
 const fails = [];
@@ -104,7 +105,7 @@ const SPECS = [
   }
 ];
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 const rows = [];
 
 for (const city of rolled) {

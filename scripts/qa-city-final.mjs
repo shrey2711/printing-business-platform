@@ -10,8 +10,11 @@
 
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { SEO_CITIES, cityWithAbbr } from '../src/data/citySeo.js';
+import { INDEXED_STATES } from '../src/data/stateContent.js';
+import { hubIndexable, catLive } from './lib/hub-gate.mjs';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
 import { CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
+import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
 
 const DIST = 'dist';
 const CAT = 'trade-show-displays';
@@ -60,7 +63,7 @@ const rows = [];
 const failures = [];
 for (const city of SEO_CITIES) {
   const d = CITY_DETAIL[city.slug];
-  if (!Array.isArray(d?.productSections)) continue;
+  if (!Array.isArray(d?.productSections) || !hubIndexable(city)) continue;
   const path = `/${CAT}/${city.slug}`;
   const file = `${DIST}${path}/index.html`;
   if (!existsSync(file)) { failures.push(`${city.slug}: not built`); continue; }
@@ -88,20 +91,38 @@ for (const city of SEO_CITIES) {
     .matchAll(/<a href="([^"]+)"[^>]*>([\s\S]*?)<\/a>|<span>([\s\S]*?)<\/span>/g)]
     .map((m) => strip(m[2] || m[3] || '')).filter(Boolean);
 
-  const sectionH2 = (re) => h2s.some((h) => re.test(h));
+  // Product-level checks read the city's whole page cluster: each block of city
+  // copy lives on exactly one of its five URLs (src/data/cityPagePlan.js).
+  const clusterHtml = [...['trade-show-displays', 'trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers'].map((c) => `${c}/${city.slug}`),
+    // product × city pages carry the product copy where category pages were cut
+    ...CITY_PRODUCT_PAGES.filter((p) => p.citySlug === city.slug).map((p) => p.slug)]
+    .map((c) => `${DIST}/${c}/index.html`).filter(existsSync).map((x) => readFileSync(x, 'utf8')).join(' ');
+  const clusterBody = plain(clusterHtml);
+  const clusterH2s = [...clusterHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => strip(m[1]));
+  const gated = !hubIndexable(city);
+  const sectionH2 = (re) => clusterH2s.some((h) => re.test(h));
   const checks = {
     'one H1': h1s.length === 1,
     'H1 format': /^Trade Show Displays in .+, [A-Z]{2}$/.test(h1s[0] || ''),
-    'H2 hierarchy': h2s.length >= 15 && /^Why exhibit in/.test(h2s[0] || ''),
-    'FAQ H3s': h3s.length >= 6 && h3s.every((q) => q.endsWith('?')),
+    // Fewer sections than before: each block of city copy now lives on one of
+    // the city's five pages (src/data/cityPagePlan.js), and the hub keeps only
+    // its own.
+    'H2 hierarchy': h2s.length >= 6 && /^Why exhibit in/.test(h2s[0] || ''),
+    // The hub shows only FAQs that are not shared template, which can be none.
+    'FAQ H3s': h3s.every((q) => q.endsWith('?')),
 
     'city keyword': nameIn(title) && nameIn(h1s[0] || '') && /trade show displays/i.test(body),
-    'semantic cluster': ['canopy', 'banner stand', 'backdrop', 'table cover', 'step & repeat', 'exhibition display'].every((k) => body.toLowerCase().includes(k)),
+    // A removed category page cannot contribute its words to the cluster.
+    'semantic cluster': [['canopy', 'trade-show-canopies'], ['banner stand', 'banner-stands'], ['backdrop', 'trade-show-backdrops'], ['table cover', 'table-covers'], ['step & repeat', 'trade-show-backdrops'], ['exhibition display', null]]
+      .filter(([, cat]) => !cat || catLive(cat, city.slug) || CITY_PRODUCT_PAGES.some((p) => p.citySlug === city.slug))
+      .every(([k]) => clusterBody.toLowerCase().includes(k)),
     'unique title': (titles.get(title) || []).length === 1,
     'unique meta': (descs.get(desc) || []).length === 1 && desc.length >= 140 && desc.length <= 165,
     'self-canonical': canon.replace(/\/$/, '') === `${ORIGIN}${path}`,
-    'indexable': !/noindex/i.test(robots),
-    'in sitemap': sitemapUrls.has(`${ORIGIN}${path}`),
+    // A hub the plan gates (not enough city-specific copy) must be noindex and
+    // out of the sitemap instead.
+    'indexable': gated ? /noindex/i.test(robots) : !/noindex/i.test(robots),
+    'in sitemap': gated ? !sitemapUrls.has(`${ORIGIN}${path}`) : sitemapUrls.has(`${ORIGIN}${path}`),
 
     venues: (d.conventionCenters || []).length >= 3 && (d.conventionCenters || []).every((v) => body.includes(v.name.replace(/\s*\(.*?\)/, '')) || body.includes(v.name)),
     events: !/Summer NAMM/.test(body),
@@ -117,24 +138,24 @@ for (const city of SEO_CITIES) {
       && !/same[- ]day delivery|guaranteed delivery/i.test(body),
 
     'booth section': sectionH2(/^Trade Show Booth Displays in /),
-    'canopy section': sectionH2(/^Custom Canopy Tents in /),
-    'backdrop section': sectionH2(/^Trade Show Backdrops & Backdrop Printing in /),
-    'banner section': sectionH2(/^Banner Stands & Retractable Banner Stands in /),
-    'table-cover section': sectionH2(/^Custom Trade Show Table Covers in /),
+    'canopy section': !catLive('trade-show-canopies', city.slug) || sectionH2(/^Custom Canopy Tents in /),
+    'backdrop section': !catLive('trade-show-backdrops', city.slug) || sectionH2(/^Trade Show Backdrops & Backdrop Printing in /),
+    'banner section': !catLive('banner-stands', city.slug) || sectionH2(/^Banner Stands & Retractable Banner Stands in /),
+    'table-cover section': !catLive('table-covers', city.slug) || sectionH2(/^Custom Trade Show Table Covers in /),
 
     categories: ['/trade-show-displays', '/custom-canopies', '/backdrops', '/banner-stands', '/table-covers'].every((c) => hrefs.includes(c)),
     products: [...new Set(hrefs.filter((h) => h.startsWith('/products/')))].length >= 8,
-    'city-category pages': ['trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers'].every((s) => hrefs.includes(`/${s}/${city.slug}`)),
+    'city-category pages': ['trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers'].filter((s) => catLive(s, city.slug)).every((s) => hrefs.includes(`/${s}/${city.slug}`)),
     'Learning Center': CITY_BOOTH_GUIDES.every((g) => hrefs.includes(`/blog/${g.slug}`)),
-    'location hierarchy': hrefs.includes('/locations') && (!city.stateSlug || hrefs.includes(`/locations/${city.stateSlug}`)),
+    'location hierarchy': hrefs.includes('/locations') && (!city.stateSlug || !INDEXED_STATES.has(city.stateSlug) || hrefs.includes(`/locations/${city.stateSlug}`)),
     'other cities': hrefs.filter((h) => h.startsWith(`/${CAT}/`) && h !== path).length >= 8,
     'no broken links': [...new Set(hrefs)].every(exists),
 
     'direct answers': /class="answer-block"/.test(html) && visibleFaqs.every(([, a]) => !/^(it depends|that depends|generally speaking)/i.test(a)),
     '6-8 FAQs': (d.faqs || []).length >= 6 && (d.faqs || []).length <= 8,
     'local entities': nameIn(body) && (city.stateName ? body.includes(city.stateName) || body.includes(city.abbr) : true) && body.includes('Apex'),
-    'FAQ schema match': !!faqNode && (faqNode.mainEntity || []).length === visibleFaqs.length
-      && (faqNode.mainEntity || []).every((q, i) => strip(q.name) === visibleFaqs[i][0] && strip(q.acceptedAnswer.text) === visibleFaqs[i][1]),
+    'FAQ schema match': (!faqNode ? visibleFaqs.length === 0 : (faqNode.mainEntity || []).length === visibleFaqs.length)
+      && (faqNode ? faqNode.mainEntity || [] : []).every((q, i) => strip(q.name) === visibleFaqs[i][0] && strip(q.acceptedAnswer.text) === visibleFaqs[i][1]),
     'breadcrumb schema': !!bcNode && (bcNode.itemListElement || []).length === navCrumbs.length
       && (bcNode.itemListElement || []).every((it, i) => strip(String(it.name)) === navCrumbs[i]),
     'no misleading schema': !/"Review"|"AggregateRating"|"ratingValue"|"offers"/.test(JSON.stringify(blocks))

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { territories, regions } from '../data/states';
 import { SEO_CITIES } from '../data/citySeo';
+import { isCategoryCityLive } from '../data/removedLocations';
+import { INDEXED_STATES } from '../data/stateContent';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function LocationsPage() {
@@ -26,7 +28,7 @@ export default function LocationsPage() {
           Trade show displays printed and shipped to major convention cities — with local venue, industry and shipping details.
         </p>
         <div className="loc-grid">
-          {SEO_CITIES.map((c) => (
+          {SEO_CITIES.filter((c) => isCategoryCityLive('trade-show-displays', c.slug)).map((c) => (
             <Link className="loc-chip" to={`/trade-show-displays/${c.slug}`} key={c.slug}>
               <span className="loc-abbr">{c.abbr}</span>
               <span>{c.city}</span>
@@ -36,7 +38,7 @@ export default function LocationsPage() {
       </section>
 
       {regions.map((region) => {
-        const inRegion = territories.filter((s) => s.region === region);
+        const inRegion = territories.filter((s) => s.region === region && INDEXED_STATES.has(s.slug));
         if (!inRegion.length) return null;
         return (
           <section className="section-block-bare" key={region}>

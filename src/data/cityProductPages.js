@@ -276,7 +276,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       "Every exhibition booth has a table and almost every venue supplies it bare. A printed cover turns that rented trestle into branded frontage at exactly the height people look, and it is the one display element that weighs nothing and folds into a corner of a case. For corporate events, association conferences and consumer shows it does double duty: brand surface at the front, hidden storage underneath for the cases and literature that otherwise sit in view. Dye sublimation means it washes between events rather than being replaced, so one cover lasts a season of shows.",
     intro:
-      'A table cover is the highest return per dollar in a Chicago booth: it weighs almost nothing, folds into a corner of a case, and turns the venue\'s rented table into the front of your stand. Choose a draped pleated throw or a fitted stretch cover below and see the price as you configure it.',
+      'A table cover is the highest return per dollar in a Chicago booth: it weighs almost nothing, folds into a corner of a case, and turns the venue\'s rented table into the front of your stand.',
     local: [
       {
         h2: 'It packs flat, which is the point at McCormick Place',
@@ -447,7 +447,7 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Can I print both sides?', a: 'Double sided is available and is worth specifying when the back of the wall faces another aisle rather than a solid divider — otherwise you are printing a face nobody sees.' },
       { q: "Is this what people mean by a custom trade show backdrop?", a: "Usually, yes. A custom trade show backdrop is most often a tension fabric wall like this one — a single printed graphic over a tube frame — rather than a rigid panel system. Backdrop printing on fabric is dye sublimated, which is why the image has no seam and the wall packs into a case instead of travelling as freight." },
       { q: "Can you ship a tension fabric display to Los Angeles?", a: "Yes. Frame and fabric travel together in a single carry bag to any Los Angeles address. Production runs to the schedule on the product page and transit is added on top of it." },
-      { q: "Can I upload artwork for both sides?", a: "Yes, when you order the double-sided graphic - one file per face. PDF or JPEG at the ordered size, CMYK at 150dpi, fonts outlined. A free proof is sent before print." }
+      { q: "Can I upload artwork for both sides?", a: "Yes, when you order the double-sided graphic - one file per face. A free proof is sent before print." }
     ]
   },
   {
@@ -468,7 +468,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       "A tension fabric display gives a booth a full-width branded wall that weighs almost nothing. An aluminium tube frame pushes together without tools and a printed fabric skin zips over it, stretched tight so there is no seam and no visible frame — the difference between a stand that reads as built and one that reads as assembled. For exhibitions, conferences and corporate showcases it is the practical choice as much as the aesthetic one: it is the only full-size back wall a two-person team can carry in, put up and take down inside a session break.",
     intro:
-      'A tension fabric display is a single seamless graphic stretched over an aluminium frame — the back wall of a booth without the seams, panels or visible hardware. For a McCormick Place stand it has a second argument in its favour: it weighs almost nothing and packs into a case. Configure yours below and see the price as you build.',
+      'A tension fabric display is a single seamless graphic stretched over an aluminium frame — the back wall of a booth without the seams, panels or visible hardware. For a McCormick Place stand it has a second argument in its favour: it weighs almost nothing and packs into a case.',
     local: [
       {
         h2: 'Weight is money on a Chicago show floor',
@@ -484,7 +484,7 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: "Shipping to Chicago and building it on site",
-        p: "What arrives in Chicago is a bag one person can carry, and the frame goes together without tools, so nothing about the install needs a crew or a lift. That is the difference between this and a hard panel backwall at a large Chicago show, where installation labour is normally ordered through the official show contractor. Production runs to the schedule on the product page, and transit is added on top of it."
+        p: "What arrives in Chicago is a bag one person can carry, and the frame goes together without tools, so nothing about the install needs a crew or a lift. That is the difference between this and a hard panel backwall at a large Chicago show, where installation labour is normally ordered through the official show contractor."
       }
     ],
     faqs: [
@@ -541,7 +541,7 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Are hems and grommets included?', a: 'Standard hems, white double stitched thread and No. 2 Stimpson brass grommets are included at no charge on vinyl and mesh, so the banner arrives ready to tie off.' },
       { q: "What does custom banner printing include?", a: "Full colour printing across the whole sheet, cut to the exact size you enter, with standard hems and brass grommets on vinyl and mesh. Banner printing here is priced by the square foot rather than by format, so an unusual size costs what its area costs rather than being rounded up to the next stock sheet." },
       { q: "Can you ship banners to Los Angeles?", a: "Yes. A banner folds into a box and ships as a parcel, so it can go straight to the Los Angeles storefront, site or venue that is hanging it. Production time is on the product page, with transit added on top." },
-      { q: "Can I upload my own banner artwork?", a: "Yes. A PDF or JPEG at the ordered size, CMYK at 150dpi, fonts outlined and no bleed or crop marks. A free proof is sent for approval before it prints." }
+      { q: "Can I upload my own banner artwork?", a: "Yes. A free proof is sent for approval before it prints." }
     ]
   },
   {
@@ -578,7 +578,7 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: "Shipping to Chicago",
-        p: "Banners ship folded as a parcel, so going from a 6 ft banner to a 12 ft one changes the weight rather than the shipping method. Order the exact size the wall or fence needs rather than rounding up to a stock size — it is priced by the square foot, so the size you actually want is usually the cheaper one anyway. Production time is on the product page and transit is added to it."
+        p: "Banners ship folded as a parcel, so going from a 6 ft banner to a 12 ft one changes the weight rather than the shipping method. Order the exact size the wall or fence needs rather than rounding up to a stock size — it is priced by the square foot, so the size you actually want is usually the cheaper one anyway."
       }
     ],
     faqs: [
@@ -586,7 +586,7 @@ export const CITY_PRODUCT_PAGES = [
       { q: "Is there a maximum size for a banner on a Chicago building or fence?", a: "Not in practice. Banners are made to the inch up to 10 ft by 145 ft single sided, or 9.5 ft wide once a pole pocket is added. Anything larger is produced as welded panels and quoted on request, which is how long building wraps are made." },
       { q: 'Can I get a double-sided banner with no show-through?', a: 'Yes — that is what the 18oz blockout is for. An opaque layer between two PVC faces stops light passing through, so two different prints never ghost into each other.' },
       { q: "Is banner printing priced by size or by format?", a: "By the square foot. Custom banner printing here is made to the inch, so a 7 ft by 3 ft sign is priced as 21 square feet rather than being rounded up to the nearest stock format. Standard hems and brass grommets are included on vinyl and mesh, so what arrives is ready to hang." },
-      { q: "Do you deliver banners to Chicago?", a: "Yes, to any Chicago address. Size changes the weight rather than the shipping method, so a large banner still arrives as a parcel rather than on a pallet. Production time is on the product page and transit is added to it." },
+      { q: "Do you deliver banners to Chicago?", a: "Yes, to any Chicago address. Size changes the weight rather than the shipping method, so a large banner still arrives as a parcel rather than on a pallet." },
       { q: "What artwork do you need for a made-to-size banner?", a: "Build the file to the exact size you ordered - PDF or JPEG, CMYK at 150dpi, fonts outlined, no bleed or crop marks. Upload it with the order and a free proof comes back before printing." }
     ]
   }
@@ -851,7 +851,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       'From massive convention hall perimeter hanging signs and outdoor sponsor fencing to retail promotions along the Strip, custom banners offer the ultimate sizing flexibility. Printed to your exact dimensions by the square foot, banners solve signage challenges where standard hardware displays cannot fit. Whether you need heavy-duty vinyl for outdoor durability, perforated mesh to handle desert gusts, or elegant glare-free dye-sublimated fabric for ballroom stages, custom banners deliver maximum impact per dollar.',
     intro:
-      'Banners are custom cut to the inch and priced simply by the square foot, giving you complete freedom over your display dimensions. Choose from 13oz vinyl, heavy 18oz blockout, wind-rated mesh, or premium wrinkle-free fabric below to calculate real-time pricing as you enter your measurements.',
+      'Choose from 13oz vinyl, heavy 18oz blockout, wind-rated mesh, or premium wrinkle-free fabric below to calculate real-time pricing as you enter your measurements.',
     local: [
       {
         h2: 'Durable vinyl and wind-resistant mesh for desert conditions',
@@ -871,12 +871,12 @@ export const CITY_PRODUCT_PAGES = [
       }
     ],
     faqs: [
-      { q: 'What is the maximum size for a custom banner in Las Vegas?', a: 'We print continuous seamless vinyl banners up to 10 feet wide by 145 feet in length. For larger building wraps or stadium installations, multiple panels can be heat-welded together to achieve virtually any custom dimension.' },
-      { q: 'Which banner substrate is recommended for outdoor Las Vegas events?', a: 'For fence lines, construction barriers, and open outdoor lots exposed to desert winds, mesh banner material is strongly recommended. For covered pavilions or storefront walls, our standard 13oz scrim vinyl or double-sided 18oz blockout vinyl provides maximum opacity and durability.' },
-      { q: 'Are hem finishing and brass grommets included in banner printing?', a: 'Yes. Welded perimeter hems and No. 2 brass grommets along edges and corners are included at no additional charge on all vinyl and mesh orders. Pole pockets can also be selected for hanging from ceiling truss poles.' },
+      { q: 'What is the maximum size for a custom banner in Las Vegas?', a: 'For larger building wraps or stadium installations, multiple panels can be heat-welded together to achieve virtually any custom dimension.' },
+      { q: 'Which banner substrate is recommended for outdoor Las Vegas events?', a: 'For fence lines, construction barriers, and open outdoor lots exposed to desert winds, mesh banner material is strongly recommended.' },
+      { q: 'Are hem finishing and brass grommets included in banner printing?', a: 'Yes. Welded perimeter hems and No. Pole pockets can also be selected for hanging from ceiling truss poles.' },
       { q: 'How does custom banner printing handle stage lighting glare?', a: 'For indoor trade show halls and media stages where video cameras are operating, choose our 9oz dye-sublimated fabric banner. Its soft woven texture diffuses stage lighting without the specular reflection common to glossy vinyl.' },
-      { q: 'Can you ship printed banners directly to my Las Vegas venue?', a: 'Yes. We deliver banners directly to Las Vegas convention centers, hotel event offices, or commercial addresses. Standard manufacturing takes 6–8 business days (2–3 business days with rush) prior to carrier shipment.' },
-      { q: 'What artwork resolution is required for large format banners?', a: 'Please supply your file as a PDF or JPEG at 100% scale at 150 DPI in CMYK, or at half scale (50%) at 300 DPI. Convert all typefaces to curves. A complimentary digital proof will be sent for your review before production.' }
+      { q: 'Can you ship printed banners directly to my Las Vegas venue?', a: 'Yes. We deliver banners directly to Las Vegas convention centers, hotel event offices, or commercial addresses.' },
+      { q: 'What artwork resolution is required for large format banners?', a: 'Please supply your file as a PDF or JPEG at 100% scale at 150 DPI in CMYK, or at half scale (50%) at 300 DPI. Convert all typefaces to curves.' }
     ]
   },
 
@@ -928,8 +928,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Can the printed canopy top handle heavy Florida rain?', a: 'Yes. The 600D canopy top is waterproof, UV-treated, and flame retardant (CPAI-84 compliant). The pitched roof structure promotes rapid water runoff, keeping your products and staff dry during Orlando downpours.' },
       { q: 'Are weights required for canopies at the Orange County Convention Center?', a: 'Yes. The OCCC strictly enforces safety guidelines requiring at least 40 to 50 pounds of weight per leg on hardstanding and asphalt lots. Staking into venue pavement is prohibited, making leg weights mandatory.' },
       { q: 'What does canopy printing include on the tent top?', a: 'Canopy printing includes full-color, edge-to-edge dye sublimation across all four peaks and all four valances. You can also configure optional full-height back walls and half-height side walls for additional branded surface area.' },
-      { q: 'How is a custom pop up tent shipped to Orlando?', a: 'We ship via commercial freight and express parcel carriers directly to Orlando hotels, business addresses, or event delivery docks. Production takes 6–8 business days (2–3 business days with rush) prior to transit.' },
-      { q: 'What file format is needed for canopy artwork upload?', a: 'Please provide vector or high-resolution raster artwork saved as a PDF or JPEG at full scale in CMYK color mode at 150 DPI. All text should be outlined. A complimentary digital proof will be sent for your approval before printing.' }
+      { q: 'How is a custom pop up tent shipped to Orlando?', a: 'We ship via commercial freight and express parcel carriers directly to Orlando hotels, business addresses, or event delivery docks.' },
+      { q: 'What file format is needed for canopy artwork upload?', a: 'Please provide vector or high-resolution raster artwork saved as a PDF or JPEG at full scale in CMYK color mode at 150 DPI. All text should be outlined.' }
     ]
   },
 
@@ -976,7 +976,7 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Can I replace the banner graphic for a future Orlando show?', a: 'Yes. The spring-loaded roller base is completely reusable. You can retain your hardware and order replacement printed banner inserts whenever your product promotions or branding guidelines change.' },
       { q: 'How durable is the pull up banner hardware during travel?', a: 'Our retractable stands feature extruded aluminum bases with heavy-duty internal spring cassettes and steel-reinforced support pole slots, engineered to withstand frequent airline travel and multi-city tour schedules.' },
       { q: 'What materials are used for retractable banner printing?', a: 'Our roll up banner printing uses anti-curl, matte-finish synthetic blockout film printed with high-resolution UV-cured inks. This prevents edge curling and eliminates rear light bleed on busy convention floors.' },
-      { q: 'Do you deliver retractable banner stands to Orlando convention venues?', a: 'Yes. We deliver to any Orlando business address, hotel shipping center, or convention dock facility. Standard production is 6–8 business days (2–3 business days with rush) prior to shipping transit.' },
+      { q: 'Do you deliver retractable banner stands to Orlando convention venues?', a: 'Yes. We deliver to any Orlando business address, hotel shipping center, or convention dock facility.' },
       { q: 'What artwork format should I upload for roll up banner printing?', a: 'Please upload a PDF or JPEG file created to your ordered banner dimensions at 150 DPI in CMYK color with fonts converted to outlines. A free digital proof will be sent for review before printing proceeds.' }
     ]
   },
@@ -999,7 +999,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       'Exhibiting packages at the Orange County Convention Center, Gaylord Palms, and Orlando resort ballrooms universally supply a standard folding utility table. Leaving that table bare or draped in plain banquet linen misses a major branding opportunity. A custom table cover converts an uninspired rented table into a sleek, high-visibility promotional station. Edge-to-edge dye sublimation allows your corporate colors and logos to span all four sides, while concealing product samples, literature, and team personal items beneath the drape.',
     intro:
-      'Transform ordinary venue tables into polished brand stations with branded table covers at your next Orlando trade show or corporate conference. Compact and washable, custom table throws deliver maximum branding with zero freight weight. Choose relaxed pleated throws or modern contour stretch covers below to see live pricing.',
+      'Compact and washable, branded table covers deliver maximum branding with zero freight weight.',
     local: [
       {
         h2: 'Drape standard OCCC rental tables with your brand',
@@ -1007,7 +1007,7 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Four-sided coverage keeps surplus literature out of sight',
-        p: 'A cluttered booth distracts prospective clients and weakens your brand perception. Our 4-sided closed-back trade show table covers completely hide the area beneath the table. Your booth team can easily store backup brochures, giveaways, demonstration inventory, and bags out of attendee sight while keeping them readily accessible.'
+        p: 'A cluttered booth distracts prospective clients and weakens your brand perception. Your booth team can easily store backup brochures, giveaways, demonstration inventory, and bags out of attendee sight while keeping them readily accessible.'
       },
       {
         h2: 'Resilient fabric that sheds travel wrinkles quickly',
@@ -1015,16 +1015,16 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Shipping custom table covers to Orlando venues',
-        p: 'Because they fold flat and weigh only a few pounds, table covers can be shipped inexpensively directly to your Orlando hotel, conference venue receiving desk, or local corporate facility. Review production schedules on the configurator above and select your preferred shipping method to Florida.'
+        p: 'Because they fold flat and weigh only a few pounds, table covers can be shipped inexpensively directly to your Orlando hotel, conference venue receiving desk, or local corporate facility.'
       }
     ],
     faqs: [
       { q: 'Should I choose a pleated or stretch table cover for Orlando expos?', a: 'A pleated throw provides a classic, flowing drape that adapts easily to minor table size variations. A stretch table cover pulls snugly over the table using reinforced leg pockets, creating a crisp, geometric modern aesthetic favored at medical and technology expos.' },
-      { q: 'What table sizes are standard at Orlando convention centers?', a: 'The OCCC and major Orlando hotels standardly supply 6-foot (72x30x29 inches) or 8-foot (96x30x29 inches) rectangular tables. Verify your booth equipment agreement before ordering to ensure the correct size cover.' },
+      { q: 'What table sizes are standard at Orlando convention centers?', a: 'Verify your booth equipment agreement before ordering to ensure the correct size cover.' },
       { q: 'Are custom printed table covers machine washable?', a: 'Yes. The dye-sublimation process permanently locks inks into the polyester fibers. You can machine-wash the cover on cold delicate cycle and tumble dry on low heat without risk of ink bleeding, fading, or peeling.' },
       { q: 'How does a trade show tablecloth differ from a table throw?', a: 'A trade show tablecloth and custom table throw are terms for the same product: a custom-tailored fabric drape designed to cover standard exhibition tables with full-color edge-to-edge printing.' },
-      { q: 'How quickly can I get a custom table cover shipped to Orlando?', a: 'Standard production requires 6–8 business days (2–3 business days with rush) after you approve your artwork proof. Parcel shipping options to Orlando include standard ground and expedited overnight delivery.' },
-      { q: 'What file format is best for table cover printing?', a: 'Upload your artwork placed within our downloadable template as a print-ready PDF or high-resolution JPEG in CMYK mode at 150 DPI with fonts converted to outlines. A complimentary digital proof will be sent for approval before printing.' }
+      { q: 'How quickly can I get a custom table cover shipped to Orlando?', a: 'Parcel shipping options to Orlando include standard ground and expedited overnight delivery.' },
+      { q: 'What file format is best for table cover printing?', a: 'Upload your artwork placed within our downloadable template as a print-ready PDF or high-resolution JPEG in CMYK mode at 150 DPI with fonts converted to outlines.' }
     ]
   },
 
@@ -1044,13 +1044,13 @@ export const CITY_PRODUCT_PAGES = [
       'logo backdrop Orlando', 'event backdrop Orlando'
     ],
     productIntro:
-      'Orlando hosts thousands of national association annual meetings, corporate incentive galas, and trade show banquets every year. From executive awards ceremonies at Disney and Universal resort ballrooms to exhibitor reception entrances at the Orange County Convention Center, a custom step and repeat backdrop creates the designated focal point for commemorative photography. Repeating your brand and sponsor logos across a premium non-glare fabric wall ensures lasting marketing mileage on social feeds and in corporate press releases.',
+      'Orlando hosts thousands of national association annual meetings, corporate incentive galas, and trade show banquets every year. From executive awards ceremonies at Disney and Universal resort ballrooms to exhibitor reception entrances at the Orange County Convention Center, a custom step and repeat backdrop creates the designated focal point for commemorative photography.',
     intro:
-      'Provide your sponsors, VIP attendees, and keynote guests with an authentic photo wall for Orlando galas and trade shows. Engineered with glare-free fabric on an adjustable aluminum framework, our backdrops ensure flawless camera flash results. Configure your size and hardware kit below to check instant pricing.',
+      'Provide your sponsors, VIP attendees, and keynote guests with an authentic photo wall — a step and repeat banner — for Orlando galas and trade shows. Engineered with glare-free fabric on an adjustable aluminum framework, our backdrops ensure flawless camera flash results. Configure your size and hardware kit below to check instant pricing.',
     local: [
       {
         h2: 'Balanced logo grids for attendee group portraits',
-        p: 'A well-designed step-and-repeat pattern positions alternating sponsor logos at an optimal size — typically 8 to 12 inches across. This ensures that whether photographers capture a solo executive portrait or a group of six colleagues smiling together, several complete sponsor logos remain crisply legible in the background of the image.'
+        p: 'This ensures that whether photographers capture a solo executive portrait or a group of six colleagues smiling together, several complete sponsor logos remain crisply legible in the background of the image.'
       },
       {
         h2: 'Matte polyester prevents photography glare',
@@ -1058,20 +1058,20 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Telescoping aluminum frames adjust to ballroom ceilings',
-        p: 'Our modular aluminum support frames utilize telescoping horizontal and vertical poles with secure twist-lock mechanisms. This allows you to fine-tune the display height to match varying ballroom ceiling clearances across Orlando conference centers, from intimate meeting suites to expansive convention halls.'
+        p: 'This allows you to fine-tune the display height to match varying ballroom ceiling clearances across Orlando conference centers, from intimate meeting suites to expansive convention halls.'
       },
       {
         h2: 'Shipping photo backdrops to Orlando conference centers',
-        p: 'The complete display system — folding graphic, telescoping poles, and solid steel base plates — packs into a single padded travel bag that easily fits into a car trunk or rideshare. We ship directly to your Orlando event hotel, venue dock, or local production office with real-time tracking.'
+        p: 'We ship directly to your Orlando event hotel, venue dock, or local production office with real-time tracking.'
       }
     ],
     faqs: [
-      { q: 'What size step and repeat is recommended for Orlando galas?', a: 'A 10ft wide by 8ft tall media wall is our most requested size, comfortably framing groups of four to five attendees. An 8ft wide by 8ft tall size is well-suited for smaller registration desks or portrait photobooth setups.' },
-      { q: 'How many logos should appear on an event backdrop in Orlando?', a: 'We typically recommend featuring two to four sponsor marks in an alternating grid pattern. This creates balanced spacing that remains clear and readable across both wide-angle landscape shots and vertical mobile photography.' },
+      { q: 'What size step and repeat is recommended for Orlando galas?', a: 'An 8ft wide by 8ft tall size is well-suited for smaller registration desks or portrait photobooth setups.' },
+      { q: 'How many logos should appear on an event backdrop in Orlando?', a: 'This creates balanced spacing that remains clear and readable across both wide-angle landscape shots and vertical mobile photography.' },
       { q: 'Are tools required to assemble the step and repeat frame?', a: 'No tools are required. The aluminum upright poles and crossbars slide together smoothly and tighten using built-in thumb screws, allowing two people to set up the entire wall in about ten minutes.' },
-      { q: 'What fabric is used for step and repeat printing?', a: 'We print step and repeat banners on premium 9oz wrinkle-free stretch fabric using dye-sublimation technology. This yields a matte, reflection-free surface that eliminates camera flash flare.' },
-      { q: 'Can you ship a step and repeat backdrop directly to an Orlando hotel?', a: 'Yes. We frequently deliver to Orlando hotel business centers, resort guest package desks, and convention docks. Standard production takes 6–8 business days (2–3 business days with rush) prior to shipping.' },
-      { q: 'What specifications should I follow for logo backdrop artwork?', a: 'Please submit your repeating pattern layout as a PDF or high-resolution JPEG at 150 DPI in CMYK with all fonts converted to curves. A free digital proof will be provided for your review and approval before manufacturing.' }
+      { q: 'What fabric is used for step and repeat printing?', a: 'This yields a matte, reflection-free surface that eliminates camera flash flare.' },
+      { q: 'Can you ship a step and repeat backdrop directly to an Orlando hotel?', a: 'Yes. We frequently deliver to Orlando hotel business centers, resort guest package desks, and convention docks.' },
+      { q: 'What specifications should I follow for logo backdrop artwork?', a: 'Please submit your repeating pattern layout as a PDF or high-resolution JPEG at 150 DPI in CMYK with all fonts converted to curves.' }
     ]
   },
 
@@ -1117,7 +1117,7 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Should I choose single-sided or double-sided fabric printing?', a: 'Single-sided printing with a clean white back is standard for inline booths backed against venue drape. For island booths, walk-around pavilions, or open perimeter locations, choose double-sided printing to engage attendees from both sides.' },
       { q: 'How does a tension fabric display differ from a pop-up display?', a: 'While traditional pop-up displays use heavy magnetic strips and flexible plastic panels that can crease or show visible seams, a tension fabric display uses a single continuous stretch textile that zips smoothly over a lightweight frame.' },
       { q: 'What printing method is used for the fabric trade show backdrop?', a: 'Our backdrops are printed using advanced dye sublimation on stretch polyester. The inks fuse with the textile fibers, ensuring vivid color depth that will not crack or peel and can be machine washed if needed.' },
-      { q: 'Can you deliver a tension fabric display directly to an Orlando venue?', a: 'Yes. We deliver to any Orlando convention center dock, resort conference facility, or commercial address. Standard production is 6–8 business days (2–3 business days with rush) prior to shipping transit.' },
+      { q: 'Can you deliver a tension fabric display directly to an Orlando venue?', a: 'Yes. We deliver to any Orlando convention center dock, resort conference facility, or commercial address.' },
       { q: 'What artwork guidelines should I follow for backdrop printing?', a: 'Build your layout using our provided template at 150 DPI in CMYK color as a print-ready PDF or JPEG. Keep critical logos and text within the designated safe area to avoid corner radius cropping. A free online proof is sent before printing.' }
     ]
   },
@@ -1140,7 +1140,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       'From expansive overhead signage suspended from OCCC hall trussing to outdoor perimeter fencing at Central Florida golf tournaments, festivals, and theme park attractions, custom banners provide maximum graphic surface area at an economical cost. Cut to your exact specified dimensions by the square foot, banners adapt to any installation challenge where rigid displays cannot be mounted. With durable outdoor vinyl, wind-permeable mesh, and premium non-glare fabric options, our custom banners deliver vibrant color and dependable performance.',
     intro:
-      'Custom trade show banners are produced to your exact dimensions and priced simply by the square foot, giving you complete sizing versatility. Select from durable 13oz vinyl, heavy-duty 18oz blockout, wind-resistant mesh, or elegant wrinkle-free fabric below to calculate instant pricing.',
+      'Trade show banners for Orlando exhibitors start here: select durable 13oz vinyl, heavy-duty 18oz blockout, wind-resistant mesh, or wrinkle-free fabric below to calculate instant pricing.',
     local: [
       {
         h2: 'Weather-resistant vinyl and mesh for Central Florida humidity',
@@ -1160,12 +1160,12 @@ export const CITY_PRODUCT_PAGES = [
       }
     ],
     faqs: [
-      { q: 'What is the largest continuous banner size you can print for Orlando venues?', a: 'We print continuous seamless vinyl banners up to 10 feet wide by 145 feet long. For massive building wraps or stadium installations, multiple printed panels can be welded together seamlessly to span any required dimension.' },
-      { q: 'Which banner substrate is recommended for outdoor Orlando events?', a: 'For exposed fences and open-air festival perimeters subject to Florida thunderstorm gusts, mesh banner material is strongly recommended. For covered pavilions or storefront walls, our 13oz scrim vinyl or 18oz blockout vinyl provides maximum opacity and durability.' },
-      { q: 'Are edge hems and mounting grommets included in banner printing?', a: 'Yes. Welded perimeter hems and brass grommets placed every two to three feet are included at no additional charge on all vinyl and mesh orders. Pole pockets can also be specified for truss hanging.' },
-      { q: 'Can fabric banners be used indoors to reduce lighting glare?', a: 'Yes. Our 9oz dye-sublimated fabric banners offer a soft matte texture that diffuses indoor convention spotlights, preventing the harsh reflective glare that often obscures smooth vinyl prints on camera.' },
-      { q: 'Can you ship printed banners directly to Orlando convention centers?', a: 'Yes. We deliver to any hotel, convention receiving dock, or business address in Orlando. Standard production requires 6–8 business days (2–3 business days with rush) prior to carrier shipping.' },
-      { q: 'What artwork resolution should I provide for custom banner printing?', a: 'Please supply your artwork as a print-ready PDF or JPEG at full scale at 150 DPI in CMYK, or half scale at 300 DPI. Convert all typography to curves. A free digital proof will be sent for your approval before printing begins.' }
+      { q: 'What is the largest continuous banner size you can print for Orlando venues?', a: 'For massive building wraps or stadium installations, multiple printed panels can be welded together seamlessly to span any required dimension.' },
+      { q: 'Which banner substrate is recommended for outdoor Orlando events?', a: 'For exposed fences and open-air festival perimeters subject to Florida thunderstorm gusts, mesh banner material is strongly recommended.' },
+      { q: 'Are edge hems and mounting grommets included in banner printing?', a: 'Yes. Pole pockets can also be specified for truss hanging.' },
+      { q: 'Can fabric banners be used indoors to reduce lighting glare?', a: 'Yes.' },
+      { q: 'Can you ship printed banners directly to Orlando convention centers?', a: 'Yes. We deliver to any hotel, convention receiving dock, or business address in Orlando.' },
+      { q: 'What artwork resolution should I provide for custom banner printing?', a: 'Convert all typography to curves.' }
     ]
   },
 
@@ -1217,8 +1217,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Which canopy footprint is most popular for Dallas outdoor expos?', a: 'A 10x10 custom canopy tent is the standard space allocation for Dallas outdoor street fairs, corporate expos, and convention plazas. For larger equipment demonstrations or hospitality lounges, 10x15 and 10x20 sizes provide substantial additional shade.' },
       { q: 'How do you secure a pop up tent on Dallas concrete without stakes?', a: 'Because driving metal stakes into paved Dallas convention grounds or city plazas is disallowed, you must anchor each leg with 40 to 50 pounds of weight plates or heavy sandbag covers to resist plains wind gusts.' },
       { q: 'Will the canopy printing withstand Texas summer heat?', a: 'Yes. Our canopy printing process bonds dye-sublimation pigments into the polyester yarn under intense heat, ensuring your graphics resist UV degradation, peeling, and color fade throughout prolonged Texas summer expos.' },
-      { q: 'What is included in a custom printed canopy package?', a: 'Every custom printed canopy arrives with a heavy-duty folding aluminum frame, full-color printed roof, and a wheeled travel bag. You can also add full-height back walls and half-height side walls for additional branded protection.' },
-      { q: 'Can you deliver custom canopies directly to Dallas hotels or event venues?', a: 'Yes. We deliver custom canopy tents directly to Dallas business addresses, hotel guest package desks, or trade show marshaling facilities. Standard manufacturing requires 6–8 business days (2–3 business days with rush) prior to shipping transit.' },
+      { q: 'What is included in a custom printed canopy package?', a: 'Every custom printed canopy arrives with a heavy-duty folding aluminum frame, full-color printed roof, and a wheeled travel bag.' },
+      { q: 'Can you deliver custom canopies directly to Dallas hotels or event venues?', a: 'Yes. We deliver custom canopy tents directly to Dallas business addresses, hotel guest package desks, or trade show marshaling facilities.' },
       { q: 'What file format is needed for custom canopy artwork?', a: 'Please submit your vector graphics as an outlined PDF or high-resolution JPEG at 150 DPI in CMYK. A complimentary digital artwork proof is provided for your sign-off before manufacturing starts.' }
     ]
   },
@@ -1241,9 +1241,9 @@ export const CITY_PRODUCT_PAGES = [
       'roll up banner printing Dallas'
     ],
     productIntro:
-      'Dallas is the wholesale commerce hub of the Southwest, driven by the massive multi-building Dallas Market Center on Stemmons Freeway and downtown conventions at the Kay Bailey Hutchison Convention Center. In wholesale showrooms and convention booths where floor space comes at a premium, retractable banner stands provide vital vertical branding. Rolling cleanly into a cast aluminum base and slipping into an included padded shoulder bag, roll up banner stands allow traveling sales reps to stand up crisp, eye-level promotional graphics in under sixty seconds.',
+      'Dallas is the wholesale commerce hub of the Southwest, driven by the massive multi-building Dallas Market Center on Stemmons Freeway and downtown conventions at the Kay Bailey Hutchison Convention Center. In wholesale showrooms and convention booths where floor space comes at a premium, retractable banner stands provide vital vertical branding.',
     intro:
-      'Maximize vertical brand presence in tight Dallas showrooms and convention booths using a custom retractable banner. Portable, tool-free, and lightweight, these roll up displays fit into an automobile trunk with ease. Choose standard, deluxe, or X-stand models below to check live pricing.',
+      'Maximize vertical brand presence in tight Dallas showrooms and convention booths using a custom retractable banner.',
     local: [
       {
         h2: 'Tailored for Dallas Market Center wholesale showrooms',
@@ -1259,16 +1259,16 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Getting retractable banner stands to Dallas exhibits',
-        p: 'Avoid high loading dock fees by having your roll up banner stands shipped directly to your Dallas hotel, corporate office, or showroom facility. Our production schedule is displayed in real time on the configurator above so you can plan delivery ahead of your market setup day.'
+        p: 'Our production schedule is displayed in real time on the configurator above so you can plan delivery ahead of your market setup day.'
       }
     ],
     faqs: [
       { q: 'What width pull up banner is recommended for Dallas market showrooms?', a: 'Our 33-inch retractable stand is the preferred choice for wholesale showrooms and 10x10 convention spaces, providing vertical visibility without crowding aisles. For larger hotel ballrooms or wider booth spaces, our 47-inch wide deluxe stand offers commanding presence.' },
       { q: 'Can I swap graphics in my roll up banner stand later?', a: 'Yes. The aluminum spring-tensioned base mechanism supports graphic replacement. You can keep the hardware for upcoming Dallas shows and order replacement printed banner inserts when launching new seasonal collections.' },
-      { q: 'How quickly does a pull up banner assemble on site?', a: 'Setup takes under sixty seconds with zero tools. Simply pivot the base feet outward, insert the support pole into the base slot, pull the graphic upward, and hook it onto the top rail.' },
+      { q: 'How quickly does a pull up banner assemble on site?', a: 'Setup takes under sixty seconds with zero tools.' },
       { q: 'What materials are used for retractable banner printing in Dallas?', a: 'Our roll up banner printing utilizes UV-cured digital inks on durable anti-curl blockout film. The light-blocking layer prevents rear illumination from ghosting through the face of your banner.' },
-      { q: 'Can you deliver retractable banners directly to Dallas hotels and venues?', a: 'Yes. We deliver to any Dallas hotel, corporate office, or convention center loading dock. Standard production takes 6–8 business days (2–3 business days with rush) prior to shipping transit.' },
-      { q: 'What artwork guidelines should I follow for roll up banner printing?', a: 'Please supply your artwork sized to your ordered banner dimensions as a PDF or JPEG at 150 DPI in CMYK with all fonts converted to outlines. A free digital proof will be sent for your approval before printing proceeds.' }
+      { q: 'Can you deliver retractable banners directly to Dallas hotels and venues?', a: 'Yes. We deliver to any Dallas hotel, corporate office, or convention center loading dock.' },
+      { q: 'What artwork guidelines should I follow for roll up banner printing?', a: 'Please supply your artwork sized to your ordered banner dimensions as a PDF or JPEG at 150 DPI in CMYK with all fonts converted to outlines.' }
     ]
   },
 
@@ -1314,8 +1314,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Should I choose a pleated or stretch table cover for Dallas expos?', a: 'A pleated table throw provides a traditional, graceful drape that accommodates minor table dimension variances across hotels and convention centers. A stretch table cover fastens securely under each table foot with reinforced canvas pockets, creating a taut, geometric profile popular at technology and healthcare conferences.' },
       { q: 'What table sizes are standard at Dallas convention facilities?', a: 'Dallas convention facilities such as the KBHCCD and Dallas Market Center standardly furnish 6-foot (72x30x29 inches) or 8-foot (96x30x29 inches) rectangular tables. Always check your exhibitor manual kit to verify table dimensions before finalizing your print file.' },
       { q: 'What is the difference between a custom tablecloth and a table drape in Dallas?', a: 'The terms trade show tablecloth, branded table drape, and custom table throw describe the same product: an edge-to-edge dye-sublimated fabric cover tailored to fit standard display tables without slipping or bunching.' },
-      { q: 'How quickly can I get a custom table cover shipped to Dallas?', a: 'Standard production requires 6–8 business days (2–3 business days with rush) after you approve your artwork proof. Parcel shipping options to Dallas include standard ground and expedited overnight delivery.' },
-      { q: 'What artwork file types are accepted for Dallas table cover printing?', a: 'Upload your artwork placed within our downloadable template as a print-ready PDF or high-resolution JPEG in CMYK mode at 150 DPI with fonts converted to outlines. A complimentary digital proof will be sent for approval before printing.' }
+      { q: 'How quickly can I get a custom table cover shipped to Dallas?', a: 'Standard production requires 6–8 business days (2–3 business days with rush) after you approve your artwork proof.' },
+      { q: 'What artwork file types are accepted for Dallas table cover printing?', a: 'Upload your artwork placed within our downloadable template as a print-ready PDF or high-resolution JPEG in CMYK mode at 150 DPI with fonts converted to outlines.' }
     ]
   },
 
@@ -1336,34 +1336,34 @@ export const CITY_PRODUCT_PAGES = [
       'logo backdrop Dallas', 'event backdrop Dallas'
     ],
     productIntro:
-      'Dallas hosts major corporate headquarters, charity galas, and professional sports banquets where photography plays a central promotional role. From red-carpet donor galas at the Omni Dallas to trade show press scrums at the convention center, high-profile events require an authentic photo wall. A custom step and repeat backdrop tiles your brand and sponsor logos across a premium non-glare fabric display, ensuring that every smartphone photo, news release, and attendee selfie captures your sponsors clearly.',
+      'Dallas hosts major corporate headquarters, charity galas, and professional sports banquets where photography plays a central promotional role.',
     intro:
-      'Guarantee prime sponsor visibility at Dallas galas, charity banquets, and expo press conferences with an authentic media wall. Built with non-glare fabric on an adjustable aluminum frame, our photo walls eliminate flash reflections. Configure your dimensions and hardware package below to view live pricing.',
+      'Built with non-glare fabric on an adjustable aluminum frame, our photo walls eliminate flash reflections. Configure your dimensions and hardware package below to view live pricing.',
     local: [
       {
-        h2: 'Sponsor logo spacing engineered for smartphone photography',
-        p: 'A well-designed step-and-repeat pattern positions alternating sponsor logos at an optimal size — typically 8 to 12 inches across. This ensures that whether photographers capture a solo executive portrait or a group of six colleagues smiling together, several complete sponsor logos remain crisply legible in the background of the image.'
+        h2: 'Where a step and repeat earns its keep in Dallas',
+        p: 'Dallas runs two backdrop circuits. Downtown, the Kay Bailey Hutchison Convention Center hosts energy, medical and technology shows where the wall behind a demo area ends up in trade-press photos. The Dallas Market Center, a short drive from downtown, runs apparel, gift and home markets where showrooms stage launches and buyer evenings in front of a logo wall. Hotel galas and corporate dinners across the city use the same format for arrival photography.'
       },
       {
-        h2: 'Matte fabric finish eliminates camera flash hot spots',
-        p: 'Ballrooms at luxury Dallas hotels feature complex overhead chandeliers and spotlights. Traditional glossy vinyl backdrops bounce these light sources directly into camera lenses as blinding hot spots. Our matte fabric absorbs glare completely, ensuring rich color reproduction and pristine photo clarity under all lighting setups.'
+        h2: 'Sizing the wall for a ballroom or an exhibit-hall booth',
+        p: 'Measure the space before the artwork. A 10 ft wide by 8 ft tall wall suits a ballroom arrival line or an exhibit-hall booth back; the 8 ft by 8 ft size fits a registration alcove or a showroom corner at the Market Center. Ceiling clearance in older hotel rooms varies, so check it with the venue before choosing the taller option.'
       },
       {
-        h2: 'Telescoping frame adapts to hotel ballroom ceilings',
-        p: 'Our modular aluminum support frames utilize telescoping horizontal and vertical poles with secure twist-lock mechanisms. This allows you to fine-tune the display height to match varying ballroom ceiling clearances across Dallas conference centers, from intimate meeting suites to expansive convention halls.'
+        h2: 'Laying out sponsor marks for a charity gala',
+        p: 'Dallas charity galas often carry a dozen sponsors, and the wall is the only place they all appear together. Rotate a small set of marks in a staggered grid rather than shrinking every logo to fit, so each one reads in a tight group shot and in a single-person portrait. Send the grid as one repeating tile and the print stays consistent across the full width.'
       },
       {
-        h2: 'Shipping photo backdrops to Dallas conference centers',
-        p: 'The complete display system — folding graphic, telescoping poles, and solid steel base plates — packs into a single padded travel bag that easily fits into a car trunk or rideshare. We ship directly to your Dallas event hotel, venue dock, or local production office with real-time tracking.'
+        h2: 'Getting the wall to the venue',
+        p: 'The wall ships as a folded graphic with a telescoping frame and base plates in one padded bag. Send it to a hotel package desk, the venue dock, or your own address; transit time varies by destination and is added to production. For a downtown convention booth, check the exhibitor manual for receiving dates before you pick a delivery address.'
       }
     ],
     faqs: [
-      { q: 'What size step and repeat is best for Dallas gala events?', a: 'A 10ft wide by 8ft tall media wall is our most popular option, providing ample width for groups of four or five guests. For smaller step-and-repeat photobooths or registration entrances, an 8ft by 8ft backdrop provides a compact alternative.' },
-      { q: 'How many sponsor marks should be tiled on an event backdrop?', a: 'We typically recommend featuring two to four alternating sponsor marks in a staggered grid. This spacing prevents visual crowding and guarantees that individual sponsor emblems stay legible in both portrait and landscape shots.' },
-      { q: 'Do the support poles require tools to set up on site?', a: 'No tools are required. The telescoping aluminum upright poles and crossbars slide together smoothly and tighten using built-in thumb screws, allowing two people to set up the entire wall in about ten minutes.' },
-      { q: 'What material is used for custom step and repeat printing?', a: 'We print step and repeat banners on premium 9oz wrinkle-free stretch fabric using dye-sublimation technology. This yields a matte, reflection-free surface that eliminates camera flash flare.' },
-      { q: 'Can you deliver a step and repeat backdrop directly to a Dallas hotel?', a: 'Yes. We regularly ship displays directly to Dallas hotel guest package desks, resort convention offices, and venue docks. Manufacturing takes 6–8 business days (2–3 business days with rush) prior to shipping.' },
-      { q: 'What layout specifications should I follow for logo backdrop artwork in Dallas?', a: 'Upload your finished repeating logo grid placed within our downloadable template as a print-ready PDF or JPEG at 150 DPI in CMYK with fonts outlined. A free digital proof will be sent for your sign-off before manufacturing begins.' }
+      { q: 'What size step and repeat is best for Dallas gala events?', a: 'Most Dallas galas use a 10 ft by 8 ft wall, wide enough for a group of four or five guests. Registration alcoves and Market Center showroom corners are usually better served by the 8 ft by 8 ft size.' },
+      { q: 'How many sponsor marks should be tiled on an event backdrop?', a: 'Two to four marks repeated in a staggered grid is a good range. More than that and each logo has to shrink until it stops reading in photographs.' },
+      { q: 'Do the support poles require tools to set up on site?', a: 'No. The telescoping poles lock with built-in thumb screws, and two people can stand the wall in about ten minutes.' },
+      { q: 'What material is used for custom step and repeat printing?', a: 'A wrinkle-free stretch fabric printed by dye sublimation, so the step and repeat banner hangs flat and the matte finish avoids flash glare in ballroom lighting.' },
+      { q: 'Can you deliver a step and repeat backdrop directly to a Dallas hotel?', a: 'Yes. It can ship to a hotel guest package desk, a convention receiving dock or a business address in Dallas; confirm the hotel\'s receiving window before you order.' },
+      { q: 'What layout specifications should I follow for logo backdrop artwork in Dallas?', a: 'Upload one repeating logo tile on the supplied template. A free digital proof comes back for approval before anything is printed.' }
     ]
   },
 
@@ -1410,7 +1410,7 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'How does double-sided printing benefit Dallas exhibition spaces?', a: 'Double-sided printing allows corner booths, perimeter exhibits, and island walkthroughs to display branded messaging on both faces of the wall. For inline booths backed against pipe-and-drape curtains, single-sided printing with an unprinted white reverse is standard.' },
       { q: 'How does a tension fabric backwall differ from a magnetic pop-up wall?', a: 'Magnetic pop-up walls use multiple flexible plastic strips that can crease, curl at the edges, and show visible vertical seams. A tension fabric display uses a single continuous piece of washable stretch fabric zipped tightly over a rigid aluminum skeleton.' },
       { q: 'What printing technology is utilized for backdrop printing Dallas exhibits?', a: 'Our backdrop printing Dallas production uses heat dye sublimation. Inks are heat-infused into 9oz polyester fibers, delivering rich color saturation, deep blacks, and a matte glare-free surface that photographs beautifully without flash reflection.' },
-      { q: 'Can you ship a custom trade show backdrop Dallas order directly to our hotel?', a: 'Yes. We ship directly to guest package receiving desks at downtown Dallas hotels, venue docks, and business addresses. Turnaround requires 6–8 business days (2–3 business days with rush) prior to shipping carrier transit.' },
+      { q: 'Can you ship a custom trade show backdrop Dallas order directly to our hotel?', a: 'Yes. We ship directly to guest package receiving desks at downtown Dallas hotels, venue docks, and business addresses.' },
       { q: 'What artwork setup is required for seamless fabric display Dallas printing?', a: 'Download our production template and place your artwork at 150 DPI in CMYK format as a print-ready PDF or JPEG. Keep key logos and text inside the safety margin to avoid edge seams. A free digital proof is issued before fabrication begins.' }
     ]
   },
@@ -1434,7 +1434,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       'Throughout the Dallas-Fort Worth metroplex, businesses depend on large format banners for high-impact visual promotion across trade show halls, commercial warehousing complexes, and outdoor festival grounds. When standard display hardware cannot accommodate unconventional architectural spaces or high-span ceiling rafters, custom banners Dallas orders provide the ultimate flexible signage solution. Cut to your exact custom dimensions and priced by the square foot, our heavy-duty vinyl banners Dallas, wind-permeable mesh, and wrinkle-resistant fabric deliver commanding visibility for indoor corporate showcases and outdoor Texas commercial facilities.',
     intro:
-      'Custom trade show banners Dallas are produced to your exact dimensions and priced simply by the square foot, giving you complete sizing versatility. Select from durable 13oz vinyl, heavy-duty 18oz blockout, wind-resistant mesh, or elegant wrinkle-free fabric below to calculate instant pricing.',
+      'Custom trade show banners Dallas are produced to your exact dimensions and priced simply by the square foot, giving you complete sizing versatility.',
     local: [
       {
         h2: 'Industrial-grade vinyl substrates engineered for North Texas heat',
@@ -1454,11 +1454,11 @@ export const CITY_PRODUCT_PAGES = [
       }
     ],
     faqs: [
-      { q: 'What is the maximum seamless banner size produced for Dallas locations?', a: 'We produce continuous seamless vinyl banners up to 10 feet wide by 145 feet in length on our grand-format presses. For oversized building wraps or sports venue murals, multiple printed panels can be thermally welded together to achieve any custom dimension.' },
+      { q: 'What is the maximum seamless banner size produced for Dallas locations?', a: 'For oversized building wraps or sports venue murals, multiple printed panels can be thermally welded together to achieve any custom dimension.' },
       { q: 'Which material is best suited for outdoor event banners Dallas festivals?', a: 'For open-air festival fences and perimeter security barricades subject to Texas wind gusts, perforated mesh banner material is optimal. For indoor trade show displays or sheltered retail facades, 13oz scrim vinyl or 18oz blockout vinyl provides maximum opacity and saturation.' },
-      { q: 'Are perimeter hems and brass grommets included in banner printing Dallas orders?', a: 'Yes. High-frequency heat-welded hems and solid brass grommets placed every two to three feet are included as standard on all vinyl and mesh orders. Pole pockets can also be selected for hanging from ceiling truss pipes.' },
+      { q: 'Are perimeter hems and brass grommets included in banner printing Dallas orders?', a: 'Yes. High-frequency heat-welded hems and solid brass grommets placed every two to three feet are included as standard on all vinyl and mesh orders.' },
       { q: 'Why choose dye-sublimated fabric over vinyl for indoor trade show banners Dallas?', a: 'Our 9oz dye-sublimated fabric banners offer a soft matte texture that diffuses harsh convention hall spotlights, eliminating the surface glare common with smooth vinyl prints and ensuring clear visibility in photography and video recordings.' },
-      { q: 'Can you ship custom banner printing Dallas orders directly to convention docks?', a: 'Yes. We deliver directly to convention marshaling depots, hotel package desks, and corporate offices across the DFW metroplex. Standard production is 6–8 business days (2–3 business days with rush) prior to shipping carrier transit.' },
+      { q: 'Can you ship custom banner printing Dallas orders directly to convention docks?', a: 'Yes. We deliver directly to convention marshaling depots, hotel package desks, and corporate offices across the DFW metroplex.' },
       { q: 'What artwork resolution is required for printed banners Dallas production?', a: 'Submit your layout as a print-ready PDF or JPEG at 150 DPI in CMYK at full scale (or 300 DPI at half scale). Make sure all fonts are converted to curves or outlines. A complimentary digital proof will be provided before printing begins.' }
     ]
   },
@@ -1512,7 +1512,7 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'How do you anchor a pop up tent on downtown Atlanta concrete plazas?', a: 'Because driving stakes into paved city streets or convention plazas is disallowed, you must secure each leg with 40 to 50 pounds of specialized canopy weight plates or sandbags to withstand sudden urban wind gusts.' },
       { q: 'Will the canopy graphics resist fading in Georgia humidity?', a: 'Yes. Our canopy printing employs industrial dye sublimation where inks are infused directly into the synthetic polyester yarn under extreme heat, ensuring your graphics remain vibrant, peel-free, and UV-resistant through repeated outdoor use.' },
       { q: 'What is included in a custom printed canopy order in Atlanta?', a: 'Each custom printed canopy includes a commercial folding aluminum frame, full-color printed canopy roof, and a wheeled travel bag. Optional custom back walls and half-height sidewalls can be added to complete your booth enclosure.' },
-      { q: 'Can you ship a custom canopy tent directly to my Atlanta event location?', a: 'Yes. We deliver custom canopy tents directly to Atlanta hotels, corporate offices, or convention center loading docks. Standard production takes 6–8 business days (2–3 business days with rush) prior to ground or expedited shipping.' },
+      { q: 'Can you ship a custom canopy tent directly to my Atlanta event location?', a: 'Yes. We deliver custom canopy tents directly to Atlanta hotels, corporate offices, or convention center loading docks.' },
       { q: 'What artwork format should I provide for Atlanta canopy printing?', a: 'Please provide vector artwork as a PDF or high-resolution JPEG at 150 DPI in CMYK mode with all text converted to curves or outlines. A free digital proof is provided for your approval before printing proceeds.' }
     ]
   },
@@ -1535,13 +1535,13 @@ export const CITY_PRODUCT_PAGES = [
       'roll up banner printing Atlanta'
     ],
     productIntro:
-      'Atlanta is a major convention destination anchored by the Georgia World Congress Center and the multi-story AmericasMart wholesale campus downtown. In dense trade show environments and permanent wholesale showrooms where square footage is tightly managed, retractable banner stands deliver immediate vertical branding. Rolling into an aluminum base and traveling in an included padded shoulder bag, roll up banner stands allow sales teams to deploy polished, eye-level promotional graphics in under sixty seconds with zero tools.',
+      'Atlanta is a major convention destination anchored by the Georgia World Congress Center and the multi-story AmericasMart wholesale campus downtown. In dense trade show environments and permanent wholesale showrooms where square footage is tightly managed, retractable banner stands deliver immediate vertical branding.',
     intro:
-      'Navigate the massive Georgia World Congress Center and AmericasMart showroom towers easily with a custom retractable banner. Portable, tool-free, and lightweight, these roll up displays fit into a rideshare or elevator without freight hassle. Select standard, deluxe, or X-stand models below to check instant pricing.',
+      'Navigate the massive Georgia World Congress Center and AmericasMart showroom towers easily with a custom retractable banner.',
     local: [
       {
         h2: 'Effortless mobility across the multi-building GWCC campus',
-        p: 'The Georgia World Congress Center spans three expansive exhibition buildings linked by multiple concourses and escalators. Transporting heavy crated displays between halls is costly and tiring. A retractable banner stand weighs under ten pounds in its padded carry bag, allowing an exhibitor to hand-carry their signage directly to their booth without waiting for drayage.'
+        p: 'The Georgia World Congress Center spans three expansive exhibition buildings linked by multiple concourses and escalators. Transporting heavy crated displays between halls is costly and tiring.'
       },
       {
         h2: 'Vertical visibility for dense AmericasMart showroom floors',
@@ -1553,16 +1553,16 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Shipping retractable banner stands to Atlanta properties',
-        p: 'Save on convention receiving charges by having your roll up banner stands shipped directly to your downtown Atlanta hotel, showroom address, or corporate office. Check our live production calendar on the configurator above to coordinate shipping ahead of your event date.'
+        p: 'Check our live production calendar on the configurator above to coordinate shipping ahead of your event date.'
       }
     ],
     faqs: [
-      { q: 'Which pull up banner width works best for Atlanta convention booths?', a: 'Our 33-inch retractable banner stand is the most versatile option for 10x10 booths and showroom doorways, providing vertical visibility without obstructing walkways. For open hall intersections or stage presentations, our 47-inch wide deluxe stand offers commanding impact.' },
+      { q: 'Which pull up banner width works best for Atlanta convention booths?', a: 'Our 33-inch retractable banner stand is the most versatile option for 10x10 booths and showroom doorways, providing vertical visibility without obstructing walkways.' },
       { q: 'Can I replace the printed graphic inside my banner stand later?', a: 'Yes. The aluminum spring cassette supports graphic replacement. You can preserve the stand hardware for future Atlanta markets and order replacement printed banner inserts when updating your brand messaging.' },
-      { q: 'How long does it take to deploy a roll up banner on site?', a: 'Setup takes under sixty seconds with no tools required. Simply rotate the base feet, insert the telescoping support pole into the base slot, pull the banner graphic upward, and secure it to the top rail.' },
-      { q: 'What substrate is used for Atlanta retractable banner printing?', a: 'Our roll up banner printing utilizes UV-cured digital inks on heavy-duty blockout synthetic film. The opaque barrier layer blocks ambient rear light from washing out your print, while anti-curl technology keeps edges completely straight.' },
-      { q: 'Do you deliver retractable banner stands to Atlanta hotels and venues?', a: 'Yes. We ship directly to Atlanta corporate addresses, hotel business centers, and convention loading facilities. Standard manufacturing requires 6–8 business days (2–3 business days with rush) prior to shipping.' },
-      { q: 'What are the artwork specifications for roll up banner printing in Atlanta?', a: 'Please provide your artwork built to the exact ordered dimensions as a press-ready PDF or JPEG at 150 DPI in CMYK with all fonts outlined. You will receive a complimentary online proof to inspect before we print.' }
+      { q: 'How long does it take to deploy a roll up banner on site?', a: 'Setup takes under sixty seconds with no tools required.' },
+      { q: 'What substrate is used for Atlanta retractable banner printing?', a: 'The opaque barrier layer blocks ambient rear light from washing out your print, while anti-curl technology keeps edges completely straight.' },
+      { q: 'Do you deliver retractable banner stands to Atlanta hotels and venues?', a: 'Yes. We ship directly to Atlanta corporate addresses, hotel business centers, and convention loading facilities.' },
+      { q: 'What are the artwork specifications for roll up banner printing in Atlanta?', a: 'Please provide your artwork built to the exact ordered dimensions as a press-ready PDF or JPEG at 150 DPI in CMYK with all fonts outlined.' }
     ]
   },
 
@@ -1585,7 +1585,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       'At major Atlanta buying markets and trade exhibitions like MODEX, IPPE, and AmericasMart gift markets, your exhibit table is where wholesale orders are written and deals are closed. Leaving that venue-supplied utility table bare or wrapped in disposable paper weakens your brand presentation. A custom table cover turns a rented table into an attractive, branded desk. Dye-sublimated polyester showcases your corporate pantone colors and logos across all four sides, while concealing sample inventory, literature, and staff gear cleanly beneath the cloth.',
     intro:
-      'Transform ordinary venue tables into polished brand stations with branded table covers at your next Atlanta trade show or corporate conference. Compact and washable, custom table throws deliver maximum branding with zero freight weight. Choose relaxed pleated throws or modern contour stretch covers below to see live pricing.',
+      'Transform ordinary venue tables into polished brand stations with branded table covers at your next Atlanta trade show or corporate conference.',
     local: [
       {
         h2: 'Tailored for AmericasMart apparel and gift showroom tables',
@@ -1609,8 +1609,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'What table lengths do Atlanta convention decorators provide?', a: 'Convention decorators at the GWCC and downtown Atlanta hotels standardly provide 6-foot (72x30x29 inches) or 8-foot (96x30x29 inches) rectangular tables. Always verify your exhibitor order package to confirm table length.' },
       { q: 'How do you care for dye-sublimated table throws between market weeks?', a: 'Machine wash on cold delicate cycle with mild detergent, then tumble dry on low heat or hang to air dry. The heat-fused dye-sublimation inks will not crack, fade, or run during regular washing.' },
       { q: 'Can you print my corporate logo across the entire front and sides in Atlanta?', a: 'Yes. Our custom table cover printing includes edge-to-edge, full-color dye sublimation across the entire surface of the tablecloth, allowing custom background colors, patterns, and logos on all four sides.' },
-      { q: 'How fast can custom table covers be delivered to downtown Atlanta?', a: 'Production requires 6–8 business days (2–3 business days with rush) after digital proof approval. Standard ground and expedited overnight shipping options are available for delivery to Atlanta.' },
-      { q: 'What vector artwork specifications are required for Atlanta table printing?', a: 'Submit your layout within our downloadable template as a print-ready PDF or JPEG at 150 DPI in CMYK with all fonts converted to curves. A complimentary online proof is provided before printing starts.' }
+      { q: 'How fast can custom table covers be delivered to downtown Atlanta?', a: 'Standard ground and expedited overnight shipping options are available for delivery to Atlanta.' },
+      { q: 'What vector artwork specifications are required for Atlanta table printing?', a: 'A complimentary online proof is provided before printing starts.' }
     ]
   },
 
@@ -1631,9 +1631,9 @@ export const CITY_PRODUCT_PAGES = [
       'logo backdrop Atlanta', 'event backdrop Atlanta'
     ],
     productIntro:
-      'As the major film and television entertainment production hub of the South, Atlanta hosts countless red-carpet premieres, awards galas, and corporate summits. From VIP receptions in Midtown and Buckhead luxury ballrooms to major conference keynote halls at the Georgia World Congress Center, high-profile events require an authentic photo wall. Our custom step and repeat printing Atlanta service delivers seamless media backdrops that tile your brand and sponsor logos across a premium non-glare fabric display, ensuring that every smartphone photo, news release, and attendee selfie captures your sponsors clearly.',
+      'As the major film and television entertainment production hub of the South, Atlanta hosts countless red-carpet premieres, awards galas, and corporate summits. From VIP receptions in Midtown and Buckhead luxury ballrooms to major conference keynote halls at the Georgia World Congress Center, high-profile events require an authentic photo wall.',
     intro:
-      'Guarantee prime sponsor visibility at Atlanta galas, charity banquets, and expo press conferences with an authentic custom step and repeat backdrop. Built with non-glare fabric on an adjustable aluminum frame, our photo walls eliminate flash reflections. Configure your dimensions and hardware package below to view live pricing.',
+      'Guarantee prime sponsor visibility at Atlanta galas, charity banquets, and expo press conferences with an authentic custom step and repeat backdrop.',
     local: [
       {
         h2: 'Red carpet logo layouts engineered for Atlanta media photocalls',
@@ -1649,16 +1649,16 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Shipping media backdrops to Atlanta venues and production offices',
-        p: 'The complete backdrop system — folding fabric graphic, telescoping poles, and heavy steel base plates — packs into a single padded travel bag that fits easily into a car trunk or rideshare. We ship directly to your Atlanta event hotel, venue dock, or local production office with real-time tracking.'
+        p: 'The complete backdrop system — folding fabric graphic, telescoping poles, and heavy steel base plates — packs into a single padded travel bag that fits easily into a car trunk or rideshare.'
       }
     ],
     faqs: [
-      { q: 'What media wall dimension is standard for Atlanta film premieres and galas?', a: 'A 10ft wide by 8ft tall media wall is our most requested size, accommodating up to four or five guests across the frame. For smaller VIP step-and-repeat photobooths or registration entrances, an 8ft by 8ft backdrop provides an intimate option.' },
+      { q: 'What media wall dimension is standard for Atlanta film premieres and galas?', a: 'A 10ft wide by 8ft tall media wall is our most requested size, accommodating up to four or five guests across the frame.' },
       { q: 'How should sponsor logos be arranged on an Atlanta event photo backdrop?', a: 'We recommend featuring two to four sponsor marks arranged in an offset checkerboard grid. This staggered pattern ensures even spacing that stays legible in both vertical smartphone pictures and wide press photographs.' },
       { q: 'Can the step and repeat frame be adjusted to low-ceiling Atlanta venues?', a: 'Yes. The telescoping aluminum uprights adjust between 6ft and 8ft tall, allowing you to lower the display height to fit boutique hotel suites or private dining rooms across Atlanta.' },
-      { q: 'What material is used for step and repeat backdrop printing Atlanta events?', a: 'For step and repeat backdrop printing Atlanta organizers choose our premium 9oz wrinkle-resistant stretch polyester printed via dye-sublimation. This produces a soft, non-reflective matte finish that eliminates photographic flash flare completely.' },
-      { q: 'Can you ship a step and repeat backdrop directly to an Atlanta hotel?', a: 'Yes. We regularly ship displays directly to Atlanta hotel guest package desks, resort convention offices, and venue docks. Manufacturing takes 6–8 business days (2–3 business days with rush) prior to shipping.' },
-      { q: 'What artwork layout is needed for an Atlanta repeating logo backdrop?', a: 'Upload your finished repeating logo grid placed within our downloadable template as a print-ready PDF or JPEG at 150 DPI in CMYK with fonts outlined. A free digital proof will be sent for your sign-off before manufacturing begins.' }
+      { q: 'What material is used for step and repeat backdrop printing Atlanta events?', a: 'For step and repeat backdrop printing Atlanta organizers choose our premium 9oz wrinkle-resistant stretch polyester printed via dye-sublimation.' },
+      { q: 'Can you ship a step and repeat backdrop directly to an Atlanta hotel?', a: 'Yes.' },
+      { q: 'What artwork layout is needed for an Atlanta repeating logo backdrop?', a: 'Upload your finished repeating logo grid placed within our downloadable template as a print-ready PDF or JPEG at 150 DPI in CMYK with fonts outlined.' }
     ]
   },
 
@@ -1681,7 +1681,7 @@ export const CITY_PRODUCT_PAGES = [
     productIntro:
       'At major Atlanta industry conventions like MODEX, IPPE, and Supercomputing, an exhibitor’s back wall anchors the entire presence of the booth. A straight tension fabric display provides an architectural, unbroken presentation without the unsightly vertical panel seams, bulky hinges, and heavy metal extrusions of outdated modular exhibits. A high-definition dye-sublimated stretch fabric graphic slips smoothly over an interlocking aluminum tubular frame like a pillowcase, zipping closed along the bottom edge to create an impeccably smooth wall.',
     intro:
-      'Establish a sleek, professional booth presence in Atlanta with a custom trade show backdrop made from seamless tension fabric. Extremely lightweight and fast to assemble without tools, it packs into a single carry bag that travels easily. Configure 8ft, 10ft, or 20ft displays below to see live pricing.',
+      'Establish a sleek, professional booth presence in Atlanta with a custom trade show backdrop made from seamless tension fabric.',
     local: [
       {
         h2: 'Seamless modern aesthetic that commands long GWCC aisles',
@@ -1689,7 +1689,7 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Bypassing union rigging charges and heavy crate freight',
-        p: 'Freight handling and forklift fees at the GWCC escalate rapidly when exhibits arrive in heavy wooden crates. A 10-foot straight tension fabric display weighs under thirty pounds complete with hardware and soft travel bag, allowing your booth staff to hand-carry the unit onto the floor without paying drayage fees.'
+        p: 'Freight handling and forklift fees at the GWCC escalate rapidly when exhibits arrive in heavy wooden crates.'
       },
       {
         h2: 'Pillowcase zipper installation in under ten minutes',
@@ -1697,7 +1697,7 @@ export const CITY_PRODUCT_PAGES = [
       },
       {
         h2: 'Shipping tension fabric exhibits to Atlanta event docks',
-        p: 'Because the folded fabric graphic and tubular aluminum skeleton pack down compactly into an included canvas duffle, parcel shipping costs are minimal. We deliver directly to Atlanta convention center docks, advance freight warehouses, and local business offices. Review production timelines and calculate Georgia shipping above.'
+        p: 'We deliver directly to Atlanta convention center docks, advance freight warehouses, and local business offices. Review production timelines and calculate Georgia shipping above.'
       }
     ],
     faqs: [
@@ -1705,8 +1705,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Can I print double-sided graphics for island exhibits in Atlanta?', a: 'Yes. We offer double-sided dye-sublimation printing for island or end-cap booths where the back of your display is exposed to foot traffic, maximizing your promotional exposure.' },
       { q: 'Why choose tension fabric over traditional pipe-and-drape in Atlanta?', a: 'Standard pipe-and-drape provided by convention halls looks temporary and utilitarian. A tension fabric wall conceals the venue drape behind a monolithic, high-resolution corporate graphic wall that looks built-in.' },
       { q: 'Is the tension fabric backdrop machine washable if it gets soiled?', a: 'Yes. The dye-sublimated stretch polyester fabric is completely machine washable on cold delicate cycle. Hang to dry or tumble dry on low heat; the heat-infused inks will not crack or peel.' },
-      { q: 'How quickly can a tension fabric wall be shipped to an Atlanta venue?', a: 'Manufacturing takes 6–8 business days (2–3 business days with rush) following digital proof approval. We ship via express parcel carriers directly to Atlanta convention docks, hotels, or corporate facilities.' },
-      { q: 'What artwork preparation guidelines apply to Atlanta backdrop printing?', a: 'Build your artwork to scale within our provided template at 150 DPI in CMYK color as a print-ready PDF or JPEG. Keep critical logos and typography inside the safety margin to avoid edge wrapping. A free digital proof is sent before printing.' }
+      { q: 'How quickly can a tension fabric wall be shipped to an Atlanta venue?', a: 'We ship via express parcel carriers directly to Atlanta convention docks, hotels, or corporate facilities.' },
+      { q: 'What artwork preparation guidelines apply to Atlanta backdrop printing?', a: 'Keep critical logos and typography inside the safety margin to avoid edge wrapping. A free digital proof is sent before printing.' }
     ]
   },
 
@@ -1751,10 +1751,10 @@ export const CITY_PRODUCT_PAGES = [
     faqs: [
       { q: 'What is the largest seamless banner dimension available for Atlanta venues?', a: 'Our wide-format presses produce seamless single-piece vinyl banners up to 10 feet wide by 145 feet in length. For monumental building facade displays or arena wall wraps, multiple printed panels can be RF-welded together to create virtually unlimited dimensions.' },
       { q: 'Which banner substrate is recommended for outdoor Atlanta festivals?', a: 'For open-air festival perimeters, concert barricades, and construction safety fences exposed to wind gusts, micro-perforated mesh banner material is recommended. For sheltered convention booths or storefront signage, 13oz scrim vinyl or 18oz blockout vinyl provides full opacity.' },
-      { q: 'Are edge hems and hanging grommets included with banner printing Atlanta orders?', a: 'Yes. Thermally welded perimeter hems and solid brass grommets spaced every two to three feet are included standard on all vinyl and mesh orders. Pole pockets can also be added for mounting onto horizontal truss pipes.' },
+      { q: 'Are edge hems and hanging grommets included with banner printing Atlanta orders?', a: 'Yes. Pole pockets can also be added for mounting onto horizontal truss pipes.' },
       { q: 'When should I choose fabric banners for indoor Atlanta trade show exhibits?', a: 'Our 9oz dye-sublimated fabric banners offer a soft matte finish that diffuses harsh convention spotlights, eliminating reflective glare that can obscure glossy vinyl in photographs and live video broadcasts.' },
-      { q: 'Can you deliver event banners Atlanta orders directly to the GWCC dock?', a: 'Yes. We deliver directly to Georgia World Congress Center receiving docks, local Atlanta hotels, and commercial facilities throughout Fulton and DeKalb counties. Turnaround takes 6–8 business days (2–3 business days with rush) prior to shipping transit.' },
-      { q: 'What file specifications should I submit for custom banner printing Atlanta?', a: 'Provide your graphic file as a print-ready PDF or JPEG at 150 DPI in CMYK at actual size, or 300 DPI at 50% scale. Outline all vector fonts to avoid font substitution. A complimentary electronic proof is provided for your sign-off before manufacturing starts.' }
+      { q: 'Can you deliver event banners Atlanta orders directly to the GWCC dock?', a: 'Yes. We deliver directly to Georgia World Congress Center receiving docks, local Atlanta hotels, and commercial facilities throughout Fulton and DeKalb counties.' },
+      { q: 'What file specifications should I submit for custom banner printing Atlanta?', a: 'Provide your graphic file as a print-ready PDF or JPEG at 150 DPI in CMYK at actual size, or 300 DPI at 50% scale. Outline all vector fonts to avoid font substitution.' }
     ]
   }
 ];

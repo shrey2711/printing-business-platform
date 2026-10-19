@@ -22,6 +22,7 @@ import { readFileSync, existsSync } from 'fs';
 import { SEO_CITIES, cityWithAbbr } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
 import { CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
+import { hubIndexable, catLive } from './lib/hub-gate.mjs';
 
 const DIST = 'dist';
 const CAT = 'trade-show-displays';
@@ -46,7 +47,7 @@ const exists = (href) => {
   return existsSync(`${DIST}${clean}/index.html`) || existsSync(`${DIST}${clean}`);
 };
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 for (const city of rolled) {
   const file = `${DIST}/${CAT}/${city.slug}/index.html`;
@@ -69,7 +70,7 @@ for (const city of rolled) {
   // 2. sibling city-category pages
   for (const sib of ['trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers']) {
     const target = `/${sib}/${city.slug}`;
-    if (!hrefs.includes(target)) F(`no city-to-category link ${target}`);
+    if (catLive(sib, city.slug) && !hrefs.includes(target)) F(`no city-to-category link ${target}`);
   }
 
   // 3. no broken links

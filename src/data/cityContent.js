@@ -3,14 +3,17 @@
 // hard weather claims — just genuine local event context. Priority cities are
 // indexed with this content; every other city stays noindex.
 
-// Tight, defensible shortlist of indexed city pages (13). Every other city —
-// including the ones with content below that aren't in this set — stays
-// noindex, so we never expose hundreds of near-identical city URLs.
-export const PRIORITY_CITIES = new Set([
-  'los-angeles', 'san-diego', 'san-francisco', 'houston', 'dallas', 'austin',
-  'miami', 'orlando', 'new-york-city', 'las-vegas', 'seattle',
-  'vancouver', 'toronto', 'calgary', 'montreal'
-]);
+// No /locations/{state}/{city} page is indexed.
+//
+// The SEO cities (LA, Chicago, Dallas, ...) 301 to their /trade-show-displays/
+// hub, so those URLs never render. The five that remain (Austin, Calgary,
+// Montreal, New York City, Toronto) carry ~460 words, of which ~85% is the same
+// size guide / FAQ / ordering block as every other city page — measured by
+// scripts/audit-location-uniqueness.mjs. Indexing them splits the signal with
+// the state page for the same query. They stay readable and linked
+// (noindex,follow) until they gain a hub page of their own; add the slug here
+// only when the audit shows the page is >=80% unique.
+export const PRIORITY_CITIES = new Set([]);
 
 export const cityContent = {
   'los-angeles': {

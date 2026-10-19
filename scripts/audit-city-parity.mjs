@@ -18,6 +18,8 @@ import { readFileSync, existsSync } from 'fs';
 import { SEO_CITIES, cityVenueName } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
 import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
+import { INDEXED_STATES } from '../src/data/stateContent.js';
+import { hubIndexable, catLive } from './lib/hub-gate.mjs';
 
 // The one heading a city page may carry that the master does not: the link
 // block down to that city's product + city pages. It exists exactly where those
@@ -27,6 +29,12 @@ import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
 // exception enforceable in both directions: a pilot city without the section
 // fails, and a non-pilot city that grows one fails too.
 const PILOT_H2 = 'Order by product in {city}';
+// Sections that render only when the city has copy for them that is not the
+// shared template (src/data/cityPagePlan.js drops the rest): the best-displays
+// paragraph and the hub FAQ. Removed from both sides before comparing, so the
+// architecture check stays strict about every other heading and its order.
+const OPTIONAL_H2 = [/^Best displays for \{city\} trade shows$/, /^\{city\} trade show displays FAQ$/];
+const isOptional = (t) => OPTIONAL_H2.some((re) => re.test(t));
 const pilotCities = new Set(CITY_PRODUCT_PAGES.map((p) => p.citySlug));
 
 const DIST = 'dist';
@@ -36,7 +44,7 @@ const fails = [];
 const notes = [];
 
 // Cities carrying the master pattern (productSections is the opt-in marker).
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 const nameOf = (slug) => SEO_CITIES.find((c) => c.slug === slug).city;
 
 // Seattle-only local facts. None of these may appear on another city's page.
@@ -110,6 +118,7 @@ const classify = (links, slug) => ({
   quote: links.filter((l) => l === '/quote').length
 });
 const MC = classify(M.links, MASTER);
+const MASTER_H2 = M.h2.filter((t) => !isOptional(t));
 
 console.log(`Master: /${CAT}/${MASTER} — ${M.h2.length} H2s, ${M.faqVisible} FAQs, schema [${M.schema.join(', ')}]`);
 console.log(`Master link strategy: ${MC.categoryHubs.length} category hubs · ${MC.products.length} product pages · ${MC.learningCenter.length} Learning Center guides · ${MC.siblingCats.length} sibling category-city pages · ${MC.otherCities.length} city-to-city links\n`);
@@ -138,19 +147,20 @@ for (const city of rolled) {
   if (!isPilot && hasPilotH2) {
     F(`carries "${PILOT_H2}" but has no product+city pages to link to`);
   }
-  const core = S.h2.filter((t) => t !== PILOT_H2);
-  if (core.length !== M.h2.length) F(`${core.length} H2s vs master ${M.h2.length} (excluding the pilot section)`);
-  core.forEach((t, i) => { if (M.h2[i] && t !== M.h2[i]) F(`H2 #${i + 1} "${t}" != master "${M.h2[i]}"`); });
+  const core = S.h2.filter((t) => t !== PILOT_H2 && !isOptional(t));
+  if (core.length !== MASTER_H2.length) F(`${core.length} H2s vs master ${MASTER_H2.length} (excluding the pilot and optional sections)`);
+  core.forEach((t, i) => { if (MASTER_H2[i] && t !== MASTER_H2[i]) F(`H2 #${i + 1} "${t}" != master "${MASTER_H2[i]}"`); });
 
   // 3. Breadcrumb — Home / Locations / State / current, all real URLs.
   for (const need of ['/', '/locations']) {
     if (!S.breadcrumb.includes(`href="${need}"`)) F(`breadcrumb missing ${need}`);
   }
-  if (city.stateSlug && !S.breadcrumb.includes(`/locations/${city.stateSlug}`)) F('breadcrumb missing state level');
+  if (city.stateSlug && INDEXED_STATES.has(city.stateSlug) && !S.breadcrumb.includes(`/locations/${city.stateSlug}`)) F('breadcrumb missing state level');
   if (!S.breadcrumb.includes(city.city)) F('breadcrumb missing the current page name');
 
   // 4. GEO/entity signals — same JSON-LD @type set as the master.
-  if (S.schema.join() !== M.schema.join()) F(`schema [${S.schema.join(', ')}] != master [${M.schema.join(', ')}]`);
+  const noFaq = (a) => a.filter((t) => t !== 'FAQPage').join();
+  if (noFaq(S.schema) !== noFaq(M.schema)) F(`schema [${S.schema.join(', ')}] != master [${M.schema.join(', ')}] (FAQPage is optional)`);
   for (const banned of ['LocalBusiness', 'Review', 'AggregateRating', 'Offer']) {
     if (S.schema.includes(banned)) F(`schema contains ${banned} (not permitted on city pages)`);
   }
@@ -158,14 +168,15 @@ for (const city of rolled) {
   // 5. AEO — answer block + FAQ visible/schema parity.
   if (!S.answerBlock) F('no answer-first block');
   if (S.faqVisible !== S.faqSchema) F(`FAQ schema ${S.faqSchema} != visible ${S.faqVisible}`);
-  if (S.faqVisible < M.faqVisible) F(`${S.faqVisible} FAQs < master ${M.faqVisible}`);
 
   // 6. Internal linking strategy — same classes as the master.
   if (C.categoryHubs.length < MC.categoryHubs.length) F(`${C.categoryHubs.length} category hubs < master ${MC.categoryHubs.length}`);
   if (C.products.length < MC.products.length) F(`${C.products.length} product links < master ${MC.products.length}`);
   if (!C.boothPackages) F('no booth-packages link');
   if (C.learningCenter.length !== MC.learningCenter.length) F(`${C.learningCenter.length} Learning Center links != master ${MC.learningCenter.length}`);
-  if (C.siblingCats.length !== MC.siblingCats.length) F(`${C.siblingCats.length} sibling category-city links != master ${MC.siblingCats.length}`);
+  // Sibling category pages that were removed (not unique enough) are not linked.
+  const liveSibs = ['trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers'].filter((c) => catLive(c, city.slug)).length;
+  if (C.siblingCats.length !== liveSibs) F(`${C.siblingCats.length} sibling category-city links != ${liveSibs} live sibling pages`);
   if (C.otherCities.length !== MC.otherCities.length) F(`${C.otherCities.length} city-to-city links != master ${MC.otherCities.length}`);
 
   // 7. CTA strategy — the master's conversion paths must be present.

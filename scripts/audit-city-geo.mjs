@@ -18,6 +18,8 @@
 import { readFileSync, existsSync } from 'fs';
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
+import { CITY_PRODUCT_PAGES } from '../src/data/cityProductPages.js';
 
 const DIST = 'dist';
 const CAT = 'trade-show-displays';
@@ -32,13 +34,21 @@ const text = (h) => h
   .replace(/&amp;/g, '&').replace(/&#39;|&rsquo;/g, "'").replace(/&quot;/g, '"')
   .replace(/\s+/g, ' ');
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 for (const city of rolled) {
   const file = `${DIST}/${CAT}/${city.slug}/index.html`;
   if (!existsSync(file)) { fails.push(`${city.slug}: not built`); continue; }
   const html = readFileSync(file, 'utf8');
   const body = text(html);
+  // Product-level guidance (what each category is for, indoor/outdoor use) is
+  // judged across the city's page cluster: each block of city copy now appears
+  // on exactly one of the five URLs (src/data/cityPagePlan.js). Entity, venue,
+  // ordering and answer-block checks stay on the hub itself.
+  const cluster = text([...['trade-show-displays', 'trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers'].map((c) => `${c}/${city.slug}`),
+    // product × city pages carry the product copy where category pages were cut
+    ...CITY_PRODUCT_PAGES.filter((p) => p.citySlug === city.slug).map((p) => p.slug)]
+    .map((c) => `${DIST}/${c}/index.html`).filter(existsSync).map((x) => readFileSync(x, 'utf8')).join(' '));
   const d = CITY_DETAIL[city.slug];
   const F = (m) => fails.push(`${city.slug}: ${m}`);
   const names = [city.h1City, city.city].filter(Boolean);
@@ -54,8 +64,8 @@ for (const city of rolled) {
     ['table covers', /table covers?/i, /rented table|fitted|pleated|stretch|demo table|registration/i]
   ];
   for (const [name, named, explained] of CATEGORIES) {
-    if (!named.test(body)) F(`never names ${name}`);
-    else if (!explained.test(body)) F(`names ${name} but never explains what it is for`);
+    if (!named.test(cluster)) F(`never names ${name}`);
+    else if (!explained.test(cluster)) F(`names ${name} but never explains what it is for`);
   }
 
   // 4. audience + local industries
@@ -81,15 +91,18 @@ for (const city of rolled) {
   for (const [what, re] of ORDER) if (!re.test(body)) F(`never states the ${what}`);
 
   // 7. use-case guidance
-  if (!/(?:inside|indoors?)[\s\S]{0,140}?(?:booth|hall|convention cent|exhibit|banner stand|display|table cover)/i.test(body)) F('no indoor use-case guidance');
-  if (!/outdoor[\s\S]{0,100}?(?:canopy|activation|event)/i.test(body)) F('no outdoor use-case guidance');
+  if (!/(?:inside|indoors?|halls?|convention cent\w*)[\s\S]{0,140}?(?:booth|banner stand|display|table cover|backdrop)/i.test(cluster)) F('no indoor use-case guidance');
+  if (!/outdoor[\s\S]{0,100}?(?:canopy|activation|event)/i.test(cluster)) F('no outdoor use-case guidance');
 
   // 8. extractable answer-first summary
   const answer = (html.match(/class="answer-block">([\s\S]*?)<\/p>/) || [])[1];
   if (!answer) F('no answer-first summary block');
   else {
     const words = text(answer).trim().split(/\s+/).length;
-    if (words < 25 || words > 70) F(`answer block is ${words} words (want 25-70 for extraction)`);
+    // The shared "Apex prints … and ships them to {city}" tail is dropped from the
+    // answer (it is the same sentence in every city; cityPagePlan.js), so the
+    // answer is the city's own opening sentence: 18-70 words.
+    if (words < 18 || words > 70) F(`answer block is ${words} words (want 18-70 for extraction)`);
     if (!names.some((n) => text(answer).includes(n))) F('answer block does not name the city');
   }
 

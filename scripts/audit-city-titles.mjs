@@ -12,6 +12,7 @@
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { SEO_CITIES, cityWithAbbr } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const DIST = 'dist';
 const CAT = 'trade-show-displays';
@@ -37,7 +38,7 @@ const allTitles = new Map();
   }
 })(DIST);
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 for (const city of rolled) {
   const file = `${DIST}/${CAT}/${city.slug}/index.html`;

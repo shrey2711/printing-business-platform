@@ -16,6 +16,7 @@
 
 import { SEO_CITIES, cityWithAbbr } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const list = process.argv.includes('--list');
 const fails = [];
@@ -42,7 +43,7 @@ const VENUE_DISCLAIMER = [
 ];
 const SPECIAL_ARRANGEMENT = /we (?:have|hold) an? (?:arrangement|account|agreement) with|direct (?:line|access) to the (?:venue|dock)|preferred (?:vendor|supplier) at|we deliver straight to the (?:floor|booth)/i;
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 for (const city of rolled) {
   const faqs = CITY_DETAIL[city.slug].faqs || [];

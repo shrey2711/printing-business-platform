@@ -15,6 +15,7 @@
 
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const list = process.argv.includes('--list');
 const fails = [];
@@ -49,7 +50,7 @@ const norm = (s, city) => {
   return t.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 };
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 // index every sentence, verbatim and name-normalised
 const verbatim = new Map();

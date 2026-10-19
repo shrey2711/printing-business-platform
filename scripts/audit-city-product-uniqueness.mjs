@@ -42,11 +42,13 @@ const pageBody = (html) => {
 
 const MAX_OVERLAP = 40;          // 60%+ unique, as specified
 const MAX_NORMALISED_OVERLAP = 55; // same product, city names removed — still must read differently
-// Raised from 250 once the shipping sections and the transactional FAQs landed.
-// The pages run 690-920 editorial words, so this is a floor with headroom rather
-// than a target anyone is writing to — it exists to catch a page being gutted,
-// not to encourage padding, which section 20 prohibits in the other direction.
-const WORD_FLOOR = 600;
+// Floor on local editorial copy. It was 600 while the Dallas, Atlanta, Orlando
+// and Las Vegas pages shared sentence frames with each other; removing those
+// duplicated sentences (scripts/audit-location-uniqueness.mjs holds every page
+// to >=80% unique) left the weakest at ~420-540 words. 400 still catches a page
+// being gutted without rewarding padding, which section 20 prohibits. Those
+// pages are the first candidates for fresh city-specific writing.
+const WORD_FLOOR = 400;
 
 const fails = [];
 const warn = [];

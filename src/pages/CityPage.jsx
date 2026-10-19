@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { list as getProducts } from '../services/cms/productService';
 import { getCity, slugify } from '../data/states';
-import { getSeoCity } from '../data/citySeo';
+import { removedRedirectFor } from '../data/removedLocations';
 import { PRIORITY_CITIES, cityContent } from '../data/cityContent';
 import { SIZE_COMPARISON, STATE_FAQS } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
@@ -31,13 +31,10 @@ export default function CityPage() {
     return () => { alive = false; };
   }, []);
 
-  // Option-A consolidation: for the priority SEO cities, the canonical canopy
-  // page is /trade-show-canopies/[city]. The edge middleware 301s direct hits;
-  // this mirrors it for in-app (SPA) navigation so clicks land on the same page.
-  const seoCity = getSeoCity(citySlug);
-  if (seoCity && seoCity.stateSlug === stateSlug) {
-    return <Navigate to={`/trade-show-canopies/${citySlug}`} replace />;
-  }
+  // /locations/{state}/{city} pages are removed. The edge middleware 301s direct
+  // hits; this mirrors it for in-app navigation (src/data/removedLocations.js).
+  const gone = removedRedirectFor(`/locations/${stateSlug}/${citySlug}`);
+  if (gone) return <Navigate to={gone.destination} replace />;
 
   if (!match) {
     return (

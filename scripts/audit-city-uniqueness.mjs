@@ -16,11 +16,12 @@
 
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const matrix = process.argv.includes('--matrix');
 const fails = [];
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 // Everything that legitimately differs city to city, collapsed to a token so it
 // cannot inflate a uniqueness score.

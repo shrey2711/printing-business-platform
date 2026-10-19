@@ -14,6 +14,7 @@
 import { readFileSync, existsSync, readdirSync, realpathSync } from 'fs';
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const DIST = 'dist';
 const CAT = 'trade-show-displays';
@@ -63,7 +64,7 @@ const DESC_PARTS = [
   ['the ordering or shipping process', /printed to order|made to order|ship|shipping|instant (?:online )?pricing/i]
 ];
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 for (const city of rolled) {
   const path = `/${CAT}/${city.slug}`;
@@ -95,6 +96,14 @@ for (const city of rolled) {
 
   // ---- §22 indexability ----
   const robots = (html.match(/<meta name="robots" content="([^"]*)"/) || [])[1] || '';
+  const gated = !hubIndexable(city);
+  if (gated) {
+    // Expected: not enough city-specific copy yet. It must be noindex AND out of the sitemap.
+    if (!/noindex/i.test(robots)) F('plan says not indexable but the page is indexable');
+    if (sitemapUrls.some((u) => u.replace(/\/$/, '') === want)) F('noindex page is listed in the sitemap');
+    console.log(`  ~ ${city.slug}: gated noindex until it has more city-specific copy`);
+    continue;
+  }
   if (/noindex/i.test(robots)) F(`page is noindex ("${robots}")`);
   if (/nofollow/i.test(robots)) F(`page-level nofollow ("${robots}")`);
   const nofollowLinks = [...html.matchAll(/<a [^>]*href="(\/[^"]*)"[^>]*rel="[^"]*nofollow/g)].map((m) => m[1]);

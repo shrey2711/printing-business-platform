@@ -18,6 +18,7 @@
 import { readFileSync, existsSync } from 'fs';
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const DIST = 'dist';
 const CAT = 'trade-show-displays';
@@ -30,11 +31,13 @@ const decode = (s) => s
   .replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ');
 const strip = (s) => decode(s.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
 
-const REQUIRED = ['WebSite', 'WebPage', 'BreadcrumbList', 'FAQPage'];
+// FAQPage is required only where the page shows FAQs: the hub shows the FAQs
+// that are not shared template (src/data/cityPagePlan.js), which can be none.
+const REQUIRED = ['WebSite', 'WebPage', 'BreadcrumbList'];
 const BANNED_TYPES = ['Review', 'AggregateRating', 'LocalBusiness'];
 const BANNED_PROPS = ['ratingValue', 'reviewCount', 'bestRating', 'reviewBody'];
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 
 for (const city of rolled) {
   const file = `${DIST}/${CAT}/${city.slug}/index.html`;
@@ -56,6 +59,7 @@ for (const city of rolled) {
 
   const types = blocks.map((b) => b['@type']).flat();
   for (const t of REQUIRED) if (!types.includes(t)) F(`missing ${t} schema`);
+  if (/<h3>[\s\S]*?<\/h3>\s*<p>/.test(html) && !types.includes('FAQPage')) F('visible FAQs but missing FAQPage schema');
   for (const t of BANNED_TYPES) if (types.includes(t)) F(`contains ${t} schema, which this page has no basis for`);
 
   // duplicate / conflicting nodes

@@ -9,6 +9,7 @@
 // Usage: node scripts/report-city-rollout.mjs
 
 import { readFileSync, existsSync } from 'fs';
+import { hubIndexable } from './lib/hub-gate.mjs';
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
 
@@ -54,7 +55,8 @@ for (const tier of [...byTier.keys()].sort()) {
 
     // the guard: priority must never have been written into tier
     if (c.tier > 2) fails.push(`${c.slug}: tier ${c.tier} renders noindex — if this was meant as rollout priority, use the priority field instead`);
-    if (indexed === 'NOINDEX') fails.push(`${c.slug}: page is noindex`);
+    if (indexed === 'NOINDEX' && hubIndexable(c)) fails.push(`${c.slug}: page is noindex`);
+    if (indexed === 'NOINDEX' && !hubIndexable(c)) console.log(`    ~ ${c.slug}: gated noindex — needs more city-specific copy (cityPagePlan)`);
   }
 }
 

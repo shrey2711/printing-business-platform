@@ -9,7 +9,7 @@
 // client-side redirect, this preserves SEO signal and works for crawlers.
 
 import { redirects } from './src/generated/redirects.js';
-import { SEO_CITIES } from './src/data/citySeo.js';
+import { locationRedirects } from './src/generated/locationRedirects.js';
 import { KNOWN_ROUTES, STATIC_FILES } from './src/generated/routes.js';
 
 // Skip the API and the three directories that hold real static files:
@@ -58,17 +58,13 @@ const BUILT_IN = [
   { source: '/products/feather-flags', destination: '/products', code: 301 }
 ];
 
-// Option-A consolidation: the /trade-show-canopies/[city] pages are the
-// canonical local canopy pages, so the old /locations/[state]/[city] canopy
-// pages 301 into them. The bare /trade-show-canopies path goes to the canopy
-// category.
+// Removed location pages (state, state/city and category/city URLs that could
+// not carry >=80% unique copy) 301 to the nearest live page. The list is
+// generated at build from src/data/removedLocations.js. The bare
+// /trade-show-canopies path goes to the canopy category.
 const CITY_REDIRECTS = [
   { source: '/trade-show-canopies', destination: '/custom-canopies', code: 301 },
-  ...SEO_CITIES.filter((c) => c.stateSlug).map((c) => ({
-    source: `/locations/${c.stateSlug}/${c.slug}`,
-    destination: `/trade-show-canopies/${c.slug}`,
-    code: 301
-  }))
+  ...locationRedirects.map((r) => ({ ...r, code: 301 }))
 ];
 
 // DB-managed rules can still override a built-in source if ever needed.

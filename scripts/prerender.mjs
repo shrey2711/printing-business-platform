@@ -24,13 +24,14 @@ import {
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
 import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr, cityVenueName, cityVenueWithAbbr } from '../src/data/citySeo.js';
+import { cityPagePlan } from '../src/data/cityPagePlan.js';
+import { removedLocationRedirects, isStateLive, isCategoryCityLive } from '../src/data/removedLocations.js';
 import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
-  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS,
+  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS, LOCAL_FACTS, BUYING_GUIDE_NOTE, STATE_OUTDOOR, distinctIntro,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../src/data/stateContent.js';
-import { PRIORITY_CITIES, cityContent } from '../src/data/cityContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
 import {
@@ -618,7 +619,7 @@ for (const cp of CATEGORY_PAGES) {
     const localForHub = { 'custom-canopies': 'canopies', 'trade-show-displays': 'displays', 'banner-stands': 'banner-stands', 'backdrops': 'backdrops', 'table-covers': 'table-covers' }[cp.slug];
     const lc = localForHub && LOCAL_CATEGORIES.find((l) => l.key === localForHub);
     const cities = lc
-      ? `<h2>${esc(lc.label)} by city</h2><ul>${SEO_CITIES.filter((c) => c.tier <= 2).map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}, ${esc(c.abbr)}</a></li>`).join('')}</ul>`
+      ? `<h2>${esc(lc.label)} by city</h2><ul>${SEO_CITIES.filter((c) => isCategoryCityLive(lc.slug, c.slug)).map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}, ${esc(c.abbr)}</a></li>`).join('')}</ul>`
       : '';
     // Buying-decision sections: how to choose within the category, sized and
     // specified from the product records rather than restating the intro.
@@ -859,10 +860,13 @@ const endSentence = (s) => (/[.!?]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`)
 const dedupePeriods = (s) => s.replace(/\.{2,}/g, '.');
 for (const lc of LOCAL_CATEGORIES) {
   for (const city of SEO_CITIES) {
+    // A page that cannot reach the uniqueness bar is not written; it 301s to
+    // the nearest live page (src/data/removedLocations.js).
+    if (!isCategoryCityLive(lc.slug, city.slug)) continue;
     routes.push(() => {
       const items = productList.filter((p) => lc.productCats.includes(p.category));
-      const siblings = LOCAL_CATEGORIES.filter((l) => l.key !== lc.key);
-      const others = SEO_CITIES.filter((c) => c.slug !== city.slug).slice(0, 8);
+      const siblings = LOCAL_CATEGORIES.filter((l) => l.key !== lc.key && isCategoryCityLive(l.slug, city.slug));
+      const others = SEO_CITIES.filter((c) => c.slug !== city.slug && isCategoryCityLive(lc.slug, c.slug)).slice(0, 8);
       // §21 image SEO: the prerendered grid carries the real product photo, so
       // the crawled page is not text-only. Alt text describes the PRODUCT (it
       // is what the photo shows) rather than repeating "{label} in {city}" on
@@ -873,7 +877,7 @@ for (const lc of LOCAL_CATEGORIES) {
           const img = photo
             ? `<img src="${photo.replace(ORIGIN, '')}" alt="${esc(`${p.name} — custom printed by ${BRAND}`)}" width="320" height="320" loading="lazy" decoding="async"> `
             : '';
-          return `<li>${img}<a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`;
+          return `<li>${img}<a href="/products/${p.slug}">${esc(p.name)} — ${priceFrom(p)}</a></li>`;
         })
         .join('');
       const siblingLinks = siblings
@@ -882,124 +886,32 @@ for (const lc of LOCAL_CATEGORIES) {
       const otherLis = others
         .map((c) => `<li><a href="/${lc.slug}/${c.slug}">${esc(lc.label)} in ${esc(c.city)}</a></li>`)
         .join('');
-      // Rich, per-city editorial (real facts only) when the city has a detail
-      // entry; otherwise the standard template. Keeps rollout incremental with no
-      // thin/empty sections.
+      // Which editorial block lives on which of the city's five pages is decided
+      // once in cityPagePlan (shared with CityCategoryPage): each block appears
+      // on exactly one page, so the five URLs for a city are not near-duplicates.
       const detail = cityDetailFor(city.slug);
-      // Spec table per category: the displays hub shows every product line,
-      // each category page shows only the rows for its own products.
-      const SPEC_ROWS_FOR = {
-        'trade-show-displays': null, // all rows
-        'trade-show-canopies': ['Canopy tent'],
-        'banner-stands': ['Retractable banner stand'],
-        'trade-show-backdrops': ['Step & repeat backdrop', 'Tension fabric display'],
-        'table-covers': ['Table cover']
-      };
-      const rowFilter = SPEC_ROWS_FOR[lc.slug];
-      const baseSpec = detail?.specTable;
-      const st = baseSpec
-        ? (rowFilter === null
-          ? baseSpec
-          : { ...baseSpec,
-            caption: `${city.city} ${lc.label.toLowerCase()} at a glance`,
-            rows: baseSpec.rows.filter((r) => rowFilter.includes(r[0])) })
-        : null;
-      const specTableHtml = st
+      const plan = cityPagePlan(city, lc, detail);
+      const specHtml = (st) => st
         ? `<div class="table-wrap"><table class="compare-table"><caption>${esc(st.caption)}</caption><thead><tr>${st.cols.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${st.rows.map((r) => `<tr>${r.map((cell) => `<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
         : '';
-      // Climate belongs on the pages whose product is used outdoors; the
-      // best-displays overview belongs on the hub that covers every product.
-      const showClimate = lc.slug === 'trade-show-displays' || lc.slug === 'trade-show-canopies';
-      const showBestDisplays = lc.slug === 'trade-show-displays';
-      const richHtml = detail
-        ? `
-        <p class="answer-block">${esc(detail.answer)}</p>
-        <h2>Why exhibit in ${esc(city.city)}?</h2>
-        ${detail.overview.map((t) => `<p>${esc(t)}</p>`).join('')}
-        <p>${esc(detail.whyExhibit)}</p>
-        <h2>${esc(cityVenueName(city))} and other ${esc(city.city)} venues</h2>
-        <ul>${detail.conventionCenters.map((v) => `<li><strong>${esc(v.name)}</strong> — ${esc(v.desc)}</li>`).join('')}</ul>
-        <h2>Popular trade show industries in ${esc(city.city)}</h2>
-        <ul>${detail.industries.map(([n, d]) => `<li><strong>${esc(n)}</strong> — ${esc(d)}</li>`).join('')}</ul>
-        <h2>Shipping to ${esc(city.city)}</h2>
-        <p>${esc(BRAND)} prints to order and ships to ${esc(city.city)}, ${esc(city.stateName)}. Standard production is 6–8 business days after you approve your free artwork proof, with an optional 2–3 business day rush; transit time is added on top and depends on the delivery address. Exhibiting at ${esc(cityVenueWithAbbr(city))}? Ship to its receiving dock, the advance warehouse named in your exhibitor kit, or your business address.</p>
-        ${showClimate ? `<h2>Outdoor &amp; climate tips for ${esc(city.city)}</h2><p>${esc(detail.climate)}</p>` : ''}
-        ${showBestDisplays && detail.bestDisplays ? `<h2>Best displays for ${esc(city.city)} trade shows</h2><p>${esc(detail.bestDisplays)}</p>` : ''}
-        ${specTableHtml}`
-        : '';
-      // FAQ relevance per category. The displays hub answers everything; a
-      // category page answers the questions about ITS product plus the two that
-      // always apply (shipping to the city, rush production), so the five pages
-      // no longer repeat one identical eight-question block.
-      const FAQ_TOPIC = {
-        'trade-show-canopies': /canop|outdoor|weight|wind|sun|rain|shade/i,
-        'banner-stands': /banner|retractable|x-stand|tabletop|aisle/i,
-        'trade-show-backdrops': /backdrop|step & repeat|step and repeat|tension|media wall|photo/i,
-        'table-covers': /table cover|tablecloth|fitted|stretch|pleated/i
-      };
-      const alwaysFaq = /ship|deliver|receiving|rush|how early|in time for|order/i;
-      const topic = FAQ_TOPIC[lc.slug];
-      const cityFaqs = detail
-        ? (topic ? detail.faqs.filter((f) => topic.test(f.q) || alwaysFaq.test(f.q)) : detail.faqs)
-        : [];
+      const sectionHtml = (sec) => `<h2>${esc(sec.h2)}</h2>`
+        + (sec.paras || []).map((t) => `<p>${esc(t)}</p>`).join('')
+        + (sec.bullets ? `<ul>${sec.bullets.map(([n, d]) => `<li><strong>${esc(n)}</strong> — ${esc(d)}</li>`).join('')}</ul>` : '')
+        + specHtml(sec.spec)
+        + (Array.isArray(sec.links) && sec.links.length ? `<p>${sec.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>` : '');
+      const planHtml = (plan.answer ? `<p class="answer-block">${esc(plan.answer)}</p>` : '') + plan.sections.map(sectionHtml).join('');
+      const cityFaqs = plan.faqs;
       const cityFaqHtml = cityFaqs.length
-        ? `<h2>${esc(city.city)} FAQ</h2>${cityFaqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
+        ? `<h2>${esc(city.city)} ${esc(lc.label.toLowerCase())} FAQ</h2>${cityFaqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
         : '';
-      const boothLinks = `<p>Complete your ${esc(city.city)} booth: <a href="/custom-canopies">canopy tents</a> · <a href="/banner-stands">banner stands</a> · <a href="/backdrops">backdrops</a> · <a href="/table-covers">table covers</a> · <a href="/trade-show-displays">all trade show displays</a>.</p>`;
+      const boothLinks = `<p><a href="/custom-canopies">canopy tents</a> · <a href="/banner-stands">banner stands</a> · <a href="/backdrops">backdrops</a> · <a href="/table-covers">table covers</a> · <a href="/trade-show-displays">all trade show displays</a>.</p>`;
       // The city hub points DOWN at its product + city pages, and each of those
-      // points back UP here — hub above, transactional pages below it.
-      //
-      // Only on the displays hub, and only where the pages exist: the pilot
-      // covers Los Angeles and Chicago, so every other city renders nothing
-      // rather than an empty heading. The link text is each page's own H1, so
-      // the anchor says exactly what the destination says it is.
+      // points back UP here. Only on the displays hub, and only where they exist.
       const cityBuy = CITY_PRODUCT_PAGES.filter((p) => p.citySlug === city.slug);
       const cityBuyHtml = (lc.slug === 'trade-show-displays' && cityBuy.length)
         ? `<h2>Order by product in ${esc(city.city)}</h2>
            <ul>${cityBuy.map((p) => `<li><a href="/${p.slug}">${esc(p.h1)}</a></li>`).join('')}</ul>`
         : '';
-      // Dedicated contextual product H2 sections — displays (hub) page only, when
-      // the city supplies them (see cityDetail.productSections).
-      // The five per-city product sections are written one per product family.
-      // Each renders on the ONE category page whose intent it matches, so no two
-      // city URLs repeat the same product prose. Index order in cityDetail is:
-      // 0 booth displays · 1 canopies · 2 backdrops · 3 banner stands · 4 table covers
-      // The displays hub carries all five (owner spec §5-§9: the city page must
-      // show booth displays, canopies, backdrops, banner stands and table
-      // covers). Each category page additionally surfaces the one section that
-      // matches its own intent, so a canopy searcher reads canopy prose on the
-      // canopy URL rather than a generic city page.
-      const SECTION_FOR = {
-        'trade-show-displays': [0, 1, 2, 3, 4],
-        'trade-show-canopies': [1],
-        'trade-show-backdrops': [2],
-        'banner-stands': [3],
-        'table-covers': [4]
-      };
-      const wanted = SECTION_FOR[lc.slug] || [];
-      // Per city x category paragraph: local context written specifically for
-      // THIS product in THIS city, so a category URL carries something the
-      // displays hub does not. Keyed by category slug in cityDetail.categoryLocal.
-      const CATEGORY_LOCAL_H2 = {
-        'trade-show-canopies': (c) => `Outdoor branding in ${c}`,
-        'banner-stands': (c) => `Getting banner stands into ${c} venues`,
-        'trade-show-backdrops': (c) => `Where ${c} exhibitors use backdrops`,
-        'table-covers': (c) => `Table covers at ${c} shows`
-      };
-      const localPara = detail?.categoryLocal?.[lc.slug];
-      const categoryLocalHtml = (localPara && CATEGORY_LOCAL_H2[lc.slug])
-        ? `<h2>${esc(CATEGORY_LOCAL_H2[lc.slug](city.city))}</h2><p>${esc(localPara)}</p>`
-        : '';
-      const productSectionsHtml = Array.isArray(detail?.productSections)
-        ? wanted
-          .map((i) => detail.productSections[i])
-          .filter(Boolean)
-          .map((s) => `<h2>${esc(s.h2)}</h2><p>${esc(s.body)}</p>${Array.isArray(s.links) && s.links.length ? `<p>${s.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}`)
-          .join('')
-        : '';
-      // Planning renders AFTER the product sections (logical §24 order: plan the
-      // booth once you've chosen displays).
-      const planningHtml = detail?.planning ? `<h2>Planning your ${esc(city.city)} booth</h2><p>${esc(detail.planning)}</p>` : '';
       const crumbs = cityBreadcrumb(lc.label, lc.slug, city);
       const crumbNav = crumbs.map((c, i) => i === crumbs.length - 1
         ? `<span>${esc(c.name)}</span>`
@@ -1007,25 +919,17 @@ for (const lc of LOCAL_CATEGORIES) {
       const body = `
         <nav aria-label="Breadcrumb">${crumbNav}</nav>
         <h1>${esc(lc.label)} in ${esc(cityWithAbbr(city))}</h1>
-        <p>${esc(dedupePeriods(lc.lead(city)))}</p>
-        ${richHtml}
+        ${lc.slug === 'trade-show-displays' ? '' : `<p>Ships to ${esc(cityWithAbbr(city))}.</p>`}
+        ${plan.hasDetail ? (plan.lead ? `<p>${esc(plan.lead)}</p>` : '') : `<p>${esc(dedupePeriods(lc.lead(city)))}</p>`}
+        ${planHtml}
         <h2>${esc(lc.label)} for ${esc(city.city)} events</h2>
         <ul>${productLis}</ul>
-        ${boothLinks}
         ${cityBuyHtml}
-        ${productSectionsHtml}
-        ${categoryLocalHtml}
-        ${planningHtml}
-        <h2>${esc(lc.label)} for ${esc(cityVenueName(city))} trade shows</h2>
-        <p>${esc(city.city)} hosts ${esc(city.scene)}. Whether you're exhibiting at ${esc(city.venue)} or
-        running an outdoor activation nearby, ${esc(BRAND)} prints your ${esc(lc.label.toLowerCase())} in your
-        brand and ships them to ${esc(city.city)}, ${esc(city.stateName)}.</p>
-        <p>Building a full booth in ${esc(city.city)}? ${siblingLinks}</p>
-        <h2>Guides for your ${esc(city.city)} booth</h2>
-        <ul>${CITY_BOOTH_GUIDES.map((g) => `<li><a href="/blog/${g.slug}">${esc(g.label)}</a></li>`).join('')}</ul>
         ${cityFaqHtml}
-        <h2>${esc(lc.label)} in other cities</h2>
-        <ul>${otherLis}</ul>`;
+        <p>${siblingLinks}</p>
+        ${boothLinks}
+        <p>Guides: ${CITY_BOOTH_GUIDES.map((g) => `<a href="/blog/${g.slug}">${esc(g.label)}</a>`).join(' · ')}</p>
+        <p>Elsewhere: ${others.map((c) => `<a href="/${lc.slug}/${c.slug}">${esc(c.city)}</a>`).join(' · ')}</p>`;
       const catMetaDesc = (lc.slug === 'trade-show-displays' && detail?.metaDescription)
         ? detail.metaDescription
         : (detail?.categoryMeta?.[lc.slug] || cityCatDescription(lc.label, city));
@@ -1037,7 +941,7 @@ for (const lc of LOCAL_CATEGORIES) {
         description: catMetaDesc,
         image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,
-        robots: city.tier > 2 ? 'noindex, follow' : undefined,
+        robots: (city.tier > 2 || !plan.indexable) ? 'noindex, follow' : undefined,
         body,
         jsonLd: [
           {
@@ -1557,11 +1461,11 @@ routes.push(() => {
     US state and Canadian province, priced in USD or CAD.</p>
     <h2>Popular cities</h2>
     <p>Trade show displays printed and shipped to major convention cities, with local venue, industry and shipping details.</p>
-    <ul>${SEO_CITIES.map((c) => `<li><a href="/trade-show-displays/${c.slug}">Trade show displays in ${esc(cityWithAbbr(c))}</a></li>`).join('')}</ul>
+    <ul>${SEO_CITIES.filter((c) => isCategoryCityLive('trade-show-displays', c.slug)).map((c) => `<li><a href="/trade-show-displays/${c.slug}">Trade show displays in ${esc(cityWithAbbr(c))}</a></li>`).join('')}</ul>
     <h2>United States</h2>
-    <ul>${us.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
+    <ul>${us.filter((t) => isStateLive(t.slug)).map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
     <h2>Canada</h2>
-    <ul>${ca.map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
+    <ul>${ca.filter((t) => isStateLive(t.slug)).map((s) => `<li><a href="/locations/${s.slug}">Canopy tents in ${esc(s.name)}</a></li>`).join('')}</ul>
     <h2>Order for your city</h2>
     <p>Apex prints to order and ships across the US and Canada — there's no local storefront to visit. Configure a
     <a href="/custom-canopies">canopy</a>, <a href="/banner-stands">banner stand</a>, <a href="/backdrops">backdrop</a>
@@ -1631,22 +1535,25 @@ for (const s of territories) {
   const isPriority = PRIORITY_STATES.has(s.slug);   // full editorial body
   const isIndexed = INDEXED_STATES.has(s.slug);     // competes in the index
   const content = stateContent[s.slug];
-  routes.push(() => {
+  const local = LOCAL_FACTS[s.slug];
+  // States without verified local facts are not written (301 to /locations).
+  if (isIndexed) routes.push(() => {
     // SEO cities link to their canonical /trade-show-displays/{city} page (not the
     // redirecting /locations/{state}/{city}); other cities keep the canopy page.
     const cityLinks = s.cities
       .map((c) => {
         const cs = slugify(c);
         const seo = SEO_CITIES.find((x) => x.slug === cs && x.stateSlug === s.slug);
-        return seo
+        // City pages are removed; only a live city hub is linked, the rest are plain text.
+        return seo && isCategoryCityLive('trade-show-displays', cs)
           ? `<li><a href="/trade-show-displays/${cs}">Trade show displays in ${esc(c)}, ${s.abbr}</a></li>`
-          : `<li><a href="/locations/${s.slug}/${cs}">Canopy tents in ${esc(c)}, ${s.abbr}</a></li>`;
+          : `<li>${esc(c)}, ${s.abbr}</li>`;
       })
       .join('');
     // State → City (§27): every SEO city in this state, linked to its canonical page.
-    const seoInState = SEO_CITIES.filter((c) => c.stateSlug === s.slug);
+    const seoInState = SEO_CITIES.filter((c) => c.stateSlug === s.slug && isCategoryCityLive('trade-show-displays', c.slug));
     const seoCitiesHtml = seoInState.length
-      ? `<h2>Trade show display cities in ${esc(s.name)}</h2><p>Full booth coverage — canopies, banner stands, backdrops and table covers — for exhibitors in these ${esc(s.name)} convention cities:</p><ul>${seoInState.map((c) => `<li><a href="/trade-show-displays/${c.slug}">Trade show displays in ${esc(cityWithAbbr(c))}</a></li>`).join('')}</ul>`
+      ? `<h2>Trade show display cities in ${esc(s.name)}</h2><ul>${seoInState.map((c) => `<li><a href="/trade-show-displays/${c.slug}">Trade show displays in ${esc(cityWithAbbr(c))}</a></li>`).join('')}</ul>`
       : '';
     const products6 = `<ul>${coreProducts.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>`;
     const sizesList = `<ul>${SIZES.map((z) => `<li><a href="/sizes/${z.slug}">${esc(z.label)} canopy tent</a></li>`).join('')}</ul>`;
@@ -1655,14 +1562,22 @@ for (const s of territories) {
       .join('');
     const sizeComparison = `<ul>${SIZE_COMPARISON.map(([sz, txt]) => `<li><a href="/sizes/${sz}">${sz} canopy tent</a> — ${esc(txt)}</li>`).join('')}</ul>`;
 
+    const localBody = local
+      ? `<h2>Events and venues in ${esc(s.name)}</h2>
+         <ul>${content.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
+         ${local.venues.length ? `<ul>${local.venues.map((v) => `<li>${esc(v)}</li>`).join('')}</ul>` : ''}
+         <ul>${local.events.map(([n, when, where]) => `<li>${esc(n)} — ${esc(when)}, ${esc(where)}</li>`).join('')}</ul>
+         ${STATE_OUTDOOR[s.slug] ? `<h2>Setting up outdoors in ${esc(s.name)}</h2><p>${esc(STATE_OUTDOOR[s.slug])}</p>` : ''}
+         <p>${esc(BUYING_GUIDE_NOTE)} ${SIZE_COMPARISON.map(([sz]) => `<a href="/sizes/${sz}">${sz} canopy tent</a>`).join(', ')}.</p>`
+      : '';
     // Priority markets get genuinely unique, useful content; the long tail gets
     // a minimal page and is noindex'd (see robots below).
     const richBody = isPriority && content
-      ? `<h2>Custom canopy tents in ${esc(s.name)}</h2><p>${esc(content.intro)}</p>
+      ? `${local ? '' : `<h2>Custom canopy tents in ${esc(s.name)}</h2>`}<p>${esc(local ? distinctIntro(s.slug) : content.intro)}</p>
          <p>${sizePhotos}</p>
-         <h2>Popular event uses in ${esc(s.name)}</h2>
-         <ul>${content.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
-         <h2>Choosing a canopy size for ${esc(s.name)} events</h2>
+         ${local ? '' : `<h2>Popular event uses in ${esc(s.name)}</h2>
+         <ul>${content.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>`}
+         ${local ? localBody : `         <h2>Choosing a canopy size for ${esc(s.name)} events</h2>
          ${sizeComparison}
          <h2>Outdoor event considerations</h2>
          <ul>${OUTDOOR_CONSIDERATIONS.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
@@ -1673,9 +1588,10 @@ for (const s of territories) {
          <h2>Artwork &amp; branding</h2>
          <ul>${ARTWORK_NOTES.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
          <h2>How ordering works</h2><ol>${ORDERING_STEPS.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
-         <h2>Shop canopy tents</h2>${products6}
+         `}
+         ${local ? '' : `<h2>Shop canopy tents</h2>${products6}
          <h2>Custom canopy tent FAQs</h2>
-         ${STATE_FAQS.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}`
+         ${STATE_FAQS.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}`}`
       : `<p>Order custom printed pop-up canopy tents in ${esc(s.name)} with instant online pricing and
          shipping to ${esc(s.cities.join(', '))} and ${areaWord}.</p>
          <h2>Canopy sizes</h2>${sizesList}
@@ -1718,83 +1634,21 @@ for (const s of territories) {
           isPartOf: { '@type': 'WebSite', url: `${ORIGIN}/` },
           about: { '@type': 'Place', name: s.name }
         },
-        // Matches the four FAQs rendered on the page, verbatim.
-        {
+        // Matches the four FAQs rendered on the page, verbatim — only on pages
+        // that render them (regions with LOCAL_FACTS drop the shared FAQ block).
+        ...(local ? [] : [{
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
           mainEntity: STATE_FAQS.map(([q, a]) => ({
             '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a }
           }))
-        }
+        }])
       ]
     });
   });
 
-  for (const c of s.cities) {
-    const citySlug = slugify(c);
-    const cityIsPriority = PRIORITY_CITIES.has(citySlug);
-    const cc = cityContent[citySlug];
-    // State content differs per state, so this section varies 64 ways rather than
-    // being another block identical on every city page.
-    const sc = stateContent[s.slug];
-    routes.push(() => {
-      const products6 = `<ul>${coreProducts.slice(0, 6).map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>`;
-      const cityPhotos = SIZES
-        .map((z) => `<img src="/images/tents/${z.slug}-1wall.webp" alt="${esc(z.label)} custom printed canopy tent" width="1200" height="900" loading="lazy" decoding="async">`)
-        .join('');
-      const cityComparison = `<ul>${SIZE_COMPARISON.map(([sz, txt]) => `<li><a href="/sizes/${sz}">${sz} canopy tent</a> — ${esc(txt)}</li>`).join('')}</ul>`;
-      const richBody = cc
-        ? `<h2>Custom canopy tents in ${esc(c)}</h2><p>${esc(cc.intro)}</p>
-           <p>${cityPhotos}</p>
-           <h2>Where canopy tents get used in ${esc(c)}</h2>
-           <ul>${cc.events.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
-           <h2>Choosing a size for ${esc(c)} events</h2>${cityComparison}
-           ${sc ? `<h2>Shipping to ${esc(c)} and the rest of ${esc(s.name)}</h2>
-           <p>${esc(sc.intro)}</p>
-           <p>Everything is printed to order and shipped to ${esc(c)}; transit time is added to
-           production and depends on where in ${esc(s.name)} it is going.</p>` : ''}
-           <h2>Ordering &amp; artwork</h2>
-           <ol>${ORDERING_STEPS.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
-           <h2>Shop canopy tents</h2>${products6}
-           <h2>Custom canopy tent FAQs</h2>
-           ${STATE_FAQS.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}
-           <p><a href="/locations/${s.slug}">More about custom canopy tents in ${esc(s.name)} →</a></p>`
-        : `<p>${esc(BRAND)} ships custom printed canopy tents to ${esc(c)},
-           ${esc(s.name)} with instant online pricing and a free artwork proof on every order.</p>
-           <h2>Popular products in ${esc(c)}</h2>${products6}`;
-      const body = `
-        <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <a href="/locations/${s.slug}">${esc(s.name)}</a> / <span>${esc(c)}</span></nav>
-        <h1>Custom Printed Canopy Tents in ${esc(c)}, ${esc(s.name)}</h1>
-        ${richBody}`;
-      // Where a full city page exists (/trade-show-displays/<city>), THIS page
-      // points at it. Both were indexable and self-canonical, so a 390-word
-      // location page was competing with a 1,500-word city page for the same
-      // query and splitting the signals between them. Keeping the page (it is
-      // linked and useful) while canonicalising consolidates that.
-      const canonicalCity = SEO_CITIES.find((sc) => sc.slug === citySlug && sc.stateSlug === s.slug);
-
-      return render({
-        path: `/locations/${s.slug}/${citySlug}`,
-        canonical: canonicalCity ? `${ORIGIN}/trade-show-displays/${canonicalCity.slug}` : undefined,
-        title: `Custom Canopy Tents in ${c}, ${s.abbr} | ${BRAND}`,
-        description: `Custom printed canopy tents for ${c}, ${s.name} trade shows and outdoor events — configure size and printed walls online for an instant price.`,
-        // Priority cities have unique content and are indexed; the rest stay
-        // noindex to avoid doorway-page risk.
-        robots: cityIsPriority ? undefined : 'noindex, follow',
-        body,
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-            { '@type': 'ListItem', position: 2, name: 'Locations', item: `${ORIGIN}/locations` },
-            { '@type': 'ListItem', position: 3, name: s.name, item: `${ORIGIN}/locations/${s.slug}` },
-            { '@type': 'ListItem', position: 4, name: c, item: `${ORIGIN}/locations/${s.slug}/${citySlug}` }
-          ]
-        }
-      });
-    });
-  }
+  // /locations/{state}/{city} pages are removed: they 301 to the state page
+  // (or the city's hub) via src/data/removedLocations.js.
 }
 
 // ---- Contact + Quote ----
@@ -2115,22 +1969,15 @@ const smBlog = [
   ...posts.filter((p) => !p.canonical).map((p) => smUrl(`/blog/${p.slug}`, '0.6', undefined, postLmod(p)))
 ];
 
-// Locations. City pages that 301 to /trade-show-canopies/[city] must NOT appear
-// (a sitemap URL must be 200, not a redirect).
-const redirectedLoc = new Set(SEO_CITIES.filter((c) => c.stateSlug).map((c) => `/locations/${c.stateSlug}/${c.slug}`));
+// Locations. Removed pages (src/data/removedLocations.js) are never listed.
 const smLocations = [
   smUrl('/locations', '0.6', 'monthly', LMOD.city),
   ...territories.filter((s) => INDEXED_STATES.has(s.slug)).map((s) => smUrl(`/locations/${s.slug}`, '0.5', undefined, LMOD.city))
 ];
-territories.forEach((s) =>
-  s.cities.forEach((c) => {
-    const path = `/locations/${s.slug}/${slugify(c)}`;
-    if (PRIORITY_CITIES.has(slugify(c)) && !redirectedLoc.has(path)) smLocations.push(smUrl(path, '0.4', undefined, LMOD.city));
-  })
-);
 for (const lc of LOCAL_CATEGORIES) {
   for (const city of SEO_CITIES) {
-    if (city.tier <= 2) smLocations.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly', LMOD.city));
+    // Only pages that render indexable (cityPagePlan gates on uniqueness) are listed.
+    if (isCategoryCityLive(lc.slug, city.slug)) smLocations.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly', LMOD.city));
   }
 }
 
@@ -2232,6 +2079,11 @@ const redirectsModule =
 mkdirSync(join(__dirname, '..', 'src', 'generated'), { recursive: true });
 writeFileSync(join(__dirname, '..', 'src', 'generated', 'redirects.js'), redirectsModule);
 console.log(`Redirects: ${redirectRules.length} rule(s) baked into middleware.`);
+const removed = removedLocationRedirects();
+writeFileSync(join(__dirname, '..', 'src', 'generated', 'locationRedirects.js'),
+  `// AUTO-GENERATED by scripts/prerender.mjs from src/data/removedLocations.js. Do not edit.\n` +
+  `export const locationRedirects = ${JSON.stringify(removed, null, 2)};\n`);
+console.log(`Removed location pages: ${removed.length} URL(s) 301 to their nearest live page.`);
 
 // The manifests go LAST, on purpose. They are built by reading dist, and the
 // sitemaps, sitemap index and feed.xml are written further up this file —

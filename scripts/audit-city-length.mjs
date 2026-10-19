@@ -11,6 +11,7 @@
 
 import { SEO_CITIES } from '../src/data/citySeo.js';
 import { CITY_DETAIL } from '../src/data/cityDetail.js';
+import { hubIndexable } from './lib/hub-gate.mjs';
 
 const MASTER = 'seattle';
 const list = process.argv.includes('--list');
@@ -51,7 +52,7 @@ const editorial = (d) => [
 const words = (t) => (t.match(/[A-Za-z0-9'’×]+/g) || []).length;
 const sentences = (t) => t.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter((s) => s.length > 30);
 
-const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections));
+const rolled = SEO_CITIES.filter((c) => Array.isArray(CITY_DETAIL[c.slug]?.productSections) && hubIndexable(c));
 const masterWords = words(editorial(CITY_DETAIL[MASTER]));
 const lo = Math.round(masterWords * (1 - DRIFT));
 const hi = Math.round(masterWords * (1 + DRIFT));

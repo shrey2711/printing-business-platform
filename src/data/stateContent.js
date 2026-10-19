@@ -362,12 +362,9 @@ export const PRIORITY_STATES = new Set(Object.keys(stateContent));
 // words each, which is the doorway pattern. They stay noindex,follow — readable,
 // linked, still passing equity to the money pages — until they carry real local
 // content. That gate lives on PRIORITY_CITIES in scripts/prerender.mjs.
-import { states, territories } from './states.js';
+import { states, territories, provinces } from './states.js';
 
-export const INDEXED_STATES = new Set([
-  ...states.map((s) => s.slug),
-  ...territories.map((s) => s.slug)
-]);
+// (defined at the bottom of this file, after LOCAL_FACTS)
 
 // Shared, non-fabricated sections reused across priority state pages.
 export const ORDERING_STEPS = [
@@ -406,3 +403,135 @@ export const STATE_FAQS = [
   ['How many walls can I add?', 'Up to 3 printed walls in any mix of full-height and half-height; both cost the same per wall.'],
   ['Do you offer bulk pricing?', 'Yes — order 3 or more tents and volume pricing applies automatically as you increase the quantity.']
 ];
+
+// Verified, well-known venues and recurring events per region. Only facts that
+// are public and stable go here (venue names, the month/season an annual event
+// runs). Regions without an entry keep the shared buying-guide sections.
+// `venues` are convention/exhibition centres; `events` are [name, timing, place].
+export const LOCAL_FACTS = {
+  california: { venues: ['Los Angeles Convention Center', 'San Diego Convention Center', 'Moscone Center (San Francisco)', 'Anaheim Convention Center'], events: [['San Diego Comic-Con', 'July', 'San Diego'], ['The NAMM Show', 'January', 'Anaheim']] },
+  texas: { venues: ['George R. Brown Convention Center (Houston)', 'Kay Bailey Hutchison Convention Center (Dallas)', 'Austin Convention Center'], events: [['SXSW', 'March', 'Austin'], ['Houston Livestock Show and Rodeo', 'February–March', 'Houston'], ['State Fair of Texas', 'late September–October', 'Dallas']] },
+  florida: { venues: ['Orange County Convention Center (Orlando)', 'Miami Beach Convention Center', 'Tampa Convention Center'], events: [['Art Basel Miami Beach', 'December', 'Miami Beach'], ['Gasparilla Pirate Festival', 'January', 'Tampa'], ['Florida State Fair', 'February', 'Tampa']] },
+  'new-york': { venues: ['Jacob K. Javits Convention Center (New York City)', 'Buffalo Niagara Convention Center'], events: [['New York State Fair', 'late August–Labor Day', 'Syracuse']] },
+  nevada: { venues: ['Las Vegas Convention Center', 'Mandalay Bay Convention Center', 'Venetian Expo'], events: [['CES', 'January', 'Las Vegas'], ['SEMA Show', 'November', 'Las Vegas']] },
+  illinois: { venues: ['McCormick Place (Chicago)', 'Navy Pier (Chicago)'], events: [['Taste of Chicago', 'summer', 'Chicago'], ['Lollapalooza', 'early August', 'Chicago'], ['Illinois State Fair', 'August', 'Springfield']] },
+  washington: { venues: ['Seattle Convention Center', 'Spokane Convention Center'], events: [['Seafair', 'summer', 'Seattle'], ['Washington State Fair', 'September', 'Puyallup']] },
+  colorado: { venues: ['Colorado Convention Center (Denver)'], events: [['Great American Beer Festival', 'fall', 'Denver'], ['Colorado State Fair', 'late August–Labor Day', 'Pueblo']] },
+  georgia: { venues: ['Georgia World Congress Center (Atlanta)'], events: [['Dragon Con', 'Labor Day weekend', 'Atlanta']] },
+  massachusetts: { venues: ['Boston Convention & Exhibition Center', 'Hynes Convention Center (Boston)'], events: [['Boston Marathon', 'April (Patriots\' Day)', 'Boston']] },
+  pennsylvania: { venues: ['Pennsylvania Convention Center (Philadelphia)', 'David L. Lawrence Convention Center (Pittsburgh)'], events: [['Pennsylvania Farm Show', 'January', 'Harrisburg']] },
+  tennessee: { venues: ['Music City Center (Nashville)'], events: [['CMA Fest', 'June', 'Nashville']] },
+  louisiana: { venues: ['Ernest N. Morial Convention Center (New Orleans)'], events: [['Mardi Gras', 'February–March', 'New Orleans'], ['New Orleans Jazz & Heritage Festival', 'late April–early May', 'New Orleans']] },
+  arizona: { venues: ['Phoenix Convention Center', 'Tucson Convention Center'], events: [['Arizona State Fair', 'October', 'Phoenix']] },
+  indiana: { venues: ['Indiana Convention Center (Indianapolis)'], events: [['Indianapolis 500', 'May', 'Indianapolis'], ['Indiana State Fair', 'August', 'Indianapolis']] },
+  kentucky: { venues: ['Kentucky International Convention Center (Louisville)'], events: [['Kentucky Derby', 'first Saturday in May', 'Louisville'], ['Kentucky State Fair', 'August', 'Louisville']] },
+  ohio: { venues: ['Greater Columbus Convention Center'], events: [['Ohio State Fair', 'late July–August', 'Columbus']] },
+  minnesota: { venues: ['Minneapolis Convention Center'], events: [['Minnesota State Fair', 'late August–Labor Day', 'St. Paul']] },
+  wisconsin: { venues: ['Wisconsin Center (Milwaukee)'], events: [['Wisconsin State Fair', 'August', 'West Allis'], ['Summerfest', 'June–July', 'Milwaukee']] },
+  iowa: { venues: ['Iowa Events Center (Des Moines)'], events: [['Iowa State Fair', 'August', 'Des Moines']] },
+  oklahoma: { venues: ['Oklahoma City Convention Center'], events: [['State Fair of Oklahoma', 'September', 'Oklahoma City']] },
+  utah: { venues: ['Salt Palace Convention Center (Salt Lake City)'], events: [['Utah State Fair', 'September', 'Salt Lake City']] },
+  oregon: { venues: ['Oregon Convention Center (Portland)'], events: [['Oregon State Fair', 'late August–Labor Day', 'Salem']] },
+  wyoming: { venues: [], events: [['Cheyenne Frontier Days', 'July', 'Cheyenne']] },
+  ontario: { venues: ['Metro Toronto Convention Centre', 'Enercare Centre (Toronto)'], events: [['Canadian National Exhibition', 'late August–Labor Day', 'Toronto']] },
+  quebec: { venues: ['Palais des congrès de Montréal'], events: [['Montreal International Jazz Festival', 'late June–July', 'Montréal']] },
+  'british-columbia': { venues: ['Vancouver Convention Centre'], events: [['Pacific National Exhibition', 'late August–early September', 'Vancouver']] },
+  alberta: { venues: ['BMO Centre (Calgary)', 'Edmonton Convention Centre'], events: [['Calgary Stampede', 'July', 'Calgary']] },
+  manitoba: { venues: ['RBC Convention Centre Winnipeg'], events: [['Folklorama', 'August', 'Winnipeg'], ['Festival du Voyageur', 'February', 'Winnipeg']] }
+};
+
+// Compact replacement for the shared boilerplate on pages that have LOCAL_FACTS.
+export const BUYING_GUIDE_NOTE =
+  'Sizes:';
+
+// Only regions with verified local facts compete in the index. The rest render
+// the shared buying guide with a one-paragraph intro, which Google folds into a
+// sibling page as a duplicate (the canonical problem seen in Search Console), so
+// they stay noindex,follow and out of the sitemap until they gain LOCAL_FACTS.
+//
+// Crawl budget (2026-10): a new domain gets few crawls, so regions with no
+// city hub page are cut too — they compete only with the national category
+// pages. None had a click or an impression in Search Console over 90 days.
+// They 301 to /locations (src/data/removedLocations.js).
+export const CRAWL_BUDGET_CUT_STATES = new Set([
+  'iowa', 'kentucky', 'manitoba', 'minnesota', 'ohio', 'oklahoma',
+  'oregon', 'pennsylvania', 'utah', 'wisconsin', 'wyoming'
+]);
+export const INDEXED_STATES = new Set(
+  [...states, ...territories, ...provinces].map((s) => s.slug)
+    .filter((slug) => LOCAL_FACTS[slug] && !CRAWL_BUDGET_CUT_STATES.has(slug))
+);
+
+// What the weather and the event calendar actually ask of a printed canopy in
+// each indexed region. General, stable observations only — no figures, no
+// claims about any customer. One paragraph per region, written for that region:
+// this is the copy that makes each state page its own page rather than the
+// shared buying guide with a name swapped in.
+export const STATE_OUTDOOR = {
+  alberta: 'Alberta weather turns quickly. A chinook can push a mild winter afternoon into strong, gusty wind, and prairie thunderstorms in summer arrive with little warning, so every canopy leg needs a weight bag and the walls should be easy to drop. Stampede week in Calgary and the summer festival circuit in Edmonton fill the calendar with long days and low evening sun, which is when a printed back wall earns its place by cutting glare and keeping the branding readable.',
+  arizona: 'Sun is the first design problem in Arizona and the monsoon is the second. Outdoor events run mostly from fall to spring, but summer markets still happen at dawn and dusk, and a canopy top is the only shade a vendor has. From roughly June to September the monsoon brings sudden dust and gusts, so weight every leg even on a calm morning. Dye-sublimated fabric holds its colour under that sun, which matters for a top that stays up all season.',
+  'british-columbia': 'British Columbia is two climates. On the coast, markets and festivals run through rain for much of the year, so a printed valance and full walls turn a canopy into a dry counter and keep prints from soaking through. In the Okanagan and the interior, summers are hot and dry and the problem flips to shade and airflow. Vancouver waterfront events add steady wind off the water, which is why weights beat stakes on the hard surfaces most venues have.',
+  california: 'California covers coastal fog, Central Valley heat and Sierra snow, and a canopy plan changes with each. On the coast, a damp marine layer burns off by midday, then sea wind picks up in the afternoon; inland, summer heat and strong UV make shade the main product. Autumn Santa Ana winds are the one to plan for statewide: anchor every leg and keep walls closed on the windward side. The long event season, from farmers markets to convention-centre lots, means a canopy gets used year round.',
+  colorado: 'Altitude changes the job in Colorado. Ultraviolet exposure is intense at elevation, so a printed top that holds its colour matters, and temperatures can swing widely between a sunny morning and a cold evening. Summer afternoons bring fast-building thunderstorms and gusts along the Front Range, so weight every leg and be ready to drop the walls. Brewery festivals, mountain-town markets and Denver convention-centre lots all lean on canopies, often within the same week.',
+  florida: 'Florida\'s two seasons for a canopy are afternoon storms and hurricane season. Summer thunderstorms arrive on a near-daily schedule, so a fully printed top and walls keep a booth working through a downpour, and drainage across the roof matters. Hurricane season runs from June to November, and outdoor events are routinely rescheduled, so build slack into order timing. Humidity and salt air near the coast argue for fabric that dries quickly and a frame you rinse after each event.',
+  georgia: 'Georgia vendors work through hot, humid summers and a spring pollen season that coats everything in yellow dust, so a canopy that wipes clean and a top that can be hosed down earn their keep. Pop-up thunderstorms are common from late spring through summer. The best outdoor weather, spring and fall, is also festival season, which means Atlanta weekends are crowded and a booth needs a strong read from a distance to be noticed.',
+  illinois: 'Illinois outdoor events cluster into a short, busy summer. In Chicago, wind off Lake Michigan is the constant: lakefront festivals and street fairs punish a canopy that is only lightly weighted. Downstate, spring storms can arrive quickly across open ground. The state fair and county fairs fill late summer, so most vendors want a canopy that goes up in minutes, packs flat and survives being moved between weekends without damage to the print.',
+  indiana: 'Indiana\'s outdoor calendar is built around racing, fairs and fall tailgates. May around Indianapolis is the busiest stretch, with crowds at open-air events and the weather still unsettled, so weight every leg and keep walls handy for spring showers. Summer county and state fairs mean many consecutive days in one spot, which rewards a sturdy frame. In autumn, tailgate lots are open and gusty, and a bold printed top is how a vendor is spotted across a field of cars.',
+  iowa: 'Iowa is open country, and open country means wind. Fairgrounds and town squares offer little shelter, so a canopy here needs a weight bag on each leg and walls that can be dropped quickly when a summer storm rolls across the plains. The Iowa State Fair and the county fair circuit make August the peak, with long hot days in fully exposed lots; a printed top that shades the counter and holds its colour is the most useful thing a vendor can bring.',
+  kentucky: 'Kentucky vendors work through warm, humid weather and a spring that can be wet. Derby season brings large outdoor crowds around Louisville, often with showers, so a canopy with printed walls keeps product and paperwork dry. Summer fairs and festivals in Lexington and across the Bluegrass mean long days in heat, where shade and airflow matter as much as branding. Anchor against afternoon gusts ahead of storms, which can arrive fast on open lots.',
+  louisiana: 'Louisiana events run in heat, humidity and sudden rain. Festival seasons in spring and fall are the best weather and the biggest crowds, from New Orleans to Lafayette, and booths often stand in the same spot for several days. Tropical storms and hurricane season, June to November, can cancel or move outdoor plans at short notice, so order early and confirm dates. A fast-drying printed top and walls that shed water keep a booth working through the daily shower.',
+  manitoba: 'Manitoba pairs a short, bright summer with some of the coldest winters in the country. Winnipeg\'s summer festivals run in long daylight, where a printed back wall gives shade and glare control, while the winter Festival du Voyageur is an outdoor event in February, where walls act as a windbreak for a vendor standing for hours. The open prairie is windy in every season, so weights are not optional and a low-profile setup holds up best.',
+  massachusetts: 'Massachusetts weather swings with the season and the coast. Spring road races and outdoor markets around Boston meet cold wind and sudden rain, and nor\'easters can shut an event entirely, so build flexibility into your order date. Summer waterfront festivals bring sea breezes that catch an unweighted canopy, and autumn foliage season fills small-town fairs across the state. A weighted frame and printed walls handle most of it, and the top reads clearly through the shifting light.',
+  minnesota: 'Minnesota is built for both extremes. The Minnesota State Fair at the end of summer is one of the largest outdoor gatherings in the country, and lake-country markets keep vendors busy from May to September. In winter, events such as the St. Paul Winter Carnival put vendors outdoors in the cold, where printed walls act as a windbreak. Humid summer storms can roll in quickly, so keep weights on every leg regardless of the forecast.',
+  nevada: 'Nevada is desert: strong sun, dry air and wind that picks up without warning. In Las Vegas, outdoor activations sit on asphalt that radiates heat, so a printed top and a closed back wall create real shade, and stakes are useless on the hard surfaces around most venues. Convention season is mostly indoors, but sponsor areas, parking-lot events and festivals use canopies heavily. Dust and wind argue for weight on every leg and a quick set-down plan.',
+  'new-york': 'New York spans the dense street fairs of New York City, the lake-effect weather of the north and the fall festivals of the Hudson Valley and beyond. In the city, street closures and sidewalk setups reward a compact canopy that goes up quickly and sits within a permit footprint. Upstate, wind and sudden weather changes are common, and summer fairs run long. A weighted frame, printed walls and a top that reads from down the block cover most of what the state asks of one.',
+  ohio: 'Ohio outdoor events follow the fairground calendar. The Ohio State Fair in Columbus and county fairs across the state run for days at a time, in humid summer heat with the occasional fast thunderstorm. Near Lake Erie, wind off the water can catch a canopy in an open lot. A frame that withstands being up for a full week, with weights on every leg and walls ready for a downpour, is the practical requirement here.',
+  oklahoma: 'Oklahoma sits in the middle of the country\'s storm belt. Spring severe weather and steady plains wind mean a canopy must be anchored properly and taken down early when storms approach, so quick set-down matters as much as the print. The State Fair of Oklahoma in September and rodeo events draw large outdoor crowds in fading summer heat. A printed top that holds its colour in the sun and a heavy, weighted frame are the two things that matter.',
+  ontario: 'Ontario vendors face lake-driven weather and hot, humid summers. In Toronto, wind off Lake Ontario makes weights essential on exposed waterfront sites, and the Canadian National Exhibition at the end of summer is a long outdoor run. Winter events such as Ottawa\'s Winterlude put stalls outside in the cold, where walls help block wind. Province-wide, festivals and farmers\' markets from May to October keep canopies in constant use.',
+  oregon: 'Oregon is wet. West of the Cascades, rain can last for much of the year, so a canopy with a full printed top and walls is a working dry space, and markets in Portland and Eugene run through the drizzle. Dry summers bring a different problem, with strong sun and the occasional smoke-hazy day. East of the mountains, wind and sun dominate. Brand colours on a dye-sublimated top stay vivid even after a long wet season.',
+  pennsylvania: 'Pennsylvania has four honest seasons and a canopy plan for each. Spring and fall bring the busiest festival and market calendar in Philadelphia and Pittsburgh, with changeable weather and gusts across paved plazas where stakes cannot go. Summer is hot and humid with passing storms. Winter indoor shows dominate, including the Pennsylvania Farm Show in Harrisburg. Weight bags, printed walls and a top that reads at a distance are the useful basics.',
+  quebec: 'Québec runs a festival calendar in both summer and winter. Montréal\'s summer events fill the streets from June, and the Carnaval de Québec puts vendors outside in the cold in winter, where printed walls act as a windbreak. Signage in Québec is generally expected to be in French, so plan bilingual or French artwork when you submit your files. Humid summer storms and winter wind both argue for weighted legs and a frame you can set up with gloves on.',
+  tennessee: 'Tennessee\'s outdoor events run in heat and humidity, then storms. CMA Fest in Nashville fills downtown in June, when shade and airflow are the real priorities and a printed top becomes the vendor\'s roof for the day. Fall brings crowds to the mountains for foliage season and to Nashville and Memphis for festivals. Afternoon thunderstorms are common through summer, so weight every leg and have the walls ready; dye-sublimated fabric dries quickly afterward.',
+  texas: 'Texas is large enough that the weather depends on the city. Houston and the Gulf Coast mean humidity, heavy downpours and a hurricane season to plan around; Dallas and the north see spring storms and strong gusts; West Texas is open, dry and windy. Across the state, summer heat makes shade the first thing a vendor wants, and rodeo, state fair and stadium seasons put canopies in constant use. Weighted legs and a colourfast printed top handle the common ground.',
+  utah: 'Utah is high desert with strong sun, thin air and canyon-funnelled wind. Summer markets in Salt Lake City and the valley run in bright, dry heat where shade is the main benefit of a printed top, and afternoon gusts catch an unweighted canopy easily. Winter events in the Wasatch resort towns put vendors outdoors in the cold. Weighted legs, a closed back wall and fabric that holds colour at altitude are the practical requirements.',
+  washington: 'Washington splits at the Cascades. West of the mountains, rain is the dominant factor, and Seattle markets and festivals run through it, so a canopy with a printed top and full walls works as a dry stall. East of the mountains, summers are dry and sunny and wind picks up across open ground. Waterfront events add steady breeze off Puget Sound. Seafair and the state fair draw summer crowds, when long days make a bold, visible top worthwhile.',
+  wisconsin: 'Wisconsin outdoor events are driven by lakefront festivals and game days. Summerfest in Milwaukee fills the shore in summer, when wind off Lake Michigan is the thing to anchor against, and the Wisconsin State Fair runs across August in heat and humidity. In autumn, tailgates around football games run in cool, gusty weather where walls act as a windbreak. A printed top, a weighted frame and quick set-up between days cover most of what a vendor here needs.',
+  wyoming: 'Wyoming is one of the windiest places in the country, which makes weight the first rule of any canopy setup: every leg anchored, walls dropped when gusts build and nothing left unattended. Cheyenne Frontier Days in July is the largest outdoor event in the state, in bright high-altitude sun with fast-changing afternoon weather. The summer season is short, so a rugged frame with a colourfast printed top gets used hard in a few busy months.'
+};
+
+// The state intros each end on a near-identical product sentence ("Trade show
+// displays, retractable banner stands and step & repeat backdrops fit the halls;
+// custom canopy tents brand the outdoor … circuit"). Rendered on 29 indexed
+// pages that is shared template, so each page shows only the sentences whose
+// wording is not mostly found in another region's intro. The first sentence is
+// always kept.
+const INTRO_SENT = /(?<=[.!?])\s+(?=[A-Z0-9“"'])/;
+const introWords = (t, slug) => {
+  const reg = [...states, ...provinces, ...territories].find((r) => r.slug === slug);
+  const names = reg ? [reg.name, ...reg.cities] : [];
+  let s = t;
+  for (const n of names) s = s.split(n).join(' P ');
+  return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+};
+const introShingles = (t, slug) => {
+  const w = introWords(t, slug);
+  const out = new Set();
+  for (let i = 0; i + 4 <= w.length; i++) out.add(w.slice(i, i + 4).join(' '));
+  return out;
+};
+let introFreq = null;
+export function distinctIntro(slug) {
+  const c = stateContent[slug];
+  if (!c) return '';
+  if (!introFreq) {
+    introFreq = new Map();
+    for (const [k, v] of Object.entries(stateContent)) {
+      for (const sn of v.intro.split(INTRO_SENT)) for (const x of introShingles(sn, k)) introFreq.set(x, (introFreq.get(x) || 0) + 1);
+    }
+  }
+  return c.intro.split(INTRO_SENT).filter((sn, i) => {
+    if (i === 0) return true;
+    const sh = [...introShingles(sn, slug)];
+    return !sh.length || sh.filter((x) => introFreq.get(x) > 1).length / sh.length <= 0.4;
+  }).join(' ');
+}
