@@ -363,7 +363,7 @@ const HOME_CITIES = [
   ['Vancouver', 'vancouver'], ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
   ['Atlanta', 'atlanta'], ['Dallas', 'dallas'], ['New York', 'new-york'],
   ['Houston', 'houston'], ['Los Angeles', 'los-angeles'], ['Miami', 'miami'],
-  ['San Diego', 'san-diego'], ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
+  ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
 ];
 const HOME_FAQS = [
   { q: 'What does Apex Trade Show print?', a: 'Custom trade show displays and event branding — canopy tents, retractable and X-stand banner stands, step & repeat backdrops, table covers, vinyl/mesh/fabric banners and feather flags — all printed to order in your brand.' },
@@ -738,7 +738,7 @@ for (const cp of CITY_PRODUCT_PAGES) {
       ${cp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
       ${city ? `<h2>Exhibiting in ${esc(city.city)}?</h2><ul>
         <li><a href="/trade-show-displays/${city.slug}">Trade Show Displays in ${esc(city.city)}</a></li>
-        ${lane && lane.slug !== 'trade-show-displays'
+        ${lane && lane.slug !== 'trade-show-displays' && isCategoryCityLive(lane.slug, city.slug)
           ? `<li><a href="/${lane.slug}/${city.slug}">${esc(lane.label)} in ${esc(city.city)}</a></li>`
           : ''}
         <li><a href="/products">All Apex products</a></li>

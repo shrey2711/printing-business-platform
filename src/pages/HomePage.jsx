@@ -106,8 +106,12 @@ const popularCities = [
   ['Vancouver', 'vancouver'], ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
   ['Atlanta', 'atlanta'], ['Dallas', 'dallas'], ['New York', 'new-york'],
   ['Houston', 'houston'], ['Los Angeles', 'los-angeles'], ['Miami', 'miami'],
-  ['San Diego', 'san-diego'], ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
+  ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
 ];
+// Every entry must be a live /trade-show-displays/{city} page (audit:seo fails
+// on links to removed location URLs — see src/data/removedLocations.js). Kept
+// as a static list rather than filtered with isCategoryCityLive so the home
+// page's first load doesn't pull in the removedLocations chunk.
 
 // Buying guides — real published articles.
 const buyingGuides = [
