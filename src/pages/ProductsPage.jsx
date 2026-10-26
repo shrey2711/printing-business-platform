@@ -5,6 +5,7 @@ import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
 import AccessoriesSection from '../components/AccessoriesSection';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { PRODUCTS_GUIDE } from '../data/productsGuide';
 
 // Vary the wall configuration per tent so cards don't look identical.
 const cardPreview = {
@@ -14,7 +15,7 @@ const cardPreview = {
 };
 
 export default function ProductsPage() {
-  useDocumentMeta('Trade Show Displays, Canopies & Banner Stands', 'Shop the complete trade show booth from Apex — custom canopy tents (instant pricing), retractable banner stands, step & repeat backdrops and table covers. Free artwork proof, US & Canada.');
+  useDocumentMeta('Shop All Products', 'Browse all Apex trade show displays and event branding — canopy tents, banner stands, backdrops and table covers. Free artwork proof, ships US & Canada.');
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'all';
 
@@ -50,9 +51,9 @@ export default function ProductsPage() {
 
       <main className="catalog-main">
         <div className="catalog-heading">
-          <h1>Trade Show Displays &amp; Custom Canopies</h1>
-          <p>Everything for a professional booth from one supplier — canopy tents, banner stands,
-          backdrops and table covers. Filter by category, then configure and price your product.</p>
+          <h1>Shop All Apex Products</h1>
+          <p>Browse every Apex trade show display and event-branding product — or jump straight to a
+          category. Filter by category, then configure and price your product.</p>
         </div>
 
         <div className="filter-bar">
@@ -90,6 +91,11 @@ export default function ProductsPage() {
             })}
           </div>
         )}
+
+        <section className="section-block">
+          <h2>Which range do you need?</h2>
+          {PRODUCTS_GUIDE.map(([h, t]) => (<div key={h}><h3>{h}</h3><p>{t}</p></div>))}
+        </section>
 
         <AccessoriesSection />
       </main>

@@ -24,6 +24,7 @@ import {
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
 } from '../src/data/boothPackages.js';
 import { LOCAL_CATEGORIES, SEO_CITIES, cityDisplaysTitle, cityCatTitle, cityCatDescription, cityBreadcrumb, cityWithAbbr, cityVenueName, cityVenueWithAbbr } from '../src/data/citySeo.js';
+import { PRODUCTS_GUIDE } from '../src/data/productsGuide.js';
 import { cityPagePlan } from '../src/data/cityPagePlan.js';
 import { removedLocationRedirects, isStateLive, isCategoryCityLive } from '../src/data/removedLocations.js';
 import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
@@ -551,24 +552,30 @@ routes.push(() => {
 // this page is the browse-everything catalog, so it does not compete for the
 // same head term.
 routes.push(() => {
+  // Product lines are link-only (name and price inside the anchor). The product
+  // descriptions live on the category and product pages; repeating them here
+  // made /products a near copy of /trade-show-displays.
+  const linkList = (list) => `<ul>${list.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)} — ${priceFrom(p)}</a></li>`).join('')}</ul>`;
+  const section = (heading, list) => (list.length ? `<h2>${esc(heading)}</h2>${linkList(list)}` : '');
   const body = `
     <nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>All products</span></nav>
     <h1>Shop All Apex Products</h1>
     <p>Browse every Apex trade show display and event-branding product — or jump straight to a
     category.</p>
+    <h2>Which range do you need?</h2>
+    ${PRODUCTS_GUIDE.map(([h, t]) => `<h3>${esc(h)}</h3><p>${esc(t)}</p>`).join('')}
     <h2>Shop by category</h2>
     <ul>${CATEGORY_PAGES.map((cp) => `<li><a href="/${cp.slug}">${esc(cp.h1)}</a></li>`).join('')}</ul>
-    <h2>Custom canopy tents</h2>
-    <ul>${coreProducts.map(productLi).join('')}</ul>
+    ${section('Custom canopy tents', coreProducts)}
     <p>Not sure which size? Read the <a href="/sizes/10x10">10x10</a>, <a href="/sizes/10x15">10x15</a>
     and <a href="/sizes/10x20">10x20</a> size guides.</p>
-    ${productSection('Banner stands & backdrops', displayProducts)}
-    ${productSection('Banners', bannerProducts)}
-    ${productSection('Flags', flagProductsList)}
-    ${productSection('SEG modular kits', segProductsList)}
-    ${productSection('Rigid signs', rigidSignsList)}
-    ${productSection('Marketing essentials', marketingList)}
-    ${productSection('Channel letters', channelLettersList)}`;
+    ${section('Banner stands & backdrops', displayProducts)}
+    ${section('Banners', bannerProducts)}
+    ${section('Flags', flagProductsList)}
+    ${section('SEG modular kits', segProductsList)}
+    ${section('Rigid signs', rigidSignsList)}
+    ${section('Marketing essentials', marketingList)}
+    ${section('Channel letters', channelLettersList)}`;
   return render({
     path: '/products',
     title: `Shop All Products | ${BRAND}`,
@@ -1775,28 +1782,20 @@ routes.push(() => {
     .filter((p) => !p.canonical) // don't link to canonicalised-away (301'd) posts
     .map(
       (p) =>
-        `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` — ${esc(p.excerpt)}` : ''}</li>`
+        // Title and date only: the descriptions live on the Learning Center
+        // (/resources) and on each post, so this archive is not a copy of it.
+        `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.publishedAt ? ` — ${esc(p.publishedAt.slice(0, 10))}` : ''}</li>`
     )
     .join('');
-  const topics = [
-    ['/trade-show-displays', 'All trade show displays'],
-    ['/custom-canopies', 'Custom canopy tents'],
-    ['/banner-stands', 'Retractable & X-stand banners'],
-    ['/table-covers', 'Table covers'],
-    ['/backdrops', 'Backdrops'],
-    ['/artwork-guidelines', 'Artwork preparation']
-  ].map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('');
   return render({
     path: '/blog',
-    title: `Trade Show Display Guides & Resources | ${BRAND}`,
+    title: `Blog: Latest Articles | ${BRAND}`,
     description:
-      'Buying guides, size charts and setup tips for trade show displays — canopy tents, banner stands, table covers, backdrops, booth planning and artwork prep.',
-    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Resources</span></nav>
-      <h1>Trade Show Resources &amp; Buying Guides</h1>
-      <p>Practical guides to help you choose, print and set up a professional trade show booth — from
-      custom canopy tents and banner stands to table covers, backdrops, artwork prep and booth planning.</p>
-      <h2>Browse by topic</h2>
-      <ul>${topics}</ul>
+      'The Apex Trade Show blog, newest first: new articles on trade show displays, canopy tents, banner stands and booth planning. Topic guides: Learning Center.',
+    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>
+      <h1>Apex Trade Show Blog</h1>
+      <p>Every article we publish, newest first. Looking for a guide by topic? Use the
+      <a href="/resources">Learning Center</a>.</p>
       <h2>Latest articles</h2>
       <ul>${items || '<li>Articles coming soon.</li>'}</ul>`
   });

@@ -984,12 +984,13 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   related,
   seoTitle,
   seoDescription,
+  // Shape-specific answers first. The answers every flag shares (hardware,
+  // sides, base, production time) are folded into one question so the three
+  // feather/teardrop pages are not copies of one FAQ block.
   faqs: [
     ...(shapeFaq ? [shapeFaq] : []),
-    { q: 'What is the difference between "with hardware" and "graphic only"?', a: 'With hardware includes the flexible pole kit and a base so the flag is ready to fly. Graphic only is the printed flag on its own — for customers who already own compatible hardware.' },
-    { q: 'Single-sided or double-sided?', a: 'Single-sided prints the front in full color; the reverse shows a mirrored print-through. Double-sided prints two separate faces with a blockout layer between them so each side reads correctly.' },
-    { q: 'Which base should I choose?', a: 'A spike base (included) pushes into grass for outdoor use. A cross base or metal plate base (small upcharge) weighs the flag down on hard floors indoors. A water bag (+$20) adds ballast for outdoor hard surfaces where you cannot drive a spike — fill it on site and empty it before transport.' },
-    { q: 'How long does production take?', a: 'Standard production is 6–8 business days after proof approval; rush is 2–3 business days. This is production time — shipping/transit is additional.' }
+    { q: `What sizes does the ${name} come in?`, a: `${sizes.map((z) => z.label.replace(' — ', ', ')).join('; ')}. Pick by viewing distance: the small size is for counters and storefronts, the large one for roadsides and open fields.` },
+    { q: 'What do the hardware, single/double-sided and base options mean?', a: 'With hardware includes the flexible pole kit and a base; graphic only is the printed flag alone. Single-sided prints the front with a mirrored print-through on the reverse, double-sided prints two faces with a blockout layer between. A spike base (included) suits grass, a cross or metal plate base suits hard floors, and a water bag (+$20) adds ballast outdoors. Standard production is 6–8 business days after proof approval, rush is 2–3; shipping time is extra.' }
   ],
   pricing: {
     model: 'configured',
@@ -1343,16 +1344,16 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
   seoTitle,
   seoDescription,
   whatsIncluded,
+  // Kit-specific answers first; the answers every SEG kit shares (lighting,
+  // reusable frame, artwork, plug, pricing) are folded into two questions so
+  // the A/B/C pages are not three copies of one FAQ block.
   faqs: [
     ...(shapeFaq ? [shapeFaq] : []),
-    { q: 'What is an SEG trade show display?', a: 'SEG stands for Silicone Edge Graphics — a sewn silicone strip on the edge of the fabric presses into a channel on the frame, so the graphic sits smooth, tensioned and nearly frameless. These kits add integrated LED backlighting for illuminated graphics.' },
-    { q: 'Are the graphics illuminated?', a: 'Yes — the frame is a lightbox with integrated LED illumination, so the backlit fabric graphics glow evenly for strong trade-show visibility.' },
-    { q: 'Can the graphics be replaced later?', a: 'Yes. The frame is reusable — you can print new SEG fabric graphics for future events and reuse the same modular hardware.' },
-    { q: 'Can I submit my own artwork, or can Apex help design it?', a: 'Both. Upload your own print-ready artwork, or ask our team for design help. Because a modular booth has several panels, you can supply artwork for each panel or send your logo and brand direction.' },
-    { q: 'Which size should I choose?', a: `${name} comes in ${SEG_WIDTHS.length} widths (10, 13, 16.4 and 20 ft) and ${heights.length} heights. Match the width to your booth space and the height to the venue; not sure? Request a quote and we'll advise.` },
-    { q: 'Can I request modifications to the standard configuration?', a: 'Yes — tell us your requirements (extra counters, shelving, TV mounting, custom sizes) in the quote and our team will confirm what we can supply.' },
-    { q: 'Which plug type should I choose?', a: 'US plug is standard for North American events. EU, AU or no-plug options are available if you need them.' },
-    { q: 'How do I get pricing?', a: 'Pricing is customized based on the selected kit, size, quantity and project requirements. Submit a quote request and our team will prepare pricing for your configuration. Production and delivery timing are confirmed with your quote.' }
+    { q: `What comes with ${name}?`, a: `${name} is laid out as: ${config}. The box holds the ${whatsIncluded.slice(0, 4).join('; ')}, plus the frame, LED hardware and a carry bag.` },
+    { q: `How heavy is ${name}, and how does it travel?`, a: `Fully printed it weighs ${weight.replace(' with graphics', '').replace('–', ' to ')} and packs into a bag of about ${bag.replace('≈ ', '').replace(' (varies by size)', '')}, depending on the width you order. The counter measures ${counter.replace(/ · /g, '; ')}.` },
+    { q: `Which size should I choose for ${name}?`, a: `Widths run 10, 13, 16.4 and 20 ft, in ${heights.map((h) => h.h).join(', ')} ft heights. Match the width to your floor space and the height to the hall; ${heights.length === 2 ? 'this kit has no 6.6 ft option, so check the venue ceiling first' : 'the 6.6 ft height suits halls with a low ceiling'}.` },
+    { q: 'Are the graphics lit, and can I change them later?', a: 'Yes to both. SEG is Silicone Edge Graphics: a sewn silicone strip presses into the frame channel so the fabric sits smooth and nearly frameless, with integrated LED backlighting behind it. The frame is reusable, so you reprint only the fabric for the next show.' },
+    { q: 'How do artwork, changes, plug type and pricing work?', a: 'Upload print-ready artwork per panel or send your logo and brand direction for design help. Tell us about extra counters, shelving, TV mounting or custom sizes in the quote. Choose a US, EU, AU or no-plug option. Pricing and timing are confirmed in your custom quote; we ship across the United States and Canada.' }
   ],
   pricing: {
     model: 'configured',
