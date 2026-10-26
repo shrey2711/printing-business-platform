@@ -13,7 +13,7 @@ import { INDEXED_STATES } from './stateContent.js';
 import { SEO_CITIES, LOCAL_CATEGORIES } from './citySeo.js';
 import { CITY_DETAIL } from './cityDetail.js';
 import { cityPagePlan } from './cityPagePlan.js';
-import { CITY_PRODUCT_PAGES } from './cityProductPages.js';
+import { productPageFor } from './cityProductPages.js';
 
 const HUB = LOCAL_CATEGORIES.find((l) => l.slug === 'trade-show-displays');
 const planOf = (city, lc) => cityPagePlan(city, lc, CITY_DETAIL[city.slug]);
@@ -28,17 +28,6 @@ export const isStateLive = (stateSlug) => INDEXED_STATES.has(stateSlug);
 //  - Backdrop and table-cover city pages elsewhere are the thinnest and have
 //    the least demand. They go; they 301 to the city hub.
 // None of these had a click or an impression in Search Console over 90 days.
-const PRODUCT_PAGE_FOR = {
-  'trade-show-canopies': 'custom-canopy-tents',
-  'banner-stands': 'retractable-banner-stands',
-  'trade-show-backdrops': 'step-and-repeat-backdrop',
-  'table-covers': 'custom-table-covers'
-};
-const productPageFor = (catSlug, citySlug) => {
-  const base = PRODUCT_PAGE_FOR[catSlug];
-  const slug = base && `${base}-${citySlug}`;
-  return slug && CITY_PRODUCT_PAGES.some((p) => p.slug === slug) ? `/${slug}` : null;
-};
 const THIN_CATEGORIES = new Set(['trade-show-backdrops', 'table-covers']);
 
 export const isCategoryCityLive = (catSlug, citySlug) => {

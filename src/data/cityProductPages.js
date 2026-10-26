@@ -1759,6 +1759,22 @@ export const CITY_PRODUCT_PAGES = [
   }
 ];
 
+// Category × city pages that a product × city page replaced (they 301 to it;
+// see removedLocations.js). Lives here, beside the pages it checks, so the
+// city product page can test it without pulling in removedLocations.
+const PRODUCT_PAGE_FOR = {
+  'trade-show-canopies': 'custom-canopy-tents',
+  'banner-stands': 'retractable-banner-stands',
+  'trade-show-backdrops': 'step-and-repeat-backdrop',
+  'table-covers': 'custom-table-covers'
+};
+// '/{product}-{city}' when that page exists, else null.
+export const productPageFor = (catSlug, citySlug) => {
+  const base = PRODUCT_PAGE_FOR[catSlug];
+  const slug = base && `${base}-${citySlug}`;
+  return slug && CITY_PRODUCT_PAGES.some((p) => p.slug === slug) ? `/${slug}` : null;
+};
+
 export const getCityProductPage = (slug) => CITY_PRODUCT_PAGES.find((p) => p.slug === slug) || null;
 
 // The national category page behind each product group.

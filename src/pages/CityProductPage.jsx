@@ -4,7 +4,7 @@ import { list as getProducts } from '../services/cms/productService';
 import ProductConfigurator from './ProductConfigurator';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
-import { CITY_PRODUCT_PAGES, getCityProductPage, nationalCategoryFor } from '../data/cityProductPages';
+import { CITY_PRODUCT_PAGES, getCityProductPage, nationalCategoryFor, productPageFor } from '../data/cityProductPages';
 import { SEO_CITIES, LOCAL_CATEGORIES, cityBreadcrumb } from '../data/citySeo';
 
 // Transactional product + city page.
@@ -209,7 +209,12 @@ export default function CityProductPage({ slug }) {
             <Link className="loc-chip" to={`/trade-show-displays/${city.slug}`}>
               <span>Trade Show Displays in {city.city}</span>
             </Link>
-            {lane && lane.slug !== 'trade-show-displays' && (
+            {/* Not when a product × city page replaced that category × city
+                page (e.g. /trade-show-canopies/{city} now 301s to this very
+                page): the link would be a redirect hop back to ourselves.
+                productPageFor rather than isCategoryCityLive keeps the heavy
+                removedLocations chunk off this route. */}
+            {lane && lane.slug !== 'trade-show-displays' && !productPageFor(lane.slug, city.slug) && (
               <Link className="loc-chip" to={`/${lane.slug}/${city.slug}`}>
                 <span>{lane.label} in {city.city}</span>
               </Link>
