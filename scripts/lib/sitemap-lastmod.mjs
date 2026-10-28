@@ -20,7 +20,8 @@
 //   2. shallow / no git  -> manifest date, when the fingerprint still matches
 //   3. fingerprint changed and no usable history -> date of the HEAD commit
 //      (an upper bound on when the change was committed; never "now")
-//   4. nothing available -> no <lastmod> for that URL
+//   4. no git at all     -> the manifest's last known date, even if stale
+//   5. nothing available -> no <lastmod> for that URL
 // Regenerate the manifest after content edits: `npm run sitemap:lastmod`
 // (needs full history). `npm run sitemap:lastmod -- --check` exits 1 if stale.
 import { readFileSync, existsSync, writeFileSync } from 'fs';
@@ -177,7 +178,7 @@ export function createLastmodResolver(root) {
   };
 
   const results = new Map(); // url -> { lastmod, fp, via }
-  const stats = { blame: 0, manifest: 0, head: 0, none: 0, missingSource: [] };
+  const stats = { blame: 0, manifest: 0, head: 0, stale: 0, none: 0, missingSource: [] };
 
   const resolve = (url, sources) => {
     const spans = sources.flatMap((src) => {
@@ -208,6 +209,8 @@ export function createLastmodResolver(root) {
       lastmod = m && DATE_RE.test(m.lastmod) && m.lastmod > headDate ? m.lastmod : headDate;
       via = 'head';
     }
+    // No git at all and the fingerprint changed: keep the last known date rather than none.
+    if (!lastmod && m && DATE_RE.test(m.lastmod)) { lastmod = m.lastmod; via = 'stale'; }
     stats[via]++;
     results.set(url, { lastmod, fp, via });
     return lastmod;

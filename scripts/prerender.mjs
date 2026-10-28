@@ -2030,7 +2030,7 @@ writeFileSync(join(DIST, 'sitemap.xml'), sitemapIndex);
 console.log(`Sitemap: ${smTotal} indexable URLs across ${Object.keys(sitemapFiles).length} sitemaps (index at /sitemap.xml).`);
 {
   const st = LASTMOD.stats;
-  console.log(`Sitemap lastmod: ${st.blame} from git blame, ${st.manifest} from manifest, ${st.head} from HEAD date (manifest stale), ${st.none} omitted${LASTMOD.shallow ? ' [shallow clone]' : ''}.`);
+  console.log(`Sitemap lastmod: ${st.blame} from git blame, ${st.manifest} from manifest, ${st.head} from HEAD date (manifest stale), ${st.stale} stale manifest date (no git), ${st.none} omitted${LASTMOD.shallow ? ' [shallow clone]' : ''}.`);
   if (st.missingSource.length) console.warn(`  sitemap lastmod: source record not found for ${st.missingSource.length} URL(s):\n    ${st.missingSource.join('\n    ')}`);
   const stale = LASTMOD.staleEntries();
   if (process.env.SITEMAP_LASTMOD_WRITE === '1') {
