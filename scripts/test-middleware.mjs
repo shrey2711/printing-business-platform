@@ -28,6 +28,7 @@
 
 import middleware from '../middleware.js';
 import { STATIC_FILES, KNOWN_ROUTES } from '../src/generated/routes.js';
+import { GONE_LOCATION_PATHS } from '../src/data/goneLocations.js';
 
 const ORIGIN = 'https://www.apextradeshow.com';
 const fails = [];
@@ -131,6 +132,45 @@ check('a trailing slash resolves to the same decision', () => {
   return null;
 });
 
+// --- location pages removed for good: 410 Gone (src/data/goneLocations.js) --
+const expect410 = (path) => {
+  const res = call(path);
+  if (res === undefined) return `${path} passed through — it would be served (200)`;
+  if (res.status !== 410) return `${path} returned ${res.status}, expected 410`;
+  if (res.headers.get('location')) return `${path} carries a Location header — a 410 is not a redirect`;
+  return null;
+};
+check('the gone list holds the 70 removed location URLs', () =>
+  GONE_LOCATION_PATHS.length === 70 && new Set(GONE_LOCATION_PATHS).size === 70 ? null : `${GONE_LOCATION_PATHS.length} entries`);
+check('every gone location URL answers 410', () => {
+  const broken = GONE_LOCATION_PATHS.map(expect410).filter(Boolean);
+  return broken.length ? `${broken.length} wrong, e.g. ${broken[0]}` : null;
+});
+check('a gone URL with a trailing slash answers 410', () => expect410('/trade-show-displays/orlando/'));
+check('a gone URL with a query string answers 410', () => expect410('/locations/arizona?utm_source=x'));
+check('the 410 body is HTML with no robots noindex', () => {
+  const res = call('/custom-banners-atlanta');
+  if (!/text\/html/.test(res.headers.get('content-type') || '')) return `content-type ${res.headers.get('content-type')}`;
+  if (res.headers.get('x-robots-tag')) return `x-robots-tag ${res.headers.get('x-robots-tag')}`;
+  return null;
+});
+check('no gone URL is a known route (it would have a prerendered file)', () => {
+  const hit = GONE_LOCATION_PATHS.filter((p) => KNOWN_ROUTES.has(p));
+  return hit.length ? hit.join(', ') : null;
+});
+check('the kept location pages are still served', () => {
+  const kept = ['/locations', '/step-and-repeat-backdrop-chicago', '/custom-canopy-tents-chicago', '/custom-banners-los-angeles',
+    '/locations/colorado', '/locations/indiana', '/locations/louisiana', '/locations/massachusetts', '/locations/tennessee',
+    '/trade-show-displays/chicago', '/trade-show-displays/los-angeles', '/trade-show-canopies/seattle', '/locations/california'];
+  const broken = kept.map(expectServed).filter(Boolean);
+  return broken.length ? broken.join('; ') : null;
+});
+check('retired location URLs still 301 (unchanged by the removal)', () => {
+  const res = call('/locations/arizona/phoenix');
+  if (res === undefined || res.status !== 301) return `/locations/arizona/phoenix returned ${res && res.status}`;
+  return null;
+});
+
 if (fails.length) {
   console.error(`\n✗ MIDDLEWARE FAILED — ${fails.length}/${ran}:`);
   fails.forEach((f) => console.error(`  ✗ ${f}`));
@@ -138,5 +178,6 @@ if (fails.length) {
 }
 console.log(
   `✓ MIDDLEWARE OK — ${ran} assertions: unknown paths 404 whether or not they carry a file extension, ` +
-  `all ${STATIC_FILES.size} real root files are still served, and redirects still take precedence.`
+  `all ${STATIC_FILES.size} real root files are still served, redirects still take precedence, ` +
+  `and all ${GONE_LOCATION_PATHS.length} removed location pages answer 410.`
 );

@@ -9,7 +9,8 @@
 // (state: add LOCAL_FACTS + STATE_OUTDOOR; category page: cityPagePlan clears
 // the uniqueness bar).
 import { territories, slugify } from './states.js';
-import { INDEXED_STATES } from './stateContent.js';
+import { INDEXED_STATES, STATES_WITH_PAGES_BEFORE_GONE } from './stateContent.js';
+import { isGonePath } from './goneLocations.js';
 import { SEO_CITIES, LOCAL_CATEGORIES } from './citySeo.js';
 import { CITY_DETAIL } from './cityDetail.js';
 import { cityPagePlan } from './cityPagePlan.js';
@@ -18,6 +19,7 @@ import { productPageFor } from './cityProductPages.js';
 const HUB = LOCAL_CATEGORIES.find((l) => l.slug === 'trade-show-displays');
 const planOf = (city, lc) => cityPagePlan(city, lc, CITY_DETAIL[city.slug]);
 
+// INDEXED_STATES already leaves out the state pages in goneLocations.js (410).
 export const isStateLive = (stateSlug) => INDEXED_STATES.has(stateSlug);
 // Crawl budget (2026-10). Two more cuts so a new domain's few crawls land on
 // the pages that matter:
@@ -30,7 +32,10 @@ export const isStateLive = (stateSlug) => INDEXED_STATES.has(stateSlug);
 // None of these had a click or an impression in Search Console over 90 days.
 const THIN_CATEGORIES = new Set(['trade-show-backdrops', 'table-covers']);
 
-export const isCategoryCityLive = (catSlug, citySlug) => {
+// Whether a category x city page existed before the 2026-10-28 removal. Only
+// the redirect generator below uses this, so retired URLs keep the 301
+// destinations they already had (owner rule: do not change those redirects).
+const categoryCityPlanned = (catSlug, citySlug) => {
   const city = SEO_CITIES.find((c) => c.slug === citySlug);
   const lc = LOCAL_CATEGORIES.find((l) => l.slug === catSlug);
   if (!(city && lc && city.tier <= 2 && planOf(city, lc).indexable)) return false;
@@ -39,26 +44,35 @@ export const isCategoryCityLive = (catSlug, citySlug) => {
   return true;
 };
 
+// A live page: planned, and not one of the 410 pages in goneLocations.js.
+export const isCategoryCityLive = (catSlug, citySlug) =>
+  categoryCityPlanned(catSlug, citySlug) && !isGonePath(`/${catSlug}/${citySlug}`);
+
 let cache = null;
-// [{ source, destination }] for every removed location URL.
+// [{ source, destination }] for every removed location URL (301).
+//
+// Computed against the pages that existed BEFORE the 2026-10-28 removal, so it
+// is byte-identical to what it was: the gone (410) pages are not added here,
+// and redirects that point at a page that is now gone keep pointing there
+// until the owner decides what they should do (see the PR for the list).
 export function removedLocationRedirects() {
   if (cache) return cache;
   const out = [];
   for (const s of territories) {
-    const live = isStateLive(s.slug);
+    const live = STATES_WITH_PAGES_BEFORE_GONE.has(s.slug);
     if (!live) out.push({ source: `/locations/${s.slug}`, destination: '/locations' });
     for (const c of s.cities) {
       const seo = SEO_CITIES.find((x) => x.slug === slugify(c) && x.stateSlug === s.slug);
       const dest = seo
-        ? (isCategoryCityLive('trade-show-displays', seo.slug) ? `/trade-show-displays/${seo.slug}` : '/trade-show-displays')
+        ? (categoryCityPlanned('trade-show-displays', seo.slug) ? `/trade-show-displays/${seo.slug}` : '/trade-show-displays')
         : (live ? `/locations/${s.slug}` : '/locations');
       out.push({ source: `/locations/${s.slug}/${slugify(c)}`, destination: dest });
     }
   }
   for (const lc of LOCAL_CATEGORIES) {
     for (const city of SEO_CITIES) {
-      if (isCategoryCityLive(lc.slug, city.slug)) continue;
-      const hubLive = isCategoryCityLive(HUB.slug, city.slug);
+      if (categoryCityPlanned(lc.slug, city.slug)) continue;
+      const hubLive = categoryCityPlanned(HUB.slug, city.slug);
       const product = productPageFor(lc.slug, city.slug);
       out.push({
         source: `/${lc.slug}/${city.slug}`,

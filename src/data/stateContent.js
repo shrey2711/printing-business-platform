@@ -363,6 +363,7 @@ export const PRIORITY_STATES = new Set(Object.keys(stateContent));
 // linked, still passing equity to the money pages — until they carry real local
 // content. That gate lives on PRIORITY_CITIES in scripts/prerender.mjs.
 import { states, territories, provinces } from './states.js';
+import { isGonePath } from './goneLocations.js';
 
 // (defined at the bottom of this file, after LOCAL_FACTS)
 
@@ -457,9 +458,17 @@ export const CRAWL_BUDGET_CUT_STATES = new Set([
   'iowa', 'kentucky', 'manitoba', 'minnesota', 'ohio', 'oklahoma',
   'oregon', 'pennsylvania', 'utah', 'wisconsin', 'wyoming'
 ]);
-export const INDEXED_STATES = new Set(
+// Regions that had a page before the 2026-10-28 removal. Only the retired-URL
+// redirect generator reads this (src/data/removedLocations.js), so the 301s for
+// /locations/{state}/{city} keep exactly the destinations they had.
+export const STATES_WITH_PAGES_BEFORE_GONE = new Set(
   [...states, ...territories, ...provinces].map((s) => s.slug)
     .filter((slug) => LOCAL_FACTS[slug] && !CRAWL_BUDGET_CUT_STATES.has(slug))
+);
+// Regions with a live page. State pages listed in src/data/goneLocations.js
+// (owner decision 2026-10-28) answer 410 and are not built, listed or linked.
+export const INDEXED_STATES = new Set(
+  [...STATES_WITH_PAGES_BEFORE_GONE].filter((slug) => !isGonePath(`/locations/${slug}`))
 );
 
 // What the weather and the event calendar actually ask of a printed canopy in

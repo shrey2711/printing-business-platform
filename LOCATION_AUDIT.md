@@ -7,9 +7,9 @@ FLAGGED for owner review._
 
 ## Summary
 
-- Location pages total: **64**
-- Indexable: **64**  ·  noindex (already gated): **0**
-- In a sitemap: **64**
+- Location pages total: **20**
+- Indexable: **20**  ·  noindex (already gated): **0**
+- In a sitemap: **20**
 - Flagged for review (indexed + highly templated): **0**
 - Duplication% = share of 6-word shingles that also appear on another location page.
 
@@ -31,67 +31,23 @@ invented) or downgrade them to noindex.
 
 | Path | Words | Dup% | Unique H | Index | Sitemap | Links | Flag |
 |---|---|---|---|---|---|---|---|
-| /banner-stands/phoenix | 274 | 49% | 3 | index | yes | 58 | Keep/index (distinct content) |
-| /banner-stands/new-orleans | 287 | 48% | 3 | index | yes | 57 | Keep/index (distinct content) |
-| /banner-stands/miami | 309 | 44% | 4 | index | yes | 58 | Keep/index (distinct content) |
-| /trade-show-canopies/boston | 323 | 40% | 4 | index | yes | 57 | Keep/index (distinct content) |
-| /banner-stands/seattle | 319 | 38% | 3 | index | yes | 58 | Keep/index (distinct content) |
-| /banner-stands/washington-dc | 392 | 38% | 4 | index | yes | 57 | Keep/index (distinct content) |
-| /banner-stands/charlotte | 354 | 37% | 4 | index | yes | 57 | Keep/index (distinct content) |
-| /banner-stands/indianapolis | 343 | 36% | 4 | index | yes | 58 | Keep/index (distinct content) |
-| /trade-show-canopies/nashville | 341 | 36% | 4 | index | yes | 56 | Keep/index (distinct content) |
-| /banner-stands/new-york | 409 | 35% | 4 | index | yes | 58 | Keep/index (distinct content) |
-| /trade-show-canopies/washington-dc | 404 | 35% | 5 | index | yes | 56 | Keep/index (distinct content) |
-| /banner-stands/san-diego | 388 | 34% | 4 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-canopies/new-york | 447 | 33% | 6 | index | yes | 57 | Keep/index (distinct content) |
-| /banner-stands/boston | 420 | 32% | 4 | index | yes | 58 | Keep/index (distinct content) |
-| /banner-stands/houston | 368 | 32% | 4 | index | yes | 58 | Keep/index (distinct content) |
-| /trade-show-displays/phoenix | 617 | 32% | 6 | index | yes | 61 | Keep/index (distinct content) |
-| /trade-show-displays/seattle | 631 | 32% | 6 | index | yes | 61 | Keep/index (distinct content) |
-| /trade-show-displays/boston | 665 | 31% | 8 | index | yes | 61 | Keep/index (distinct content) |
-| /banner-stands/denver | 390 | 30% | 4 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-canopies/houston | 413 | 30% | 6 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-displays/charlotte | 694 | 30% | 9 | index | yes | 60 | Keep/index (distinct content) |
-| /trade-show-displays/miami | 650 | 30% | 8 | index | yes | 61 | Keep/index (distinct content) |
-| /banner-stands/vancouver | 411 | 29% | 4 | index | yes | 58 | Keep/index (distinct content) |
-| /trade-show-canopies/charlotte | 427 | 29% | 4 | index | yes | 56 | Keep/index (distinct content) |
-| /banner-stands/nashville | 426 | 28% | 4 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-canopies/indianapolis | 435 | 28% | 6 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-canopies/vancouver | 448 | 28% | 6 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-displays/atlanta | 673 | 28% | 8 | index | yes | 65 | Keep/index (distinct content) |
-| /trade-show-displays/indianapolis | 742 | 28% | 8 | index | yes | 61 | Keep/index (distinct content) |
-| /trade-show-displays/washington-dc | 797 | 28% | 10 | index | yes | 60 | Keep/index (distinct content) |
-| /trade-show-canopies/new-orleans | 502 | 27% | 6 | index | yes | 56 | Keep/index (distinct content) |
-| /trade-show-canopies/san-diego | 468 | 27% | 6 | index | yes | 56 | Keep/index (distinct content) |
-| /trade-show-canopies/san-francisco | 501 | 27% | 6 | index | yes | 56 | Keep/index (distinct content) |
-| /trade-show-canopies/seattle | 486 | 27% | 6 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-displays/dallas | 679 | 27% | 8 | index | yes | 65 | Keep/index (distinct content) |
-| /trade-show-canopies/miami | 517 | 26% | 7 | index | yes | 57 | Keep/index (distinct content) |
-| /trade-show-displays/chicago | 707 | 26% | 8 | index | yes | 65 | Keep/index (distinct content) |
-| /trade-show-displays/los-angeles | 738 | 26% | 10 | index | yes | 65 | Keep/index (distinct content) |
-| /trade-show-displays/houston | 775 | 25% | 9 | index | yes | 61 | Keep/index (distinct content) |
-| /trade-show-displays/orlando | 745 | 25% | 10 | index | yes | 65 | Keep/index (distinct content) |
-| /trade-show-displays/san-francisco | 790 | 25% | 9 | index | yes | 60 | Keep/index (distinct content) |
-| /locations/british-columbia | 226 | 24% | 4 | index | yes | 35 | Keep/index (distinct content) |
-| /locations/ontario | 196 | 24% | 3 | index | yes | 33 | Keep/index (distinct content) |
-| /trade-show-canopies/denver | 516 | 24% | 7 | index | yes | 56 | Keep/index (distinct content) |
-| /trade-show-displays/new-york | 830 | 24% | 10 | index | yes | 61 | Keep/index (distinct content) |
-| /trade-show-displays/vancouver | 789 | 24% | 9 | index | yes | 61 | Keep/index (distinct content) |
+| /trade-show-displays/chicago | 688 | 24% | 8 | index | yes | 56 | Keep/index (distinct content) |
 | /locations/alberta | 202 | 23% | 3 | index | yes | 33 | Keep/index (distinct content) |
-| /locations/georgia | 216 | 23% | 4 | index | yes | 35 | Keep/index (distinct content) |
-| /trade-show-displays/las-vegas | 821 | 23% | 8 | index | yes | 65 | Keep/index (distinct content) |
-| /locations/arizona | 254 | 21% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/georgia | 200 | 23% | 3 | index | yes | 33 | Keep/index (distinct content) |
+| /trade-show-displays/los-angeles | 728 | 23% | 10 | index | yes | 58 | Keep/index (distinct content) |
+| /locations/british-columbia | 209 | 22% | 3 | index | yes | 33 | Keep/index (distinct content) |
 | /locations/illinois | 241 | 21% | 4 | index | yes | 35 | Keep/index (distinct content) |
-| /locations/indiana | 245 | 21% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/indiana | 229 | 21% | 3 | index | yes | 33 | Keep/index (distinct content) |
 | /locations/louisiana | 222 | 21% | 3 | index | yes | 33 | Keep/index (distinct content) |
-| /locations/nevada | 256 | 21% | 4 | index | yes | 35 | Keep/index (distinct content) |
 | /locations/tennessee | 218 | 21% | 3 | index | yes | 33 | Keep/index (distinct content) |
-| /trade-show-canopies/phoenix | 594 | 21% | 8 | index | yes | 57 | Keep/index (distinct content) |
+| /trade-show-canopies/seattle | 468 | 21% | 6 | index | yes | 48 | Keep/index (distinct content) |
 | /locations/colorado | 237 | 20% | 3 | index | yes | 33 | Keep/index (distinct content) |
-| /locations/florida | 266 | 20% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/massachusetts | 243 | 20% | 4 | index | yes | 35 | Keep/index (distinct content) |
-| /locations/new-york | 272 | 20% | 4 | index | yes | 34 | Keep/index (distinct content) |
-| /locations/washington | 249 | 20% | 4 | index | yes | 35 | Keep/index (distinct content) |
+| /locations/massachusetts | 227 | 20% | 3 | index | yes | 33 | Keep/index (distinct content) |
+| /locations/nevada | 239 | 20% | 3 | index | yes | 33 | Keep/index (distinct content) |
+| /locations/washington | 233 | 20% | 3 | index | yes | 33 | Keep/index (distinct content) |
+| /trade-show-canopies/miami | 499 | 20% | 7 | index | yes | 48 | Keep/index (distinct content) |
+| /locations/florida | 240 | 19% | 3 | index | yes | 33 | Keep/index (distinct content) |
+| /locations/new-york | 257 | 19% | 3 | index | yes | 33 | Keep/index (distinct content) |
 | /locations/quebec | 240 | 19% | 3 | index | yes | 33 | Keep/index (distinct content) |
-| /locations/texas | 287 | 19% | 4 | index | yes | 37 | Keep/index (distinct content) |
-| /locations/california | 306 | 17% | 4 | index | yes | 37 | Keep/index (distinct content) |
+| /locations/texas | 261 | 18% | 3 | index | yes | 33 | Keep/index (distinct content) |
+| /locations/california | 295 | 17% | 4 | index | yes | 35 | Keep/index (distinct content) |
