@@ -38,7 +38,10 @@ export function getProductFaqs(product) {
         q: `What sizes are available for ${lower}?`,
         a: `We print ${lower} in custom sizes from ${p.minWidthIn}"×${p.minHeightIn}" up to ${p.maxWidthIn}"×${p.maxHeightIn}". ${enterSizes}`
       });
-    } else if (sizeRow) {
+    } else if (sizeRow && !(Array.isArray(product.compareWith) && product.compareWith.length)) {
+      // Products in a comparison group (product.compareWith) skip this one: it
+      // restates their Sizes spec row word for word, and that row is already on
+      // the page. Other products keep it (it is their only size answer in the FAQ schema).
       faqs.push({
         q: `What sizes are available for ${lower}?`,
         a: `${String(sizeRow[1]).replace(/\.$/, '')}. ${enterSizes}`

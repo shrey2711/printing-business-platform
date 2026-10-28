@@ -9,6 +9,7 @@ import rateLimit from 'express-rate-limit';
 import { listProducts, getProduct, categories, navGroups } from './data/products.js';
 import { computePrice } from './data/pricing.js';
 import { getProductFaqs } from './data/faqs.js';
+import { productComparison } from './lib/productCompare.js';
 import { STATIC_ARTICLES, getStaticArticle } from './data/staticArticles.js';
 import { stripe, stripeMode, supabaseAdmin, getUserFromToken, isAdmin, getRole, adminEmails, baseUrl } from './lib/clients.js';
 import { sendOrderStatusEmail, sendOrderConfirmationEmail, sendNewOrderAlert, sendQuoteRequest, sendTrackingEmail, sendReviewRequestEmail } from './lib/mailer.js';
@@ -290,7 +291,8 @@ app.get('/api/products', (req, res) => {
 app.get('/api/products/:slug', (req, res) => {
   const product = getProduct(req.params.slug);
   if (!product) return res.status(404).json({ error: 'Product not found' });
-  res.json({ product: { ...product, faqs: getProductFaqs(product) } });
+  const comparison = productComparison(product, getProduct);
+  res.json({ product: { ...product, faqs: getProductFaqs(product), ...(comparison ? { comparison } : {}) } });
 });
 
 // Instant pricing ----------------------------------------------------------

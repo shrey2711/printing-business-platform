@@ -14,6 +14,7 @@ export default function ProductTabs({ product, catalog }) {
     ? product.slug.replace('canopy-tent-', '')
     : null;
   const faqs = product.faqs || [];
+  const cmp = product.comparison && Array.isArray(product.comparison.distinctSpecs) ? product.comparison : null;
 
   const tabs = [
     { id: 'desc', label: 'Description' },
@@ -47,6 +48,12 @@ export default function ProductTabs({ product, catalog }) {
           <div className="ptab-panel">
             <h2>{product.name} — Overview</h2>
             <p>{product.description}</p>
+            {/* Optional product-specific sections (owner-supplied), mirrored in scripts/prerender.mjs. */}
+            {(Array.isArray(product.productSections) ? product.productSections : [])
+              .filter((x) => x && x.h2 && x.p)
+              .map((x) => (
+                <div key={x.h2}><h3>{x.h2}</h3><p>{x.p}</p></div>
+              ))}
             <h3>Key features</h3>
             <ul className="ptab-list">
               {(product.features || []).map((f) => <li key={f}>{f}</li>)}
@@ -72,14 +79,25 @@ export default function ProductTabs({ product, catalog }) {
 
         {tab === 'specs' && (
           <div className="ptab-panel">
-            <h2>Product specifications</h2>
-            <table className="spec-table">
-              <tbody>
-                {specsFor(product, sizeKey).map(([k, v]) => (
-                  <tr key={k}><th>{k}</th><td>{v}</td></tr>
-                ))}
-              </tbody>
-            </table>
+            {cmp ? (
+              <>
+                {/* Comparison group (backend/lib/productCompare.js): this product's
+                    own key specs first, then the rows shared with its siblings. */}
+                <h2>{product.name} key specifications</h2>
+                <SpecTable rows={cmp.distinctSpecs} />
+                {cmp.sharedSpecs.length > 0 && (
+                  <>
+                    <h2>Specifications shared with <SiblingLinks siblings={cmp.siblings} /></h2>
+                    <SpecTable rows={cmp.sharedSpecs} />
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <h2>Product specifications</h2>
+                <SpecTable rows={specsFor(product, sizeKey)} />
+              </>
+            )}
           </div>
         )}
 
@@ -169,4 +187,26 @@ const TEMPLATE_SETS = {
 
 function templatesFor(sizeKey) {
   return (sizeKey && TEMPLATE_SETS[sizeKey]) || [];
+}
+
+function SpecTable({ rows }) {
+  return (
+    <table className="spec-table">
+      <tbody>
+        {rows.map(([k, v]) => (
+          <tr key={k}><th>{k}</th><td>{v}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+// "A", "A and B", "A, B and C" as product links.
+function SiblingLinks({ siblings }) {
+  return siblings.map((s, i) => (
+    <span key={s.slug}>
+      {i > 0 && (i === siblings.length - 1 ? ' and ' : ', ')}
+      <Link to={`/products/${s.slug}`}>{s.name}</Link>
+    </span>
+  ));
 }
