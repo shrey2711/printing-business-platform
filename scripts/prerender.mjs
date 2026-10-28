@@ -3,9 +3,9 @@
 // JSON-LD in the initial HTML — without a full SSR framework. React still
 // hydrates on top for the interactive app.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'fs';
-import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'path';
 import { ogVariantPath } from './lib/og-image.mjs';
+import { createLastmodResolver } from './lib/sitemap-lastmod.mjs';
 import { fileURLToPath } from 'url';
 
 import { listProducts, getProduct, startingPriceFor, priceDisplayFor } from '../backend/data/products.js';
@@ -1921,31 +1921,15 @@ console.log(`Prerendered ${count} pages (${posts.length} blog posts).`);
 // ---- Sitemap: INDEXABLE pages only (city pages are noindex, so excluded) ----
 // A dashboard SEO override can force a route out (robots: noindex) or reset its
 // priority; both are honoured here.
-// Real content-modification date per source file (git committer date, YYYY-MM-DD)
-// — NOT the build time. Cached per file; null (omit lastmod) if git is unavailable.
-const _lmodCache = new Map();
-const gitLastMod = (file) => {
-  if (_lmodCache.has(file)) return _lmodCache.get(file);
-  let d = null;
-  try {
-    // execFileSync (no shell) — file names are constants, args passed directly.
-    d = execFileSync('git', ['log', '-1', '--format=%cs', '--', file], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || null;
-    if (d && !/^\d{4}-\d{2}-\d{2}$/.test(d)) d = null;
-  } catch { d = null; }
-  _lmodCache.set(file, d);
-  return d;
-};
-// Content-group lastmods (the file that governs each page group).
-const LMOD = {
-  products: gitLastMod('backend/data/products.js'),
-  categories: gitLastMod('src/data/categoryPages.js'),
-  landing: gitLastMod('src/data/landingPages.js'),
-  pages: gitLastMod('src/data/pages.js'),
-  canopy: gitLastMod('src/data/canopy.js'),
-  booth: gitLastMod('src/data/boothPackages.js'),
-  city: gitLastMod('src/data/citySeo.js'),
-  home: gitLastMod('scripts/prerender.mjs')
-};
+// Per-URL lastmod from each page's own content sources (see
+// scripts/lib/sitemap-lastmod.mjs): git blame of exactly the records a page is
+// built from, with a committed manifest for shallow clones. Never the build time.
+const LASTMOD = createLastmodResolver(join(__dirname, '..'));
+const rec = (file, key) => ({ file, key });
+const block = (re) => ({ file: 'scripts/prerender.mjs', find: re, outermost: true });
+const lm = (loc, sources) => LASTMOD.resolve(loc, sources);
+const productSrc = (slug) => [rec('backend/data/products.js', slug)];
+const citySrc = (slug) => [rec('src/data/citySeo.js', slug), rec('src/data/cityDetail.js', slug), { ...rec('src/data/cityContent.js', slug), optional: true }];
 const smUrl = (loc, priority, changefreq, lastmod) => {
   const o = seoMap[loc];
   if (o?.robots && /noindex/i.test(o.robots)) return null; // dropped from sitemap
@@ -1961,25 +1945,25 @@ const buildUrlset = (rows) =>
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.filter(Boolean).join('\n')}\n</urlset>\n`;
 
 const smPages = [
-  smUrl('/', '1.0', 'weekly', LMOD.home),
-  smUrl('/resources', '0.7', 'weekly', gitLastMod('src/data/resources.js')),
+  smUrl('/', '1.0', 'weekly', lm('/', [block(/path: '\/',/), { file: 'src/data/content.js', lines: /['"]home\./ }])),
+  smUrl('/resources', '0.7', 'weekly', lm('/resources', [block(/path: '\/resources',/), { file: 'src/data/resources.js' }])),
   smUrl(TENT_RULES_PATH, '0.7', 'monthly', TENT_RULES_META.updated),
-  smUrl('/quote', '0.4', undefined, LMOD.pages),
-  smUrl('/contact', '0.4', undefined, LMOD.pages),
-  ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7', undefined, LMOD.canopy)),
-  ...SOLUTIONS.map((s) => smUrl(`/solutions/${s.slug}`, '0.6', undefined, LMOD.canopy)),
+  smUrl('/quote', '0.4', undefined, lm('/quote', [block(/path: '\/quote'/)])),
+  smUrl('/contact', '0.4', undefined, lm('/contact', [block(/path: '\/contact'/)])),
+  ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7', undefined, lm(`/sizes/${s.slug}`, [rec('src/data/canopy.js', s.slug)]))),
+  ...SOLUTIONS.map((s) => smUrl(`/solutions/${s.slug}`, '0.6', undefined, lm(`/solutions/${s.slug}`, [rec('src/data/canopy.js', s.slug)]))),
   // Indexable trust pages (stub policy pages are noindex and excluded).
-  ...PAGES.filter((p) => !p.stub).map((p) => smUrl(`/${p.slug}`, '0.4', undefined, LMOD.pages))
+  ...PAGES.filter((p) => !p.stub).map((p) => smUrl(`/${p.slug}`, '0.4', undefined, lm(`/${p.slug}`, [rec('src/data/pages.js', p.slug)])))
 ];
 const smCategories = [
   // Product + city pilot pages: commercial landing pages, same weight as a category.
-  ...CITY_PRODUCT_PAGES.map((cp) => smUrl(`/${cp.slug}`, '0.8', 'weekly', LMOD.products)),
-  smUrl('/products', '0.9', 'weekly', LMOD.products),
-  ...CATEGORY_PAGES.map((cp) => smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly', LMOD.categories)),
-  smUrl('/trade-show-booth-packages', '0.8', 'weekly', LMOD.booth),
-  ...LANDING_PAGES.map((lp) => smUrl(`/${lp.slug}`, '0.7', 'weekly', LMOD.landing))
+  ...CITY_PRODUCT_PAGES.map((cp) => smUrl(`/${cp.slug}`, '0.8', 'weekly', lm(`/${cp.slug}`, [rec('src/data/cityProductPages.js', cp.slug)]))),
+  smUrl('/products', '0.9', 'weekly', lm('/products', [block(/path: '\/products',/), { file: 'src/data/productsGuide.js' }, { file: 'backend/data/products.js', lines: /^\s*(?:name|slug):\s*['"]/ }])),
+  ...CATEGORY_PAGES.map((cp) => smUrl(`/${cp.slug}`, cp.hub ? '0.9' : '0.8', 'weekly', lm(`/${cp.slug}`, [rec('src/data/categoryPages.js', cp.slug)]))),
+  smUrl('/trade-show-booth-packages', '0.8', 'weekly', lm('/trade-show-booth-packages', [{ file: 'src/data/boothPackages.js' }])),
+  ...LANDING_PAGES.map((lp) => smUrl(`/${lp.slug}`, '0.7', 'weekly', lm(`/${lp.slug}`, [rec('src/data/landingPages.js', lp.slug)])))
 ];
-const smProducts = productList.map((p) => smUrl(`/products/${p.slug}`, '0.8', undefined, LMOD.products));
+const smProducts = productList.map((p) => smUrl(`/products/${p.slug}`, '0.8', undefined, lm(`/products/${p.slug}`, productSrc(p.slug))));
 // Exclude posts canonicalised to another article — a canonicalised-away URL
 // should not appear in the sitemap. Blog lastmod uses each post's real
 // updated/published date (per-post), the most accurate signal available.
@@ -1994,10 +1978,16 @@ const smBlog = [
 // Exactly the URLs src/data/indexability.js calls indexable, the same rules the
 // page templates use for robots, so a listed URL can never render noindex.
 const smLocations = [
-  smUrl('/locations', '0.6', 'monthly', LMOD.city),
-  ...indexableLocationPaths().map((l) => (l.kind === 'city-category'
-    ? smUrl(l.path, l.city.tier === 1 ? '0.6' : '0.5', 'weekly', LMOD.city)
-    : smUrl(l.path, '0.5', undefined, LMOD.city)))
+  smUrl('/locations', '0.6', 'monthly', lm('/locations', [block(/path: '\/locations',/), { file: 'src/data/citySeo.js', lines: /^\s*\{ slug: '/ }])),
+  ...indexableLocationPaths().map((l) => {
+    if (l.kind === 'city-category') {
+      return smUrl(l.path, l.city.tier === 1 ? '0.6' : '0.5', 'weekly', lm(l.path, [rec('src/data/citySeo.js', l.cat.slug), ...citySrc(l.city.slug)]));
+    }
+    if (l.kind === 'legacy-city') {
+      return smUrl(l.path, '0.5', undefined, lm(l.path, [rec('src/data/stateContent.js', l.state.slug), { ...rec('src/data/cityContent.js', l.path.split('/').pop()), optional: true }]));
+    }
+    return smUrl(l.path, '0.5', undefined, lm(l.path, [rec('src/data/stateContent.js', l.state.slug)]));
+  })
 ];
 
 const sitemapFiles = {
@@ -2038,6 +2028,18 @@ const sitemapIndex =
   `\n</sitemapindex>\n`;
 writeFileSync(join(DIST, 'sitemap.xml'), sitemapIndex);
 console.log(`Sitemap: ${smTotal} indexable URLs across ${Object.keys(sitemapFiles).length} sitemaps (index at /sitemap.xml).`);
+{
+  const st = LASTMOD.stats;
+  console.log(`Sitemap lastmod: ${st.blame} from git blame, ${st.manifest} from manifest, ${st.head} from HEAD date (manifest stale), ${st.none} omitted${LASTMOD.shallow ? ' [shallow clone]' : ''}.`);
+  if (st.missingSource.length) console.warn(`  sitemap lastmod: source record not found for ${st.missingSource.length} URL(s):\n    ${st.missingSource.join('\n    ')}`);
+  const stale = LASTMOD.staleEntries();
+  if (process.env.SITEMAP_LASTMOD_WRITE === '1') {
+    console.log(`  wrote ${LASTMOD.writeManifest()}`);
+  } else if (stale.length) {
+    console.warn(`  sitemap lastmod manifest is stale for ${stale.length} URL(s) — run \`npm run sitemap:lastmod\` and commit scripts/data/sitemap-lastmod.json.`);
+    if (process.env.SITEMAP_LASTMOD_CHECK === '1') { console.warn(`    ${stale.slice(0, 50).join('\n    ')}`); process.exitCode = 1; }
+  }
+}
 
 // ---- Google Merchant Center product feed (/feed.xml) ----
 // RSS 2.0 + g: namespace. Only ACTIVE, instant-priced products are listed —
