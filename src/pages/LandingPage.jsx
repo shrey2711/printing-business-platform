@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { brand } from '../config/brand';
 import { getLandingPage } from '../data/landingPages';
+import ContextLinks from '../components/ContextLinks';
 
 // Content-first SEO landing page for a display product type (SEG, tension
 // fabric, pop-up, flags). Quote-based — no invented specs/prices. Mirrors the
@@ -60,6 +61,8 @@ export default function LandingPage({ slug }) {
           <Link className="btn btn-outline" to="/trade-show-displays">All displays</Link>
         </div>
       </section>
+
+      <ContextLinks path={`/${page.slug}`} />
 
       {page.image && (
         <section className="landing-photo">

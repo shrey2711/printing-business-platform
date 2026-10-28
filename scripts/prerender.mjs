@@ -41,6 +41,7 @@ import {
   TENT_RULES, TENT_CHECKLIST, TENT_RULES_FAQ
 } from '../src/data/tentRules.js';
 import { guidesForCategory, productsForGuide, CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
+import { contextLinksFor } from '../src/data/contextualLinks.js';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides, loadApprovedReviews } from './buildData.mjs';
 import { ratingSummary } from '../backend/lib/reviews.js';
 import { resolveContent, resolveList } from '../src/data/content.js';
@@ -100,6 +101,11 @@ const FOOTER = `<nav aria-label="Company">
   <a href="/terms">Terms</a>
   <a href="/contact">Contact</a>
 </nav>`;
+
+// Contextual in-body links (src/data/contextualLinks.js), same text as ContextLinks.jsx.
+const contextLinksHtml = (path) => contextLinksFor(path)
+  .map((segs) => `<p>${segs.map((s) => (typeof s === 'string' ? esc(s) : `<a href="${esc(s.to)}">${esc(s.label)}</a>`)).join('')}</p>`)
+  .join('');
 
 // Populated by top-level await before the render loop runs.
 let seoMap = {};
@@ -403,6 +409,7 @@ routes.push(() => {
     <ul>${coreProducts.map(productLi).join('')}</ul>
     ${displayProducts.length ? `<h2>Banner stands &amp; backdrops</h2>
     <ul>${displayProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}. ${esc(p.tagline)}</li>`).join('')}</ul>` : ''}
+    ${contextLinksHtml('/')}
     <h2>Canopy tent size guides</h2>
     <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a> — ${esc(s.blurb)}</li>`).join('')}</ul>
     <h2>What people use them for</h2>
@@ -575,6 +582,7 @@ routes.push(() => {
     category.</p>
     <h2>Which range do you need?</h2>
     ${PRODUCTS_GUIDE.map(([h, t]) => `<h3>${esc(h)}</h3><p>${esc(t)}</p>`).join('')}
+    ${contextLinksHtml('/products')}
     <h2>Shop by category</h2>
     <ul>${CATEGORY_PAGES.map((cp) => `<li><a href="/${cp.slug}">${esc(cp.h1)}</a></li>`).join('')}</ul>
     ${section('Custom canopy tents', coreProducts)}
@@ -657,6 +665,7 @@ for (const cp of CATEGORY_PAGES) {
       <h1>${esc(cp.h1)}</h1>
       <p>${esc(cp.intro)}</p>
       ${answer}
+      ${contextLinksHtml(`/${cp.slug}`)}
       ${subTiles}
       <h2>${cp.hub ? 'Featured products' : cp.h1}</h2>
       ${catProducts.length
@@ -1027,6 +1036,7 @@ for (const lp of LANDING_PAGES) {
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/trade-show-displays">Trade Show Displays</a> / <span>${esc(lp.nav)}</span></nav>
       <h1>${esc(lp.h1)}</h1>
       <p>${esc(lp.intro)}</p>
+      ${contextLinksHtml(`/${lp.slug}`)}
       ${sections}
       ${productsHtml}
       <h2>Frequently asked questions</h2>${faqsHtml}

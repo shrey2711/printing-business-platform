@@ -7,6 +7,7 @@ import { brand } from '../config/brand';
 import { getCategoryPage, SUBCATEGORIES } from '../data/categoryPages';
 import { LANDING_PAGES } from '../data/landingPages';
 import { CITY_PRODUCT_PAGES } from '../data/cityProductPages';
+import ContextLinks from '../components/ContextLinks';
 
 const cardPreview = {
   'canopy-tent-10x10': { full: 3, half: 0 },
@@ -99,6 +100,7 @@ export default function CategoryPage({ slug }) {
       </section>
 
       {page.answer && <p className="answer-block">{page.answer}</p>}
+      <ContextLinks path={`/${page.slug}`} />
 
       {page.hub && (
         <section className="cat-cards-section">
