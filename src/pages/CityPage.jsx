@@ -3,16 +3,16 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { list as getProducts } from '../services/cms/productService';
 import { getCity, slugify } from '../data/states';
 import { removedRedirectFor } from '../data/removedLocations';
-import { PRIORITY_CITIES, cityContent } from '../data/cityContent';
+import { cityContent } from '../data/cityContent';
 import { SIZE_COMPARISON, STATE_FAQS } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { legacyCityRobots } from '../data/indexability';
 
 export default function CityPage() {
   const { stateSlug, citySlug } = useParams();
   const match = getCity(stateSlug, citySlug);
   const [products, setProducts] = useState([]);
-  const cityPriority = match && PRIORITY_CITIES.has(slugify(match.city));
   const cc = match && cityContent[slugify(match.city)];
 
   useDocumentMeta(
@@ -22,7 +22,8 @@ export default function CityPage() {
       : '',
     undefined,
     // Priority cities have unique content and are indexed; the rest stay noindex.
-    match && !cityPriority ? 'noindex, follow' : undefined
+    // Rule lives in src/data/indexability.js (shared with the sitemap).
+    match ? legacyCityRobots(slugify(match.city)) : undefined
   );
 
   useEffect(() => {

@@ -10,6 +10,7 @@ import { CITY_PRODUCT_PAGES } from '../data/cityProductPages';
 import { cityDetailFor } from '../data/cityDetail';
 import { cityPagePlan } from '../data/cityPagePlan';
 import { isCategoryCityLive } from '../data/removedLocations';
+import { isCityCategoryIndexable, NOINDEX_FOLLOW } from '../data/indexability';
 
 const sizeKey = (s) => s.replace('canopy-tent-', '');
 
@@ -39,7 +40,8 @@ export default function CityCategoryPage({ categoryKey }) {
 
   // Tier 1 + 2 are indexed (each carries unique local content); Tier 3 stays
   // noindex until it earns depth.
-  const indexed = city && city.tier <= 2 && plan && plan.indexable;
+  // Rule lives in src/data/indexability.js (shared with the sitemap).
+  const indexed = isCityCategoryIndexable(city, cat, plan);
   const metaDesc = (cat.slug === 'trade-show-displays' && detail?.metaDescription)
     ? detail.metaDescription
     : (detail?.categoryMeta?.[cat.slug] || cityCatDescription(cat.label, city));
@@ -88,7 +90,7 @@ export default function CityCategoryPage({ categoryKey }) {
         ]
       : undefined,
     // Only Tier 1 cities are indexed; the rest stay noindex until they earn content.
-    city && !indexed ? 'noindex, follow' : undefined
+    city && !indexed ? NOINDEX_FOLLOW : undefined
   );
 
   // A page that cannot reach the uniqueness bar is removed; mirror the edge 301.
