@@ -61,6 +61,7 @@
     "test:shipping-promo": "node scripts/test-shipping-promo.mjs",
     "check:css": "node scripts/check-css.mjs",
     "test:sitemap": "node scripts/test-sitemap-coverage.mjs",
+    "check:sitemap-noindex": "node scripts/check-sitemap-noindex.mjs",
     "test:seed": "node scripts/test-seed.mjs",
     "serve:dist": "node scripts/serve-dist.mjs"
   },
