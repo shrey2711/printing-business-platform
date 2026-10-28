@@ -10,6 +10,7 @@ import {
 } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { stateRobots } from '../data/indexability';
 
 export default function LocationPage() {
   const { stateSlug } = useParams();
@@ -28,7 +29,8 @@ export default function LocationPage() {
       : '',
     undefined,
     // Templated long-tail states are noindex until they earn unique content.
-    state && !INDEXED_STATES.has(state.slug) ? 'noindex, follow' : undefined
+    // Rule lives in src/data/indexability.js (shared with the sitemap).
+    state ? stateRobots(state.slug) : undefined
   );
 
   useEffect(() => {

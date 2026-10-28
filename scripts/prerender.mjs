@@ -34,6 +34,7 @@ import {
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../src/data/stateContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
+import { cityCategoryRobots, indexableLocationPaths, isStateIndexable } from '../src/data/indexability.js';
 import { RESOURCES_META, RESOURCE_CATEGORIES } from '../src/data/resources.js';
 import {
   TENT_RULES_PATH, TENT_RULES_META, TENT_RULES_FINDINGS, TENT_RULES_BANDS,
@@ -958,7 +959,8 @@ for (const lc of LOCAL_CATEGORIES) {
         description: catMetaDesc,
         image: items.map(productPhoto).find(Boolean) || productPhoto(coreProducts[0]),
         imageAlt: `${lc.label} shipped to ${city.city} — ${BRAND}`,
-        robots: (city.tier > 2 || !plan.indexable) ? 'noindex, follow' : undefined,
+        // Shared with the sitemap and CityCategoryPage (src/data/indexability.js).
+        robots: cityCategoryRobots(city, lc, plan),
         body,
         jsonLd: [
           {
@@ -1560,7 +1562,7 @@ const productLi = (p) => {
 for (const s of territories) {
   const areaWord = s.country === 'CA' ? 'province-wide' : 'statewide';
   const isPriority = PRIORITY_STATES.has(s.slug);   // full editorial body
-  const isIndexed = INDEXED_STATES.has(s.slug);     // competes in the index
+  const isIndexed = isStateIndexable(s.slug);       // competes in the index (src/data/indexability.js)
   const content = stateContent[s.slug];
   const local = LOCAL_FACTS[s.slug];
   // States without verified local facts are not written (301 to /locations).
@@ -1989,16 +1991,14 @@ const smBlog = [
 ];
 
 // Locations. Removed pages (src/data/removedLocations.js) are never listed.
+// Exactly the URLs src/data/indexability.js calls indexable, the same rules the
+// page templates use for robots, so a listed URL can never render noindex.
 const smLocations = [
   smUrl('/locations', '0.6', 'monthly', LMOD.city),
-  ...territories.filter((s) => INDEXED_STATES.has(s.slug)).map((s) => smUrl(`/locations/${s.slug}`, '0.5', undefined, LMOD.city))
+  ...indexableLocationPaths().map((l) => (l.kind === 'city-category'
+    ? smUrl(l.path, l.city.tier === 1 ? '0.6' : '0.5', 'weekly', LMOD.city)
+    : smUrl(l.path, '0.5', undefined, LMOD.city)))
 ];
-for (const lc of LOCAL_CATEGORIES) {
-  for (const city of SEO_CITIES) {
-    // Only pages that render indexable (cityPagePlan gates on uniqueness) are listed.
-    if (isCategoryCityLive(lc.slug, city.slug)) smLocations.push(smUrl(`/${lc.slug}/${city.slug}`, city.tier === 1 ? '0.6' : '0.5', 'weekly', LMOD.city));
-  }
-}
 
 const sitemapFiles = {
   'sitemap-pages.xml': smPages,
