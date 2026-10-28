@@ -62,6 +62,7 @@
     "check:css": "node scripts/check-css.mjs",
     "test:sitemap": "node scripts/test-sitemap-coverage.mjs",
     "check:sitemap-noindex": "node scripts/check-sitemap-noindex.mjs",
+    "sitemap:lastmod": "node scripts/update-sitemap-lastmod.mjs",
     "test:seed": "node scripts/test-seed.mjs",
     "serve:dist": "node scripts/serve-dist.mjs"
   },
