@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 
 import { listProducts, getProduct, startingPriceFor, priceDisplayFor } from '../backend/data/products.js';
 import { getProductFaqs } from '../backend/data/faqs.js';
+import { productComparison, joinNames } from '../backend/lib/productCompare.js';
 import { STATIC_ARTICLES } from '../backend/data/staticArticles.js';
 import { territories, slugify } from '../src/data/states.js';
 import { brand } from '../src/config/brand.js';
@@ -1285,6 +1286,23 @@ for (const summary of productList) {
       .map((s) => productList.find((x) => x.slug === s))
       .filter(Boolean);
     const faqs = getProductFaqs(product);
+    // Comparison group (product.compareWith): this product's own key specs first,
+    // then the rows it shares with its siblings. Same rows, regrouped.
+    const cmp = productComparison(product, getProduct);
+    const specRows = (rows) => rows.map(([k, v]) => `<p><strong>${esc(k)}:</strong> ${esc(v)}</p>`).join('');
+    const sibLinks = cmp ? joinNames(cmp.siblings.map((x) => `<a href="/products/${x.slug}">${esc(x.name)}</a>`)) : '';
+    const featuresHtml = cmp
+      ? `${cmp.distinctFeatures.length ? `<h2>Features</h2><ul>${cmp.distinctFeatures.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}${cmp.sharedFeatures.length ? `<h2>Features shared with ${sibLinks}</h2><ul>${cmp.sharedFeatures.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}`
+      : `<h2>Features</h2><ul>${product.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`;
+    // Optional product-specific editorial sections ({ h2, p }[]), for real,
+    // owner-supplied content that only this product has (see
+    // backend/lib/productCompare.js). Renders nothing until a product has them.
+    const ownSectionsHtml = (Array.isArray(product.productSections) ? product.productSections : [])
+      .filter((x) => x && x.h2 && x.p)
+      .map((x) => `<h2>${esc(x.h2)}</h2><p>${esc(x.p)}</p>`).join('');
+    const specsHtml = cmp
+      ? `<h2>${esc(product.name)} key specifications</h2>${specRows(cmp.distinctSpecs)}${cmp.sharedSpecs.length ? `<h2>Specifications shared with ${sibLinks}</h2>${specRows(cmp.sharedSpecs)}` : ''}`
+      : `<h2>Specifications</h2>${specRows(specs)}`;
     const productReviews = reviewsBySlug[product.slug] || [];
     const reviewSummary = ratingSummary(productReviews);
     const reviewsHtml = reviewSummary.count
@@ -1342,11 +1360,11 @@ for (const summary of productList) {
       <p>${startingPrice != null
         ? `<strong>Starting at $${startingPrice}${priceDisp.startingNote ? ` — ${esc(priceDisp.startingNote.toLowerCase())}` : ''}.</strong>${priceDisp.full ? ` ${esc(priceDisp.full.label)}: $${priceDisp.full.price}.` : ''}`
         : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}</p>
-      <h2>Features</h2><ul>${product.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+      ${ownSectionsHtml}
+      ${featuresHtml}
       ${Array.isArray(product.whatsIncluded) && product.whatsIncluded.length ? `<h2>What's in the box</h2><ul>${product.whatsIncluded.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>` : ''}
       ${Array.isArray(product.applications) && product.applications.length ? `<h2>Applications</h2><ul>${product.applications.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
-      <h2>Specifications</h2>
-      ${specs.map(([k, v]) => `<p><strong>${esc(k)}:</strong> ${esc(v)}</p>`).join('')}
+      ${specsHtml}
       <p><a href="/products/${product.slug}">${startingPrice != null ? `Configure your ${esc(product.name)} and get an instant price →` : `Configure your ${esc(product.name)} and request a quote →`}</a></p>
       <h2>Frequently asked questions</h2>
       ${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>${faqLinksHtml(f)}`).join('')}
@@ -1361,7 +1379,7 @@ for (const summary of productList) {
         })
         .join('')}</ul>`;
     return render({
-      seed: { kind: 'product', slug: product.slug, data: { ...product, faqs: getProductFaqs(product) } },
+      seed: { kind: 'product', slug: product.slug, data: { ...product, faqs: getProductFaqs(product), ...(cmp ? { comparison: cmp } : {}) } },
       path: `/products/${product.slug}`,
       title: `${seoTitle.title} | ${BRAND}`,
       description: seoTitle.description(startingPrice, product),

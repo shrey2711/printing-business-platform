@@ -1313,7 +1313,7 @@ const segMockupGroup = {
 const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, config, counter, weight, bag, seoTitle, seoDescription,
   apps = ['Trade shows and exhibitions', 'Conventions and conferences', 'Corporate events and product launches', 'Retail activations and branded environments'],
   related = ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'custom-canopies', 'standard-retractable-banner', 'hard-case-podium'],
-  shapeFaq = null }) => ({
+  shapeFaq = null, compareWith = [] }) => ({
   slug,
   active: true,
   name,
@@ -1352,6 +1352,9 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
   ],
   turnaround: 'Production and delivery timing are confirmed with your custom quote.',
   related,
+  // Comparison group (see backend/lib/productCompare.js): the product page
+  // splits its specs into rows specific to this kit and rows shared with these.
+  compareWith,
   seoTitle,
   seoDescription,
   whatsIncluded,
@@ -1381,6 +1384,7 @@ const segKit = ({ slug, name, letter, heights, gallery, whatsIncluded, intro, co
 const segKits = [
   segKit({
     slug: 'seg-modular-trade-show-kit-a', name: 'Trade Show SEG Modular Kit A', letter: 'A', heights: SEG_H3,
+    compareWith: ['seg-modular-trade-show-kit-b', 'seg-modular-trade-show-kit-c'],
     apps: ['Inline booths with one open side', 'First illuminated booth for a growing stand', 'Shows where the lightest kit wins', 'Roadshows repeating across several cities'],
     related: ['seg-modular-trade-show-kit-b', 'straight-tension-fabric-display', 'step-and-repeat-backdrop'],
     shapeFaq: { q: 'Which SEG kit is the simplest to travel with?', a: 'Kit A. It is the lightest of the three at 72-80 lb with graphics and packs into the smallest bag, roughly 43 by 14 by 8 inches, because its layout is a backdrop, one illuminated archway return and the counter. If the booth has one open side and the stand travels often, this is the configuration to start from.' },
@@ -1401,6 +1405,7 @@ const segKits = [
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-b', name: 'Trade Show SEG Modular Kit B', letter: 'B', heights: SEG_H3,
+    compareWith: ['seg-modular-trade-show-kit-a', 'seg-modular-trade-show-kit-c'],
     apps: ['Corner booths seen from two aisles', 'Stands that want an overhead branded band', 'Product launches needing a framed entrance', 'Halls where height carries further than width'],
     related: ['seg-modular-trade-show-kit-a', 'seg-modular-trade-show-kit-c', 'straight-tension-fabric-display'],
     shapeFaq: { q: 'What does the overhead arch on Kit B actually buy?', a: 'Sightlines above the crowd. Kit B is the only one of the three with an illuminated overhead arch section, so the brand reads over the heads of people standing in the aisle rather than only at eye level. It costs weight for that: 68-110 lb with graphics against Kit A at 72-80 lb.' },
@@ -1420,6 +1425,7 @@ const segKits = [
   }),
   segKit({
     slug: 'seg-modular-trade-show-kit-c', name: 'Trade Show SEG Modular Kit C', letter: 'C', heights: SEG_H2,
+    compareWith: ['seg-modular-trade-show-kit-a', 'seg-modular-trade-show-kit-b'],
     apps: ['Island and peninsula stands', 'Booths needing a room rather than a wall', 'Halls with a height restriction', 'Demonstrations that want enclosed sides'],
     related: ['seg-modular-trade-show-kit-b', 'seg-modular-trade-show-kit-a', 'stretch-table-covers'],
     shapeFaq: { q: 'Why does Kit C have no overhead arch?', a: 'Because it spends the structure on the sides instead. Kit C is a backdrop with left and right illuminated side panels, which encloses the stand into three walls rather than framing an entrance. It is also the only kit without the 6.6 ft height option, so check the hall rules before choosing it.' },
@@ -1919,6 +1925,8 @@ const products = [
   // (public/images/banners/).
   {
     slug: '13oz-vinyl-banner',
+    // Comparison group (backend/lib/productCompare.js).
+    compareWith: ['18oz-blockout-banner'],
   faqs: [
     { q: 'What size can I order?', a: "Any size to the inch, up to 10' x 145' single sided. A pole pocket is sewn from the same material and costs width, so with a pocket the maximum is 9.5' x 145'; double sided is also 9.5' x 145'. Larger than that is produced by welding panels together and is quoted on request. Pricing is by the square foot, so you are not limited to stock formats." },
     { q: 'How is the banner finished?', a: 'Standard hems, white double stitched thread and No. 2 Stimpson brass grommets are included at no charge, so it is ready to tie off out of the box. Pole pockets in 2", 3" and 4", windslits, velcro, webbing with D-rings, sewn-in rope and reinforced corner tabs are all available; the ones not shown in the configurator are quoted on request.' },
@@ -1990,6 +1998,8 @@ const products = [
   },
   {
     slug: '18oz-blockout-banner',
+    // Comparison group (backend/lib/productCompare.js).
+    compareWith: ['13oz-vinyl-banner'],
   faqs: [
     { q: 'What makes it suitable for double-sided printing?', a: 'The construction. It is a PVC face front and back with a blockout layer sandwiched between them, scrim reinforced. That middle layer stops light passing through the banner, so the image on one face cannot ghost into the other. A single-layer banner cannot do this, which is the whole reason to specify 18oz blockout.' },
     { q: 'What is included, and what is not?', a: 'Hemming is included on single sided banners only, along with No. 2 Stimpson brass grommets. A double sided banner is hemmed as a charged option rather than free. Pole pockets, windslits, webbing with D-rings, sewn-in rope and reinforced corner tabs are available; velcro is not offered on double sided.' },
