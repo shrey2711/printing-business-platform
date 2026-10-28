@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import AccessoriesSection from '../components/AccessoriesSection';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { PRODUCTS_GUIDE } from '../data/productsGuide';
+import ContextLinks from '../components/ContextLinks';
 
 // Vary the wall configuration per tent so cards don't look identical.
 const cardPreview = {
@@ -95,6 +96,7 @@ export default function ProductsPage() {
         <section className="section-block">
           <h2>Which range do you need?</h2>
           {PRODUCTS_GUIDE.map(([h, t]) => (<div key={h}><h3>{h}</h3><p>{t}</p></div>))}
+          <ContextLinks path="/products" />
         </section>
 
         <AccessoriesSection />

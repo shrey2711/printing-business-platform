@@ -9,6 +9,7 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useContentResolver, useListResolver } from '../context/ContentContext';
 import { brand } from '../config/brand';
 import { SHOWCASE } from '../data/showcase';
+import ContextLinks from '../components/ContextLinks';
 
 
 const solutions = [
@@ -464,6 +465,7 @@ export default function HomePage() {
         <div className="section-more">
           <Link className="btn btn-outline" to="/products?category=tents">All canopy sizes &amp; walls</Link>
         </div>
+        <ContextLinks path="/" />
       </section>
 
       {/* Use cases */}
