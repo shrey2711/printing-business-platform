@@ -6,9 +6,13 @@
 import { LOCAL_CATEGORIES } from '../../src/data/citySeo.js';
 import { CITY_DETAIL } from '../../src/data/cityDetail.js';
 import { cityPagePlan } from '../../src/data/cityPagePlan.js';
+import { isGonePath } from '../../src/data/goneLocations.js';
 
 const HUB = LOCAL_CATEGORIES.find((l) => l.slug === 'trade-show-displays');
-export const hubIndexable = (city) => cityPagePlan(city, HUB, CITY_DETAIL[city.slug]).indexable;
+// Hubs removed on 2026-10-28 (src/data/goneLocations.js) answer 410 and are
+// not built, so no city audit expects them.
+export const hubIndexable = (city) =>
+  cityPagePlan(city, HUB, CITY_DETAIL[city.slug]).indexable && !isGonePath(`/${HUB.slug}/${city.slug}`);
 
 // Category pages (/banner-stands/{city} …) that still exist after the removal
 // of pages that could not reach the uniqueness bar (src/data/removedLocations.js).

@@ -11,6 +11,7 @@
 import { redirects } from './src/generated/redirects.js';
 import { locationRedirects } from './src/generated/locationRedirects.js';
 import { KNOWN_ROUTES, STATIC_FILES } from './src/generated/routes.js';
+import { GONE_PATHS } from './src/data/goneLocations.js';
 
 // Skip the API and the three directories that hold real static files:
 // /assets (hashed build output), /images and /templates.
@@ -78,6 +79,13 @@ function notFoundHtml(origin) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>Page not found — Apex Trade Show</title><style>body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;color:#0b1f4d;display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center}.b{background:#fff;border:1px solid #e4e9f2;border-radius:14px;padding:44px 36px;max-width:460px;margin:16px}h1{font-size:56px;margin:0;color:#ED1C24}h2{font-size:22px;margin:6px 0 10px}p{color:#6b7480;line-height:1.6}a{display:inline-block;margin:6px;padding:11px 20px;border-radius:8px;text-decoration:none;font-weight:700}.r{background:#ED1C24;color:#fff}.o{border:1px solid #e4e9f2;color:#0b1f4d}</style></head><body><div class="b"><h1>404</h1><h2>Page not found</h2><p>That page doesn't exist or may have moved. Let's get you back on track.</p><a class="r" href="${origin}/">Home</a><a class="o" href="${origin}/products">Shop products</a></div></body></html>`;
 }
 
+// Minimal 410 body for location pages removed for good (src/data/goneLocations.js).
+// Deliberately plain: no robots meta and no x-robots-tag — the 410 status is
+// the whole message, and Google drops a 410 URL without needing a noindex.
+function goneHtml(origin) {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page removed — Apex Trade Show</title><style>body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;color:#0b1f4d;display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center}.b{background:#fff;border:1px solid #e4e9f2;border-radius:14px;padding:44px 36px;max-width:460px;margin:16px}h1{font-size:56px;margin:0;color:#ED1C24}h2{font-size:22px;margin:6px 0 10px}p{color:#6b7480;line-height:1.6}a{display:inline-block;margin:6px;padding:11px 20px;border-radius:8px;text-decoration:none;font-weight:700}.r{background:#ED1C24;color:#fff}.o{border:1px solid #e4e9f2;color:#0b1f4d}</style></head><body><div class="b"><h1>410</h1><h2>This page has been removed</h2><p>This page is no longer available.</p><a class="r" href="${origin}/">Home</a><a class="o" href="${origin}/products">Shop products</a></div></body></html>`;
+}
+
 export default function middleware(request) {
   const url = new URL(request.url);
 
@@ -91,7 +99,18 @@ export default function middleware(request) {
 
   const path = url.pathname.replace(/\/$/, '') || '/';
 
-  // 1) Redirects (301/308) win first.
+  // 0) Location pages removed for good answer 410 Gone — not a redirect, and
+  //    ahead of everything else so no rule can turn them back into a 301.
+  //    The prerenderer writes no HTML for them, and this runs before Vercel's
+  //    filesystem/rewrites for every path the matcher covers.
+  if (GONE_PATHS.has(path)) {
+    return new Response(goneHtml(url.origin), {
+      status: 410,
+      headers: { 'content-type': 'text/html; charset=utf-8' }
+    });
+  }
+
+  // 1) Redirects (301/308) win next.
   const rule = bySource.get(path);
   if (rule) {
     const destination = /^https?:\/\//i.test(rule.destination)
@@ -104,7 +123,7 @@ export default function middleware(request) {
   // if the lowercase route or a redirect exists, preserving link equity.
   if (/[A-Z]/.test(path)) {
     const lower = path.toLowerCase();
-    if (KNOWN_ROUTES.has(lower) || bySource.has(lower)) {
+    if (KNOWN_ROUTES.has(lower) || bySource.has(lower) || GONE_PATHS.has(lower)) {
       url.pathname = lower;
       return Response.redirect(url.toString(), 301);
     }

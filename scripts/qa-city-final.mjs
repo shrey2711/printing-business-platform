@@ -148,7 +148,10 @@ for (const city of SEO_CITIES) {
     'city-category pages': ['trade-show-canopies', 'banner-stands', 'trade-show-backdrops', 'table-covers'].filter((s) => catLive(s, city.slug)).every((s) => hrefs.includes(`/${s}/${city.slug}`)),
     'Learning Center': CITY_BOOTH_GUIDES.every((g) => hrefs.includes(`/blog/${g.slug}`)),
     'location hierarchy': hrefs.includes('/locations') && (!city.stateSlug || !INDEXED_STATES.has(city.stateSlug) || hrefs.includes(`/locations/${city.stateSlug}`)),
-    'other cities': hrefs.filter((h) => h.startsWith(`/${CAT}/`) && h !== path).length >= 8,
+    // Links to other city hubs: 8, or every other live hub when fewer remain
+    // (most hubs were removed on 2026-10-28 — src/data/goneLocations.js).
+    'other cities': hrefs.filter((h) => h.startsWith(`/${CAT}/`) && h !== path).length
+      >= Math.min(8, SEO_CITIES.filter((c) => c.slug !== city.slug && catLive(CAT, c.slug)).length),
     'no broken links': [...new Set(hrefs)].every(exists),
 
     'direct answers': /class="answer-block"/.test(html) && visibleFaqs.every(([, a]) => !/^(it depends|that depends|generally speaking)/i.test(a)),

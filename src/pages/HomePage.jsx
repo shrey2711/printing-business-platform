@@ -104,10 +104,9 @@ const eventTypes = [
 
 // Popular cities — links to the enriched local landing pages.
 const popularCities = [
-  ['Vancouver', 'vancouver'], ['Las Vegas', 'las-vegas'], ['Orlando', 'orlando'], ['Chicago', 'chicago'],
-  ['Atlanta', 'atlanta'], ['Dallas', 'dallas'], ['New York', 'new-york'],
-  ['Houston', 'houston'], ['Los Angeles', 'los-angeles'], ['Miami', 'miami'],
-  ['Phoenix', 'phoenix'], ['Washington, D.C.', 'washington-dc']
+  // The other ten city pages were removed on 2026-10-28 and answer 410
+  // (src/data/goneLocations.js); test:links fails on any link to one.
+  ['Chicago', 'chicago'], ['Los Angeles', 'los-angeles']
 ];
 // Every entry must be a live /trade-show-displays/{city} page (audit:seo fails
 // on links to removed location URLs — see src/data/removedLocations.js). Kept

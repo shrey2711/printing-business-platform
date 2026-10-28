@@ -38,7 +38,13 @@ const isOptional = (t) => OPTIONAL_H2.some((re) => re.test(t));
 const pilotCities = new Set(CITY_PRODUCT_PAGES.map((p) => p.citySlug));
 
 const DIST = 'dist';
-const MASTER = 'seattle';
+// The approved master was Seattle (/trade-show-displays/seattle). That hub was
+// removed on 2026-10-28 and answers 410 (src/data/goneLocations.js), so the
+// reference is now Los Angeles: indexed, rolled out to the same architecture,
+// and a pilot city like Chicago (its pilot section is stripped before the H2
+// comparison, exactly as on the compared page). The Seattle-term leak checks
+// below stay: Seattle copy still lives in CITY_DETAIL.
+const MASTER = 'los-angeles';
 const CAT = 'trade-show-displays';
 const fails = [];
 const notes = [];
@@ -118,7 +124,7 @@ const classify = (links, slug) => ({
   quote: links.filter((l) => l === '/quote').length
 });
 const MC = classify(M.links, MASTER);
-const MASTER_H2 = M.h2.filter((t) => !isOptional(t));
+const MASTER_H2 = M.h2.filter((t) => t !== PILOT_H2 && !isOptional(t));
 
 console.log(`Master: /${CAT}/${MASTER} — ${M.h2.length} H2s, ${M.faqVisible} FAQs, schema [${M.schema.join(', ')}]`);
 console.log(`Master link strategy: ${MC.categoryHubs.length} category hubs · ${MC.products.length} product pages · ${MC.learningCenter.length} Learning Center guides · ${MC.siblingCats.length} sibling category-city pages · ${MC.otherCities.length} city-to-city links\n`);
@@ -214,4 +220,4 @@ if (fails.length) {
   fails.forEach((f) => console.error(`  ✗ ${f}`));
   process.exit(1);
 }
-console.log(`\n✓ CITY PARITY OK — ${row.length} city pages match the Seattle master architecture (H1, H2 order, breadcrumb, schema, AEO answer + FAQ parity, link strategy, CTAs) with no Seattle local content reused.`);
+console.log(`\n✓ CITY PARITY OK — ${row.length} city pages match the ${nameOf(MASTER)} master architecture (H1, H2 order, breadcrumb, schema, AEO answer + FAQ parity, link strategy, CTAs) with no Seattle local content reused.`);

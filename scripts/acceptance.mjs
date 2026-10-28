@@ -354,7 +354,7 @@ try {
     // Each Lighthouse run takes about a minute, so two pages by default;
     // --lighthouse-full samples the wider set.
     const urls = process.argv.includes('--lighthouse-full')
-      ? ['/', '/products/canopy-tent-10x10', '/trade-show-displays/seattle', '/blog']
+      ? ['/', '/products/canopy-tent-10x10', '/trade-show-displays/chicago', '/blog']
       : ['/', '/products/canopy-tent-10x10'];
     let scored = null;
     let lhError = null;
@@ -390,7 +390,7 @@ try {
         : fail('Lighthouse SEO remains 95+', `${detail}; failures: ${scored.flatMap((s2) => s2.failing).join('; ')}`);
     } else {
       // No Chrome, or Lighthouse could not run: check what it checks, and say so.
-      const samples = ['', 'backdrops', 'products/canopy-tent-10x10', 'trade-show-displays/seattle', 'blog'];
+      const samples = ['', 'backdrops', 'products/canopy-tent-10x10', 'trade-show-displays/chicago', 'blog'];
       const problems = [];
       for (const sp of samples) {
         const file = join(ROOT, 'dist', sp, 'index.html');
