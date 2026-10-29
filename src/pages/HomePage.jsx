@@ -142,6 +142,22 @@ const cardPreview = {
   'canopy-tent-10x20': { full: 1, half: 0 }
 };
 
+// Link the first occurrence of `phrase` in editable (CMS) copy. Mirrors
+// linkFirstPhrase in scripts/prerender.mjs so the hydrated and prerendered
+// hero match; copy without the phrase renders as plain text.
+function linkFirstPhrase(text, phrase, to) {
+  const str = String(text || '');
+  const i = str.toLowerCase().indexOf(phrase.toLowerCase());
+  if (i === -1) return str;
+  return (
+    <>
+      {str.slice(0, i)}
+      <Link to={to}>{str.slice(i, i + phrase.length)}</Link>
+      {str.slice(i + phrase.length)}
+    </>
+  );
+}
+
 export default function HomePage() {
   useDocumentMeta('Custom Trade Show Displays & Booths', brand.description);
   const c = useContentResolver();
@@ -183,7 +199,7 @@ export default function HomePage() {
           <div className="hero-copy">
             <span className="hero-eyebrow">{c('home.hero.eyebrow')}</span>
             <h1>{c('home.hero.title')}</h1>
-            <p>{c('home.hero.subtitle')}</p>
+            <p>{linkFirstPhrase(c('home.hero.subtitle'), 'trade show displays', '/trade-show-displays')}</p>
             <div className="hero-actions">
               <Link className="btn btn-red" to={c('home.hero.cta.href') || '/products'}>
                 {c('home.hero.cta.label') || 'Shop Trade Show Displays'}

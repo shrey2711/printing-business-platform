@@ -15,7 +15,7 @@ export const CONTENT_FIELDS = [
     label: 'Home — hero subtitle',
     multiline: true,
     default:
-      'Design, print and order premium exhibition displays with instant online pricing, a free artwork ' +
+      'Design, print and order premium trade show displays with instant online pricing, a free artwork ' +
       'proof and fast nationwide shipping — professional trade show solutions for businesses across the United States.'
   },
   // Home size section

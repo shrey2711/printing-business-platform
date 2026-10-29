@@ -65,7 +65,7 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
           ? `${canopySize} Custom Canopy Tent With Logo`
           : `${product.name} — Custom Printing & Instant Pricing`
       : 'Product',
-    product?.seoDescription || product?.tagline
+    product?.seoDescription || product?.metaDescription || product?.tagline
   );
 
   // Related products (by slug) for the detail page. The same lookup is kept in
@@ -405,7 +405,7 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
                 already introduces it. Styling follows the element it replaces. */}
             {embedded
               ? <h3 className="config-title">{product.name}</h3>
-              : <h1>{product.name}</h1>}
+              : <h1>{product.h1 || product.name}</h1>}
             <p className="lead">{product.description}</p>
             <ul className="feature-list">
               {product.features.map((f) => (
