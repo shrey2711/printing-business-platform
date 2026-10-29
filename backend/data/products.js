@@ -571,7 +571,7 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['deluxe-retractable-banner', 'x-stand-banner'],
-    seoTitle: 'Retractable Banner Stand | Roll Up Banner',
+    seoTitle: 'Standard Retractable Banner Stand 33" & 47"',
     seoDescription:
       'Custom retractable banner stand (roll up banner), 33 or 47 in wide × 81 in tall. Compact aluminum base, tool-free setup and a replaceable printed graphic.',
     pricing: {
