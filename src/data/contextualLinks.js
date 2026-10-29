@@ -5,15 +5,9 @@
 // scripts/prerender.mjs, so the crawled HTML and the hydrated page match.
 //
 // Each paragraph is a list of segments: plain strings, or { to, label } links.
-// Only link to live, non-redirecting URLs that are in the sitemap.
+// Only link to live, non-redirecting URLs that are in the sitemap (never to a
+// 410 page in src/data/goneLocations.js; test:gone and audit:seo fail on one).
 export const CONTEXT_LINKS = {
-  '/': [
-    [
-      'Exhibiting outdoors in Texas? See ',
-      { to: '/trade-show-canopies/houston', label: 'trade show canopies in Houston, TX' },
-      ' for custom printed canopy tents for Houston events.'
-    ]
-  ],
   '/products': [
     [
       'Comparing two similar products? ',
@@ -31,9 +25,7 @@ export const CONTEXT_LINKS = {
       { to: '/blog/banner-materials-explained', label: 'Banner materials explained' },
       ' compares 13oz vinyl, 18oz blockout, perforated mesh and 9oz fabric. For a banner that is seen from both sides, the ',
       { to: '/products/18oz-blockout-banner', label: '18oz blockout banner' },
-      ' stops one side\u2019s image showing through the other. Ordering for an event in Georgia? See ',
-      { to: '/custom-banners-atlanta', label: 'custom banners in Atlanta' },
-      '.'
+      ' stops one side\u2019s image showing through the other.'
     ]
   ],
   '/banner-stands': [
@@ -49,9 +41,7 @@ export const CONTEXT_LINKS = {
       { to: '/products/seg-modular-trade-show-kit-a', label: 'SEG Modular Kit A' },
       ' is a backdrop with a single illuminated archway and a counter, and ',
       { to: '/products/seg-modular-trade-show-kit-b', label: 'SEG Modular Kit B' },
-      ' adds a side panel and an illuminated overhead arch. Exhibiting in Texas? See ',
-      { to: '/tension-fabric-display-dallas', label: 'tension fabric displays in Dallas' },
-      '.'
+      ' adds a side panel and an illuminated overhead arch.'
     ]
   ]
 };
