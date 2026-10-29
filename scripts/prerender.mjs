@@ -374,11 +374,21 @@ const HOME_FAQS = [
   { q: 'Can I order a whole booth from one place?', a: 'Yes. You can order every branded piece of your booth from Apex so it all matches — request a quote and we coordinate the set.' }
 ];
 
+// Wrap the first case-insensitive occurrence of `phrase` in an already-escaped
+// string with a link. The copy is editable in the CMS, so when an editor drops
+// the phrase the text renders unlinked rather than gaining an invented anchor.
+function linkFirstPhrase(escapedText, phrase, href) {
+  const i = escapedText.toLowerCase().indexOf(phrase.toLowerCase());
+  if (i === -1) return escapedText;
+  const hit = escapedText.slice(i, i + phrase.length);
+  return `${escapedText.slice(0, i)}<a href="${href}">${hit}</a>${escapedText.slice(i + phrase.length)}`;
+}
+
 // ---- Home ----
 routes.push(() => {
   const body = `
     <h1>${esc(cms('home.hero.title'))}</h1>
-    <p>${esc(cms('home.hero.subtitle'))}</p>
+    <p>${linkFirstPhrase(esc(cms('home.hero.subtitle')), 'trade show displays', '/trade-show-displays')}</p>
     ${cms('home.promo.message') ? `<p><strong>${esc(cms('home.promo.message'))}</strong>${
       cms('home.promo.href') && cms('home.promo.cta')
         ? ` <a href="${esc(cms('home.promo.href'))}">${esc(cms('home.promo.cta'))}</a>` : ''}</p>` : ''}
@@ -1183,7 +1193,7 @@ function productSeoTitle(product) {
   if (product.seoTitle) {
     return {
       title: product.seoTitle,
-      h1: product.name,
+      h1: product.h1 || product.name,
       description: () => product.seoDescription || product.tagline
     };
   }
@@ -1193,8 +1203,18 @@ function productSeoTitle(product) {
     return {
       title: `${size} Custom Canopy Tent With Logo`,
       h1: `${product.name} — Custom Printed With Your Logo`,
-      description: (price) =>
-        `Custom printed ${size} canopy tent with your logo — full-color dye sublimation, full or half walls, from $${price}. Free artwork proof, ships across the US & Canada.`
+      description: (price, prod) => {
+        const generic = `Custom printed ${size} canopy tent with your logo — full-color dye sublimation, full or half walls, from $${price}. Free artwork proof, ships across the US & Canada.`;
+        if (!prod.metaDescription) return generic;
+        // A per-size description quotes prices from the base rate card. A
+        // pricing override can move the live prices, so only use it while every
+        // dollar figure it quotes is one the page itself shows.
+        const shown = new Set([price, priceDisplayFor(prod.pricing).full?.price].filter((v) => v != null).map(String));
+        const quoted = [...prod.metaDescription.matchAll(/\$(\d[\d,]*)/g)].map((m) => m[1].replace(/,/g, ''));
+        if (quoted.every((q) => shown.has(q))) return prod.metaDescription;
+        console.warn(`[prerender] ${prod.slug}: metaDescription prices (${quoted.join(', ')}) do not match the page — using the generic description.`);
+        return generic;
+      }
     };
   }
   return {

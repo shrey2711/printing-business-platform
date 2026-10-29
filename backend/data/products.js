@@ -230,8 +230,14 @@ const designGroup = {
 // `applications` and one FAQ are written per size and passed in. No invented
 // specifications — the square footage and booth equivalence come from the
 // comparison table the category page already publishes.
-const canopyProduct = ({ slug, size, sqft, booth, blurb, apps, sizeFaq, related, full1, full3, canopy1, canopy3, wallPer }) => ({
+const canopyProduct = ({ slug, size, sqft, booth, blurb, apps, sizeFaq, related, full1, full3, canopy1, canopy3, wallPer, metaDescription }) => ({
   slug,
+  // Optional per-size page meta description, built from this size's own
+  // rate-card prices so the quoted figures cannot drift from the price matrix.
+  // The prerenderer re-checks them against the effective (override-aware)
+  // prices. Named metaDescription, not seoDescription, so the Merchant feed
+  // keeps using the long product description for canopies.
+  ...(metaDescription ? { metaDescription: metaDescription({ canopy1, full1 }) } : {}),
   active: true,
   name: `${size} Canopy Tent`,
   category: 'tents',
@@ -330,7 +336,9 @@ const canopyTents = [
          'two adjacent spaces.'
     },
     related: ['standard-retractable-banner', 'pleated-table-covers', 'teardrop-flag'],
-    full1: 835, full3: 799, canopy1: 510, canopy3: 485, wallPer: 275
+    full1: 835, full3: 799, canopy1: 510, canopy3: 485, wallPer: 275,
+    metaDescription: ({ canopy1, full1 }) =>
+      `Custom printed 10x10 canopy tent with your logo — full or half walls, from $${canopy1} (printed top) · complete set $${full1}. Free artwork proof, ships US & Canada.`
   }),
   canopyProduct({
     slug: 'canopy-tent-10x15',
@@ -801,9 +809,12 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
-    seoTitle: 'Step & Repeat Backdrop | Media Wall',
+    seoTitle: 'Step and Repeat Banner & Backdrop 10×8 ft',
+    // Visible page H1 at /products/{slug}. `name` stays the catalog name used
+    // in cards, breadcrumbs, cart lines and the Product schema.
+    h1: 'Step and Repeat Banner Backdrop (10×8 ft)',
     seoDescription:
-      'Apex 10×8 ft step and repeat backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
+      '10×8 ft step and repeat banner backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
     pricing: {
       model: 'configured',
       baseLabel: 'Step & repeat backdrop',

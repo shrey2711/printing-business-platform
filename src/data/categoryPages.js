@@ -70,7 +70,7 @@ export const CATEGORY_PAGES = [
     category: 'tents',
     nav: 'Custom Canopies',
     h1: 'Custom Canopy Tents & Pop Up Tents With Your Logo',
-    title: 'Custom Pop Up Canopy Tents With Logo',
+    title: 'Custom Canopy Tents With Logo, 10x10–10x20',
     description:
       'Custom canopy tents and pop up tents with your logo in 10x10, 10x15 and 10x20 — branded event tents with up to 3 printed walls. Instant pricing, free proof.',
     intro:
