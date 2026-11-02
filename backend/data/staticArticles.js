@@ -1443,6 +1443,334 @@ export const STATIC_ARTICLES = [
       { q: 'What prizes work best at a trade show?', a: 'Cheap, useful items for everyone, such as branded wristbands or lanyards, plus one prize relevant to your buyers. A relevant top prize attracts the people you actually want to talk to.' },
       { q: 'Are raffles allowed at trade shows?', a: 'It depends on the show and the location. Many shows have rules on raffles and games of chance, and some places regulate prize draws, so check the exhibitor manual and local requirements first.' }
     ]
+  },
+  {
+    slug: 'table-runner-size-guide',
+    faqs: [
+      { q: 'What size table runner do I need for a 6ft table?', a: 'A 72-inch (183 cm) runner sits flush on a 6ft table. For a 6 to 12 inch overhang at each end, use 84 to 96 inches (213 to 244 cm).' },
+      { q: 'How long should a table runner be for an 8ft table?', a: 'A 96-inch (244 cm) runner sits flush on an 8ft table. For overhang, use 108 to 120 inches (274 to 305 cm).' },
+      { q: 'What width table runner should I choose?', a: 'Pick the width by how much table you want branded and what will sit on it. Apex runners come in 14, 18, 24 and 30 inch widths, or a custom width.' },
+      { q: 'Should a table runner hang over the edge of the table?', a: 'At the ends, a 6 to 12 inch overhang looks deliberate. At trade shows, flush is common because nothing hangs into the aisle.' },
+      { q: 'What is the difference between a table runner and a tablecloth?', a: 'A runner is a strip along the top that leaves the edges visible. A tablecloth or table cover goes over the whole table and can close off the front and sides.' }
+    ],
+    title: 'Table Runner Size Guide: How to Choose the Right Length and Width',
+    excerpt:
+      'What size table runner fits a 6ft or 8ft table? Length, width, overhang and measuring, for trade show and event tables.',
+    tags: ['Buying Guide', 'Table Covers'],
+    seo: {
+      title: 'Table Runner Size Guide: Length and Width (6ft, 8ft)',
+      description:
+        'Table runner size guide for trade show tables: what length fits a 6ft or 8ft table, how wide to go, overhang, inches and cm, and how to measure.'
+    },
+    coverUrl: '/images/table-covers/custom-table-runner-trade-show.webp',
+    publishedAt: '2026-11-02T00:00:00.000Z',
+    updatedAt: '2026-11-02T00:00:00.000Z',
+    html: `
+<p><strong>Match the runner length to the table, or add 6 to 12 inches at each end if you want it to hang over. Then pick a width that leaves some table visible on both sides.</strong> On a standard 6ft table that means a 72-inch runner sitting flush, or 84 to 96 inches with overhang. On an 8ft table it means 96 inches flush, or 108 to 120 inches with overhang.</p>
+<h2>Table Runner Size Chart for Common Trade Show Tables</h2>
+<p>A table runner is a long, narrow strip laid along the top of a table. Unlike a <a href="/table-covers">table cover</a>, it leaves the edges and front of the table visible. These numbers are simple arithmetic: the table length, plus any overhang on both ends.</p>
+<table>
+<thead>
+<tr>
+<th>Table length</th>
+<th>Flush runner</th>
+<th>With 6 to 12 in overhang at each end</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 ft</td>
+<td>48 in (122 cm)</td>
+<td>60 to 72 in (152 to 183 cm)</td>
+</tr>
+<tr>
+<td>6 ft</td>
+<td>72 in (183 cm)</td>
+<td>84 to 96 in (213 to 244 cm)</td>
+</tr>
+<tr>
+<td>8 ft</td>
+<td>96 in (244 cm)</td>
+<td>108 to 120 in (274 to 305 cm)</td>
+</tr>
+</tbody>
+</table>
+<p>One inch is 2.54 cm, so you can convert any custom size yourself. Give your printer the final size in one unit and say which one.</p>
+<h2>What Size Table Runner for a 6ft Table?</h2>
+<p>A 6ft table is 72 inches (183 cm) long, so a 72-inch runner sits flush. For overhang, choose 84 to 96 inches (213 to 244 cm). Our <a href="/products/custom-table-runner">custom table runner</a> comes in a 72-inch length made for 6ft tables, or a custom length if you want overhang.</p>
+<h2>What Size Table Runner for an 8ft Table?</h2>
+<p>An 8ft table is 96 inches (244 cm) long, so a 96-inch runner sits flush. For overhang, use 108 to 120 inches (274 to 305 cm). The longer table gives a repeated logo more room, but it also shows an off-centre runner more clearly, so centre it before you set products out.</p>
+<h2>How Long Should a Table Runner Be?</h2>
+<p>There are two good answers, and they suit different jobs.</p>
+<ul>
+<li><strong>Flush, the same length as the table.</strong> Clean, and nothing hangs into the aisle where carts and bags can catch it. A practical default at trade shows.</li>
+<li><strong>Overhang of 6 to 12 inches at each end.</strong> The classic event look. It reads as deliberate and gives a logo room to sit on the end of the table.</li>
+</ul>
+<p>If you are unsure, go flush. A runner that stops at the table edge looks intentional; one that drags on the floor does not.</p>
+<h2>How Wide Should a Table Runner Be?</h2>
+<p>Length is set by the table; width is a design choice. Our runners come in 14, 18, 24 and 30 inch widths, or a custom width. How each one tends to work on a table:</p>
+<ul>
+<li><strong>14 in (36 cm):</strong> a slim accent, best when products cover most of the table.</li>
+<li><strong>18 in (46 cm):</strong> a balanced band with room for a brochure holder or a laptop beside it.</li>
+<li><strong>24 in (61 cm):</strong> a strong brand band that leaves a narrower strip of table on each side.</li>
+<li><strong>30 in (76 cm):</strong> close to the full depth of many folding tables. At this width, compare it with a full cover.</li>
+</ul>
+<p>Folding tables are usually around 30 inches deep, but depth varies by venue, so measure the one you will actually use.</p>
+<h2>How to Measure Your Table for a Table Runner</h2>
+<ol>
+<li>Measure the table top <strong>length</strong> and <strong>depth</strong>, not the legs and not the booth.</li>
+<li>Decide flush or overhang, and add the overhang to both ends of the length.</li>
+<li>Choose a width, keeping in mind what will sit on the table.</li>
+<li>Ask the show's exhibitor services which table you are getting. A rented table is not always the size on the listing.</li>
+<li>Send the final length and width, in one unit, with your artwork.</li>
+</ol>
+<h2>Table Runner vs. Table Cover: What's the Difference?</h2>
+<p>A runner is a strip along the top. A cover goes over the whole table and hangs down the sides. Choose a runner to add a branded accent and keep the table visible. Choose a cover to hide storage under the table and put your logo on the front. A tablecloth is a cover for sizing purposes: it is built to the table's length and drop.</p>
+<p>If you choose a cover, sizing is stricter. A <a href="/products/stretch-table-covers">stretch table cover</a> is fitted to a 6ft or 8ft table and will not fit another size, while a draped <a href="/products/pleated-table-covers">pleated table cover</a> is more forgiving. Our guides on <a href="/blog/6ft-vs-8ft-table-cover">6 ft vs 8 ft table covers</a> and <a href="/blog/pleated-vs-stretch-table-cover">pleated vs stretch table covers</a> go deeper.</p>
+<h2>Using a Runner and a Cover Together</h2>
+<p>The cover sets the base colour and the front-of-table logo; the runner adds a second band on top. Order both to the same table so the lengths line up, and keep the runner the same length as the cover top or shorter. If the cover already carries a big logo on the front, put the runner logo once at the aisle end, or repeat it small, so the two do not compete.</p>
+<h2>Before Your Artwork Prints</h2>
+<ul>
+<li><strong>Confirm the exact table.</strong> Get the length and depth from the venue or measure it.</li>
+<li><strong>Decide where the logo lands.</strong> You can print it once at the front, repeat it along the length, or run a full design edge to edge. The free proof shows where it will sit.</li>
+<li><strong>Plan for what goes on top.</strong> A laptop or brochure holder hides part of the band, so keep key artwork clear of where products will sit.</li>
+<li><strong>Send print-ready files.</strong> A vector file (AI, EPS or PDF) with fonts converted to outlines, or a high-resolution CMYK image for a photographic design. We check every file at no charge and send a proof before printing.</li>
+</ul>
+
+<h3>Frequently asked questions</h3>
+<p><strong>What size table runner do I need for a 6ft table?</strong> A 72-inch (183 cm) runner sits flush on a 6ft table. For a 6 to 12 inch overhang at each end, use 84 to 96 inches (213 to 244 cm).</p>
+<p><strong>How long should a table runner be for an 8ft table?</strong> A 96-inch (244 cm) runner sits flush on an 8ft table. For overhang, use 108 to 120 inches (274 to 305 cm).</p>
+<p><strong>What width table runner should I choose?</strong> Pick the width by how much table you want branded and what will sit on it. Apex runners come in 14, 18, 24 and 30 inch widths, or a custom width.</p>
+<p><strong>Should a table runner hang over the edge of the table?</strong> At the ends, a 6 to 12 inch overhang looks deliberate. At trade shows, flush is common because nothing hangs into the aisle.</p>
+<p><strong>What is the difference between a table runner and a tablecloth?</strong> A runner is a strip along the top that leaves the edges visible. A tablecloth or table cover goes over the whole table and can close off the front and sides.</p>
+
+<h2>Next step</h2>
+<p>Know your table size? See the <a href="/products/custom-table-runner">custom table runner</a> options, or compare full <a href="/table-covers">table covers</a>.</p>
+`
+  },
+  {
+    slug: 'business-card-size-guide',
+    faqs: [
+      { q: 'What is the standard size of a business card?', a: 'In the US and Canada, 3.5 x 2 inches (88.9 x 50.8 mm), used landscape or turned vertical.' },
+      { q: 'What size is a business card in pixels?', a: '1050 x 600 pixels at 300 dpi for the finished card, or about 1088 x 638 pixels including a 1/16" bleed.' },
+      { q: 'How much bleed should a business card have?', a: 'For our cards, 1/16" on all four sides, which makes the file 3.625 x 2.125 inches.' },
+      { q: 'What is the difference between 14pt and 16pt business cards?', a: '16pt is the thicker stock. It feels more substantial and holds its shape better in a pocket than 14pt.' },
+      { q: 'Should I choose a matte or glossy finish?', a: 'Matte avoids glare under booth lighting and can be written on. Our 16pt cards have a matte coating on both sides.' },
+      { q: 'What is the minimum order?', a: '100 cards, up to 25,000 in a single run. Cards are quoted, and the quote confirms production and delivery timing.' }
+    ],
+    title: 'Business Card Size Guide: Standard Dimensions, Bleed and Paper Options',
+    excerpt:
+      'The standard US and Canadian business card is 3.5 x 2 inches. Here is that size in cm and pixels, plus bleed, safe margins and paper thickness.',
+    tags: ['Buying Guide', 'Marketing Essentials'],
+    seo: {
+      title: 'Business Card Size Guide: Dimensions, Bleed and Paper',
+      description:
+        'Standard business card size is 3.5 x 2 inches. Dimensions in cm and pixels, how much bleed to add, safe margins, and 14pt vs 16pt paper explained.'
+    },
+    coverUrl: '/images/marketing/business-cards-16pt-matte-mockup.webp',
+    publishedAt: '2026-11-02T00:00:00.000Z',
+    updatedAt: '2026-11-02T00:00:00.000Z',
+    html: `
+<p><strong>The standard business card in the US and Canada is 3.5 x 2 inches (88.9 x 50.8 mm).</strong> Build your file a little larger than that, with bleed, keep text inside a safe margin, and choose a stock thick enough to survive a pocket. This guide covers each of those numbers.</p>
+<h2>What Is the Standard Business Card Size?</h2>
+<p>3.5 inches wide by 2 inches tall, landscape. A vertical card uses the same size turned on its side: 2 inches wide by 3.5 inches tall. Our <a href="/products/business-cards-16pt-matte">16pt matte business cards</a> are cut to this standard 3.5&quot; x 2&quot; size.</p>
+<h2>Business Card Dimensions in Inches, cm and Pixels</h2>
+<table>
+<thead>
+<tr>
+<th>Measurement</th>
+<th>Trim size (finished card)</th>
+<th>With 1/16&quot; bleed on all sides</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inches</td>
+<td>3.5 x 2 in</td>
+<td>3.625 x 2.125 in</td>
+</tr>
+<tr>
+<td>Millimetres</td>
+<td>88.9 x 50.8 mm</td>
+<td>92.1 x 54.0 mm</td>
+</tr>
+<tr>
+<td>Centimetres</td>
+<td>8.89 x 5.08 cm</td>
+<td>9.21 x 5.40 cm</td>
+</tr>
+<tr>
+<td>Pixels at 300 dpi</td>
+<td>1050 x 600 px</td>
+<td>about 1088 x 638 px</td>
+</tr>
+</tbody>
+</table>
+<p>The pixel figures are the inch figures multiplied by 300, because print files for cards are set up at 300 dpi. A design built at screen resolution (72 or 96 dpi) at these pixel sizes will print soft.</p>
+<h2>Business Card Bleed Size and Safe Margins</h2>
+<p><strong>Bleed</strong> is extra artwork that runs past the edge of the card. The cutter works to a small tolerance, so a background built exactly to 3.5&quot; x 2&quot; can leave a thin white edge on one side. For our cards, add a 1/16&quot; (about 1.6 mm) bleed on all four sides, which makes the file 3.625&quot; x 2.125&quot;.</p>
+<p><strong>Safe margin</strong> is the opposite: keep text and logos clear of the trim, inside the card, so nothing important is cut close. Anything that touches the edge should be background only.</p>
+<p>Card files are different from large format. Banners and displays on our <a href="/artwork-guidelines">artwork guidelines</a> are built with no bleed, but business cards need it. When you order cards, the card spec is the one to follow.</p>
+<h2>Business Card Size vs Credit Card Size</h2>
+<p>They look similar but are not the same. A standard business card is 3.5 x 2 inches; a standard bank card is 3.370 x 2.125 inches (85.60 x 53.98 mm), slightly narrower and slightly taller. Do not use a credit card as a template for your artwork.</p>
+<h2>Business Card Paper Options: 14pt vs 16pt</h2>
+<p>&quot;pt&quot; is the thickness (caliper) of the stock. 16pt is noticeably thicker than the 14pt most desk and office printers run. A thicker card holds its shape in a pocket or a wallet through several days of a show.</p>
+<p>Our cards are printed on <strong>95 bright, 16pt gloss C2S</strong> stock. C2S means coated on both sides.</p>
+<h2>Business Card Finish Options: Matte vs Gloss</h2>
+<p>The stock is gloss coated, and we apply a <strong>matte coating over both faces</strong>. The finished card reads matte: no shine under booth lighting, and a surface that takes a pen if someone wants to write a note on the back.</p>
+<h2>One Side or Both?</h2>
+<ul>
+<li><strong>4/0, front only:</strong> full colour on the front, back left plain. A clean surface to write on.</li>
+<li><strong>4/4, both sides:</strong> full colour on both faces, so the back can carry a QR code, your booth number or a second language.</li>
+</ul>
+<p>Both are printed in full colour CMYK.</p>
+<h2>Square or Rounded Corners</h2>
+<p>Square corners are standard. Rounded corners are cut from a template, so get the template before you design and keep anything important away from the corner radius.</p>
+<h2>How to Set Up Your Business Card File for Print</h2>
+<ol>
+<li>Set the document to 3.625&quot; x 2.125&quot; (trim plus 1/16&quot; bleed on each side), or 3.5&quot; x 2&quot; with the bleed added in your design software.</li>
+<li>Work in <strong>CMYK</strong> at <strong>300 dpi</strong>.</li>
+<li>Extend backgrounds and colour blocks to the bleed edge.</li>
+<li>Keep text and logos well inside the trim.</li>
+<li>If you print both sides, set up the back to the same size and orientation.</li>
+<li>Export a <strong>print-ready PDF</strong>.</li>
+</ol>
+<p>We check every file at no charge and send a free proof before printing.</p>
+<h2>Matching Cards to the Rest of Your Booth</h2>
+<p>Cards are the one piece of the booth that leaves with the visitor. Use the same logo file and brand colours as your <a href="/table-covers">table cover</a> and <a href="/products/standard-retractable-banner">retractable banner</a> so the card matches what people saw at your stand. For the rest of the small items to pack, see <a href="/marketing-essentials">marketing essentials</a> and the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a>.</p>
+<h2>Common Business Card Size Mistakes to Avoid</h2>
+<ul>
+<li>Building the file at exactly 3.5&quot; x 2&quot; with a background that runs to the edge and no bleed.</li>
+<li>Placing text right against the edge, where the trim can clip it.</li>
+<li>Designing in RGB at screen resolution.</li>
+<li>Using a credit card as the size reference.</li>
+<li>Designing a rounded-corner card without the corner template.</li>
+</ul>
+
+<h3>Frequently asked questions</h3>
+<p><strong>What is the standard size of a business card?</strong> In the US and Canada, 3.5 x 2 inches (88.9 x 50.8 mm), used landscape or turned vertical.</p>
+<p><strong>What size is a business card in pixels?</strong> 1050 x 600 pixels at 300 dpi for the finished card, or about 1088 x 638 pixels including a 1/16&quot; bleed.</p>
+<p><strong>How much bleed should a business card have?</strong> For our cards, 1/16&quot; on all four sides, which makes the file 3.625 x 2.125 inches.</p>
+<p><strong>What is the difference between 14pt and 16pt business cards?</strong> 16pt is the thicker stock. It feels more substantial and holds its shape better in a pocket than 14pt.</p>
+<p><strong>Should I choose a matte or glossy finish?</strong> Matte avoids glare under booth lighting and can be written on. Our 16pt cards have a matte coating on both sides.</p>
+<p><strong>What is the minimum order?</strong> 100 cards, up to 25,000 in a single run. Cards are quoted, and the quote confirms production and delivery timing.</p>
+
+<h2>Next step</h2>
+<p>Ready to print? Request a quote for <a href="/products/business-cards-16pt-matte">16pt matte business cards</a>, from 100 to 25,000 cards.</p>
+`
+  },
+  {
+    slug: 'yard-sign-size-guide',
+    faqs: [
+      { q: 'What is the most common size for a yard sign?', a: '18 x 24 inches (45.7 x 61 cm), used in portrait or landscape.' },
+      { q: 'What size yard sign can drivers read from the road?', a: 'Generally 24 x 36 inches or larger, with a short message and large, high-contrast letters.' },
+      { q: 'What size are real estate yard signs?', a: 'Usually 18 x 24 or 24 x 18 inches on a wire stake, with larger signs for corner lots.' },
+      { q: 'How do I convert yard sign dimensions from inches to centimetres?', a: 'Multiply by 2.54. An 18 x 24 inch sign is about 45.7 x 61 cm; a 24 x 36 inch sign is about 61 x 91.4 cm.' },
+      { q: 'Can you print a custom yard sign size?', a: 'Yes. Our coroplast signs are cut to the size you enter, from 6 x 6 inches up to 48 x 96 inches. Pricing is by quote.' }
+    ],
+    title: 'Yard Sign Size Guide: Common Dimensions and Where to Use Each Size',
+    excerpt:
+      'Which yard sign size should you order? Common dimensions in inches and cm, what reads from a passing car, and how to mount a coroplast sign.',
+    tags: ['Buying Guide', 'Rigid Signs'],
+    seo: {
+      title: 'Yard Sign Size Guide: Common Dimensions and Best Uses',
+      description:
+        'Yard sign size guide: common sizes like 18 x 24 and 24 x 36 inches, sizes in cm, what reads from the road, and how coroplast yard signs are mounted.'
+    },
+    coverUrl: '/images/signs/coroplast-signs-yard-sign-h-stake.webp',
+    publishedAt: '2026-11-02T00:00:00.000Z',
+    updatedAt: '2026-11-02T00:00:00.000Z',
+    html: `
+<p><strong>For most yard signs, 18 x 24 inches is the size people expect. Go up to 24 x 36 inches when the sign has to be read from a passing car or across a parking lot.</strong> Smaller signs suit walkways and directions; bigger signs suit roads. This guide covers the common sizes, how to pick one, and how a coroplast yard sign is made and mounted.</p>
+<h2>Common Yard Sign Sizes and Dimensions</h2>
+<p>These are the sizes you will see most often. They are general industry sizes, not limits: our <a href="/products/coroplast-signs">coroplast signs</a> are cut to whatever size you enter, from 6 x 6 inches up to 48 x 96 inches.</p>
+<table>
+<thead>
+<tr>
+<th>Size (inches)</th>
+<th>Size (cm)</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12 x 18 in</td>
+<td>30.5 x 45.7 cm</td>
+<td>Walkway, directional and small event signs</td>
+</tr>
+<tr>
+<td>18 x 24 in</td>
+<td>45.7 x 61 cm</td>
+<td>The everyday yard sign: real estate, political, business and event signs</td>
+</tr>
+<tr>
+<td>24 x 36 in</td>
+<td>61 x 91.4 cm</td>
+<td>Roadside signs that drivers need to read</td>
+</tr>
+<tr>
+<td>48 x 96 in</td>
+<td>122 x 244 cm</td>
+<td>Full-sheet signs for site entrances and large events</td>
+</tr>
+</tbody>
+</table>
+<p>The cm figures are the inches multiplied by 2.54. Either orientation works; 24 x 18 (landscape) suits a name and a phone number, while 18 x 24 (portrait) suits a logo above a short message.</p>
+<h2>How to Choose a Yard Sign Size</h2>
+<p>Ask three questions:</p>
+<ol>
+<li><strong>How far away is the reader?</strong> Someone on the sidewalk is a few feet away. A driver may only see the sign for a few seconds from across the road.</li>
+<li><strong>How much do you need to say?</strong> A name and an arrow fit on a small sign. A name, offer, phone number and website need more room, or fewer words.</li>
+<li><strong>Where will it stand?</strong> A lawn, a fence, a booth upright or a parking lot each limit what size is practical to carry and fix.</li>
+</ol>
+<p>If you are between two sizes and the sign faces a road, go bigger.</p>
+<h2>What Yard Sign Size Is Easiest to Read from the Road?</h2>
+<p>Size matters less than letter height and how much text there is. A commonly quoted rule of thumb in signage is about 1 inch of letter height for every 10 feet of reading distance. Treat it as a starting point, not a measurement: contrast, font and the number of words matter as much.</p>
+<p>For road-facing signs:</p>
+<ul>
+<li>Use 24 x 36 inches or larger.</li>
+<li>Keep it to one message and one contact method.</li>
+<li>Use dark text on a light background, or the reverse, with strong contrast.</li>
+<li>Leave space around the text rather than filling every inch.</li>
+</ul>
+<h2>Real Estate and Political Yard Sign Sizes</h2>
+<p>Real estate and political signs are usually 18 x 24 inches or 24 x 18 inches, mounted on a wire stake in a lawn. Some campaigns and agents step up to 24 x 36 inches for corner lots or busy roads. Check any local rules on sign size and placement before you order, because they vary by city and by property.</p>
+<h2>Are Coroplast Signs Suitable for Yard Signs?</h2>
+<p>Yes. Coroplast is the corrugated plastic most yard signs are made from. Ours is <strong>4mm corrugated plastic</strong>, printed direct with <strong>UV ink in a matte finish</strong>, so there is no laminated layer to lift at the edges.</p>
+<ul>
+<li><strong>Single or double sided.</strong> Single sided (4/0) prints one face. Double sided (4/4) prints both, so the sign reads from both directions along a street.</li>
+<li><strong>Flute direction.</strong> The flutes run vertically as standard, which is the direction that lets the sign sit on an H-stake. Signs wider than 48 inches run horizontal flutes instead, so keep a staked sign 48 inches wide or less.</li>
+<li><strong>Outdoors.</strong> It can be used outdoors. We do not publish a rated outdoor lifespan for this material, so treat it as event and short-run signage rather than permanent exterior signage.</li>
+</ul>
+<p>For a comparison with rigid PVC and aluminum, see <a href="/blog/coroplast-vs-pvc-vs-aluminum-signs">coroplast vs PVC vs aluminum signs</a>.</p>
+<h2>How to Mount a Yard Sign</h2>
+<p>Two optional finishing choices are available, and neither is included unless you add it:</p>
+<ul>
+<li><strong>10 x 30 inch steel H-stake.</strong> Pushes into the ground and holds the sign upright on a lawn or verge.</li>
+<li><strong>No. 2 brass grommets.</strong> For tying or hanging the sign on a fence, rail or booth frame.</li>
+</ul>
+<p>For softer, roll-up signage on fences and walls, a <a href="/banners">vinyl or fabric banner</a> can be a better fit, and <a href="/flags">feather flags</a> add height where a yard sign sits too low to be seen.</p>
+<h2>Preparing Yard Sign Artwork</h2>
+<p>Coroplast signs follow our large-format <a href="/artwork-guidelines">artwork guidelines</a>:</p>
+<ul>
+<li>One single-page JPEG or PDF per face, in CMYK, at 150 dpi or higher for raster artwork.</li>
+<li>Built to the ordered size, with no crop marks and no bleed.</li>
+<li>A double sided sign needs two separate files, one for each face.</li>
+<li>Maximum upload is 300MB.</li>
+</ul>
+<h2>Yard Signs at Trade Shows and Events</h2>
+<p>The same coroplast sign works inside the venue as well as outside: directional signs pointing to a demo station, aisle markers, sponsor boards, and parking or check-in signs on H-stakes. Add them to your <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> so they are printed with the rest of the booth.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>What is the most common size for a yard sign?</strong> 18 x 24 inches (45.7 x 61 cm), used in portrait or landscape.</p>
+<p><strong>What size yard sign can drivers read from the road?</strong> Generally 24 x 36 inches or larger, with a short message and large, high-contrast letters.</p>
+<p><strong>What size are real estate yard signs?</strong> Usually 18 x 24 or 24 x 18 inches on a wire stake, with larger signs for corner lots.</p>
+<p><strong>How do I convert yard sign dimensions from inches to centimetres?</strong> Multiply by 2.54. An 18 x 24 inch sign is about 45.7 x 61 cm; a 24 x 36 inch sign is about 61 x 91.4 cm.</p>
+<p><strong>Can you print a custom yard sign size?</strong> Yes. Our coroplast signs are cut to the size you enter, from 6 x 6 inches up to 48 x 96 inches. Pricing is by quote.</p>
+
+<h2>Next step</h2>
+<p>Know your size? Request a quote for <a href="/products/coroplast-signs">coroplast signs</a>, single or double sided, with an H-stake or grommets.</p>
+`
   }
 ];
 

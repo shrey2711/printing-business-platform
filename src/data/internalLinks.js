@@ -9,13 +9,14 @@ export const CATEGORY_GUIDES = {
   // All five canopy guides: the buying, artwork and print-coverage guides had no
   // product page linking to them, and Google had them clustered as duplicates.
   tents: ['10x10-vs-10x15-vs-10x20-custom-canopy-tents', 'custom-canopy-tent-buying-guide', 'custom-canopy-tent-wall-options-explained', 'how-to-prepare-artwork-for-a-custom-canopy-tent', 'print-coverage-explained'],
-  'table-covers': ['pleated-vs-stretch-table-cover', '6ft-vs-8ft-table-cover', 'trade-show-display-setup-and-care-guide'],
+  'table-covers': ['table-runner-size-guide', 'pleated-vs-stretch-table-cover', '6ft-vs-8ft-table-cover', 'trade-show-display-setup-and-care-guide'],
   'banner-stands': ['standard-vs-deluxe-retractable-banner', 'x-stand-vs-retractable-banner', 'what-size-retractable-banner'],
   backdrops: ['trade-show-backdrop-size-guide', 'step-and-repeat-vs-tension-fabric-backdrop', 'trade-show-booth-design-guide'],
   banners: ['banner-materials-explained', 'trade-show-display-setup-and-care-guide', 'trade-show-display-cost'],
   flags: ['feather-angled-vs-convex-vs-teardrop-flags', 'trade-show-booth-design-guide', 'trade-show-display-setup-and-care-guide'],
   'seg-kits': ['seg-modular-kit-a-vs-b-vs-c', 'trade-show-booth-design-guide', 'trade-show-display-cost'],
-  'rigid-signs': ['coroplast-vs-pvc-vs-aluminum-signs', 'print-coverage-explained', 'trade-show-booth-checklist']
+  'rigid-signs': ['yard-sign-size-guide', 'coroplast-vs-pvc-vs-aluminum-signs', 'print-coverage-explained', 'trade-show-booth-checklist'],
+  'marketing-essentials': ['business-card-size-guide', 'trade-show-booth-checklist', 'trade-show-booth-design-guide']
 };
 export const DEFAULT_GUIDES = ['trade-show-booth-checklist', 'trade-show-display-cost', 'trade-show-booth-design-guide'];
 
@@ -40,7 +41,10 @@ export const GUIDE_PRODUCTS = {
   'trade-show-booth-design-guide': ['step-and-repeat-backdrop', 'standard-retractable-banner', 'canopy-tent-10x10', 'pleated-table-covers'],
   'trade-show-display-setup-and-care-guide': ['canopy-tent-10x10', 'standard-retractable-banner', 'step-and-repeat-backdrop', 'pleated-table-covers'],
   'coroplast-vs-pvc-vs-aluminum-signs': ['coroplast-signs', 'pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
-  'step-and-repeat-vs-tension-fabric-backdrop': ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'standard-retractable-banner', 'pleated-table-covers']
+  'step-and-repeat-vs-tension-fabric-backdrop': ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'standard-retractable-banner', 'pleated-table-covers'],
+  'table-runner-size-guide': ['custom-table-runner', 'stretch-table-covers', 'pleated-table-covers', 'standard-retractable-banner'],
+  'business-card-size-guide': ['business-cards-16pt-matte', 'flyers-80lb-uncoated', 'custom-lanyards', 'pleated-table-covers'],
+  'yard-sign-size-guide': ['coroplast-signs', 'pvc-board-signs', 'acp-aluminum-signs', 'feather-angled-flag']
 };
 export const DEFAULT_PRODUCTS = ['canopy-tent-10x10', 'standard-retractable-banner', 'pleated-table-covers', 'step-and-repeat-backdrop'];
 
@@ -66,7 +70,10 @@ export const GUIDE_TITLES = {
   'feather-angled-vs-convex-vs-teardrop-flags': 'Feather Angled vs Convex vs Teardrop Flags',
   'seg-modular-kit-a-vs-b-vs-c': 'SEG Modular Kit A vs B vs C',
   'coroplast-vs-pvc-vs-aluminum-signs': 'Coroplast vs PVC vs Aluminum Signs: Which Rigid Sign Should You Choose?',
-  'trade-show-booth-checklist': 'The Complete Trade Show Booth Checklist'
+  'trade-show-booth-checklist': 'The Complete Trade Show Booth Checklist',
+  'table-runner-size-guide': 'Table Runner Size Guide: Length and Width (6ft, 8ft)',
+  'business-card-size-guide': 'Business Card Size Guide: Dimensions, Bleed and Paper',
+  'yard-sign-size-guide': 'Yard Sign Size Guide: Common Dimensions and Best Uses'
 };
 
 export const guidesForCategory = (cat) => (CATEGORY_GUIDES[cat] || DEFAULT_GUIDES).slice(0, 5);
