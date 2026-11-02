@@ -28,7 +28,10 @@ export const RESOURCE_CATEGORIES = [
       '6ft-vs-8ft-table-cover',
       'trade-show-backdrop-size-guide',
       'feather-angled-vs-convex-vs-teardrop-flags',
-      'seg-modular-kit-a-vs-b-vs-c'
+      'seg-modular-kit-a-vs-b-vs-c',
+      'table-runner-size-guide',
+      'business-card-size-guide',
+      'yard-sign-size-guide'
     ]
   },
   {

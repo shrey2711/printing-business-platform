@@ -372,7 +372,10 @@ const HOME_GUIDES = [
   { title: 'Feather angled vs convex vs teardrop flags', to: '/blog/feather-angled-vs-convex-vs-teardrop-flags' },
   { title: 'SEG modular kit A vs B vs C', to: '/blog/seg-modular-kit-a-vs-b-vs-c' },
   { title: 'Standard vs deluxe retractable banner', to: '/blog/standard-vs-deluxe-retractable-banner' },
-  { title: 'Pleated vs stretch table covers', to: '/blog/pleated-vs-stretch-table-cover' }
+  { title: 'Pleated vs stretch table covers', to: '/blog/pleated-vs-stretch-table-cover' },
+  { title: 'Table runner size guide (6ft and 8ft)', to: '/blog/table-runner-size-guide' },
+  { title: 'Business card size, bleed and paper', to: '/blog/business-card-size-guide' },
+  { title: 'Yard sign size guide', to: '/blog/yard-sign-size-guide' }
 ];
 const HOME_CITIES = [
   // The other ten city pages were removed on 2026-10-28 and answer 410
