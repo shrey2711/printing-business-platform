@@ -1458,7 +1458,7 @@ export const STATIC_ARTICLES = [
       'What size table runner fits a 6ft or 8ft table? Length, width, overhang and measuring, for trade show and event tables.',
     tags: ['Buying Guide', 'Table Covers'],
     seo: {
-      title: 'Table Runner Size Guide: Length and Width (6ft, 8ft)',
+      title: 'Table Runner Size Guide: Length & Width',
       description:
         'Table runner size guide for trade show tables: what length fits a 6ft or 8ft table, how wide to go, overhang, inches and cm, and how to measure.'
     },
@@ -1563,7 +1563,7 @@ export const STATIC_ARTICLES = [
       'The standard US and Canadian business card is 3.5 x 2 inches. Here is that size in cm and pixels, plus bleed, safe margins and paper thickness.',
     tags: ['Buying Guide', 'Marketing Essentials'],
     seo: {
-      title: 'Business Card Size Guide: Dimensions, Bleed and Paper',
+      title: 'Business Card Size Guide: Bleed & Paper',
       description:
         'Standard business card size is 3.5 x 2 inches. Dimensions in cm and pixels, how much bleed to add, safe margins, and 14pt vs 16pt paper explained.'
     },
@@ -1673,7 +1673,7 @@ export const STATIC_ARTICLES = [
       'Which yard sign size should you order? Common dimensions in inches and cm, what reads from a passing car, and how to mount a coroplast sign.',
     tags: ['Buying Guide', 'Rigid Signs'],
     seo: {
-      title: 'Yard Sign Size Guide: Common Dimensions and Best Uses',
+      title: 'Yard Sign Size Guide: Common Dimensions',
       description:
         'Yard sign size guide: common sizes like 18 x 24 and 24 x 36 inches, sizes in cm, what reads from the road, and how coroplast yard signs are mounted.'
     },
