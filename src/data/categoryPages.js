@@ -243,7 +243,7 @@ export const CATEGORY_PAGES = [
     category: 'backdrops',
     nav: 'Backdrops',
     h1: 'Trade Show Backdrops & Step and Repeat Banners',
-    title: 'Step & Repeat & Trade Show Backdrops',
+    title: 'Trade Show Backdrops & Step and Repeat',
     description:
       'Custom trade show backdrops and step and repeat banners — media wall backdrops with repeating logos on a portable adjustable frame. Instant pricing, free proof.',
     intro:
