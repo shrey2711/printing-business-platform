@@ -44,6 +44,8 @@ import {
 } from '../src/data/tentRules.js';
 import { guidesForCategory, productsForGuide, CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
 import { contextLinksFor } from '../src/data/contextualLinks.js';
+import { productPolicyNote } from '../src/data/warranty.js';
+import { offerMerchantPolicy } from './lib/offerPolicy.mjs';
 import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides, loadApprovedReviews, cmsLoad } from './buildData.mjs';
 import {
   postsForBlogIndex,
@@ -1391,6 +1393,7 @@ for (const summary of productList) {
       <p>${startingPrice != null
         ? `<strong>Starting at $${startingPrice}${priceDisp.startingNote ? ` — ${esc(priceDisp.startingNote.toLowerCase())}` : ''}.</strong>${priceDisp.full ? ` ${esc(priceDisp.full.label)}: $${priceDisp.full.price}.` : ''}`
         : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}</p>
+      <p>${esc(productPolicyNote(product))} <a href="/returns">Returns</a> · <a href="/warranty">Warranty details</a></p>
       ${ownSectionsHtml}
       ${featuresHtml}
       ${Array.isArray(product.whatsIncluded) && product.whatsIncluded.length ? `<h2>What's in the box</h2><ul>${product.whatsIncluded.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>` : ''}
@@ -1454,33 +1457,13 @@ for (const summary of productList) {
             ? {
                 offers: (() => {
                   const priceValidUntil = new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10);
+                  // priceValidUntil is how long the stated price holds. It is not a
+                  // return window. Shipping and returns come from offerPolicy.mjs:
+                  // no flat rate (a $0 rate would mean free shipping) and no
+                  // return window (published policy is remedy-only, no refunds).
                   const merchantProps = {
                     priceValidUntil,
-                    shippingDetails: {
-                      '@type': 'OfferShippingDetails',
-                      shippingRate: {
-                        '@type': 'MonetaryAmount',
-                        value: '0',
-                        currency: 'USD'
-                      },
-                      shippingDestination: [
-                        { '@type': 'DefinedRegion', addressCountry: 'US' },
-                        { '@type': 'DefinedRegion', addressCountry: 'CA' }
-                      ],
-                      deliveryTime: {
-                        '@type': 'ShippingDeliveryTime',
-                        handlingTime: { '@type': 'QuantitativeValue', minValue: 2, maxValue: 4, unitCode: 'DAY' },
-                        transitTime: { '@type': 'QuantitativeValue', minValue: 2, maxValue: 5, unitCode: 'DAY' }
-                      }
-                    },
-                    hasMerchantReturnPolicy: {
-                      '@type': 'MerchantReturnPolicy',
-                      applicableCountry: ['US', 'CA'],
-                      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-                      merchantReturnDays: 30,
-                      returnMethod: 'https://schema.org/ReturnByMail',
-                      returnFees: 'https://schema.org/FreeReturn'
-                    }
+                    ...offerMerchantPolicy()
                   };
                   return priceDisp.full
                     ? {

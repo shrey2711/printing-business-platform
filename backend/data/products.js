@@ -2181,7 +2181,7 @@ const products = [
       'Edge finishing as configured — sewn hem edges included; a sewn Velcro edge or pole pocket where you select it.',
       'No pole, stand or hardware — the banner ships ready to hang, Velcro to a frame, or slide onto a pole per your finishing choice.'
     ],
-    turnaround: 'Ships in 3–5 business days',
+    turnaround: 'Production: 6-8 business days standard, 2-3 day rush (production time, not delivery). Shipping is calculated separately at checkout.',
     seoTitle: '9oz Wrinkle-Free Fabric Banner',
     seoDescription:
       'Custom 9oz wrinkle-free fabric banners, dye-sublimated for a no-glare matte finish — packs without creasing, sewn hem. From $45, US & Canada.',

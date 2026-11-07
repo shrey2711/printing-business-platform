@@ -20,7 +20,7 @@ import { useCart } from '../context/CartContext';
 import { trackViewItem } from '../lib/analytics';
 import { brand } from '../config/brand';
 import '../styles/configurator.css';
-import { warrantyHeadline, WARRANTY } from '../data/warranty';
+import { productPolicyNote } from '../data/warranty';
 import { readSeed } from '../lib/seed';
 
 // `slug` and `embedded` let the product + city pages mount this exact
@@ -780,7 +780,9 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
           </>
           )}
           <p className="panel-foot warranty-note">
-            {warrantyHeadline(product)} Damaged in transit? Tell us within {WARRANTY.transitDamageDays} days for a reship.{' '}
+            {productPolicyNote(product)}{' '}
+            <Link to="/returns">Returns</Link>
+            {' · '}
             <Link to="/warranty">Warranty details</Link>
           </p>
         </aside>
