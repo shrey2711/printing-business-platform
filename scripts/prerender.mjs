@@ -44,7 +44,19 @@ import {
 } from '../src/data/tentRules.js';
 import { guidesForCategory, productsForGuide, CITY_BOOTH_GUIDES } from '../src/data/internalLinks.js';
 import { contextLinksFor } from '../src/data/contextualLinks.js';
-import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides, loadApprovedReviews } from './buildData.mjs';
+import { loadPublishedPosts, loadContentMap, loadSeoMap, loadRedirects, loadPricingOverrides, loadApprovedReviews, cmsLoad } from './buildData.mjs';
+import {
+  postsForBlogIndex,
+  blogPageCount,
+  sliceBlogPage,
+  blogCanonicalPath,
+  blogListingTitle,
+  blogListingDescription,
+  blogListingLead,
+  paginationLinks,
+  blogRelLinks,
+  blogListingJsonLd
+} from '../src/lib/blogPagination.js';
 import { ratingSummary } from '../backend/lib/reviews.js';
 import { resolveContent, resolveList } from '../src/data/content.js';
 
@@ -150,8 +162,10 @@ function jsonLdSafe(obj) {
     .replace(/\u2029/g, '\\u2029');
 }
 
-function render({ path, title, description, body, jsonLd, robots, canonical: canonicalArg, image, imageAlt, preloadImage, seed }) {
+function render({ path, publicPath, title, description, body, jsonLd, jsonLdId, robots, canonical: canonicalArg, image, imageAlt, preloadImage, seed, extraHead }) {
   // Per-route SEO overrides from the dashboard win over the page's own values.
+  // Lookup is the write path, not publicPath, so a /blog override cannot leak
+  // onto /blog?page=2 (whose file is written at /blog/page/2).
   const o = seoMap[path];
   if (o) {
     if (o.title) title = o.title;
@@ -203,8 +217,12 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
   }
   // Priority: dashboard override > per-route canonicalArg (e.g. a blog post that
   // canonicalises to another article) > the page itself.
-  const canonical = o?.canonical || canonicalArg || ORIGIN + path;
-  const url = ORIGIN + path;
+  // publicPath is the URL visitors and crawlers see when it differs from the
+  // file path (blog listing page 2+ is written under /blog/page/N and served
+  // at /blog?page=N). og:url follows that public URL.
+  const locPath = publicPath || path;
+  const url = ORIGIN + locPath;
+  const canonical = o?.canonical || canonicalArg || url;
   // Function-replacer based tag rewriting (see scripts/lib/seo-meta.mjs) — never
   // `$1…$2` strings, so a "$140" in a value can't be read as a capture-group ref.
   let html = applyMeta(template, {
@@ -273,8 +291,12 @@ function render({ path, title, description, body, jsonLd, robots, canonical: can
     html = html.replace('</head>', `<meta name="robots" content="${robots}">\n</head>`);
   }
   if (jsonLd) {
-    const script = `<script type="application/ld+json">${jsonLdSafe(jsonLd)}</script>`;
+    const idAttr = jsonLdId ? ` id="${esc(jsonLdId)}"` : '';
+    const script = `<script type="application/ld+json"${idAttr}>${jsonLdSafe(jsonLd)}</script>`;
     html = html.replace('</head>', `${script}\n</head>`);
+  }
+  if (extraHead) {
+    html = html.replace('</head>', `${extraHead}\n</head>`);
   }
   // Editor-authored FAQ entries become FAQPage schema. Added as its own block
   // rather than merged, so it cannot damage the structured data a route built,
@@ -1835,10 +1857,32 @@ for (const p of productList) {
   if (pricingOverrides[p.slug]) p.startingPrice = startingPriceFor(pricingOverrides[p.slug]);
 }
 
-// Blog index
-routes.push(() => {
-  const items = posts
-    .filter((p) => !p.canonical) // don't link to canonicalised-away (301'd) posts
+// Blog index. One self-canonical URL per slice. Page 1 is /blog (written with
+// the other routes, so it stays a known route). Page 2+ is written afterwards
+// to /blog/page/N and is intentionally NOT a known route — the edge rewrite
+// serves that file for /blog?page=N. Canonicalised-away posts are omitted so
+// the index does not link at a 301.
+const listingPosts = postsForBlogIndex(posts);
+const blogListingPageCount = blogPageCount(listingPosts.length);
+
+function blogPaginationNav(page) {
+  if (blogListingPageCount < 2) return '';
+  const { prev, next, pages } = paginationLinks(page, blogListingPageCount);
+  const parts = [];
+  if (prev) parts.push(`<a href="${esc(prev.href)}">Previous</a>`);
+  for (const item of pages) {
+    parts.push(`<a href="${esc(item.href)}"${item.current ? ' aria-current="page"' : ''}>${item.n}</a>`);
+  }
+  if (next) parts.push(`<a href="${esc(next.href)}">Next</a>`);
+  return `<nav class="blog-pagination" aria-label="Blog pages">${parts.join('')}</nav>`;
+}
+
+function blogListingDocument(page) {
+  const slice = sliceBlogPage(listingPosts, page);
+  const lead = blogListingLead(page, blogListingPageCount);
+  const title = blogListingTitle(page, BRAND);
+  const description = blogListingDescription(page);
+  const items = slice
     .map(
       (p) =>
         // Title and date only: the descriptions live on the Learning Center
@@ -1846,19 +1890,52 @@ routes.push(() => {
         `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.publishedAt ? ` — ${esc(p.publishedAt.slice(0, 10))}` : ''}</li>`
     )
     .join('');
+  const nav = blogPaginationNav(page);
+  const rels = blogRelLinks(ORIGIN, page, blogListingPageCount)
+    .map((l) => `<link rel="${l.rel}" href="${esc(l.href)}">`)
+    .join('\n');
   return render({
-    path: '/blog',
-    title: `Blog: Latest Articles | ${BRAND}`,
-    description:
-      'The Apex Trade Show blog, newest first: new articles on trade show displays, canopy tents, banner stands and booth planning. Topic guides: Learning Center.',
-    body: `<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>
+    seed: {
+      kind: 'blog-index',
+      page,
+      data: {
+        page,
+        pageCount: blogListingPageCount,
+        posts: slice.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          coverUrl: p.coverUrl || null,
+          tags: p.tags || [],
+          publishedAt: p.publishedAt || null
+        }))
+      }
+    },
+    path: page === 1 ? '/blog' : `/blog/page/${page}`,
+    publicPath: blogCanonicalPath(page),
+    title,
+    description,
+    extraHead: rels,
+    jsonLdId: 'blog-listing-jsonld',
+    jsonLd: blogListingJsonLd({
+      origin: ORIGIN,
+      brandName: BRAND,
+      page,
+      pageCount: blogListingPageCount,
+      posts: slice,
+      title,
+      description
+    }),
+    body: `<div data-blog-page="${page}"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>
       <h1>Apex Trade Show Blog</h1>
-      <p>Every article we publish, newest first. Looking for a guide by topic? Use the
-      <a href="/resources">Learning Center</a>.</p>
-      <h2>Latest articles</h2>
-      <ul>${items || '<li>Articles coming soon.</li>'}</ul>`
+      <p>${esc(lead.before)}<a href="/resources">${esc(lead.link)}</a>${esc(lead.after)}</p>
+      <h2>${page === 1 ? 'Latest articles' : `Articles, page ${page}`}</h2>
+      ${nav}
+      <ul class="blog-index-list">${items || '<li>Articles coming soon.</li>'}</ul>
+      ${nav}</div>`
   });
-});
+}
+
+routes.push(() => blogListingDocument(1));
 
 // Each published post — full rendered HTML + BlogPosting JSON-LD.
 for (const p of posts) {
@@ -1952,7 +2029,15 @@ for (const build of routes) {
   }
 }
 
-console.log(`Prerendered ${count} pages (${posts.length} blog posts).`);
+// Page 2+ files. Not added to knownRoutes: requesting /blog/page/N directly
+// must 404 so the only indexable URL for that slice is /blog?page=N.
+for (let page = 2; page <= blogListingPageCount; page++) {
+  const raw = blogListingDocument(page);
+  const html = raw.replace(/^<!--PP:[^>]*-->/, '');
+  write(`/blog/page/${page}`, html);
+  count++;
+}
+console.log(`Prerendered ${count} pages (${posts.length} blog posts, ${blogListingPageCount} blog listing page(s)).`);
 
 
 // ---- Sitemap: INDEXABLE pages only (city pages are noindex, so excluded) ----
@@ -2008,6 +2093,13 @@ const postLmod = (p) => (p.updatedAt || p.publishedAt || '').slice(0, 10) || nul
 const newestPost = posts.map(postLmod).filter(Boolean).sort().pop() || null;
 const smBlog = [
   smUrl('/blog', '0.6', 'weekly', newestPost),
+  // Each later slice is its own indexable URL. /blog?page=1 is not listed;
+  // it 301s to /blog so the two cannot be canonicalised against each other.
+  ...Array.from({ length: Math.max(0, blogListingPageCount - 1) }, (_, i) => {
+    const page = i + 2;
+    const last = sliceBlogPage(listingPosts, page).map(postLmod).filter(Boolean).sort().pop() || null;
+    return smUrl(`/blog?page=${page}`, '0.5', 'weekly', last);
+  }),
   ...posts.filter((p) => !p.canonical).map((p) => smUrl(`/blog/${p.slug}`, '0.6', undefined, postLmod(p)))
 ];
 
@@ -2138,6 +2230,30 @@ console.log(`Sitemap: ${smTotal} indexable URLs across ${Object.keys(sitemapFile
   console.log(`Merchant feed: ${feedItems.length} products in /feed.xml (${feedSkipped} quote-only/no-image excluded).`);
 }
 
+// A no-CMS (or failed) build must not drop redirects the last CMS build wrote.
+function readGeneratedJson(file, re) {
+  try {
+    const src = readFileSync(file, 'utf8');
+    const m = src.match(re);
+    return m ? JSON.parse(m[1]) : null;
+  } catch {
+    return null;
+  }
+}
+if (cmsLoad.redirects !== 'ok') {
+  const prev = readGeneratedJson(
+    join(__dirname, '..', 'src', 'generated', 'redirects.js'),
+    /export const redirects = (\[[\s\S]*\]);/
+  ) || [];
+  // Keep the previously generated order. This run only knows the static
+  // canonical-article redirects, so replacing the list would reshuffle it.
+  const known = new Set(prev.map((r) => r && r.source));
+  const extras = redirectRules.filter((r) => r && !known.has(r.source));
+  redirectRules.length = 0;
+  redirectRules.push(...prev.filter((r) => r && typeof r.source === 'string'), ...extras);
+  if (prev.length) console.warn(`Preserved ${prev.length} previously generated redirect(s); CMS redirects were not loaded (${cmsLoad.redirects}).`);
+}
+
 // ---- Redirects: bake into a module the edge middleware imports ----
 const redirectsModule =
   `// AUTO-GENERATED by scripts/prerender.mjs from the redirects table. Do not edit.\n` +
@@ -2165,6 +2281,31 @@ const rootFiles = readdirSync(DIST, { withFileTypes: true })
   .filter((d) => d.isFile() && d.name !== 'index.html' && /\.[A-Za-z0-9]+$/.test(d.name))
   .map((d) => `/${d.name}`)
   .sort();
+
+// Same guard for blog post URLs. Only /blog/* is preserved — code-generated
+// routes are rebuilt above, and resurrecting a removed city page would be wrong.
+if (cmsLoad.posts !== 'ok') {
+  const prev = readGeneratedJson(
+    join(__dirname, '..', 'src', 'generated', 'routes.js'),
+    /export const KNOWN_ROUTES = new Set\((\[[\s\S]*?\])\);/
+  ) || [];
+  let kept = 0;
+  for (const route of prev) {
+    if (typeof route === 'string' && route.startsWith('/blog/') && !knownRoutes.has(route)) {
+      knownRoutes.add(route);
+      kept++;
+    }
+  }
+  if (kept) console.warn(`Preserved ${kept} previously generated /blog/ route(s); CMS posts were not loaded (${cmsLoad.posts}).`);
+}
+
+writeFileSync(join(__dirname, '..', 'src', 'generated', 'blogListing.js'),
+  `// AUTO-GENERATED by scripts/prerender.mjs — blog listing pages that were\n` +
+  `// actually prerendered. Do not edit.\n` +
+  `// Page 1 is /blog. Pages 2..N are served for /blog?page=N via an edge rewrite\n` +
+  `// to /blog/page/N (that path is not a public route). A no-CMS build only counts\n` +
+  `// in-repo articles; a production build with the CMS rewrites this number.\n` +
+  `export const BLOG_LISTING_PAGE_COUNT = ${blogListingPageCount};\n`);
 
 // Write the known-routes manifest the edge middleware imports for real 404s.
 const routesModule =

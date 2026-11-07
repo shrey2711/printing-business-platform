@@ -10,6 +10,7 @@
 
 import { readFileSync, existsSync } from 'fs';
 import { brand } from '../src/config/brand.js';
+import { blogListingDistPath } from '../src/lib/blogPagination.js';
 
 const DIST = 'dist';
 const ORIGIN = 'https://www.apextradeshow.com';
@@ -42,7 +43,10 @@ const descs = new Map();
 
 for (const loc of urls) {
   const path = loc.replace(ORIGIN, '').replace(/\/$/, '');
-  const file = `${DIST}${path}/index.html`;
+  // /blog?page=N is stored at dist/blog/page/N/index.html (the public URL is the
+  // query form; the directory is only how the edge rewrite finds the file).
+  const distPath = path.includes('?') ? blogListingDistPath(path) : path;
+  const file = `${DIST}${distPath}/index.html`;
   const key = path || '/';
   if (!existsSync(file)) { fail(key, 'sitemap URL has no prerendered file (would 404)'); continue; }
   const html = readFileSync(file, 'utf8');

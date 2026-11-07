@@ -11,6 +11,8 @@
 import { redirects } from './src/generated/redirects.js';
 import { locationRedirects } from './src/generated/locationRedirects.js';
 import { KNOWN_ROUTES, STATIC_FILES } from './src/generated/routes.js';
+import { BLOG_LISTING_PAGE_COUNT } from './src/generated/blogListing.js';
+import { resolveBlogListingQuery } from './src/lib/blogPagination.js';
 import { GONE_PATHS } from './src/data/goneLocations.js';
 
 // Skip the API and the three directories that hold real static files:
@@ -135,6 +137,34 @@ export default function middleware(request) {
   //    excludes them — so this list only has to cover the root of the build.
   if (/\.[A-Za-z0-9]+$/.test(path)) {
     if (STATIC_FILES.has(path)) return;
+    return new Response(notFoundHtml(url.origin), {
+      status: 404,
+      headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex, follow' }
+    });
+  }
+
+  // 2.5) Blog listing pages. /blog is page 1. /blog?page=1 is the same document,
+  //      so it 301s there (one canonical). /blog?page=N (N >= 2, in range) is a
+  //      different slice: rewrite to the prerendered file at /blog/page/N while
+  //      the browser URL stays ?page=N. That internal path is NOT a public route
+  //      (it 404s below if requested directly) so it cannot compete in the index.
+  //      Invalid or out-of-range values are a real 404, not an empty 200.
+  if (path === '/blog' && url.searchParams.has('page')) {
+    const decision = resolveBlogListingQuery(url.searchParams, BLOG_LISTING_PAGE_COUNT);
+    if (decision.action === 'redirect-bare') {
+      const dest = new URL(url.toString());
+      dest.pathname = '/blog';
+      dest.search = '';
+      return Response.redirect(dest.toString(), 301);
+    }
+    if (decision.action === 'serve') {
+      const dest = new URL(url.toString());
+      dest.pathname = `/blog/page/${decision.page}`;
+      dest.search = '';
+      return new Response(null, {
+        headers: { 'x-middleware-rewrite': dest.toString() }
+      });
+    }
     return new Response(notFoundHtml(url.origin), {
       status: 404,
       headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex, follow' }
