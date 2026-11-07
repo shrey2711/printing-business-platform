@@ -7,6 +7,7 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { join, extname, normalize } from 'node:path';
+import middleware from '../middleware.js';
 
 const ROOT = join(process.cwd(), 'dist');
 const PORT = Number(process.argv[2]) || 4173;
@@ -19,7 +20,32 @@ const TYPES = {
 const isFile = (p) => stat(p).then((s) => s.isFile()).catch(() => false);
 
 createServer(async (req, res) => {
-  const path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  const reqUrl = new URL(req.url, `http://${req.headers.host || '127.0.0.1'}`);
+  const path = decodeURIComponent(reqUrl.pathname);
+  // Blog listing queries and the internal /blog/page/N files go through the
+  // same edge middleware production uses, so /blog?page=2 is a distinct slice
+  // and /blog/page/2 is not a second public URL.
+  if (path === '/blog' || path.startsWith('/blog/page/')) {
+    const mw = middleware(new Request(reqUrl.toString()));
+    if (mw) {
+      const rewrite = mw.headers.get('x-middleware-rewrite');
+      if (rewrite) {
+        const destPath = new URL(rewrite, reqUrl).pathname;
+        const file = join(ROOT, destPath, 'index.html');
+        if (await isFile(file)) {
+          const body = await readFile(file);
+          res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+          res.end(body);
+          return;
+        }
+      }
+      const headers = {};
+      mw.headers.forEach((v, k) => { headers[k] = v; });
+      res.writeHead(mw.status, headers);
+      res.end(Buffer.from(await mw.arrayBuffer()));
+      return;
+    }
+  }
   const safe = normalize(path).replace(/^(\.\.[/\\])+/, '');
   let file = join(ROOT, safe);
   if (!(await isFile(file))) file = join(ROOT, safe, 'index.html');

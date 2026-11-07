@@ -29,8 +29,20 @@ for (const path of pages) {
   const file = `${DIST}${path === '/' ? '' : path}/index.html`;
   const h = readFileSync(file, 'utf8');
   const links = new Set();
-  for (const m of h.matchAll(/href="(\/[^"#?]*)"/g)) {
-    const href = m[1].replace(/\/$/, '') || '/';
+  for (const m of h.matchAll(/href="(\/[^"#]*)"/g)) {
+    // Blog listing URLs keep ?page=N so a sitemap entry /blog?page=2 counts as
+    // linked. Every other query is still ignored (configuration, utm, …).
+    let href = m[1].replace(/&amp;/g, '&');
+    const q = href.indexOf('?');
+    if (q !== -1) {
+      const base = href.slice(0, q).replace(/\/$/, '') || '/';
+      const page = new URLSearchParams(href.slice(q + 1)).get('page');
+      href = base === '/blog' && page && /^[1-9]\d*$/.test(page)
+        ? `/blog?page=${page}`
+        : base;
+    } else {
+      href = href.replace(/\/$/, '') || '/';
+    }
     if (/\.(png|jpe?g|webp|svg|pdf|xml|ico|txt|css|js|avif)$/i.test(href) || href.startsWith('/assets') || href.startsWith('/_')) continue;
     links.add(href);
     if (href !== path) inbound.set(href, (inbound.get(href) || 0) + 1);

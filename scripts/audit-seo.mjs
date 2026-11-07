@@ -11,6 +11,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { KNOWN_ROUTES } from '../src/generated/routes.js';
 import { redirects } from '../src/generated/redirects.js';
+import { blogListingDistPath } from '../src/lib/blogPagination.js';
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 const ORIGIN = 'https://www.apextradeshow.com';
@@ -22,7 +23,12 @@ const warn = [];
 const fail = (page, msg) => crit.push(`${page}  ✗ ${msg}`);
 const warning = (page, msg) => warn.push(`${page}  ⚠ ${msg}`);
 
-const fileFor = (path) => (path === '/' ? join(DIST, 'index.html') : join(DIST, path, 'index.html'));
+const fileFor = (path) => {
+  // /blog?page=N is prerendered at dist/blog/page/N/index.html. Every other
+  // sitemap path is still path → dist<path>/index.html.
+  const distPath = path.includes('?') ? blogListingDistPath(path) : path;
+  return distPath === '/' ? join(DIST, 'index.html') : join(DIST, distPath, 'index.html');
+};
 // Decoded length — search engines count the rendered characters, so &amp; is one
 // char, not five. Measuring the raw HTML would over-count titles/descriptions.
 const decodeEntities = (s) =>
@@ -191,8 +197,14 @@ const CONFIG_PARAMS = /^(size|width|height|color|colour|quantity|qty|material|fi
 
 // 1. No parameterised URL in a sitemap. A sitemap entry is a request to index
 // that exact string, which is the opposite of consolidating it away.
+// Exception: blog listing slices /blog?page=N (N >= 2). Each is a distinct
+// indexable document with its own self-canonical. /blog?page=1 is not listed
+// (it 301s to /blog). Configuration parameters stay forbidden.
 for (const { sm, path } of sitemapPaths) {
-  if (path.includes('?')) fail(`${sm}:${path}`, 'sitemap URL carries a query string — a parameterised URL must never be submitted for indexing');
+  if (!path.includes('?')) continue;
+  const blogPage = path.match(/^\/blog\?page=([1-9]\d*)$/);
+  if (blogPage && Number(blogPage[1]) >= 2) continue;
+  fail(`${sm}:${path}`, 'sitemap URL carries a query string — a parameterised URL must never be submitted for indexing');
 }
 
 // 2. No internal link carries a configuration parameter. Links are how a
@@ -205,10 +217,13 @@ for (const { path } of sitemapPaths) {
     // Decode first: in HTML the separator is written &amp;, and parsing that raw
     // turns every parameter after the first into "amp;color" — which would read
     // as clean and let a real configuration link through.
-    const qs = decodeEntities(m[1]).split('?')[1] || '';
+    const decodedHref = decodeEntities(m[1]);
+    const qs = decodedHref.split('?')[1] || '';
     const offenders = [...new URLSearchParams(qs).keys()].filter((k) => CONFIG_PARAMS.test(k));
     if (offenders.length) {
       fail(path, `internal link configures the product in the URL: ${m[1]} (${offenders.join(', ')})`);
+    } else if (/^\/blog\?page=[1-9]\d*$/.test(decodedHref)) {
+      // Blog listing controls. Not a configuration URL.
     } else {
       warning(path, `internal link with a query string: ${m[1]}`);
     }

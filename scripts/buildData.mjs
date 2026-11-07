@@ -23,6 +23,14 @@ const key =
 
 const client = url && key ? createClient(url, key, { auth: { persistSession: false } }) : null;
 
+// 'skipped' = no Supabase config, 'ok' = the table was read, 'error' = the read
+// failed. Prerender uses this so a no-CMS build does not wipe routes/redirects
+// that an earlier CMS build had generated.
+export const cmsLoad = {
+  posts: 'skipped',
+  redirects: 'skipped'
+};
+
 function mediaUrl(path) {
   if (!path || !client) return null;
   return client.storage.from('media').getPublicUrl(path).data?.publicUrl || null;
@@ -31,6 +39,7 @@ function mediaUrl(path) {
 // Published blog posts, shaped for prerendering (rendered HTML + cover URL).
 export async function loadPublishedPosts() {
   if (!client) {
+    cmsLoad.posts = 'skipped';
     console.warn('[build] Supabase not configured — blog will prerender empty.');
     return [];
   }
@@ -40,9 +49,11 @@ export async function loadPublishedPosts() {
     .eq('status', 'published')
     .order('published_at', { ascending: false });
   if (error) {
+    cmsLoad.posts = 'error';
     console.warn(`[build] could not load blog posts: ${error.message}`);
     return [];
   }
+  cmsLoad.posts = 'ok';
   return (data || []).map((row) => ({
     slug: row.slug,
     title: row.title,
@@ -125,11 +136,16 @@ export async function loadPricingOverrides() {
 
 // Redirects, for baking into the edge middleware module.
 export async function loadRedirects() {
-  if (!client) return [];
+  if (!client) {
+    cmsLoad.redirects = 'skipped';
+    return [];
+  }
   const { data, error } = await client.from('redirects').select('source, destination, code');
   if (error) {
+    cmsLoad.redirects = 'error';
     console.warn(`[build] could not load redirects: ${error.message}`);
     return [];
   }
+  cmsLoad.redirects = 'ok';
   return data || [];
 }

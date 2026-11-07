@@ -9,6 +9,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { states, provinces, territories } from '../src/data/states.js';
 import { SEO_CITIES } from '../src/data/citySeo.js';
+import { blogListingDistPath } from '../src/lib/blogPagination.js';
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 const MIN = Number((process.argv.find((a) => a.startsWith('--min=')) || '=50').split('=')[1]);
@@ -21,7 +22,8 @@ for (const f of readdirSync(DIST).filter((n) => /^sitemap-.*\.xml$/.test(n)))
 
 const pages = [];
 for (const u of urls) {
-  const file = join(DIST, u, 'index.html');
+  const distPath = u.includes('?') ? blogListingDistPath(u) : u;
+  const file = distPath === '/' ? join(DIST, 'index.html') : join(DIST, distPath, 'index.html');
   if (!existsSync(file)) continue;
   const html = readFileSync(file, 'utf8');
   const body = (html.match(/<div id="seo-prerender">([\s\S]*?)<\/div>\s*<\/div>/) || [])[1] || '';
