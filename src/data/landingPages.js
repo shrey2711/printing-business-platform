@@ -104,10 +104,10 @@ export const LANDING_PAGES = [
     slug: 'pop-up-displays',
     products: [{ slug: 'seg-modular-trade-show-kit-a' }, { slug: 'seg-modular-trade-show-kit-b' }, { slug: 'seg-modular-trade-show-kit-c' }],
     nav: 'Pop-Up Displays',
-    title: 'Pop-Up Displays | Trade Show Backwalls',
-    h1: 'Pop-Up Displays',
+    title: 'Pop Up Display Solutions',
+    h1: 'Pop Up Display Solutions',
     description:
-      'Custom pop-up displays — accordion-frame portable trade show backwalls with fabric or graphic panels. Fast setup, quoted per order.',
+      'Make setup simple with a branded pop up display built for events and trade shows. Shipping across the US & Canada.',
     intro:
       'A pop-up display is the classic portable backwall: an accordion-style frame that expands in seconds into a straight or curved wall, with fabric or printed graphic panels that attach across the front. It is one of the fastest displays to set up and packs down into a wheeled case, which is why it remains a trade show staple.',
     sections: [
@@ -124,7 +124,10 @@ export const LANDING_PAGES = [
     ,
       { h2: 'Choosing a pop-up backwall size', p: 'Pop-up backwalls are sold by booth footprint rather than by panel: a 10 ft wall fills the back of a standard 10x10, and a 20 ft wall spans a 10x20. Decide first whether you want a straight wall, which maximises flat graphic area for text and product shots, or a curved one, which reads softer from an angle and hides the booth corners. The SEG modular kits we stock run from 10 ft to 20 ft wide at 6.6, 7.4 or 8.2 ft tall.' },
       { h2: 'What you get and how it goes up', p: 'The kits use modular, tool-free snap-fit construction with SEG fabric graphics — a sewn silicone edge that presses into the frame groove for a flat, near-frameless finish — and integrated LED illumination. Kit A adds an illuminated archway and a display counter. Everything travels in a carry bag of roughly 43 by 14 by 8 inches, and a full kit with graphics weighs about 72 to 80 lb, so plan for a cart rather than a shoulder carry.' },
-      { h2: 'Artwork and reuse', p: 'Graphics are full-color dye sublimation on flame-retardant 200g backlit fabric, and they are replaceable — a new campaign means a reprint, not a new frame. Because the panels are backlit, artwork behaves differently than it does on a front-lit wall: solid dark areas stay dark, and fine reversed type can bloom. Send us the file and the free proof shows you exactly how it will read before anything prints.' }
+      { h2: 'Artwork and reuse', p: 'Graphics are full-color dye sublimation on flame-retardant 200g backlit fabric, and they are replaceable — a new campaign means a reprint, not a new frame. Because the panels are backlit, artwork behaves differently than it does on a front-lit wall: solid dark areas stay dark, and fine reversed type can bloom. Send us the file and the free proof shows you exactly how it will read before anything prints.' },
+      { h2: 'Portable Pop Up Display Options', p: 'A pop up display is an accordion frame that expands into a straight or curved backwall, with fabric or printed panels across the front. Size it to the booth: a 10 ft wall for a 10x10, a 20 ft wall for a 10x20. The modular kits stocked here run from 10 ft to 20 ft wide at 6.6, 7.4 or 8.2 ft tall, and they are quoted rather than priced on a rate card.' },
+      { h2: 'Choose a Pop Up Trade Show Display', p: 'For a trade show, decide straight or curved first. Straight maximises flat area for text and product shots. Curved reads softer from an angle. The kits use modular snap-fit construction, SEG fabric graphics and integrated LED lighting. Kit A adds an illuminated archway and a display counter. A full kit with graphics is about 72 to 80 lb.' },
+      { h2: 'Fabric Pop Up Display Features', p: 'The fabric is flame-retardant 200g backlit material, dye-sublimated in full color, with a silicone edge that presses into the frame groove. That is what makes the face flat and the graphic replaceable. Integrated LEDs light the fabric from behind. Design for that light: large solid dark areas stay dark, and thin reversed type can blur, so check the proof.' }
     ],
     faqs: [
       { q: 'What is a pop-up display?', a: 'A collapsible accordion-frame backwall with attachable fabric or graphic panels — one of the fastest portable displays to set up.' },
@@ -134,7 +137,10 @@ export const LANDING_PAGES = [
     ,
       { q: 'What size pop-up display do I need?', a: 'Match it to your booth: a 10 ft wall backs a standard 10x10, a 20 ft wall spans a 10x20. The kits are available at 10, 13, 16.4 and 20 ft wide and 6.6, 7.4 or 8.2 ft tall, so the wall can be sized to the space you have actually booked.' },
       { q: 'How heavy is a pop-up kit to transport?', a: 'A full kit with graphics runs about 72 to 80 lb and packs into a carry bag of roughly 43 by 14 by 8 inches. Plan on a cart and a checked freight shipment rather than carrying it through an airport.' },
-      { q: 'Are the graphics replaceable?', a: 'Yes — the SEG fabric panels pull out of the frame groove and swap in minutes, so a new campaign is a reprint. The frame, LED system and counter carry over.' }
+      { q: 'Are the graphics replaceable?', a: 'Yes — the SEG fabric panels pull out of the frame groove and swap in minutes, so a new campaign is a reprint. The frame, LED system and counter carry over.' },
+      { q: 'Are portable pop up displays easy to transport?', a: 'They pack into a carry bag of roughly 43 by 14 by 8 inches. A full kit with graphics weighs about 72 to 80 lb, so plan on a cart rather than a shoulder carry. Setup of the frame is tool-free; the weight is the part to plan for.' },
+      { q: 'How do I choose a pop up trade show display?', a: 'Match the width to the booth: about 10 ft for a 10x10 back wall and about 20 ft for a 10x20. Then choose straight, which gives the most flat graphic area, or curved. The modular kits run 10, 13, 16.4 and 20 ft wide, at 6.6, 7.4 or 8.2 ft tall, and they are quoted per order.' },
+      { q: 'What are the benefits of a fabric pop up display?', a: 'The kits on this page use SEG fabric graphics: dye-sublimated, flame-retardant 200g backlit fabric with a silicone edge that presses into the frame. The graphic is replaceable, and the kits include integrated LED lighting, so the fabric is backlit rather than lit only by the hall.' }
     ],
     related: [
       { label: 'Tension Fabric Displays', to: '/tension-fabric-displays' },
