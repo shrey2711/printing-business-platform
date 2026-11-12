@@ -52,7 +52,7 @@ export default function ProductTabs({ product, catalog }) {
             {(Array.isArray(product.productSections) ? product.productSections : [])
               .filter((x) => x && x.h2 && x.p)
               .map((x) => (
-                <div key={x.h2}><h3>{x.h2}</h3><p>{x.p}</p></div>
+                <div key={x.h2}><h2>{x.h2}</h2><p>{x.p}</p></div>
               ))}
             <h3>Key features</h3>
             <ul className="ptab-list">

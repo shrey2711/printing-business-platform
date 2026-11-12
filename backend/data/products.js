@@ -230,7 +230,7 @@ const designGroup = {
 // `applications` and one FAQ are written per size and passed in. No invented
 // specifications — the square footage and booth equivalence come from the
 // comparison table the category page already publishes.
-const canopyProduct = ({ slug, size, sqft, booth, blurb, apps, sizeFaq, related, full1, full3, canopy1, canopy3, wallPer, metaDescription }) => ({
+const canopyProduct = ({ slug, size, sqft, booth, blurb, apps, sizeFaq, related, full1, full3, canopy1, canopy3, wallPer, metaDescription, seoTitle, h1, seoDescription, productSections, extraFaqs }) => ({
   slug,
   // Optional per-size page meta description, built from this size's own
   // rate-card prices so the quoted figures cannot drift from the price matrix.
@@ -238,6 +238,12 @@ const canopyProduct = ({ slug, size, sqft, booth, blurb, apps, sizeFaq, related,
   // prices. Named metaDescription, not seoDescription, so the Merchant feed
   // keeps using the long product description for canopies.
   ...(metaDescription ? { metaDescription: metaDescription({ canopy1, full1 }) } : {}),
+  ...(seoTitle ? { seoTitle } : {}),
+  ...(h1 ? { h1 } : {}),
+  // A short on-page meta. The Merchant feed still prefers the long description
+  // when seoDescription is absent; set it only when the page meta should differ.
+  ...(seoDescription ? { seoDescription } : {}),
+  ...(productSections ? { productSections } : {}),
   active: true,
   name: `${size} Canopy Tent`,
   category: 'tents',
@@ -281,7 +287,8 @@ const canopyProduct = ({ slug, size, sqft, booth, blurb, apps, sizeFaq, related,
     { q: 'Can I purchase only the printed canopy top?', a: 'Yes. Customers who already have a compatible frame can order the printed canopy top on its own — choose "Printed Canopy Top Only" on the product page.' },
     { q: 'How long does production take?', a: 'Standard production is 6–8 business days after you approve your free proof; rush production is 2–3 business days. Shipping/transit time is additional and depends on your destination.' },
     { q: 'How many walls can I add?', a: 'Up to 3 printed walls total, in any combination of full-height and half-height walls.' },
-    sizeFaq
+    sizeFaq,
+    ...(extraFaqs || [])
   ],
   pricing: {
     model: 'configured',
@@ -338,7 +345,20 @@ const canopyTents = [
     related: ['standard-retractable-banner', 'pleated-table-covers', 'teardrop-flag'],
     full1: 835, full3: 799, canopy1: 510, canopy3: 485, wallPer: 275,
     metaDescription: ({ canopy1, full1 }) =>
-      `Custom printed 10x10 canopy tent with your logo — full or half walls, from $${canopy1} (printed top) · complete set $${full1}. Free artwork proof, ships US & Canada.`
+      `Custom printed 10x10 canopy tent with your logo — full or half walls, from $${canopy1} (printed top) · complete set $${full1}. Free artwork proof, ships US & Canada.`,
+    seoTitle: '10x10 Canopy Tent',
+    h1: '10x10 Canopy Tent for Events and Promotions',
+    seoDescription: 'Get a 10x10 canopy tent for branded shade at events and promotions, with shipping across US & Canada.',
+    productSections: [
+      { h2: 'Explore a Custom Canopy Tent 10x10', p: 'This is the 10 by 10 foot pitch: 100 square feet, the single booth space most expos, markets and street festivals sell. The top is dye-sublimated edge to edge into 600D polyester over a heavy-duty aluminum hex frame with telescopic legs. Order the complete set (printed top, frame and carry bag) or the printed top alone if you already have a compatible frame.' },
+      { h2: 'Choose a 10 x 10 Canopy Tent with Sides', p: 'Add up to three printed walls in any mix of full and half height. A back wall turns the open shade structure into a booth; half walls at the sides leave the front open. Full walls on three sides close the space. Walls are ordered with the top.' },
+      { h2: 'Set Up Your 10x10 Canopy Tent', p: 'The complete set includes the aluminum hex frame with telescopic legs and a carry bag. A four-piece sandbag set is an optional add-on, one bag per leg. Outdoors, weight every leg: wind and storm damage are not covered, and an unweighted canopy is the usual outdoor failure on pavement where a stake will not go in.' }
+    ],
+    extraFaqs: [
+      { q: 'What should I consider when choosing a canopy tent 10x10?', a: 'It covers 100 square feet, one standard booth. Decide whether you need the complete set or the printed top only, how many of the three wall positions you want as full or half walls, and whether the site is paved (weight every leg). Standard production is 6–8 business days after proof approval, or 2–3 business days on rush. Transit is extra.' },
+      { q: 'Can I customize a 10x10 canopy tent with my branding?', a: 'Yes. The top is dye-sublimated full-bleed with your artwork, and any walls you add are printed the same way. Every order includes a free artwork proof before production.' },
+      { q: 'Are sides available for a 10x10 canopy tent?', a: 'Yes. You can add up to three printed walls in any mix of full and half height. That is the side and back enclosure; the front can stay open.' }
+    ]
   }),
   canopyProduct({
     slug: 'canopy-tent-10x15',
@@ -571,9 +591,15 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['deluxe-retractable-banner', 'x-stand-banner'],
-    seoTitle: 'Standard Retractable Banner Stand 33" & 47"',
+    seoTitle: 'Roll Up Banner',
+    h1: 'Standard Roll Up Banner',
     seoDescription:
-      'Custom retractable banner stand (roll up banner), 33 or 47 in wide × 81 in tall. Compact aluminum base, tool-free setup and a replaceable printed graphic.',
+      'Order a roll up banner that sets up quickly and travels easily. Shop display options with shipping across US & Canada.',
+    productSections: [
+      { h2: 'Choose a Pull Up Banner for Your Display', p: 'This standard stand is a roll up banner and a pull up banner: the same retractable, with a compact aluminum base and two stabilising feet. The printed graphic is 33" x 81" or 47" x 81". The wider graphic fills more of an aisle; the narrower one fits a tighter booth or a hotel meeting room.' },
+      { h2: 'Quick Setup for Trade Shows and Events', p: 'The graphic rolls into the base for travel and pops up in seconds, with no tools. Listed uses are trade shows and expos, conferences and lobbies, retail and showroom displays, and events and promotions.' },
+      { h2: 'A Portable Display Made for Repeat Use', p: 'The graphic is replaceable, so a new campaign is a reprint and the base stays. What ships is the printed graphic, the compact aluminum base with two stabilising feet, and a carry bag. Standard production is 6–8 business days after proof approval, or 2–3 business days on rush. Shipping is calculated at checkout.' }
+    ],
     pricing: {
       model: 'configured',
       baseLabel: 'Retractable banner',
@@ -603,7 +629,10 @@ const tradeShowDisplays = [
     ,
     { q: 'What size is the printed graphic?', a: '33" x 81" or 47" x 81". The wider option fills more of an aisle-facing corner; the narrower one fits tighter booths and hotel meeting rooms.' },
     { q: 'What ships with the stand?', a: 'The custom-printed banner graphic and the compact aluminum retractable base with its two stabilising feet. The graphic is replaceable, so the base is reusable across campaigns.' },
-    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' }
+    { q: 'How long does production take?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. That is production time only; transit is added on top and depends on the delivery address.' },
+    { q: 'What is the difference between a roll up banner and a pull up banner?', a: 'On this stand they are two names for the same display: a printed graphic that rolls into a compact aluminum base and pulls up onto the pole. This standard stand prints at 33" x 81" or 47" x 81".' },
+    { q: 'How easy is a pull up banner to set up and transport?', a: 'Setup is tool-free and the graphic pops up in seconds. For travel it rolls into the base. The stand ships with the printed graphic, the compact aluminum base with two stabilising feet, and a carry bag.' },
+    { q: 'Can I use a roll up banner at events and trade shows?', a: 'Yes. The listed uses are trade shows and expos, conferences and lobbies, retail and showroom displays, and events and promotions. The graphic is replaceable, so the base is reused when the message changes.' }
   ]
   },
   {
@@ -809,12 +838,18 @@ const tradeShowDisplays = [
     ],
     turnaround: 'Production: 6–8 business days (2–3 day rush). Shipping is calculated separately at checkout.',
     related: ['pleated-table-covers', 'canopy-tent-10x10', 'standard-retractable-banner'],
-    seoTitle: 'Step and Repeat Banner & Backdrop 10×8 ft',
+    seoTitle: 'Step and Repeat Banner Backdrops',
     // Visible page H1 at /products/{slug}. `name` stays the catalog name used
     // in cards, breadcrumbs, cart lines and the Product schema.
-    h1: 'Step and Repeat Banner Backdrop (10×8 ft)',
+    h1: 'Step and Repeat Banners and Backdrops',
     seoDescription:
-      '10×8 ft step and repeat banner backdrop for event photography. Large-format fabric media wall with repeating logo branding on an adjustable, portable frame.',
+      'Create a polished photo backdrop with a step and repeat banner made for events. Shipping across US & Canada.',
+    productSections: [
+      { h2: 'Plan Your Step and Repeat', p: 'Choose 8 ft by 8 ft or 10 ft by 8 ft. A 10 ft wall needs about 8 to 10 ft of clear floor in front so a photographer can step back. Stagger the logo rows so a person standing in the centre does not block a whole column, and keep logos large enough to survive a crop. The free proof shows the grid.' },
+      { h2: 'Choose a Step and Repeat Backdrop', p: 'The backdrop is large-format fabric on an adjustable portable frame, with a carry bag. Order the frame and the printed graphic, or the graphic only. The graphic is replaceable, so the frame stays when the sponsors change.' },
+      { h2: 'Compare Step and Repeat Banners', p: 'Both sizes on this page are the same kind of media wall. 8 ft by 8 ft is the smaller wall. 10 ft by 8 ft is the wider one, up to 120 inches by 96 inches. The difference is footprint, not a second product.' },
+      { h2: 'Make Your Event Stand Out with a Tradeshow Backdrop', p: 'Listed uses are event and press photography, red-carpet and step-and-repeat walls, conferences and galas, and brand activations. The graphic is repeating logos or artwork across the full surface so the brand reads in the photos taken in front of it.' }
+    ],
     pricing: {
       model: 'configured',
       baseLabel: 'Step & repeat backdrop',
@@ -849,7 +884,10 @@ const tradeShowDisplays = [
     ,
     { q: 'What size is a step & repeat backdrop?', a: '8\' x 8\' or 10\' x 8\', up to 120" x 96", on an adjustable portable frame. Allow 8 to 10 ft of clear floor in front of a 10 ft wall so a photographer can step back far enough.' },
     { q: 'How should the logo grid be laid out?', a: 'Stagger the rows so a person standing centre never blocks a whole column, and size the logos to stay readable once a photo is cropped. Send the file and the free proof shows exactly how it will read.' },
-    { q: 'Can the graphic be replaced?', a: 'Yes — the large-format fabric graphic is replaceable and the frame is reusable, so a new campaign is a reprint rather than a new backdrop.' }
+    { q: 'Can the graphic be replaced?', a: 'Yes — the large-format fabric graphic is replaceable and the frame is reusable, so a new campaign is a reprint rather than a new backdrop.' },
+    { q: 'What is a step and repeat wall used for?', a: 'It is the media wall behind event and press photos, red-carpet and step-and-repeat lines, conferences, galas and brand activations. Repeating logos are spaced across the fabric so the brand still reads when a photo is cropped.' },
+    { q: 'How do I choose the right size step and repeat wall?', a: 'The two sizes are 8 ft by 8 ft and 10 ft by 8 ft, up to 120 inches by 96 inches. Allow about 8 to 10 ft of clear floor in front of a 10 ft wall so a photographer can step back.' },
+    { q: 'Can a step and repeat wall be reused at different events?', a: 'Yes. The fabric graphic is replaceable and the frame is reusable, and both pack into a carry bag. A new campaign is a reprint, not a new frame. You can order the frame with the graphic, or the graphic only.' }
   ]
   },
   {
@@ -950,13 +988,15 @@ const FLAG_SHARED_FIGURES = [
   { src: '/images/flags/flag-kit-in-bag-portable.webp', alt: 'Flag kit packed in its carry bag — portable, easy to transport' }
 ];
 
-const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro,
+const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, h1, productSections, extraFaqs, intro,
   apps = ['Storefronts and grand openings', 'Trade shows and events', 'Roadside and parking-lot promotion', 'Marking a booth alongside a canopy'],
   related = ['custom-canopies', 'standard-retractable-banner', 'x-stand-banner'],
   shapeFaq = null, shapeFeature = 'Bold vertical format that reads from a distance', active = false, gallery }) => ({
   slug,
   active,
   name,
+  ...(h1 ? { h1 } : {}),
+  ...(productSections ? { productSections } : {}),
   category: 'flags',
   badge: 'Custom Printed',
   emoji: '🚩',
@@ -1001,7 +1041,8 @@ const flagProduct = ({ slug, name, shape, sizes, seoTitle, seoDescription, intro
   faqs: [
     ...(shapeFaq ? [shapeFaq] : []),
     { q: `What sizes does the ${name} come in?`, a: `${sizes.map((z) => z.label.replace(' — ', ', ')).join('; ')}. Pick by viewing distance: the small size is for counters and storefronts, the large one for roadsides and open fields.` },
-    { q: 'What do the hardware, single/double-sided and base options mean?', a: 'With hardware includes the flexible pole kit and a base; graphic only is the printed flag alone. Single-sided prints the front with a mirrored print-through on the reverse, double-sided prints two faces with a blockout layer between. A spike base (included) suits grass, a cross or metal plate base suits hard floors, and a water bag (+$20) adds ballast outdoors. Standard production is 6–8 business days after proof approval, rush is 2–3; shipping time is extra.' }
+    { q: 'What do the hardware, single/double-sided and base options mean?', a: 'With hardware includes the flexible pole kit and a base; graphic only is the printed flag alone. Single-sided prints the front with a mirrored print-through on the reverse, double-sided prints two faces with a blockout layer between. A spike base (included) suits grass, a cross or metal plate base suits hard floors, and a water bag (+$20) adds ballast outdoors. Standard production is 6–8 business days after proof approval, rush is 2–3; shipping time is extra.' },
+    ...(extraFaqs || [])
   ],
   pricing: {
     model: 'configured',
@@ -1060,8 +1101,19 @@ const flagProducts = [
       { src: '/images/flags/feather_angled_hardware_cross_base.jpg', alt: 'Cross-base hardware for the Apex angled feather flag' },
       { src: '/images/flags/feather_angled_install_step_3_slide_flag_onto_pole.jpg', alt: 'Installing an Apex feather flag — sliding the printed flag onto the pole' }
     ],
-    seoTitle: 'Custom Feather Angled Flags',
-    seoDescription: 'Custom printed angled feather flags in 9, 10.5 and 14 ft — full-color dye sublimation, single or double sided, pole + base or graphic only. From $140.',
+    seoTitle: 'Feather Flags',
+    h1: 'Angled Feather Flags for Events and Promotions',
+    seoDescription: 'Make your message easy to spot with feather flags designed for events and promotions. Explore options with shipping across US & Canada.',
+    productSections: [
+      { h2: 'A High-Visibility Display for Events', p: 'The angled feather is the shape whose top edge runs forward over the pole, so the print hangs closer to flat on a still day instead of collapsing against the pole. Sizes are 9 ft, 10.5 ft and 14 ft. The 14 ft size is the one used for roadside and car-park viewing.' },
+      { h2: 'Showcase Your Brand Outdoors', p: 'The graphic is full-color dye sublimation, single-sided or double-sided, and it is replaceable so the pole kit can be reused. Listed uses are roadside and forecourt promotion, event entrances and car parks, grand openings, and marking a booth from across a field.' },
+      { h2: 'Set Up a Standout Promotional Display', p: 'Order the flag with the flexible pole kit and a base, or the graphic only if you already have compatible hardware. A spike base is included for grass. A cross base, a metal plate or a water bag is the choice for pavement and hard floors. Assembly is tool-free. Standard production is 6–8 business days after proof approval, or 2–3 business days on rush. Shipping is calculated at checkout.' }
+    ],
+    extraFaqs: [
+      { q: 'What are feather flags commonly used for?', a: 'This angled feather flag is used for roadside and forecourt promotion, event entrances and car parks, grand openings that need height, and marking a booth from across a field.' },
+      { q: 'Are feather flags suitable for outdoor events?', a: 'Yes. The flag is listed for indoor or outdoor advertising. Use the included spike base in grass, and a cross base, metal plate or water bag where the ground is hard. The print is dye-sublimated. No separate wind rating is published for this shape.' },
+      { q: 'How can feather flags help promote a business?', a: 'The flag stands 9, 10.5 or 14 ft tall, and the angled top keeps the printed area closer to flat when there is little wind, so the graphic stays readable at a distance. The graphic can be replaced when the message changes.' }
+    ],
     intro: 'A custom printed angled feather flag — the tall, curved-top advertising flag whose canopy angles forward over the pole so your branding stays visible even in light wind. Full-color dye sublimation on a flexible pole, with a choice of base for grass or hard floors.'
   }),
   flagProduct({
@@ -1930,7 +1982,10 @@ const products = [
   faqs: [
     { q: 'What size can I order?', a: "Any size to the inch, up to 10' x 145' single sided. A pole pocket is sewn from the same material and costs width, so with a pocket the maximum is 9.5' x 145'; double sided is also 9.5' x 145'. Larger than that is produced by welding panels together and is quoted on request. Pricing is by the square foot, so you are not limited to stock formats." },
     { q: 'How is the banner finished?', a: 'Standard hems, white double stitched thread and No. 2 Stimpson brass grommets are included at no charge, so it is ready to tie off out of the box. Pole pockets in 2", 3" and 4", windslits, velcro, webbing with D-rings, sewn-in rope and reinforced corner tabs are all available; the ones not shown in the configurator are quoted on request.' },
-    { q: 'Will it arrive rolled or folded?', a: 'Rolled when the shortest side is 88" or under, folded when it is 89" or over. A folded banner can carry crease lines from transport, which relax over a few days once it is hung.' }
+    { q: 'Will it arrive rolled or folded?', a: 'Rolled when the shortest side is 88" or under, folded when it is 89" or over. A folded banner can carry crease lines from transport, which relax over a few days once it is hung.' },
+    { q: 'What are custom vinyl banners commonly used for?', a: 'This 13oz scrim banner is used for storefront and window banners, trade show and event backdrops, promotions and seasonal offers, and outdoor signage on fences and railings.' },
+    { q: 'How do I choose the right vinyl banner size?', a: 'Enter the width and height to the inch. Single sided prints up to 10 ft by 145 ft. With a pole pocket, or double sided, the maximum is 9.5 ft by 145 ft, because the pocket is sewn from the same material. Larger than that is welded and quoted. Price is by the square foot.' },
+    { q: 'Can a vinyl sign be used outdoors?', a: 'This 13oz banner is rated for indoor and outdoor use. The material is waterproof and the ink is UV-stable. On an exposed fence a solid banner can act like a sail; perforated mesh is the banner material that lets wind through. Tie off the grommets rather than only the corners.' }
   ],
     specs: [
       ['Material', '13oz scrim vinyl, waterproof and UV safe'],
@@ -1970,9 +2025,15 @@ const products = [
       'No pole, stand or hardware — the banner ships ready to hang by its grommets or pocket.'
     ],
     turnaround: 'Production: same business day when artwork is approved before 12pm PST, next business day before 4pm PST. Over 100 pieces adds 2 business days. Shipping is calculated separately at checkout.',
-    seoTitle: '13oz Vinyl Banner | Full-Color Print',
+    seoTitle: 'Vinyl Banners',
+    h1: '13oz Vinyl Banners',
     seoDescription:
-      'Custom 13oz scrim vinyl banners made to any size, indoor or outdoor — welded hem and grommets included, UV-stable print. From $45, US & Canada.',
+      'Order durable vinyl banners for promotions and events, printed to showcase your brand. Shipping across the US & Canada.',
+    productSections: [
+      { h2: 'Create Custom Vinyl Banners for Your Brand', p: 'This is 13oz scrim vinyl, printed edge to edge in full color with UV-stable ink. It is made to the inch you enter, up to 10 ft by 145 ft single sided. Standard hems, white double-stitched thread and No. 2 Stimpson brass grommets are included, so it is ready to hang. No pole or stand is included.' },
+      { h2: 'Choosing the Right Vinyl Banner', p: '13oz scrim is the single-ply indoor and outdoor banner. Double-sided printing on this material is front and back on a single ply and is quoted on request; the maximum with a pole pocket or double sided is 9.5 ft by 145 ft. A banner that must hide the reverse image uses the 18oz blockout instead, which has an opaque layer between two faces.' },
+      { h2: 'When to Use a Vinyl Sign', p: 'Use this banner when the sign is a flexible vinyl sheet: a storefront, a trade show or event backdrop, a promotion, or outdoor signage on a fence or railing. It is not a rigid panel. Coroplast, PVC and aluminum signs are the flat boards. If the banner will sit on an exposed fence in the wind, mesh is the material that lets air through.' }
+    ],
     gallery: [
       { src: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg', alt: 'Custom printed 13oz vinyl landscape banner with grommets' },
       { src: '/images/banners/13oz-vinyl-banner-cafe-portrait.jpeg', alt: 'Custom printed 13oz vinyl portrait banner with grommets' },
@@ -2214,7 +2275,10 @@ const products = [
       // page carrying both.
       { q: 'How fast is production and shipping?', a: 'Artwork approved before 6am PST ships the same business day. Approved between 6:01am and 11:59pm PST ships the next business day. An order over 300 pieces adds one business day. Shipping time is separate and depends on the delivery address.' },
       // Same reason: the generated answer lists file types the uploader rejects.
-      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. Maximum upload is 300MB. A double sided sign needs two separate files.' }
+      { q: 'What artwork file formats do you accept?', a: 'A single page JPEG or PDF per face, in CMYK, at 150dpi or higher for raster artwork, built to the ordered size with no crop marks and no bleeds. Maximum upload is 300MB. A double sided sign needs two separate files.' },
+      { q: 'What yard sign sizes can I order?', a: 'From 6" x 6" up to 48" x 96", cut to the size you enter. Flutes run vertically as standard. A sign wider than 48" runs horizontal flutes instead.' },
+      { q: 'Can I get double-sided yard signs?', a: 'Yes. Double sided is a 4/4 print on both faces, and the artwork has to be two files, one per face. Single sided is 4/0, with the back left white.' },
+      { q: 'Are these yard signs weather-resistant?', a: 'They can be used outdoors for an event or a short run. The sheet is 4mm corrugated plastic and the ink is UV printed direct to it, so there is no laminated layer to lift at the edges. A rated outdoor lifespan is not published, and these are not permanent exterior signs. An optional 10" x 30" steel H-stake holds one in the ground.' }
     ],
     specs: [
       ['Material', '4mm white corrugated plastic (coroplast)'],
@@ -2252,9 +2316,15 @@ const products = [
       'No frame, post or wall fixings. The sign ships flat, ready to mount however you have specified.'
     ],
     turnaround: 'Production: same business day when artwork is approved before 6am PST, otherwise the next business day. Shipping is calculated separately at checkout.',
-    seoTitle: 'Coroplast Signs | 4mm Corrugated Plastic',
+    seoTitle: 'Custom Yard Signs & Coroplast Signs',
+    h1: 'Custom Yard Signs',
     seoDescription:
-      'Custom 4mm coroplast signs, UV printed single or double sided and cut to size from 6 by 6 inches up to 48 by 96 inches. Grommets and H-stakes available.',
+      'Order custom yard signs and 4mm coroplast signs for events and short-run outdoor use. Shipping to the US and Canada.',
+    productSections: [
+      { h2: 'Custom Yard Signs for Events and Promotions', p: 'These are 4mm coroplast signs cut to the size you order, from 6" x 6" up to 48" x 96". The uses already on this product are booth directional signs, aisle markers, sponsor boards, and parking or check-in signs on an H-stake outside the venue.' },
+      { h2: 'Coroplast Signs Made for Indoor and Outdoor Use', p: 'The sheet is printed direct with UV ink in a matte finish, single sided (4/0, back left white) or double sided (4/4, one file per face). Outdoors they are event and short-run signs. No rated outdoor lifespan is published, so they are not specified as permanent exterior panels.' },
+      { h2: 'Why Choose Corrugated Plastic Signs?', p: 'Coroplast is light enough to carry with a booth kit and stiff enough to stand as a directional or check-in sign. Flutes run vertically as standard, which is the direction that lets a sign sit on an H-stake. Optional finishing is No. 2 brass grommets or a 10" x 30" steel H-stake. Neither is included unless you add it.' }
+    ],
     related: ['pvc-board-signs', 'acp-aluminum-signs', 'step-and-repeat-backdrop'],
     gallery: [
       { src: '/images/signs/coroplast-signs-booth-directional.jpeg', alt: 'Coroplast booth directional sign zip-tied to an exhibition booth upright' },
@@ -2463,7 +2533,10 @@ const products = [
       // and wrong here: this product wants a print-ready PDF at 300dpi WITH a
       // 1/16" bleed, where the large format spec is 150dpi and explicitly no
       // bleed. Two contradictory answers on one page is worse than either.
-      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. The bleed matters on a small card: the cutter works to a tolerance, and artwork built exactly to 3.5" x 2" with no bleed can leave a white edge on one side. Keep text and logos clear of the trim. We check every file at no charge and send a free proof before printing.' }
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready PDF in CMYK at 300dpi, with a 1/16" bleed on all four sides. The bleed matters on a small card: the cutter works to a tolerance, and artwork built exactly to 3.5" x 2" with no bleed can leave a white edge on one side. Keep text and logos clear of the trim. We check every file at no charge and send a free proof before printing.' },
+      { q: 'What business card sizes can I order?', a: 'This card is cut to one size, 3.5" x 2". Square corners are standard, and rounded corners are available from a template. Other card sizes are not offered on this product.' },
+      { q: 'What should I look for in business card printing?', a: 'On this card, look at the 16pt caliper, the matte coating on both faces, whether you need 4/0 or 4/4, and a quantity from 100 to 25,000. Artwork is a print-ready PDF in CMYK at 300dpi with a 1/16" bleed. A free proof is sent before printing.' },
+      { q: 'Are matte or gloss business cards better?', a: 'This product finishes matte. The stock is gloss C2S, and a matte coating is applied to both faces so the card does not glare under booth lighting and will take a pen. A gloss face is not offered as a separate finish here, so the comparison is about this coating, not two cards you can order.' }
     ],
     specs: [
       ['Stock', '95 bright, 16pt gloss C2S'],
@@ -2511,9 +2584,15 @@ const products = [
     // says what is true: it is quoted. Replace this line with the real
     // production time when the supplier gives one.
     turnaround: 'Production and delivery timing are confirmed with your quote.',
-    seoTitle: 'Business Cards | 16pt Matte',
+    seoTitle: 'Matte Business Cards',
+    h1: '16pt Matte Business Cards',
     seoDescription:
-      'Custom 16pt matte business cards on 95 bright C2S stock, full colour on one side or both, 3.5 by 2 inches, from 100 to 25,000. Free artwork proof.',
+      'Order business cards with a smooth 16pt matte finish and crisp custom printing. Shipping to US & Canada.',
+    productSections: [
+      { h2: 'Why Choose 16pt Matte Business Cards?', p: 'The stock is 95 bright, 16pt gloss C2S, with a matte coating on both faces. 16pt is thicker than the 14pt most office printers run, which is what keeps a card from softening in a pocket over a multi-day show. The matte face does not glare under booth lighting, and it takes a pen if someone writes on the back.' },
+      { h2: 'Create Custom Business Cards That Stand Out', p: 'Cards are printed full colour CMYK, either 4/0 (front only, back left plain) or 4/4 (both faces, so the back can carry a QR code, a stand number or a second language). Square corners are standard. Rounded corners are cut from a template. Quantities run from 100 to 25,000, and the cards are cut to 3.5" x 2" and boxed.' },
+      { h2: 'The Benefits of a Matte Finish', p: 'The sheet itself is gloss-coated on both sides. A matte coating is then applied over both faces, so the card you receive reads matte. That is the finish that avoids shine under booth lights and gives you a surface you can write on.' }
+    ],
     related: ['flyers-80lb-uncoated', 'custom-lanyards', 'silicone-wristbands'],
     gallery: [
       { src: '/images/marketing/business-cards-16pt-matte-mockup.webp', alt: 'Business cards mockup showing the front and back of a printed card and a stack of cards' },
@@ -2764,7 +2843,10 @@ const products = [
       { q: 'What attachment options are there?', a: 'Swivel hook, bulldog clip, split ring or a cell phone loop. A breakaway safety clasp can be added to any of them — worth considering for a staffed booth where a lanyard might catch on equipment.' },
       { q: 'Can I print on both sides?', a: 'Yes. A single-side imprint is standard; a double-sided imprint repeats the design (or a second message) along the full length so it reads correctly no matter which way the lanyard twists.' },
       { q: 'What is the minimum quantity?', a: '100 lanyards, and we print up to 10,000 in a single run.' },
-      { q: 'What artwork file formats do you accept?', a: 'A print-ready vector file (AI, EPS or PDF) with fonts outlined. Dye-sublimated full-colour artwork can be supplied as high-resolution CMYK art instead. We check every file at no charge and send a free proof before printing.' }
+      { q: 'What artwork file formats do you accept?', a: 'A print-ready vector file (AI, EPS or PDF) with fonts outlined. Dye-sublimated full-colour artwork can be supplied as high-resolution CMYK art instead. We check every file at no charge and send a free proof before printing.' },
+      { q: 'Can I order a custom lanyard with my logo?', a: 'Yes. Polyester and nylon take a one- or two-colour imprint. Full-colour dye sublimation is the option when the logo has gradients or photography. Imprint can be one side or both.' },
+      { q: 'What lanyard attachment options are available?', a: 'Swivel hook, bulldog clip, split ring or a cell phone loop. A breakaway safety clasp can be added to any of them. No badge holder or ID card is included.' },
+      { q: 'Can lanyards be printed in full color?', a: 'Yes, when you choose full-colour dye sublimation. Polyester and nylon are the one- or two-colour imprint. Widths are 5/8", 3/4" or 1", on a 36" standard loop, from 100 to 10,000.' }
     ],
     specs: [
       ['Material', 'Polyester, nylon, woven, tubular, or full-colour dye sublimation'],
@@ -2814,8 +2896,14 @@ const products = [
     // production time when the supplier gives one.
     turnaround: 'Production and delivery timing are confirmed with your quote.',
     seoTitle: 'Custom Lanyards',
+    h1: 'Custom Lanyards',
     seoDescription:
-      'Custom printed lanyards in polyester, nylon, woven or dye sublimation. Choose width, attachment style and an optional breakaway clasp. Free artwork proof.',
+      'Order custom lanyards with your logo for events, badges and staff credentials. Shipping to US & Canada.',
+    productSections: [
+      { h2: 'Printed Lanyards for Events and Teams', p: 'A lanyard is what a badge, ID card or exhibitor pass hangs from, and on a show floor it is worn all day. Polyester or nylon takes a one- or two-colour imprint. Woven or tubular is the heavier feel. Full-colour dye sublimation is for gradients or photography. The people this product is specified for are booth staff and registered attendees.' },
+      { h2: 'Create Branded Lanyards for Your Business', p: 'Widths are 5/8", 3/4" or 1", on a 36" standard loop. Quantities run from 100 to 10,000. A longer or shorter drop can be confirmed on the proof if the badge holder needs it. Ordering them with a canopy or backdrop is how booth staff match the branding behind them.' },
+      { h2: 'Add Your Logo to Custom Lanyards', p: 'Imprint one side or both. A double-sided imprint repeats the design, or a second message, along the length so it still reads when the lanyard twists. Finish with a swivel hook, bulldog clip, split ring or cell phone loop, and add a breakaway safety clasp if the lanyard might catch on equipment.' }
+    ],
     related: ['silicone-wristbands', 'business-cards-16pt-matte', 'standard-retractable-banner'],
     pricing: {
       model: 'configured',
@@ -3011,7 +3099,10 @@ const products = [
       { q: 'What is the difference between an A-frame sign and a sandwich board?', a: 'In everyday use they are the same shape, and people search for both names. In our range, the A-frame sign is the frame with replaceable printed panels, so the message can change. The sandwich board sign has the artwork printed directly onto the boards for a fixed, longer-lasting message. Both are quoted from your artwork and size.' },
       { q: 'Can an A-frame sign be used outdoors?', a: 'Yes, that is what it is made for. Place it where it cannot be knocked into foot traffic, and bring it in during strong wind. Tell us if it will stay out overnight or in a wet climate so the quote can recommend the right frame and panel material.' },
       { q: 'What artwork file format do you accept?', a: 'A single-page PDF or JPEG built to the finished panel size at 150dpi in CMYK, with fonts converted to outlines and no crop marks. We check every file at no charge and send a free proof before anything is printed.' },
-      { q: 'Do you ship A-frame signs to Canada and the US?', a: 'Yes. We ship across the United States and Canada. Delivery cost and timing are confirmed with your quote.' }
+      { q: 'Do you ship A-frame signs to Canada and the US?', a: 'Yes. We ship across the United States and Canada. Delivery cost and timing are confirmed with your quote.' },
+      { q: 'What is an a frame sign used for?', a: 'It is the sidewalk sign set outside a door: two panels on a hinged frame, readable from both sides, that fold flat to bring inside. Listed uses include a shop, café or salon offer, event welcome and registration, open-house and real estate signs, and trade show wayfinding.' },
+      { q: 'Are a frame signs suitable for outdoor use?', a: 'Yes. Place the sign where it cannot be knocked into foot traffic, and bring it in during strong wind. If it will stay out overnight or in a wet climate, say so on the quote so the frame and panel material can be recommended. No weights, anchors or lock are included unless you ask for them.' },
+      { q: 'How can a sidewalk sign help my business stand out?', a: 'A 24" x 36" panel is the size for a pavement sign read from a few steps away. An 18" x 24" panel suits a counter, doorway or event table. Both faces can carry the same artwork or two different messages, and the panels are replaceable when the offer changes.' }
     ],
     specs: [
       ['Type', 'Folding two-panel A-frame (sidewalk sign)'],
@@ -3055,9 +3146,15 @@ const products = [
       'No weights, anchors or lock — tell us if you need them and we will quote them.'
     ],
     turnaround: 'Production and delivery timing are confirmed with your quote.',
-    seoTitle: 'Custom A-Frame Signs | Sidewalk Sign Stands',
+    seoTitle: 'A Frame Sign',
+    h1: 'A Frame Sign for Sidewalks and Events',
     seoDescription:
-      'Custom A-frame signs: folding sidewalk sign frames with printed 18 x 24 or 24 x 36 panels, outdoor-ready and replaceable. Free artwork proof. Request a quote.',
+      'Get an a frame sign that helps attract attention and share your message. Explore display options with shipping across US & Canada.',
+    productSections: [
+      { h2: 'A Frame Signs for Business and Events', p: 'An A-frame is two printed panels on a hinged frame. It stands in an A, reads from both sides, and folds flat for storage. Panel sizes are 18" x 24", 24" x 36", or a custom size. The same artwork can go on both faces, or each face can carry a different message.' },
+      { h2: 'Use a Sidewalk Sign to Catch Attention', p: 'This is the sidewalk sign set outside a door. 24" x 36" is the pavement size read from a few steps away. 18" x 24" suits a counter, doorway or event table. The panels are replaceable inserts, so a new offer is a new set of panels rather than a new frame.' },
+      { h2: 'Display Your Message Where Customers Walk', p: 'Listed placements are a shop, café or salon pavement, an event entrance or registration table, open-house and real estate signs that move between properties, and trade show wayfinding. Use is indoor or outdoor. Bring the sign in during strong wind, and tell us if it will stay out overnight or in a wet climate so the quote can recommend the frame.' }
+    ],
     related: ['sandwich-board-sign', 'coroplast-signs', 'acp-aluminum-signs'],
     pricing: {
       model: 'configured',
@@ -3209,7 +3306,10 @@ const products = [
       { q: 'What size table runner do I need?', a: 'Match the length to the table: 72" suits a 6 ft table and 96" an 8 ft table, and the width sets how much of the table top it covers. Choose a width from 14" to 30" or ask for a custom size. If you are not sure which table the venue supplies, ask the show\'s exhibitor services before printing.' },
       { q: 'Is it suitable for trade shows and events?', a: 'Yes, that is what it is most often ordered for. It folds small and travels in the show case, and it brands the table for conferences, vendor markets, expos, weddings and corporate events. Order it with a matching banner stand or table cover so the booth reads as one brand.' },
       { q: 'What artwork file formats do you accept?', a: 'A print-ready vector file (AI, EPS or PDF) with fonts converted to outlines. A high-resolution CMYK image works for a photographic design. We check every file at no charge and send a free proof before anything is printed.' },
-      { q: 'Do you ship custom table runners to Canada and the US?', a: 'Yes. We ship across the United States and Canada. Delivery cost and timing are confirmed with your quote.' }
+      { q: 'Do you ship custom table runners to Canada and the US?', a: 'Yes. We ship across the United States and Canada. Delivery cost and timing are confirmed with your quote.' },
+      { q: 'What table runner sizes are available?', a: 'Lengths are 72" for a 6 ft table, 96" for an 8 ft table, or a custom length. Widths are 14", 18", 24", 30", or a custom width.' },
+      { q: 'Should I choose a fitted or draped table runner?', a: 'A table runner is not fitted or draped. It is a printed strip laid along the table top, and it leaves the edges of the table clear. Fitted describes the stretch table cover, and draped describes the pleated throw. Both of those cover all four sides.' },
+      { q: 'How do I clean a printed table runner?', a: 'Fabric and finish are confirmed with your quote, so this page does not publish a wash method. Ask for the care note when the fabric for your runner is confirmed.' }
     ],
     specs: [
       ['Product', 'Printed fabric table runner'],
@@ -3252,9 +3352,15 @@ const products = [
       'No table, no table cover — see Table Covers for a full cover.'
     ],
     turnaround: 'Production and delivery timing are confirmed with your quote.',
-    seoTitle: 'Custom Table Runners with Your Logo',
+    seoTitle: 'Custom Table Runner',
+    h1: 'Custom Table Runner',
     seoDescription:
-      'Custom table runners with your logo for trade show and event tables. 6 ft and 8 ft lengths, full-colour print, free artwork proof. Request a quote.',
+      'Order a custom table runner with your branding for a trade show or event table. Shipping to US & Canada.',
+    productSections: [
+      { h2: 'Design Custom Table Runners for Your Brand', p: 'Print a logo once at the front, repeat it along the length, or run a full design edge to edge. The print is full colour. The quote comes back with a proof that shows where the logo lands.' },
+      { h2: 'Branded Table Runners for Events and Promotions', p: 'A runner is the lighter way to brand a table: it folds small in the show case, sits under products or a brochure holder, and works on its own or on top of a table cover. Listed uses include trade show tables, vendor and craft-fair tables, and conference, registration and sponsor tables.' },
+      { h2: 'Choose a Trade Show Table Runner for Your Display', p: 'Match the length to the table: 72" for 6 ft, 96" for 8 ft, or a custom length. Widths are 14", 18", 24" or 30", or a custom width. If you are not sure which table the venue supplies, confirm the length before the proof is approved.' }
+    ],
     related: ['pleated-table-covers', 'stretch-table-covers', 'standard-retractable-banner'],
     pricing: {
       model: 'configured',

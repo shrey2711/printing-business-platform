@@ -5,6 +5,7 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 import { useMoney } from '../context/CurrencyContext';
 import { brand } from '../config/brand';
 import BoothScene from '../components/BoothScene';
+import ContextLinks from '../components/ContextLinks';
 import {
   BOOTH_PACKAGES_META, BOOTH_PACKAGES, SHOP_INDIVIDUALLY,
   BOOTH_USE_CASES, BOOTH_FAQS, BOOTH_COMPONENT_SLUGS
@@ -77,6 +78,7 @@ export default function BoothPackagesPage() {
           Prefer to buy one product? Every item below is sold individually, with its own price and
           checkout.
         </p>
+        <ContextLinks path="/trade-show-booth-packages" />
         <div className="hero-actions" style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
           <Link className="btn btn-red" to="/products">Shop all products</Link>
           <Link className="btn btn-outline" to="/quote">Request a booth quote</Link>

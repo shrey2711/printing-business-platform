@@ -882,6 +882,7 @@ routes.push(() => {
     <p>Need a whole booth, not just one piece? These packages combine Apex products that work well
     together — canopy tents, banner stands, table covers and backdrops, all printed to match. Every
     item is also sold individually, with its own price and checkout — you never have to buy a bundle.</p>
+    ${contextLinksHtml('/trade-show-booth-packages')}
     <h2>Buy the whole booth, or any single product</h2>
     <p>${shopLinks}</p>
     <h2>Recommended booth packages</h2>
@@ -1416,6 +1417,7 @@ for (const summary of productList) {
       <h1>${esc(seoTitle.h1)}</h1>
       ${shotsHtml}
       <p>${esc(product.description)}</p>
+      ${contextLinksHtml(`/products/${product.slug}`)}
       <p>${startingPrice != null
         ? `<strong>Starting at $${startingPrice}${priceDisp.startingNote ? ` — ${esc(priceDisp.startingNote.toLowerCase())}` : ''}.</strong>${priceDisp.full ? ` ${esc(priceDisp.full.label)}: $${priceDisp.full.price}.` : ''}`
         : `<strong>Request a quote for pricing.</strong>`} ${esc(product.turnaround)}</p>
