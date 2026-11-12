@@ -44,9 +44,11 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/banner-summit-outdoors.webp',
     publishedAt: '2026-08-10T00:00:00.000Z',
-    updatedAt: '2026-08-10T00:00:00.000Z',
+    updatedAt: '2026-11-12T00:00:00.000Z',
     html: `
 <p>Both of Apex's roll-up banner stands print the same size graphic — <strong>33″ wide × 81″ tall</strong> — and both roll that graphic into an aluminum base that pops up in seconds with no tools. So the choice between the <a href="/products/standard-retractable-banner">Standard Retractable Banner Stand</a> and the <a href="/products/deluxe-retractable-banner">Deluxe Retractable Banner Stand</a> is not about size or print. It's about the <em>hardware</em> underneath the graphic: how it looks up close, how well it travels, and how many shows it will live through.</p>
+
+<p>Both of these stands are 33″ × 81″, so the comparison here is the base, not the footprint. A counter needs the smaller tabletop size, and a wider aisle graphic is the 47″ floor stand — <a href="/blog/what-size-retractable-banner">what size retractable banner to buy</a> compares those.</p>
 
 <p>Here is how the two actually differ, and who each one is for.</p>
 
@@ -692,7 +694,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-02T00:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-12T00:00:00.000Z',
     html: `
 <p>All three Apex canopies are the same commercial-grade, dye-sublimated tent on a heavy-duty aluminum hex frame. They differ in <strong>footprint, price and how much branding surface</strong> you get. Here's the side-by-side.</p>
 
@@ -727,6 +729,7 @@ export const STATIC_ARTICLES = [
   <li>Need a second table or a display → <strong>10×15</strong>.</li>
   <li>Want maximum shade, branding and a double footprint → <strong>10×20</strong>.</li>
 </ul>
+<p>If the vendor packet does not spell out the footprint, <a href="/blog/how-to-choose-canopy-tent-size">how to choose a canopy tent size</a> starts from the space you are given, the tables, and how many people work the stand.</p>
 <p>Ordering <strong>3 or more</strong> of any size drops the per-tent price automatically.</p>
 
 <h3>Frequently asked questions</h3>

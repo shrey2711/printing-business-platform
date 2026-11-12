@@ -16,6 +16,17 @@ const cardPreview = {
 };
 const sizeKey = (s) => s.replace('canopy-tent-', '');
 
+// Guide copy is a string, or a list of strings and { to, label } links. The
+// prerenderer (inlineHtml in scripts/prerender.mjs) emits the same markup.
+function guideCopy(value) {
+  const parts = Array.isArray(value) ? value : [value];
+  return parts.map((part, i) => (
+    typeof part === 'string' || part == null
+      ? part
+      : <Link key={i} to={part.to}>{part.label}</Link>
+  ));
+}
+
 // Indexable category / collection landing page. Mirrors the prerendered HTML in
 // scripts/prerender.mjs (same content + BreadcrumbList + ItemList schema).
 export default function CategoryPage({ slug }) {
@@ -225,7 +236,7 @@ export default function CategoryPage({ slug }) {
       {page.guide?.length > 0 && page.guide.map((g) => (
         <section className="section-block" key={g.h2}>
           <h2>{g.h2}</h2>
-          <p>{g.p}</p>
+          <p>{guideCopy(g.p)}</p>
         </section>
       ))}
 

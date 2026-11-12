@@ -15,8 +15,11 @@ import { BLOG_LISTING_PAGE_COUNT } from './src/generated/blogListing.js';
 import { resolveBlogListingQuery } from './src/lib/blogPagination.js';
 import { GONE_PATHS } from './src/data/goneLocations.js';
 
-// Skip the API and the three directories that hold real static files:
-// /assets (hashed build output), /images and /templates.
+// Skip the API and the directories of hashed or bulk static files:
+// /assets (hashed build output), /images and /templates. The display font
+// lives under /fonts/ and is NOT skipped here — it is listed in STATIC_FILES
+// (generated from dist/fonts) so the real woff2 is served and an unknown
+// /fonts/*.woff2 still 404s instead of falling through to the SPA.
 //
 // This used to exclude every path ending in a file extension, which was a hole:
 // an unknown /anything.html never reached the 404 below, fell through to the SPA
@@ -131,10 +134,11 @@ export default function middleware(request) {
     }
   }
 
-  // 2) A path carrying a file extension is either a real root-level file
-  //    (favicon, robots.txt, a sitemap, feed.xml) or it is junk. Serve the
-  //    first, 404 the second. Asset directories never get here — the matcher
-  //    excludes them — so this list only has to cover the root of the build.
+  // 2) A path carrying a file extension is either a real static file
+  //    (favicon, robots.txt, a sitemap, feed.xml, the display font) or it is
+  //    junk. Serve the first, 404 the second. /assets, /images and /templates
+  //    never get here — the matcher excludes them. /fonts/ does, and
+  //    STATIC_FILES lists the files the build actually emitted there.
   if (/\.[A-Za-z0-9]+$/.test(path)) {
     if (STATIC_FILES.has(path)) return;
     return new Response(notFoundHtml(url.origin), {

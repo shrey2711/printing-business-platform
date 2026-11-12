@@ -9,10 +9,9 @@
 // Page 2+ must NOT canonicalise to /blog. That would collapse every slice into
 // the first page and is the bug this module exists to prevent.
 //
-// rel=prev/next point at the canonical URL of the neighbour, so the previous
-// link from page 2 is /blog rather than /blog?page=1 (a redirect). The visible
-// controls still use /blog?page=N, including page 1, so each control is a real
-// crawlable URL.
+// rel=prev/next and the visible controls (numbered pages, Previous, Next) all
+// use the canonical URL of the neighbour. Page 1 is /blog. Linking it as
+// /blog?page=1 would send crawlers through the 301.
 
 export const BLOG_PAGE_SIZE = 12;
 
@@ -46,9 +45,9 @@ export function blogCanonicalPath(page) {
   return page <= 1 ? '/blog' : `/blog?page=${page}`;
 }
 
-/** Href for a numbered / previous / next control. Always carries ?page=. */
+/** Href for a numbered / previous / next control. Page 1 is the bare /blog. */
 export function blogPageHref(page) {
-  return `/blog?page=${page}`;
+  return page <= 1 ? '/blog' : `/blog?page=${page}`;
 }
 
 /**
