@@ -16,7 +16,8 @@ import { territories, slugify } from '../src/data/states.js';
 import { brand } from '../src/config/brand.js';
 // Size / use-case landing pages target the winnable long tail (size x use case
 // x location) — head terms belong to 15-20 year old domains.
-import { SIZES, SOLUTIONS } from '../src/data/canopy.js';
+import { SIZES } from '../src/data/canopy.js';
+import { SOLUTIONS, splitRich } from '../src/data/solutions.js';
 import { applyMeta } from './lib/seo-meta.mjs';
 import { PAGES } from '../src/data/pages.js';
 import { CATEGORY_PAGES, SUBCATEGORIES } from '../src/data/categoryPages.js';
@@ -83,6 +84,11 @@ function inlineHtml(value) {
     return '';
   }).join('');
 }
+
+// [[/path|label]] in solution copy. Same splitter the React page uses.
+const richHtml = (text) => splitRich(text).map((part) =>
+  part.to ? `<a href="${esc(part.to)}">${esc(part.label)}</a>` : esc(part.text)
+).join('');
 
 // Keep SEO titles within ~60 chars. Source strings hold raw "&", so .length
 // equals the rendered length. Drop the optional tail first, then the brand
@@ -1186,43 +1192,52 @@ for (const size of SIZES) {
 }
 
 // ---- Use-case (solution) landing pages ----
+// Body blocks mirror src/pages/SolutionPage.jsx. Keep the two in step.
 for (const sol of SOLUTIONS) {
   routes.push(() => {
     const g = sol.guide;
-    const others = SOLUTIONS.filter((s) => s.slug !== sol.slug);
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/custom-canopies">Custom Canopies</a> / <span>${esc(sol.title)}</span></nav>
+      <p class="eyebrow">${esc(g.eyebrow)}</p>
       <h1>${esc(sol.title)}</h1>
-      <p>${esc(g.intro)}</p>
-      <h2>What matters for ${esc(sol.title.toLowerCase())}</h2>
+      <p>${esc(sol.blurb)}</p>
+      <p>${richHtml(g.intro)}</p>
+      <p><a href="${esc(g.primaryCta.to)}">${esc(g.primaryCta.label)}</a> <a href="/quote">Ask about bulk orders</a></p>
+      <img src="${esc(g.photo.src)}" alt="${esc(g.photo.alt)}" width="1200" height="900">
+      <h2>${esc(g.focusHeading)}</h2>
       <ul>${g.focus.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
-      <h2>Choosing a size</h2>
-      <p>${esc(g.sizing)}</p>
-      <ul>${SIZES.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a></li>`).join('')}</ul>
-      <h2>Wall &amp; print setup</h2>
-      <p>${esc(g.walls)}</p>
-      ${g.care ? `<h2>Setup, care &amp; durability</h2>\n      <p>${esc(g.care)}</p>` : ''}
-      <h2>Order your ${esc(sol.title.toLowerCase().replace(/ tents$/, ' tent'))}</h2>
-      <p>Pick a size and configure walls, print and delivery for an instant price:</p>
-      <ul>${coreProducts.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> — ${priceFrom(p)}</li>`).join('')}</ul>
-      <h2>Other uses</h2>
-      <ul>${others.map((s) => `<li><a href="/solutions/${s.slug}">${esc(s.title)}</a></li>`).join('')}</ul>`;
+      ${g.sections.map((sec) => `<h2>${esc(sec.h2)}</h2>${sec.paragraphs.map((p) => `<p>${richHtml(p)}</p>`).join('')}`).join('')}
+      <h2>${esc(g.faqHeading)}</h2>
+      ${g.faqs.map((f) => `<details class="faq-item"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}
+      <h2>${esc(g.relatedHeading)}</h2>
+      <p>${richHtml(g.relatedLead)}</p>`;
     return render({
       path: `/solutions/${sol.slug}`,
       title: fitTitle(sol.title, ' — Custom Printed'),
       description: g.metaDescription,
-      image: CANOPY_OG,
-      imageAlt: `${sol.title} — custom printed canopy tents by ${BRAND}`,
+      image: g.photo.src,
+      imageAlt: g.photo.alt,
       body,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'Custom Canopies', item: `${ORIGIN}/custom-canopies` },
-          { '@type': 'ListItem', position: 3, name: sol.title, item: `${ORIGIN}/solutions/${sol.slug}` }
-        ]
-      }
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+            { '@type': 'ListItem', position: 2, name: 'Custom Canopies', item: `${ORIGIN}/custom-canopies` },
+            { '@type': 'ListItem', position: 3, name: sol.title, item: `${ORIGIN}/solutions/${sol.slug}` }
+          ]
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: g.faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a }
+          }))
+        }
+      ]
     });
   });
 }
@@ -2086,7 +2101,7 @@ const smPages = [
   smUrl('/quote', '0.4', undefined, lm('/quote', [block(/path: '\/quote'/)])),
   smUrl('/contact', '0.4', undefined, lm('/contact', [block(/path: '\/contact'/)])),
   ...SIZES.map((s) => smUrl(`/sizes/${s.slug}`, '0.7', undefined, lm(`/sizes/${s.slug}`, [rec('src/data/canopy.js', s.slug)]))),
-  ...SOLUTIONS.map((s) => smUrl(`/solutions/${s.slug}`, '0.6', undefined, lm(`/solutions/${s.slug}`, [rec('src/data/canopy.js', s.slug)]))),
+  ...SOLUTIONS.map((s) => smUrl(`/solutions/${s.slug}`, '0.6', undefined, lm(`/solutions/${s.slug}`, [rec('src/data/solutions.js', s.slug)]))),
   // Indexable trust pages (stub policy pages are noindex and excluded).
   ...PAGES.filter((p) => !p.stub).map((p) => smUrl(`/${p.slug}`, '0.4', undefined, lm(`/${p.slug}`, [rec('src/data/pages.js', p.slug)])))
 ];
