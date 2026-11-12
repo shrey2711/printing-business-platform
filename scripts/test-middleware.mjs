@@ -66,6 +66,12 @@ check('an old affiliate URL 404s', () => expect404('/ejaculation-trainer-alpha-p
 check('an unknown .xml path 404s', () => expect404('/not-a-real-sitemap.xml'));
 check('a fake verification file 404s', () => expect404('/google1234567890abcdef.html'));
 check('a made-up asset path 404s', () => expect404('/logo.png'));
+check('an unknown font file 404s', () => expect404('/fonts/not-a-real-font.woff2'));
+check('the display font is in the static manifest and is served', () => {
+  const path = '/fonts/plus-jakarta-sans-latin-500-800.woff2';
+  if (!STATIC_FILES.has(path)) return `${path} is missing from STATIC_FILES — production middleware would 404 the preloaded font`;
+  return expectServed(path);
+});
 
 // --- and the things that must keep working ----------------------------------
 check('every real root file is served', () => {

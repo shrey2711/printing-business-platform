@@ -93,7 +93,7 @@ check('resolver: bare, page=1, in-range, invalid, out of range', () => {
 check('canonicals do not collapse later pages onto /blog', () => {
   if (blogCanonicalPath(1) !== '/blog') return `page 1 canonical ${blogCanonicalPath(1)}`;
   if (blogCanonicalPath(2) !== '/blog?page=2') return `page 2 canonical ${blogCanonicalPath(2)}`;
-  if (blogPageHref(1) !== '/blog?page=1') return `page 1 href ${blogPageHref(1)}`;
+  if (blogPageHref(1) !== '/blog') return `page 1 href ${blogPageHref(1)}`;
   if (blogPageHref(2) !== '/blog?page=2') return `page 2 href ${blogPageHref(2)}`;
   const rels = blogRelLinks(ORIGIN, 2, 3);
   const prev = rels.find((r) => r.rel === 'prev');
@@ -101,9 +101,13 @@ check('canonicals do not collapse later pages onto /blog', () => {
   if (!prev || prev.href !== `${ORIGIN}/blog`) return `page 2 prev should be the bare /blog, got ${prev && prev.href}`;
   if (!next || next.href !== `${ORIGIN}/blog?page=3`) return `page 2 next ${next && next.href}`;
   const buttons = paginationLinks(2, 3);
-  if (buttons.pages.map((p) => p.href).join(' ') !== '/blog?page=1 /blog?page=2 /blog?page=3') {
+  if (!buttons.prev || buttons.prev.href !== '/blog') return `page 2 Previous ${buttons.prev && buttons.prev.href}`;
+  if (buttons.pages.map((p) => p.href).join(' ') !== '/blog /blog?page=2 /blog?page=3') {
     return `button hrefs ${buttons.pages.map((p) => p.href).join(' ')}`;
   }
+  const last = paginationLinks(3, 3);
+  if (last.pages[0].href !== '/blog') return `page 3 number 1 ${last.pages[0].href}`;
+  if (!last.prev || last.prev.href !== '/blog?page=2') return `page 3 Previous ${last.prev && last.prev.href}`;
   return null;
 });
 
@@ -208,6 +212,10 @@ check('prerendered listing pages exist with self-canonicals and distinct slices'
     if (n < BLOG_LISTING_PAGE_COUNT && relNext !== `${ORIGIN}${blogCanonicalPath(n + 1)}`) return `page ${n} rel=next ${relNext}`;
     if (n === BLOG_LISTING_PAGE_COUNT && relNext) return `last page has rel=next ${relNext}`;
     if (BLOG_LISTING_PAGE_COUNT > 1 && !html.includes('href="/blog?page=')) return `${file} pagination is not a real ?page= link`;
+    if (html.includes('href="/blog?page=1"') || html.includes('href="/blog?page=1&')) return `${file} links page 1 as /blog?page=1`;
+    if (n === 1 && !html.includes('<a href="/blog" aria-current="page">1</a>')) return `${file} current page 1 is not /blog`;
+    if (n > 1 && !html.includes('<a href="/blog">1</a>')) return `${file} numbered 1 does not point at /blog`;
+    if (n === 2 && !html.includes('<a href="/blog">Previous</a>')) return `${file} Previous does not point at /blog`;
   }
   const indexableStatic = postsForBlogIndex(STATIC_ARTICLES).length;
   if (seen.size < Math.min(indexableStatic, BLOG_PAGE_SIZE)) return `only ${seen.size} articles across listing pages`;
