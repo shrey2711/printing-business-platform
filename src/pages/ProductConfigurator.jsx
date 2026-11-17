@@ -11,6 +11,7 @@ import ProductGallery from '../components/ProductGallery';
 import AccessoriesSection, { BANNER_ACCESSORIES } from '../components/AccessoriesSection';
 import EmailCapture from '../components/EmailCapture';
 import ProductReviews from '../components/ProductReviews';
+import ContextLinks from '../components/ContextLinks';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import { getCategoryForProduct } from '../data/categoryPages';
 import { guidesForCategory, GUIDE_TITLES } from '../data/internalLinks';
@@ -407,6 +408,7 @@ export default function ProductConfigurator({ slug: slugProp, embedded = false }
               ? <h3 className="config-title">{product.name}</h3>
               : <h1>{product.h1 || product.name}</h1>}
             <p className="lead">{product.description}</p>
+            {!embedded && <ContextLinks path={`/products/${product.slug}`} />}
             <ul className="feature-list">
               {product.features.map((f) => (
                 <li key={f}>{f}</li>
