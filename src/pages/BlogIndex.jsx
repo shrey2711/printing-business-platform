@@ -12,6 +12,7 @@ import {
   blogListingTitle,
   blogListingDescription,
   blogListingLead,
+  blogListingDigest,
   paginationLinks,
   blogListingJsonLd,
   applyBlogListingDocumentMeta,
@@ -135,7 +136,11 @@ export default function BlogIndex() {
     window.scrollTo(0, 0);
   }, [page, notFound]);
 
-  const lead = blogListingLead(page, pageCount || 1);
+  const leadPosts = Array.isArray(slice) ? slice : [];
+  const lead = blogListingLead(page, pageCount || 1, leadPosts);
+  const digest = !notFound && leadPosts.length
+    ? blogListingDigest(page, pageCount || 1, leadPosts)
+    : null;
 
   return (
     <main className="page" data-blog-page={notFound ? undefined : page}>
@@ -152,6 +157,18 @@ export default function BlogIndex() {
           </p>
         )}
       </section>
+
+      {digest && (
+        <section className="blog-page-digest">
+          <h2>{digest.heading}</h2>
+          <p>{digest.intro}</p>
+          <ol>
+            {digest.items.map((item) => (
+              <li key={item.slug || item.title}><strong>{item.title}</strong>{item.detail ? ` ${item.detail}` : ''}</li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       {notFound ? (
         <p><Link to="/blog">Back to the blog</Link></p>

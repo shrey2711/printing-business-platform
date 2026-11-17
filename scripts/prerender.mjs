@@ -54,6 +54,7 @@ import {
   blogListingTitle,
   blogListingDescription,
   blogListingLead,
+  blogListingDigest,
   paginationLinks,
   blogRelLinks,
   blogListingJsonLd
@@ -1907,9 +1908,19 @@ function blogPaginationNav(page) {
   return `<nav class="blog-pagination" aria-label="Blog pages">${parts.join('')}</nav>`;
 }
 
+function blogListingDigestHtml(page) {
+  const slice = sliceBlogPage(listingPosts, page);
+  const digest = blogListingDigest(page, blogListingPageCount, slice);
+  if (!digest) return '';
+  const lines = digest.items
+    .map((item) => `<li><strong>${esc(item.title)}</strong>${item.detail ? ` ${esc(item.detail)}` : ''}</li>`)
+    .join('');
+  return `<section class="blog-page-digest"><h2>${esc(digest.heading)}</h2><p>${esc(digest.intro)}</p><ol>${lines}</ol></section>`;
+}
+
 function blogListingDocument(page) {
   const slice = sliceBlogPage(listingPosts, page);
-  const lead = blogListingLead(page, blogListingPageCount);
+  const lead = blogListingLead(page, blogListingPageCount, slice);
   const title = blogListingTitle(page, BRAND);
   const description = blogListingDescription(page);
   const items = slice
@@ -1934,6 +1945,7 @@ function blogListingDocument(page) {
         posts: slice.map((p) => ({
           slug: p.slug,
           title: p.title,
+          excerpt: p.excerpt || '',
           coverUrl: p.coverUrl || null,
           tags: p.tags || [],
           publishedAt: p.publishedAt || null
@@ -1958,6 +1970,7 @@ function blogListingDocument(page) {
     body: `<div data-blog-page="${page}"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>
       <h1>Apex Trade Show Blog</h1>
       <p>${esc(lead.before)}<a href="/resources">${esc(lead.link)}</a>${esc(lead.after)}</p>
+      ${blogListingDigestHtml(page)}
       <h2>${page === 1 ? 'Latest articles' : `Articles, page ${page}`}</h2>
       ${nav}
       <ul class="blog-index-list">${items || '<li>Articles coming soon.</li>'}</ul>

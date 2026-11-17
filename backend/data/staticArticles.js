@@ -44,7 +44,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/banner-summit-outdoors.webp',
     publishedAt: '2026-08-10T00:00:00.000Z',
-    updatedAt: '2026-11-12T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p>Both of Apex's roll-up banner stands print the same size graphic — <strong>33″ wide × 81″ tall</strong> — and both roll that graphic into an aluminum base that pops up in seconds with no tools. So the choice between the <a href="/products/standard-retractable-banner">Standard Retractable Banner Stand</a> and the <a href="/products/deluxe-retractable-banner">Deluxe Retractable Banner Stand</a> is not about size or print. It's about the <em>hardware</em> underneath the graphic: how it looks up close, how well it travels, and how many shows it will live through.</p>
 
@@ -98,7 +98,7 @@ export const STATIC_ARTICLES = [
 <p><strong>Are the two stands the same size?</strong> Yes — both print a 33″ × 81″ graphic. The difference is the base hardware, not the display size.</p>
 <p><strong>Can I replace the graphic later?</strong> Yes, on both. The banner is replaceable, so you keep the hardware and only reprint when your message changes.</p>
 <p><strong>Which one is more durable?</strong> The Deluxe — heavier aluminum, chrome-style end caps and a padded bag make it the better choice for frequent travel and repeated setup.</p>
-<p><strong>How do I get pricing?</strong> Request a quote with your artwork and quantity and we'll send pricing and a free proof before production.</p>
+<p><strong>How do I get pricing?</strong> The Standard and Deluxe stands are quoted from the artwork and the quantity you need. That quote includes the price and a free proof, and nothing is produced until you approve it.</p>
 
 <p>Ready to pick one? Compare them directly — the <a href="/products/standard-retractable-banner">Standard Retractable Banner Stand</a> and the <a href="/products/deluxe-retractable-banner">Deluxe Retractable Banner Stand</a> — or see the full <a href="/banner-stands">banner stands range</a> and the rest of our <a href="/trade-show-displays">trade show displays</a>.</p>
 `
@@ -122,7 +122,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/xstand-volt.webp',
     publishedAt: '2026-08-11T00:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p>Both the <a href="/products/x-stand-banner">X-Stand banner</a> and a <a href="/products/standard-retractable-banner">retractable banner stand</a> put a tall printed graphic beside your booth and set up in seconds without tools. The difference is how the banner is held up — and that one difference drives cost, durability and how the display looks.</p>
 
@@ -161,7 +161,7 @@ export const STATIC_ARTICLES = [
 <h3>Frequently asked questions</h3>
 <p><strong>Is the X-Stand a retractable banner?</strong> No — it uses a collapsible X-frame and a grommet-mounted banner, not a roll-up cassette. It's lighter and more economical.</p>
 <p><strong>Which lasts longer?</strong> A retractable generally protects the graphic better because it rolls into the base; an X-Stand's banner travels exposed.</p>
-<p><strong>How do I get pricing?</strong> Request a quote with your artwork and quantity and we'll send pricing and a free proof before production.</p>
+<p><strong>How do I get pricing?</strong> Price the X-stand and the retractable on their own quotes. Send the artwork and how many of each stand you want; the reply has the price and a free proof, and production waits for your approval.</p>
 
 <p>Compare them yourself: the <a href="/products/x-stand-banner">X-Stand Banner</a> and the <a href="/products/standard-retractable-banner">Standard Retractable Banner</a>, or browse all <a href="/banner-stands">banner stands</a> and <a href="/trade-show-displays">trade show displays</a>.</p>
 `
@@ -185,7 +185,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/xstand-sunset-yoga.webp',
     publishedAt: '2026-08-12T00:00:00.000Z',
-    updatedAt: '2026-08-12T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p>Retractable banners come in two very different heights, and picking the right one is mostly about <em>where the banner will stand</em> — on the floor beside your booth, or on a table or counter. Here's how the Apex sizes map to those spots.</p>
 
@@ -217,7 +217,7 @@ export const STATIC_ARTICLES = [
 <h3>Frequently asked questions</h3>
 <p><strong>Can I get a size between the two?</strong> Ask about other sizes when you request a quote and we'll tell you what's available for your artwork.</p>
 <p><strong>Is the tabletop a retractable too?</strong> Yes — it's a compact retractable with a small aluminum base and a replaceable graphic.</p>
-<p><strong>How do I get pricing?</strong> Request a quote with your size, artwork and quantity and we'll send pricing and a free proof.</p>
+<p><strong>How do I get pricing?</strong> Name the size you want — tabletop 11.5″ × 17.5″ or a floor stand — along with the artwork and quantity. The reply includes the price and a free proof.</p>
 
 <p>See the <a href="/products/table-top-banner-stand">Table Top</a>, <a href="/products/standard-retractable-banner">Standard</a> and <a href="/products/deluxe-retractable-banner">Deluxe</a> stands, or browse all <a href="/banner-stands">banner stands</a>.</p>
 `
@@ -454,7 +454,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-17T00:00:00.000Z',
-    updatedAt: '2026-08-17T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p>"How much is a trade show display?" depends on which pieces you need. Here are Apex's real starting prices so you can budget honestly — no bundle gimmicks, no invented numbers. Most products configure for an instant price online; a few (like the tabletop banner) are quoted per order.</p>
 
@@ -477,7 +477,7 @@ export const STATIC_ARTICLES = [
     <tr><td><a href="/seg-displays">SEG modular kits &amp; large custom displays</a></td><td>Quoted per order</td></tr>
   </tbody>
 </table>
-<p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" is the custom-printed fabric top on its own (for customers who already have a compatible frame); the "Complete Canopy Set" adds the aluminum frame and carry bag — the difference is explained on each product page. Prices above are the starting (from) price for each product; the final price depends on the size, options and production speed you choose.</p>
+<p>Canopy prices are per unit and drop when you order three or more. "Printed Canopy Top Only" means the fabric top by itself, for a frame you already own; the "Complete Canopy Set" adds the aluminum frame and carry bag — the difference is explained on each product page. Prices above are the starting (from) price for each product; the final price depends on the size, options and production speed you choose.</p>
 
 <figure class="blog-fig">
   <img src="/images/displays/standard-retractable-banner.webp" alt="Apex standard retractable banner stand, one piece of a trade show booth budget" loading="lazy" decoding="async" width="900" height="700">
@@ -485,7 +485,7 @@ export const STATIC_ARTICLES = [
 </figure>
 
 <h2>Instant pricing vs quote-only</h2>
-<p>Canopy tents, banner stands (standard, deluxe and X-stand), step &amp; repeat backdrops and table covers all configure for an instant online price — choose your options and the price updates live. A few items, such as the tabletop banner stand and large or non-standard bulk orders, are quoted per order: <a href="/quote">request a quote</a> with your artwork and quantity and we'll send pricing and a free proof before anything prints.</p>
+<p>Canopy tents, banner stands (standard, deluxe and X-stand), step &amp; repeat backdrops and table covers all configure for an instant online price — choose your options and the price updates live. A few items, such as the tabletop banner stand and large or non-standard bulk orders, are quoted per order. Use the <a href="/quote">quote form</a> for those and include the artwork and the quantity, so the reply can show the price and the free proof before anything is printed.</p>
 
 <h2>Budgeting a complete booth</h2>
 <p>A full booth is the sum of its pieces, not a discounted bundle — each product keeps its own price and configuration. A simple outdoor setup might be a 10×10 canopy plus a table cover; a larger booth adds banner stands and a backdrop. See how the pieces fit together in the <a href="/blog/trade-show-booth-checklist">booth checklist</a>, or browse recommended combinations on the <a href="/trade-show-booth-packages">booth packages</a> page. For a full-booth total, <a href="/quote">request a quote</a> listing everything you need.</p>
@@ -547,9 +547,9 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-05T00:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
-<p class="answer-block"><strong>Short answer:</strong> For most exhibitors, a 10×10 canopy with a printed top, a back wall and one side wall covers a single booth. Choose the complete set (printed top + aluminum frame + carry bag) unless you already own a compatible frame, allow 6–8 business days production (2–3 with rush) plus transit, and approve the free proof before anything prints.</p>
+<p class="answer-block"><strong>Short answer:</strong> For most exhibitors, a 10×10 canopy with a printed top, a back wall and one side wall covers a single booth. Choose the complete set (printed top + aluminum frame + carry bag) unless you already own a compatible frame. Standard production is 6–8 business days and rush is 2–3; add transit on top of that, and approve the free proof before anything prints.</p>
 <p>Everything to decide before ordering a custom printed canopy tent — size, what you get, walls, print, delivery speed and artwork.</p>
 <h2>1. Size</h2>
 <p>Pick by table count and booth space — 10×10 (standard), 10×15 (more room), 10×20 (double booth). See <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">what size to buy</a>.</p>
@@ -559,13 +559,13 @@ export const STATIC_ARTICLES = [
   <li><strong>Printed Canopy Top Only</strong> — the custom-printed fabric top on its own (no frame, no carry bag), for customers who already have a compatible frame. Pricing varies by canopy size; see the relevant product page for current pricing.</li>
 </ul>
 <h2>3. Walls</h2>
-<p>Add up to <strong>3 printed walls total</strong> — any combination of full-height and half-height walls — for weather cover and branding. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options</a>.</p>
+<p>Walls are optional. The limit is three printed walls on one tent, mixing full-height and half-height however you like, for weather cover and branding. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options</a>.</p>
 <h2>4. Print</h2>
 <p>Every canopy is <strong>dye-sublimated</strong> — ink bonded into the fabric, so it will not crack, peel or fade in the sun.</p>
 <h2>5. Delivery speed</h2>
 <p><strong>Production</strong> is 6–8 business days (standard) or 2–3 business days (rush, +50%) after you approve your free proof. Shipping/transit time is additional and depends on your destination.</p>
 <h2>6. Quantity</h2>
-<p>Ordering <strong>3 or more</strong> drops the per-tent price automatically.</p>
+<p>At three tents or more, the price of each tent drops on its own.</p>
 <h2>7. Artwork</h2>
 <p>Upload a print-ready file or add the <strong>design service ($35)</strong>. You approve a free proof before anything prints.</p>
 <p><a href="/custom-canopies">Start configuring →</a></p>
@@ -587,7 +587,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-06T00:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p>Transparent pricing for custom printed canopy tents — what each option includes, wall costs, rush fees and volume discounts. Prices update live as you configure on the product page.</p>
 <h2>Complete Canopy Set — base price by size</h2>
@@ -601,7 +601,7 @@ export const STATIC_ARTICLES = [
   </tbody>
 </table>
 <h2>Printed Canopy Top Only</h2>
-<p>Already have a compatible frame? You can order the <strong>printed canopy top only</strong> — the custom-printed fabric top on its own, at a lower price than the complete set. Each size has its own top-only price shown live on the product page (the 10×10 top only starts at $510). It is a separate configuration, not a percentage discount off the set.</p>
+<p>Already have a compatible frame? You can order just the printed fabric top, with no frame and no carry bag, at a lower price than the complete set. Each size has its own top-only price shown live on the product page (the 10×10 top only starts at $510). It is a separate configuration, not a percentage discount off the set.</p>
 <h2>Add-ons</h2>
 <ul>
   <li><strong>Walls</strong> (up to 3 total, any mix of full or half): $275 each on 10×10, $365 each on 10×15 and 10×20.</li>
@@ -632,7 +632,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-01T00:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p>Buying the right size canopy is mostly about two things: the <strong>space you're given</strong> and <strong>what has to fit under cover</strong>. Get those right and the rest follows. Here's how to decide between a 10×10, 10×15 and 10×20 without guesswork.</p>
 
@@ -658,7 +658,7 @@ export const STATIC_ARTICLES = [
 </ul>
 
 <h2>Walls change the equation</h2>
-<p>A printed <strong>back wall</strong> turns any size into a branded backdrop, and side walls add weather cover and privacy. You can add <strong>up to 3 printed walls total</strong>, in any combination of full-height and half-height — so factor walls into your plan, not just the roof. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options explained</a>.</p>
+<p>A printed <strong>back wall</strong> turns any size into a branded backdrop, and side walls add weather cover and privacy. The same three-wall cap applies here — full-height and half-height both count toward that cap — so plan the walls with the roof. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options explained</a>.</p>
 
 <h2>A quick example</h2>
 <p>A coffee roaster doing weekend markets from one table and a grinder chose a <strong>10×10</strong> with a printed back wall — enough for the table, a queue in front, and branding overhead. When they added a second market with a full tasting bar and two staff, they moved to a <strong>10×20</strong> so the line stayed under shade.</p>
@@ -669,7 +669,7 @@ export const STATIC_ARTICLES = [
 <h3>Frequently asked questions</h3>
 <p><strong>Which size is most common?</strong> The 10×10 — it's what most events allocate by default and fits a single vendor table.</p>
 <p><strong>Can I fit two tables under a 10×10?</strong> It's tight. For two tables plus staff, choose a 10×15 or 10×20.</p>
-<p><strong>Do bigger tents cost more per unit?</strong> Yes, and walls are priced per wall — but ordering 3 or more of any size drops the per-tent price. See <a href="/blog/trade-show-display-cost">canopy pricing</a>.</p>
+<p><strong>Do bigger tents cost more per unit?</strong> Yes, and walls are priced per wall. A quantity of three or more lowers each tent's price. See <a href="/blog/trade-show-display-cost">canopy pricing</a>.</p>
 
 <p>Compare sizes and price yours: <a href="/products/canopy-tent-10x10">10×10</a>, <a href="/products/canopy-tent-10x15">10×15</a> or <a href="/products/canopy-tent-10x20">10×20</a>, or read the full <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">size comparison</a>.</p>
 `
@@ -694,7 +694,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-02T00:00:00.000Z',
-    updatedAt: '2026-11-12T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p>All three Apex canopies are the same commercial-grade, dye-sublimated tent on a heavy-duty aluminum hex frame. They differ in <strong>footprint, price and how much branding surface</strong> you get. Here's the side-by-side.</p>
 
@@ -730,7 +730,7 @@ export const STATIC_ARTICLES = [
   <li>Want maximum shade, branding and a double footprint → <strong>10×20</strong>.</li>
 </ul>
 <p>If the vendor packet does not spell out the footprint, <a href="/blog/how-to-choose-canopy-tent-size">how to choose a canopy tent size</a> starts from the space you are given, the tables, and how many people work the stand.</p>
-<p>Ordering <strong>3 or more</strong> of any size drops the per-tent price automatically.</p>
+<p>The per-tent price is lower once the order reaches three units of any of these sizes.</p>
 
 <h3>Frequently asked questions</h3>
 <p><strong>Is the 10×15 worth it over a 10×10?</strong> If you run two tables or two staff, yes — the extra 50 sq ft removes the crowding without jumping to a full double booth.</p>
@@ -1066,7 +1066,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-21T00:00:00.000Z',
-    updatedAt: '2026-08-21T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p><strong>Short answer:</strong> most trade show displays set up tool-free in minutes, but they last far longer when you weight them properly, pack them down clean and dry, and store graphics rolled rather than folded. This guide walks through setup, teardown, cleaning and storage for each display type so your booth looks sharp show after show.</p>
 
@@ -1146,7 +1146,7 @@ export const STATIC_ARTICLES = [
       { q: 'Can I machine wash a fabric table cover?', a: 'Many fitted fabric table covers are machine washable on a gentle cycle — check the specific product page. Dye-sublimated fabric handles washing well; let it dry fully before storing.' },
       { q: 'Should I fold or roll my graphics for storage?', a: 'Roll large graphics where possible rather than folding them, since folds can leave creases (especially in vinyl). Retractable graphics stay rolled inside their base.' },
       { q: 'How do I stop my display smelling musty?', a: 'Never pack it away damp. If it got wet, air-dry the fabric or canopy top completely before sealing it in its case — trapped moisture causes mildew and odour.' },
-      { q: 'Do I have to replace the whole display when my branding changes?', a: 'Usually no. Most systems — retractable stands, SEG backdrops, canopy tops, table covers — let you reprint just the graphic and reuse the frame, which is the most economical way to refresh a booth.' }
+      { q: 'Do I have to replace the whole display when my branding changes?', a: 'Usually no. Retractable stands, SEG backdrops, canopy tops and table covers can take a new graphic while you keep the frame. That is the cheaper way to refresh a booth.' }
     ]
   },
   {
@@ -1162,7 +1162,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/backdrop-oakwood.webp',
     publishedAt: '2026-08-21T00:00:00.000Z',
-    updatedAt: '2026-08-21T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
     html: `
 <p><strong>Short answer:</strong> a booth that gets noticed does three things well — it reads in three seconds from across the aisle, it pulls people in with an open, easy-to-enter layout, and it uses a clear branding hierarchy so the eye lands on your message first. Get those right and even a 10×10 space can out-perform a larger, cluttered neighbor.</p>
 
@@ -1216,7 +1216,7 @@ export const STATIC_ARTICLES = [
 </ul>
 
 <h2>Design for your budget</h2>
-<p>Good design is not the same as expensive design. If budget is tight, spend it where the eye lands first: a strong, well-designed backdrop does more than several smaller pieces, so prioritize that focal element and add supporting banners over time. Portable, reusable displays also stretch a budget across many shows — a fabric backdrop and retractable banners fold into a case, travel as luggage, and set up without paid labor, which keeps per-show costs low. And because most systems let you reprint just the graphic and reuse the frame, you can refresh the look for a new campaign without rebuying hardware. Investing in one high-impact, reusable set almost always beats spending the same money on a booth that only works once.</p>
+<p>Good design is not the same as expensive design. If budget is tight, spend it where the eye lands first: a strong, well-designed backdrop does more than several smaller pieces, so prioritize that focal element and add supporting banners over time. Portable, reusable displays also stretch a budget across many shows — a fabric backdrop and retractable banners fold into a case, travel as luggage, and set up without paid labor, which keeps per-show costs low. On most of these systems a later campaign is a new graphic on the frame you already own, which costs less than buying the hardware again. Investing in one high-impact, reusable set almost always beats spending the same money on a booth that only works once.</p>
 
 <h2>Test your design before you print</h2>
 <p>The cheapest way to fix a booth is on screen, before anything is produced. Lay your design out at scale, step back, and run the three-second test: can someone tell what you do and why to stop, from across the room, in a glance? Check that headline text is large and high-contrast, that the focal message isn’t competing with clutter, and that logos and key words aren’t placed where a table or a person will block them. Every Apex order includes a free artwork proof, so you can confirm size, color, placement and spelling before it goes to production — use it. It’s far better to catch a too-small tagline or a low-contrast color on the proof than to discover it on the show floor.</p>

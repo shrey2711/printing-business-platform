@@ -83,8 +83,53 @@ export function blogListingDescription(page) {
   return `Blog archive page ${page}, newest first: further Apex Trade Show articles on displays, canopy tents, banner stands and booth planning.`;
 }
 
-/** Visible lead. Page 1 keeps the historical sentence; later pages are distinct. */
-export function blogListingLead(page, pageCount) {
+function listingPosts(posts) {
+  return Array.isArray(posts) ? posts.filter((p) => p && p.title) : [];
+}
+
+function topicLabels(posts) {
+  const labels = [];
+  const seen = new Set();
+  for (const post of posts) {
+    for (const tag of post.tags || []) {
+      const label = String(tag).replace(/\s+/g, ' ').trim();
+      const key = label.toLowerCase();
+      if (!label || seen.has(key)) continue;
+      seen.add(key);
+      labels.push(label);
+    }
+  }
+  return labels;
+}
+
+function publishedSpan(posts) {
+  const days = posts
+    .map((p) => String(p.publishedAt || '').slice(0, 10))
+    .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d));
+  if (!days.length) return '';
+  const newest = days[0];
+  const oldest = days[days.length - 1];
+  return newest === oldest ? newest : `${newest} back to ${oldest}`;
+}
+
+function titleSpan(posts, lastPage) {
+  const first = posts[0]?.title;
+  const last = posts.length > 1 ? posts[posts.length - 1].title : '';
+  if (lastPage) {
+    if (first && last) return ` First post on this final page: “${first}”. Last post on this final page: “${last}”.`;
+    if (first) return ` The only post on this final page is “${first}”.`;
+    return '';
+  }
+  if (first && last) return ` Newest title on this page: “${first}”. Oldest title on this page: “${last}”.`;
+  if (first) return ` The article on this page is “${first}”.`;
+  return '';
+}
+
+/**
+ * Visible lead. Page 1 keeps the historical sentence. Later pages name the
+ * actual titles on that slice so two archive pages do not share a template.
+ */
+export function blogListingLead(page, pageCount, posts) {
   if (page <= 1) {
     return {
       before: 'Every article we publish, newest first. Looking for a guide by topic? Use the ',
@@ -92,10 +137,57 @@ export function blogListingLead(page, pageCount) {
       after: '.'
     };
   }
+  const list = listingPosts(posts);
+  const total = pageCount > 1 ? pageCount : 0;
+  const lastPage = Boolean(total && page >= total);
+  const range = titleSpan(list, lastPage);
+  if (lastPage) {
+    return {
+      before: `Final page of the blog, page ${page} of ${total}.${range} These posts are older than every article on the earlier pages. The topic index is the `,
+      link: 'Learning Center',
+      after: '.'
+    };
+  }
   return {
-    before: `Page ${page} of ${pageCount} in the blog archive, continuing newest first. Earlier articles are on the previous page. Topic guides are in the `,
+    before: `Continuing the archive on page ${page}${total ? ` of ${total}` : ''}.${range} Newer posts are on the previous page. Subject guides grouped by topic are in the `,
     link: 'Learning Center',
     after: '.'
+  };
+}
+
+/**
+ * Plain-text summary of the posts actually on this listing page.
+ * Titles and excerpts are the articles' own fields — nothing invented.
+ * Rendered outside links so each slice has its own prose.
+ */
+export function blogListingDigest(page, pageCount, posts) {
+  const list = listingPosts(posts);
+  if (!list.length) return null;
+  const topics = topicLabels(list);
+  const span = publishedSpan(list);
+  const n = list.length;
+  const topicText = topics.length ? topics.join(', ') : 'the subjects named in the titles';
+  const dated = span ? `, dated ${span}` : '';
+  let heading;
+  let intro;
+  if (page <= 1) {
+    heading = 'Newest articles, and what each one is about';
+    intro = `Opening page of the blog: ${n} articles${dated}. The subjects gathered here are ${topicText}. The note under each title is that article's own summary.`;
+  } else if (pageCount && page >= pageCount) {
+    heading = 'Oldest articles still in the archive';
+    intro = `Last page, ${page} of ${pageCount}: ${n} article${n === 1 ? '' : 's'} left${dated}. Nothing from the newer pages is repeated here. Subjects on this short page: ${topicText}.`;
+  } else {
+    heading = `Articles on archive page ${page}`;
+    intro = `Middle of the archive, page ${page}${pageCount ? ` of ${pageCount}` : ''}: ${n} articles${dated}. Subjects on this slice only: ${topicText}.`;
+  }
+  return {
+    heading,
+    intro,
+    items: list.map((p) => ({
+      slug: p.slug || '',
+      title: String(p.title).replace(/\s+/g, ' ').trim(),
+      detail: String(p.excerpt || '').replace(/\s+/g, ' ').trim()
+    }))
   };
 }
 

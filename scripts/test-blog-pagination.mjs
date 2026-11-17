@@ -197,6 +197,12 @@ check('prerendered listing pages exist with self-canonicals and distinct slices'
     const og = attr(html, /<meta property="og:url" content="([^"]*)"/);
     if (og !== expect) return `${file} og:url ${og}`;
     if (attr(html, /data-blog-page="(\d+)"/) !== String(n)) return `${file} data-blog-page mismatch`;
+    const digest = (html.match(/<section class="blog-page-digest">([\s\S]*?)<\/section>/) || [])[1] || '';
+    if (!digest) return `${file} is missing the page digest`;
+    const digestTitles = [...digest.matchAll(/<strong>([^<]*)<\/strong>/g)].map((m) => m[1]);
+    const linkTitles = [...html.matchAll(/<ul class="blog-index-list">([\s\S]*?)<\/ul>/g)]
+      .flatMap((block) => [...block[1].matchAll(/<a href="\/blog\/[^"]+">([^<]*)<\/a>/g)].map((m) => m[1]));
+    if (digestTitles.join('\n') !== linkTitles.join('\n')) return `${file} digest titles do not match the listed articles`;
     const slugs = slugsOf(html);
     if (slugs.length === 0) return `${file} lists no articles`;
     if (slugs.length > BLOG_PAGE_SIZE) return `${file} lists ${slugs.length} articles`;
