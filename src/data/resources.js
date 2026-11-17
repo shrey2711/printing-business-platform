@@ -31,7 +31,10 @@ export const RESOURCE_CATEGORIES = [
       'seg-modular-kit-a-vs-b-vs-c',
       'table-runner-size-guide',
       'business-card-size-guide',
-      'yard-sign-size-guide'
+      'yard-sign-size-guide',
+      'a-frame-sign-size-guide',
+      'feather-flag-size-guide',
+      'what-is-a-step-and-repeat'
     ]
   },
   {

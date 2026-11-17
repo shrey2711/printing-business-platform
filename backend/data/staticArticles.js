@@ -1774,7 +1774,273 @@ export const STATIC_ARTICLES = [
 <h2>Next step</h2>
 <p>Know your size? Request a quote for <a href="/products/coroplast-signs">coroplast signs</a>, single or double sided, with an H-stake or grommets.</p>
 `
+  },
+  {
+    slug: 'a-frame-sign-size-guide',
+    faqs: [
+      { q: 'What is the standard size of an A-frame sign?', a: 'The two published panel sizes are 18 x 24 inches (46 x 61 cm) and 24 x 36 inches (61 x 91 cm). 24 x 36 is the default, because it is the size most businesses choose for a pavement sign read from a few steps away. Custom sizes are quoted.' },
+      { q: 'What size A-frame sign is best for a sidewalk?', a: '24 x 36 inches. We do not publish a clearance figure; check the city, landlord or venue rules for how far the sign may sit into the walkway.' },
+      { q: 'What size A-frame sign should I use for an event?', a: '18 x 24 inches for a counter, doorway or event table; 24 x 36 inches if it has to be read from further away, such as outside a venue door.' },
+      { q: 'How much sidewalk clearance should I leave around an A-frame sign?', a: 'We do not publish a clearance measurement. Place it where it cannot be knocked into foot traffic, and follow the local or venue rule. That figure is not listed on the product page.' },
+      { q: 'Are A-frame sign dimensions listed in inches or centimetres?', a: 'In inches, as US-first. The conversions above use 2.54 cm per inch. Give your printer one unit and say which one.' },
+      { q: 'Can I change the graphics later?', a: 'Yes, on the A-frame: the panels sit in the frame, so a new offer is a new set of panels. On the sandwich board the artwork is printed onto the boards; replacement boards are quoted separately.' }
+    ],
+    title: 'A-Frame Sign Size Guide: How to Choose the Right Size',
+    excerpt:
+      '18 x 24 or 24 x 36 inch A-frame panels, sizes in cm, sidewalk vs event use, and how an A-frame differs from a sandwich board.',
+    tags: ['Buying Guide', 'Rigid Signs'],
+    seo: {
+      title: 'A-Frame Sign Size Guide: 18x24 & 24x36',
+      description:
+        'A-frame sign size guide: choose 18 x 24 or 24 x 36 inch panels, see sizes in cm, match sidewalk vs event use, and learn how a sandwich board differs.'
+    },
+    coverUrl: '/images/signs/a-frame-sign-sizes.webp',
+    publishedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
+    html: `
+<p><strong>For a pavement sign that has to be read from a few steps away, use a 24 x 36 inch (61 x 91 cm) panel. For a counter, doorway or event-table sign, use 18 x 24 inches (46 x 61 cm). A custom size is available if your frame or space needs something else.</strong> Those are the panel sizes on our <a href="/products/a-frame-sign">A-frame sign</a>. The default on the quote form is 24 x 36 inches.</p>
+<h2>A-Frame Sign Sizes: 18x24, 24x36 and Custom</h2>
+<p>An A-frame sign is a folding two-panel sidewalk sign: two faces hinged at the top, standing in an A shape, readable from both sides, and folding flat for storage. The size that matters is the <strong>printed panel</strong>, not the overall height of the open frame. We do not publish a standing height or footprint for the open frame, so order by the panel size.</p>
+<table>
+<thead>
+<tr>
+<th>Panel size</th>
+<th>Inches</th>
+<th>Centimetres</th>
+<th>Typical use, as published on the product page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smaller panel</td>
+<td>18&quot; x 24&quot;</td>
+<td>46 x 61 cm</td>
+<td>Counter, doorway or event-table sign</td>
+</tr>
+<tr>
+<td>Default pavement size</td>
+<td>24&quot; x 36&quot;</td>
+<td>61 x 91 cm</td>
+<td>A sign read from a few steps away on the pavement</td>
+</tr>
+<tr>
+<td>Custom</td>
+<td>Your measurements</td>
+<td>Convert at 2.54 cm per inch</td>
+<td>When your frame or space needs a different size</td>
+</tr>
+</tbody>
+</table>
+<p>One inch is 2.54 cm. The centimetre figures above are rounded to the nearest centimetre (18 x 2.54 = 45.72 cm, shown as 46; 24 x 2.54 = 60.96 cm, shown as 61; 36 x 2.54 = 91.44 cm, shown as 91). Give your printer the size in one unit and say which one.</p>
+<h2>What Size A-Frame Sign Works Best on a Sidewalk?</h2>
+<p>Use <strong>24 x 36 inches</strong> when the sign stands on the pavement and has to be read from a few steps away. That is the size most businesses choose on our A-frame page, and it is the default on the quote form.</p>
+<p>We do not publish a sidewalk-clearance measurement, a wind rating, or a rule for how far the sign may sit from the kerb. Those limits come from the city, the landlord or the venue, not from the product listing. Place the sign where it cannot be knocked into foot traffic, and bring it in during strong wind. If it will stay out overnight or in a wet climate, say so on the quote so the right frame and panel material can be recommended. Frame material (metal, plastic or wood) is confirmed with the quote; we do not publish a weather rating for any of them.</p>
+<h2>What Size A-Frame Sign Works Best at an Event?</h2>
+<p>Use <strong>18 x 24 inches</strong> for a smaller counter, doorway or event-table sign. At registration, an open house or a trade-show aisle, that size sits on or beside a table without needing pavement-scale type.</p>
+<p>If the sign has to be spotted from further up an aisle or outside a venue door, 24 x 36 inches is the better match. For booth planning more generally, see the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a>.</p>
+<p>The sign folds flat, so either size packs with the rest of the booth kit. Weights, anchors and a lock are not included; tell us if you need them and they are quoted separately.</p>
+<h2>A-Frame Sign vs Sandwich Board: Are They the Same?</h2>
+<p>In everyday use they are the same shape, and people search for both names, plus &quot;sidewalk sign&quot;. In our range they are two products, split by how the graphic is carried:</p>
+<ul>
+<li>An <a href="/products/a-frame-sign">A-frame sign</a> is a <strong>frame with replaceable printed panels</strong>, so the offer, event or season can change without buying a new sign. Spare panels can be ordered with the first set.</li>
+<li>A <a href="/products/sandwich-board-sign">sandwich board sign</a> has the <strong>artwork printed directly onto the boards</strong>, for a fixed message that stays on the sign.</li>
+</ul>
+<p>Both can be printed on one face or on both faces, with the same artwork or a different message on each side, and both fold flat. Sandwich board sizes are listed as small (counter, doorway), medium (pavement, the default), large (street frontage), or custom. We do not publish inch measurements for those sandwich-board size names, so do not treat small/medium/large as 18 x 24 or 24 x 36. The quote comes back with a proof drawn to scale.</p>
+<p>If you also need a planted outdoor sign rather than a folding sidewalk sign, the <a href="/blog/yard-sign-size-guide">yard sign size guide</a> covers coroplast panels. That guide was still &quot;Discovered — currently not indexed&quot; at the 2026-11-11 inspection.</p>
+<h2>How to Choose an A-Frame Sign Size</h2>
+<ol>
+<li>Measure the space you actually have, including any venue or city limit on how far a sign may sit into a walkway.</li>
+<li>Decide how far away people will read it: a few steps of pavement points to 24 x 36 inches; a counter or table points to 18 x 24 inches.</li>
+<li>If you already own a frame, measure the panel opening and choose custom if it is not one of the two listed sizes.</li>
+<li>Decide whether the message will change. If it will, the A-frame with replaceable panels is the matching product.</li>
+<li>Send artwork built to the finished panel size. The <a href="/artwork-guidelines">artwork guidelines</a> spell out the file spec: a single-page PDF or JPEG at 150 dpi in CMYK, fonts converted to outlines, no crop marks. Every file is checked at no charge and you get a free proof before anything is printed.</li>
+</ol>
+<p>A-frame signs are quoted rather than priced on the page. Production and delivery timing, and shipping across the United States and Canada, are confirmed with the quote. Printed <a href="/banners">banners</a> are a separate product if you need a larger outdoor graphic rather than a folding sidewalk sign.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>What is the standard size of an A-frame sign?</strong> The two published panel sizes are 18 x 24 inches (46 x 61 cm) and 24 x 36 inches (61 x 91 cm). 24 x 36 is the default, because it is the size most businesses choose for a pavement sign read from a few steps away. Custom sizes are quoted.</p>
+<p><strong>What size A-frame sign is best for a sidewalk?</strong> 24 x 36 inches. We do not publish a clearance figure; check the city, landlord or venue rules for how far the sign may sit into the walkway.</p>
+<p><strong>What size A-frame sign should I use for an event?</strong> 18 x 24 inches for a counter, doorway or event table; 24 x 36 inches if it has to be read from further away, such as outside a venue door.</p>
+<p><strong>How much sidewalk clearance should I leave around an A-frame sign?</strong> We do not publish a clearance measurement. Place it where it cannot be knocked into foot traffic, and follow the local or venue rule. That figure is not listed on the product page.</p>
+<p><strong>Are A-frame sign dimensions listed in inches or centimetres?</strong> In inches, as US-first. The conversions above use 2.54 cm per inch. Give your printer one unit and say which one.</p>
+<p><strong>Can I change the graphics later?</strong> Yes, on the A-frame: the panels sit in the frame, so a new offer is a new set of panels. On the sandwich board the artwork is printed onto the boards; replacement boards are quoted separately.</p>
+`
+  },
+  {
+    slug: 'feather-flag-size-guide',
+    faqs: [
+      { q: 'What size feather flag should I choose for an outdoor promotion?', a: 'Use the large 14 ft feather for a roadside or open field, and the small 9 ft feather for a storefront or closer viewing. We do not publish a more specific distance chart than that.' },
+      { q: 'How tall are feather flags?', a: '9 ft, 10.5 ft and 14 ft. Teardrop flags are 7 ft, 9 ft and 11.2 ft.' },
+      { q: 'Are feather flag dimensions measured with or without the pole?', a: 'We do not publish a split between pole height and flag height. The numbers above are the size labels on the product pages (Small, Medium and Large).' },
+      { q: 'Which base should I use for a feather flag outdoors?', a: 'A spike base is included and suits grass. A cross base or metal plate base suits hard floors. A water bag adds ballast outdoors. No wind rating is published; bring common sense to an exposed site and consider the teardrop shape if the flag has to hold its form in wind.' },
+      { q: 'Is a teardrop flag the same as a feather flag?', a: 'No. It is a different silhouette and a shorter size range, on the same style of pole kit and bases. See the shape comparison for how they look; use the table above for how tall they are.' }
+    ],
+    title: 'Feather Flag Size Guide: Heights and Base Options Explained',
+    excerpt:
+      'Feather flags come in 9, 10.5 and 14 ft; teardrop flags in 7, 9 and 11.2 ft. How to choose a height and a base for grass or hard ground.',
+    tags: ['Buying Guide', 'Flags'],
+    seo: {
+      title: 'Feather Flag Size Guide: 9, 10.5 & 14 ft',
+      description:
+        'Feather flag sizes at Apex are 9, 10.5 and 14 ft; teardrop flags are 7, 9 and 11.2 ft. How to pick a height and a spike, cross, plate or water-bag base.'
+    },
+    coverUrl: '/images/flags/feather_angled_size_measurements_all_sizes.jpg',
+    publishedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
+    html: `
+<p><strong>Apex feather flags come in three heights: 9 ft, 10.5 ft and 14 ft (about 2.7 m, 3.2 m and 4.3 m). Teardrop flags use a shorter range: 7 ft, 9 ft and 11.2 ft (about 2.1 m, 2.7 m and 3.4 m).</strong> Pick the height by how far away people will see it, and pick the base by the surface it will stand on. The <a href="/products/feather-angled-flag">feather angled flag</a> is the usual starting point; all feather shapes share this height range.</p>
+<h2>Feather Flag Sizes: 9 ft, 10.5 ft and 14 ft</h2>
+<p>These are the published size labels on the feather-flag product pages. One foot is 0.3048 m; the metre figures are rounded to one decimal place.</p>
+<table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Feather flags (angled and convex)</th>
+<th>Teardrop flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Small</td>
+<td>9 ft (2.7 m)</td>
+<td>7 ft (2.1 m)</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>10.5 ft (3.2 m)</td>
+<td>9 ft (2.7 m)</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>14 ft (4.3 m)</td>
+<td>11.2 ft (3.4 m)</td>
+</tr>
+</tbody>
+</table>
+<p>The product FAQ says to pick by viewing distance: the small size is for counters and storefronts, the large one for roadsides and open fields. We do not publish a recommended viewing-distance in metres or feet beyond that, and we do not publish a separate &quot;pole height&quot; and &quot;flag height&quot;. The figures above are the size labels on the product pages and on the size-chart images.</p>
+<p>The 14 ft angled feather is the tallest flag in the range, which is why the product page calls it the usual pick for roadside and car-park siting.</p>
+<h2>How to Choose a Feather Flag Size</h2>
+<ol>
+<li>Check the ceiling or any overhead limit first. Indoors, or under a low canopy, a 14 ft feather may not fit. The teardrop large size is 11.2 ft, and its small size is 7 ft.</li>
+<li>Then decide how far away the flag has to read. Storefronts and counters point to the small size; roadsides and open fields point to the large size. Medium sits between the two.</li>
+<li>Choose the shape after the height. Angled and convex feathers use the same 9, 10.5 and 14 ft sizes and the same pole kit. A <a href="/products/teardrop-flag">teardrop flag</a> uses the shorter 7, 9 and 11.2 ft range. For a side-by-side look at the silhouettes, see <a href="/blog/feather-angled-vs-convex-vs-teardrop-flags">feather angled vs convex vs teardrop flags</a>. This post does not repeat that comparison.</li>
+</ol>
+<p>The same hardware matrix applies to every shape: full-color dye sublimation, single- or double-sided printing, and a choice of a complete hardware kit or a graphic-only reprint. Instant pricing starts at $140 for a small, single-sided, graphic-only flag on the 6–8 business day production schedule, as published on the product pages. Shipping to the US and Canada is calculated at checkout.</p>
+<h2>Feather Flag Base Types for Grass and Hard Ground</h2>
+<p>The base is an add-on on the hardware package. Graphic-only orders ship without a pole or a base.</p>
+<table>
+<thead>
+<tr>
+<th>Base</th>
+<th>Published use</th>
+<th>Add-on price with hardware</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spike base</td>
+<td>Suits grass</td>
+<td>Included ($0)</td>
+</tr>
+<tr>
+<td>Cross base</td>
+<td>Suits hard floors</td>
+<td>+$31</td>
+</tr>
+<tr>
+<td>Metal plate base</td>
+<td>Suits hard floors</td>
+<td>+$35</td>
+</tr>
+<tr>
+<td>Water bag</td>
+<td>Adds ballast outdoors</td>
+<td>+$20</td>
+</tr>
+</tbody>
+</table>
+<p>Those prices and uses are from the product configurator and the shared hardware FAQ. We do not publish a wind rating, a required ballast weight, or a rule for when a water bag is mandatory. If the site is exposed, the teardrop's closed profile is the shape the product page recommends, because it holds its form instead of streaming out; that is a shape choice, not a substitute for a published wind rating.</p>
+<p>A <a href="/products/canopy-tent-10x10">10x10 canopy tent</a> is a common partner outdoors when you need shade as well as height. Indoors, or in an aisle where a tall flag will not fit, a <a href="/products/standard-retractable-banner">standard retractable banner</a> sits on the floor at 33 x 81 inches and does not need a flagged-up ceiling height. Browse all shapes and bases on the <a href="/flags">flags</a> category page.</p>
+<h2>Feather Flags and Teardrop Flags: Size Differences Only</h2>
+<p>This is the size difference, not a redesign of the shape guide:</p>
+<ul>
+<li><strong>Feather flags</strong> (angled or <a href="/products/feather-convex-flag">convex</a>): 9, 10.5 and 14 ft, same pole kit and same bases. The only difference between angled and convex is the top edge. The angled top runs forward over the pole so the print hangs closer to flat on a still day; the convex top is a softer, rounded silhouette with slightly less print area at the top.</li>
+<li><strong>Teardrop flags</strong>: 7, 9 and 11.2 ft. The shorter range is why the product page points to them for an exposed site, a narrow walkway, or indoor use under a low ceiling.</li>
+</ul>
+<p>Both families use replaceable graphics, so a new campaign is a reprint on the same hardware. Standard production is 6–8 business days after you approve the free artwork proof; rush production is 2–3 business days. That is production time, not delivery time.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>What size feather flag should I choose for an outdoor promotion?</strong> Use the large 14 ft feather for a roadside or open field, and the small 9 ft feather for a storefront or closer viewing. We do not publish a more specific distance chart than that.</p>
+<p><strong>How tall are feather flags?</strong> 9 ft, 10.5 ft and 14 ft. Teardrop flags are 7 ft, 9 ft and 11.2 ft.</p>
+<p><strong>Are feather flag dimensions measured with or without the pole?</strong> We do not publish a split between pole height and flag height. The numbers above are the size labels on the product pages (Small, Medium and Large).</p>
+<p><strong>Which base should I use for a feather flag outdoors?</strong> A spike base is included and suits grass. A cross base or metal plate base suits hard floors. A water bag adds ballast outdoors. No wind rating is published; bring common sense to an exposed site and consider the teardrop shape if the flag has to hold its form in wind.</p>
+<p><strong>Is a teardrop flag the same as a feather flag?</strong> No. It is a different silhouette and a shorter size range, on the same style of pole kit and bases. See the <a href="/blog/feather-angled-vs-convex-vs-teardrop-flags">shape comparison</a> for how they look; use the table above for how tall they are.</p>
+`
+  },
+  {
+    slug: 'what-is-a-step-and-repeat',
+    faqs: [
+      { q: 'What is a step and repeat banner?', a: 'It is the printed graphic for a photo backdrop, with logos or artwork tiled so every picture taken in front of it carries the brand. On a frame, it is called a step and repeat backdrop or media wall.' },
+      { q: 'What is the purpose of a step and repeat backdrop?', a: 'To brand event photographs — press, red-carpet, conferences, galas and activations — with a consistent logo grid. It is not the same job as a single-image booth back wall.' },
+      { q: 'What size should a step and repeat banner be?', a: 'Apex publishes 8 x 8 ft and 10 x 8 ft, up to 120 x 96 inches. The 10 x 8 ft size is the standard display in the product FAQ. For choosing between them and laying out the logo grid, use the trade show backdrop size guide.' },
+      { q: 'How do you set up a step and repeat banner?', a: 'The frame is portable and adjustable and packs into a carry bag when you order the kit that includes it. Leave 8 to 10 ft of clear floor in front of a 10 ft wall for photography, and check that an 8 ft-tall wall will clear the ceiling.' },
+      { q: 'What material is used for a step and repeat backdrop?', a: 'A replaceable large-format fabric graphic on an adjustable portable frame.' }
+    ],
+    title: 'What Is a Step and Repeat? A Simple Guide for Events and Trade Shows',
+    excerpt:
+      'A step and repeat is a media wall with repeating logos behind event photos. What it is, what it is used for, and how the 8x8 and 10x8 fabric backdrops work.',
+    tags: ['Buying Guide', 'Backdrops'],
+    seo: {
+      title: 'What Is a Step and Repeat Banner?',
+      description:
+        'A step and repeat is a media wall with repeating logos for event photos. What it is, how it is used, and how Apex 8x8 and 10x8 fabric backdrops work.'
+    },
+    coverUrl: '/images/displays/step-repeat-angled.jpeg',
+    publishedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-17T00:00:00.000Z',
+    html: `
+<p><strong>A step and repeat is a backdrop printed with a repeating grid of logos, set up as a wall for photographs at an event.</strong> Guests step in front of it, a photo is taken, and they repeat — that is where the name comes from. Every shot carries the brand, which is why press, red-carpet and sponsor events use one. Our version is a <a href="/products/step-and-repeat-backdrop">step and repeat backdrop</a>: a large-format fabric graphic on an adjustable, portable frame, in 8 x 8 ft or 10 x 8 ft (up to 120 x 96 inches).</p>
+<h2>What Is a Step and Repeat Banner Used For?</h2>
+<p>The names overlap, and they all point at the same kind of product:</p>
+<ul>
+<li>A <strong>step and repeat banner</strong> is the printed graphic with logos tiled across it.</li>
+<li>A <strong>step and repeat backdrop</strong> is that graphic on its frame, ready to stand up.</li>
+<li>A <strong>media wall</strong> or <strong>step and repeat wall</strong> is the same setup at a press event, sponsor launch or red carpet.</li>
+</ul>
+<p>Typical uses on the product page are event and press photography, red-carpet walls, conferences and galas, and brand activations. It is a photo backdrop first. If you need a single seamless image as the back wall of a booth, rather than a repeating logo grid, look at a <a href="/products/straight-tension-fabric-display">straight tension fabric display</a> instead. The <a href="/backdrops">backdrops</a> category page walks through that split.</p>
+<h2>How Does a Step and Repeat Backdrop Work?</h2>
+<p>Three pieces do the job:</p>
+<ol>
+<li><strong>The graphic.</strong> A large-format fabric print, replaceable, with your logos or artwork spaced evenly across the surface so they read in every photo.</li>
+<li><strong>The frame.</strong> An adjustable, portable frame system. It packs into a carry bag with the graphic when you order the kit that includes the frame.</li>
+<li><strong>The layout.</strong> The logo grid is the design. The existing <a href="/blog/trade-show-backdrop-size-guide">trade show backdrop size guide</a> covers how large the logos should be and how much wall a 10 x 8 ft display covers. This post does not repeat that sizing advice. The short version from the product FAQ: stagger the rows so a person standing in the centre never blocks a whole column, and size the logos so they stay readable once a photo is cropped. The free proof shows how that layout will read.</li>
+</ol>
+<p>You can order the frame plus the printed graphic, or the graphic on its own if you already have a compatible frame. A new campaign is a reprint, not a new backdrop.</p>
+<h2>Step and Repeat Sizes and Materials, Briefly</h2>
+<p>Apex offers two published sizes on an adjustable portable frame:</p>
+<ul>
+<li><strong>8 x 8 ft</strong> (96 x 96 inches, about 2.4 x 2.4 m)</li>
+<li><strong>10 x 8 ft</strong> (120 x 96 inches, about 3.0 x 2.4 m), which is the standard display called out in the product FAQ</li>
+</ul>
+<p>The graphic is large-format fabric. For how to choose between those sizes, how much floor to leave in front of the wall, and how to space the logos, use the <a href="/blog/trade-show-backdrop-size-guide">trade show backdrop size guide</a>. That guide is already indexed. One figure from the product FAQ, so you can plan the room: allow 8 to 10 ft of clear floor in front of a 10 ft wall so a photographer can step back far enough.</p>
+<p>Instant pricing is on the <a href="/products/step-and-repeat-backdrop">product page</a>. As a measured rate-card example, an 8 x 8 ft backdrop with frame on the 6–8 business day schedule is $440, and a 10 x 8 ft with frame is $465; graphic-only and rush options are listed there. Every order includes a free artwork proof. Standard production is 6–8 business days after proof approval; rush is 2–3 business days. Shipping to the US and Canada is calculated at checkout.</p>
+<h2>How to Set Up a Step and Repeat Wall at an Event</h2>
+<p>The product and category copy describe a tool-free, portable frame that packs into a case. For press and red-carpet use, leave enough clear floor in front for a photographer to step back — about 8 to 10 ft in front of a 10 ft wall. Check ceiling height too: at about 8 ft tall these clear most rooms, but not every low-ceilinged hotel suite.</p>
+<p>At a trade show the same wall can stand at the back of the booth. The <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> is the planning companion. Put the name and one line about what you do in the top third, where it clears the heads of people standing in the booth, and keep the bottom third quieter, because a table and staff will cover it. That booth-layout advice is from the <a href="/backdrops">backdrops</a> category page.</p>
+<p>Send artwork that matches the finished size. The <a href="/artwork-guidelines">artwork guidelines</a> and the free proof are the checks before anything is printed.</p>
+<h2>Step and Repeat Backdrop vs a Standard Trade Show Backdrop</h2>
+<p>A step and repeat is one kind of trade show backdrop: a repeating-logo media wall, built to show up in photographs. A <a href="/tension-fabric-displays">tension fabric display</a> is a single seamless graphic over a lightweight aluminium tube frame, 8, 10 or 20 ft wide at roughly 8 ft tall, and is the better choice when you want one image as a booth back wall rather than a repeating pattern.</p>
+<p>If you are choosing between those two, the existing comparison article is <a href="/blog/step-and-repeat-vs-tension-fabric-backdrop">/blog/step-and-repeat-vs-tension-fabric-backdrop</a>. It was still &quot;Discovered — currently not indexed&quot; at the 2026-10-28 inspection, but the two category hubs and both product pages above are indexed and cover the same distinction.</p>
+
+<h3>Frequently asked questions</h3>
+<p><strong>What is a step and repeat banner?</strong> It is the printed graphic for a photo backdrop, with logos or artwork tiled so every picture taken in front of it carries the brand. On a frame, it is called a step and repeat backdrop or media wall.</p>
+<p><strong>What is the purpose of a step and repeat backdrop?</strong> To brand event photographs — press, red-carpet, conferences, galas and activations — with a consistent logo grid. It is not the same job as a single-image booth back wall.</p>
+<p><strong>What size should a step and repeat banner be?</strong> Apex publishes 8 x 8 ft and 10 x 8 ft, up to 120 x 96 inches. The 10 x 8 ft size is the standard display in the product FAQ. For choosing between them and laying out the logo grid, use the <a href="/blog/trade-show-backdrop-size-guide">trade show backdrop size guide</a>.</p>
+<p><strong>How do you set up a step and repeat banner?</strong> The frame is portable and adjustable and packs into a carry bag when you order the kit that includes it. Leave 8 to 10 ft of clear floor in front of a 10 ft wall for photography, and check that an 8 ft-tall wall will clear the ceiling.</p>
+<p><strong>What material is used for a step and repeat backdrop?</strong> A replaceable large-format fabric graphic on an adjustable portable frame.</p>
+`
   }
+
 ];
 
 export const getStaticArticle = (slug) => STATIC_ARTICLES.find((a) => a.slug === slug) || null;
