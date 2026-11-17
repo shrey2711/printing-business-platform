@@ -3,4 +3,4 @@
 // Page 1 is /blog. Pages 2..N are served for /blog?page=N via an edge rewrite
 // to /blog/page/N (that path is not a public route). A no-CMS build only counts
 // in-repo articles; a production build with the CMS rewrites this number.
-export const BLOG_LISTING_PAGE_COUNT = 2;
+export const BLOG_LISTING_PAGE_COUNT = 3;
