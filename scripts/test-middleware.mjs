@@ -29,6 +29,7 @@
 import middleware from '../middleware.js';
 import { STATIC_FILES, KNOWN_ROUTES } from '../src/generated/routes.js';
 import { GONE_LOCATION_PATHS } from '../src/data/goneLocations.js';
+import { CATEGORY_QUERY_REDIRECTS } from '../src/lib/categoryQueryRedirects.js';
 
 const ORIGIN = 'https://www.apextradeshow.com';
 const fails = [];
@@ -176,6 +177,53 @@ check('retired location URLs still 301 (unchanged by the removal)', () => {
   if (res === undefined || res.status !== 301) return `/locations/arizona/phoenix returned ${res && res.status}`;
   return null;
 });
+
+// --- /products?category=<id> → the category's landing page -----------------
+// Only the exact path with that single parameter. Everything else still
+// serves /products (canonical stays /products; robots rules are unchanged).
+const expectCategoryRedirect = (search, destPath) => {
+  const res = call(`/products?${search}`);
+  if (res === undefined) return `/products?${search} was not redirected`;
+  if (res.status !== 301) return `/products?${search} returned ${res.status}, expected 301`;
+  let loc;
+  try { loc = new URL(res.headers.get('location') || ''); } catch { return `bad Location ${res.headers.get('location')}`; }
+  if (loc.origin !== ORIGIN) return `origin ${loc.origin}`;
+  if (loc.pathname !== destPath) return `path ${loc.pathname}, expected ${destPath}`;
+  if (loc.search) return `query was kept: ${loc.search}`;
+  return null;
+};
+check('each catalog category with a landing page 301s to that page', () => {
+  const broken = Object.entries(CATEGORY_QUERY_REDIRECTS)
+    .map(([id, dest]) => expectCategoryRedirect(`category=${encodeURIComponent(id)}`, dest))
+    .filter(Boolean);
+  return broken.length ? broken.join('; ') : null;
+});
+check('category redirect targets are served, not redirected again', () => {
+  const broken = [...new Set(Object.values(CATEGORY_QUERY_REDIRECTS))].map(expectServed).filter(Boolean);
+  return broken.length ? broken.join('; ') : null;
+});
+check('a category query redirect drops the query string', () =>
+  expectCategoryRedirect('category=tents', '/custom-canopies'));
+check('a trailing slash on /products still 301s the category query', () => {
+  const res = call('/products/?category=backdrops');
+  if (!res || res.status !== 301) return `returned ${res && res.status}`;
+  if (!res.headers.get('location')?.endsWith('/backdrops')) return `location ${res.headers.get('location')}`;
+  return null;
+});
+check('the bare /products catalog is still served', () => expectServed('/products'));
+check('a category with no landing page is still served', () => expectServed('/products?category=accessories'));
+check('an unknown category value is still served', () => expectServed('/products?category=not-a-category'));
+check('an empty category value is still served', () => expectServed('/products?category='));
+check('a category query plus another parameter is still served', () =>
+  expectServed('/products?category=tents&utm_source=google'));
+check('a repeated category parameter is still served', () =>
+  expectServed('/products?category=tents&category=backdrops'));
+check('a category query on another path is not rewritten to a landing page', () => {
+  const res = call('/products/canopy-tent-10x10?category=tents');
+  if (res !== undefined) return `product URL intercepted with ${res.status}`;
+  return null;
+});
+check('category query matching is case-sensitive', () => expectServed('/products?category=Tents'));
 
 if (fails.length) {
   console.error(`\n✗ MIDDLEWARE FAILED — ${fails.length}/${ran}:`);

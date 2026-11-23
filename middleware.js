@@ -13,6 +13,7 @@ import { locationRedirects } from './src/generated/locationRedirects.js';
 import { KNOWN_ROUTES, STATIC_FILES } from './src/generated/routes.js';
 import { BLOG_LISTING_PAGE_COUNT } from './src/generated/blogListing.js';
 import { resolveBlogListingQuery } from './src/lib/blogPagination.js';
+import { categoryQueryRedirectPath } from './src/lib/categoryQueryRedirects.js';
 import { GONE_PATHS } from './src/data/goneLocations.js';
 
 // Skip the API and the directories of hashed or bulk static files:
@@ -173,6 +174,17 @@ export default function middleware(request) {
       status: 404,
       headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex, follow' }
     });
+  }
+
+  // 2.6) /products?category=<id> when that id has its own landing page.
+  // Same shape as the blog listing query redirect above: a 301, and only for
+  // this exact path with that single parameter. A second parameter, a repeated
+  // category, or a category with no landing page is left alone — the catalog
+  // still answers 200 and canonicalises to /products. Path redirects above
+  // are not consulted or changed.
+  const categoryDest = categoryQueryRedirectPath(url);
+  if (categoryDest) {
+    return Response.redirect(new URL(categoryDest, url.origin).toString(), 301);
   }
 
   // 3) Real 404 for unknown page routes. Without this the SPA rewrite serves

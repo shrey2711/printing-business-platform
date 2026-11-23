@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { getProducts, getCategories } from '../services/api';
+import { categoryQueryTarget } from '../lib/categoryQueryRedirects';
 import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
 import AccessoriesSection from '../components/AccessoriesSection';
@@ -64,15 +65,29 @@ export default function ProductsPage() {
           >
             All Products
           </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              className={`chip ${activeCategory === cat.id ? 'chip-active' : ''}`}
-              onClick={() => setCategory(cat.id)}
-            >
-              {cat.name}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const to = categoryQueryTarget(cat.id);
+            // A category with its own landing page is a real link to that page.
+            // The rest stay buttons: they filter this catalog, and a button is
+            // not a crawlable /products?category= URL.
+            if (to) {
+              return (
+                <Link key={cat.id} className="chip" to={to}>
+                  {cat.name}
+                </Link>
+              );
+            }
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                className={`chip ${activeCategory === cat.id ? 'chip-active' : ''}`}
+                onClick={() => setCategory(cat.id)}
+              >
+                {cat.name}
+              </button>
+            );
+          })}
         </div>
 
         {loading ? (
