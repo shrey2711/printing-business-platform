@@ -10,6 +10,7 @@ import { useContentResolver, useListResolver } from '../context/ContentContext';
 import { brand } from '../config/brand';
 import { SHOWCASE } from '../data/showcase';
 import ContextLinks from '../components/ContextLinks';
+import { categoryQueryTarget } from '../lib/categoryQueryRedirects';
 
 
 const solutions = [
@@ -207,7 +208,7 @@ export default function HomePage() {
               <Link className="btn btn-red" to={c('home.hero.cta.href') || '/products'}>
                 {c('home.hero.cta.label') || 'Shop Trade Show Displays'}
               </Link>
-              <Link className="btn btn-outline" to={c('home.hero.cta2.href') || '/products?category=tents'}>
+              <Link className="btn btn-outline" to={c('home.hero.cta2.href') || categoryQueryTarget('tents')}>
                 {c('home.hero.cta2.label') || 'Shop Custom Canopies'}
               </Link>
             </div>
@@ -465,7 +466,7 @@ export default function HomePage() {
               })}
         </div>
         <div className="section-more">
-          <Link className="btn btn-outline" to="/products?category=tents">All canopy sizes &amp; walls</Link>
+          <Link className="btn btn-outline" to={categoryQueryTarget('tents')}>All canopy sizes &amp; walls</Link>
         </div>
         <ContextLinks path="/" />
       </section>

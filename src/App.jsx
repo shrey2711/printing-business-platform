@@ -38,9 +38,10 @@ import { CITY_PRODUCT_SLUGS } from './generated/cityProductSlugs';
 import { useCurrency } from './context/CurrencyContext';
 import { useCart } from './context/CartContext';
 import { useContentResolver, useListResolver } from './context/ContentContext';
+import { categoryQueryTarget } from './lib/categoryQueryRedirects';
 
 // Shop menu — grouped by the real categories, one level deep, every link a real
-// destination (category filter or product page). Shared by the desktop dropdown
+// destination (category page or product page). Shared by the desktop dropdown
 // and the mobile accordion.
 const shopMenu = [
   {
@@ -92,7 +93,7 @@ const shopMenu = [
   },
   {
     label: 'Flags',
-    to: '/products?category=flags',
+    to: categoryQueryTarget('flags'),
     items: [
       { label: 'Feather Angled Flag', to: '/products/feather-angled-flag' },
       { label: 'Feather Convex Flag', to: '/products/feather-convex-flag' },
@@ -101,7 +102,7 @@ const shopMenu = [
   },
   {
     label: 'SEG Modular Kits',
-    to: '/products?category=seg-kits',
+    to: categoryQueryTarget('seg-kits'),
     items: [
       { label: 'SEG Modular Kit A', to: '/products/seg-modular-trade-show-kit-a' },
       { label: 'SEG Modular Kit B', to: '/products/seg-modular-trade-show-kit-b' },
