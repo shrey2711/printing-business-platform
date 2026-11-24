@@ -33,7 +33,7 @@ import { GONE_LOCATION_PATHS, isGonePath } from '../src/data/goneLocations.js';
 import { CITY_PRODUCT_PAGES, nationalCategoryFor } from '../src/data/cityProductPages.js';
 import { LANDING_PAGES } from '../src/data/landingPages.js';
 import {
-  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS, LOCAL_FACTS, BUYING_GUIDE_NOTE, STATE_OUTDOOR, distinctIntro,
+  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS, LOCAL_FACTS, BUYING_GUIDE_NOTE, STATE_OUTDOOR, STATE_LOCAL_BUYING, distinctIntro,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../src/data/stateContent.js';
 import { cityDetailFor } from '../src/data/cityDetail.js';
@@ -586,7 +586,7 @@ routes.push(() => {
       ${TENT_RULES_FAQ.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}
       <h2>Organizers: use or correct this guide</h2>
       <p>You’re welcome to link to this page or the checklist from your vendor information. If your event is listed and a rule has changed, email marketing@apextradeshow.com and we’ll update it.</p>
-      <p>Need a tent that meets your event’s rules? See our <a href="/custom-canopies">custom canopy tents</a>, side walls and weight bags.</p>
+      <p>Need a tent that meets your event’s rules? See our <a href="/custom-canopies">custom canopy tents</a>, side walls and weight bags. The frame, fabric and ballast choices are in the <a href="/blog/custom-canopy-tent-buying-guide">canopy buying guide</a>. A lakefront pitch is <a href="/custom-canopy-tents-chicago">custom canopy tents in Chicago</a>.</p>
       </article>`,
     jsonLd: [
       {
@@ -1148,31 +1148,48 @@ for (const size of SIZES) {
   routes.push(() => {
     const g = size.guide;
     const others = SIZES.filter((s) => s.slug !== size.slug);
+    const h = g.headings || {};
+    const lead = g.lead
+      ? richHtml(g.lead)
+      : `${esc(size.blurb)} This guide covers the ${esc(size.slug)} canopy tent's dimensions, how many
+      tables and people it fits, booth layout ideas and what it is best used for — so you can pick the
+      right size before you configure and buy.`;
+    const wall = g.wallIntro
+      ? richHtml(g.wallIntro)
+      : `Add up to 3 printed walls, in any mix of full-height and half-height (both cost the same per
+      wall). Walls give you shade, a printed backdrop, weather protection and privacy while keeping
+      the front open. You can also print the canopy top and valance, and choose standard 6–8 day or
+      rush 2–3 day production.`;
+    const extras = (g.extraSections || []).map((sec) => `<h2>${esc(sec.h2)}</h2>${
+      (sec.paragraphs || []).map((p) => `<p>${richHtml(p)}</p>`).join('')
+    }${sec.items ? `<ul>${sec.items.map((item) => `<li>${richHtml(item)}</li>`).join('')}</ul>` : ''}`).join('');
+    const faqs = Array.isArray(g.faqs) && g.faqs.length
+      ? `<h2>${esc(g.faqHeading || 'Questions')}</h2>${g.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`
+      : '';
+    const closing = g.closing
+      ? richHtml(g.closing)
+      : `Ready to order? <a href="/products/${size.product}">Configure the ${esc(size.label)} custom canopy tent and get an instant price →</a>`;
     const body = `
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/custom-canopies">Custom Canopies</a> / <span>${esc(size.slug)} Size Guide</span></nav>
       <h1>${esc(g.title)}</h1>
-      <p>${esc(size.blurb)} This guide covers the ${esc(size.slug)} canopy tent's dimensions, how many
-      tables and people it fits, booth layout ideas and what it is best used for — so you can pick the
-      right size before you configure and buy.</p>
+      <p>${g.lead ? `${esc(size.blurb)} ${lead}` : lead}</p>
+      ${extras}
       <h2>Dimensions &amp; footprint</h2>
-      <p>${esc(g.footprint)}</p>
-      <h2>How many tables and people fit</h2>
+      <p>${richHtml(g.footprint)}</p>
+      <h2>${esc(h.capacity || 'How many tables and people fit')}</h2>
       <ul>${g.capacity.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
-      <h2>Booth layout ideas</h2>
+      <h2>${esc(h.layouts || 'Booth layout ideas')}</h2>
       <ul>${g.layouts.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
-      <h2>Wall options for a ${esc(size.label)}</h2>
-      <p>Add up to 3 printed walls, in any mix of full-height and half-height (both cost the same per
-      wall). Walls give you shade, a printed backdrop, weather protection and privacy while keeping
-      the front open. You can also print the canopy top and valance, and choose standard 6–8 day or
-      rush 2–3 day production.</p>
-      <h2>Common uses for a ${esc(size.label)}</h2>
+      <h2>${esc(h.walls || `Wall options for a ${size.label}`)}</h2>
+      <p>${wall}</p>
+      <h2>${esc(h.uses || `Common uses for a ${size.label}`)}</h2>
       <ul>${g.uses.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
-      <h2>${esc(size.slug)} vs other sizes</h2>
-      <p>${esc(g.comparison)}</p>
+      <h2>${esc(h.compare || `${size.slug} vs other sizes`)}</h2>
+      <p>${richHtml(g.comparison)}</p>
       <ul>${others.map((s) => `<li><a href="/sizes/${s.slug}">${esc(s.slug)} canopy tent size guide</a></li>`).join('')}</ul>
-      <h2>Shop the ${esc(size.label)} Custom Canopy Tent</h2>
-      <p>Ready to order? <a href="/products/${size.product}">Configure the ${esc(size.label)} custom
-      canopy tent and get an instant price →</a></p>`;
+      ${faqs}
+      <h2>${esc(h.shop || `Shop the ${size.label} Custom Canopy Tent`)}</h2>
+      <p>${closing}</p>`;
     return render({
       path: `/sizes/${size.slug}`,
       title: `${g.title} | ${BRAND}`,
@@ -1689,6 +1706,10 @@ for (const s of territories) {
          ${STATE_OUTDOOR[s.slug] ? `<h2>Setting up outdoors in ${esc(s.name)}</h2><p>${esc(STATE_OUTDOOR[s.slug])}</p>` : ''}
          <p>${esc(BUYING_GUIDE_NOTE)} ${SIZE_COMPARISON.map(([sz]) => `<a href="/sizes/${sz}">${sz} canopy tent</a>`).join(', ')}.</p>`
       : '';
+    const stateBuy = STATE_LOCAL_BUYING[s.slug];
+    const stateBuyHtml = stateBuy
+      ? `<h2>${esc(stateBuy.h2)}</h2>${stateBuy.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('')}<ul>${stateBuy.links.map((l) => `<li><a href="${l.to}">${esc(l.label)}</a></li>`).join('')}</ul>`
+      : '';
     // Priority markets get genuinely unique, useful content; the long tail gets
     // a minimal page and is noindex'd (see robots below).
     const richBody = isPriority && content
@@ -1720,6 +1741,7 @@ for (const s of territories) {
       <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/locations">Locations</a> / <span>${esc(s.name)}</span></nav>
       <h1>Custom Printed Canopy Tents in ${esc(s.name)}</h1>
       ${richBody}
+      ${stateBuyHtml}
       ${seoCitiesHtml}
       <h2>Cities we serve in ${esc(s.name)}</h2><ul>${cityLinks}</ul>`;
     return render({

@@ -352,7 +352,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/backdrop-greenleaf.webp',
     publishedAt: '2026-08-15T00:00:00.000Z',
-    updatedAt: '2026-08-15T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p>A <a href="/products/step-and-repeat-backdrop">step & repeat backdrop</a> is the branded media wall behind press, red-carpet and event photos — the surface that puts your logo in every shot. Getting the size and the logo spacing right is what makes it work.</p>
 
@@ -383,6 +383,7 @@ export const STATIC_ARTICLES = [
 <p><strong>Is the graphic replaceable?</strong> Yes — reuse the frame and reprint the fabric when your branding changes.</p>
 
 <p>See the <a href="/products/step-and-repeat-backdrop">step & repeat backdrop</a>, all <a href="/backdrops">backdrops</a>, or the full range of <a href="/trade-show-displays">trade show displays</a>.</p>
+<p>Chicago galas and the hospitality rooms around McCormick Place have their own buying page: <a href="/step-and-repeat-backdrop-chicago">step and repeat backdrops in Chicago</a>.</p>
 `
   },
   {
@@ -404,7 +405,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-16T00:00:00.000Z',
-    updatedAt: '2026-08-16T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p class="answer-block"><strong>Short answer:</strong> A complete trade show booth is a canopy or backdrop, a printed table cover, one or two banner stands, and your artwork ready to upload. Order the pieces together from one supplier so the colors match, and allow 6–8 business days production (2–3 with rush) plus transit before your event.</p>
 <p>A booth that looks professional is really just a few well-chosen pieces that match. Here's the checklist we walk exhibitors through, part by part, with the Apex product for each. You can buy any of these on its own — nothing here forces you into a bundle.</p>
@@ -439,6 +440,7 @@ export const STATIC_ARTICLES = [
 <p><strong>How much does a full booth cost?</strong> It depends on the pieces — see <a href="/blog/trade-show-display-cost">how much a trade show display costs</a>.</p>
 
 <p>Start with <a href="/trade-show-displays">all trade show displays</a>, or jump to <a href="/custom-canopies">canopies</a>, <a href="/banner-stands">banner stands</a>, <a href="/table-covers">table covers</a> or <a href="/backdrops">backdrops</a>.</p>
+<p>City buying pages, when the show is already booked: <a href="/custom-canopy-tents-chicago">custom canopy tents in Chicago</a> for a lakefront or McCormick Place pitch, <a href="/step-and-repeat-backdrop-chicago">step and repeat backdrops in Chicago</a> for a gala or press wall, and <a href="/custom-banners-los-angeles">custom banners in Los Angeles</a> for a hall span, a storefront or a fence. Each one ships to the address on the order. None of them is a counter you visit.</p>
 `
   },
   {
@@ -454,7 +456,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-17T00:00:00.000Z',
-    updatedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p>"How much is a trade show display?" depends on which pieces you need. Here are Apex's real starting prices so you can budget honestly — no bundle gimmicks, no invented numbers. Most products configure for an instant price online; a few (like the tabletop banner) are quoted per order.</p>
 
@@ -513,6 +515,7 @@ export const STATIC_ARTICLES = [
 </ul>
 
 <p>Price a <a href="/custom-canopies">canopy</a>, <a href="/table-covers">table cover</a> or <a href="/banners">banner</a> instantly, or <a href="/quote">request a quote</a> for banner stands, backdrops, SEG kits or a full booth.</p>
+<p>Those products also have city buying pages: <a href="/custom-canopy-tents-chicago">canopy tents for Chicago</a>, <a href="/step-and-repeat-backdrop-chicago">a Chicago step and repeat</a>, and <a href="/custom-banners-los-angeles">banners for Los Angeles</a>. Shipping stays a separate line on each of them.</p>
 `,
     faqs: [
       { q: 'How much does a trade show display cost?', a: 'It depends on the piece. Made-to-size banners start at $45, feather flags at $140, table covers and banner stands in the low hundreds, and complete custom canopy sets in the several-hundreds to low-thousands. Most products show an instant online price as you configure.' },
@@ -530,49 +533,104 @@ export const STATIC_ARTICLES = [
   {
     slug: 'custom-canopy-tent-buying-guide',
     faqs: [
-      { q: 'What size canopy tent should I buy?', a: '10x10 for a standard single booth or market pitch, 10x15 when you need room for a longer table or a queue, and 10x20 for a double booth. All three use the same aluminum hex frame and 600D polyester top, so size is about footprint rather than build quality.' },
-      { q: 'What comes with a custom canopy tent?', a: 'The complete set includes your custom-printed canopy top, a heavy-duty aluminum hex frame with telescopic legs, and a carry bag. You can also order the printed top on its own to fit a compatible frame you already own.' },
-      { q: 'How many printed walls can I add?', a: 'Up to three in total, in any mix of full and half height. A back wall turns the canopy into a booth; half walls give a counter line while keeping the front open to visitors.' },
-      { q: 'Do I need weights or will stakes do?', a: 'Stakes only work in grass. Most trade show and market pitches are on pavement, where a weight on every leg is the only thing holding the canopy down — and an unweighted canopy in a gust is the most common outdoor failure there is.' },
-      { q: 'How long does a custom canopy take to produce?', a: 'Standard production is 6-8 business days after you approve the free artwork proof, with an optional 2-3 business day rush. Transit is added on top and depends on the delivery address.' }
+      { q: "Does Apex sell a steel canopy frame?", a: "Not on the 10x10, 10x15 or 10x20 pages. Each complete set is the heavy-duty aluminum hex frame with telescopic legs, plus the printed top and a carry bag. A printed top on its own is available if you already have a compatible frame." },
+      { q: "What fabric and print method are the canopy tops?", a: "The spec table lists 600D polyester, printed by dye sublimation edge to edge. The ink is bonded into the fibre. Adding more colors does not change the print method or add a color charge." },
+      { q: "Which size should I order?", a: "Use the footprint on your vendor contract. 100 sq ft is the 10x10, 150 sq ft is the 10x15 (the extra five feet are width), and 200 sq ft is the 10x20, which needs two adjacent spaces in one 20 ft run. Prices for each are on the product page and in the table in this guide." },
+      { q: "How many walls can I add, and what do they cost?", a: "Up to three printed walls in any mix of full and half height. Full and half cost the same: $275 each on a 10x10, and $365 each on a 10x15 or 10x20." },
+      { q: "How much weight do I need, and do the sandbags cover it?", a: "Follow the event rule. The tent-weight guide summarizes published 2025–2026 rules: about 24–25 lb per leg is a common market minimum, 40 lb per leg is common at craft shows and festivals, and many art fairs ask for 45–60 lb. The optional sandbag add-on is four pieces at $50 and does not publish a pound rating. The planner counts four legs on a 10x10 and six on a 10x15 or 10x20, so one four-piece set does not cover a six-leg frame." },
+      { q: "What does rush change, and is shipping included?", a: "Rush is 2–3 business days of production instead of 6–8, and it adds 50% on a canopy. It does not shorten courier transit. Shipping is priced from the destination, size and weight, and it is not inside the product price. Production starts when you approve the proof in writing." },
+      { q: "Can I return a canopy if the event changes?", a: "No. Once you approve the proof, the returns page says the order cannot be canceled and is not refunded. A problem Apex confirms is handled by a reship or a reprint. Report transit damage within three days. Wind and weather damage are outside the warranty." }
     ],
     title: 'Custom Canopy Tent Buying Guide',
     excerpt:
-      'Everything to decide before ordering a custom printed canopy tent: size, what you get, walls, print coverage, delivery speed and artwork.',
+      'Frame, fabric, size, walls, weights and budget for a custom printed canopy — what the 10x10, 10x15 and 10x20 pages actually include.',
     tags: ['buying guide'],
     seo: {
       title: 'Custom Canopy Tent Buying Guide',
       description:
-        'How to order a custom printed canopy tent — size, complete set vs printed top only, walls, print, production speed and artwork.'
+        'How to order a custom printed canopy tent — aluminum hex frame, dye-sublimated 600D top, size, walls, weights, budget and production time.'
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-05T00:00:00.000Z',
-    updatedAt: '2026-11-17T00:00:00.000Z',
-    html: `
-<p class="answer-block"><strong>Short answer:</strong> For most exhibitors, a 10×10 canopy with a printed top, a back wall and one side wall covers a single booth. Choose the complete set (printed top + aluminum frame + carry bag) unless you already own a compatible frame. Standard production is 6–8 business days and rush is 2–3; add transit on top of that, and approve the free proof before anything prints.</p>
-<p>Everything to decide before ordering a custom printed canopy tent — size, what you get, walls, print, delivery speed and artwork.</p>
-<h2>1. Size</h2>
-<p>Pick by table count and booth space — 10×10 (standard), 10×15 (more room), 10×20 (double booth). See <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">what size to buy</a>.</p>
-<h2>2. What you get</h2>
+    updatedAt: '2026-11-24T00:00:00.000Z',
+    html: `<p>Ordering a printed canopy means locking a footprint, a frame, a set of walls and a proof before the fabric is made. The pages below already publish the rate card, the frame spec, the wall cap and the shipping split. This guide puts those decisions in the order they change what arrives and what you owe, and it points at the size guide, the wall guide, the artwork guide and the tent-weight guide instead of repeating them.</p>
+
+<h2>Frame grade: aluminum hex, not a menu of steels</h2>
+<p>The three canopy product pages you can order — 10×10, 10×15 and 10×20 — list one frame: a heavy-duty aluminum hex frame with telescopic legs. The spec table is the same on each size. A wider footprint does not move you onto a different tube, and those pages do not offer a steel frame as an alternate grade. “Hex” is the frame named in that spec. The telescopic legs are part of the same frame, not an accessory you add later.</p>
+<p>The product pages do not publish a separate clearance height for every footprint. The only published valance clearance is on the <a href="/sizes/10x10">10×10 size guide</a>, which says roughly 6.5–7 ft under the valance for that size. Treat that figure as belonging to the 10×10 page. Measure the set you receive before you plan a tall banner underneath a wider frame.</p>
+<p>What the carton contains depends on the kit line, not on the frame grade:</p>
 <ul>
-  <li><strong>Complete Canopy Set</strong> — the printed canopy top + aluminum hex frame + carry bag.</li>
-  <li><strong>Printed Canopy Top Only</strong> — the custom-printed fabric top on its own (no frame, no carry bag), for customers who already have a compatible frame. Pricing varies by canopy size; see the relevant product page for current pricing.</li>
+  <li><strong>Complete set.</strong> Custom-printed canopy top, the aluminum hex frame with telescopic legs, and a carry bag.</li>
+  <li><strong>Printed canopy top only.</strong> The fabric by itself, for a frame you already own that the product page calls compatible. It is its own price, not a discount taken off the set, and it does not include the bag.</li>
 </ul>
-<h2>3. Walls</h2>
-<p>Walls are optional. The limit is three printed walls on one tent, mixing full-height and half-height however you like, for weather cover and branding. See <a href="/blog/custom-canopy-tent-wall-options-explained">wall options</a>.</p>
-<h2>4. Print</h2>
-<p>Every canopy is <strong>dye-sublimated</strong> — ink bonded into the fabric, so it will not crack, peel or fade in the sun.</p>
-<h2>5. Delivery speed</h2>
-<p><strong>Production</strong> is 6–8 business days (standard) or 2–3 business days (rush, +50%) after you approve your free proof. Shipping/transit time is additional and depends on your destination.</p>
-<h2>6. Quantity</h2>
-<p>At three tents or more, the price of each tent drops on its own.</p>
-<h2>7. Artwork</h2>
-<p>Upload a print-ready file or add the <strong>design service ($35)</strong>. You approve a free proof before anything prints.</p>
-<p><a href="/custom-canopies">Start configuring →</a></p>
+<p>There is no second hardware tier to upgrade into. If the frame you already own is not the one these tops are cut for, the complete set is the path that includes hardware.</p>
+
+<h2>Canopy fabric and dye-sublimation</h2>
+<p>The top material on the spec table is 600D polyester. Printing is dye sublimation, full bleed: the ink is bonded into the fibre rather than sitting as a film on top. That is the description the product pages give for why a graphic holds through a season of folding and sun instead of cracking, peeling or fading the way a surface print can. Color count is not a price lever. Dye sublimation is full color by default, so a two-color logo and a photographic roof are the same print method.</p>
+<p>A canopy is several printable surfaces, and the <a href="/blog/print-coverage-explained">print-coverage guide</a> is the one that assigns a job to each:</p>
+<ul>
+  <li><strong>Roof.</strong> Seen from across a site and in photos taken from above.</li>
+  <li><strong>Valance.</strong> The skirt along the roof edge, at roughly eye level for someone walking the row. That is the spot for a business name.</li>
+  <li><strong>Walls.</strong> The large vertical panels, for a backdrop, an offer or a product image.</li>
+  <li><strong>Underside.</strong> The ceiling someone sees after they step under the roof.</li>
+</ul>
+<p>You do not have to print every surface. Plenty of orders are a printed roof plus one back wall. Coverage is which panels you pay to print, not how complicated the art is.</p>
+
+<h2>Picking 10×10, 10×15 or 10×20</h2>
+<p>Start from the square the organizer assigned. A frame that is wider than the pitch does not get to overhang the neighbor. The <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">size comparison</a> puts the three footprints and the rate card in one table. The notes here are the buying consequences of that table.</p>
+<table>
+  <thead><tr><th>Size</th><th>Footprint</th><th>Complete set, 1–2</th><th>Complete set, 3+</th><th>Printed top only, from</th><th>Each wall</th></tr></thead>
+  <tbody>
+    <tr><td>10×10</td><td>100 sq ft</td><td>$835</td><td>$799</td><td>$510</td><td>$275</td></tr>
+    <tr><td>10×15</td><td>150 sq ft</td><td>$1,375</td><td>$1,250</td><td>$545</td><td>$365</td></tr>
+    <tr><td>10×20</td><td>200 sq ft</td><td>$1,635</td><td>$1,445</td><td>$915</td><td>$365</td></tr>
+  </tbody>
+</table>
+<p>The 3+ column is per tent, and it applies once the order reaches three units. The printed-top-only column is the graphic without a frame or a bag. On the 10×15 the top-only price at three or more is $540; on the 10×10 it is $485; on the 10×20 it is $805. Those are the quantity tiers on the product records, shown live as you configure.</p>
+<p><strong>10×10.</strong> One hundred square feet, described on the product page as the single booth space most expos, markets and street festivals sell. One 6 ft table across the front with staff behind it is the layout that page calls enough for most shows. The <a href="/sizes/10x10">10×10 size guide</a> is where table counts and layout sketches live. Shop the <a href="/products/canopy-tent-10x10">10×10 canopy</a> when the contract is one square.</p>
+<p><strong>10×15.</strong> One hundred fifty square feet. The product copy is specific that the extra five feet are frontage, not depth: useful when people queue at the opening, or when a demo needs its own table beside the product. It is the wrong buy if you needed depth and were given two spaces in a line — that case is the 10×20. Confirm the organizer will accept a 15 ft front before you print, because many layouts are drawn in 10 ft steps. The <a href="/sizes/10x15">10×15 size guide</a> covers which pitches it fits, leg count and ballast. Shop the <a href="/products/canopy-tent-10x15">10×15 canopy</a> once that pitch is confirmed.</p>
+<p><strong>10×20.</strong> Two hundred square feet under one roof. The product FAQ says to buy two adjacent spaces first, and to confirm they sit in a single 20 ft run rather than back to back, because that is the span the frame needs. Use it for a double booth, a walk-through, or two brands on one frame. The <a href="/sizes/10x20">10×20 size guide</a> and the <a href="/products/canopy-tent-10x20">10×20 canopy</a> are the matching pages.</p>
+
+<h2>Sidewalls and the other add-ons</h2>
+<p>Walls are optional and capped at three printed walls in total, in any mix of full height and half height. Full and half are the same price on a given size: $275 each on a 10×10, $365 each on a 10×15 or a 10×20. A full wall runs from the ground to the frame and is the usual back-wall choice. A half wall stops around counter height, so staff can still talk across it. Three full walls enclose the back and both sides and leave the front as the opening. The <a href="/blog/custom-canopy-tent-wall-options-explained">wall-options guide</a> lists the combinations and the prices. Walls attach with hook-and-loop, so a wall ordered later can still go on a standard frame; ordering them with the roof is how the print is matched in one proof.</p>
+<p>Two other lines sit on the same configurator:</p>
+<ul>
+  <li><strong>Sandbag set, four pieces, $50.</strong> The help text calls it one bag per leg. The product does not publish a pound rating for the bag. A vendor rule that demands a certain weight per leg is not satisfied by assuming these bags weigh that amount.</li>
+  <li><strong>Design service, $35 once.</strong> Upload a print-ready file, or pay that flat fee and the team builds the art. The <a href="/blog/how-to-prepare-artwork-for-a-custom-canopy-tent">artwork guide</a> covers file type, resolution and keeping logos off seams. A free proof is included either way, and nothing prints until that proof is approved in writing.</li>
+</ul>
+<p>The carry bag is included with the complete set. It is not included with a top-only order.</p>
+
+<h2>Weights and ballast</h2>
+<p>The <a href="/warranty">warranty</a> excludes wind, storm and weather damage. Its own wording is that canopies and signs should be staked, weighted or taken down in strong wind. The <a href="/resources/tent-weight-rules">tent-weight guide</a> is a separate, cited collection of what organizers published for their 2025–2026 seasons. The findings on that page, not a guess added here, are the numbers worth planning from:</p>
+<ul>
+  <li>Weights were required at every event that guide reviewed.</li>
+  <li>A common minimum at farmers markets in that set is about 24–25 lb per leg. Forty pounds per leg is the figure that shows up most often at craft shows and festivals. Juried art fairs in the set often ask for 45–60 lb per leg.</li>
+  <li>Stakes are often banned on pavement, downtown streets and parks with buried cables.</li>
+  <li>Some events refuse water jugs, cinder blocks, disc weights or plastic sand bags. Sandbags, cast-iron leg weights and concrete-filled pipe are the forms that page lists as widely accepted, and they need to be fastened to the leg.</li>
+  <li>Walls increase the load. The guide says to bring extra weight when walls are up and to lower or open them when gusts rise.</li>
+</ul>
+<p>The planner on that same page counts legs by size: four on a 10×10, six on a 10×15, six on a 10×20. The sandbag add-on sold with the tent is a set of four. One set cannot put a bag on every leg of a frame the planner counts as six. Count the legs on the hardware, read the event’s per-leg rule, and buy or bring enough accepted weight for each leg. This site does not publish a wind-speed rating for the aluminum hex frame, so there is no miles-per-hour number to quote.</p>
+
+<h2>How to budget the order</h2>
+<p>Add the lines in this order. Every dollar figure in the list is already on a product page, the cost table above, or the configurator.</p>
+<ol>
+  <li>Complete set or printed top only, at the size you confirmed.</li>
+  <li>Walls, up to three, at that size’s per-wall price.</li>
+  <li>The $50 sandbag set, only if you want that four-piece add-on.</li>
+  <li>The $35 design service, only if you are not supplying the file.</li>
+  <li>Production speed. Standard is 6–8 business days after you approve the proof in writing. Rush is 2–3 business days and adds 50% on a canopy order. That percentage speeds production. It does not change courier transit. The <a href="/shipping">shipping page</a> separates the two clocks: arrival is production time plus transit time, and transit depends on the destination.</li>
+  <li>Shipping cost, calculated from destination, size and weight. It is not inside the product price. Orders ship across the United States and Canada to a business, a venue or a hotel. There is no storefront and no will-call pickup. For an estimate against a specific address and an in-hands date, the shipping page says to send both.</li>
+</ol>
+<p>Quantity is the other lever. At three tents or more, each tent uses the lower column in the table above. There is no hidden bundle price that combines a canopy with a table cover or a banner; those are separate products. A large multi-item order can go through the <a href="/quote">quote form</a> so the pieces are coordinated.</p>
+<p>Budget for the proof, not for a refund. The <a href="/returns">returns page</a> says a custom order cannot be canceled once the proof is approved, and that the remedy for a confirmed problem is a reship or a reprint. Transit damage has to be reported within three days of delivery, with photos. A printing defect is reprinted at no charge for one year from delivery. On the warranty, frames are covered for five years and everything else for one year. Wind damage is not in that coverage. Getting the footprint, the file and the weights right before approval is the part of the budget you control.</p>
+
+<h2>Where a Chicago or Los Angeles show changes the plan</h2>
+<p>The hardware and the rate card do not change by city. What changes is the pitch and the calendar. <a href="/custom-canopy-tents-chicago">Custom canopy tents in Chicago</a> is the buying page for a lakefront festival or the hardstanding outside McCormick Place, where staking is not an option and the outdoor season is short. A photo wall for a gala or a hospitality suite in the same city is a different product: <a href="/step-and-repeat-backdrop-chicago">step and repeat backdrops in Chicago</a>. In Los Angeles, a fence line, a storefront or a hall graphic is usually a banner rather than a tent; <a href="/custom-banners-los-angeles">custom banners in Los Angeles</a> is that buying page, with 13oz vinyl, 18oz blockout, mesh and 9oz fabric. All three ship to the address you give. None of them is a local counter you can collect from.</p>
+<p>When the choices above are settled, <a href="/custom-canopies">configure the canopy</a> and the price updates as you add walls, sandbags and rush.</p>
 `
   },
   {
-    slug: 'how-much-does-a-custom-printed-canopy-tent-cost',
+        slug: 'how-much-does-a-custom-printed-canopy-tent-cost',
     title: 'How Much Does a Custom Printed Canopy Tent Cost?',
     // Canonicalised to the broader cost guide — Google treats these as the same
     // topic and picked a different canonical, so we consolidate signals there.
@@ -694,7 +752,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-02T00:00:00.000Z',
-    updatedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p>All three Apex canopies are the same commercial-grade, dye-sublimated tent on a heavy-duty aluminum hex frame. They differ in <strong>footprint, price and how much branding surface</strong> you get. Here's the side-by-side.</p>
 
@@ -730,6 +788,7 @@ export const STATIC_ARTICLES = [
   <li>Want maximum shade, branding and a double footprint → <strong>10×20</strong>.</li>
 </ul>
 <p>If the vendor packet does not spell out the footprint, <a href="/blog/how-to-choose-canopy-tent-size">how to choose a canopy tent size</a> starts from the space you are given, the tables, and how many people work the stand.</p>
+<p>When the packet does say 15 feet across, the <a href="/sizes/10x15">10×15 size guide</a> is the page for the rectangle, the leg count and the ballast, not this comparison. Frame, fabric, walls and the budget sit in the <a href="/blog/custom-canopy-tent-buying-guide">canopy buying guide</a>. A lakefront pitch outside McCormick Place is a different URL again: <a href="/custom-canopy-tents-chicago">custom canopy tents in Chicago</a>.</p>
 <p>The per-tent price is lower once the order reaches three units of any of these sizes.</p>
 
 <h3>Frequently asked questions</h3>
@@ -759,7 +818,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-03T00:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p>A canopy top gives you shade and overhead branding. <strong>Walls</strong> do three more things: block wind and sun, add privacy and security, and give you a large printed backdrop right at eye level. Here's how they work.</p>
 
@@ -800,6 +859,7 @@ export const STATIC_ARTICLES = [
 <p><strong>Can I add walls later?</strong> It's easiest to order them with the tent so the print matches, but walls attach with hook-and-loop to a standard frame.</p>
 
 <p>Add walls when you <a href="/products/canopy-tent-10x10">build your canopy</a>, or see <a href="/blog/10x10-vs-10x15-vs-10x20-custom-canopy-tents">what size to buy</a>.</p>
+<p>Walls are one line on a larger order. The <a href="/blog/custom-canopy-tent-buying-guide">canopy buying guide</a> lines that up with the aluminum hex frame, the 600D top and the weight plan. Where lake wind makes those panels a sail, <a href="/custom-canopy-tents-chicago">custom canopy tents in Chicago</a> is the city page.</p>
 `
   },
   {
@@ -821,7 +881,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-04T00:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p class="answer-block"><strong>Short answer:</strong> Send vector art (PDF, AI or EPS) or the highest-resolution PNG/JPG you have, in full color and sized to the product, keeping important text away from seams and edges. Not print-ready? Add Apex's design service — and always check the free proof carefully before you approve it.</p>
 <p>Dye sublimation prints edge to edge in full color, so a canopy is only as sharp as the file you send. A few minutes getting the artwork right saves a reprint — here's what matters.</p>
@@ -869,6 +929,7 @@ export const STATIC_ARTICLES = [
 <p><strong>What if I don't have a designer?</strong> Add the $35 design service and we'll create the artwork for you.</p>
 
 <p><a href="/products/canopy-tent-10x10">Configure your canopy and upload artwork →</a> or read <a href="/blog/print-coverage-explained">print coverage explained</a>.</p>
+<p>Artwork is the last step, not the first. Size, frame, walls and budget are gathered in the <a href="/blog/custom-canopy-tent-buying-guide">canopy buying guide</a> so the file you upload matches the tent you actually ordered.</p>
 `
   },
   {
@@ -890,7 +951,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-nova-tech.webp',
     publishedAt: '2026-08-05T12:00:00.000Z',
-    updatedAt: '2026-08-11T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p>"Print coverage" simply means <strong>how much of the canopy carries your artwork</strong>. A canopy is not one surface — it's several, and each does a different job. Knowing what to print where gets you the most branding for your budget.</p>
 
@@ -932,6 +993,7 @@ export const STATIC_ARTICLES = [
 <p><strong>Can I print the inside of the roof?</strong> Yes — the underside is a great surface for an immersive pattern or brand color.</p>
 
 <p>Choose your coverage when you <a href="/products/canopy-tent-10x10">build your canopy</a>, and see <a href="/blog/how-to-prepare-artwork-for-a-custom-canopy-tent">how to prepare artwork</a>.</p>
+<p>How many of those surfaces you can afford is a buying question. The <a href="/blog/custom-canopy-tent-buying-guide">canopy buying guide</a> keeps it next to the rate card, the three footprints and the ballast.</p>
 `
   },
   {
@@ -1066,7 +1128,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/canopy-harbor-realty.webp',
     publishedAt: '2026-08-21T00:00:00.000Z',
-    updatedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p><strong>Short answer:</strong> most trade show displays set up tool-free in minutes, but they last far longer when you weight them properly, pack them down clean and dry, and store graphics rolled rather than folded. This guide walks through setup, teardown, cleaning and storage for each display type so your booth looks sharp show after show.</p>
 
@@ -1139,6 +1201,7 @@ export const STATIC_ARTICLES = [
   <li><a href="/table-covers">Table covers</a> — machine-washable fitted and pleated options.</li>
 </ul>
 <p>New to buying? Start with <a href="/blog/trade-show-display-cost">what a display costs</a> and the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a>.</p>
+<p>Outdoor care in a windy city starts before setup day. <a href="/custom-canopy-tents-chicago">Custom canopy tents in Chicago</a> is where that shows up as a buying page, and <a href="/custom-banners-los-angeles">custom banners in Los Angeles</a> is the matching page when the graphic is a banner rather than a tent.</p>
 `,
     faqs: [
       { q: 'How do I keep a canopy tent from blowing away?', a: 'Always put a weight bag on every leg for outdoor use — on hard surfaces you can’t use stakes, and wind is the main cause of canopy damage. Adding printed walls also reduces wind load.' },
@@ -1162,7 +1225,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/backdrop-oakwood.webp',
     publishedAt: '2026-08-21T00:00:00.000Z',
-    updatedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p><strong>Short answer:</strong> a booth that gets noticed does three things well — it reads in three seconds from across the aisle, it pulls people in with an open, easy-to-enter layout, and it uses a clear branding hierarchy so the eye lands on your message first. Get those right and even a 10×10 space can out-perform a larger, cluttered neighbor.</p>
 
@@ -1223,6 +1286,7 @@ export const STATIC_ARTICLES = [
 
 <h2>Bring your booth together</h2>
 <p>Design the layers, then order them to match: a <a href="/backdrops">backdrop</a> for the big message, <a href="/banner-stands">banner stands</a> for support, a <a href="/table-covers">table cover</a> for the interaction zone, and a <a href="/custom-canopies">canopy</a> or <a href="/flags">flags</a> for outdoor visibility. Printing the whole set from one supplier keeps colors and branding consistent across every piece. See the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> to plan the rest, and the <a href="/blog/print-coverage-explained">print coverage guide</a> to get your artwork right.</p>
+<p>A repeating-logo wall for a Chicago gala is <a href="/step-and-repeat-backdrop-chicago">step and repeat backdrops in Chicago</a>. A hanging graphic for a Los Angeles hall or storefront is <a href="/custom-banners-los-angeles">custom banners in Los Angeles</a>.</p>
 `,
     faqs: [
       { q: 'What makes a trade show booth stand out?', a: 'One clear focal point that reads in about three seconds from the aisle, an open and welcoming layout, height for visibility, good contrast and lighting, and a branding hierarchy that guides the eye from your headline to the details.' },
@@ -1246,7 +1310,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/banners/13oz-vinyl-banner-burger-landscape.jpeg',
     publishedAt: '2026-08-21T00:00:00.000Z',
-    updatedAt: '2026-08-21T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p><strong>Short answer:</strong> pick <strong>13oz vinyl</strong> for everyday indoor/outdoor banners, <strong>18oz blockout</strong> when you need a true double-sided banner or maximum durability, <strong>mesh</strong> for fences and windy outdoor spots, and <strong>9oz wrinkle-free fabric</strong> for a premium, no-glare indoor look. This guide explains why, and how the finishing options change how you hang each one.</p>
 
@@ -1304,6 +1368,7 @@ export const STATIC_ARTICLES = [
   <li>Premium indoor branding and backdrops → <a href="/products/fabric-banner-9oz-wrinkle-free">9oz fabric</a>.</li>
 </ul>
 <p>All four are priced by the square foot with instant online pricing. See the whole range on the <a href="/banners">banners page</a>, or read the <a href="/blog/print-coverage-explained">print coverage guide</a> for artwork tips.</p>
+<p>If the banner is for a Los Angeles hall, storefront or fence, the city buying page is <a href="/custom-banners-los-angeles">custom banners in Los Angeles</a>. The materials are the same four. The page adds the convention-center and shipping notes for that city.</p>
 `,
     faqs: [
       { q: 'What is the most popular banner material?', a: '13oz scrim vinyl. It is durable, weather-resistant, economical and prints in vivid color, which makes it the default for most indoor and outdoor banners.' },
@@ -1327,7 +1392,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/showcase/backdrop-greenleaf.webp',
     publishedAt: '2026-10-03T00:00:00.000Z',
-    updatedAt: '2026-10-03T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p><strong>Short answer:</strong> the booth ideas that work do one of three things. They get you noticed from the aisle, they make it easy for people to step in, or they give people a reason to start talking. Below are 14 ideas grouped by the job they do, each built from displays you can reuse show after show. For the layout and branding rules behind them, see our <a href="/blog/trade-show-booth-design-guide">trade show booth design guide</a>.</p>
 
@@ -1359,7 +1424,7 @@ export const STATIC_ARTICLES = [
 
 <h2>Ideas for photos and social</h2>
 <h3>11. Build a photo wall people want to stand in front of</h3>
-<p>A <a href="/products/step-and-repeat-backdrop">step and repeat backdrop</a> tiles your logo so every photo taken in front of it carries your brand, even when it's cropped. Leave 8–10 ft of clear floor in front so people can step back and take the shot.</p>
+<p>A <a href="/products/step-and-repeat-backdrop">step and repeat backdrop</a> tiles your logo so every photo taken in front of it carries your brand, even when it's cropped. Leave 8–10 ft of clear floor in front so people can step back and take the shot. For a Chicago gala or press call, that wall is also on <a href="/step-and-repeat-backdrop-chicago">step and repeat backdrops in Chicago</a>.</p>
 <h3>12. Make the table work in photos too</h3>
 <p>Put your logo on the front panel of the table cover, centred and high enough to clear the knees of whoever is standing behind it. It's often the only branding in a close-up photo.</p>
 
@@ -1997,7 +2062,7 @@ export const STATIC_ARTICLES = [
     },
     coverUrl: '/images/displays/step-repeat-angled.jpeg',
     publishedAt: '2026-11-17T00:00:00.000Z',
-    updatedAt: '2026-11-17T00:00:00.000Z',
+    updatedAt: '2026-11-24T00:00:00.000Z',
     html: `
 <p><strong>A step and repeat is a backdrop printed with a repeating grid of logos, set up as a wall for photographs at an event.</strong> Guests step in front of it, a photo is taken, and they repeat — that is where the name comes from. Every shot carries the brand, which is why press, red-carpet and sponsor events use one. Our version is a <a href="/products/step-and-repeat-backdrop">step and repeat backdrop</a>: a large-format fabric graphic on an adjustable, portable frame, in 8 x 8 ft or 10 x 8 ft (up to 120 x 96 inches).</p>
 <h2>What Is a Step and Repeat Banner Used For?</h2>
@@ -2031,6 +2096,7 @@ export const STATIC_ARTICLES = [
 <h2>Step and Repeat Backdrop vs a Standard Trade Show Backdrop</h2>
 <p>A step and repeat is one kind of trade show backdrop: a repeating-logo media wall, built to show up in photographs. A <a href="/tension-fabric-displays">tension fabric display</a> is a single seamless graphic over a lightweight aluminium tube frame, 8, 10 or 20 ft wide at roughly 8 ft tall, and is the better choice when you want one image as a booth back wall rather than a repeating pattern.</p>
 <p>If you are choosing between those two, the existing comparison article is <a href="/blog/step-and-repeat-vs-tension-fabric-backdrop">/blog/step-and-repeat-vs-tension-fabric-backdrop</a>. It was still &quot;Discovered — currently not indexed&quot; at the 2026-10-28 inspection, but the two category hubs and both product pages above are indexed and cover the same distinction.</p>
+<p>A Chicago association gala or a hospitality suite at McCormick Place uses the same wall. The city page is <a href="/step-and-repeat-backdrop-chicago">step and repeat backdrops in Chicago</a>.</p>
 
 <h3>Frequently asked questions</h3>
 <p><strong>What is a step and repeat banner?</strong> It is the printed graphic for a photo backdrop, with logos or artwork tiled so every picture taken in front of it carries the brand. On a frame, it is called a step and repeat backdrop or media wall.</p>

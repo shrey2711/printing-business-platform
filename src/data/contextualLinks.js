@@ -91,6 +91,15 @@ export const CONTEXT_LINKS = {
       ' for badges, and a ',
       { to: '/products/custom-table-runner', label: 'custom table runner' },
       ' along the table top.'
+    ],
+    [
+      'City buying pages for shows that are already on the calendar: ',
+      { to: '/custom-canopy-tents-chicago', label: 'custom canopy tents in Chicago' },
+      ', ',
+      { to: '/step-and-repeat-backdrop-chicago', label: 'step and repeat backdrops in Chicago' },
+      ', and ',
+      { to: '/custom-banners-los-angeles', label: 'custom banners in Los Angeles' },
+      '.'
     ]
   ],
   '/trade-show-booth-packages': [
@@ -172,6 +181,15 @@ export const CONTEXT_LINKS = {
       ' at the front corner. The ',
       { to: '/products/canopy-tent-10x10', label: '10x10 canopy tent' },
       ' is the single-booth size.'
+    ],
+    [
+      'Frame, dye-sublimated fabric, walls, ballast and budget are walked through in the ',
+      { to: '/blog/custom-canopy-tent-buying-guide', label: 'custom canopy tent buying guide' },
+      '. The 15-foot pitch — which marks it fits, and what six legs do to ballast — is the ',
+      { to: '/sizes/10x15', label: '10x15 size guide' },
+      '. A lakefront or McCormick Place pitch is ',
+      { to: '/custom-canopy-tents-chicago', label: 'custom canopy tents in Chicago' },
+      '.'
     ]
   ],
   '/tension-fabric-displays': [
@@ -207,6 +225,41 @@ export const CONTEXT_LINKS = {
       'This fitted cover is one ',
       { to: '/table-covers', label: 'custom table cover' },
       ' style. The pleated throw on that page is the draped option.'
+    ]
+  ],
+  '/products/13oz-vinyl-banner': [
+    [
+      'For a Los Angeles hall, storefront or fence, the city page is ',
+      { to: '/custom-banners-los-angeles', label: 'custom banners in Los Angeles' },
+      '. This 13oz scrim is the everyday material on that page.'
+    ]
+  ],
+  '/products/18oz-blockout-banner': [
+    [
+      'Double-sided vinyl for a Los Angeles street or hall is covered with the other three materials on ',
+      { to: '/custom-banners-los-angeles', label: 'custom banners in Los Angeles' },
+      '.'
+    ]
+  ],
+  '/products/mesh-banner': [
+    [
+      'A fence or hoarding in Los Angeles is the mesh case on ',
+      { to: '/custom-banners-los-angeles', label: 'custom banners in Los Angeles' },
+      '.'
+    ]
+  ],
+  '/products/fabric-banner-9oz-wrinkle-free': [
+    [
+      'Under hall lighting in Los Angeles, the matte fabric option is on ',
+      { to: '/custom-banners-los-angeles', label: 'custom banners in Los Angeles' },
+      '.'
+    ]
+  ],
+  '/products/step-and-repeat-backdrop': [
+    [
+      'Galas and press calls in Chicago have a city buying page: ',
+      { to: '/step-and-repeat-backdrop-chicago', label: 'step and repeat backdrops in Chicago' },
+      '.'
     ]
   ]
 };

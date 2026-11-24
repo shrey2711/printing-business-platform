@@ -508,6 +508,31 @@ export const STATE_OUTDOOR = {
   wyoming: 'Wyoming is one of the windiest places in the country, which makes weight the first rule of any canopy setup: every leg anchored, walls dropped when gusts build and nothing left unattended. Cheyenne Frontier Days in July is the largest outdoor event in the state, in bright high-altitude sun with fast-changing afternoon weather. The summer season is short, so a rugged frame with a colourfast printed top gets used hard in a few busy months.'
 };
 
+// Extra buying links on the two state pages that have indexed city product URLs
+// the category hubs already point at. Copy stays on facts from /shipping and the
+// product records. Rendered by LocationPage and scripts/prerender.mjs.
+export const STATE_LOCAL_BUYING = {
+  illinois: {
+    h2: 'Chicago orders under this state page',
+    paragraphs: [
+      'Two Chicago URLs sit beside this statewide canopy overview because a lakefront festival and a hall hospitality suite are not the same product. Canopy tents there are the 10x10, 10x15 and 10x20 frames for a street pitch or the hardstanding outside McCormick Place. A repeating-logo wall for a gala or an awards night is the step-and-repeat page. Both are printed after you approve a proof in writing, then shipped. Production time and courier transit are separate, there is no storefront in the city, and transit damage has to be reported within three days.'
+    ],
+    links: [
+      { to: '/custom-canopy-tents-chicago', label: 'Custom canopy tents in Chicago' },
+      { to: '/step-and-repeat-backdrop-chicago', label: 'Step and repeat backdrops in Chicago' }
+    ]
+  },
+  california: {
+    h2: 'Los Angeles banners, separate from the canopy overview',
+    paragraphs: [
+      'Los Angeles has a banner buying page that this statewide canopy note does not replace. It covers 13oz scrim vinyl, 18oz blockout, mesh and 9oz fabric for a storefront, a fence line or a graphic inside the Los Angeles Convention Center. Vinyl and mesh enter production the same business day when the proof is approved before 12pm PST, or the next business day when approval lands before 4pm PST, and more than 100 pieces adds two business days. The 9oz fabric banner’s product line says it ships in 3–5 business days. Courier transit is additional. The charge follows destination, size and weight, and the box goes to a business, a venue or a hotel. There is no will-call.'
+    ],
+    links: [
+      { to: '/custom-banners-los-angeles', label: 'Custom banners in Los Angeles' }
+    ]
+  }
+};
+
 // The state intros each end on a near-identical product sentence ("Trade show
 // displays, retractable banner stands and step & repeat backdrops fit the halls;
 // custom canopy tents brand the outdoor … circuit"). Rendered on 29 indexed
