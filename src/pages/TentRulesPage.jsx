@@ -139,7 +139,7 @@ export default function TentRulesPage() {
       </section>
 
       <aside className="resource-cta">
-        <p>Need a tent that meets your event’s rules? See our <Link to="/custom-canopies">custom canopy tents</Link>, side walls and weight bags.</p>
+        <p>Need a tent that meets your event’s rules? See our <Link to="/custom-canopies">custom canopy tents</Link>, side walls and weight bags. The frame, fabric and ballast choices are in the <Link to="/blog/custom-canopy-tent-buying-guide">canopy buying guide</Link>. A lakefront pitch is <Link to="/custom-canopy-tents-chicago">custom canopy tents in Chicago</Link>.</p>
       </aside>
     </main>
   );

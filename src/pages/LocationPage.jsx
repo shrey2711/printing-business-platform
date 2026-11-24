@@ -5,7 +5,7 @@ import { list as getProducts } from '../services/cms/productService';
 import { getState, slugify } from '../data/states';
 import { SEO_CITIES } from '../data/citySeo';
 import {
-  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS, LOCAL_FACTS, BUYING_GUIDE_NOTE, STATE_OUTDOOR, distinctIntro,
+  PRIORITY_STATES, INDEXED_STATES, stateContent, ORDERING_STEPS, LOCAL_FACTS, BUYING_GUIDE_NOTE, STATE_OUTDOOR, STATE_LOCAL_BUYING, distinctIntro,
   SIZE_COMPARISON, OUTDOOR_CONSIDERATIONS, ARTWORK_NOTES, STATE_FAQS
 } from '../data/stateContent';
 import ProductCard from '../components/ProductCard';
@@ -114,6 +114,17 @@ export default function LocationPage() {
                     <span key={sz}>{i > 0 && ', '}<Link to={`/sizes/${sz}`}>{sz} canopy tent</Link></span>
                   ))}.
                 </p>
+                {STATE_LOCAL_BUYING[state.slug] && (
+                  <>
+                    <h3>{STATE_LOCAL_BUYING[state.slug].h2}</h3>
+                    {STATE_LOCAL_BUYING[state.slug].paragraphs.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+                    <ul className="feature-list">
+                      {STATE_LOCAL_BUYING[state.slug].links.map((l) => (
+                        <li key={l.to}><Link to={l.to}>{l.label}</Link></li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </>
             ) : (
               <>

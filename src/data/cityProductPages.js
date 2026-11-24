@@ -104,6 +104,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: "Shipping into a Chicago summer",
         p: "Chicago compresses its outdoor events into a few months, so a canopy ordered for a July date is shipping into the weeks when carriers and venues are both busiest. Leave room for that rather than for the production schedule alone. If the tent is going to a show at McCormick Place instead of a street festival, read the exhibitor kit first: large halls route freight through an advance warehouse or a marshalling yard, and a canopy case counts as freight."
+      },
+      {
+        h2: 'Navy Pier weekends and the hall apron',
+        p: 'Navy Pier and the lots along McCormick Place are two different receiving problems. A weekend festival on the pier wants the case at a business or hotel address you can drive in from, because there is no Apex counter in the city and no will-call window. A show attached to the hall often wants freight in the advance warehouse named in the exhibitor kit, which is the venue’s process, not a special dock arrangement of ours. Either way the clock is the one on the shipping page: production of 6–8 business days starts when the proof is approved in writing, rush production is 2–3 business days and adds 50 percent without shortening the courier, and transit plus the shipping charge depend on the destination, the size and the weight. Report transit damage within three days if the case arrives crushed.'
       }
     ],
     faqs: [
@@ -112,7 +116,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Can I print a different design for a later Chicago event?', a: 'Yes. The printed top and walls are separate from the frame, so a new campaign is a reprint rather than a new canopy. The frame, legs and bag carry across years.' },
       { q: "What is the difference between a pop up tent and a canopy tent?", a: "There is none worth acting on — custom pop up tent, printed canopy tent and branded canopy all name the same folding frame with a printed top. What does differ is how it is printed. Canopy printing at this quality means dye sublimation, where the ink becomes part of the polyester, rather than a surface print that cracks along the fold lines after a season in a case." },
       { q: "Do you deliver canopy tents to Chicago venues?", a: "Yes, anywhere in Chicago and the surrounding suburbs. For a street festival or a parking-lot activation the tent can go to your own address. For a show inside McCormick Place, read the exhibitor kit first: a canopy case counts as freight, and large halls route freight through their own advance warehouse or marshalling process." },
-      { q: "What artwork do you need for a printed canopy?", a: "A PDF or JPEG built to the configured size, CMYK at 150dpi, fonts outlined and no crop marks. Upload it when you order. We send a free proof before print, which is the point to check that the logo on the valance is still readable once it is scaled." }
+      { q: "What artwork do you need for a printed canopy?", a: "A PDF or JPEG built to the configured size, CMYK at 150dpi, fonts outlined and no crop marks. Upload it when you order. We send a free proof before print, which is the point to check that the logo on the valance is still readable once it is scaled." },
+      { q: 'Where should a Chicago canopy be delivered if there is no dock?', a: 'To the business, hotel or venue address you enter at checkout. Apex is online-only and has no storefront or will-call pickup in Chicago. Production is 6–8 business days after written proof approval (2–3 on rush, which does not speed the courier), and the shipping charge depends on destination, size and weight. For a McCormick Place show, follow the exhibitor kit’s freight instructions before you choose that address.' }
     ]
   },
 
@@ -342,6 +347,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: "Shipping to Chicago, and who signs for it",
         p: "A media wall for a Chicago gala or reception usually goes to a hotel or an event space rather than a convention centre, which means the delivery address is a front desk. Name the person receiving it. A case that arrives the day before an evening event and sits unclaimed behind a desk is the most common way one of these goes missing, and it is a scheduling problem rather than a shipping one. Production time is on the product page."
+      },
+      {
+        h2: 'Press calls next to the big halls',
+        p: 'McCormick Place hospitality suites and the hotel ballrooms that host the week’s receptions are the usual rooms for a repeating-logo wall in this city. The frame is adjustable and tool-free and the graphic travels in a case, so it can go to a hotel front desk or a business address rather than through show freight. Nothing is printed until the proof is approved in writing. Standard production on this backdrop is 6–8 business days and rush is 2–3; the rush does not shorten courier transit, and the shipping charge depends on destination, size and weight. There is no pickup desk in Chicago. If the case is damaged on arrival, the returns page asks for photos within three days.'
       }
     ],
     faqs: [
@@ -350,7 +359,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Is the frame easy to set up without a crew?', a: 'Yes. It is adjustable and assembles without tools, and it packs into a case one or two people can carry into a venue.' },
       { q: "What does step and repeat printing actually involve?", a: "Laying the logo grid out so it survives a crop, then printing it on a matte fabric that will not flare under a photographer's flash. A step and repeat banner and a step and repeat backdrop are the same item described two ways — the banner is the graphic, the backdrop is the graphic on its frame. Step and repeat backdrop printing includes both, plus the case they travel in." },
       { q: "Can a backdrop be shipped to a Chicago hotel for an event?", a: "Yes, and for these it is the usual destination. Send it to the hotel or event space and name the person receiving it - a case waiting unclaimed behind a front desk the night before an event is the common failure, and it is a scheduling problem rather than a shipping one." },
-      { q: "How do I get my artwork to you?", a: "Upload it when you order: PDF or JPEG at the ordered size, CMYK at 150dpi, fonts outlined and no crop marks. A free proof comes back before printing, which is where to check that no logo falls at the edge of the crop." }
+      { q: "How do I get my artwork to you?", a: "Upload it when you order: PDF or JPEG at the ordered size, CMYK at 150dpi, fonts outlined and no crop marks. A free proof comes back before printing, which is where to check that no logo falls at the edge of the crop." },
+      { q: 'Can a Chicago press wall be sent to a hotel instead of McCormick Place?', a: 'Yes. A hotel or event-space address is a normal destination, and there is no storefront pickup. Approve the proof in writing first: standard production is 6–8 business days and rush is 2–3, then the courier’s transit is added. The shipping charge depends on destination, size and weight. Name the person who will sign for the case.' }
     ]
   },
 
@@ -488,6 +498,10 @@ export const CITY_PRODUCT_PAGES = [
       {
         h2: "Shipping banners to Los Angeles",
         p: "A banner folds, so even a large one arrives as a box rather than as freight. For Los Angeles storefronts and outdoor events that usually means sending it straight to the address that is going to hang it, with nobody needing to be at a dock. Banners are made to order at the size you enter above, so the production time on the product page is what to plan around, with transit on top."
+      },
+      {
+        h2: 'A hall span and a storefront on one ticket',
+        p: 'The Los Angeles Convention Center and a neighborhood storefront rarely want the same material. A span inside the hall is often 13oz scrim or, under spotlights, the 9oz fabric that is dye-sublimated so it does not glare. A fence or hoarding outside wants mesh, because a solid sheet acts as a sail. Vinyl and mesh share a production window: artwork approved before 12pm PST starts the same business day, approval before 4pm PST starts the next business day, and more than 100 pieces adds two business days. The 9oz fabric banner’s own line says it ships in 3–5 business days. None of those clocks include courier transit. The charge depends on destination, size and weight, the address can be a business, a venue or a hotel, and there is no will-call counter. Tell us within three days if the box arrives damaged.'
       }
     ],
     faqs: [
@@ -496,7 +510,8 @@ export const CITY_PRODUCT_PAGES = [
       { q: 'Are hems and grommets included?', a: 'Standard hems, white double stitched thread and No. 2 Stimpson brass grommets are included at no charge on vinyl and mesh, so the banner arrives ready to tie off.' },
       { q: "What does custom banner printing include?", a: "Full colour printing across the whole sheet, cut to the exact size you enter, with standard hems and brass grommets on vinyl and mesh. Banner printing here is priced by the square foot rather than by format, so an unusual size costs what its area costs rather than being rounded up to the next stock sheet." },
       { q: "Can you ship banners to Los Angeles?", a: "Yes. A banner folds into a box and ships as a parcel, so it can go straight to the Los Angeles storefront, site or venue that is hanging it. Production time is on the product page, with transit added on top." },
-      { q: "Can I upload my own banner artwork?", a: "Yes. A free proof is sent for approval before it prints." }
+      { q: "Can I upload my own banner artwork?", a: "Yes. A free proof is sent for approval before it prints." },
+      { q: 'How do I time a banner for a date at the Los Angeles Convention Center?', a: 'Approve the proof in writing, then add courier transit to the production window on the material you picked. Vinyl and mesh start the same business day if approval is before 12pm PST, or the next business day before 4pm PST; over 100 pieces adds two business days. The 9oz fabric banner ships in 3–5 business days. Shipping cost depends on destination, size and weight, and the box goes to a business, venue or hotel. There is no storefront pickup.' }
     ]
   }
   // Chicago's banners and table covers pages, and every Las Vegas, Orlando,
