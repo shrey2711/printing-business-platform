@@ -14,9 +14,9 @@ export const CATEGORY_GUIDES = {
   backdrops: ['trade-show-backdrop-size-guide', 'what-is-a-step-and-repeat', 'step-and-repeat-vs-tension-fabric-backdrop', 'trade-show-booth-design-guide'],
   banners: ['banner-materials-explained', 'trade-show-display-setup-and-care-guide', 'trade-show-display-cost'],
   flags: ['feather-flag-size-guide', 'feather-angled-vs-convex-vs-teardrop-flags', 'trade-show-booth-design-guide', 'trade-show-display-setup-and-care-guide'],
-  'seg-kits': ['seg-modular-kit-a-vs-b-vs-c', 'trade-show-booth-design-guide', 'trade-show-display-cost'],
+  'seg-kits': ['seg-modular-kit-a-vs-b-vs-c', 'trade-show-booth-design-guide', 'trade-show-display-cost', 'pop-up-display-size-guide'],
   'rigid-signs': ['yard-sign-size-guide', 'a-frame-sign-size-guide', 'coroplast-vs-pvc-vs-aluminum-signs', 'print-coverage-explained', 'trade-show-booth-checklist'],
-  'marketing-essentials': ['business-card-size-guide', 'trade-show-booth-checklist', 'trade-show-booth-design-guide']
+  'marketing-essentials': ['business-card-size-guide', 'custom-lanyard-size-guide', 'brochure-size-guide', 'trade-show-booth-checklist', 'trade-show-booth-design-guide']
 };
 export const DEFAULT_GUIDES = ['trade-show-booth-checklist', 'trade-show-display-cost', 'trade-show-booth-design-guide'];
 
@@ -47,7 +47,10 @@ export const GUIDE_PRODUCTS = {
   'yard-sign-size-guide': ['coroplast-signs', 'pvc-board-signs', 'acp-aluminum-signs', 'feather-angled-flag'],
   'a-frame-sign-size-guide': ['a-frame-sign', 'sandwich-board-sign', 'coroplast-signs', 'acp-aluminum-signs'],
   'feather-flag-size-guide': ['feather-angled-flag', 'feather-convex-flag', 'teardrop-flag', 'canopy-tent-10x10'],
-  'what-is-a-step-and-repeat': ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'standard-retractable-banner', 'pleated-table-covers']
+  'what-is-a-step-and-repeat': ['step-and-repeat-backdrop', 'straight-tension-fabric-display', 'standard-retractable-banner', 'pleated-table-covers'],
+  'custom-lanyard-size-guide': ['custom-lanyards', 'business-cards-16pt-matte', 'brochures-80lb-uncoated', 'step-and-repeat-backdrop'],
+  'brochure-size-guide': ['brochures-80lb-uncoated', 'flyers-80lb-uncoated', 'business-cards-16pt-matte', 'custom-lanyards'],
+  'pop-up-display-size-guide': ['seg-modular-trade-show-kit-a', 'seg-modular-trade-show-kit-b', 'seg-modular-trade-show-kit-c', 'straight-tension-fabric-display']
 };
 export const DEFAULT_PRODUCTS = ['canopy-tent-10x10', 'standard-retractable-banner', 'pleated-table-covers', 'step-and-repeat-backdrop'];
 
@@ -79,7 +82,10 @@ export const GUIDE_TITLES = {
   'yard-sign-size-guide': 'Yard Sign Size Guide: Common Dimensions and Best Uses',
   'a-frame-sign-size-guide': 'A-Frame Sign Size Guide: How to Choose the Right Size',
   'feather-flag-size-guide': 'Feather Flag Size Guide: Heights and Base Options Explained',
-  'what-is-a-step-and-repeat': 'What Is a Step and Repeat? A Simple Guide for Events and Trade Shows'
+  'what-is-a-step-and-repeat': 'What Is a Step and Repeat? A Simple Guide for Events and Trade Shows',
+  'custom-lanyard-size-guide': 'Custom Lanyard Size Guide: Widths, Lengths, Print Options',
+  'brochure-size-guide': 'Brochure Size Guide: Flat Sizes, Folds, and How to Choose',
+  'pop-up-display-size-guide': 'Pop Up Display Size Guide: 10x10 or 10x20 Booths'
 };
 
 export const guidesForCategory = (cat) => (CATEGORY_GUIDES[cat] || DEFAULT_GUIDES).slice(0, 5);

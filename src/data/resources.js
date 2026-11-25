@@ -34,7 +34,10 @@ export const RESOURCE_CATEGORIES = [
       'yard-sign-size-guide',
       'a-frame-sign-size-guide',
       'feather-flag-size-guide',
-      'what-is-a-step-and-repeat'
+      'what-is-a-step-and-repeat',
+      'custom-lanyard-size-guide',
+      'brochure-size-guide',
+      'pop-up-display-size-guide'
     ]
   },
   {

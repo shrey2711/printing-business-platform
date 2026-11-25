@@ -2105,6 +2105,355 @@ export const STATIC_ARTICLES = [
 <p><strong>How do you set up a step and repeat banner?</strong> The frame is portable and adjustable and packs into a carry bag when you order the kit that includes it. Leave 8 to 10 ft of clear floor in front of a 10 ft wall for photography, and check that an 8 ft-tall wall will clear the ceiling.</p>
 <p><strong>What material is used for a step and repeat backdrop?</strong> A replaceable large-format fabric graphic on an adjustable portable frame.</p>
 `
+  },
+  {
+    slug: 'custom-lanyard-size-guide',
+    faqs: [
+      { q: 'What is the standard size of a lanyard?', a: 'In our range the published standard is a 36 inch (91 cm) loop. Widths are 5/8 inch, 3/4 inch or 1 inch (1.6, 1.9 or 2.54 cm). A longer or shorter drop is confirmed on the proof if the badge holder needs it.' },
+      { q: 'What width should I choose for a custom lanyard?', a: 'Choose from the three published widths: 5/8 inch, 3/4 inch or 1 inch. The 1 inch width gives the imprint the most room; 5/8 inch is the slimmer strap. There is no published rule that ties one width to a specific event type.' },
+      { q: 'How long should a lanyard be to hold an ID badge?', a: 'Start with the 36 inch standard loop. We do not publish a separate badge-holder drop chart. If the holder needs a longer or shorter drop, tell us on the quote and we confirm it on the proof.' },
+      { q: 'What materials are commonly used for custom lanyards?', a: 'Polyester, nylon, woven and tubular, plus full-colour dye sublimation, as listed on the product page. Polyester or nylon is the usual choice for a one- or two-colour imprint; woven or tubular is described as the heavier feel. Dye sublimation is the print method for gradients or photography, not a separate fabric.' },
+      { q: 'Which printing method is best for a lanyard design?', a: 'Use a one- or two-colour imprint on polyester or nylon when the logo is a simple colour set. Use full-colour dye sublimation when the artwork has gradients, photography, or more than a couple of colours. Print one side, or both sides if the design should still read when the lanyard twists.' }
+    ],
+    title: 'Custom Lanyard Size Guide: Widths, Lengths, Print Options',
+    excerpt:
+      '5/8, 3/4 or 1 inch widths, a 36 inch standard loop, sizes in cm, and how to match material and printing to the artwork.',
+    tags: ['Buying Guide', 'Marketing Essentials'],
+    seo: {
+      title: 'Custom Lanyard Size Guide: Widths',
+      description:
+        'Custom lanyard size guide: choose 5/8, 3/4 or 1 inch widths, the 36 inch standard loop, see sizes in cm, and match material and print to the artwork.'
+    },
+    coverUrl: '/images/marketing/custom-lanyards-widths.webp',
+    publishedAt: '2026-11-25T00:00:00.000Z',
+    updatedAt: '2026-11-25T00:00:00.000Z',
+    html: `
+<p><strong>The standard custom lanyard in our range is a 36 inch (91 cm) loop in a 5/8 inch, 3/4 inch or 1 inch (1.6, 1.9 or 2.54 cm) width.</strong> Those are the sizes published on our <a href="/products/custom-lanyards">custom lanyards</a> page. If a badge holder needs a longer or shorter drop, that is confirmed on the proof rather than picked from a second published length list.</p>
+<h2>Custom Lanyard Sizes: A Quick Size Guide</h2>
+<p>A lanyard is the strap a badge, ID card or exhibitor pass hangs from. The two measurements that matter on our product page are <strong>width</strong> (how wide the strap is) and <strong>loop length</strong> (published as a 36 inch standard loop). We do not publish a separate neck-drop figure, a thickness, or a weight for the finished lanyard, so order by the width and the 36 inch loop, and tell us if the drop needs to change.</p>
+<table>
+<thead>
+<tr>
+<th>What is published</th>
+<th>Inches</th>
+<th>Centimetres</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Narrower width</td>
+<td>5/8&quot;</td>
+<td>1.6 cm</td>
+</tr>
+<tr>
+<td>Mid width</td>
+<td>3/4&quot;</td>
+<td>1.9 cm</td>
+</tr>
+<tr>
+<td>Wider width</td>
+<td>1&quot;</td>
+<td>2.54 cm</td>
+</tr>
+<tr>
+<td>Standard loop length</td>
+<td>36&quot;</td>
+<td>91 cm</td>
+</tr>
+</tbody>
+</table>
+<p>The inch-to-centimetre factor for this table is 2.54. The centimetre figures above are rounded to the nearest 0.1 cm except for the 1 inch width, which is exact (5/8 × 2.54 = 1.5875 cm, shown as 1.6; 3/4 × 2.54 = 1.905 cm, shown as 1.9; 36 × 2.54 = 91.44 cm, shown as 91). Name the unit in the same instruction so the proof is drawn to the size you meant.</p>
+<p>Quantities run from 100 to 10,000. The lanyards ship printed and finished with the attachment you choose. A badge holder or ID card is not included.</p>
+<h2>Standard Lanyard Width and Length</h2>
+<p><strong>Width</strong> is the choice most people make first, because it changes how much room the imprint has and how the strap feels against the neck.</p>
+<ul>
+<li><strong>5/8 inch</strong> is the narrower published width. It leaves a slimmer strap and a smaller area for the imprint.</li>
+<li><strong>3/4 inch</strong> sits in the middle of the three published widths.</li>
+<li><strong>1 inch</strong> is the wider published width, with the most room for a logo or a line of text.</li>
+</ul>
+<p><strong>Length</strong> is published as a <strong>36 inch standard loop</strong>. That is the default on the product page. We do not publish a chart that converts the loop length into a drop measurement, and we do not publish separate adult, child or &quot;badge-only&quot; lengths. If the badge holder needs a longer or shorter drop, say so on the quote and it is confirmed on the proof.</p>
+<h2>Lanyard Dimensions in Inches and Centimetres</h2>
+<p>Trade show and event work in the United States usually specifies lanyards in inches, which is why the product page lists 5/8&quot;, 3/4&quot;, 1&quot; and 36&quot;. The same sizes can be written in centimetres, as in the table above, if a Canadian or metric artwork file needs them. Do not mix units in the same instruction (for example, a 1 inch width with a 91 cm loop) without saying that both refer to the published standard size.</p>
+<p>We do not publish a tolerance, a stretch figure, or a finished circumference for the worn loop, so treat the numbers above as the sizes you order, not as a worn-fit chart.</p>
+<h2>How to Choose a Lanyard Size for Your Event</h2>
+<ol>
+<li>Pick a <strong>width</strong> from the three published options. Use 1 inch when the logo or wordmark needs more horizontal room; use 5/8 inch when you want a slimmer strap.</li>
+<li>Start from the <strong>36 inch standard loop</strong>. Only ask for a different drop if the badge holder or the way the pass is worn needs it.</li>
+<li>Choose an <strong>attachment</strong>: swivel hook, bulldog clip, split ring or cell phone loop. A breakaway safety clasp can be added to any of them, which is worth considering at a staffed booth where a lanyard might catch on equipment.</li>
+<li>Decide whether the imprint is on <strong>one side or both</strong>. A double-sided imprint repeats the design, or a second message, along the length so it still reads when the lanyard twists.</li>
+</ol>
+<p>If you are also planning the rest of the booth kit, the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> covers the other pieces that usually sit alongside badges and passes. The product page says ordering lanyards with a canopy or a backdrop is how booth staff match the branding behind them. That backdrop can be a <a href="/products/step-and-repeat-backdrop">step and repeat backdrop</a>.</p>
+<h2>Wide vs Narrow Lanyards: Which Width Should You Choose?</h2>
+<p>&quot;Narrow&quot; and &quot;wide&quot; in this range simply mean the ends of the published width list: <strong>5/8 inch</strong> versus <strong>1 inch</strong>, with <strong>3/4 inch</strong> in between. We do not publish a rule that one width is required for a given event type, logo size or badge style. The practical difference is imprint area and how bulky the strap feels. If the artwork has a short wordmark or a simple icon, any of the three widths can carry it. If the artwork is a longer line of text, the 1 inch width gives it more room.</p>
+<p>There is no published minimum logo size for each width. The free proof is where you see whether the imprint reads clearly at the width you chose.</p>
+<h2>Lanyard Materials: What Are the Options?</h2>
+<p>The product page lists <strong>polyester</strong>, <strong>nylon</strong>, <strong>woven</strong> and <strong>tubular</strong>, and the same material menu includes full-colour <strong>dye sublimation</strong>. Polyester or nylon is the option for a clean one- or two-colour imprint, and woven or tubular is the heavier feel. Dye sublimation is the printing method for artwork with gradients or photography, not a fifth fabric. We do not publish a fabric weight, a thread count, a water rating or a softness grade for any of them, so do not treat one material as &quot;indoor only&quot; or &quot;outdoor only&quot; unless that is confirmed on the quote.</p>
+<p>Choose the material for feel and for the kind of imprint the artwork needs, then confirm both on the proof.</p>
+<h2>Lanyard Printing Options and Design Considerations</h2>
+<ul>
+<li><strong>One- or two-colour imprint</strong> on polyester or nylon, when the logo is a simple colour set.</li>
+<li><strong>Full-colour dye sublimation</strong> when the artwork has gradients or photography, or more than a couple of colours.</li>
+<li><strong>One side or both sides.</strong> A single-side imprint is standard. A double-sided imprint is the option when the lanyard should still read after it twists.</li>
+</ul>
+<p>Artwork for a one- or two-colour imprint is a print-ready vector file (AI, EPS or PDF) with fonts outlined. Dye-sublimated full-colour artwork can be supplied as high-resolution CMYK art instead. Every file is checked at no charge and a free proof is sent before printing. Related handouts, such as <a href="/products/business-cards-16pt-matte">16pt matte business cards</a>, have their own size rules — see the <a href="/blog/business-card-size-guide">business card size guide</a> if you are ordering cards at the same time. Other marketing print lives on the <a href="/marketing-essentials">marketing essentials</a> category page.</p>
+<p>We do not publish a maximum imprint length, a pantone-matching guarantee, or a wash or fade rating, so those details stay on the quote and the proof.</p>
+<h2>What Lanyard Length Works Best for Adults and ID Badges?</h2>
+<p>The length we publish for this product is the <strong>36 inch standard loop</strong>, and it is the length to start from for adult staff and attendee badges. We do not publish a separate adult length, a child length, or a recommended drop for a given badge-holder size. If the holder, the pass, or the way people wear the lanyard needs a longer or shorter drop, put that on the quote and confirm it on the proof before the run is printed.</p>
+<p>The attachment does not change the published loop length. It only changes how the badge or pass connects: swivel hook, bulldog clip, split ring or cell phone loop. Add the breakaway clasp when there is a chance the lanyard could catch.</p>
+<h3>Frequently asked questions</h3>
+<p><strong>What is the standard size of a lanyard?</strong> In our range the published standard is a 36 inch (91 cm) loop. Widths are 5/8 inch, 3/4 inch or 1 inch (1.6, 1.9 or 2.54 cm). A longer or shorter drop is confirmed on the proof if the badge holder needs it.</p>
+<p><strong>What width should I choose for a custom lanyard?</strong> Choose from the three published widths: 5/8 inch, 3/4 inch or 1 inch. The 1 inch width gives the imprint the most room; 5/8 inch is the slimmer strap. There is no published rule that ties one width to a specific event type.</p>
+<p><strong>How long should a lanyard be to hold an ID badge?</strong> Start with the 36 inch standard loop. We do not publish a separate badge-holder drop chart. If the holder needs a longer or shorter drop, tell us on the quote and we confirm it on the proof.</p>
+<p><strong>What materials are commonly used for custom lanyards?</strong> Polyester, nylon, woven and tubular, plus full-colour dye sublimation, as listed on the product page. Polyester or nylon is the usual choice for a one- or two-colour imprint; woven or tubular is described as the heavier feel. Dye sublimation is the print method for gradients or photography, not a separate fabric.</p>
+<p><strong>Which printing method is best for a lanyard design?</strong> Use a one- or two-colour imprint on polyester or nylon when the logo is a simple colour set. Use full-colour dye sublimation when the artwork has gradients, photography, or more than a couple of colours. Print one side, or both sides if the design should still read when the lanyard twists.</p>
+`
+  },
+  {
+    slug: 'brochure-size-guide',
+    faqs: [
+      { q: 'What size brochure should I order?', a: 'Order by flat size, not folded size. The six published flat sizes are 8.5 x 11, 8.5 x 14, 9 x 12, 11 x 17, 17 x 22 and 11 x 25.5 inches. The finished piece is smaller once it is folded, and that folded size is confirmed on the proof.' },
+      { q: 'What are the brochure sizes in centimetres?', a: 'Rounded to the nearest centimetre: 22 x 28, 22 x 36, 23 x 30, 28 x 43, 43 x 56 and 28 x 65 cm, in the same order as the inch list above. The factor is 2.54 cm per inch. State the unit beside the size.' },
+      { q: 'What fold options are available?', a: 'Folding is included, but we do not publish a fixed list of fold layouts for this product. Send the fold you want with the artwork and we confirm it on the proof before the job runs.' },
+      { q: 'Do I need scoring on a brochure?', a: 'Scoring is optional. It creases the sheet before folding and helps stop the fibre cracking on this 80lb uncoated stock, especially when the fold runs through a solid or dark area of the design.' },
+      { q: 'Should I order a brochure or a flyer?', a: 'Order a brochure when you need a folded piece with more than one panel. Order a flyer when you want a flat, unfolded sheet. Both use the same 80lb enviro uncoated stock; the size lists and the finishing are different.' }
+    ],
+    title: 'Brochure Size Guide: Flat Sizes, Folds, and How to Choose',
+    excerpt:
+      'Six flat brochure sizes from 8.5 x 11 to 11 x 25.5 inches, sizes in cm, how folds and scoring work, and when to order a flyer instead.',
+    tags: ['Buying Guide', 'Marketing Essentials'],
+    seo: {
+      title: 'Brochure Size Guide: 6 Flat Sizes',
+      description:
+        'Brochure size guide: six flat sizes from 8.5x11 to 11x25.5 inches, centimetre conversions, how folds and scoring work, and how a brochure differs from a flyer.'
+    },
+    coverUrl: '/images/marketing/brochures-80lb-uncoated-folded-stack.jpeg',
+    publishedAt: '2026-11-25T00:00:00.000Z',
+    updatedAt: '2026-11-25T00:00:00.000Z',
+    html: `
+<p><strong>Our brochures are ordered by flat size: 8.5 x 11, 8.5 x 14, 9 x 12, 11 x 17, 17 x 22, or 11 x 25.5 inches (about 22 x 28, 22 x 36, 23 x 30, 28 x 43, 43 x 56, or 28 x 65 cm).</strong> Those are the sizes before folding, published on our <a href="/products/brochures-80lb-uncoated">80lb enviro uncoated brochures</a> page. The finished, folded piece is smaller. We do not publish a fixed list of fold layouts, so the fold you want is sent with the artwork and confirmed on the proof.</p>
+<h2>Brochure Sizes: The Six Flat Options</h2>
+<p>A brochure on this product is a folded sheet: the fold is what gives you more panels than a single flyer. The size you pick on the quote is the <strong>flat sheet</strong>, not the folded packet. All six sizes are printed on 80lb enviro stock (the mill states 30% post-consumer recycled content — that is the only recycled-content claim on the product page), uncoated, in full colour on one side (4/0) or both sides (4/4).</p>
+<table>
+<thead>
+<tr>
+<th>Flat size (as published)</th>
+<th>Inches</th>
+<th>Centimetres (rounded)</th>
+<th>What the figure is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smallest letter-size sheet</td>
+<td>8.5&quot; x 11&quot;</td>
+<td>22 x 28 cm</td>
+<td>Size before folding</td>
+</tr>
+<tr>
+<td>Legal-length sheet</td>
+<td>8.5&quot; x 14&quot;</td>
+<td>22 x 36 cm</td>
+<td>Size before folding</td>
+</tr>
+<tr>
+<td>9 x 12 sheet</td>
+<td>9&quot; x 12&quot;</td>
+<td>23 x 30 cm</td>
+<td>Size before folding</td>
+</tr>
+<tr>
+<td>Tabloid sheet</td>
+<td>11&quot; x 17&quot;</td>
+<td>28 x 43 cm</td>
+<td>Size before folding</td>
+</tr>
+<tr>
+<td>17 x 22 sheet</td>
+<td>17&quot; x 22&quot;</td>
+<td>43 x 56 cm</td>
+<td>Size before folding</td>
+</tr>
+<tr>
+<td>Long 11 x 25.5 sheet</td>
+<td>11&quot; x 25.5&quot;</td>
+<td>28 x 65 cm</td>
+<td>Size before folding</td>
+</tr>
+</tbody>
+</table>
+<p>Centimetre figures in this table use 2.54 cm per inch. They are rounded to the nearest centimetre (8.5 × 2.54 = 21.59 cm, shown as 22; 9 × 2.54 = 22.86 cm, shown as 23; 11 × 2.54 = 27.94 cm, shown as 28; 14 × 2.54 = 35.56 cm, shown as 36; 17 × 2.54 = 43.18 cm, shown as 43; 22 × 2.54 = 55.88 cm, shown as 56; 25.5 × 2.54 = 64.77 cm, shown as 65). Put the flat size in one unit on the order and name that unit.</p>
+<p>Quantities run from 25 to 100,000. The brochures arrive cut to size, folded and boxed. A folder, sleeve or insert is not included. Optional bundling splits them into counted stacks.</p>
+<h2>What Size Brochure Is Easier to Take Away?</h2>
+<p>We do not publish a &quot;best size for a show bag&quot; or a &quot;best size for a pocket&quot; chart, so treat the six flat sizes as the options you can order, then judge the <strong>folded</strong> result on the proof. As a starting point:</p>
+<ul>
+<li>The <strong>smaller flat sheets</strong> (8.5 x 11, 8.5 x 14, 9 x 12 inches) fold down into a more compact leave-behind. The product page describes the range as folding down to fit a bag.</li>
+<li>The <strong>larger flat sheets</strong> (11 x 17, 17 x 22, 11 x 25.5 inches) give you more panel area for specification detail, but only after you know how the sheet will be folded.</li>
+</ul>
+<p>If the piece should stay flat, with no fold at all, that is a different product: <a href="/products/flyers-80lb-uncoated">80lb enviro uncoated flyers</a> ship flat on the same stock, in a different size list. Do not order a brochure if you need an unfolded sheet.</p>
+<h2>How Brochure Folds Work (and What We Do Not Publish)</h2>
+<p>Folding is part of the finishing, and the brochures arrive already folded. <strong>We do not publish a fixed list of fold layouts for this product.</strong> A tri-fold, half-fold or any other layout is not a published menu item here, even if a past job used one. Send the fold you want with the artwork and it is confirmed on the proof before anything runs.</p>
+<p>Because the finished size depends on that fold, this guide does not list a folded width and height for each flat size. Publishing those figures would mean inventing a fold catalogue the product page does not have. The proof is drawn to the flat size with the fold marks you asked for, so you can see the finished packet before it prints.</p>
+<h2>Scoring: When the Fold Needs a Crease First</h2>
+<p>Scoring presses a crease into the sheet before it is folded. On a heavier uncoated stock, the fibre can crack along a fold that has not been scored, which shows as a broken white line through the printed colour. Scoring is optional, and the product page says it is worth adding when the fold runs through a solid or dark area of the design.</p>
+<p>Scoring does not change the flat size you order. It only prepares the sheet so the fold you already chose is cleaner.</p>
+<h2>Brochure vs Flyer: Which Size Range Do You Need?</h2>
+<p>Both products use the same 80lb enviro uncoated stock. The difference is the finishing and the size list:</p>
+<ul>
+<li>A <a href="/products/brochures-80lb-uncoated">brochure</a> is folded, and you order one of six <strong>flat</strong> sizes from 8.5 x 11 to 11 x 25.5 inches.</li>
+<li>A <a href="/products/flyers-80lb-uncoated">flyer</a> is shipped flat, in six sizes from 3.5 x 8.5 to 17 x 22 inches, including 8.5 x 5.5, 4.25 x 11, 8.5 x 11, 11 x 17 and 17 x 22.</li>
+</ul>
+<p>Use a brochure when you need more than one panel to answer a question properly. Use a flyer when you want a single flat sheet a visitor can write on at the booth (the flyer page notes that 4/0 leaves the back blank for that). If you are also handing out cards, the <a href="/blog/business-card-size-guide">business card size guide</a> covers <a href="/products/business-cards-16pt-matte">16pt matte business cards</a>. All three sit in <a href="/marketing-essentials">marketing essentials</a>.</p>
+<h2>Artwork: Build to the Flat Size, Not the Folded Size</h2>
+<p>For this product, send a print-ready PDF in CMYK at 300 dpi, with a <strong>1/16 inch (about 1.6 mm) bleed on all four sides</strong>. Build the file to the <strong>flat size</strong>, not the folded size, and mark where the folds go. Keep anything you cannot afford to lose away from the trim and the fold lines.</p>
+<p>That bleed rule is specific to this brochure (and to the matching flyers). The site-wide <a href="/artwork-guidelines">artwork guidelines</a> for large-format displays such as canopies, banners and backdrops say not to add bleed on those products — do not apply that large-format rule to a brochure file. Every file is checked at no charge, and a free proof goes out before printing.</p>
+<p>If the rest of the booth still needs a checklist, see the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a>.</p>
+<h2>How to Choose a Brochure Size</h2>
+<ol>
+<li>Pick the <strong>flat size</strong> from the six published options, based on how much panel area the content needs.</li>
+<li>State the <strong>fold</strong> you want with the artwork. There is no published fold menu, so the proof is where that layout is locked in.</li>
+<li>Add <strong>scoring</strong> if the fold runs through a solid or dark area.</li>
+<li>Choose <strong>4/0 or 4/4</strong>, and build the file to the flat size with 1/16 inch bleed and the fold marks shown.</li>
+</ol>
+<p>We do not publish production or delivery dates on the product page; timing is confirmed with the quote. Shipping covers the United States and Canada.</p>
+<h3>Frequently asked questions</h3>
+<p><strong>What size brochure should I order?</strong> Order by flat size, not folded size. The six published flat sizes are 8.5 x 11, 8.5 x 14, 9 x 12, 11 x 17, 17 x 22 and 11 x 25.5 inches. The finished piece is smaller once it is folded, and that folded size is confirmed on the proof.</p>
+<p><strong>What are the brochure sizes in centimetres?</strong> Rounded to the nearest centimetre: 22 x 28, 22 x 36, 23 x 30, 28 x 43, 43 x 56 and 28 x 65 cm, in the same order as the inch list above. The factor is 2.54 cm per inch. State the unit beside the size.</p>
+<p><strong>What fold options are available?</strong> Folding is included, but we do not publish a fixed list of fold layouts for this product. Send the fold you want with the artwork and we confirm it on the proof before the job runs.</p>
+<p><strong>Do I need scoring on a brochure?</strong> Scoring is optional. It creases the sheet before folding and helps stop the fibre cracking on this 80lb uncoated stock, especially when the fold runs through a solid or dark area of the design.</p>
+<p><strong>Should I order a brochure or a flyer?</strong> Order a brochure when you need a folded piece with more than one panel. Order a flyer when you want a flat, unfolded sheet. Both use the same 80lb enviro uncoated stock; the size lists and the finishing are different.</p>
+`
+  },
+  {
+    slug: 'pop-up-display-size-guide',
+    faqs: [
+      { q: 'What size pop-up display do I need for a 10x10 booth?', a: 'The published starting point is a 10 ft (305 cm) wall along the back of a standard 10x10. Choose a height from 6.6, 7.4 or 8.2 ft after you check the venue\'s height limit.' },
+      { q: 'What size pop-up display do I need for a 10x20 booth?', a: 'The published starting point is a 20 ft (610 cm) wall. The same three heights apply. If the organisers have given you a wall length between 10 and 20 ft, the published intermediate widths are 13 ft and 16.4 ft.' },
+      { q: 'How tall is a pop-up display?', a: 'The kits are published at 6.6, 7.4 or 8.2 ft tall (201, 226 or 250 cm). We do not publish a ceiling-clearance rule, so confirm the venue height before you choose.' },
+      { q: 'Is a pop-up display the same as a tension fabric display?', a: 'No. A pop-up, as described on the category page, uses an accordion or modular frame with panel graphics. A tension fabric display uses one stretch graphic over a tube frame. Size each product from its own page; the widths in this guide are the kit widths published on the pop-up displays page.' },
+      { q: 'How large is the packed kit?', a: 'A full kit with graphics is published at about 72 to 80 lb, in a carry bag of roughly 43 x 14 x 8 inches. Plan on a cart, and on checked freight rather than a shoulder carry.' }
+    ],
+    title: 'Pop Up Display Size Guide: 10x10 or 10x20 Booths',
+    excerpt:
+      'Match a 10 ft or 20 ft pop-up backwall to a 10x10 or 10x20 booth, with published kit widths and heights in feet and centimetres.',
+    tags: ['Buying Guide', 'Displays'],
+    seo: {
+      title: 'Pop Up Display Size Guide: 10 & 20 ft',
+      description:
+        'Pop up display size guide: match a 10 ft or 20 ft backwall to a 10x10 or 10x20 booth, see kit widths and heights in feet and cm, and compare straight vs curved.'
+    },
+    coverUrl: '/images/og/seg-kits__apex-seg-modular-kit-a-main.jpg',
+    publishedAt: '2026-11-25T00:00:00.000Z',
+    updatedAt: '2026-11-25T00:00:00.000Z',
+    html: `
+<p><strong>Match the backwall to the booth: a 10 ft (305 cm) wall fills the back of a standard 10x10, and a 20 ft (610 cm) wall spans a 10x20.</strong> That rule is published on our <a href="/pop-up-displays">pop up displays</a> page. The modular kits stocked there also come in 13 ft and 16.4 ft widths (396 and 500 cm), at 6.6, 7.4 or 8.2 ft tall (201, 226 or 250 cm), so the wall can be sized to the space you have actually booked.</p>
+<h2>Pop Up Display Sizes: Widths and Heights</h2>
+<p>On that category page, a pop-up display is described as a portable backwall — an accordion-style frame that expands into a straight or curved wall, with fabric or printed graphic panels across the front. The same page then lists the kits actually stocked: modular SEG (silicone-edge graphic) kits, quoted per order, in the widths and heights below. This guide uses those published kit dimensions. We do not publish a separate size chart for a classic accordion-frame pop-up with magnetic or hook-and-loop panels, so do not invent panel counts or &quot;3x3&quot; / &quot;4x3&quot; frame sizes from this article.</p>
+<table>
+<thead>
+<tr>
+<th>Published kit width</th>
+<th>Feet</th>
+<th>Centimetres (rounded)</th>
+<th>Typical match, as published</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard 10x10 back wall</td>
+<td>10 ft</td>
+<td>305 cm</td>
+<td>Back of a 10x10 booth</td>
+</tr>
+<tr>
+<td>Intermediate width</td>
+<td>13 ft</td>
+<td>396 cm</td>
+<td>When the booked space is between 10 and 20 ft</td>
+</tr>
+<tr>
+<td>Intermediate width</td>
+<td>16.4 ft</td>
+<td>500 cm</td>
+<td>When the booked space is between 10 and 20 ft</td>
+</tr>
+<tr>
+<td>Standard 10x20 back wall</td>
+<td>20 ft</td>
+<td>610 cm</td>
+<td>Spans a 10x20 booth</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Published kit height</th>
+<th>Feet</th>
+<th>Centimetres (rounded)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lower height</td>
+<td>6.6 ft</td>
+<td>201 cm</td>
+</tr>
+<tr>
+<td>Mid height</td>
+<td>7.4 ft</td>
+<td>226 cm</td>
+</tr>
+<tr>
+<td>Taller height</td>
+<td>8.2 ft</td>
+<td>250 cm</td>
+</tr>
+</tbody>
+</table>
+<p>One foot is 12 inches, and each inch is 2.54 cm, so a foot is 30.48 cm. The centimetre figures are rounded to the nearest centimetre (10 × 30.48 = 304.8 cm, shown as 305; 13 × 30.48 = 396.24 cm, shown as 396; 16.4 × 30.48 = 499.872 cm, shown as 500; 20 × 30.48 = 609.6 cm, shown as 610; 6.6 × 30.48 = 201.168 cm, shown as 201; 7.4 × 30.48 = 225.552 cm, shown as 226; 8.2 × 30.48 = 249.936 cm, shown as 250). Put the width and the height in one unit, and say which unit it is. Keep the 16.4 ft width as 16.4, not 16.</p>
+<h2>What Size Pop Up Display for a 10x10 or 10x20 Booth?</h2>
+<p>Start with the booth you have booked, not with a preferred graphic size.</p>
+<ul>
+<li>For a <strong>10x10 booth</strong>, the published starting point is a <strong>10 ft</strong> wall along the back.</li>
+<li>For a <strong>10x20 booth</strong>, the published starting point is a <strong>20 ft</strong> wall.</li>
+</ul>
+<p>If the organisers have given you a different back-wall length, the 13 ft and 16.4 ft kit widths are the published options between those two standards. We do not publish a size for an 8x8, 10x15 or island booth on this category page, so do not treat those footprints as a listed kit width. Measure the booked wall, then pick the published width that fits it.</p>
+<p>Height is a separate choice: <strong>6.6, 7.4 or 8.2 ft</strong>. We do not publish a hall-ceiling clearance chart, a hanging-point height, or a rule for which height a given venue allows. Check the venue's height limit first, then choose one of the three published heights that stays under it.</p>
+<p>For layout help around the rest of the booth, see the <a href="/blog/trade-show-booth-checklist">trade show booth checklist</a> and the <a href="/blog/trade-show-booth-design-guide">trade show booth design guide</a>.</p>
+<h2>Straight or Curved: The Other Size Decision</h2>
+<p>Width and height are not the only shape choice. The category page asks you to decide <strong>straight or curved</strong> first:</p>
+<ul>
+<li>A <strong>straight</strong> wall maximises flat graphic area for text and product shots.</li>
+<li>A <strong>curved</strong> wall reads softer from an angle and hides the booth corners.</li>
+</ul>
+<p>We do not publish a radius, a depth, or a footprint difference between the straight and curved versions, so do not plan the aisle clearance from a figure that is not on the page. If the booth is shallow, say so on the quote and confirm the standing depth on the proof.</p>
+<h2>How These Kits Are Built (and How That Affects Size)</h2>
+<p>The kits on the pop-up displays page use modular, tool-free snap-fit construction with SEG fabric graphics — a sewn silicone edge that presses into the frame groove — and integrated LED illumination. Kit A adds an illuminated archway and a display counter; the differences between Kit A, B and C are covered in the <a href="/blog/seg-modular-kit-a-vs-b-vs-c">SEG modular kit A vs B vs C</a> guide, and Kit A itself is listed as <a href="/products/seg-modular-trade-show-kit-a">Trade Show SEG Modular Kit A</a>.</p>
+<p>Graphics are full-colour dye sublimation on flame-retardant 200g backlit fabric, and they are replaceable. Because the panels are backlit, the category page notes that solid dark areas stay dark and fine reversed type can bloom — the free proof is where you check that. This post does not add artwork sizes beyond the published widths and heights; build the graphic to the size you are quoted.</p>
+<p>A full kit with graphics weighs about <strong>72 to 80 lb</strong> (about 33 to 36 kg) and packs into a carry bag of roughly <strong>43 x 14 x 8 inches</strong> (109 x 36 x 20 cm). Plan for a cart rather than a shoulder carry. We do not publish a packed weight for the frame alone, or a shipping-case size besides that bag figure.</p>
+<h2>Pop Up vs Tension Fabric vs a Retractable Banner</h2>
+<p>Size a pop-up as a <strong>backwall</strong>. That is a different job from a banner stand in the aisle or a fabric wall on a tube frame:</p>
+<ul>
+<li>A <a href="/tension-fabric-displays">tension fabric display</a> uses one stretch graphic over a tube frame. The pop-up page describes that option as lighter and fully seamless, and says to pick pop-up for speed and durability, or fabric for the lightest, most seamless wall. Use the tension-fabric category and the <a href="/blog/trade-show-backdrop-size-guide">trade show backdrop size guide</a> when you are sizing that kind of wall, not the kit widths above.</li>
+<li>A retractable banner is a narrow stand, not a booth-width backwall. If you need an aisle graphic, see <a href="/blog/what-size-retractable-banner">what size retractable banner to buy</a> rather than stretching a banner-stand size across a 10 ft wall.</li>
+</ul>
+<p>Do not use this size guide to pick a <a href="/custom-canopies">custom canopy tent</a>. A pop-up canopy tent is a different product and a different keyword.</p>
+<h2>How to Choose a Pop Up Display Size</h2>
+<ol>
+<li>Confirm the <strong>booth footprint</strong> you have booked (10x10, 10x20, or another width).</li>
+<li>Pick a published <strong>width</strong>: 10 ft for a standard 10x10 back wall, 20 ft for a 10x20, or 13 / 16.4 ft if the booked wall falls between them.</li>
+<li>Pick a published <strong>height</strong>: 6.6, 7.4 or 8.2 ft, after you know the venue's height limit.</li>
+<li>Choose <strong>straight or curved</strong>.</li>
+<li>If you need an archway, side panels or a counter, use the kit comparison to choose Kit A, B or C, and request a quote — these kits are quoted per order, not priced from a rate card.</li>
+</ol>
+<p>We do not publish production or delivery dates on the category page; timing is confirmed with the quote. These kits ship across the United States and Canada.</p>
+<h3>Frequently asked questions</h3>
+<p><strong>What size pop-up display do I need for a 10x10 booth?</strong> The published starting point is a 10 ft (305 cm) wall along the back of a standard 10x10. Choose a height from 6.6, 7.4 or 8.2 ft after you check the venue's height limit.</p>
+<p><strong>What size pop-up display do I need for a 10x20 booth?</strong> The published starting point is a 20 ft (610 cm) wall. The same three heights apply. If the organisers have given you a wall length between 10 and 20 ft, the published intermediate widths are 13 ft and 16.4 ft.</p>
+<p><strong>How tall is a pop-up display?</strong> The kits are published at 6.6, 7.4 or 8.2 ft tall (201, 226 or 250 cm). We do not publish a ceiling-clearance rule, so confirm the venue height before you choose.</p>
+<p><strong>Is a pop-up display the same as a tension fabric display?</strong> No. A pop-up, as described on the category page, uses an accordion or modular frame with panel graphics. A tension fabric display uses one stretch graphic over a tube frame. Size each product from its own page; the widths in this guide are the kit widths published on the pop-up displays page.</p>
+<p><strong>How large is the packed kit?</strong> A full kit with graphics is published at about 72 to 80 lb, in a carry bag of roughly 43 x 14 x 8 inches. Plan on a cart, and on checked freight rather than a shoulder carry.</p>
+`
   }
 
 ];
