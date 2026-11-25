@@ -47,8 +47,18 @@ for (const p of listProducts()) {
       if (o.availability !== 'https://schema.org/MadeToOrder') fails.push(`${p.slug}: Offer availability "${o.availability}" != MadeToOrder`);
       if (o.itemCondition !== 'https://schema.org/NewCondition') fails.push(`${p.slug}: Offer itemCondition != NewCondition`);
       if (!o.priceValidUntil) fails.push(`${p.slug}: Offer missing priceValidUntil`);
-      if (!o.shippingDetails) fails.push(`${p.slug}: Offer missing shippingDetails`);
-      if (!o.hasMerchantReturnPolicy) fails.push(`${p.slug}: Offer missing hasMerchantReturnPolicy`);
+      if (o.shippingDetails) fails.push(`${p.slug}: Offer includes shippingDetails (no published flat rate or transit window)`);
+      const policy = o.hasMerchantReturnPolicy;
+      if (!policy || policy.returnPolicyCategory !== 'https://schema.org/MerchantReturnNotPermitted') {
+        fails.push(`${p.slug}: return policy must be MerchantReturnNotPermitted`);
+      }
+      if (policy && (policy.merchantReturnDays != null || policy.returnFees || policy.returnMethod)) {
+        fails.push(`${p.slug}: return policy still carries a return window, fee or method`);
+      }
+      const offerLd = JSON.stringify(o);
+      if (/FreeReturn/.test(offerLd)) fails.push(`${p.slug}: Offer claims FreeReturn`);
+      if (/OfferShippingDetails|"shippingRate"|shippingRate/.test(offerLd)) fails.push(`${p.slug}: Offer claims a shipping rate`);
+      if (/"value"\s*:\s*"?0"?/.test(offerLd)) fails.push(`${p.slug}: Offer contains a $0 monetary amount`);
       if (o['@type'] === 'AggregateOffer' && Number(o.lowPrice) > Number(o.highPrice)) fails.push(`${p.slug}: AggregateOffer lowPrice > highPrice`);
     }
   }
